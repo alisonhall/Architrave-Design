@@ -1,28 +1,28 @@
 $(document).ready(function(){
-	// Home Page top section animation
-	$('.slickFade1').slick({
-		dots: false,
-		infinite: true,
-		speed: 500,
-		fade: true,
-		cssEase: 'linear',
-		slidesToShow: 1,
-		slidesToScroll: 1,
-		autoplay: true,
-		autoplaySpeed: 4000,
-	});
-	// Home Page bottom section animation
-	$('.slickFade2').slick({
-		dots: false,
-		infinite: true,
-		speed: 500,
-		fade: true,
-		cssEase: 'linear',
-		slidesToShow: 1,
-		slidesToScroll: 1,
-		autoplay: true,
-		autoplaySpeed: 5000,
-	});
+	// // Home Page top section animation
+	// $('.slickFade1').slick({
+	// 	dots: false,
+	// 	infinite: true,
+	// 	speed: 500,
+	// 	fade: true,
+	// 	cssEase: 'linear',
+	// 	slidesToShow: 1,
+	// 	slidesToScroll: 1,
+	// 	autoplay: true,
+	// 	autoplaySpeed: 4000,
+	// });
+	// // Home Page bottom section animation
+	// $('.slickFade2').slick({
+	// 	dots: false,
+	// 	infinite: true,
+	// 	speed: 500,
+	// 	fade: true,
+	// 	cssEase: 'linear',
+	// 	slidesToShow: 1,
+	// 	slidesToScroll: 1,
+	// 	autoplay: true,
+	// 	autoplaySpeed: 5000,
+	// });
 
 	// Main image slider
 	$('.mainImages').slick({
