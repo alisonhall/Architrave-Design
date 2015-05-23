@@ -1,0 +1,110 @@
+
+header {
+	width: 100%;
+}
+header #logo {
+	float: left;
+	padding: 10px;
+}
+header nav {
+	margin: 0;
+	padding: 0 10px 0 0;
+}
+header nav ul {
+	float: right;
+	width: 445px;
+	text-align: right;
+	margin: 40px 0 0 0;
+	padding: 0;
+}
+header nav li {
+	display: inline-block;
+	color: #555;
+	font-size: 20px;
+	padding: 1%;
+	color: #999;
+}
+header nav li a {
+	text-decoration: none;
+	color: #999;
+}
+header nav li a:hover {
+	color: black;
+}
+header nav .selected {
+	color: #905065;
+}
+header nav .subNav {
+	display: none;
+	position: absolute;
+	top: 70px;
+	right: 0;
+	width: 445px;
+	padding-right: 1%;
+	margin: 10px 0;
+	text-align: right;
+}
+header nav .subNavVisisble,
+header nav .portfolioNav:hover .subNav {
+	display: inline-block;
+}
+header nav .subNav li {
+	font-size: 14px;
+	padding: 0%;
+}
+
+
+@media screen and (max-width: 935px) {
+	header a {
+		float: none;
+		margin: 0 auto;
+		text-align: center;
+	}
+	header #logo {
+		float: none;
+		display: inline-block;
+		margin: 0 auto;
+		text-align: center;
+	}
+	header nav ul {
+		float: none;
+		margin: 0 auto;
+		text-align: center;
+	}
+	header nav .subNav {
+		top: 160px;
+		display: block;
+		/*right: 30%;*/
+		width: 100%;
+		margin: 0 auto;
+		text-align: center;
+	}
+}
+
+@media screen and (max-width: 475px) {
+	header #logo {
+		max-width: 100%;
+	}
+	header nav ul {
+		max-width: 100%;
+	}
+	header nav li{
+		display: block;
+		max-width: 100%;
+		/*text-align: center;*/
+		margin: 0;
+		padding: 5px 0;
+	}
+	header nav .dividerLine {
+		display: none;
+	}
+	header nav .subNav {
+		top: 230px;
+		right: 0;
+		width: 445px;
+		padding-right: 1%;
+		margin: 10px 0;
+		text-align: right;
+		line-height: 1.5em;
+	}
+}

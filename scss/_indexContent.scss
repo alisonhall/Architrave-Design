@@ -1,0 +1,321 @@
+$item-height: 33vh;
+
+/********************
+INDEX
+********************/
+.index {
+	.newHomes,
+	.renosAndAdditions {
+		height: $item-height;
+		width: 100%;
+		clear: left;
+	}
+	.newHomesImages,
+	.renosAndAdditionsImages {
+		max-width: 100%;
+		background-size: cover;
+		height: $item-height;
+		overflow: hidden;
+		clear: left;
+		-webkit-animation-duration: 12s;
+		-moz-animation-duration: 12s;
+		animation-duration: 12s;
+		-webkit-animation-iteration-count: infinite;
+		-moz-animation-iteration-count: infinite;
+		animation-iteration-count: infinite;
+		-webkit-animation-timing-function: ease-in;
+		-moz-animation-timing-function: ease-in;
+		animation-timing-function: ease-in;
+	}
+	.newHomesImages {
+		-webkit-animation-name: newHomesImageFade;
+		-moz-animation-name: newHomesImageFade;
+		animation-name: newHomesImageFade;
+	}
+	.renosAndAdditionsImages {
+		-webkit-animation-name: renosAndAdditionsImageFade;
+		-moz-animation-name: renosAndAdditionsImageFade;
+		animation-name: renosAndAdditionsImageFade;
+	}
+	.shadowOverlay {
+		/*opacity: 1;*/
+		background-color: black;
+	}
+	.newHomes:hover .newHomesImages,
+	.renosAndAdditions:hover .renosAndAdditionsImages {
+		opacity: 0.5;
+	}
+	.renosAndAdditionsImages {
+		margin-top: 20px;
+	}
+	.contentWrapper a {
+		text-decoration: none;
+		color: white;
+		font-size: 28px;
+		font-weight: 700;
+	}
+	.textOverlay {
+		position: relative;
+		margin-top: -80px;
+		padding: 1%;
+		z-index: 200;
+		text-shadow: 1px 1px 7px rgba(0, 0, 0, 0.8)
+	}
+	.welcomeBlurb {
+		float: center;
+		text-align: center;
+		font-size: 24px;
+		margin: 1% 0;
+	}
+	.welcomeBlurb p {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+	/*.image {
+		max-width: 100%;
+		background-size: cover;
+		height: 33vh;
+	}*/
+	/*.newHomesImages .image1 {
+		background-image: url("../images/New-Homes/Oakville-Executive-Home/1.jpg");
+		background-position: 50% 40%;
+	}
+	.newHomesImages .image2 {
+		background-image: url("../images/New-Homes/Hoggs-Hollow-Traditional/2.jpg");
+		background-position: 50% 40%;
+	}
+	.newHomesImages .image3 {
+		background-image: url("../images/New-Homes/Hoggs-Hollow-French-Country/4.jpg");
+		background-position: 50% 60%;
+	}
+	.renosAndAdditionsImages .image1 {
+		background-image: url("../images/Renovations-Additions/Lytton-Park-Update/3.jpg");
+		background-position: 50% 20%;
+	}
+	.renosAndAdditionsImages .image2 {
+		background-image: url("../images/Renovations-Additions/Etobicoke-Renewal/2.jpg");
+		background-position: 50% 40%;
+	}
+	.renosAndAdditionsImages .image3 {
+		background-image: url("../images/Renovations-Additions/Lytton-Park-Update/2.jpg");
+		background-position: 50% 40%;
+	}*/
+}
+
+@media screen and (max-width: 935px) {
+	.index {
+		.newHomes,
+		.renosAndAdditions {
+			height: 30vh;
+		}
+		.newHomesImages,
+		.renosAndAdditionsImages {
+			height: 30vh;
+		}
+		/*.image {
+			height: 30vh;
+		}*/
+	}
+}
+@media screen and (max-width: 475px) {
+	.index {
+		.newHomes,
+		.renosAndAdditions {
+			height: 25vh;
+		}
+		.newHomesImages,
+		.renosAndAdditionsImages {
+			height: 25vh;
+		}
+		/*.image {
+			height: 25vh;
+		}*/
+	}
+}
+
+@-webkit-keyframes newHomesImageFade {
+	0% {
+		background-image: url("../images/New-Homes/Oakville-Executive-Home/1.jpg");
+		background-position: 50% 40%;
+	}
+	32.9% {
+		background-image: url("../images/New-Homes/Oakville-Executive-Home/1.jpg");
+		background-position: 50% 40%;
+	}
+	33% {
+		background-image: url("../images/New-Homes/Hoggs-Hollow-Traditional/2.jpg");
+		background-position: 50% 40%;
+	}
+	65.9% {
+		background-image: url("../images/New-Homes/Hoggs-Hollow-Traditional/2.jpg");
+		background-position: 50% 40%;
+	}
+	66%{
+		background-image: url("../images/New-Homes/Hoggs-Hollow-French-Country/4.jpg");
+		background-position: 50% 60%;
+	}
+	100% {
+		background-image: url("../images/New-Homes/Hoggs-Hollow-French-Country/4.jpg");
+		background-position: 50% 60%;
+	}
+}
+@-moz-keyframes newHomesImageFade {
+	0% {
+		background-image: url("../images/New-Homes/Oakville-Executive-Home/1.jpg");
+		background-position: 50% 40%;
+	}
+	32.9% {
+		background-image: url("../images/New-Homes/Oakville-Executive-Home/1.jpg");
+		background-position: 50% 40%;
+	}
+	33% {
+		background-image: url("../images/New-Homes/Hoggs-Hollow-Traditional/2.jpg");
+		background-position: 50% 40%;
+	}
+	65.9% {
+		background-image: url("../images/New-Homes/Hoggs-Hollow-Traditional/2.jpg");
+		background-position: 50% 40%;
+	}
+	66%{
+		background-image: url("../images/New-Homes/Hoggs-Hollow-French-Country/4.jpg");
+		background-position: 50% 60%;
+	}
+	100% {
+		background-image: url("../images/New-Homes/Hoggs-Hollow-French-Country/4.jpg");
+		background-position: 50% 60%;
+	}
+}
+@keyframes newHomesImageFade {
+	0% {
+		background-image: url("../images/New-Homes/Oakville-Executive-Home/1.jpg");
+		background-position: 50% 40%;
+	}
+	32.9% {
+		background-image: url("../images/New-Homes/Oakville-Executive-Home/1.jpg");
+		background-position: 50% 40%;
+	}
+	33% {
+		background-image: url("../images/New-Homes/Hoggs-Hollow-Traditional/2.jpg");
+		background-position: 50% 40%;
+	}
+	65.9% {
+		background-image: url("../images/New-Homes/Hoggs-Hollow-Traditional/2.jpg");
+		background-position: 50% 40%;
+	}
+	66%{
+		background-image: url("../images/New-Homes/Hoggs-Hollow-French-Country/4.jpg");
+		background-position: 50% 60%;
+	}
+	100% {
+		background-image: url("../images/New-Homes/Hoggs-Hollow-French-Country/4.jpg");
+		background-position: 50% 60%;
+	}
+}
+@-webkit-keyframes renosAndAdditionsImageFade {
+	0% {
+		background-image: url("../images/Renovations-Additions/Lytton-Park-Update/3.jpg");
+		background-position: 50% 20%;
+	}
+	15.9% {
+		background-image: url("../images/Renovations-Additions/Lytton-Park-Update/3.jpg");
+		background-position: 50% 20%;
+	}
+	16% {
+		background-image: url("../images/Renovations-Additions/Etobicoke-Renewal/2.jpg");
+		background-position: 50% 40%;
+	}
+	49.9% {
+		background-image: url("../images/Renovations-Additions/Etobicoke-Renewal/2.jpg");
+		background-position: 50% 40%;
+	}
+	50% {
+		background-image: url("../images/Renovations-Additions/Lytton-Park-Update/2.jpg");
+		background-position: 50% 40%;
+	}
+	83.9% {
+		background-image: url("../images/Renovations-Additions/Lytton-Park-Update/2.jpg");
+		background-position: 50% 40%;
+	}
+	84% {
+		background-image: url("../images/Renovations-Additions/Lytton-Park-Update/3.jpg");
+		background-position: 50% 20%;
+	}
+	100% {
+		background-image: url("../images/Renovations-Additions/Lytton-Park-Update/3.jpg");
+		background-position: 50% 20%;
+	}
+}
+@-moz-keyframes renosAndAdditionsImageFade {
+	0% {
+		background-image: url("../images/Renovations-Additions/Lytton-Park-Update/3.jpg");
+		background-position: 50% 20%;
+	}
+	15.9% {
+		background-image: url("../images/Renovations-Additions/Lytton-Park-Update/3.jpg");
+		background-position: 50% 20%;
+	}
+	16% {
+		background-image: url("../images/Renovations-Additions/Etobicoke-Renewal/2.jpg");
+		background-position: 50% 40%;
+	}
+	49.9% {
+		background-image: url("../images/Renovations-Additions/Etobicoke-Renewal/2.jpg");
+		background-position: 50% 40%;
+	}
+	50% {
+		background-image: url("../images/Renovations-Additions/Lytton-Park-Update/2.jpg");
+		background-position: 50% 40%;
+	}
+	83.9% {
+		background-image: url("../images/Renovations-Additions/Lytton-Park-Update/2.jpg");
+		background-position: 50% 40%;
+	}
+	84% {
+		background-image: url("../images/Renovations-Additions/Lytton-Park-Update/3.jpg");
+		background-position: 50% 20%;
+	}
+	100% {
+		background-image: url("../images/Renovations-Additions/Lytton-Park-Update/3.jpg");
+		background-position: 50% 20%;
+	}
+}
+@keyframes renosAndAdditionsImageFade {
+	0% {
+		background-image: url("../images/Renovations-Additions/Lytton-Park-Update/3.jpg");
+		background-position: 50% 20%;
+	}
+	15.9% {
+		background-image: url("../images/Renovations-Additions/Lytton-Park-Update/3.jpg");
+		background-position: 50% 20%;
+	}
+	16% {
+		background-image: url("../images/Renovations-Additions/Etobicoke-Renewal/2.jpg");
+		background-position: 50% 40%;
+	}
+	49.9% {
+		background-image: url("../images/Renovations-Additions/Etobicoke-Renewal/2.jpg");
+		background-position: 50% 40%;
+	}
+	50% {
+		background-image: url("../images/Renovations-Additions/Lytton-Park-Update/2.jpg");
+		background-position: 50% 40%;
+	}
+	83.9% {
+		background-image: url("../images/Renovations-Additions/Lytton-Park-Update/2.jpg");
+		background-position: 50% 40%;
+	}
+	84% {
+		background-image: url("../images/Renovations-Additions/Lytton-Park-Update/3.jpg");
+		background-position: 50% 20%;
+	}
+	100% {
+		background-image: url("../images/Renovations-Additions/Lytton-Park-Update/3.jpg");
+		background-position: 50% 20%;
+	}
+}
+
+
+
+
+
