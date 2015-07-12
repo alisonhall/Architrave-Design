@@ -1,0 +1,125 @@
+
+header {
+	width: 100%;
+	height: 60px;
+	position: fixed;
+	top: 0;
+	margin-left: 25%;
+	background: white;
+	letter-spacing: 0.05em;
+}
+header p {
+	font-size: 26px;
+	display: inline-block;
+	color: #999;
+	padding-left: 1%;
+	letter-spacing: 0.05em;
+}
+header p:first-child{
+	color: #9B5C6C;
+	letter-spacing: 0.15em;
+}
+aside {
+	width: 25%;
+	height: 100vh;
+	position: fixed;
+	margin: 0 -2%;
+	top: 0;
+	left: 0;
+	background: white;
+}
+aside #logo {
+	float: right;
+	padding: 1%;
+	padding-top: 30px;
+	width: 150px;
+}
+aside nav {
+	margin: 0;
+	padding: 0 10px 0 0;
+}
+aside nav > ul {
+	float: right;
+	width: 445px;
+	text-align: right;
+	margin: 40px 0 0 0;
+	padding: 0;
+}
+aside nav li {
+	display: block;
+	font-size: 26px;
+	line-height: 1.8em;
+	padding: 1%;
+	color: #999;
+}
+aside nav li a {
+	text-decoration: none;
+	color: #999;
+}
+aside nav li a:hover {
+	color: black;
+}
+aside nav .selected {
+	color: #905065;
+}
+aside nav .subNav {
+	display: none;
+	margin: 5% 5%;
+}
+aside nav .subNavVisible {
+	display: block;
+}
+
+/*
+@media screen and (max-width: 935px) {
+	header a {
+		float: none;
+		margin: 0 auto;
+		text-align: center;
+	}
+	header #logo {
+		float: none;
+		display: inline-block;
+		margin: 0 auto;
+		text-align: center;
+	}
+	header nav ul {
+		float: none;
+		margin: 0 auto;
+		text-align: center;
+	}
+	header nav .subNav {
+		top: 160px;
+		display: block;
+		width: 100%;
+		margin: 0 auto;
+		text-align: center;
+	}
+}
+
+@media screen and (max-width: 475px) {
+	header #logo {
+		max-width: 100%;
+	}
+	header nav ul {
+		max-width: 100%;
+	}
+	header nav li{
+		display: block;
+		max-width: 100%;
+		margin: 0;
+		padding: 5px 0;
+	}
+	header nav .dividerLine {
+		display: none;
+	}
+	header nav .subNav {
+		top: 230px;
+		right: 0;
+		width: 445px;
+		padding-right: 1%;
+		margin: 10px 0;
+		text-align: right;
+		line-height: 1.5em;
+	}
+}*/

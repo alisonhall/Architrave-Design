@@ -1,0 +1,79 @@
+
+.layoutAll {
+	.image,
+	.textBlurb {
+		padding: 1%;
+		float: left;
+		max-width: 100%;
+
+		-webkit-animation: 
+			contentFadeIn 3s ease-in 1,
+			contentStayFaded 3s ease-in infinite 3s;
+		-moz-animation: 
+			contentFadeIn 3s ease-in 1,
+			contentStayFaded 3s ease-in infinite 3s;
+		-o-animation: 
+			contentFadeIn 3s ease-in 1,
+			contentStayFaded 3s ease-in infinite 3s;
+		animation: 
+			contentFadeIn 3s ease-in 1,
+			contentStayFaded 3s ease-in infinite 3s;
+	}
+	.imageDiv:hover {
+		opacity: 0.7;
+	}
+	.filler:hover {
+		opacity: 1;
+	}
+	.textBlurb {
+		background-color: #7ba7ba;
+		margin: 1%;
+		padding: 0 5%;
+		width: 87%;
+		min-height: 75px;
+		color: white;
+
+		h2 {
+			font-weight: normal;
+			font-size: 1.5em;
+			line-height: 0.5em;
+		}
+		h3 {
+			font-weight: normal;
+			font-size: 1.5em;
+			line-height: 0.5em;
+			text-align: right;
+			margin-top: -1.3em;
+			color: #CAE1EB;
+		}
+	}
+	.shadowOverlay {
+		width: 100%;
+		height: 100%;
+		background-color: black;
+	}
+	.textOverlay {
+		margin-top: -50px;
+		margin-left: 20px;
+		position: relative;
+		padding: 1%;
+		z-index: 200;
+		text-shadow: 1px 1px 7px rgba(0, 0, 0, 0.8);
+	}
+	a {
+		text-decoration: none;
+		color: white;
+		font-size: 20px;
+		font-weight: 300;
+	}
+	.imageDiv {
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		max-width: 100%;
+		height: 100%;
+		overflow: hidden;
+	}
+
+}

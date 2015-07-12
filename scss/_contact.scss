@@ -1,0 +1,35 @@
+
+/********************
+CONTACT
+********************/
+
+.contact {
+	.contentWrapper {
+		background-image: url("../images/New-Homes/HoggsHollowTraditional-4.jpg");
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		min-height: 600px;
+		height: 92vh;
+		overflow: hidden;
+	}
+	.textBlurb {
+		padding: 1% 5%;
+		float: left;
+		width: 100%;
+		background-color: #7ba7ba;
+		margin: 17% 0 1% 0;
+		color: white;
+		border-style: solid;
+		border-color: white;
+		border-width: 25px 0;
+		font-size: 1.5em;
+		line-height: 0.7em;
+	}
+	.textBlurb a:link,
+	.textBlurb a:visited {
+		text-decoration: none;
+		color: white;
+	}
+}
