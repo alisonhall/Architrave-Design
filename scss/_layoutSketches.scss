@@ -1,30 +1,73 @@
+$width1: 61% - $spacingX2;
+$width2: 38% - $spacingX2;
+$width3: $width2;
+$width4: $width1;
+$width5: $width2;
+$height1: $baseHeight * 0.92;
+$height2: $baseHeight * 0.54;
+$height3: $baseHeight * 0.5;
+$height4: $baseHeight * 0.5;
+$height5: $baseHeight * 0.31;
+
+.sketchesAndRenderings .layoutSketches {
+	a:hover .imageDiv,
+	.imageDiv:hover {
+		opacity: 1;
+	}
+
+	.textOverlay {
+		/*color: #7ba7ba;*/
+	}
+	.imageDiv1 {
+		background-image: url('../images/Sketches-Renderings/1-The-Kingsway--New-Home.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv2 {
+		background-image: url('../images/Sketches-Renderings/6-The-Kingsway-Renovation.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv3 {
+		background-image: url('../images/Sketches-Renderings/2-North-York-New-Home.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv4 {
+		background-image: url('../images/Sketches-Renderings/3-Oakville-Proposal.jpg');
+		background-position: 50% 60%;
+	}
+	.imageDiv5 {
+		background-image: url('../images/Sketches-Renderings/4-Lorne-Park-New-Home.jpg');
+		background-position: 50% 50%;
+	}
+}
 
 .layoutSketches {
 	.image1 {
-		width: 60%;
-		height: 450px;
+		width: $width1;
+		height: $height1;
 	}
 	.image2 {
-		width: 35%;
-		height: 275px;
+		width: $width2;
+		height: $height2;
 		float: right;
-		margin-right: 1%;
+		margin-right: $spacingHalf;
 	}
 	.image3 {
-		width: 35%;
-		height: 250px;
+		width: $width3;
+		height: $height3;
 		float: right;
-		margin-right: 1%;
+		margin-right: $spacingHalf;
 	}
 	.image4 {
-		width: 60%;
-		height: 250px;
+		width: $width4;
+		height: $height4;
 	}
 	.image5 {
-		width: 35%;
-		height: 155px;
+		width: $width5;
+		height: $height5;
 		float: right;
-		margin-right: 1%;
+		margin-right: $spacingHalf;
 	}
-
+	.shadowOverlay {
+		background-color: black;
+	}
 }

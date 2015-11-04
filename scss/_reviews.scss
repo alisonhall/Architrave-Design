@@ -3,14 +3,74 @@
 REVIEWS
 ********************/
 .reviews {
-	.textBlurb {
-		padding: 1%;
+	.contentBackground {
+		margin: $spacing;
+		background-image: url("../images/Reviews/Reviews-Background.jpg");
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		background-position: 100% 100%;
+	}
+	.textContent {
+		min-height: $viewportHeightReviews;
+		height: 100%;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+	}
+	.review {
+		padding: 4%;
 		float: left;
 		max-width: 100%;
-		background-color: #7ba7ba;
-		margin: 1%;
+		margin: 0;
 		width: 95%;
-		height: 75px;
 		color: white;
+		border-top: 30px solid white;
+
+		h3,
+		h4,
+		h5 {
+			font-size: 1em;
+			line-height: 1em;
+			padding: 0;
+			margin: 0;
+		}
+		h4,
+		h5 {
+			display: inline-block;
+		}
+		h5 {
+			font-weight: normal;
+		}
+		p {
+			max-width: 600px;
+		}
+	}
+	.review1 {
+		border: none;
+	}
+	.textBlurb {
+		padding: 4%;
+		float: left;
+		width: 92%;
+		color: white;
+		background-color: $blurbColour;
+		border-style: solid;
+		border-color: white;
+		border-width: 30px 0 30px 0;
+
+		img {
+			max-width: 200px;
+			width: 100%;
+			margin-bottom: -10px;
+			padding: 0 5px 0 20%;
+		}
+	}
+}
+
+@media screen and (max-width: $breakpointLarge) {
+	.reviews .contentBackground {
+		min-height: $viewportHeightReviewsLarge;
 	}
 }

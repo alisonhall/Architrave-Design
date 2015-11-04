@@ -1,23 +1,85 @@
+/********************
+VARIABLES
+********************/
+
+$breakpointLarge: 1030px;
+$breakpointMedium: 750px;
+$breakpointMediumSmall: 600px;
+$breakpointSmall: 520px;
+$breakpointExtraSmall: 380px;
+
+$baseHeight: 500px;
+
+$spacing: 1.5%;
+$spacingX2: $spacing * 2;
+$spacingHalf: $spacing / 2;
+$negativeSpacing: $spacing * (-1);
+$negativeSpacingHalf: $spacingHalf * (-1);
+
+$headerHeight: 35px;
+$asideWidth: 22%;
+$contentWrapperWidth: 100% - ($asideWidth + $spacingHalf) - $spacing;
+$contentWrapperMaxWidth: 1000px;
+$contentWrapperMinHeight: 89vh;
+$asidePlusSpacing: $asideWidth + $spacingHalf;
+$headerPlusSpacing: 0;
+$headerPlusExtraSpacing: 0;
+
+$blurbColour: #7ba7ba;
+$grayLinkColour: #999;
+$lightGrayLinkColour: #DDD;
+$architraveLogoColour: #9B5C6C;
+
+$viewportHeightDefault: 82vh;
+$viewportHeightContact: 87vh;
+$viewportHeightReviews: 95vh;
+$viewportHeightSitemap: 85vh;
+$viewportHeightDefaultLarge: $viewportHeightDefault - 10vh;
+$viewportHeightContactLarge: $viewportHeightContact - 15vh;
+$viewportHeightReviewsLarge: $viewportHeightReviews - 10vh;
+$viewportHeightSitemapLarge: $viewportHeightSitemap - 10vh;
+
+$contactImageHeight: 250px;
+$contactImageWidth: 24%;
+$contactBlurbHeight: $contactImageHeight;
+$contactBlurbWidth: 62%;
+$contactImageHeightSmall: 520px;
+$contactImageWidthSmall: 100%;
+$contactBlurbHeightSmall: auto;
+$contactBlurbWidthSmall: 100% - 10%;
+
+$fadeInDuration: 3s;
+$fadeInDelay1: 1s;
+$fadeInDelay2: 1.5s;
+$fadeInDelay3: 2s;
+$fadeInDelay4: 2.5s;
+$fadeInDelay5: 3s;
+$fadeInDelay6: 3.5s;
+$stayFadedDelay1: $fadeInDelay1 + 3s;
+$stayFadedDelay2: $fadeInDelay2 + 3s;
+$stayFadedDelay3: $fadeInDelay3 + 3s;
+$stayFadedDelay4: $fadeInDelay4 + 3s;
+$stayFadedDelay5: $fadeInDelay5 + 3s;
+$stayFadedDelay6: $fadeInDelay6 + 3s;
+
+
+
+
+
+
+
+
+/********************
+FILES
+********************/
 
 @import 'header';
+@import 'footer';
 @import 'about';
 @import 'reviews';
 @import 'contact';
+@import 'sitemap';
 @import 'contentFadeIn';
-@import 'imagesHome';
-@import 'imagesSketches';
-@import 'imagesNewHomes';
-@import 'imagesRenovations';
-@import 'imagesNewHomesCreditRiverClassic';
-@import 'imagesNewHomesHoggsHollowFrenchCountry';
-@import 'imagesNewHomesHoggsHollowTraditional';
-@import 'imagesNewHomesKingswayTransitional';
-@import 'imagesNewHomesOakvilleExecutiveHome';
-@import 'imagesRenovationsCornwallHeritageAddition';
-@import 'imagesRenovationsEtobicokeRenewal';
-@import 'imagesRenovationsLyttonParkUpdate';
-@import 'imagesRenovationsRosedaleRevival';
-/*@import 'imagesRenovationsRoyalYorkFacelift';*/
 @import 'layoutAll';
 @import 'layoutHome';
 @import 'layoutNewHomes';
@@ -32,6 +94,7 @@
 @import 'layoutRenovationsEtobicokeRenewal';
 @import 'layoutRenovationsCornwallHeritageAddition';
 @import 'layoutRenovationsRosedaleRevival';
+/*@import 'layoutRenovationsRoyalYorkFacelift';*/
 
 
 /********************
@@ -42,45 +105,54 @@ GENERAL
 	/*box-sizing: border-box;*/
 	/*border: 1px solid red;*/
 }
+html,
 body {
-	/*margin: 1%;*/
-	/*font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;*/
-	/*font-family: Tahoma, 'Geneva', 'Century Gothic', 'Lucida Sans Unicode', 'Lucida Grande', Verdana, 'Trebuchet MS', sans-serif;*/
-	/*font-family: 'Open Sans', sans-serif;*/
+	margin: 0;
+	border: 0;
+	padding: 0;
+	height: 100%;
+}
+body {
 	font-family: 'Raleway', sans-serif;
 }
 
 .contentWrapper {
-	width: 75%;
-	max-width: 1050px;
+	width: $contentWrapperWidth;
+	max-width: $contentWrapperMaxWidth;
 	float: left;
-	margin-top: 60px;
-	margin-left: 25%;
+	font-size: 1.653em;
+	margin-top: $headerPlusExtraSpacing;
+	margin-left: $asideWidth;
+	min-height: $viewportHeightDefault;
+	overflow: hidden;
 }
-/*.contentWrapper {
-	width: 100%;
-	float: left;
-	margin: 0;
-	padding: 0;
-}*/
 
-
-/*@media screen and (max-width: 935px) {
+.contact,
+.about,
+.reviews,
+.sitemap {
 	.contentWrapper {
-		margin-top: 30px;
+		font-size: 1.2em;
 	}
 }
-@media screen and (max-width: 475px) {
-	.contentWrapper {
-		margin-top: 100px;
-	}
-}
-@media screen and (max-width: 230px) {
-	body {
-		width: 230px;
-	}
-}*/
 
+
+@media screen and (max-width: $breakpointLarge) {
+	.contentWrapper {
+		width: 100%;
+		max-width: 100%;
+		float: left;
+		margin-top: 150px;
+		margin-left: 0;
+		min-height: $viewportHeightDefaultLarge;
+	}
+}
+
+@media screen and (max-width: $breakpointExtraSmall) {
+	.contentWrapper {
+		margin-top: 200px;
+	}
+}
 
 
 

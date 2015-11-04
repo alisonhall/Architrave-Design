@@ -1,125 +1,220 @@
 
 header {
-	width: 100%;
-	height: 60px;
-	position: fixed;
-	top: 0;
-	margin-left: 25%;
+	width: $contentWrapperWidth;
+	height: $headerHeight;
+	float: left;
+	margin-left: $asideWidth;
 	background: white;
-	letter-spacing: 0.05em;
+	text-transform: uppercase;
 }
 header p {
-	font-size: 26px;
+	/*font-size: 1.80375em;*/
+	font-size: 1.75em;
+	line-height: 0.8em;
+	margin: 20px 0 0 0;
 	display: inline-block;
-	color: #999;
-	padding-left: 1%;
-	letter-spacing: 0.05em;
+	color: $grayLinkColour;
+	padding-left: $spacing;
+	font-weight: 400;
+	/*letter-spacing: 0.05em;*/
 }
 header p:first-child{
-	color: #9B5C6C;
-	letter-spacing: 0.15em;
+	color: $architraveLogoColour;
+	font-size: 1.75em;
+	letter-spacing: 0.05em;
+	font-weight: 500;
 }
 aside {
-	width: 25%;
-	height: 100vh;
+	width: $asideWidth;
+	height: 100%;
 	position: fixed;
-	margin: 0 -2%;
+	padding-right: $spacingHalf;
+	margin: 0 0 0 $negativeSpacingHalf;
 	top: 0;
 	left: 0;
-	background: white;
+	float: left;
+	background: transparent;
+	z-index: 9999;
 }
 aside #logo {
 	float: right;
-	padding: 1%;
-	padding-top: 30px;
-	width: 150px;
+	padding: 0;
+	padding-top: 20px;
+	width: 112px;
+	min-width: 60px;
 }
 aside nav {
-	margin: 0;
-	padding: 0 10px 0 0;
+	float: right;
+	padding: 0;
+	margin: 80px 0 0;
+	text-transform: uppercase;
 }
 aside nav > ul {
-	float: right;
 	width: 445px;
+	margin: 0;
 	text-align: right;
-	margin: 40px 0 0 0;
-	padding: 0;
 }
 aside nav li {
 	display: block;
-	font-size: 26px;
-	line-height: 1.8em;
-	padding: 1%;
-	color: #999;
+	font-size: 1.6875em;
+	line-height: 1.6875em;
+	padding: 0;
+	color: $grayLinkColour;
 }
 aside nav li a {
 	text-decoration: none;
-	color: #999;
+	color: $grayLinkColour;
 }
 aside nav li a:hover {
 	color: black;
 }
 aside nav .selected {
-	color: #905065;
+	font-weight: 500;
+	color: $architraveLogoColour;
 }
 aside nav .subNav {
 	display: none;
-	margin: 5% 5%;
+	margin: 4% 4%;
+}
+aside nav .subNav li {
+	font-size: 1em;
+	line-height: 1.5em;
 }
 aside nav .subNavVisible {
 	display: block;
 }
+aside .houzzLogo {
+	position: absolute;
+	bottom: $spacing;
+	right: 3%;
+}
+aside .houzzLogo img {
+	width: 50px;
+	height: 50px;
+}
 
-/*
-@media screen and (max-width: 935px) {
-	header a {
-		float: none;
-		margin: 0 auto;
-		text-align: center;
+
+@media screen and (max-width: $breakpointLarge) {
+	header {
+		height: $headerHeight;
+		position: absolute;
+		top: 0;
+		left: 150px;
+		margin: 0;
 	}
-	header #logo {
-		float: none;
-		display: inline-block;
-		margin: 0 auto;
-		text-align: center;
-	}
-	header nav ul {
-		float: none;
-		margin: 0 auto;
-		text-align: center;
-	}
-	header nav .subNav {
-		top: 160px;
-		display: block;
+	aside {
 		width: 100%;
-		margin: 0 auto;
-		text-align: center;
+		height: 0px;
+		position: absolute;
+		top: 0;
+		left: 0;
+		margin: 0;
+		float: left;
+		z-index: 9999;
+	}
+	aside #logo {
+		float: left;
+		padding: $spacing $spacing 0 $spacing;
+	}
+	aside nav {
+		margin: 0;
+		padding: 0;
+		text-transform: none;
+	}
+	aside nav > ul {
+		float: left;
+		text-align: right;
+		position: absolute;
+		top: 70px;
+		right: 1%;
+		width: 96%;
+		margin: 0 $spacing $spacing $spacing;
+		padding: 0;
+	}
+	aside nav li {
+		display: inline-block;
+		padding-left: 10px;
+	}
+	aside nav .subNav {
+		position: absolute;
+		top: 25px;
+		right: 0;
+		font-size: 0.8em;
+		text-align: right;
+		width: 96%;
+		margin: $spacing 0;
+		padding: 0;
+	}
+	aside nav .subNavVisible {
+		display: inline-block;
+	}
+	aside .houzzLogo {
+		display: none;
 	}
 }
 
-@media screen and (max-width: 475px) {
-	header #logo {
-		max-width: 100%;
+@media screen and (max-width: $breakpointMedium) {
+	header {
+		left: 15%;
+		width: 85%;
 	}
-	header nav ul {
-		max-width: 100%;
+	header p {
+		font-size: 1.5em;
+		padding-left: 1%;
+		letter-spacing: 0em;
+		line-height: 0.2em;
 	}
-	header nav li{
-		display: block;
-		max-width: 100%;
+	header p:first-child{
+		letter-spacing: 0.02em;
+	}
+	aside #logo {
+		width: 10%;
+	}
+}
+
+@media screen and (max-width: $breakpointSmall) {
+	header {
+		width: 85%;
+		height: $headerHeight;
+		position: absolute;
+		top: 0;
+		left: 70px;
 		margin: 0;
-		padding: 5px 0;
 	}
-	header nav .dividerLine {
+	header p {
+		margin: 0;
+		font-size: 1.1em;
+		letter-spacing: 0.02em;
+		line-height: 1.2em;
+	}
+	header p:first-child {
+		margin-top: 1%;
+		font-size: 1.5em;
+		letter-spacing: 0.08em;
+	}
+	header p:first-child + p {
 		display: none;
 	}
-	header nav .subNav {
-		top: 230px;
-		right: 0;
-		width: 445px;
-		padding-right: 1%;
-		margin: 10px 0;
-		text-align: right;
-		line-height: 1.5em;
+	aside nav > ul > li {
+		font-size: 1.3em !important;
+		color: red !important;
 	}
-}*/
+	aside nav .subNav {
+		top: 30px;
+	}
+}
+
+@media screen and (max-width: $breakpointExtraSmall) {
+	aside nav > ul {
+		top: 100px;
+	}
+	aside nav > ul > li {
+		line-height: 0.9em !important;
+	}
+	aside nav .subNav {
+		top: 50px !important;
+	}
+	aside nav .subNav li {
+		line-height: 0.9em !important;
+	}
+}

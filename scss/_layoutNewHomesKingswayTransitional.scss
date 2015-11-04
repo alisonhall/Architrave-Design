@@ -1,43 +1,102 @@
+$width1: 100% - $spacingX2;
+$width2: 42% - $spacingX2;
+$width3: 29% - $spacingX2;
+$width4: 29% - $spacingX2;
+$width5: 50% - $spacingX2;
+$width6: 50% - $spacingX2;
+$width7: 58% - $spacingX2;
+$width8: 42% - $spacingX2;
+$widthTextBlurbFiller: $width6;
+$height1: $baseHeight * 1.26;
+$height2: $baseHeight * 0.58;
+$height3: $baseHeight * 0.58;
+$height4: $baseHeight * 0.58;
+$height5: $baseHeight * 0.68;
+$height6: $baseHeight * 0.52;
+$height7: $baseHeight * 0.68;
+$height8: $baseHeight * 0.68;
+
+.kingswayTransitional .layoutAll {
+	a:hover .imageDiv,
+	.imageDiv:hover {
+		opacity: 1;
+	}
+
+	.imageDiv1 {
+		background-image: url('../images/New-Homes/Kingsway-1.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv2 {
+		background-image: url('../images/New-Homes/Kingsway-2.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv3 {
+		background-image: url('../images/New-Homes/Kingsway-6.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv4 {
+		background-image: url('../images/New-Homes/Kingsway-3.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv5 {
+		background-image: url('../images/New-Homes/Kingsway-5.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv6 {
+		background-image: url('../images/New-Homes/Kingsway-4.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv7 {
+		background-image: url('../images/New-Homes/Kingsway-7.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv8 {
+		background-image: url('../images/New-Homes/Kingsway-8.jpg');
+		background-position: 50% 40%;
+	}
+}
+
 .layoutNewHomesKingswayTransitional {
 	.image1 {
-		width: 97%;
-		height: 650px;
+		width: $width1;
+		height: $height1;
 	}
 	.image2 {
-		width: 39%;
-		height: 300px;
+		width: $width2;
+		height: $height2;
 	}
 	.image3 {
-		width: 27%;
-		height: 300px;
+		width: $width3;
+		height: $height3;
 	}
 	.image4 {
-		width: 27%;
-		height: 300px;
+		width: $width4;
+		height: $height4;
 	}
 	.image5 {
-		width: 48%;
-		height: 350px;
+		width: $width5;
+		height: $height5;
 	}
 	.image6 {
-		width: 47%;
-		height: 275px;
+		width: $width6;
+		height: $height6;
 	}
 	.textBlurbFiller {
 		background-color: #7ba7ba;
-		margin: 1%;
-		padding: 0 5%;
-		width: 37%;
-		min-height: 50px;
+		margin: $spacing;
+		width: $widthTextBlurbFiller;
+		min-height: 40px;
 		float: left;
 	}
 	.image7 {
-		width: 56%;
-		height: 350px;
+		width: $width7;
+		height: $height7;
 	}
 	.image8 {
-		width: 39%;
-		height: 350px;
+		width: $width8;
+		height: $height8;
 	}
-
+	.shadowOverlay {
+		background-color: black;
+	}
 }

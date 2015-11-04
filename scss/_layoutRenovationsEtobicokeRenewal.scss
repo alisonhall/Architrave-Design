@@ -1,34 +1,86 @@
+$width1: 62% - $spacingX2;
+$width2: 38% - $spacingX2;
+$width3: 38% - $spacingX2;
+$width4: 31% - $spacingX2;
+$width5: 31% - $spacingX2;
+$width6: 48% - $spacingX2;
+$width7: 52% - $spacingX2;
+$height1: $baseHeight * 0.96;
+$height2: $baseHeight * 0.43;
+$height3: $baseHeight * 1.01;
+$height4: $baseHeight * 0.48;
+$height5: $baseHeight * 0.48;
+$height6: $baseHeight * 0.78;
+$height7: $baseHeight * 0.78;
+
+.etobicokeRenewal .layoutAll {
+	a:hover .imageDiv,
+	.imageDiv:hover {
+		opacity: 1;
+	}
+
+	.imageDiv1 {
+		background-image: url('../images/Renovations-Additions/Etobicoke-2.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv2 {
+		background-image: url('../images/Renovations-Additions/Etobicoke-7.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv3 {
+		background-image: url('../images/Renovations-Additions/Etobicoke-6.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv4 {
+		background-image: url('../images/Renovations-Additions/Etobicoke-1.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv5 {
+		background-image: url('../images/Renovations-Additions/Etobicoke-5.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv6 {
+		background-image: url('../images/Renovations-Additions/Etobicoke-4.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv7 {
+		background-image: url('../images/Renovations-Additions/Etobicoke-8.jpg');
+		background-position: 50% 40%;
+	}
+}
+
 .layoutRenovationsEtobicokeRenewal {
 	.image1 {
-		width: 60%;
-		height: 500px;
+		width: $width1;
+		height: $height1;
 	}
 	.image2 {
-		width: 35%;
-		height: 225px;
+		width: $width2;
+		height: $height2;
 		float: right;
-		margin-right: 1%;
 	}
 	.image3 {
-		width: 35%;
-		height: 525px;
+		width: $width3;
+		height: $height3;
 		float: right;
-		margin-right: 1%;
 	}
 	.image4 {
-		width: 29%;
-		height: 250px;
+		width: $width4;
+		height: $height4;
 	}
 	.image5 {
-		width: 29%;
-		height: 250px;
+		width: $width5;
+		height: $height5;
 	}
 	.image6 {
-		width: 45%;
-		height: 400px;
+		width: $width6;
+		height: $height6;
 	}
 	.image7 {
-		width: 50%;
-		height: 400px;
+		width: $width7;
+		height: $height7;
+	}
+	.shadowOverlay {
+		background-color: black;
 	}
 }
