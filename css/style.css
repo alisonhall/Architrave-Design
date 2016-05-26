@@ -6,7 +6,7 @@ FILES
 ********************/
 header {
   width: 75.75%;
-  height: 35px;
+  height: 2.1875em;
   float: left;
   margin-left: 22%;
   background: white;
@@ -113,9 +113,9 @@ aside .houzzLogo img {
   height: 50px;
 }
 
-@media screen and (max-width: 1030px) {
+@media screen and (max-width: 1000px) {
   header {
-    height: 35px;
+    height: 2.1875em;
     position: absolute;
     top: 0;
     left: 150px;
@@ -194,7 +194,7 @@ aside .houzzLogo img {
 @media screen and (max-width: 520px) {
   header {
     width: 85%;
-    height: 35px;
+    height: 2.1875em;
     position: absolute;
     top: 0;
     left: 70px;
@@ -287,7 +287,7 @@ footer .websiteBy {
   margin-right: 0.75%;
 }
 
-@media screen and (max-width: 1030px) {
+@media screen and (max-width: 1000px) {
   footer {
     width: 100%;
     margin-left: 0;
@@ -394,7 +394,7 @@ REVIEWS
 }
 
 .reviews .review {
-  padding: 4%;
+  padding: 4% 4% 4% 12%;
   float: left;
   max-width: 100%;
   margin: 0;
@@ -444,10 +444,10 @@ REVIEWS
   max-width: 200px;
   width: 100%;
   margin-bottom: -10px;
-  padding: 0 5px 0 20%;
+  padding: 0 5px 0 30%;
 }
 
-@media screen and (max-width: 1030px) {
+@media screen and (max-width: 1000px) {
   .reviews .contentBackground {
     min-height: 85vh;
   }
@@ -491,12 +491,16 @@ CONTACT
   color: white;
 }
 
+.contact .textBlurb a:hover {
+  text-decoration: underline;
+}
+
 .contact i.fa {
   font-size: 0.8em;
   margin: 10px;
 }
 
-@media screen and (max-width: 1030px) {
+@media screen and (max-width: 1000px) {
   .contact .contentBackground {
     height: 72vh;
   }
@@ -553,7 +557,7 @@ SITEMAP
   color: #DDD;
 }
 
-@media screen and (max-width: 1030px) {
+@media screen and (max-width: 1000px) {
   .sitemap .contentBackground {
     height: 75vh;
     min-height: 75vh;
@@ -1154,23 +1158,49 @@ SITEMAP
   opacity: 1;
 }
 
+.sketchesAndRenderings .layoutSketches .image {
+  padding: 4.5%;
+}
+
+.sketchesAndRenderings .layoutSketches .textBlurb {
+  background-color: #7ba7ba;
+  margin: 4.5% 4.5% 4.5% 4.5%;
+  padding: 0 8%;
+  width: 84%;
+}
+
+.sketchesAndRenderings .layoutSketches .textOverlay,
+.sketchesAndRenderings .layoutSketches .completionDate {
+  position: relative;
+  padding: 1%;
+  z-index: 200;
+}
+
 .sketchesAndRenderings .layoutSketches .textOverlay {
-  /*color: #7ba7ba;*/
+  margin-top: 15px;
+  margin-left: -20px;
+}
+
+.sketchesAndRenderings .layoutSketches .completionDate {
+  margin-top: -55px;
+  margin-right: 20px;
+  display: block;
+  text-align: right;
 }
 
 .sketchesAndRenderings .layoutSketches .imageDiv1 {
-  background-image: url("../images/Sketches-Renderings/46-Queen-Marys-5.jpg");
+  background-image: url("../images/Sketches-Renderings/46-Queen-Marys-6.jpg");
   background-position: 50% 100%;
 }
 
 .sketchesAndRenderings .layoutSketches .imageDiv2 {
   background-image: url("../images/Sketches-Renderings/1-The-Kingsway--New-Home.jpg");
-  background-position: 0% 40%;
+  background-position: 0% 80%;
 }
 
 .sketchesAndRenderings .layoutSketches .imageDiv3 {
   background-image: url("../images/Sketches-Renderings/3-Oakville-Proposal.jpg");
-  background-position: 50% 60%;
+  background-position: 50% 70%;
 }
 
 .layoutSketches .image1 {
@@ -1180,12 +1210,12 @@ SITEMAP
 
 .layoutSketches .image2 {
   width: 97%;
-  height: 630px;
+  height: 550px;
 }
 
 .layoutSketches .image3 {
   width: 97%;
-  height: 500px;
+  height: 400px;
 }
 
 .layoutSketches .shadowOverlay {
@@ -1873,12 +1903,12 @@ body {
   font-size: 1.2em;
 }
 
-@media screen and (max-width: 1030px) {
+@media screen and (max-width: 1000px) {
   .contentWrapper {
     width: 100%;
     max-width: 100%;
     float: left;
-    margin-top: 150px;
+    margin-top: 6em;
     margin-left: 0;
     min-height: 72vh;
   }
@@ -1886,7 +1916,7 @@ body {
 
 @media screen and (max-width: 380px) {
   .contentWrapper {
-    margin-top: 200px;
+    margin-top: 7em;
   }
 }
 
