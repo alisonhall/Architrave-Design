@@ -1,0 +1,75 @@
+$width1: 63% - $spacingX2;
+$width2: 37% - $spacingX2;
+$width3: 48% - $spacingX2;
+$width4: 52% - $spacingX2;
+$width5: 63% - $spacingX2;
+$width6: 37% - $spacingX2;
+$height1: $baseHeight * 0.78;
+$height2: $baseHeight * 0.78;
+$height3: $baseHeight * 0.58;
+$height4: $baseHeight * 0.58;
+$height5: $baseHeight * 0.73;
+$height6: $baseHeight * 0.73;
+
+.hoggsHollowFrenchCountry .layoutAll {
+	a:hover .imageDiv,
+	.imageDiv:hover {
+		opacity: 1;
+	}
+
+	.imageDiv1 {
+		background-image: url('../images/New-Homes/FrenchCountry-4.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv2 {
+		background-image: url('../images/New-Homes/FrenchCountry-2.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv3 {
+		background-image: url('../images/New-Homes/FrenchCountry-3.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv4 {
+		background-image: url('../images/New-Homes/FrenchCountry-1.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv5 {
+		background-image: url('../images/New-Homes/FrenchCountry-7.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv6 {
+		background-image: url('../images/New-Homes/FrenchCountry-5.jpg');
+		background-position: 100% 40%;
+	}
+
+}
+
+.layoutNewHomesHoggsHollowFrenchCountry {
+	.image1 {
+		width: $width1;
+		height: $height1;
+	}
+	.image2 {
+		width: $width2;
+		height: $height2;
+	}
+	.image3 {
+		width: $width3;
+		height: $height3;
+	}
+	.image4 {
+		width: $width4;
+		height: $height4;
+	}
+	.image5 {
+		width: $width5;
+		height: $height5;
+	}
+	.image6 {
+		width: $width6;
+		height: $height6;
+	}
+	.shadowOverlay {
+		background-color: black;
+	}
+}

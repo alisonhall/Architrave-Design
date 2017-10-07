@@ -1,0 +1,65 @@
+$width1: 100% - $spacingX2;
+$width2: 54% - $spacingX2;
+$width3: 46% - $spacingX2;
+$width4: 54% - $spacingX2;
+$width5: 100% - $spacingX2;
+$height1: $baseHeight * 1.2;
+$height2: $baseHeight * 0.7;
+$height3: $baseHeight * 1.4;
+$height4: $baseHeight * 0.62;
+$height5: $baseHeight * 0.9;
+
+.lyttonParkUpdate .layoutAll {
+	a:hover .imageDiv,
+	.imageDiv:hover {
+		opacity: 1;
+	}
+
+	.imageDiv1 {
+		background-image: url('../images/Renovations-Additions/Lytton-Park-2.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv2 {
+		background-image: url('../images/Renovations-Additions/Lytton-Park-1.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv3 {
+		background-image: url('../images/Renovations-Additions/Lytton-Park-4.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv4 {
+		background-image: url('../images/Renovations-Additions/Lytton-Park-5.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv5 {
+		background-image: url('../images/Renovations-Additions/Lytton-Park-3.jpg');
+		background-position: 50% 40%;
+	}
+}
+
+.layoutRenovationsLyttonParkUpdate {
+	.image1 {
+		width: $width1;
+		height: $height1;
+	}
+	.image2 {
+		width: $width2;
+		height: $height2;
+	}
+	.image3 {
+		width: $width3;
+		height: $height3;
+		float: right;
+	}
+	.image4 {
+		width: $width4;
+		height: $height4;
+	}
+	.image5 {
+		width: $width5;
+		height: $height5;
+	}
+	.shadowOverlay {
+		background-color: black;
+	}
+}

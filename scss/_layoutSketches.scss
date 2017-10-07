@@ -1,0 +1,80 @@
+$extraSpace: 3%;
+$extraTextBlurbSpaceTop: 3%;
+$extraTextBlurbSpaceBottom: 3%;
+
+$width1: 100% - $spacingX2;
+$width2: $width1;
+$width3: $width1;
+$height1: $baseHeight * 1.26;
+$height2: $baseHeight * 1.1;
+$height3: $baseHeight * 0.8;
+
+.sketchesAndRenderings .layoutSketches {
+	a:hover .imageDiv,
+	.imageDiv:hover {
+		opacity: 1;
+	}
+
+	.image {
+		padding: $spacing + $extraSpace;
+	}
+
+	.textBlurb {
+		background-color: #7ba7ba;
+		margin: ($spacing + $extraTextBlurbSpaceTop) ($spacing + $extraSpace) ($spacing + $extraTextBlurbSpaceBottom) ($spacing + $extraSpace);
+		padding: 0 $textBlurbPadding + $extraSpace;
+		width: $textBlurbWidth - $extraSpace;
+	}
+
+	.textOverlay,
+	.completionDate {
+		position: relative;
+		padding: 1%;
+		z-index: 200;
+		// text-shadow: 0px 0px 5px rgba(0, 0, 0, 1);
+	}
+	.textOverlay {
+		// margin-top: -50px;
+		margin-top: 15px;
+		margin-left: -20px;
+	}
+	.completionDate {
+		// margin-top: -65px;
+		margin-top: -55px;
+		margin-right: 20px;
+		display: block;
+		text-align: right;
+		// font-size: 0.9em;
+	}
+
+	.imageDiv1 {
+		background-image: url('../images/Sketches-Renderings/46-Queen-Marys-6.jpg');
+		background-position: 50% 100%;
+	}
+	.imageDiv2 {
+		background-image: url('../images/Sketches-Renderings/1-The-Kingsway--New-Home.jpg');
+		background-position: 0% 80%;
+	}
+	.imageDiv3 {
+		background-image: url('../images/Sketches-Renderings/3-Oakville-Proposal.jpg');
+		background-position: 50% 70%;
+	}
+}
+
+.layoutSketches {
+	.image1 {
+		width: $width1;
+		height: $height1;
+	}
+	.image2 {
+		width: $width2;
+		height: $height2;
+	}
+	.image3 {
+		width: $width3;
+		height: $height3;
+	}
+	.shadowOverlay {
+		background-color: black;
+	}
+}
