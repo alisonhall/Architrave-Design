@@ -4,12 +4,16 @@ $width3: 21% - $spacingX2;
 $width4: 31% - $spacingX2;
 $width5: 48% - $spacingX2;
 $width6: 52% - $spacingX2;
+$width7: 40% - $spacingX2;
+$width8: 60% - $spacingX2;
 $height1: $baseHeight * 1.405;
 $height2: $baseHeight * 0.74058;
 $height3: $baseHeight * 0.598266;
 $height4: $baseHeight * 0.598266;
 $height5: $baseHeight * 0.6;
 $height6: $baseHeight * 0.6;
+$height7: $baseHeight * 0.9;
+$height8: $baseHeight * 0.9;
 
 .newHomesOverview .layoutAll {
 	.imageDiv1 {
@@ -17,11 +21,11 @@ $height6: $baseHeight * 0.6;
 		background-position: 100% 0%;
 	}
 	.imageDiv2 {
-		background-image: url('../images/New-Homes/Kingsway-1.jpg');
+		background-image: url('../images/New-Homes/KingswayTransitional-1.jpg');
 		background-position: 50% 40%;
 	}
 	.imageDiv3 {
-		background-image: url('../images/New-Homes/Kingsway-6.jpg');
+		background-image: url('../images/New-Homes/KingswayTransitional-6.jpg');
 		background-position: 50% 40%;
 	}
 	.imageDiv4 {
@@ -35,6 +39,18 @@ $height6: $baseHeight * 0.6;
 	.imageDiv6 {
 		background-image: url('../images/New-Homes/FrenchCountry-4.jpg');
 		background-position: 50% 40%;
+	}
+	.imageDiv6 {
+		background-image: url('../images/New-Homes/FrenchCountry-4.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv7 {
+		background-image: url('../images/New-Homes/KingswayGeorgian-1.jpg');
+		background-position: 70% 40%;
+	}
+	.imageDiv8 {
+		background-image: url('../images/New-Homes/KingswayTraditional-1.jpg');
+		background-position: 30% 40%;
 	}
 
 }
@@ -63,6 +79,14 @@ $height6: $baseHeight * 0.6;
 	.image6 {
 		width: $width6;
 		height: $height6;
+	}
+	.image7 {
+		width: $width7;
+		height: $height7;
+	}
+	.image8 {
+		width: $width8;
+		height: $height8;
 	}
 	.shadowOverlay {
 		background-color: black;

@@ -916,6 +916,7 @@ SITEMAP
 
 .layoutAll .nextProject {
   float: right;
+  clear: right;
 }
 
 @media screen and (max-width: 750px) {
@@ -977,12 +978,12 @@ SITEMAP
 }
 
 .home .layoutAll .imageDiv2 {
-  background-image: url("../images/New-Homes/Kingsway-1.jpg");
+  background-image: url("../images/New-Homes/KingswayTransitional-1.jpg");
   background-position: 50% 40%;
 }
 
 .home .layoutAll .imageDiv3 {
-  background-image: url("../images/New-Homes/Kingsway-6.jpg");
+  background-image: url("../images/New-Homes/KingswayTransitional-6.jpg");
   background-position: 50% 40%;
 }
 
@@ -1041,12 +1042,12 @@ SITEMAP
 }
 
 .newHomesOverview .layoutAll .imageDiv2 {
-  background-image: url("../images/New-Homes/Kingsway-1.jpg");
+  background-image: url("../images/New-Homes/KingswayTransitional-1.jpg");
   background-position: 50% 40%;
 }
 
 .newHomesOverview .layoutAll .imageDiv3 {
-  background-image: url("../images/New-Homes/Kingsway-6.jpg");
+  background-image: url("../images/New-Homes/KingswayTransitional-6.jpg");
   background-position: 50% 40%;
 }
 
@@ -1063,6 +1064,21 @@ SITEMAP
 .newHomesOverview .layoutAll .imageDiv6 {
   background-image: url("../images/New-Homes/FrenchCountry-4.jpg");
   background-position: 50% 40%;
+}
+
+.newHomesOverview .layoutAll .imageDiv6 {
+  background-image: url("../images/New-Homes/FrenchCountry-4.jpg");
+  background-position: 50% 40%;
+}
+
+.newHomesOverview .layoutAll .imageDiv7 {
+  background-image: url("../images/New-Homes/KingswayGeorgian-1.jpg");
+  background-position: 70% 40%;
+}
+
+.newHomesOverview .layoutAll .imageDiv8 {
+  background-image: url("../images/New-Homes/KingswayTraditional-1.jpg");
+  background-position: 30% 40%;
 }
 
 .layoutNewHomes .image1 {
@@ -1095,6 +1111,16 @@ SITEMAP
   height: 300px;
 }
 
+.layoutNewHomes .image7 {
+  width: 37%;
+  height: 450px;
+}
+
+.layoutNewHomes .image8 {
+  width: 57%;
+  height: 450px;
+}
+
 .layoutNewHomes .shadowOverlay {
   background-color: black;
 }
@@ -1110,17 +1136,17 @@ SITEMAP
 }
 
 .renosAndAdditionsOverview .layoutAll .imageDiv3 {
-  background-image: url("../images/Renovations-Additions/Lytton-Park-2.jpg");
-  background-position: 50% 40%;
-}
-
-.renosAndAdditionsOverview .layoutAll .imageDiv4 {
   background-image: url("../images/Renovations-Additions/Cornwall-1.jpg");
   background-position: 50% 40%;
 }
 
-.renosAndAdditionsOverview .layoutAll .imageDiv5 {
+.renosAndAdditionsOverview .layoutAll .imageDiv4 {
   background-image: url("../images/Renovations-Additions/Rosedale-2.jpg");
+  background-position: 50% 40%;
+}
+
+.renosAndAdditionsOverview .layoutAll .imageDiv5 {
+  background-image: url("../images/Renovations-Additions/Lorne-Park-4.jpg");
   background-position: 50% 40%;
 }
 
@@ -1153,72 +1179,52 @@ SITEMAP
   background-color: black;
 }
 
-.sketchesAndRenderings .layoutSketches a:hover .imageDiv,
-.sketchesAndRenderings .layoutSketches .imageDiv:hover {
+.upcoming .layoutUpcoming a:hover .imageDiv,
+.upcoming .layoutUpcoming .imageDiv:hover {
   opacity: 1;
 }
 
-.sketchesAndRenderings .layoutSketches .image {
+.upcoming .layoutUpcoming .image {
   padding: 4.5%;
 }
 
-.sketchesAndRenderings .layoutSketches .textBlurb {
+.upcoming .layoutUpcoming .textBlurb {
   background-color: #7ba7ba;
   margin: 4.5% 4.5% 4.5% 4.5%;
   padding: 0 8%;
   width: 84%;
 }
 
-.sketchesAndRenderings .layoutSketches .textOverlay,
-.sketchesAndRenderings .layoutSketches .completionDate {
+.upcoming .layoutUpcoming .textOverlay,
+.upcoming .layoutUpcoming .completionDate {
   position: relative;
   padding: 1%;
   z-index: 200;
 }
 
-.sketchesAndRenderings .layoutSketches .textOverlay {
+.upcoming .layoutUpcoming .textOverlay {
   margin-top: 15px;
   margin-left: -20px;
 }
 
-.sketchesAndRenderings .layoutSketches .completionDate {
+.upcoming .layoutUpcoming .completionDate {
   margin-top: -55px;
   margin-right: 20px;
   display: block;
   text-align: right;
 }
 
-.sketchesAndRenderings .layoutSketches .imageDiv1 {
-  background-image: url("../images/Sketches-Renderings/46-Queen-Marys-6.jpg");
-  background-position: 50% 100%;
+.upcoming .layoutUpcoming .imageDiv1 {
+  background-image: url("../images/Upcoming/Oakville-New-Home-01.jpg");
+  background-position: 50% 80%;
 }
 
-.sketchesAndRenderings .layoutSketches .imageDiv2 {
-  background-image: url("../images/Sketches-Renderings/1-The-Kingsway--New-Home.jpg");
-  background-position: 0% 80%;
-}
-
-.sketchesAndRenderings .layoutSketches .imageDiv3 {
-  background-image: url("../images/Sketches-Renderings/3-Oakville-Proposal.jpg");
-  background-position: 50% 70%;
-}
-
-.layoutSketches .image1 {
-  width: 97%;
-  height: 630px;
-}
-
-.layoutSketches .image2 {
-  width: 97%;
-  height: 550px;
-}
-
-.layoutSketches .image3 {
+.layoutUpcoming .image1 {
   width: 97%;
   height: 400px;
 }
 
-.layoutSketches .shadowOverlay {
+.layoutUpcoming .shadowOverlay {
   background-color: black;
 }
 
@@ -1287,42 +1293,42 @@ SITEMAP
 }
 
 .kingswayTransitional .layoutAll .imageDiv1 {
-  background-image: url("../images/New-Homes/Kingsway-1.jpg");
+  background-image: url("../images/New-Homes/KingswayTransitional-1.jpg");
   background-position: 50% 40%;
 }
 
 .kingswayTransitional .layoutAll .imageDiv2 {
-  background-image: url("../images/New-Homes/Kingsway-2.jpg");
+  background-image: url("../images/New-Homes/KingswayTransitional-2.jpg");
   background-position: 50% 40%;
 }
 
 .kingswayTransitional .layoutAll .imageDiv3 {
-  background-image: url("../images/New-Homes/Kingsway-6.jpg");
+  background-image: url("../images/New-Homes/KingswayTransitional-6.jpg");
   background-position: 50% 40%;
 }
 
 .kingswayTransitional .layoutAll .imageDiv4 {
-  background-image: url("../images/New-Homes/Kingsway-3.jpg");
+  background-image: url("../images/New-Homes/KingswayTransitional-3.jpg");
   background-position: 50% 40%;
 }
 
 .kingswayTransitional .layoutAll .imageDiv5 {
-  background-image: url("../images/New-Homes/Kingsway-5.jpg");
+  background-image: url("../images/New-Homes/KingswayTransitional-5.jpg");
   background-position: 50% 40%;
 }
 
 .kingswayTransitional .layoutAll .imageDiv6 {
-  background-image: url("../images/New-Homes/Kingsway-4.jpg");
+  background-image: url("../images/New-Homes/KingswayTransitional-4.jpg");
   background-position: 50% 40%;
 }
 
 .kingswayTransitional .layoutAll .imageDiv7 {
-  background-image: url("../images/New-Homes/Kingsway-7.jpg");
+  background-image: url("../images/New-Homes/KingswayTransitional-7.jpg");
   background-position: 50% 40%;
 }
 
 .kingswayTransitional .layoutAll .imageDiv8 {
-  background-image: url("../images/New-Homes/Kingsway-8.jpg");
+  background-image: url("../images/New-Homes/KingswayTransitional-8.jpg");
   background-position: 50% 40%;
 }
 
@@ -1615,6 +1621,155 @@ SITEMAP
   background-color: black;
 }
 
+.kingswayTraditional .layoutAll a:hover .imageDiv,
+.kingswayTraditional .layoutAll .imageDiv:hover {
+  opacity: 1;
+}
+
+.kingswayTraditional .layoutAll .imageDiv1 {
+  background-image: url("../images/New-Homes/KingswayTraditional-1.jpg");
+  background-position: 50% 40%;
+}
+
+.kingswayTraditional .layoutAll .imageDiv2 {
+  background-image: url("../images/New-Homes/KingswayTraditional-2.jpg");
+  background-position: 50% 40%;
+}
+
+.kingswayTraditional .layoutAll .imageDiv3 {
+  background-image: url("../images/New-Homes/KingswayTraditional-3.jpg");
+  background-position: 50% 40%;
+}
+
+.kingswayTraditional .layoutAll .imageDiv4 {
+  background-image: url("../images/New-Homes/KingswayTraditional-4.jpg");
+  background-position: 50% 40%;
+}
+
+.kingswayTraditional .layoutAll .imageDiv5 {
+  background-image: url("../images/New-Homes/KingswayTraditional-6.jpg");
+  background-position: 50% 40%;
+}
+
+.kingswayTraditional .layoutAll .imageDiv6 {
+  background-image: url("../images/New-Homes/KingswayTraditional-5.jpg");
+  background-position: 50% 40%;
+}
+
+.layoutNewHomesKingswayTraditional .image1 {
+  width: 97%;
+  height: 630px;
+}
+
+.layoutNewHomesKingswayTraditional .image2 {
+  width: 31%;
+  height: 425px;
+}
+
+.layoutNewHomesKingswayTraditional .image3 {
+  width: 63%;
+  height: 425px;
+}
+
+.layoutNewHomesKingswayTraditional .image4 {
+  width: 97%;
+  height: 525px;
+}
+
+.layoutNewHomesKingswayTraditional .image5 {
+  width: 50%;
+  height: 270px;
+  float: right;
+}
+
+.layoutNewHomesKingswayTraditional .image6 {
+  width: 44%;
+  height: 200px;
+}
+
+.layoutNewHomesKingswayTraditional .textBlurbFiller {
+  background-color: #7ba7ba;
+  margin: 1.5%;
+  width: 44%;
+  min-height: 40px;
+  float: left;
+}
+
+.layoutNewHomesKingswayTraditional .shadowOverlay {
+  background-color: black;
+}
+
+.kingswayGeorgian .layoutAll a:hover .imageDiv,
+.kingswayGeorgian .layoutAll .imageDiv:hover {
+  opacity: 1;
+}
+
+.kingswayGeorgian .layoutAll .imageDiv1 {
+  background-image: url("../images/New-Homes/KingswayGeorgian-1.jpg");
+  background-position: 50% 40%;
+}
+
+.kingswayGeorgian .layoutAll .imageDiv2 {
+  background-image: url("../images/New-Homes/KingswayGeorgian-2.jpg");
+  background-position: 50% 40%;
+}
+
+.kingswayGeorgian .layoutAll .imageDiv3 {
+  background-image: url("../images/New-Homes/KingswayGeorgian-3.jpg");
+  background-position: 50% 40%;
+}
+
+.kingswayGeorgian .layoutAll .imageDiv4 {
+  background-image: url("../images/New-Homes/KingswayGeorgian-4.jpg");
+  background-position: 50% 40%;
+}
+
+.kingswayGeorgian .layoutAll .imageDiv5 {
+  background-image: url("../images/New-Homes/KingswayGeorgian-6.jpg");
+  background-position: 50% 40%;
+}
+
+.kingswayGeorgian .layoutAll .imageDiv6 {
+  background-image: url("../images/New-Homes/KingswayGeorgian-5.jpg");
+  background-position: 50% 40%;
+}
+
+.layoutNewHomesKingswayGeorgian .image1 {
+  width: 97%;
+  height: 750px;
+}
+
+.layoutNewHomesKingswayGeorgian .image2 {
+  width: 31%;
+  height: 400px;
+}
+
+.layoutNewHomesKingswayGeorgian .image3 {
+  width: 63%;
+  height: 830px;
+  float: right;
+}
+
+.layoutNewHomesKingswayGeorgian .image4 {
+  width: 31%;
+  height: 400px;
+}
+
+.layoutNewHomesKingswayGeorgian .image5 {
+  width: 47%;
+  height: 350px;
+  float: right;
+}
+
+.layoutNewHomesKingswayGeorgian .image6 {
+  width: 47%;
+  height: 350px;
+}
+
+.layoutNewHomesKingswayGeorgian .shadowOverlay {
+  background-color: black;
+}
+
 .lyttonParkUpdate .layoutAll a:hover .imageDiv,
 .lyttonParkUpdate .layoutAll .imageDiv:hover {
   opacity: 1;
@@ -1861,6 +2016,66 @@ SITEMAP
 }
 
 .layoutRenovationsRosedaleRevival .shadowOverlay {
+  background-color: black;
+}
+
+.lorneParkInterior .layoutAll a:hover .imageDiv,
+.lorneParkInterior .layoutAll .imageDiv:hover {
+  opacity: 1;
+}
+
+.lorneParkInterior .layoutAll .imageDiv1 {
+  background-image: url("../images/Renovations-Additions/Lorne-Park-2.jpg");
+  background-position: 50% 40%;
+}
+
+.lorneParkInterior .layoutAll .imageDiv2 {
+  background-image: url("../images/Renovations-Additions/Lorne-Park-4.jpg");
+  background-position: 50% 40%;
+}
+
+.lorneParkInterior .layoutAll .imageDiv3 {
+  background-image: url("../images/Renovations-Additions/Lorne-Park-1.jpg");
+  background-position: 50% 40%;
+}
+
+.lorneParkInterior .layoutAll .imageDiv4 {
+  background-image: url("../images/Renovations-Additions/Lorne-Park-5.jpg");
+  background-position: 50% 30%;
+}
+
+.lorneParkInterior .layoutAll .imageDiv5 {
+  background-image: url("../images/Renovations-Additions/Lorne-Park-6.jpg");
+  background-position: 50% 30%;
+}
+
+.layoutRenovationsLorneParkInterior .image1 {
+  width: 20%;
+  height: 225px;
+}
+
+.layoutRenovationsLorneParkInterior .image2 {
+  width: 74%;
+  height: 480px;
+  float: right;
+}
+
+.layoutRenovationsLorneParkInterior .image3 {
+  width: 20%;
+  height: 225px;
+}
+
+.layoutRenovationsLorneParkInterior .image4 {
+  width: 47%;
+  height: 260px;
+}
+
+.layoutRenovationsLorneParkInterior .image5 {
+  width: 47%;
+  height: 260px;
+}
+
+.layoutRenovationsLorneParkInterior .shadowOverlay {
   background-color: black;
 }
 

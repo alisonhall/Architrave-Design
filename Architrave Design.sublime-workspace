@@ -1,0 +1,942 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"subC",
+				"subCategories"
+			],
+			[
+				"class",
+				"className"
+			],
+			[
+				"catego",
+				"categoryId"
+			],
+			[
+				"forma",
+				"formattedNewExampleType"
+			],
+			[
+				"newExa",
+				"newExampleType"
+			],
+			[
+				"ho",
+				"howTo"
+			],
+			[
+				"exa",
+				"exampleType"
+			],
+			[
+				"exam",
+				"exampleType"
+			],
+			[
+				"parentCa",
+				"parentCategory"
+			],
+			[
+				"addEx",
+				"addExampleToNewLocation"
+			],
+			[
+				"isA",
+				"isActiveStatus"
+			],
+			[
+				"newEx",
+				"newExampleType"
+			],
+			[
+				"newExam",
+				"newExampleType"
+			],
+			[
+				"desc",
+				"description"
+			],
+			[
+				"siblin",
+				"siblingCategories"
+			],
+			[
+				"sibli",
+				"siblingCategories"
+			],
+			[
+				"spli",
+				"splitElements"
+			],
+			[
+				"newCate",
+				"newCategoryAlternativeNames"
+			],
+			[
+				"newCa",
+				"newCategoryAlternativeNames"
+			],
+			[
+				"countO",
+				"countObjects"
+			],
+			[
+				"comment",
+				"commentIDs"
+			],
+			[
+				"ori",
+				"originalIds"
+			],
+			[
+				"relatedC",
+				"relatedCategoryIDs"
+			],
+			[
+				"removeFrom",
+				"removeFromParentCategory"
+			],
+			[
+				"addTo",
+				"addToParentCategory"
+			],
+			[
+				"removeF",
+				"removeFromTopCategories"
+			],
+			[
+				"relatedCat",
+				"relatedCategoryIDs"
+			],
+			[
+				"related",
+				"relatedCategoryIDs"
+			],
+			[
+				"dele",
+				"deleteCategory"
+			],
+			[
+				"relatedCa",
+				"relatedCategoryIDs"
+			],
+			[
+				"origin",
+				"originalIds"
+			],
+			[
+				"origi",
+				"originalIds"
+			],
+			[
+				"orig",
+				"originalIds"
+			],
+			[
+				"check",
+				"checkRelatedCategories"
+			],
+			[
+				"update",
+				"updateRelatedCategory"
+			],
+			[
+				"relat",
+				"updateRelatedCategory"
+			],
+			[
+				"upd",
+				"updateRelatedCategory"
+			],
+			[
+				"categoryN",
+				"categoryNames"
+			],
+			[
+				"render",
+				"renderCategoryInfo"
+			],
+			[
+				"disp",
+				"displayCategoryInfo"
+			],
+			[
+				"cate",
+				"categoryEditedBy"
+			],
+			[
+				"rela",
+				"relatedCategoryIDs"
+			],
+			[
+				"chan",
+				"changeToEditMode"
+			],
+			[
+				"none",
+				"none"
+			],
+			[
+				"topC",
+				"topCategories"
+			],
+			[
+				"sidebar",
+				"sidebar-height-2"
+			],
+			[
+				"max",
+				"max-width"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"curr",
+				"currentUser"
+			],
+			[
+				"selec",
+				"selectedLanguages"
+			],
+			[
+				"top",
+				"topCategories"
+			],
+			[
+				"componen",
+				"componentWillMount"
+			],
+			[
+				"selectTyp",
+				"selectTypeSyntax"
+			],
+			[
+				"refC",
+				"refComments"
+			],
+			[
+				"curret",
+				"currentUserDataLoaded"
+			],
+			[
+				"categ",
+				"categoryId"
+			],
+			[
+				"comm",
+				"commentDataLoaded"
+			],
+			[
+				"sele",
+				"selectedLanguagesDataLoaded"
+			],
+			[
+				"edit",
+				"editMenu-container"
+			],
+			[
+				"handleClick",
+				"handleClickOutside"
+			],
+			[
+				"No",
+				"NoLanguage"
+			],
+			[
+				"noLangu",
+				"NoLanguage"
+			],
+			[
+				"languages",
+				"languageSectionsSyntax"
+			],
+			[
+				"for",
+				"for\tfor (…) {…}"
+			],
+			[
+				"commen",
+				"commentIDs"
+			],
+			[
+				"sh",
+				"showSidebar"
+			],
+			[
+				"getLa",
+				"getLanguageExamples"
+			],
+			[
+				"examplesL",
+				"examplesLanguage1"
+			],
+			[
+				"sy",
+				"syntaxesHTML"
+			],
+			[
+				"sear",
+				"searchResultsComponent"
+			],
+			[
+				"open",
+				"openExampleCardComponent"
+			],
+			[
+				"Open",
+				"OpenExampleCard"
+			],
+			[
+				"creat",
+				"createBrowserHistory"
+			],
+			[
+				"Op",
+				"OpenedExampleCardView"
+			],
+			[
+				"route",
+				"Route"
+			],
+			[
+				"code",
+				"codeText"
+			],
+			[
+				"js",
+				"js"
+			],
+			[
+				"Rea",
+				"ReactAccordion"
+			],
+			[
+				"langu",
+				"languageDataLoaded"
+			],
+			[
+				"componentWill",
+				"componentWillReceiveProps"
+			],
+			[
+				"example",
+				"exampleDataLoaded"
+			],
+			[
+				"state",
+				"stateName"
+			],
+			[
+				"sub",
+				"subCategoryIDs"
+			],
+			[
+				"subCate",
+				"subCategory"
+			],
+			[
+				"so",
+				"sofia_prolight"
+			],
+			[
+				"rg",
+				"rgba()"
+			],
+			[
+				"submit",
+				"submitButton"
+			],
+			[
+				"resul",
+				"resultSubCategories"
+			],
+			[
+				"dis",
+				"display"
+			],
+			[
+				"list-sty",
+				"list-style-type"
+			],
+			[
+				"htmlspeci",
+				"htmlspecialchars_decode"
+			],
+			[
+				"read",
+				"readonly\tAttr"
+			],
+			[
+				"v_exa",
+				"v_exampleID"
+			],
+			[
+				"v_example",
+				"v_exampleCodePen"
+			],
+			[
+				"v_e",
+				"v_exampleReferenceURL"
+			],
+			[
+				"v_c",
+				"v_categoryParent"
+			],
+			[
+				"v_ca",
+				"v_categoryName"
+			],
+			[
+				"str",
+				"strCat"
+			],
+			[
+				"furtherW",
+				"furtherWorkImg"
+			],
+			[
+				"furth",
+				"furtherWorkURL"
+			],
+			[
+				"duplica",
+				"duplicateCheck"
+			],
+			[
+				"insert",
+				"insertOrderDetails"
+			],
+			[
+				"fetch",
+				"fetch_assoc"
+			],
+			[
+				"inlin",
+				"inline-block"
+			],
+			[
+				"codeP",
+				"codePenCode"
+			],
+			[
+				"finalP",
+				"finalProductImgArray"
+			],
+			[
+				"final",
+				"finalProduct"
+			],
+			[
+				"ext",
+				"extrasImgArray"
+			],
+			[
+				"mock",
+				"mockupsImgArray"
+			],
+			[
+				"wire",
+				"wireframesImgArray"
+			],
+			[
+				"ske",
+				"sketchesImgArray"
+			],
+			[
+				"site",
+				"siteMapImgArray"
+			],
+			[
+				"moo",
+				"moodboardImgArray"
+			],
+			[
+				"providedResou",
+				"providedResourcesImgArray"
+			],
+			[
+				"current",
+				"currentGradient"
+			],
+			[
+				"my",
+				"mysqli_fetch"
+			],
+			[
+				"get_templ",
+				"get_template_directory"
+			],
+			[
+				"inli",
+				"inline-block"
+			],
+			[
+				"mysql_n",
+				"mysql_num_rows"
+			],
+			[
+				"style",
+				"style\tAttr"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 178.0,
+		"last_filter": "pa",
+		"selected_items":
+		[
+			[
+				"pa",
+				"Package Control: Install Package"
+			],
+			[
+				"PHP Code Sniffer: ",
+				"PHP Code Sniffer: Sniff this file"
+			],
+			[
+				"indent",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"php",
+				"PHP CodeBeautifier"
+			],
+			[
+				"pack",
+				"Package Control: Remove Package"
+			],
+			[
+				"p",
+				"phpfmt: toggle auto align"
+			],
+			[
+				"ph",
+				"phpfmt: analyse this"
+			]
+		],
+		"width": 485.0
+	},
+	"console":
+	{
+		"height": 547.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/alisonhall/Sites/Architrave-Design",
+		"/Users/alisonhall/Sites/Architrave-Design/images",
+		"/Users/alisonhall/Sites/Architrave-Design/portfolio",
+		"/Users/alisonhall/Sites/Architrave-Design/portfolio/new-homes",
+		"/Users/alisonhall/Sites/Architrave-Design/portfolio/renovations-additions",
+		"/Users/alisonhall/Sites/Architrave-Design/scss"
+	],
+	"file_history":
+	[
+		"/Users/alisonhall/Sites/Architrave-Design/portfolio/renovations-additions/lorne-park-interior.html",
+		"/Users/alisonhall/Sites/Architrave-Design/scss/_layoutRenovationsLorneParkInterior.scss",
+		"/Users/alisonhall/Sites/Architrave-Design/portfolio/renovations-additions.html",
+		"/Users/alisonhall/Sites/Architrave-Design/scss/style.scss",
+		"/Users/alisonhall/Sites/Architrave-Design/portfolio/renovations-additions/lytton-park-update.html",
+		"/Users/alisonhall/Sites/Architrave-Design/portfolio/renovations-additions/rosedale-revival.html",
+		"/Users/alisonhall/Sites/Architrave-Design/scss/_layoutRenovations.scss",
+		"/Users/alisonhall/Sites/Architrave-Design/portfolio/renovations-additions/cornwall-heritage-addition.html",
+		"/Users/alisonhall/Sites/Architrave-Design/scss/_layoutRenovationsCornwallHeritageAddition.scss",
+		"/Users/alisonhall/Sites/Architrave-Design/portfolio/upcoming.html",
+		"/Users/alisonhall/Sites/Architrave-Design/portfolio/new-homes.html",
+		"/Users/alisonhall/Sites/Architrave-Design/scss/_layoutNewHomes.scss",
+		"/Users/alisonhall/Sites/Architrave-Design/scss/_layoutUpcoming.scss",
+		"/Users/alisonhall/Sites/Architrave-Design/scss/_layoutAll.scss",
+		"/Users/alisonhall/Sites/Architrave-Design/scss/_layoutNewHomesKingswayTraditional.scss",
+		"/Users/alisonhall/Sites/Architrave-Design/index.html",
+		"/Users/alisonhall/Sites/Architrave-Design/portfolio/renovations-additions/royal-york-facelift.html",
+		"/Users/alisonhall/Sites/Architrave-Design/portfolio/renovations-additions/etobicoke-renewal.html",
+		"/Users/alisonhall/Sites/Architrave-Design/portfolio/new-homes/oakville-executive-home.html",
+		"/Users/alisonhall/Sites/Architrave-Design/portfolio/new-homes/kingsway-transitional.html",
+		"/Users/alisonhall/Sites/Architrave-Design/portfolio/new-homes/kingsway-traditional.html",
+		"/Users/alisonhall/Sites/Architrave-Design/portfolio/new-homes/hoggs-hollow-traditional.html",
+		"/Users/alisonhall/Sites/Architrave-Design/portfolio/new-homes/hoggs-hollow-french-country.html",
+		"/Users/alisonhall/Sites/Architrave-Design/portfolio/new-homes/credit-river-classic.html",
+		"/Users/alisonhall/Sites/Architrave-Design/sitemap.html",
+		"/Users/alisonhall/Sites/Architrave-Design/contact.html",
+		"/Users/alisonhall/Sites/Architrave-Design/reviews.html",
+		"/Users/alisonhall/Sites/Architrave-Design/about.html",
+		"/Users/alisonhall/Sites/Architrave-Design/scss/_layoutRenovationsEtobicokeRenewal.scss",
+		"/Users/alisonhall/Sites/Architrave-Design/scss/_layoutNewHomesCreditRiverClassic.scss",
+		"/Users/alisonhall/Sites/Architrave-Design/scss/_layoutNewHomesOakvilleExecutiveHome.scss",
+		"/Users/alisonhall/Sites/Architrave-Design/scss/_layoutNewHomesHoggsHollowTraditional.scss",
+		"/Users/alisonhall/Sites/Architrave-Design/scss/_layoutNewHomesKingswayTransitional.scss",
+		"/Users/alisonhall/Sites/Architrave-Design/scss/_imagesNewHomesKingswayTransitional.scss",
+		"/Users/alisonhall/Sites/Architrave-Design/scss/_layoutHome.scss",
+		"/Users/alisonhall/Sites/WEBD 353 Web Application Development/Examples References/2017.01.13/In-Class Exercise/app.js",
+		"/Users/alisonhall/Sites/WEBD 353 Web Application Development/Examples References/2017.01.13/In-Class Exercise/files/index.html",
+		"/Users/alisonhall/Sites/WEBD 353 Web Application Development/Examples References/2017.01.13/In-Class Exercise/files/css/stylesheet.css",
+		"/Users/alisonhall/Sites/WEBD 353 Web Application Development/Examples References/2017.01.13/wk1/wk1_05/wk1_05.js",
+		"/Users/alisonhall/Sites/WEBD 353 Web Application Development/Examples References/2017.01.13/wk1/wk1_01/wk1_01.js",
+		"/Users/alisonhall/Sites/WEBD 353 Web Application Development/Examples References/2017.01.13/wk1/wk1_02/wk1_02.js",
+		"/Users/alisonhall/Sites/WEBD 353 Web Application Development/Examples References/2017.01.13/wk1/wk1_03/wk1_03.js",
+		"/Users/alisonhall/Sites/WEBD 353 Web Application Development/Examples References/2017.01.13/wk1/wk1_04/files/index.html",
+		"/Users/alisonhall/Sites/WEBD 353 Web Application Development/Examples References/2017.01.13/wk1/wk1_04/wk1_04.js",
+		"/Users/alisonhall/Sites/WEBD 353 Web Application Development/Examples References/2017.01.13/wk1/wk1_05/files/index.html",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/Page/page.scss",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/OpenExampleCard/OpenExampleCard.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/CategoryInfo/categoryInfo.scss",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/CategoryInfo/CategoryInfo.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/CreateSnippet/createSnippet.scss",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/OpenExampleCard/openExampleCard.scss",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/Accordion/accordion.scss",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/CategoriesSidebar/categoriesSidebar.scss",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/Accordion/Accordion.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/CategoriesSidebar/CategoriesSidebar.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/Page/Page.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/styles/variables.scss",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/Header/header.scss",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/Header/Header.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/NoLanguage/noLanguage.scss",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/NoContent/noContent.scss",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/Examples/Examples.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/index.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/ExampleCards/ExampleCards.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/SyntaxCards/SyntaxCards.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/OpenSyntaxCard/OpenSyntaxCard.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/test-data.json",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/OpenSyntaxCard/openSyntaxCard.scss",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/code-assist-export (1).json",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/CreateSnippet/CreateSnippet.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/code-assist-export (4).json",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/Examples/examples.scss",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Prod/index.html",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/CreateCategory/CreateCategory.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/code-assist-export2.json",
+		"/Users/alisonhall/Sites/SapientNitro/sdp-prototypes/src/flux/stores/Accordion.js",
+		"/Users/alisonhall/Sites/SapientNitro/sdp-prototypes/src/flux/actions/Accordion.js",
+		"/Users/alisonhall/Sites/SapientNitro/sdp-prototypes/src/components/UCL/Accordion/index.js",
+		"/Users/alisonhall/Sites/SapientNitro/sdp-prototypes/src/components/UCC/Carousel/index.js",
+		"/Users/alisonhall/Sites/SapientNitro/sdp-prototypes/src/components/UCX/MeatBall/index.js",
+		"/Users/alisonhall/Sites/SapientNitro/sdp-prototypes/package.json",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/code-assist-export.json",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/index.html",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/Page/editSelectedLanguages.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/Page/getData.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/styles/global.scss",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/NoLanguage/NoLanguage.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/EditMenu/EditMenu.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/CreateCategory/createCategory.scss",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/views/CreateCategoryView.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/package.json",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/About/about.scss",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/Languages/languages.scss",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/Languages/Languages.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/Home/Home.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/Footer/footer.scss",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/Home/home.scss",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/ExampleCards/exampleCards.scss",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/SyntaxCards/syntaxCards.scss",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/font-awesome.min.css",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/styles/bootstrap.min.css",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/test-data.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/base.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/EditMenu/editMenu.scss",
+		"/Users/alisonhall/Desktop/artofcode/Code Assist Overview.js",
+		"/Users/alisonhall/Desktop/artofcode/Descriptions.txt",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/views/CategoryView.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/build/index.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/NoContent/NoContent.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/Test/Test.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/webpack.config.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/server.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/Categories/Categories.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/flux/stores/Accordion.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/alt.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/flux/actions/Accordion.js",
+		"/Users/alisonhall/Sites/SapientNitro/lynda.com-learn-react.js-the-basics/src/actions/NoteActions.js",
+		"/Users/alisonhall/Sites/SapientNitro/lynda.com-learn-react.js-the-basics/src/actions/BoardActions.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/.babelrc",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/flux/stores",
+		"/Users/alisonhall/Sites/SapientNitro/lynda.com-learn-react.js-the-basics/package.json",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/Test/ReactSelectTest.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/UserSettings/UserSettings.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/SearchResults/SearchResults.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/Login/Login.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/Footer/Footer.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/About/About.js",
+		"/Users/alisonhall/Sites/WEBD 302 Capstone/Projects/Capstone Website/src/components/UserSettings/userSettings.scss"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"sketches",
+			"child",
+			"button",
+			"name",
+			"singleCategory",
+			"removeExample",
+			"type",
+			"splitElem",
+			"checkCategoryIds",
+			"categoryNames",
+			"languageOption",
+			"categoryOption",
+			"syntax",
+			"checkIfActive",
+			"index",
+			"createdBy",
+			"button",
+			"...",
+			"editedBy",
+			"newDateEdited",
+			"console.log",
+			"index",
+			"split",
+			"\"Edit Category",
+			"originalParentCategory",
+			"checkParentC",
+			"relatedCategoryIDs",
+			"removeRelatedCategory",
+			"deleteCategory",
+			"removeRelatedCategory",
+			".bind",
+			"removeRe",
+			"addExa",
+			"map",
+			"removeRelated",
+			"checkRelatedCategories",
+			"delete",
+			"selectedParentCategory",
+			"topCategories",
+			"edit",
+			"alternative",
+			"addRelatedC",
+			"removeRelatedC",
+			"deleteCa",
+			"index",
+			"removeRelated",
+			"relatedCategoryIDs",
+			"subCategoryIDs",
+			"addCategory",
+			"createCategory",
+			"create",
+			"createSn",
+			"load",
+			"location",
+			"goTo",
+			"link",
+			"delete",
+			"edit",
+			"comment",
+			"none",
+			"comments",
+			"none",
+			"comments",
+			"none",
+			"comments",
+			"none",
+			"\"none\"",
+			"\"Data Not Loaded\"",
+			"Data Not Loaded",
+			"alterna",
+			"none",
+			"originalRelatedCategoryIDs",
+			"checkR",
+			"alternative",
+			"map",
+			"console.log",
+			"relatedCategories",
+			"link",
+			"subcategoryids",
+			"checkCategory",
+			"categoryNames",
+			"map",
+			"parentCategory.map",
+			"subCategory",
+			"addCategory",
+			"editCategory",
+			"original",
+			"originalParentCategory",
+			"parentCategory",
+			"addCategory",
+			"saveCategory",
+			"console",
+			"categoryId",
+			"currentUser",
+			"categoryId",
+			"user",
+			"currentUser",
+			"user",
+			"categoryId",
+			"user",
+			"examples",
+			": ",
+			"categoryTitle: categoryTitle,\n\t\tcategoryDescription: categoryDescription,\n\t\tcategoryAlternativeNames: categoryAlternativeNames,\n\t\trelatedCategoryIDs: relatedCategoryIDs,\n\t\tisTopLevel: isTopLevel,\n\t\tparentCategory: parentCategory,\n\t\tcategoryCreatedBy: categoryCreatedBy,\n\t\tcategoryEditedBy: categoryEditedBy,\n\t\tdateEdited: dateEdited,\n\t\tdateCreate",
+			"categoryId",
+			"alternative",
+			"name",
+			"button",
+			"categoryTitle",
+			"null",
+			"parentCategory",
+			"console",
+			"subCategory",
+			"handleChange",
+			"addCa",
+			"createC",
+			"constructObject",
+			"addExample",
+			"create",
+			"button-height",
+			"buttonHeight",
+			"85",
+			"classnames",
+			"home",
+			"categoriesComponent",
+			"react-ca",
+			"console",
+			"prism",
+			"console"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.stino_panel":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "Architrave Design.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 377.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

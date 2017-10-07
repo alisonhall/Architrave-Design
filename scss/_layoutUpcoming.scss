@@ -1,0 +1,60 @@
+$extraSpace: 3%;
+$extraTextBlurbSpaceTop: 3%;
+$extraTextBlurbSpaceBottom: 3%;
+
+$width1: 100% - $spacingX2;
+$height1: $baseHeight * 0.8;
+
+.upcoming .layoutUpcoming {
+	a:hover .imageDiv,
+	.imageDiv:hover {
+		opacity: 1;
+	}
+
+	.image {
+		padding: $spacing + $extraSpace;
+	}
+
+	.textBlurb {
+		background-color: #7ba7ba;
+		margin: ($spacing + $extraTextBlurbSpaceTop) ($spacing + $extraSpace) ($spacing + $extraTextBlurbSpaceBottom) ($spacing + $extraSpace);
+		padding: 0 $textBlurbPadding + $extraSpace;
+		width: $textBlurbWidth - $extraSpace;
+	}
+
+	.textOverlay,
+	.completionDate {
+		position: relative;
+		padding: 1%;
+		z-index: 200;
+		// text-shadow: 0px 0px 5px rgba(0, 0, 0, 1);
+	}
+	.textOverlay {
+		// margin-top: -50px;
+		margin-top: 15px;
+		margin-left: -20px;
+	}
+	.completionDate {
+		// margin-top: -65px;
+		margin-top: -55px;
+		margin-right: 20px;
+		display: block;
+		text-align: right;
+		// font-size: 0.9em;
+	}
+
+	.imageDiv1 {
+		background-image: url('../images/Upcoming/Oakville-New-Home-01.jpg');
+		background-position: 50% 80%;
+	}
+}
+
+.layoutUpcoming {
+	.image1 {
+		width: $width1;
+		height: $height1;
+	}
+	.shadowOverlay {
+		background-color: black;
+	}
+}

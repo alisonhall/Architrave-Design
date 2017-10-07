@@ -1,0 +1,77 @@
+$width1: 100% - $spacingX2;
+$width2: 34% - $spacingX2;
+$width3: 66% - $spacingX2;
+$width4: 34% - $spacingX2;
+$width5: 50% - $spacingX2;
+$width6: 50% - $spacingX2;
+$widthTextBlurbFiller: $width6;
+$height1: $baseHeight * 1.5;
+$height2: $baseHeight * 0.8;
+$height3: $baseHeight * 1.66;
+$height4: $baseHeight * 0.8;
+$height5: $baseHeight * 0.7;
+$height6: $baseHeight * 0.7;
+
+.kingswayGeorgian .layoutAll {
+	a:hover .imageDiv,
+	.imageDiv:hover {
+		opacity: 1;
+	}
+
+	.imageDiv1 {
+		background-image: url('../images/New-Homes/KingswayGeorgian-1.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv2 {
+		background-image: url('../images/New-Homes/KingswayGeorgian-2.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv3 {
+		background-image: url('../images/New-Homes/KingswayGeorgian-3.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv4 {
+		background-image: url('../images/New-Homes/KingswayGeorgian-4.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv5 {
+		background-image: url('../images/New-Homes/KingswayGeorgian-6.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv6 {
+		background-image: url('../images/New-Homes/KingswayGeorgian-5.jpg');
+		background-position: 50% 40%;
+	}
+}
+
+.layoutNewHomesKingswayGeorgian {
+	.image1 {
+		width: $width1;
+		height: $height1;
+	}
+	.image2 {
+		width: $width2;
+		height: $height2;
+	}
+	.image3 {
+		width: $width3;
+        height: $height3;
+        float: right;
+	}
+	.image4 {
+		width: $width4;
+		height: $height4;
+	}
+	.image5 {
+		width: $width5;
+		height: $height5;
+		float: right;	
+	}
+	.image6 {
+		width: $width6;
+		height: $height6;
+	}
+	.shadowOverlay {
+		background-color: black;
+	}
+}
