@@ -1,0 +1,38 @@
+[
+    {
+        "home": [
+            {
+                "type": "link",
+                "name": "Hogg's Hollow Traditional",
+                "link": "/portfolio/new-homes/hoggs-hollow-traditional.html"
+            },
+            {
+                "type": "link",
+                "name": "Kingsway Transitional",
+                "link": "/portfolio/new-homes/kingsway-transitional.html"
+            },
+            {
+                "type": "imageFiller"
+            },
+            {
+                "type": "link",
+                "name": "Credit River",
+                "link": "/portfolio/new-homes/credit-river-classic.html"
+            },
+            {
+                "type": "textBlurb",
+                "text": "Designing stylish new homes and renovations in Etobicoke and the Greater Toronto Area."
+            },
+            {
+                "type": "link",
+                "name": "Etobicoke Facelift",
+                "link": "/portfolio/renovations-additions/etobicoke-renewal.html"
+            },
+            {
+                "type": "link",
+                "name": "Lytton Park Update",
+                "link": "/portfolio/renovations-additions/lytton-park-update.html"
+            }
+        ]
+    }
+]

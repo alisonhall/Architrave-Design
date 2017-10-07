@@ -1,0 +1,88 @@
+
+aside
+	a(href="/index.html")
+		img(
+			id="logo"
+			src="/images/ArchitraveNewLogo.jpg"
+			alt="Architrave Design | Architect"
+		)
+	nav
+		ul(class="mainNav")
+			li
+				if pageCategory=='portfolio'
+					a(
+						href="/portfolio/new-homes.html"
+						class="portfolioNav selected"
+					) Portfolio
+					ul(class="subNav")
+						li
+							if pageSubCategory=='newHomes'
+								a(
+									href="/portfolio/new-homes.html"
+									class="selected"
+								) New Homes
+							else
+								a(
+									href="/portfolio/new-homes.html"
+								) New Homes
+						li
+							if pageSubCategory=='renovations'
+								a(
+									href="/portfolio/renovations-additions.html"
+									class="selected"
+								) Renovations
+							else
+								a(
+									href="/portfolio/renovations-additions.html"
+								) Renovations
+						li
+							if pageSubCategory=='upcoming'
+								a(
+									href="/portfolio/upcoming.html"
+									class="selected"
+								) Upcoming
+							else
+								a(
+									href="/portfolio/upcoming.html"
+								) Upcoming
+				else
+					a(
+						href="/portfolio/new-homes.html"
+						class="portfolioNav"
+					) Portfolio
+			li
+				if pageCategory=='about'
+					a(
+						href="/about.html"
+						class="selected"
+					) About
+				else
+					a(
+						href="/about.html"
+					) About
+			li
+				if pageCategory=='reviews'
+					a(
+						href="/reviews.html"
+						class="selected"
+					) Reviews
+				else
+					a(
+						href="/reviews.html"
+					) Reviews
+			li
+				if pageCategory=='contact'
+					a(
+						href="/contact.html"
+						class="selected"
+					) Contact
+				else
+					a(
+						href="/contact.html"
+					) Contact
+	a(
+		class="houzzLogo"
+		href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+	)
+		img(src="/images/HouzzH.png")
+		

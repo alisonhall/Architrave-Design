@@ -1,0 +1,47 @@
+- var pageName = 'Home'
+- var pageVar = 'home'
+- var pageCategory = 'home'
+- var pageSubCategory = 'none'
+
+doctype html
+html
+	include ./meta.pug
+
+	body(class=pageVar + " index")
+
+		//- - var data = JSON.parse(list)
+		include ./header.pug
+		include ./sidebar.pug
+		include ./home.pug
+		include ./footer.pug
+
+
+//- include ./add.pug
+
+//- div(class="container todo-container")
+//- 	h1 List of To Do's
+//- 	div(class="row")
+//- 		-for(var i in todos)
+//- 			- var todoId = todos[i].id
+//- 			- var todoName = todos[i].name
+//- 			- var todoChecked = todos[i].complete
+//- 			- var isEditing = todos[i].editing
+//- 			- var isDeleting = todos[i].deleting
+
+//- 			if (!todoChecked)
+//- 				include ./view.pug
+
+//- div(class="container completed-container")
+//- 	h2 Completed To Do's
+//- 	div(class="row")
+//- 		-for(var i in todos)
+//- 			- var todoId = todos[i].id
+//- 			- var todoName = todos[i].name
+//- 			- var todoChecked = todos[i].complete
+//- 			- var isEditing = todos[i].editing
+//- 			- var isDeleting = todos[i].deleting
+
+//- 			if (todoChecked)
+//- 				include ./view.pug
+						
+//- include ./footer.pug
