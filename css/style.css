@@ -1190,7 +1190,7 @@ SITEMAP
 
 .upcoming .layoutUpcoming .textBlurb {
   background-color: #7ba7ba;
-  margin: 4.5% 4.5% 4.5% 4.5%;
+  margin: 0 4.5% 4.5% 4.5%;
   padding: 0 8%;
   width: 84%;
 }
@@ -1219,9 +1219,41 @@ SITEMAP
   background-position: 50% 80%;
 }
 
+.upcoming .layoutUpcoming .imageDiv2 {
+  background-image: url("../images/Upcoming/StGeorges-GC.jpg");
+  background-position: 50% 80%;
+}
+
+.upcoming .layoutUpcoming .imageDiv4 {
+  background-image: url("../images/Upcoming/Before-StGeorges.jpg");
+  background-position: 50% 80%;
+}
+
+.upcoming .layoutUpcoming .imageDiv3 {
+  background-image: url("../images/Upcoming/King-Georges6.jpg");
+  background-position: 50% 58%;
+}
+
 .layoutUpcoming .image1 {
   width: 97%;
   height: 400px;
+}
+
+.layoutUpcoming .image2 {
+  width: 97%;
+  height: 400px;
+}
+
+.layoutUpcoming .image4 {
+  width: 45%;
+  height: 170px;
+  float: right;
+  margin-top: -115px;
+}
+
+.layoutUpcoming .image3 {
+  width: 97%;
+  height: 500px;
 }
 
 .layoutUpcoming .shadowOverlay {
