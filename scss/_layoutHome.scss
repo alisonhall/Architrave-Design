@@ -4,12 +4,18 @@ $width3: 21% - $spacingX2;
 $width4: 31% - $spacingX2;
 $width5: 36% - $spacingX2;
 $width6: 64% - $spacingX2;
+$width7: 48% - $spacingX2;
+$width8: 21% - $spacingX2;
+$width9: 31% - $spacingX2;
 $height1: $baseHeight * 1.405;
 $height2: $baseHeight * 0.74058;
 $height3: $baseHeight * 0.598266;
 $height4: $baseHeight * 0.598266;
 $height6: $baseHeight * 0.691748;
 $height5: $height6;
+$height7: $baseHeight * 0.6;
+$height8: $baseHeight * 0.6;
+$height9: $baseHeight * 0.6;
 
 .home .layoutAll {
 	.imageDiv1 {
@@ -17,7 +23,7 @@ $height5: $height6;
 		background-position: 100% 0%;
 	}
 	.imageDiv2 {
-		background-image: url('../images/New-Homes/KingswayTransitional-1.jpg');
+		background-image: url('../images/New-Homes/KingswayGeorgian-1.jpg');
 		background-position: 50% 40%;
 	}
 	.imageDiv3 {
@@ -34,6 +40,18 @@ $height5: $height6;
 	}
 	.imageDiv6 {
 		background-image: url('../images/Renovations-Additions/Lytton-Park-3.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv7 {
+		background-image: url('../images/New-Homes/KingswayTransitional-1.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv8 {
+		background-image: url('../images/New-Homes/CreditRiver-9.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv9 {
+		background-image: url('../images/New-Homes/KingswayGeorgian-2.jpg');
 		background-position: 50% 40%;
 	}
 	.shadowOverlay {
@@ -65,5 +83,17 @@ $height5: $height6;
 	.image6 {
 		width: $width6;
 		height: $height6;
+	}
+	.image7 {
+		width: $width7;
+		height: $height7;
+	}
+	.image8 {
+		width: $width8;
+		height: $height8;
+	}
+	.image9 {
+		width: $width9;
+		height: $height9;
 	}
 }
