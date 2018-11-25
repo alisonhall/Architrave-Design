@@ -1,16 +1,29 @@
 $width1: 100% - $spacingX2;
-$width2: 34% - $spacingX2;
-$width3: 66% - $spacingX2;
-$width4: 34% - $spacingX2;
-$width5: 50% - $spacingX2;
-$width6: 50% - $spacingX2;
-$widthTextBlurbFiller: $width6;
+$width2: 35% - $spacingX2;
+$width3: 65% - $spacingX2;
+$width4: 35% - $spacingX2;
+$width5: 58% - $spacingX2;
+$width6: 42% - $spacingX2;
+$width7: 58% - $spacingX2;
+$width8: 42% - $spacingX2;
+$width9: 58% - $spacingX2;
+$width10: 34% - $spacingX2;
+$width11: 32% - $spacingX2;
+$width12: 34% - $spacingX2;
+$widthTextBlurbFiller: $width3;
 $height1: $baseHeight * 1.5;
 $height2: $baseHeight * 0.8;
-$height3: $baseHeight * 1.66;
+$height3: $baseHeight * 1.46;
 $height4: $baseHeight * 0.8;
 $height5: $baseHeight * 0.7;
-$height6: $baseHeight * 0.7;
+$height6: $baseHeight * 1.08;
+$height7: $baseHeight * 0.7;
+$height8: $baseHeight * 1.08;
+$height9: $baseHeight * 0.7;
+$height10: $baseHeight * 0.7;
+$height11: $baseHeight * 0.7;
+$height12: $baseHeight * 0.7;
+$heightTextBlurbFiller: 70px;
 
 .kingswayGeorgian .layoutAll {
 	a:hover .imageDiv,
@@ -27,7 +40,7 @@ $height6: $baseHeight * 0.7;
 		background-position: 50% 40%;
 	}
 	.imageDiv3 {
-		background-image: url('../images/New-Homes/KingswayGeorgian-3.jpg');
+		background-image: url('../images/New-Homes/KingswayGeorgian-6.jpg');
 		background-position: 50% 40%;
 	}
 	.imageDiv4 {
@@ -35,11 +48,35 @@ $height6: $baseHeight * 0.7;
 		background-position: 50% 40%;
 	}
 	.imageDiv5 {
-		background-image: url('../images/New-Homes/KingswayGeorgian-6.jpg');
+		background-image: url('../images/New-Homes/KingswayGeorgian-8.jpg');
 		background-position: 50% 40%;
 	}
 	.imageDiv6 {
 		background-image: url('../images/New-Homes/KingswayGeorgian-5.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv7 {
+		background-image: url('../images/New-Homes/KingswayGeorgian-9.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv8 {
+		background-image: url('../images/New-Homes/KingswayGeorgian-10.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv9 {
+		background-image: url('../images/New-Homes/KingswayGeorgian-11.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv10 {
+		background-image: url('../images/New-Homes/KingswayGeorgian-7.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv11 {
+		background-image: url('../images/New-Homes/KingswayGeorgian-12.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv12 {
+		background-image: url('../images/New-Homes/KingswayGeorgian-13.jpg');
 		background-position: 50% 40%;
 	}
 }
@@ -55,21 +92,53 @@ $height6: $baseHeight * 0.7;
 	}
 	.image3 {
 		width: $width3;
-        height: $height3;
-        float: right;
+		height: $height3;
+		float: right;
 	}
 	.image4 {
 		width: $width4;
 		height: $height4;
 	}
+	.textBlurbFiller {
+		background-color: #7ba7ba;
+		margin: $spacing;
+		width: $widthTextBlurbFiller;
+		min-height: $heightTextBlurbFiller;
+		float: right;
+	}
 	.image5 {
 		width: $width5;
 		height: $height5;
-		float: right;	
 	}
 	.image6 {
 		width: $width6;
 		height: $height6;
+		float: right;
+	}
+	.image7 {
+		width: $width7;
+		height: $height7;
+	}
+	.image8 {
+		width: $width8;
+		height: $height8;
+		float: right;
+	}
+	.image9 {
+		width: $width9;
+		height: $height9;
+	}
+	.image10 {
+		width: $width10;
+		height: $height10;
+	}
+	.image11 {
+		width: $width11;
+		height: $height11;
+	}
+	.image12 {
+		width: $width12;
+		height: $height12;
 	}
 	.shadowOverlay {
 		background-color: black;
