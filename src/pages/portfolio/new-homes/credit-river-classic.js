@@ -3,90 +3,98 @@ import { Link } from "gatsby"
 
 import Layout from "../../../components/layout"
 import SEO from "../../../components/seo"
+import leftArrow from "../../../images/arrow-left-solid.svg"
+import rightArrow from "../../../images/arrow-right-solid.svg"
 
-const ContactUs = () => (
-  <Layout mainClasses="portfolio creditRiverClassic">
-    <SEO title="Architrave Design, Architect | Residential Designs" />
-    <section class="contentWrapper layoutAll layoutNewHomesCreditRiverClassic">
-      <a class="image image1 clearfix">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv1"></div>
+const ContactUs = (props) => (
+  <Layout urlPath={props.location.pathname} mainClasses="portfolio creditRiverClassic">
+    <SEO />
+    <section className="contentWrapper layoutAll layoutNewHomesCreditRiverClassic">
+      <div className="image image1 clearfix">
+        <div className="shadowOverlay clearfix">
+          <div className="imageDiv imageDiv1"></div>
         </div>
-        <p class="textOverlay"></p>
-      </a>
-      <a class="image image2 clearfix">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv2"></div>
+        <p className="textOverlay"></p>
+      </div>
+      <div className="image image2 clearfix">
+        <div className="shadowOverlay clearfix">
+          <div className="imageDiv imageDiv2"></div>
         </div>
-        <p class="textOverlay"></p>
-      </a>
-      <a class="image image3 clearfix">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv3"></div>
+        <p className="textOverlay"></p>
+      </div>
+      <div className="image image3 clearfix">
+        <div className="shadowOverlay clearfix">
+          <div className="imageDiv imageDiv3"></div>
         </div>
-        <p class="textOverlay"></p>
-      </a>
-      <section class="textBlurb">
+        <p className="textOverlay"></p>
+      </div>
+      <section className="textBlurb">
         <h2>Credit River Classic</h2>
         <h3>(Completion 2016)</h3>
         <p>The home owners sought a home suitable for both family living and entertaining on their riverside lot. Rich materials and the finest craftsmanship combine to create an atmosphere of casual elegance.</p>
       </section>
-      <a class="image image4 clearfix">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv4"></div>
+      <div className="image image4 clearfix">
+        <div className="shadowOverlay clearfix">
+          <div className="imageDiv imageDiv4"></div>
         </div>
-        <p class="textOverlay"></p>
-      </a>
-      <a class="image image5 clearfix">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv5"></div>
+        <p className="textOverlay"></p>
+      </div>
+      <div className="image image5 clearfix">
+        <div className="shadowOverlay clearfix">
+          <div className="imageDiv imageDiv5"></div>
         </div>
-        <p class="textOverlay"></p>
-      </a>
-      <a class="image image6 clearfix">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv6"></div>
+        <p className="textOverlay"></p>
+      </div>
+      <div className="image image6 clearfix">
+        <div className="shadowOverlay clearfix">
+          <div className="imageDiv imageDiv6"></div>
         </div>
-        <p class="textOverlay"></p>
-      </a>
-      <a class="image image7 clearfix">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv7"></div>
+        <p className="textOverlay"></p>
+      </div>
+      <div className="image image7 clearfix">
+        <div className="shadowOverlay clearfix">
+          <div className="imageDiv imageDiv7"></div>
         </div>
-        <p class="textOverlay"></p>
-      </a>
-      <a class="image image8 clearfix">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv8"></div>
+        <p className="textOverlay"></p>
+      </div>
+      <div className="image image8 clearfix">
+        <div className="shadowOverlay clearfix">
+          <div className="imageDiv imageDiv8"></div>
         </div>
-        <p class="textOverlay"></p>
-      </a>
-      <a class="image image9 clearfix">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv9"></div>
+        <p className="textOverlay"></p>
+      </div>
+      <div className="image image9 clearfix">
+        <div className="shadowOverlay clearfix">
+          <div className="imageDiv imageDiv9"></div>
         </div>
-        <p class="textOverlay"></p>
-      </a>
-      <a class="image image10 clearfix">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv10"></div>
+        <p className="textOverlay"></p>
+      </div>
+      <div className="image image10 clearfix">
+        <div className="shadowOverlay clearfix">
+          <div className="imageDiv imageDiv10"></div>
         </div>
-        <p class="textOverlay"></p>
-      </a>
-      <a class="image image11 clearfix">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv11"></div>
+        <p className="textOverlay"></p>
+      </div>
+      <div className="image image11 clearfix">
+        <div className="shadowOverlay clearfix">
+          <div className="imageDiv imageDiv11"></div>
         </div>
-        <p class="textOverlay"></p>
-      </a>
-      <a class="image image12 clearfix">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv12"></div>
+        <p className="textOverlay"></p>
+      </div>
+      <div className="image image12 clearfix">
+        <div className="shadowOverlay clearfix">
+          <div className="imageDiv imageDiv12"></div>
         </div>
-        <p class="textOverlay"></p>
-      </a>
-      <a href="/portfolio/new-homes/kingsway-georgian" class="prevProject"><i class="fa fa-arrow-left"></i><span>Previous Project</span></a>
-      <a href="/portfolio/new-homes/kingsway-transitional" class="nextProject"><span>Next Project</span><i class="fa fa-arrow-right"></i></a>
+        <p className="textOverlay"></p>
+      </div>
+      <Link to="/portfolio/new-homes/kingsway-georgian" className="prevProject">
+        <img src={leftArrow} />
+        <span>Previous Project</span>
+      </Link>
+      <Link to="/portfolio/new-homes/kingsway-transitional" className="nextProject">
+        <span>Next Project</span>
+        <img src={rightArrow} />
+      </Link>
     </section>
   </Layout>
 )

@@ -140,9 +140,12 @@ $textBlurbWidth: 100% - $spacingX2 - ($textBlurbPadding * 2);
 		-o-transition: all 0.2s linear 0s;
 		transition: all 0.2s linear 0s;
 	}
-	.prevProject i.fa,
-	.nextProject i.fa {
+	.prevProject img,
+	.nextProject img {
+		display: none;
 		opacity: 0;
+		width: 16px;
+		height: 16px;
 		-webkit-transition: all 0.2s ease-out 0s;
 		-moz-transition: all 0.2s ease-out 0s;
 		-o-transition: all 0.2s ease-out 0s;
@@ -159,8 +162,9 @@ $textBlurbWidth: 100% - $spacingX2 - ($textBlurbPadding * 2);
 		-o-transform: translateX(18px);
 		transform: translateX(18px);
 	}
-	.prevProject:hover i.fa {
+	.prevProject:hover img {
 		color: $grayLinkColour;
+		display: inline-block;
 		opacity: 1;
 		-webkit-transform: translateX(-18px);
 		-ms-transform: translateX(-18px);
@@ -175,8 +179,9 @@ $textBlurbWidth: 100% - $spacingX2 - ($textBlurbPadding * 2);
 		-o-transform: translateX(-18px);
 		transform: translateX(-18px);
 	}
-	.nextProject:hover i.fa {
+	.nextProject:hover img {
 		color: $grayLinkColour;
+		display: inline-block;
 		opacity: 1;
 		-webkit-transform: translateX(18px);
 		-ms-transform: translateX(18px);

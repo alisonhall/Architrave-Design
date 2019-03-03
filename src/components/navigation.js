@@ -4,7 +4,11 @@ import React from "react"
 import architraveLogo from "../images/ArchitraveNewLogo.jpg"
 import houzzLogo from "../images/HouzzH.png"
 
-const Navigation = () => (
+const Navigation = ({urlPath}) => {
+  const subNavVisible = (urlPath.indexOf('portfolio') >= 0) ? 'subNavVisible' : '';
+  const isNewHomes = (urlPath.indexOf('new-homes') >= 0) ? 'selected' : '';
+  const isRenovationsAdditions = (urlPath.indexOf('renovations-additions') >= 0) ? 'selected' : '';
+  return (
   <aside>
     <Link to="/index.html">
       <img id="logo" src={architraveLogo} alt="Architrave Design | Architect" />
@@ -12,16 +16,16 @@ const Navigation = () => (
     <nav>
       <ul class="mainNav">
         <li>
-          <Link to="/portfolio/new-homes" class="portfolioNav">Portfolio</Link>
-          <ul class="subNav">
+          <Link to="/portfolio/new-homes" className="portfolioNav">Portfolio</Link>
+          <ul class={`subNav ${subNavVisible}`}>
             <li>
-              <Link to="/portfolio/new-homes">New Homes</Link>
+              <Link to="/portfolio/new-homes" activeClassName="selected" className={isNewHomes}>New Homes</Link>
             </li>
             <li>
-              <Link to="/portfolio/renovations-additions">Renovations</Link>
+              <Link to="/portfolio/renovations-additions" activeClassName="selected" className={isRenovationsAdditions}>Renovations</Link>
             </li>
             <li>
-              <Link to="/portfolio/upcoming">Upcoming</Link>
+              <Link to="/portfolio/upcoming" activeClassName="selected">Upcoming</Link>
             </li>
           </ul>
         </li>
@@ -40,6 +44,10 @@ const Navigation = () => (
       <img src={houzzLogo} />
     </Link>
   </aside>
-)
+)}
+
+Navigation.propTypes = {
+  urlPath: PropTypes.string.isRequired,
+}
     
 export default Navigation

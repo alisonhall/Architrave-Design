@@ -3,28 +3,36 @@ import { Link } from "gatsby"
 
 import Layout from "../../../components/layout"
 import SEO from "../../../components/seo"
+import leftArrow from "../../../images/arrow-left-solid.svg"
+import rightArrow from "../../../images/arrow-right-solid.svg"
 
-const ContactUs = () => (
-  <Layout mainClasses="portfolio royalYorkFacelift">
-    <SEO title="Architrave Design, Architect | Residential Designs" />
+const ContactUs = (props) => (
+  <Layout urlPath={props.location.pathname} mainClasses="portfolio royalYorkFacelift">
+    <SEO />
     <section class="contentWrapper layoutAll layout1">
-      <a class="image image1 clearfix">
+      <div class="image image1 clearfix">
         <div class="shadowOverlay clearfix">
           <div class="imageDiv imageDiv1"></div>
         </div>
         <p class="textOverlay">Before</p>
-      </a>
-      <a class="image image2 clearfix">
+      </div>
+      <div class="image image2 clearfix">
         <div class="shadowOverlay clearfix">
           <div class="imageDiv imageDiv2"></div>
         </div>
         <p class="textOverlay">New Facade</p>
-      </a>
+      </div>
       <section class="textBlurb">
-        <p>	Designing stylish new homes and renovations in Etobicoke and the Greater Toronto Area.</p>
+        <p>Designing stylish new homes and renovations in Etobicoke and the Greater Toronto Area.</p>
       </section>
-      <a href="" class="prevProject"><i class="fa fa-arrow-left"></i><span>Previous Project</span></a>
-      <a href="" class="nextProject"><span>Next Project</span><i class="fa fa-arrow-right"></i></a>
+      <Link to="" class="prevProject">
+        <img src={leftArrow} />
+        <span>Previous Project</span>
+      </Link>
+      <Link to="" class="nextProject">
+        <span>Next Project</span>
+        <img src={rightArrow} />
+      </Link>
     </section>
   </Layout>
 )

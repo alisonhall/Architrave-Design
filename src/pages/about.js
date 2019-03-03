@@ -1,12 +1,11 @@
 import React from "react"
-import { Link } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const About = () => (
-  <Layout mainClasses="about">
-    <SEO title="Architrave Design, Architect | Residential Designs" />
+const About = (props) => (
+  <Layout urlPath={props.location.pathname} mainClasses="about">
+    <SEO />
     <section class="contentWrapper clearfix">
       <div class="contentBackground clearfix">
         <section class="textContent">

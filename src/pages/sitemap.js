@@ -4,9 +4,9 @@ import { Link } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const Sitemap = () => (
-  <Layout mainClasses="sitemap">
-    <SEO title="Architrave Design, Architect | Residential Designs" />
+const Sitemap = (props) => (
+  <Layout urlPath={props.location.pathname} mainClasses="sitemap">
+    <SEO />
     <section class="contentWrapper clearfix">
       <div class="contentBackground clearfix">
         <section class="textContent">

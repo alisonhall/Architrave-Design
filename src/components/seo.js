@@ -8,32 +8,26 @@
 import React from "react"
 import PropTypes from "prop-types"
 import Helmet from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
 
 function SEO({ description, lang, meta, keywords, title }) {
-  const { site } = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            author
-          }
-        }
-      }
-    `
-  )
-
+  const site = {
+    siteMetadata: {
+      title: `Architrave Design, Architect | Residential Designs`,
+      description: `Architrave Design, Architect is a Residential Architect designing Homes and Additions in Etobicoke, Toronto, Mississauga, and Oakville.`,
+      author: `Architrave Design, Architect`,
+      keywords: `Architect, Etobicoke, The Kingsway, Toronto, Mississauga, Oakville, Design, Home, House, Renovation, Addition, Custom Home Design, Home Architect, Renovation Architect, Etobicoke Architect, Toronto Architect, Mississauga Architect, Oakville Architect`
+    }
+  }
   const metaDescription = description || site.siteMetadata.description
+  const titleTemplate = title ? `%s | ${site.siteMetadata.title}` : `${site.siteMetadata.title}`
 
   return (
     <Helmet
       htmlAttributes={{
         lang,
       }}
-      title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      title={title || site.siteMetadata.title}
+      titleTemplate={titleTemplate}
       meta={[
         {
           name: `description`,
@@ -66,10 +60,6 @@ function SEO({ description, lang, meta, keywords, title }) {
         {
           name: `twitter:description`,
           content: metaDescription,
-        },
-        {
-          name: `viewport`,
-          content: `width=device-width, initial-scale=1`
         }
       ]
         .concat(
@@ -96,8 +86,7 @@ SEO.propTypes = {
   lang: PropTypes.string,
   meta: PropTypes.array,
   keywords: PropTypes.arrayOf(PropTypes.string),
-  title: PropTypes.string.isRequired,
-  viewport: PropTypes.string
+  title: PropTypes.string
 }
 
 export default SEO
