@@ -87,8 +87,8 @@ const ContactUs = () => (
         </div>
         <p class="textOverlay"></p>
       </a>
-      <a href="/portfolio/new-homes/hoggs-hollow-traditional.html" class="prevProject"><i class="fa fa-arrow-left"></i><span>Previous Project</span></a>
-      <a href="/portfolio/new-homes/credit-river-classic.html" class="nextProject"><span>Next Project</span><i class="fa fa-arrow-right"></i></a>
+      <a href="/portfolio/new-homes/hoggs-hollow-traditional" class="prevProject"><i class="fa fa-arrow-left"></i><span>Previous Project</span></a>
+      <a href="/portfolio/new-homes/credit-river-classic" class="nextProject"><span>Next Project</span><i class="fa fa-arrow-right"></i></a>
     </section>
   </Layout>
 )

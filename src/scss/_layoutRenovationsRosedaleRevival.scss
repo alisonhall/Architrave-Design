@@ -1,0 +1,44 @@
+$width1: 100% - $spacingX2;
+$width2: 48% - $spacingX2;
+$width3: 52% - $spacingX2;
+$height1: $baseHeight * 1.3;
+$height2: $baseHeight * 0.75;
+$height3: $height2;
+
+.rosedaleRevival .layoutAll {
+	a:hover .imageDiv,
+	.imageDiv:hover {
+		opacity: 1;
+	}
+
+	.imageDiv1 {
+		background-image: url('../images/Renovations-Additions/Rosedale-2.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv2 {
+		background-image: url('../images/Renovations-Additions/Rosedale-1.jpg');
+		background-position: 50% 40%;
+	}
+	.imageDiv3 {
+		background-image: url('../images/Renovations-Additions/Rosedale-3.jpg');
+		background-position: 50% 40%;
+	}
+}
+
+.layoutRenovationsRosedaleRevival {
+	.image1 {
+		width: $width1;
+		height: $height1;
+	}
+	.image2 {
+		width: $width2;
+		height: $height2;
+	}
+	.image3 {
+		width: $width3;
+		height: $height3;
+	}
+	.shadowOverlay {
+		background-color: black;
+	}
+}

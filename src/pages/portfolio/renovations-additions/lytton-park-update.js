@@ -42,8 +42,8 @@ const ContactUs = () => (
         </div>
         <p class="textOverlay"></p>
       </a>
-      <a href="/portfolio/renovations-additions/lorne-park-interior.html" class="prevProject"><i class="fa fa-arrow-left"></i><span>Previous Project</span></a>
-      <a href="/portfolio/renovations-additions/etobicoke-renewal.html" class="nextProject"><span>Next Project</span><i class="fa fa-arrow-right"></i></a>
+      <a href="/portfolio/renovations-additions/lorne-park-interior" class="prevProject"><i class="fa fa-arrow-left"></i><span>Previous Project</span></a>
+      <a href="/portfolio/renovations-additions/etobicoke-renewal" class="nextProject"><span>Next Project</span><i class="fa fa-arrow-right"></i></a>
     </section>
   </Layout>
 )

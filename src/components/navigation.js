@@ -1,11 +1,13 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
+import architraveLogo from "../images/ArchitraveNewLogo.jpg"
+import houzzLogo from "../images/HouzzH.png"
 
 const Navigation = () => (
   <aside>
     <Link to="/index.html">
-      <img id="logo" src="../images/ArchitraveNewLogo.jpg" alt="Architrave Design | Architect" />
+      <img id="logo" src={architraveLogo} alt="Architrave Design | Architect" />
     </Link>
     <nav>
       <ul class="mainNav">
@@ -35,7 +37,7 @@ const Navigation = () => (
       </ul>
     </nav>
     <Link class="houzzLogo" to="http://www.houzz.com/pro/architrave/architrave-design-architect">
-      <img src="../images/HouzzH.png" />
+      <img src={houzzLogo} />
     </Link>
   </aside>
 )

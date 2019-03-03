@@ -85,8 +85,8 @@ const ContactUs = () => (
         </div>
         <p class="textOverlay"></p>
       </a>
-      <a href="/portfolio/new-homes/kingsway-georgian.html" class="prevProject"><i class="fa fa-arrow-left"></i><span>Previous Project</span></a>
-      <a href="/portfolio/new-homes/kingsway-transitional.html" class="nextProject"><span>Next Project</span><i class="fa fa-arrow-right"></i></a>
+      <a href="/portfolio/new-homes/kingsway-georgian" class="prevProject"><i class="fa fa-arrow-left"></i><span>Previous Project</span></a>
+      <a href="/portfolio/new-homes/kingsway-transitional" class="nextProject"><span>Next Project</span><i class="fa fa-arrow-right"></i></a>
     </section>
   </Layout>
 )

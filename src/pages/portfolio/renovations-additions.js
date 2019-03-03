@@ -8,19 +8,19 @@ const ContactUs = () => (
   <Layout mainClasses="renosAndAdditionsOverview">
     <SEO title="Architrave Design, Architect | Residential Designs" />
     <section class="contentWrapper layoutAll layoutRenovations">
-      <a href="/portfolio/renovations-additions/lytton-park-update.html" class="image image1 clearfix">
+      <a href="/portfolio/renovations-additions/lytton-park-update" class="image image1 clearfix">
         <div class="shadowOverlay clearfix">
           <div class="imageDiv imageDiv1"></div>
         </div>
         <p class="textOverlay">Lytton Park</p>
       </a>
-      <a href="/portfolio/renovations-additions/etobicoke-renewal.html" class="image image2 clearfix">
+      <a href="/portfolio/renovations-additions/etobicoke-renewal" class="image image2 clearfix">
         <div class="shadowOverlay clearfix">
           <div class="imageDiv imageDiv2"></div>
         </div>
         <p class="textOverlay">Etobicoke Restyling</p>
       </a>
-      <a href="/portfolio/renovations-additions/cornwall-heritage-addition.html" class="image image3 clearfix">
+      <a href="/portfolio/renovations-additions/cornwall-heritage-addition" class="image image3 clearfix">
         <div class="shadowOverlay clearfix">
           <div class="imageDiv imageDiv3"></div>
         </div>
@@ -29,13 +29,13 @@ const ContactUs = () => (
       <section class="textBlurb">
         <p>	Designing stylish new homes and renovations in Etobicoke and the Greater Toronto Area.</p>
       </section>
-      <a href="/portfolio/renovations-additions/rosedale-revival.html" class="image image4 clearfix">
+      <a href="/portfolio/renovations-additions/rosedale-revival" class="image image4 clearfix">
         <div class="shadowOverlay clearfix">
           <div class="imageDiv imageDiv4"></div>
         </div>
         <p class="textOverlay">Rosedale Revival</p>
       </a>
-      <a href="/portfolio/renovations-additions/lorne-park-interior.html" class="image image5 clearfix">
+      <a href="/portfolio/renovations-additions/lorne-park-interior" class="image image5 clearfix">
         <div class="shadowOverlay clearfix">
           <div class="imageDiv imageDiv5"></div>
         </div>

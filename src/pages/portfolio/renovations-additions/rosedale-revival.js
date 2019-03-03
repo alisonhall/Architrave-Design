@@ -30,8 +30,8 @@ const ContactUs = () => (
         </div>
         <p class="textOverlay"></p>
       </a>
-      <a href="/portfolio/renovations-additions/cornwall-heritage-addition.html" class="prevProject"><i class="fa fa-arrow-left"></i><span>Previous Project</span></a>
-      <a href="/portfolio/renovations-additions/lorne-park-interior.html" class="nextProject"><span>Next Project</span><i class="fa fa-arrow-right"></i></a>
+      <a href="/portfolio/renovations-additions/cornwall-heritage-addition" class="prevProject"><i class="fa fa-arrow-left"></i><span>Previous Project</span></a>
+      <a href="/portfolio/renovations-additions/lorne-park-interior" class="nextProject"><span>Next Project</span><i class="fa fa-arrow-right"></i></a>
     </section>
   </Layout>
 )

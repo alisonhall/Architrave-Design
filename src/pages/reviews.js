@@ -3,6 +3,7 @@ import { Link } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import houzzLogo from "../images/HouzzH.png"
 
 const Reviews = () => (
   <Layout mainClasses="reviews">
@@ -47,7 +48,11 @@ const Reviews = () => (
             <p>Working with Bill was great. We had decided to update our house with an Arts and Crafts theme and found Bill based on a referral. Not only does Bill have great design sensibilities, he is down to earth and has a manner that is easy to work with. He listened to our thoughts and was able to quickly come back with ideas that really worked. From re-imagining the exterior and interior, to designing our built-in furniture, Bill helped us create a house that we love to live in. We have recommended Architrave to several of our friends and they have all been very happy with quality of the work. We are grateful for the chance to work with Bill.</p>
           </section>
           <section class="textBlurb">
-            <p><a href="http://www.houzz.com/browseReviews/architrave"><img src="/images/houzz_logo_reviews.png" alt="Houzz Reviews"/></a></p>
+            <p>
+              <a href="http://www.houzz.com/browseReviews/architrave">
+                <img src={houzzLogo} alt="Houzz Reviews"/>
+              </a>
+            </p>
 					</section>
           </section>
 			</div>

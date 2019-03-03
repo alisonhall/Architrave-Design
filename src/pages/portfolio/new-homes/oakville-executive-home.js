@@ -30,8 +30,8 @@ const ContactUs = () => (
         </div>
         <p class="textOverlay"></p>
       </a>
-      <a href="/portfolio/new-homes/kingsway-transitional.html" class="prevProject"><i class="fa fa-arrow-left"></i><span>Previous Project</span></a>
-      <a href="/portfolio/new-homes/hoggs-hollow-french-country.html" class="nextProject"><span>Next Project</span><i class="fa fa-arrow-right"></i></a>
+      <a href="/portfolio/new-homes/kingsway-transitional" class="prevProject"><i class="fa fa-arrow-left"></i><span>Previous Project</span></a>
+      <a href="/portfolio/new-homes/hoggs-hollow-french-country" class="nextProject"><span>Next Project</span><i class="fa fa-arrow-right"></i></a>
     </section>
   </Layout>
 )

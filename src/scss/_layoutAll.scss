@@ -1,0 +1,250 @@
+$textBlurbPadding: 5%;
+$textBlurbWidth: 100% - $spacingX2 - ($textBlurbPadding * 2);
+
+@mixin fade-in($delay) {
+	/*-webkit-animation: 
+		contentFadeIn $fadeInDuration ease-in 1 $delay,
+		contentStayFaded $fadeInDuration ease-in infinite $delay2;
+	-moz-animation: 
+		contentFadeIn $fadeInDuration ease-in 1 $delay,
+		contentStayFaded $fadeInDuration ease-in infinite $delay2;
+	-o-animation: 
+		contentFadeIn $fadeInDuration ease-in 1 $delay,
+		contentStayFaded $fadeInDuration ease-in infinite $delay2;
+	animation: 
+		contentFadeIn $fadeInDuration ease-in 1 $delay,
+		contentStayFaded $fadeInDuration ease-in infinite $delay2;*/
+	-webkit-animation: 
+		contentFadeIn ease-in $delay;
+	-moz-animation: 
+		contentFadeIn ease-in $delay;
+	-o-animation: 
+		contentFadeIn ease-in $delay;
+	animation: 
+		contentFadeIn ease-in $delay;
+}
+
+.layoutAll {
+	.image,
+	.textBlurb {
+		padding: $spacing;
+		float: left;
+		max-width: 100%;
+	}
+	.image,
+	.textBlurbFiller {
+		@include fade-in($fadeInDelay6);
+	}
+	.image1{
+		@include fade-in($fadeInDelay1);
+	}
+	.image2,
+	.textBlurb  {
+		@include fade-in($fadeInDelay2);
+	}
+	.image3 {
+		@include fade-in($fadeInDelay3);
+	}
+	.image4 {
+		@include fade-in($fadeInDelay4);
+	}
+	.image5 {
+		@include fade-in($fadeInDelay5);
+	}
+	a .imageDiv,
+	.imageDiv {
+		-webkit-transition: all 0.2s linear 0s;
+		-moz-transition: all 0.2s linear 0s;
+		-o-transition: all 0.2s linear 0s;
+		transition: all 0.2s linear 0s;
+	}
+	a:hover .imageDiv,
+	.imageDiv:hover {
+		opacity: 0.7;
+	}
+	a:hover .filler,
+	.filler:hover {
+		opacity: 1;
+	}
+	.textBlurb {
+		background-color: #7ba7ba;
+		margin: $spacing;
+		padding: 0 $textBlurbPadding;
+		width: $textBlurbWidth;
+		min-height: 75px;
+		color: white;
+		font-size: 0.7em;
+
+		h2 {
+			font-weight: normal;
+			font-size: 1.5em;
+			line-height: 1.1em;
+		}
+		h3 {
+			float: right;
+			font-weight: normal;
+			font-size: 1.5em;
+			line-height: 1.1em;
+			text-align: right;
+			margin: 0;
+			margin-top: -1.9em;
+			color: #CAE1EB;
+		}
+	}
+	.shadowOverlay {
+		width: 100%;
+		height: 100%;
+		/*background-color: black;*/
+	}
+	.textOverlay,
+	.completionDate {
+		position: relative;
+		padding: 1%;
+		z-index: 200;
+		text-shadow: 0px 0px 5px rgba(0, 0, 0, 1);
+	}
+	.textOverlay {
+		margin-top: -50px;
+		margin-left: 20px;
+	}
+	.completionDate {
+		margin-top: -65px;
+		margin-right: 20px;
+		display: block;
+		text-align: right;
+		font-size: 0.9em;
+	}
+	a {
+		text-decoration: none;
+		color: white;
+		line-height: 1em;
+		font-size: 0.85em;
+		font-weight: 300;
+	}
+	.imageDiv {
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		max-width: 100%;
+		height: 100%;
+		overflow: hidden;
+	}
+	.prevProject,
+	.nextProject {
+		font-size: 0.8em;
+		color: black;
+		padding: 15px 3% 25px 2%;
+		-webkit-transition: all 0.2s linear 0s;
+		-moz-transition: all 0.2s linear 0s;
+		-o-transition: all 0.2s linear 0s;
+		transition: all 0.2s linear 0s;
+	}
+	.prevProject i.fa,
+	.nextProject i.fa {
+		opacity: 0;
+		-webkit-transition: all 0.2s ease-out 0s;
+		-moz-transition: all 0.2s ease-out 0s;
+		-o-transition: all 0.2s ease-out 0s;
+		transition: all 0.2s ease-out 0s;
+	}
+	.prevProject:hover,
+	.nextProject:hover {
+		color: $grayLinkColour;
+	}
+	.prevProject:hover {
+		-webkit-transform: translateX(18px);
+		-ms-transform: translateX(18px);
+		-moz-transform: translateX(18px);
+		-o-transform: translateX(18px);
+		transform: translateX(18px);
+	}
+	.prevProject:hover i.fa {
+		color: $grayLinkColour;
+		opacity: 1;
+		-webkit-transform: translateX(-18px);
+		-ms-transform: translateX(-18px);
+		-moz-transform: translateX(-18px);
+		-o-transform: translateX(-18px);
+		transform: translateX(-18px);
+	}
+	.nextProject:hover {
+		-webkit-transform: translateX(-18px);
+		-ms-transform: translateX(-18px);
+		-moz-transform: translateX(-18px);
+		-o-transform: translateX(-18px);
+		transform: translateX(-18px);
+	}
+	.nextProject:hover i.fa {
+		color: $grayLinkColour;
+		opacity: 1;
+		-webkit-transform: translateX(18px);
+		-ms-transform: translateX(18px);
+		-moz-transform: translateX(18px);
+		-o-transform: translateX(18px);
+		transform: translateX(18px);
+	}
+	.prevProject {
+		float: left;
+	}
+	.nextProject {
+		float: right;
+		clear: right;
+	}
+
+
+}
+
+@media screen and (max-width: $breakpointMedium) {
+	.layoutAll .imageFiller {
+		display: none !important;
+	}
+	.layoutAll .imageFiller + .image {
+		width: 48% !important;
+	}
+	.image {
+		/*width: 45% !important;*/
+	}
+}
+@media screen and (max-width: $breakpointSmall) {
+	.layoutAll .textBlurbFiller {
+		display: none !important;
+	}
+	.layoutAll .image {
+		width: 96% !important;
+		max-height: 400px !important;
+	}
+	.layoutAll .imageFiller + .image {
+		width: 96% !important;
+	}
+	.layoutAll .textBlurb {
+		width: 94% !important;
+		padding: 0 1% !important;
+	}
+	.textBlurb {
+		h2,
+		h3 {
+			display: block;
+			width: 100%;
+		}
+		h2 {
+			margin-bottom: 4px !important;
+		}
+		h3 {
+			float: none;
+			font-size: 1.3em !important;
+			text-align: left !important;
+			padding: 0 !important;
+			margin-top: 0em !important;
+		}
+	}
+}
+
+@media screen and (max-width: $breakpointExtraSmall) {
+	.layoutAll .image {
+		max-height: 300px !important;
+	}
+	.layoutAll .textBlurb {
+		font-size: 0.7em !important;
+	}
+}
