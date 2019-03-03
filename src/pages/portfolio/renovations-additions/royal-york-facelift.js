@@ -26,12 +26,12 @@ const ContactUs = (props) => (
         <p>Designing stylish new homes and renovations in Etobicoke and the Greater Toronto Area.</p>
       </section>
       <Link to="" class="prevProject">
-        <img src={leftArrow} />
+        <img src={leftArrow} alt="" />
         <span>Previous Project</span>
       </Link>
       <Link to="" class="nextProject">
         <span>Next Project</span>
-        <img src={rightArrow} />
+        <img src={rightArrow} alt="" />
       </Link>
     </section>
   </Layout>

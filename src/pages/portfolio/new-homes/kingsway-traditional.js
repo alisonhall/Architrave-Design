@@ -54,12 +54,12 @@ const ContactUs = (props) => (
         <p class="textOverlay"></p>
       </div>
       <Link to="/portfolio/new-homes/hoggs-hollow-french-country" class="prevProject">
-        <img src={leftArrow} />
+        <img src={leftArrow} alt="" />
         <span>Previous Project</span>
       </Link>
       <Link to="/portfolio/new-homes/hoggs-hollow-traditional" class="nextProject">
         <span>Next Project</span>
-        <img src={rightArrow} />
+        <img src={rightArrow} alt="" />
       </Link>
     </section>
   </Layout>

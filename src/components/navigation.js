@@ -11,7 +11,7 @@ const Navigation = ({urlPath}) => {
   return (
   <aside>
     <Link to="/index.html">
-      <img id="logo" src={architraveLogo} alt="Architrave Design | Architect" />
+      <img id="logo" src={architraveLogo} alt="Architrave Design, Architect logo" />
     </Link>
     <nav>
       <ul class="mainNav">
@@ -41,7 +41,7 @@ const Navigation = ({urlPath}) => {
       </ul>
     </nav>
     <Link class="houzzLogo" to="http://www.houzz.com/pro/architrave/architrave-design-architect">
-      <img src={houzzLogo} />
+      <img src={houzzLogo} alt="Houzz logo" />
     </Link>
   </aside>
 )}

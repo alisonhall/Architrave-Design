@@ -88,12 +88,12 @@ const ContactUs = (props) => (
         <p className="textOverlay"></p>
       </div>
       <Link to="/portfolio/new-homes/kingsway-georgian" className="prevProject">
-        <img src={leftArrow} />
+        <img src={leftArrow} alt="" />
         <span>Previous Project</span>
       </Link>
       <Link to="/portfolio/new-homes/kingsway-transitional" className="nextProject">
         <span>Next Project</span>
-        <img src={rightArrow} />
+        <img src={rightArrow} alt="" />
       </Link>
     </section>
   </Layout>

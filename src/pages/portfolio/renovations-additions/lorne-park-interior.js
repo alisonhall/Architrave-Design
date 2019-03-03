@@ -45,12 +45,12 @@ const ContactUs = (props) => (
         <p class="textOverlay"></p>
       </div>
       <Link to="/portfolio/renovations-additions/rosedale-revival" class="prevProject">
-        <img src={leftArrow} />
+        <img src={leftArrow} alt="" />
         <span>Previous Project</span>
       </Link>
       <Link to="/portfolio/renovations-additions/lytton-park-update" class="nextProject">
         <span>Next Project</span>
-        <img src={rightArrow} />
+        <img src={rightArrow} alt="" />
       </Link>
     </section>
   </Layout>
