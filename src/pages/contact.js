@@ -3,7 +3,7 @@ import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const ContactUs = (props) => (
+const Contact = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="contact">
     <SEO />
     <section class="contentWrapper clearfix">
@@ -18,4 +18,4 @@ const ContactUs = (props) => (
   </Layout>
 )
 
-export default ContactUs
+export default Contact

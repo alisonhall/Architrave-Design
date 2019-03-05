@@ -3,68 +3,68 @@ import { Link } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import dataItemSwitcher from "../components/dataItemSwitcher"
+
+const data = [
+  {
+    type: 'image-link',
+    linkUrl: '/portfolio/new-homes/hoggs-hollow-traditional',
+    text: "Hogg's Hollow Traditional",
+    num: '1'
+  },
+  {
+    type: 'image-link',
+    linkUrl: '/portfolio/new-homes/kingsway-georgian',
+    text: 'Kingsway Georgian',
+    num: '2'
+  },
+  {
+    type: 'image-filler',
+    num: '3'
+  },
+  {
+    type: 'image-link',
+    linkUrl: '/portfolio/new-homes/credit-river-classic',
+    text: 'Credit River',
+    num: '4'
+  },
+  {
+    type: 'text-blurb',
+    text: 'Designing stylish new homes and renovations in Etobicoke and the Greater Toronto Area.'
+  },
+  {
+    type: 'image-link',
+    linkUrl: '/portfolio/renovations-additions/etobicoke-renewal',
+    text: 'Etobicoke Facelift',
+    num: '5'
+  },
+  {
+    type: 'image-link',
+    linkUrl: '/portfolio/renovations-additions/lytton-park-update',
+    text: 'Lytton Park Update',
+    num: '6'
+  },
+  {
+    type: 'image-link',
+    linkUrl: '/portfolio/new-homes/kingsway-transitional',
+    text: 'Kingsway Transitional',
+    num: '7'
+  },
+  {
+    type: 'image-filler',
+    num: '8'
+  },
+  {
+    type: 'image-filler',
+    num: '9'
+  }
+]
 
 const IndexPage = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="index home">
     <SEO />
     <section class="contentWrapper layoutAll layoutHome">
-      <Link to="/portfolio/new-homes/hoggs-hollow-traditional" class="image image1 clearfix">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv1"></div>
-        </div>
-        <p class="textOverlay">Hogg's Hollow Traditional</p>
-      </Link>
-      <Link to="/portfolio/new-homes/kingsway-georgian" class="image image2 clearfix">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv2"></div>
-        </div>
-        <p class="textOverlay">Kingsway Georgian</p>
-      </Link>
-      <div class="image image3 clearfix imageFiller">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv3 filler"></div>
-        </div>
-        <p class="textOverlay"></p>
-      </div>
-      <Link to="/portfolio/new-homes/credit-river-classic" class="image image4 clearfix">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv4"></div>
-        </div>
-        <p class="textOverlay">Credit River</p>
-      </Link>
-      <section class="textBlurb">
-        <p>	Designing stylish new homes and renovations in Etobicoke and the Greater Toronto Area.</p>
-      </section>
-      <Link to="/portfolio/renovations-additions/etobicoke-renewal" class="image image5 clearfix">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv5"></div>
-        </div>
-        <p class="textOverlay">Etobicoke Facelift</p>
-      </Link>
-      <Link to="/portfolio/renovations-additions/lytton-park-update" class="image image6 clearfix">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv6"></div>
-        </div>
-        <p class="textOverlay">Lytton Park Update</p>
-      </Link>
-      <Link to="/portfolio/new-homes/kingsway-transitional" class="image image7 clearfix">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv7"></div>
-        </div>
-        <p class="textOverlay">Kingsway Transitional</p>
-      </Link>
-      <div class="image image8 clearfix imageFiller">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv8 filler"></div>
-        </div>
-        <p class="textOverlay"></p>
-      </div>
-      <div class="image image9 clearfix imageFiller">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv9 filler"></div>
-        </div>
-        <p class="textOverlay"></p>
-      </div>
+      {data.map(item => dataItemSwitcher(item))}
     </section>
   </Layout>
 )

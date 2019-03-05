@@ -1,102 +1,76 @@
 import React from "react"
-import { Link } from "gatsby"
 
 import Layout from "../../../components/layout"
 import SEO from "../../../components/seo"
-import leftArrow from "../../../images/arrow-left-solid.svg"
-import rightArrow from "../../../images/arrow-right-solid.svg"
+import dataItemSwitcher from "../../../components/dataItemSwitcher";
+import PrevNextProjectLink from "../../../components/prevNextProjectLink"
 
-const ContactUs = (props) => (
+const data = [
+  {
+    type: 'image-tile',
+    num: '1'
+  },
+  {
+    type: 'image-tile',
+    num: '2'
+  },
+  {
+    type: 'image-tile',
+    num: '3'
+  },
+  {
+    type: 'text-blurb',
+    title: 'Credit River Classic',
+    subTitle: '(Completion 2016)',
+    text: 'The home owners sought a home suitable for both family living and entertaining on their riverside lot. Rich materials and the finest craftsmanship combine to create an atmosphere of casual elegance.'
+  },
+  {
+    type: 'image-tile',
+    num: '4'
+  },
+  {
+    type: 'image-tile',
+    num: '5'
+  },
+  {
+    type: 'image-tile',
+    num: '6'
+  },
+  {
+    type: 'image-tile',
+    num: '7'
+  },
+  {
+    type: 'image-tile',
+    num: '8'
+  },
+  {
+    type: 'image-tile',
+    num: '9'
+  },
+  {
+    type: 'image-tile',
+    num: '10'
+  },
+  {
+    type: 'image-tile',
+    num: '11'
+  },
+  {
+    type: 'image-tile',
+    num: '12'
+  }
+]
+
+const CreditRiverClassic = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio creditRiverClassic">
     <SEO />
     <section className="contentWrapper layoutAll layoutNewHomesCreditRiverClassic">
-      <div className="image image1 clearfix">
-        <div className="shadowOverlay clearfix">
-          <div className="imageDiv imageDiv1"></div>
-        </div>
-        <p className="textOverlay"></p>
-      </div>
-      <div className="image image2 clearfix">
-        <div className="shadowOverlay clearfix">
-          <div className="imageDiv imageDiv2"></div>
-        </div>
-        <p className="textOverlay"></p>
-      </div>
-      <div className="image image3 clearfix">
-        <div className="shadowOverlay clearfix">
-          <div className="imageDiv imageDiv3"></div>
-        </div>
-        <p className="textOverlay"></p>
-      </div>
-      <section className="textBlurb">
-        <h2>Credit River Classic</h2>
-        <h3>(Completion 2016)</h3>
-        <p>The home owners sought a home suitable for both family living and entertaining on their riverside lot. Rich materials and the finest craftsmanship combine to create an atmosphere of casual elegance.</p>
-      </section>
-      <div className="image image4 clearfix">
-        <div className="shadowOverlay clearfix">
-          <div className="imageDiv imageDiv4"></div>
-        </div>
-        <p className="textOverlay"></p>
-      </div>
-      <div className="image image5 clearfix">
-        <div className="shadowOverlay clearfix">
-          <div className="imageDiv imageDiv5"></div>
-        </div>
-        <p className="textOverlay"></p>
-      </div>
-      <div className="image image6 clearfix">
-        <div className="shadowOverlay clearfix">
-          <div className="imageDiv imageDiv6"></div>
-        </div>
-        <p className="textOverlay"></p>
-      </div>
-      <div className="image image7 clearfix">
-        <div className="shadowOverlay clearfix">
-          <div className="imageDiv imageDiv7"></div>
-        </div>
-        <p className="textOverlay"></p>
-      </div>
-      <div className="image image8 clearfix">
-        <div className="shadowOverlay clearfix">
-          <div className="imageDiv imageDiv8"></div>
-        </div>
-        <p className="textOverlay"></p>
-      </div>
-      <div className="image image9 clearfix">
-        <div className="shadowOverlay clearfix">
-          <div className="imageDiv imageDiv9"></div>
-        </div>
-        <p className="textOverlay"></p>
-      </div>
-      <div className="image image10 clearfix">
-        <div className="shadowOverlay clearfix">
-          <div className="imageDiv imageDiv10"></div>
-        </div>
-        <p className="textOverlay"></p>
-      </div>
-      <div className="image image11 clearfix">
-        <div className="shadowOverlay clearfix">
-          <div className="imageDiv imageDiv11"></div>
-        </div>
-        <p className="textOverlay"></p>
-      </div>
-      <div className="image image12 clearfix">
-        <div className="shadowOverlay clearfix">
-          <div className="imageDiv imageDiv12"></div>
-        </div>
-        <p className="textOverlay"></p>
-      </div>
-      <Link to="/portfolio/new-homes/kingsway-georgian" className="prevProject">
-        <img src={leftArrow} alt="" />
-        <span>Previous Project</span>
-      </Link>
-      <Link to="/portfolio/new-homes/kingsway-transitional" className="nextProject">
-        <span>Next Project</span>
-        <img src={rightArrow} alt="" />
-      </Link>
+      {data.map(item => dataItemSwitcher(item))}
+      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/new-homes/kingsway-georgian" />
+      <PrevNextProjectLink direction="next" linkUrl="/portfolio/new-homes/kingsway-transitional" />
     </section>
   </Layout>
 )
 
-export default ContactUs
+export default CreditRiverClassic

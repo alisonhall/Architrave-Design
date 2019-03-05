@@ -1,48 +1,53 @@
 import React from "react"
-import { Link } from "gatsby"
 
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
+import dataItemSwitcher from "../../components/dataItemSwitcher"
 
-const ContactUs = (props) => (
+const data = [
+  {
+    type: 'image-link',
+    linkUrl: '/portfolio/renovations-additions/lytton-park-update',
+    text: "Lytton Park",
+    num: '1'
+  },
+  {
+    type: 'image-link',
+    linkUrl: '/portfolio/renovations-additions/etobicoke-renewal',
+    text: "Etobicoke Restyling",
+    num: '2'
+  },
+  {
+    type: 'image-link',
+    linkUrl: '/portfolio/renovations-additions/cornwall-heritage-addition',
+    text: "Loyalist Addition",
+    num: '3'
+  },
+  {
+    type: 'text-blurb',
+    text: 'Designing stylish new homes and renovations in Etobicoke and the Greater Toronto Area.'
+  },
+  {
+    type: 'image-link',
+    linkUrl: '/portfolio/renovations-additions/rosedale-revival',
+    text: "Rosedale Revival",
+    num: '4'
+  },
+  {
+    type: 'image-link',
+    linkUrl: '/portfolio/renovations-additions/lorne-park-interior',
+    text: "Lorne Park Interior",
+    num: '5'
+  },
+]
+
+const RenovationsAdditions = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="renosAndAdditionsOverview">
     <SEO />
     <section class="contentWrapper layoutAll layoutRenovations">
-      <Link to="/portfolio/renovations-additions/lytton-park-update" class="image image1 clearfix">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv1"></div>
-        </div>
-        <p class="textOverlay">Lytton Park</p>
-      </Link>
-      <Link to="/portfolio/renovations-additions/etobicoke-renewal" class="image image2 clearfix">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv2"></div>
-        </div>
-        <p class="textOverlay">Etobicoke Restyling</p>
-      </Link>
-      <Link to="/portfolio/renovations-additions/cornwall-heritage-addition" class="image image3 clearfix">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv3"></div>
-        </div>
-        <p class="textOverlay">Loyalist Addition</p>
-      </Link>
-      <section class="textBlurb">
-        <p>	Designing stylish new homes and renovations in Etobicoke and the Greater Toronto Area.</p>
-      </section>
-      <Link to="/portfolio/renovations-additions/rosedale-revival" class="image image4 clearfix">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv4"></div>
-        </div>
-        <p class="textOverlay">Rosedale Revival</p>
-      </Link>
-      <Link to="/portfolio/renovations-additions/lorne-park-interior" class="image image5 clearfix">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv5"></div>
-        </div>
-        <p class="textOverlay">Lorne Park Interior</p>
-      </Link>
+      {data.map(item => dataItemSwitcher(item))}
     </section>
   </Layout>
 )
 
-export default ContactUs
+export default RenovationsAdditions

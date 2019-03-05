@@ -3,7 +3,7 @@ import React from "react"
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 
-const ContactUs = (props) => (
+const Upcoming = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio upcoming">
     <SEO />
     <section class="contentWrapper layoutAll layoutUpcoming">
@@ -34,4 +34,4 @@ const ContactUs = (props) => (
   </Layout>
 )
 
-export default ContactUs
+export default Upcoming

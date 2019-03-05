@@ -10,7 +10,7 @@ const Navigation = ({urlPath}) => {
   const isRenovationsAdditions = (urlPath.indexOf('renovations-additions') >= 0) ? 'selected' : '';
   return (
   <aside>
-    <Link to="/index.html">
+    <Link to="/">
       <img id="logo" src={architraveLogo} alt="Architrave Design, Architect logo" />
     </Link>
     <nav>
