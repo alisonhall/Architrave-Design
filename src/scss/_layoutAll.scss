@@ -57,6 +57,7 @@ $textBlurbWidth: 100% - $spacingX2 - ($textBlurbPadding * 2);
 		-moz-transition: all 0.2s linear 0s;
 		-o-transition: all 0.2s linear 0s;
 		transition: all 0.2s linear 0s;
+		object-fit: cover;
 	}
 	a:hover .imageDiv,
 	.imageDiv:hover {
@@ -252,4 +253,41 @@ $textBlurbWidth: 100% - $spacingX2 - ($textBlurbPadding * 2);
 	.layoutAll .textBlurb {
 		font-size: 0.7em !important;
 	}
+}
+
+.layoutNewHomes,
+.layoutRenovations,
+.layoutNewHomesHoggsHollowFrenchCountry,
+.layoutNewHomesHoggsHollowTraditional,
+.layoutNewHomesKingswayGeorgian {
+	.shadowOverlay {
+		background-color: black;
+	}
+}
+
+.creditRiverClassic .layoutAll,
+.hoggsHollowFrenchCountry .layoutAll,
+.hoggsHollowTraditional .layoutAll,
+.kingswayGeorgian .layoutAll {
+	a:hover .imageDiv,
+	.imageDiv:hover {
+		opacity: 1;
+	}
+}
+
+.layoutNewHomesKingswayGeorgian {
+	.image3,
+	.image6,
+	.image8 {
+		float: right;
+	}
+
+	.textBlurbFiller {
+		float: right;
+	}
+}
+
+.textBlurbFiller {
+	background-color: #7ba7ba;
+	margin: $spacing;
 }

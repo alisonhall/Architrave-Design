@@ -14,10 +14,10 @@ const Navigation = ({urlPath}) => {
       <img id="logo" src={architraveLogo} alt="Architrave Design, Architect logo" />
     </Link>
     <nav>
-      <ul class="mainNav">
+      <ul className="mainNav">
         <li>
           <Link to="/portfolio/new-homes" className="portfolioNav">Portfolio</Link>
-          <ul class={`subNav ${subNavVisible}`}>
+          <ul className={`subNav ${subNavVisible}`}>
             <li>
               <Link to="/portfolio/new-homes" activeClassName="selected" className={isNewHomes}>New Homes</Link>
             </li>
@@ -40,7 +40,7 @@ const Navigation = ({urlPath}) => {
         </li>
       </ul>
     </nav>
-    <Link class="houzzLogo" to="http://www.houzz.com/pro/architrave/architrave-design-architect">
+    <Link className="houzzLogo" to="http://www.houzz.com/pro/architrave/architrave-design-architect">
       <img src={houzzLogo} alt="Houzz logo" />
     </Link>
   </aside>

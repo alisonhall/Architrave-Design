@@ -6,29 +6,29 @@ import SEO from "../../components/seo"
 const Upcoming = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio upcoming">
     <SEO />
-    <section class="contentWrapper layoutAll layoutUpcoming">
-      <div class="image image2 clearfix">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv2"></div>
+    <section className="contentWrapper layoutAll layoutUpcoming">
+      <div className="image image2 clearfix">
+        <div className="shadowOverlay clearfix">
+          <div className="imageDiv imageDiv2"></div>
         </div>
       </div>
-      <div class="image image4 clearfix">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv4"></div>
+      <div className="image image4 clearfix">
+        <div className="shadowOverlay clearfix">
+          <div className="imageDiv imageDiv4"></div>
         </div>
       </div>
-      <section class="textBlurb">
-        <p class="textOverlay">St. George's Rebuild</p>
-        <p class="completionDate">Completion 2019</p>
+      <section className="textBlurb">
+        <p className="textOverlay">St. George's Rebuild</p>
+        <p className="completionDate">Completion 2019</p>
       </section>
-      <div class="image image1 clearfix">
-        <div class="shadowOverlay clearfix">
-          <div class="imageDiv imageDiv1"></div>
+      <div className="image image1 clearfix">
+        <div className="shadowOverlay clearfix">
+          <div className="imageDiv imageDiv1"></div>
         </div>
       </div>
-      <section class="textBlurb">
-        <p class="textOverlay">Oakville New Home</p>
-        <p class="completionDate">Completion 2017</p>
+      <section className="textBlurb">
+        <p className="textOverlay">Oakville New Home</p>
+        <p className="completionDate">Completion 2017</p>
       </section>
     </section>
   </Layout>

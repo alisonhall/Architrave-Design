@@ -1,7 +1,13 @@
 import React from "react"
 
-const TextBlurb = ({ dataItem: {text, title = null, subTitle = null }}) => (
-  <section class="textBlurb">
+const TextBlurb = ({
+  dataItem: {
+    text = '',
+    title = null,
+    subTitle = null
+  } = {}
+}) => (
+  <section className="textBlurb">
     {title && (<h2>{title}</h2>)}
     {subTitle && (<h3>{subTitle}</h3>)}
     <p>{text}</p>
