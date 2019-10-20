@@ -30,13 +30,13 @@ const Navigation = ({urlPath}) => {
           </ul>
         </li>
         <li>
-          <Link to="/about">About</Link>
+          <Link to="/about" activeClassName="selected">About</Link>
         </li>
         <li>
-          <Link to="/reviews">Reviews</Link>
+          <Link to="/reviews" activeClassName="selected">Reviews</Link>
         </li>
         <li>
-          <Link to="/contact">Contact</Link>
+          <Link to="/contact" activeClassName="selected">Contact</Link>
         </li>
       </ul>
     </nav>
