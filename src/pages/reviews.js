@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import houzzLogo from "../images/HouzzH.png"
+import houzzReviewsLogo from "../images/houzz_logo_reviews.png"
 
 const Reviews = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="reviews">
@@ -50,7 +50,7 @@ const Reviews = (props) => (
           <section className="textBlurb">
             <p>
               <Link to="http://www.houzz.com/browseReviews/architrave">
-                <img src={houzzLogo} alt="Houzz Reviews"/>
+                <img src={houzzReviewsLogo} alt="Houzz Reviews"/>
               </Link>
             </p>
 					</section>
