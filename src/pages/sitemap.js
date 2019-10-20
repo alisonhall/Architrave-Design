@@ -62,6 +62,9 @@ const Sitemap = (props) => (
                     <li>
                       <Link to="/portfolio/renovations-additions/lorne-park-interior">Lorne Park Interior</Link>
                     </li>
+                    <li>
+                      <Link to="/portfolio/renovations-additions/princess-margaret-facelift">Princess Margaret Facelift</Link>
+                    </li>
                   </ul>
                 </li>
                 <li>
