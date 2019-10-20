@@ -27,10 +27,11 @@ footer {
 		width: 40px;
 		height: 40px;
 	}
-	.sitemap {
+	.sitemap,
+	.copyright {
 		float: left;
 		padding: 3px 10px;
-		margin-left: $spacingHalf;
+		margin: 0 0 0 $spacingHalf;
 		display: inline-block;
 	}
 	.websiteBy {
