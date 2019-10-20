@@ -1,3 +1,94 @@
+# Architrave Design
+
+## Coding Snippets
+
+### Each project page
+
+```js
+import React from "react"
+
+import Layout from "../../../components/layout"
+import SEO from "../../../components/seo"
+import ImageLayout1Col1Row from '../../../components/imageLayout1Col1Row';
+import ImageTile from '../../../components/imageTile';
+import TextBlurb from '../../../components/textBlurb';
+import TextBlurbFiller from '../../../components/textBlurbFiller';
+import PrevNextProjectLink from '../../../components/prevNextProjectLink';
+
+const PageName = (props) => (
+  <Layout urlPath={props.location.pathname} mainClasses="portfolio pageName">
+    <SEO />
+    <section class="contentWrapper layoutAll layoutRenovationsPageName">
+
+      {/* COMPONENTS GO HERE */}
+
+      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/renovations-additions/cornwall-heritage-addition" />
+      <PrevNextProjectLink direction="next" linkUrl="/portfolio/renovations-additions/lorne-park-interior" />
+    </section>
+  </Layout>
+)
+
+export default PageName;
+```
+
+### Components for project pages
+
+```js
+import image1 from '../../../images/New-Homes/KingswayTraditional-1.jpg';
+import image1 from '../../../images/Renovations-Additions/Lytton-Park-2.jpg';
+
+<ImageTile dataItem={{
+  num: '1',
+  image: image1,
+  width: 'calc(100% - (1.5% * 2))',
+  height: 'calc(500px * 1.26)'
+}} />
+
+<TextBlurb dataItem={{
+  title: 'Kingsway Traditional',
+  text: 'Set in the heart of The Kingsway, this new family home evokes the character and flavour of the neighbourhood. Local stone and brick outside conceal a double-height foyer, panelled formal rooms and a casual great-room.'
+}} />
+
+<TextBlurbFiller dataItem={{
+  width: 'calc(47% - (1.5% * 2))',
+  height: '40px',
+  float: 'left'
+}} />
+```
+
+### Components for overview pages
+
+```js
+<ImageLinkTile dataItem={{
+  num: '1',
+  linkUrl: '/portfolio/new-homes/hoggs-hollow-traditional',
+  text: "Hogg's Hollow Traditional",
+  image: image1,
+  backgroundPosition: '100% 0%',
+  width: 'calc(48% - (1.5% * 2))',
+  height: 'calc(500px * 1.405)'
+}} />
+
+<ImageFillerTile dataItem={{
+  num: '3',
+  image: image3,
+  width: 'calc(21% - (1.5% * 2))',
+  height: 'calc(500px * 0.598266)'
+}} />
+
+<TextBlurb dataItem={{
+  text: 'Designing stylish new homes and renovations in Etobicoke and the Greater Toronto Area.'
+}}/>
+```
+
+### Useful, but not currently used
+
+```js
+{data.map(item => dataItemSwitcher(item))}
+```
+
+## Default Gatsby Quick-Start Guide
+
 <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <p align="center">
   <a href="https://www.gatsbyjs.org">
