@@ -11,13 +11,15 @@ const ImageTile = ({
     backgroundPosition = '50% 40%',
     width = '100px',
     height = '100px',
-    float = 'left'
+    float = 'left',
+    marginTop
   } = {}
 }) => (
   <div className={`image image${num} clearfix`} css={css`
     width: ${width};
     height: ${height};
     float: ${float};
+    ${marginTop ? `margin-top: ${marginTop}` : ''};
   `}>
     <div className="shadowOverlay clearfix">
       <picture>
