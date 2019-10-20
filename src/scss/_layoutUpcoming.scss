@@ -3,11 +3,6 @@ $extraTextBlurbSpaceTop: 3%;
 $extraTextBlurbSpaceBottom: 3%;
 
 .upcoming .layoutUpcoming {
-	a:hover .imageDiv,
-	.imageDiv:hover {
-		opacity: 1;
-	}
-
 	.image {
 		padding-top: $spacing + $extraSpace;
 		padding-bottom: $spacing + $extraSpace;

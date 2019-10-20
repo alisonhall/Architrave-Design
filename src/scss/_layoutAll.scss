@@ -58,14 +58,6 @@ $textBlurbWidth: 100% - $spacingX2 - ($textBlurbPadding * 2);
 		transition: all 0.2s linear 0s;
 		object-fit: cover;
 	}
-	a:hover .imageDiv,
-	.imageDiv:hover {
-		opacity: 0.7;
-	}
-	a:hover .filler,
-	.filler:hover {
-		opacity: 1;
-	}
 	.textBlurb {
 		background-color: #7ba7ba;
 		margin: $spacing;
@@ -199,8 +191,19 @@ $textBlurbWidth: 100% - $spacingX2 - ($textBlurbPadding * 2);
 		float: right;
 		clear: right;
 	}
+}
 
-
+.layoutHome,
+.layoutNewHomes,
+.layoutRenovations {
+	a:hover .imageDiv,
+	.imageDiv:hover {
+		opacity: 0.7;
+	}
+	a:hover .filler,
+	.filler:hover {
+		opacity: 1;
+	}
 }
 
 @media screen and (max-width: $breakpointMedium) {
@@ -258,34 +261,9 @@ $textBlurbWidth: 100% - $spacingX2 - ($textBlurbPadding * 2);
 }
 
 .layoutNewHomes,
-.layoutRenovations,
-.layoutNewHomesHoggsHollowFrenchCountry,
-.layoutNewHomesHoggsHollowTraditional,
-.layoutNewHomesKingswayGeorgian {
+.layoutRenovations {
 	.shadowOverlay {
 		background-color: black;
-	}
-}
-
-.creditRiverClassic .layoutAll,
-.hoggsHollowFrenchCountry .layoutAll,
-.hoggsHollowTraditional .layoutAll,
-.kingswayGeorgian .layoutAll {
-	a:hover .imageDiv,
-	.imageDiv:hover {
-		opacity: 1;
-	}
-}
-
-.layoutNewHomesKingswayGeorgian {
-	.image3,
-	.image6,
-	.image8 {
-		float: right;
-	}
-
-	.textBlurbFiller {
-		float: right;
 	}
 }
 
