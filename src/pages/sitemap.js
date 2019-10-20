@@ -39,6 +39,9 @@ const Sitemap = (props) => (
                     <li>
                       <Link to="/portfolio/new-homes/kingsway-traditional">Kingsway Traditional</Link>
                     </li>
+                    <li>
+                      <Link to="/portfolio/new-homes/kingsway-georgian">Kingsway Georgian</Link>
+                    </li>
                   </ul>
                 </li>
                 <li>
@@ -55,6 +58,9 @@ const Sitemap = (props) => (
                     </li>
                     <li>
                       <Link to="/portfolio/renovations-additions/rosedale-revival">Rosedale Revival</Link>
+                    </li>
+                    <li>
+                      <Link to="/portfolio/renovations-additions/lorne-park-interior">Lorne Park Interior</Link>
                     </li>
                   </ul>
                 </li>
