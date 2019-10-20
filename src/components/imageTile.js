@@ -5,7 +5,7 @@ import { css, jsx } from "@emotion/core"
 const ImageTile = ({
   dataItem: {
     num = '0',
-    textOverlay = '',
+    textOverlay,
     image,
     altText = '',
     backgroundPosition = '50% 40%',
