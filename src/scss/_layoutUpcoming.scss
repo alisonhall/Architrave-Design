@@ -2,15 +2,6 @@ $extraSpace: 3%;
 $extraTextBlurbSpaceTop: 3%;
 $extraTextBlurbSpaceBottom: 3%;
 
-$width1: 100% - $spacingX2;
-$height1: $baseHeight * 0.8;
-$width2: 100% - $spacingX2;
-$height2: $baseHeight * 0.8;
-$width3: 100% - $spacingX2;
-$height3: 500px;
-$width4: 45%;
-$height4: 170px;
-
 .upcoming .layoutUpcoming {
 	a:hover .imageDiv,
 	.imageDiv:hover {
@@ -48,49 +39,5 @@ $height4: 170px;
 		display: block;
 		text-align: right;
 		// font-size: 0.9em;
-	}
-
-	.imageDiv1 {
-		background-image: url('../images/Upcoming/Oakville-New-Home-01.jpg');
-		background-position: 50% 80%;
-	}
-
-	.imageDiv2 {
-		background-image: url('../images/Upcoming/StGeorges-GC.jpg');
-		background-position: 50% 80%;
-	}
-	
-	.imageDiv4 {
-		background-image: url('../images/Upcoming/Before-StGeorges.jpg');
-		background-position: 50% 80%;
-	}
-
-	.imageDiv3 {
-		background-image: url('../images/Upcoming/King-Georges6.jpg');
-		background-position: 50% 58%;
-	}
-}
-
-.layoutUpcoming {
-	.image1 {
-		width: $width1;
-		height: $height1;
-	}
-	.image2 {
-		width: $width2;
-		height: $height2;
-	}
-	.image4 {
-		width: $width4;
-		height: $height4;
-		float: right;
-		margin-top: -115px;
-	}
-	.image3 {
-		width: $width3;
-		height: $height3;
-	}
-	.shadowOverlay {
-		background-color: black;
 	}
 }
