@@ -29,10 +29,10 @@ const RenovationsAdditions = (props) => (
         }} />
         <ImageLinkTile dataItem={{
           num: '2',
-          linkUrl: '/portfolio/renovations-additions/etobicoke-renewal',
-          text: "Etobicoke Restyling",
-          image: image2,
-          backgroundPosition: '50% 40%',
+          linkUrl: '/portfolio/renovations-additions/princess-margaret-facelift',
+          text: "Princess Margaret Facelift",
+          imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/f_auto,q_auto/v1571329784/ArchitraveDesign/Princess-Margaret-Transitional/Princess_Margaret_Transitional1_yp7fuo.jpg',
+          backgroundPosition: '50% 30%',
           width: 'calc(52% - (1.5% * 2))',
           height: 'calc(500px * 0.69)'
         }} />
@@ -59,9 +59,9 @@ const RenovationsAdditions = (props) => (
         }} />
         <ImageLinkTile dataItem={{
           num: '5',
-          linkUrl: '/portfolio/renovations-additions/lorne-park-interior',
-          text: "Lorne Park Interior",
-          image: image5,
+          linkUrl: '/portfolio/renovations-additions/etobicoke-renewal',
+          text: "Etobicoke Restyling",
+          image: image2,
           backgroundPosition: '50% 40%',
           width: 'calc(52% - (1.5% * 2))',
           height: 'calc(500px * 0.6)'
