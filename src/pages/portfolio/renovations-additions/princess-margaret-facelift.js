@@ -9,9 +9,9 @@ import TextBlurbFiller from '../../../components/textBlurbFiller';
 import PrevNextProjectLink from '../../../components/prevNextProjectLink';
 
 const PrincessMargaretFacelift = (props) => (
-  <Layout urlPath={props.location.pathname} mainClasses="portfolio princessMargaretFacelift">
+  <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
-    <section className="contentWrapper layoutAll layout1">
+    <section className="contentWrapper layoutAll layoutProject">
       <ImageTile dataItem={{
         num: '1',
         imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/f_auto,q_auto/v1571329784/ArchitraveDesign/Princess-Margaret-Transitional/Princess_Margaret_Transitional1_yp7fuo.jpg',

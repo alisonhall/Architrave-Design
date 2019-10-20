@@ -13,9 +13,9 @@ import image2 from '../../../images/New-Homes/Oakville-2.jpg';
 import image3 from '../../../images/New-Homes/Oakville-3.jpg';
 
 const OakvilleExecutiveHome = (props) => (
-  <Layout urlPath={props.location.pathname} mainClasses="portfolio oakvilleExecutiveHome">
+  <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
-    <section className="contentWrapper layoutAll layoutNewHomesOakvilleExecutiveHome">
+    <section className="contentWrapper layoutAll layoutProject">
       <ImageTile dataItem={{
         num: '1',
         image: image1,

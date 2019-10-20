@@ -12,9 +12,9 @@ import image1 from '../../../images/Renovations-Additions/Royal-York-1.jpg';
 import image2 from '../../../images/Renovations-Additions/Royal-York-2.jpg';
 
 const RoyalYorkFacelift = (props) => (
-  <Layout urlPath={props.location.pathname} mainClasses="portfolio royalYorkFacelift">
+  <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
-    <section className="contentWrapper layoutAll layout1">
+    <section className="contentWrapper layoutAll layoutProject">
       <ImageTile dataItem={{
         num: '1',
         image: image1,

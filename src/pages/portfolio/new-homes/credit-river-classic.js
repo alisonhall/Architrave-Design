@@ -22,9 +22,9 @@ import image12 from '../../../images/New-Homes/CreditRiver-13.jpg';
 
 
 const CreditRiverClassic = (props) => (
-  <Layout urlPath={props.location.pathname} mainClasses="portfolio creditRiverClassic">
+  <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
-    <section className="contentWrapper layoutAll layoutNewHomesCreditRiverClassic">
+    <section className="contentWrapper layoutAll layoutProject">
       <ImageLayout1Col1Row>
         <ImageTile dataItem={{
           num: '1',

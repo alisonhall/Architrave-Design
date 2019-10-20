@@ -16,9 +16,9 @@ import image6 from '../../../images/New-Homes/FrenchCountry-5.jpg';
 
 
 const HoggsHollowFrenchCountry = (props) => (
-  <Layout urlPath={props.location.pathname} mainClasses="portfolio hoggsHollowFrenchCountry">
+  <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
-    <section className="contentWrapper layoutAll layoutNewHomesHoggsHollowFrenchCountry">
+    <section className="contentWrapper layoutAll layoutProject">
       <ImageLayout1Col1Row>
         <ImageTile dataItem={{
           num: '1',
