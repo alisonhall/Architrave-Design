@@ -8,9 +8,9 @@ import ImageFillerTile from '../../components/imageFillerTile';
 import ImageTile from '../../components/imageTile';
 import TextBlurb from '../../components/textBlurb';
 
-import image1 from '../../images/Upcoming/Oakville-New-Home-01.jpg';
+// import image1 from '../../images/Upcoming/Oakville-New-Home-01.jpg';
 import image2 from '../../images/Upcoming/StGeorges-GC.jpg';
-import image3 from '../../images/Upcoming/King-Georges6.jpg';
+// import image3 from '../../images/Upcoming/King-Georges6.jpg';
 import image4 from '../../images/Upcoming/Before-StGeorges.jpg';
 
 const Upcoming = (props) => (

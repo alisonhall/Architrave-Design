@@ -11,23 +11,6 @@ import PrevNextProjectLink from '../../../components/prevNextProjectLink';
 import image1 from '../../../images/Renovations-Additions/Royal-York-1.jpg';
 import image2 from '../../../images/Renovations-Additions/Royal-York-2.jpg';
 
-const data = [
-  {
-    type: 'image-tile',
-    num: '1',
-    textOverlay: 'Before'
-  },
-  {
-    type: 'image-tile',
-    num: '2',
-    textOverlay: 'New Facade'
-  },
-  {
-    type: 'text-blurb',
-    text: "Designing stylish new homes and renovations in Etobicoke and the Greater Toronto Area."
-  }
-]
-
 const RoyalYorkFacelift = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio royalYorkFacelift">
     <SEO />
