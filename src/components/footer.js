@@ -9,7 +9,7 @@ const Footer = () => (
     </Link>
     <Link to="/sitemap" className="sitemap">Site Map</Link>
     <p className="copyright">© {new Date().getFullYear()}</p>
-    <p className="websiteBy">Website by <Link to="http://www.alisonhall.ca">Alison Hall</Link></p>
+    <p className="websiteBy">Website by <Link to="https://alisonkhall.com/">Alison Hall</Link></p>
   </footer>
 )
 
