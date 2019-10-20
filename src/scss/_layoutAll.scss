@@ -128,6 +128,7 @@ $textBlurbWidth: 100% - $spacingX2 - ($textBlurbPadding * 2);
 		-o-background-size: cover;
 		background-size: cover;
 		max-width: 100%;
+		width: 100%;
 		height: 100%;
 		overflow: hidden;
 	}
