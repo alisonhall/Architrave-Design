@@ -15,42 +15,6 @@ import image4 from '../../../images/New-Homes/KingswayTraditional-4.jpg';
 import image5 from '../../../images/New-Homes/KingswayTraditional-6.jpg';
 import image6 from '../../../images/New-Homes/KingswayTraditional-5.jpg';
 
-const data = [
-  {
-    type: 'image-tile',
-    num: '1'
-  },
-  {
-    type: 'text-blurb',
-    title: 'Kingsway Traditional',
-    text: 'Set in the heart of The Kingsway, this new family home evokes the character and flavour of the neighbourhood. Local stone and brick outside conceal a double-height foyer, panelled formal rooms and a casual great-room.'
-  },
-  {
-    type: 'image-tile',
-    num: '2'
-  },
-  {
-    type: 'image-tile',
-    num: '3'
-  },
-  {
-    type: 'image-tile',
-    num: '4'
-  },
-  {
-    type: 'text-blurb',
-    text: ''
-  },
-  {
-    type: 'image-tile',
-    num: '5'
-  },
-  {
-    type: 'image-tile',
-    num: '6'
-  }
-]
-
 const KingswayTraditional = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio kingswayTraditional">
     <SEO />
