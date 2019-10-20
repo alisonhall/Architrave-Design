@@ -9,6 +9,7 @@ const ImageLinkTile = ({
     text = '',
     num = '0',
     image,
+    imageUrl,
     altText = '',
     backgroundPosition = '50% 40%',
     width = '100px',
@@ -16,7 +17,7 @@ const ImageLinkTile = ({
     float = 'left'
   } = {}
 }) => {
-  if (width && height && image) {
+  if (width && height && (image || imageUrl)) {
     return (
       <Link to={linkUrl} className={`image image${num} clearfix`} css={css`
         width: ${width};
@@ -24,13 +25,19 @@ const ImageLinkTile = ({
         float: ${float};
       `}>
         <div className="shadowOverlay clearfix">
-          <picture>
-            <source media="(min-width: 650px)" srcset={image} />
-            <source media="(max-width: 649px)" srcset={image} />
-            <img className={`imageDiv imageDiv${num}`} src={image} alt={altText} css={css`
+          {imageUrl ? (
+            <img className={`imageDiv imageDiv${num}`} src={imageUrl} alt={altText} css={css`
               object-position: ${backgroundPosition};
             `} />
-          </picture>
+          ) : (
+            <picture>
+              <source media="(min-width: 650px)" srcset={image} />
+              <source media="(max-width: 649px)" srcset={image} />
+              <img className={`imageDiv imageDiv${num}`} src={image} alt={altText} css={css`
+                object-position: ${backgroundPosition};
+              `} />
+            </picture>
+          )}
         </div>
         <p className="textOverlay">{text}</p>
       </Link>
