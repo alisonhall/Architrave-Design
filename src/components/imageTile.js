@@ -28,7 +28,7 @@ const ImageTile = ({
         `} />
       </picture>
     </div>
-    <p className="textOverlay">{textOverlay}</p>
+    {textOverlay && <p className="textOverlay">{textOverlay}</p>}
   </div>
 )
 
