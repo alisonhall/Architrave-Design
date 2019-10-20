@@ -15,7 +15,7 @@ import image4 from '../../../images/Renovations-Additions/Cornwall-4.jpg';
 import image5 from '../../../images/Renovations-Additions/Cornwall-5.jpg';
 import image6 from '../../../images/Renovations-Additions/Cornwall-6.jpg';
 
-const ContactUs = (props) => (
+const CornwallHeritageAddition = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio cornwallHeritageAddition">
     <SEO />
     <section class="contentWrapper layoutAll layoutRenovationsCornwallHeritageAddition">
@@ -65,4 +65,4 @@ const ContactUs = (props) => (
   </Layout>
 )
 
-export default ContactUs
+export default CornwallHeritageAddition;

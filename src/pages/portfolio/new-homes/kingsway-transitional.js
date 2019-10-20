@@ -84,4 +84,4 @@ const KingswayTransitional = (props) => (
   </Layout>
 )
 
-export default KingswayTransitional
+export default KingswayTransitional;

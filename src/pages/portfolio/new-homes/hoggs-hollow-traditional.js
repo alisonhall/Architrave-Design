@@ -61,4 +61,4 @@ const HoggsHollowTraditional = (props) => (
   </Layout>
 )
 
-export default HoggsHollowTraditional
+export default HoggsHollowTraditional;

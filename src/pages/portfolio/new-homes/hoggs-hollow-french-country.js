@@ -67,4 +67,4 @@ const HoggsHollowFrenchCountry = (props) => (
   </Layout>
 )
 
-export default HoggsHollowFrenchCountry
+export default HoggsHollowFrenchCountry;

@@ -16,7 +16,7 @@ import image5 from '../../../images/Renovations-Additions/Etobicoke-5.jpg';
 import image6 from '../../../images/Renovations-Additions/Etobicoke-4.jpg';
 import image7 from '../../../images/Renovations-Additions/Etobicoke-8.jpg';
 
-const ContactUs = (props) => (
+const EtobicokeRenewal = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio etobicokeRenewal">
     <SEO />
     <section class="contentWrapper layoutAll layoutRenovationsEtobicokeRenewal">
@@ -75,4 +75,4 @@ const ContactUs = (props) => (
   </Layout>
 )
 
-export default ContactUs
+export default EtobicokeRenewal;

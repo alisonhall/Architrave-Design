@@ -6,7 +6,7 @@ import ImageLayout1Col1Row from '../../../components/imageLayout1Col1Row';
 import ImageTile from '../../../components/imageTile';
 import TextBlurb from '../../../components/textBlurb';
 import TextBlurbFiller from '../../../components/textBlurbFiller';
-import PrevNextProjectLink from "../../../components/prevNextProjectLink"
+import PrevNextProjectLink from '../../../components/prevNextProjectLink';
 
 import image1 from '../../../images/New-Homes/KingswayTraditional-1.jpg';
 import image2 from '../../../images/New-Homes/KingswayTraditional-2.jpg';
@@ -71,4 +71,4 @@ const KingswayTraditional = (props) => (
   </Layout>
 )
 
-export default KingswayTraditional
+export default KingswayTraditional;

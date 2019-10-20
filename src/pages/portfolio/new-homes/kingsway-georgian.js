@@ -114,4 +114,4 @@ const KingswayGeorgian = (props) => (
   </Layout>
 )
 
-export default KingswayGeorgian
+export default KingswayGeorgian;

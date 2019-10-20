@@ -14,7 +14,7 @@ import image3 from '../../../images/Renovations-Additions/Lorne-Park-1.jpg';
 import image4 from '../../../images/Renovations-Additions/Lorne-Park-5.jpg';
 import image5 from '../../../images/Renovations-Additions/Lorne-Park-6.jpg';
 
-const ContactUs = (props) => (
+const LorneParkInterior = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio lorneParkInterior">
     <SEO />
     <section class="contentWrapper layoutAll layoutRenovationsLorneParkInterior">
@@ -61,4 +61,4 @@ const ContactUs = (props) => (
   </Layout>
 )
 
-export default ContactUs
+export default LorneParkInterior;

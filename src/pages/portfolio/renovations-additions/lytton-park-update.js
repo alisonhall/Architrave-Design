@@ -33,7 +33,7 @@ const data = [
   }
 ]
 
-const ContactUs = (props) => (
+const LyttonParkUpdate = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio lyttonParkUpdate">
     <SEO />
     <section class="contentWrapper layoutAll layoutRenovationsLyttonParkUpdate">
@@ -44,4 +44,4 @@ const ContactUs = (props) => (
   </Layout>
 )
 
-export default ContactUs
+export default LyttonParkUpdate;

@@ -110,4 +110,4 @@ const CreditRiverClassic = (props) => (
   </Layout>
 )
 
-export default CreditRiverClassic
+export default CreditRiverClassic;

@@ -44,4 +44,4 @@ const OakvilleExecutiveHome = (props) => (
   </Layout>
 )
 
-export default OakvilleExecutiveHome
+export default OakvilleExecutiveHome;

@@ -22,7 +22,7 @@ const data = [
   }
 ]
 
-const ContactUs = (props) => (
+const RoyalYorkFacelift = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio royalYorkFacelift">
     <SEO />
     <section class="contentWrapper layoutAll layout1">
@@ -33,4 +33,4 @@ const ContactUs = (props) => (
   </Layout>
 )
 
-export default ContactUs
+export default RoyalYorkFacelift;
