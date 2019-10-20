@@ -28,7 +28,6 @@ $textBlurbWidth: 100% - $spacingX2 - ($textBlurbPadding * 2);
 	.image,
 	.textBlurb {
 		padding: $spacing;
-		float: left;
 		max-width: 100%;
 	}
 	.image,
@@ -73,6 +72,7 @@ $textBlurbWidth: 100% - $spacingX2 - ($textBlurbPadding * 2);
 		padding: 0 $textBlurbPadding;
 		width: $textBlurbWidth;
 		min-height: 75px;
+		float: left;
 		color: white;
 		font-size: 0.7em;
 

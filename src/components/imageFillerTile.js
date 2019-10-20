@@ -9,12 +9,14 @@ const ImageFillerTile = ({
     altText = '',
     backgroundPosition = '50% 40%',
     width = '100px',
-    height = '100px'
+    height = '100px',
+    float = 'left'
   } = {}
 }) => (
   <div className={`image image${num} clearfix imageFiller`} css={css`
     width: ${width};
     height: ${height};
+    float: ${float};
   `}>
     <div className="shadowOverlay clearfix">
       <picture>

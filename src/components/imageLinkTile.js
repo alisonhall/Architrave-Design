@@ -12,7 +12,8 @@ const ImageLinkTile = ({
     altText = '',
     backgroundPosition = '50% 40%',
     width = '100px',
-    height = '100px'
+    height = '100px',
+    float = 'left'
   } = {}
 }) => {
   if (width && height && image) {
@@ -20,6 +21,7 @@ const ImageLinkTile = ({
       <Link to={linkUrl} className={`image image${num} clearfix`} css={css`
         width: ${width};
         height: ${height};
+        float: ${float};
       `}>
         <div className="shadowOverlay clearfix">
           <picture>
