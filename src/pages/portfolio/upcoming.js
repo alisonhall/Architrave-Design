@@ -18,6 +18,16 @@ const Upcoming = (props) => (
     <SEO />
     <section className="contentWrapper layoutAll layoutUpcoming">
       <ImageTile dataItem={{
+        num: '5',
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/f_auto,q_auto/v1571329986/ArchitraveDesign/Kingsway-Classic/_Kingsway_Classic_hpwrk4.jpg',
+        width: 'calc(100% - (1.5% * 2))',
+        height: 'calc(500px * 1.4)',
+        backgroundPosition: '50% 25%'
+      }} />
+      <section className="textBlurb">
+        <p className="textOverlay">Kingsway Classic</p>
+      </section>
+      <ImageTile dataItem={{
         num: '2',
         image: image2,
         width: 'calc(100% - (1.5% * 2))',
@@ -36,17 +46,6 @@ const Upcoming = (props) => (
       <section className="textBlurb">
         <p className="textOverlay">St. George's Rebuild</p>
         <p className="completionDate">Completion 2019</p>
-      </section>
-      <ImageTile dataItem={{
-        num: '1',
-        image: image1,
-        width: 'calc(100% - (1.5% * 2))',
-        height: 'calc(500px * 0.8)',
-        backgroundPosition: '50% 80%'
-      }} />
-      <section className="textBlurb">
-        <p className="textOverlay">Oakville New Home</p>
-        <p className="completionDate">Completion 2017</p>
       </section>
     </section>
   </Layout>
