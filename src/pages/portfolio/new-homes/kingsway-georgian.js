@@ -25,7 +25,7 @@ import image12 from '../../../images/New-Homes/KingswayGeorgian-13.jpg';
 const KingswayGeorgian = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio kingswayGeorgian">
     <SEO />
-    <section class="contentWrapper layoutAll layoutNewHomesKingswayGeorgian">
+    <section className="contentWrapper layoutAll layoutNewHomesKingswayGeorgian">
       <ImageLayout1Col1Row>
         <ImageTile dataItem={{
           num: '1',

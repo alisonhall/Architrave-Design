@@ -16,7 +16,7 @@ import image5 from '../../images/Renovations-Additions/Lorne-Park-4.jpg';
 const RenovationsAdditions = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="renosAndAdditionsOverview">
     <SEO />
-    <section class="contentWrapper layoutAll layoutRenovations">
+    <section className="contentWrapper layoutAll layoutRenovations">
       <ImageLayout1Col1Row>
         <ImageLinkTile dataItem={{
           num: '1',

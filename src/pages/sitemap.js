@@ -7,9 +7,9 @@ import SEO from "../components/seo"
 const Sitemap = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="sitemap">
     <SEO />
-    <section class="contentWrapper clearfix">
-      <div class="contentBackground clearfix">
-        <section class="textContent">
+    <section className="contentWrapper clearfix">
+      <div className="contentBackground clearfix">
+        <section className="textContent">
           <h3>Site Map</h3>
           <ul>
             <li>

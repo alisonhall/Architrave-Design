@@ -18,7 +18,7 @@ import image6 from '../../../images/Renovations-Additions/Cornwall-6.jpg';
 const CornwallHeritageAddition = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio cornwallHeritageAddition">
     <SEO />
-    <section class="contentWrapper layoutAll layoutRenovationsCornwallHeritageAddition">
+    <section className="contentWrapper layoutAll layoutRenovationsCornwallHeritageAddition">
       <ImageTile dataItem={{
         num: '1',
         image: image1,

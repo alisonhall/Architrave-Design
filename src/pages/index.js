@@ -76,7 +76,7 @@ import image9 from '../images/New-Homes/KingswayGeorgian-2.jpg';
 const IndexPage = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="index home">
     <SEO />
-    <section class="contentWrapper layoutAll layoutHome">
+    <section className="contentWrapper layoutAll layoutHome">
       <ImageLinkTile dataItem={{
         num: '1',
         linkUrl: '/portfolio/new-homes/hoggs-hollow-traditional',

@@ -31,7 +31,7 @@ const data = [
 const RoyalYorkFacelift = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio royalYorkFacelift">
     <SEO />
-    <section class="contentWrapper layoutAll layout1">
+    <section className="contentWrapper layoutAll layout1">
       <ImageTile dataItem={{
         num: '1',
         image: image1,

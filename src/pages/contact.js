@@ -6,12 +6,12 @@ import SEO from "../components/seo"
 const Contact = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="contact">
     <SEO />
-    <section class="contentWrapper clearfix">
-      <div class="contentBackground clearfix">
-        <section class="textBlurb">
-          <p><a href="mailto:architravedesign@rogers.com"><i class="fa fa-envelope"></i>architravedesign@rogers.com</a></p>
-          <p><i class="fa fa-phone"></i>Toronto: 416-207-8881</p>
-          <p><i class="fa fa-phone"></i>Mississauga & Oakville: 905-599-3097</p>
+    <section className="contentWrapper clearfix">
+      <div className="contentBackground clearfix">
+        <section className="textBlurb">
+          <p><a href="mailto:architravedesign@rogers.com"><i className="fa fa-envelope"></i>architravedesign@rogers.com</a></p>
+          <p><i className="fa fa-phone"></i>Toronto: 416-207-8881</p>
+          <p><i className="fa fa-phone"></i>Mississauga & Oakville: 905-599-3097</p>
         </section>
       </div>
     </section>
