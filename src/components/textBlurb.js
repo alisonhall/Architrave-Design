@@ -8,8 +8,10 @@ const TextBlurb = ({
   } = {}
 }) => (
   <section className="textBlurb">
-    {title && (<h2 className="title">{title}</h2>)}
-    {subTitle && (<h3 className="subTitle">{subTitle}</h3>)}
+    {(title || subTitle) && (<div className="headingSection">
+      {title && (<h2 className="title">{title}</h2>)}
+      {subTitle && (<h3 className="subTitle">{subTitle}</h3>)}
+    </div>)}
     <p className="text">{text}</p>
   </section>
 )
