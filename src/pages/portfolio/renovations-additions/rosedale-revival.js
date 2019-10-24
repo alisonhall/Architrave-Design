@@ -40,7 +40,7 @@ const RosedaleRevival = (props) => (
         height: 'calc(500px * 0.75)'
       }} />
       <PrevNextProjectLink direction="previous" linkUrl="/portfolio/renovations-additions/cornwall-heritage-addition" />
-      <PrevNextProjectLink direction="next" linkUrl="/portfolio/renovations-additions/lorne-park-interior" />
+      <PrevNextProjectLink direction="next" linkUrl="/portfolio/renovations-additions/etobicoke-renewal" />
     </section>
   </Layout>
 )

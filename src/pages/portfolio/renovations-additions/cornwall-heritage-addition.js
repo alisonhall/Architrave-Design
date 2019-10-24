@@ -59,7 +59,7 @@ const CornwallHeritageAddition = (props) => (
         width: 'calc(38% - (1.5% * 2))',
         height: 'calc(500px * 0.7)'
       }} />
-      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/renovations-additions/etobicoke-renewal" />
+      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/renovations-additions/princess-margaret-facelift" />
       <PrevNextProjectLink direction="next" linkUrl="/portfolio/renovations-additions/rosedale-revival" />
     </section>
   </Layout>

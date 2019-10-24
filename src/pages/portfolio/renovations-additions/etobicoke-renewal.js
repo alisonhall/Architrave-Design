@@ -69,8 +69,8 @@ const EtobicokeRenewal = (props) => (
         width: 'calc(52% - (1.5% * 2))',
         height: 'calc(500px * 0.78)'
       }} />
-      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/renovations-additions/lytton-park-update" />
-      <PrevNextProjectLink direction="next" linkUrl="/portfolio/renovations-additions/cornwall-heritage-addition" />
+      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/renovations-additions/rosedale-revival" />
+      <PrevNextProjectLink direction="next" linkUrl="/portfolio/renovations-additions/lytton-park-update" />
     </section>
   </Layout>
 )

@@ -36,8 +36,8 @@ const PrincessMargaretFacelift = (props) => (
         width: 'calc(50% - (1.5% * 2))',
         height: 'calc(500px * 0.75)'
       }} />
-      <PrevNextProjectLink direction="previous" linkUrl="" />
-      <PrevNextProjectLink direction="next" linkUrl="" />
+      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/renovations-additions/lytton-park-update" />
+      <PrevNextProjectLink direction="next" linkUrl="/portfolio/renovations-additions/cornwall-heritage-addition" />
     </section>
   </Layout>
 )

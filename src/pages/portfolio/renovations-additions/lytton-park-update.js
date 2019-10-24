@@ -53,8 +53,8 @@ const LyttonParkUpdate = (props) => (
         width: 'calc(100% - (1.5% * 2))',
         height: 'calc(500px * 0.9)'
       }} />
-      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/renovations-additions/lorne-park-interior" />
-      <PrevNextProjectLink direction="next" linkUrl="/portfolio/renovations-additions/etobicoke-renewal" />
+      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/renovations-additions/etobicoke-renewal" />
+      <PrevNextProjectLink direction="next" linkUrl="/portfolio/renovations-additions/princess-margaret-facelift" />
     </section>
   </Layout>
 )
