@@ -47,17 +47,19 @@ const KingswayGeorgian = (props) => (
           num: '3',
           image: image3,
           width: 'calc(65% - (1.5% * 2))',
-          height: 'calc(500px * 1.46)'
+          height: 'calc(500px * 1.46)',
+          float: 'right'
         }} />
         <ImageTile dataItem={{
           num: '4',
           image: image4,
-          width: 'calc(35% - (1.5% * 2))',
+          width: 'calc(34% - (1.5% * 2))',
           height: 'calc(500px * 0.8)'
         }} />
         <TextBlurbFiller dataItem={{
           width: 'calc(65% - (1.5% * 2))',
-          height: '70px'
+          height: '70px',
+          float: 'right'
         }} />
         <ImageTile dataItem={{
           num: '5',
@@ -69,7 +71,8 @@ const KingswayGeorgian = (props) => (
           num: '6',
           image: image6,
           width: 'calc(42% - (1.5% * 2))',
-          height: 'calc(500px * 1.08)'
+          height: 'calc(500px * 1.08)',
+          float: 'right'
         }} />
         <ImageTile dataItem={{
           num: '7',
@@ -81,7 +84,8 @@ const KingswayGeorgian = (props) => (
           num: '8',
           image: image8,
           width: 'calc(42% - (1.5% * 2))',
-          height: 'calc(500px * 1.08)'
+          height: 'calc(500px * 1.08)',
+          float: 'right'
         }} />
         <ImageTile dataItem={{
           num: '9',
