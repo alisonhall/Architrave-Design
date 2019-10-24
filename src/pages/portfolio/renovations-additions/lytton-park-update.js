@@ -9,10 +9,10 @@ import TextBlurbFiller from '../../../components/textBlurbFiller';
 import PrevNextProjectLink from "../../../components/prevNextProjectLink";
 
 import image1 from '../../../images/Renovations-Additions/Lytton-Park-2.jpg';
-import image2 from '../../../images/Renovations-Additions/Lorne-Park-2.jpg';
-import image3 from '../../../images/Renovations-Additions/Lorne-Park-4.jpg';
-import image4 from '../../../images/Renovations-Additions/Lorne-Park-5.jpg';
-import image5 from '../../../images/Renovations-Additions/Lorne-Park-3.jpg';
+import image2 from '../../../images/Renovations-Additions/Lytton-Park-1.jpg';
+import image3 from '../../../images/Renovations-Additions/Lytton-Park-4.jpg';
+import image4 from '../../../images/Renovations-Additions/Lytton-Park-5.jpg';
+import image5 from '../../../images/Renovations-Additions/Lytton-Park-3.jpg';
 
 const LyttonParkUpdate = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
