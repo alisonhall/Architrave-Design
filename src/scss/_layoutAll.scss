@@ -1,5 +1,6 @@
-$textBlurbPadding: 5%;
-$textBlurbWidth: 100% - $spacingX2 - ($textBlurbPadding * 2);
+$padding: 1%;
+$textBlurbPadding: calc(1em + #{$padding});
+$textBlurbWidth: calc(100% - #{$spacingX2} - (#{$textBlurbPadding} * 2));
 
 @mixin fade-in($delay) {
 	/*-webkit-animation: 
@@ -27,7 +28,8 @@ $textBlurbWidth: 100% - $spacingX2 - ($textBlurbPadding * 2);
 .layoutAll {
 	.image,
 	.textBlurb {
-		padding: $spacing;
+		position: relative;
+		margin: $spacing;
 		max-width: 100%;
 	}
 	.image,
@@ -67,22 +69,32 @@ $textBlurbWidth: 100% - $spacingX2 - ($textBlurbPadding * 2);
 		float: left;
 		color: white;
 		font-size: 0.7em;
-
-		h2 {
+    .headingSection {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+      margin-top: 1.5em;
+    }
+		.title {
+      display: inline-block;
 			font-weight: normal;
 			font-size: 1.5em;
-			line-height: 1.1em;
+      line-height: 1.1em;
+      padding-right: 0.75em;
+      margin: 0;
 		}
-		h3 {
-			float: right;
+		.subTitle {
+      display: inline-block;
 			font-weight: normal;
-			font-size: 1.5em;
+			font-size: 1.3em;
 			line-height: 1.1em;
 			text-align: right;
 			margin: 0;
-			margin-top: -1.9em;
 			color: #CAE1EB;
-		}
+    }
+    .headingSection ~ .text {
+      margin-bottom: 1.7em;
+    }
 	}
 	.shadowOverlay {
 		width: 100%;
@@ -92,14 +104,16 @@ $textBlurbWidth: 100% - $spacingX2 - ($textBlurbPadding * 2);
 	.textOverlay,
 	.completionDate {
 		position: relative;
-		padding: 1%;
 		z-index: 200;
 		color: white;
 		text-shadow: 0px 0px 5px rgba(0, 0, 0, 1);
 	}
 	.textOverlay {
-		margin-top: -50px;
-		margin-left: 20px;
+		position: absolute;
+		bottom: 0;
+		width: calc(100% - 2em);
+		margin-left: 1em;
+		margin-right: 1em;
 	}
 	.completionDate {
 		margin-top: -65px;
@@ -206,17 +220,6 @@ $textBlurbWidth: 100% - $spacingX2 - ($textBlurbPadding * 2);
 	}
 }
 
-@media screen and (max-width: $breakpointMedium) {
-	.layoutAll .imageFiller {
-		display: none !important;
-	}
-	.layoutAll .imageFiller + .image {
-		width: 48% !important;
-	}
-	.image {
-		/*width: 45% !important;*/
-	}
-}
 @media screen and (max-width: $breakpointSmall) {
 	.layoutAll .textBlurbFiller {
 		display: none !important;
@@ -229,19 +232,19 @@ $textBlurbWidth: 100% - $spacingX2 - ($textBlurbPadding * 2);
 		width: 96% !important;
 	}
 	.layoutAll .textBlurb {
-		width: 94% !important;
-		padding: 0 1% !important;
+		width: 86% !important;
+		padding: 0 5% !important;
 	}
 	.textBlurb {
-		h2,
-		h3 {
+		.title,
+		.subTitle {
 			display: block;
 			width: 100%;
 		}
-		h2 {
+		.title {
 			margin-bottom: 4px !important;
 		}
-		h3 {
+		.subTitle {
 			float: none;
 			font-size: 1.3em !important;
 			text-align: left !important;

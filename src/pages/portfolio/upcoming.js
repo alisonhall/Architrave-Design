@@ -41,7 +41,7 @@ const Upcoming = (props) => (
         height: '170px',
         backgroundPosition: '50% 80%',
         float: 'right',
-        marginTop: '-115px'
+        marginTop: '-115px !important'
       }} />
       <section className="textBlurb">
         <p className="textOverlay">St. George's Rebuild</p>
