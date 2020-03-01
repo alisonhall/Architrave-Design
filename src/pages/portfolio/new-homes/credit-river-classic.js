@@ -46,7 +46,6 @@ const CreditRiverClassic = (props) => (
         }} />
         <TextBlurb dataItem={{
           title: 'Credit River Classic',
-          subTitle: '(Completion 2016)',
           text: 'The home owners sought a home suitable for both family living and entertaining on their riverside lot. Rich materials and the finest craftsmanship combine to create an atmosphere of casual elegance.'
         }} />
         <ImageTile dataItem={{
