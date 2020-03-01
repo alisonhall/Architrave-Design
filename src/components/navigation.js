@@ -40,9 +40,9 @@ const Navigation = ({urlPath}) => {
         </li>
       </ul>
     </nav>
-    <Link className="houzzLogo" to="http://www.houzz.com/pro/architrave/architrave-design-architect">
+    <a className="houzzLogo" href="http://www.houzz.com/pro/architrave/architrave-design-architect">
       <img src={houzzLogo} alt="Houzz logo" />
-    </Link>
+    </a>
   </aside>
 )}
 

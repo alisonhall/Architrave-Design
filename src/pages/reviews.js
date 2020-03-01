@@ -49,9 +49,9 @@ const Reviews = (props) => (
           </section>
           <section className="textBlurb">
             <p>
-              <Link to="http://www.houzz.com/browseReviews/architrave">
+              <a href="http://www.houzz.com/browseReviews/architrave">
                 <img src={houzzReviewsLogo} alt="Houzz Reviews"/>
-              </Link>
+              </a>
             </p>
 					</section>
           </section>
