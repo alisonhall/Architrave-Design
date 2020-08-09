@@ -19,7 +19,7 @@ const Upcoming = (props) => (
     <section className="contentWrapper layoutAll layoutUpcoming">
       <ImageTile dataItem={{
         num: '5',
-        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/f_auto,q_auto/v1571329986/ArchitraveDesign/Kingsway-Classic/_Kingsway_Classic_hpwrk4.jpg',
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_700,c_scale,f_auto,q_auto/v1571329986/ArchitraveDesign/Kingsway-Classic/_Kingsway_Classic_hpwrk4.jpg',
         width: 'calc(100% - (1.5% * 2))',
         height: 'calc(500px * 1.4)',
         backgroundPosition: '50% 25%'

@@ -76,7 +76,7 @@ const NewHomes = (props) => (
           num: '7',
           linkUrl: '/portfolio/new-homes/classic-centre-hall',
           text: "Classic Centre Hall",
-          imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347266/ArchitraveDesign/1-New-Homes/5-Centre-Hall-Classic/1b-Cut-Stone-Facade_rkbnlo.jpg',
+          imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_300,c_scale,f_auto,q_auto/v1595347266/ArchitraveDesign/1-New-Homes/5-Centre-Hall-Classic/1b-Cut-Stone-Facade_rkbnlo.jpg',
           width: 'calc(33.3% - (1.5% * 2))',
           height: 'calc(500px * 0.6)'
         }} />
