@@ -31,8 +31,8 @@ const ImageLinkTile = ({
             `} />
           ) : (
             <picture>
-              <source media="(min-width: 650px)" srcset={image} />
-              <source media="(max-width: 649px)" srcset={image} />
+              <source media="(min-width: 650px)" srcSet={image} />
+              <source media="(max-width: 649px)" srcSet={image} />
               <img className={`imageDiv imageDiv${num}`} src={image} alt={altText} css={css`
                 object-position: ${backgroundPosition};
               `} />
