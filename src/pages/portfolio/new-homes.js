@@ -74,19 +74,27 @@ const NewHomes = (props) => (
         }} />
         <ImageLinkTile dataItem={{
           num: '7',
-          linkUrl: '/portfolio/new-homes/hoggs-hollow-french-country',
-          text: "Hogg's Hollow French Country",
-          image: image7,
-          width: 'calc(58% - (1.5% * 2))',
+          linkUrl: '/portfolio/new-homes/classic-centre-hall',
+          text: "Classic Centre Hall",
+          imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_300,c_scale,f_auto,q_auto/v1595347266/ArchitraveDesign/1-New-Homes/5-Centre-Hall-Classic/1b-Cut-Stone-Facade_rkbnlo.jpg',
+          width: 'calc(33.3% - (1.5% * 2))',
           height: 'calc(500px * 0.6)'
         }} />
         <ImageLinkTile dataItem={{
           num: '8',
+          linkUrl: '/portfolio/new-homes/hoggs-hollow-french-country',
+          text: "Hogg's Hollow French Country",
+          image: image7,
+          width: 'calc(33.3% - (1.5% * 2))',
+          height: 'calc(500px * 0.6)'
+        }} />
+        <ImageLinkTile dataItem={{
+          num: '9',
           linkUrl: '/portfolio/new-homes/kingsway-traditional',
           text: "Kingsway Traditional",
           image: image8,
           backgroundPosition: '30% 40%',
-          width: 'calc(42% - (1.5% * 2))',
+          width: 'calc(33.3% - (1.5% * 2))',
           height: 'calc(500px * 0.6)'
         }} />
       </ImageLayout1Col1Row>
