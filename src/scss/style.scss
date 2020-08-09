@@ -73,6 +73,7 @@ $stayFadedDelay6: $fadeInDelay6 + 3s;
 FILES
 ********************/
 
+@import 'mixins';
 @import 'header';
 @import 'footer';
 @import 'about';
@@ -120,11 +121,10 @@ body {
 }
 
 .contentWrapper {
-	width: $contentWrapperWidth;
 	max-width: $contentWrapperMaxWidth;
 	float: left;
 	font-size: 1.653em;
-	margin-top: $headerPlusExtraSpacing;
+	margin-top: 5px;
 	margin-left: $asideWidth;
 	min-height: $viewportHeightDefault;
 	overflow: hidden;
@@ -142,7 +142,6 @@ body {
 
 @media screen and (max-width: $breakpointLarge) {
 	.contentWrapper {
-		width: 100%;
 		max-width: 100%;
 		float: left;
 		margin-top: 6em; //150px
@@ -157,6 +156,27 @@ body {
 	}
 }
 
+
+.row {
+	border-top: 25px solid white;
+	border-bottom: 25px solid white;
+	display: flex;
+	flex-flow: row nowrap;
+}
+
+.row + .row {
+	border-top: none;
+}
+
+.column {
+	border-left: 25px solid white;
+	border-right: 25px solid white;
+	height: 100%;
+}
+
+.column + .column {
+	border-left: none;
+}
 
 
 /********************

@@ -2,41 +2,23 @@ $padding: 1%;
 $textBlurbPadding: calc(1em + #{$padding});
 $textBlurbWidth: calc(100% - #{$spacingX2} - (#{$textBlurbPadding} * 2));
 
-@mixin fade-in($delay) {
-	/*-webkit-animation: 
-		contentFadeIn $fadeInDuration ease-in 1 $delay,
-		contentStayFaded $fadeInDuration ease-in infinite $delay2;
-	-moz-animation: 
-		contentFadeIn $fadeInDuration ease-in 1 $delay,
-		contentStayFaded $fadeInDuration ease-in infinite $delay2;
-	-o-animation: 
-		contentFadeIn $fadeInDuration ease-in 1 $delay,
-		contentStayFaded $fadeInDuration ease-in infinite $delay2;
-	animation: 
-		contentFadeIn $fadeInDuration ease-in 1 $delay,
-		contentStayFaded $fadeInDuration ease-in infinite $delay2;*/
-	-webkit-animation: 
-		contentFadeIn ease-in $delay;
-	-moz-animation: 
-		contentFadeIn ease-in $delay;
-	-o-animation: 
-		contentFadeIn ease-in $delay;
-	animation: 
-		contentFadeIn ease-in $delay;
-}
-
 .layoutAll {
 	.image,
 	.textBlurb {
 		position: relative;
-		margin: $spacing;
+		// margin: $spacing;
 		max-width: 100%;
+		height: 100%;
+
+		img {
+			object-fit: cover;
+		}
 	}
 	.image,
 	.textBlurbFiller {
 		@include fade-in($fadeInDelay6);
 	}
-	.image1{
+	.image1 {
 		@include fade-in($fadeInDelay1);
 	}
 	.image2,
@@ -54,47 +36,44 @@ $textBlurbWidth: calc(100% - #{$spacingX2} - (#{$textBlurbPadding} * 2));
 	}
 	a .imageDiv,
 	.imageDiv {
-		-webkit-transition: all 0.2s linear 0s;
-		-moz-transition: all 0.2s linear 0s;
-		-o-transition: all 0.2s linear 0s;
-		transition: all 0.2s linear 0s;
+		@include transition(all 0.2s linear 0s);
 		object-fit: cover;
 	}
 	.textBlurb {
 		background-color: #7ba7ba;
-		margin: $spacing;
-		padding: 0 $textBlurbPadding;
-		width: $textBlurbWidth;
-		min-height: 75px;
-		float: left;
+		// margin: $spacing;
+		padding: 20px;
+		// width: $textBlurbWidth;
+		// min-height: 75px;
+		// float: left;
 		color: white;
 		font-size: 0.7em;
-    .headingSection {
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: space-between;
-      margin-top: 1.5em;
-    }
+		.headingSection {
+			display: flex;
+			flex-flow: row wrap;
+			justify-content: space-between;
+			margin-top: 0.7em;
+		}
 		.title {
-      display: inline-block;
+			display: inline-block;
 			font-weight: normal;
 			font-size: 1.5em;
-      line-height: 1.1em;
-      padding-right: 0.75em;
-      margin: 0;
+			line-height: 1.1em;
+			padding-right: 0.75em;
+			margin: 0;
 		}
 		.subTitle {
-      display: inline-block;
+			display: inline-block;
 			font-weight: normal;
 			font-size: 1.3em;
 			line-height: 1.1em;
 			text-align: right;
 			margin: 0;
 			color: #CAE1EB;
-    }
-    .headingSection ~ .text {
-      margin-bottom: 1.7em;
-    }
+		}
+		.headingSection ~ .text {
+			//   margin-bottom: 1.7em;
+		}
 	}
 	.shadowOverlay {
 		width: 100%;
@@ -130,10 +109,7 @@ $textBlurbWidth: calc(100% - #{$spacingX2} - (#{$textBlurbPadding} * 2));
 		font-weight: 300;
 	}
 	.imageDiv {
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
-		background-size: cover;
+		@include backgroundSize(cover);
 		max-width: 100%;
 		width: 100%;
 		height: 100%;
@@ -144,10 +120,7 @@ $textBlurbWidth: calc(100% - #{$spacingX2} - (#{$textBlurbPadding} * 2));
 		font-size: 0.8em;
 		color: black;
 		padding: 15px 3% 25px 2%;
-		-webkit-transition: all 0.2s linear 0s;
-		-moz-transition: all 0.2s linear 0s;
-		-o-transition: all 0.2s linear 0s;
-		transition: all 0.2s linear 0s;
+		@include transition(all 0.2s linear 0s);
 	}
 	.prevProject img,
 	.nextProject img {
@@ -155,48 +128,29 @@ $textBlurbWidth: calc(100% - #{$spacingX2} - (#{$textBlurbPadding} * 2));
 		opacity: 0;
 		width: 16px;
 		height: 16px;
-		-webkit-transition: all 0.2s ease-out 0s;
-		-moz-transition: all 0.2s ease-out 0s;
-		-o-transition: all 0.2s ease-out 0s;
-		transition: all 0.2s ease-out 0s;
+		@include transition(all 0.2s ease-out 0s);
 	}
 	.prevProject:hover,
 	.nextProject:hover {
 		color: $grayLinkColour;
 	}
 	.prevProject:hover {
-		-webkit-transform: translateX(18px);
-		-ms-transform: translateX(18px);
-		-moz-transform: translateX(18px);
-		-o-transform: translateX(18px);
-		transform: translateX(18px);
+		@include transform(translateX(18px));
 	}
 	.prevProject:hover img {
 		color: $grayLinkColour;
 		display: inline-block;
 		opacity: 1;
-		-webkit-transform: translateX(-18px);
-		-ms-transform: translateX(-18px);
-		-moz-transform: translateX(-18px);
-		-o-transform: translateX(-18px);
-		transform: translateX(-18px);
+		@include transform(translateX(-18px));
 	}
 	.nextProject:hover {
-		-webkit-transform: translateX(-18px);
-		-ms-transform: translateX(-18px);
-		-moz-transform: translateX(-18px);
-		-o-transform: translateX(-18px);
-		transform: translateX(-18px);
+		@include transform(translateX(-18px));
 	}
 	.nextProject:hover img {
 		color: $grayLinkColour;
 		display: inline-block;
 		opacity: 1;
-		-webkit-transform: translateX(18px);
-		-ms-transform: translateX(18px);
-		-moz-transform: translateX(18px);
-		-o-transform: translateX(18px);
-		transform: translateX(18px);
+		@include transform(translateX(18px));
 	}
 	.prevProject {
 		float: left;
@@ -224,15 +178,15 @@ $textBlurbWidth: calc(100% - #{$spacingX2} - (#{$textBlurbPadding} * 2));
 	.layoutAll .textBlurbFiller {
 		display: none !important;
 	}
-	.layoutAll .image {
-		width: 96% !important;
-		max-height: 400px !important;
-	}
-	.layoutAll .imageFiller + .image {
-		width: 96% !important;
-	}
+	// .layoutAll .image {
+	// 	width: 96% !important;
+	// 	max-height: 400px !important;
+	// }
+	// .layoutAll .imageFiller + .image {
+	// 	width: 96% !important;
+	// }
 	.layoutAll .textBlurb {
-		width: 86% !important;
+		// width: 86% !important;
 		padding: 0 5% !important;
 	}
 	.textBlurb {
@@ -255,9 +209,9 @@ $textBlurbWidth: calc(100% - #{$spacingX2} - (#{$textBlurbPadding} * 2));
 }
 
 @media screen and (max-width: $breakpointExtraSmall) {
-	.layoutAll .image {
-		max-height: 300px !important;
-	}
+	// .layoutAll .image {
+	// 	max-height: 300px !important;
+	// }
 	.layoutAll .textBlurb {
 		font-size: 0.7em !important;
 	}

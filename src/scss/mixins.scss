@@ -1,0 +1,44 @@
+@mixin transition($args...) {
+    -webkit-transition: $args;
+    -moz-transition: $args;
+    -o-transition: $args;
+    transition: $args;
+}
+
+@mixin transform($args...) {
+    -webkit-transform: $args;
+    -ms-transform: $args;
+    -moz-transform: $args;
+    -o-transform: $args;
+    transform: $args;
+}
+
+@mixin backgroundSize($args...) {
+    -webkit-background-size: $args;
+    -moz-background-size: $args;
+    -o-background-size: $args;
+    background-size: $args;
+}
+
+@mixin fade-in($delay) {
+	/*-webkit-animation: 
+		contentFadeIn $fadeInDuration ease-in 1 $delay,
+		contentStayFaded $fadeInDuration ease-in infinite $delay2;
+	-moz-animation: 
+		contentFadeIn $fadeInDuration ease-in 1 $delay,
+		contentStayFaded $fadeInDuration ease-in infinite $delay2;
+	-o-animation: 
+		contentFadeIn $fadeInDuration ease-in 1 $delay,
+		contentStayFaded $fadeInDuration ease-in infinite $delay2;
+	animation: 
+		contentFadeIn $fadeInDuration ease-in 1 $delay,
+		contentStayFaded $fadeInDuration ease-in infinite $delay2;*/
+	-webkit-animation: 
+		contentFadeIn ease-in $delay;
+	-moz-animation: 
+		contentFadeIn ease-in $delay;
+	-o-animation: 
+		contentFadeIn ease-in $delay;
+	animation: 
+		contentFadeIn ease-in $delay;
+}

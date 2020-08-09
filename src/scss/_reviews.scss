@@ -6,10 +6,7 @@ REVIEWS
 	.contentBackground {
 		margin: $spacing;
 		background-image: url("../images/Reviews/Reviews-Background.jpg");
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
-		background-size: cover;
+		@include backgroundSize(cover);
 		background-position: 100% 100%;
 	}
 	.textContent {
