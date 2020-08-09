@@ -29,16 +29,25 @@ module.exports = {
       },
     },
     `gatsby-plugin-sass`,
+    // {
+    //   resolve: `gatsby-plugin-prefetch-google-fonts`,
+    //   options: {
+    //     fonts: [
+    //       {
+    //         family: `Raleway`,
+    //         variants: [`400`, `700`, `600`, `500`, `300`]
+    //       }
+    //     ],
+    //   },
+    // },
     {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      resolve: `gatsby-plugin-google-fonts`,
       options: {
         fonts: [
-          {
-            family: `Raleway`,
-            variants: [`400`, `700`, `600`, `500`, `300`]
-          }
+          `Raleway\:300,400,500,600,700` // you can also specify font weights and styles
         ],
-      },
+        display: 'swap'
+      }
     },
     {
       resolve: `gatsby-plugin-google-analytics`,
