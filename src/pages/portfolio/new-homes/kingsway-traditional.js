@@ -1,12 +1,11 @@
 import React from 'react';
 
+import constants from '../../../../public/app-constants';
+
 import Layout from '../../../components/layout';
 import SEO from '../../../components/seo';
-import ImageTile from '../../../components/imageTile';
-import TextBlurb from '../../../components/textBlurb';
-import TextBlurbFiller from '../../../components/textBlurbFiller';
+import Item from '../../../components/item';
 import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
-import constants from '../../../../public/app-constants';
 
 import image1 from '../../../images/New-Homes/KingswayTraditional-1.jpg';
 import image2 from '../../../images/New-Homes/KingswayTraditional-2.jpg';
@@ -21,52 +20,80 @@ const KingswayTraditional = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
     <section className="contentWrapper layoutAll layoutProject">
-      <ImageTile dataItem={{
-        num: '1',
-        image: image1,
-        width: 'calc(100% - (1.5% * 2))',
-        height: 'calc(500px * 1.26)'
-      }} />
-      <TextBlurb dataItem={{
-        title: 'Kingsway Traditional',
-        text: 'Set in the heart of The Kingsway, this new family home evokes the character and flavour of the neighbourhood. Local stone and brick outside conceal a double-height foyer, panelled formal rooms and a casual great-room.'
-      }} />
-      <ImageTile dataItem={{
-        num: '2',
-        image: image2,
-        width: 'calc(34% - (1.5% * 2))',
-        height: 'calc(500px * 0.85)'
-      }} />
-      <ImageTile dataItem={{
-        num: '3',
-        image: image3,
-        width: 'calc(66% - (1.5% * 2))',
-        height: 'calc(500px * 0.85)'
-      }} />
-      <ImageTile dataItem={{
-        num: '4',
-        image: image4,
-        width: 'calc(100% - (1.5% * 2))',
-        height: 'calc(500px * 1.05)'
-      }} />
-      <TextBlurbFiller dataItem={{
-        width: 'calc(47% - (1.5% * 2))',
-        height: '40px',
-        float: 'left'
-      }} />
-      <ImageTile dataItem={{
-        num: '5',
-        image: image5,
-        width: 'calc(53% - (1.5% * 2))',
-        height: 'calc(500px * 0.54)',
-        float: 'right'
-      }} />
-      <ImageTile dataItem={{
-        num: '6',
-        image: image6,
-        width: 'calc(47% - (1.5% * 2))',
-        height: 'calc(500px * 0.4)',
-      }} />
+      <Item
+        num={1}
+        image={{
+          image: image1
+        }}
+        styles={{
+          width: 'calc(100% - (1.5% * 2))',
+          height: 'calc(500px * 1.26)'
+        }}
+      />
+      <Item
+        text={{
+          title: 'Kingsway Traditional',
+          copy: 'Set in the heart of The Kingsway, this new family home evokes the character and flavour of the neighbourhood. Local stone and brick outside conceal a double-height foyer, panelled formal rooms and a casual great-room.'
+        }}
+      />
+      <Item
+        num={2}
+        image={{
+          image: image2
+        }}
+        styles={{
+          width: 'calc(34% - (1.5% * 2))',
+          height: 'calc(500px * 0.85)'
+        }}
+      />
+      <Item
+        num={3}
+        image={{
+          image: image3
+        }}
+        styles={{
+          width: 'calc(66% - (1.5% * 2))',
+          height: 'calc(500px * 0.85)'
+        }}
+      />
+      <Item
+        num={4}
+        image={{
+          image: image4
+        }}
+        styles={{
+          width: 'calc(100% - (1.5% * 2))',
+          height: 'calc(500px * 1.05)'
+        }}
+      />
+      <Item
+        styles={{
+          width: 'calc(47% - (1.5% * 2))',
+          height: '40px',
+          float: 'left'
+        }}
+      />
+      <Item
+        num={5}
+        image={{
+          image: image5
+        }}
+        styles={{
+          width: 'calc(53% - (1.5% * 2))',
+          height: 'calc(500px * 0.54)',
+          float: 'right'
+        }}
+      />
+      <Item
+        num={6}
+        image={{
+          image: image6
+        }}
+        styles={{
+          width: 'calc(47% - (1.5% * 2))',
+          height: 'calc(500px * 0.4)',
+        }}
+      />
       <PrevNextProjectLinks project={project} />
     </section>
   </Layout>

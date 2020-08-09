@@ -1,12 +1,11 @@
 import React from 'react';
 
+import constants from '../../../../public/app-constants';
+
 import Layout from '../../../components/layout';
 import SEO from '../../../components/seo';
-import ImageTile from '../../../components/imageTile';
-import TextBlurb from '../../../components/textBlurb';
-import TextBlurbFiller from '../../../components/textBlurbFiller';
+import Item from '../../../components/item';
 import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
-import constants from '../../../../public/app-constants';
 
 import image1 from '../../../images/Renovations-Additions/Lorne-Park-2.jpg';
 import image2 from '../../../images/Renovations-Additions/Lorne-Park-4.jpg';
@@ -20,43 +19,65 @@ const LorneParkInterior = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
     <section className="contentWrapper layoutAll layoutProject">
-      <ImageTile dataItem={{
-        num: '1',
-        image: image1,
-        width: 'calc(23% - (1.5% * 2))',
-        height: 'calc(500px * 0.45)'
-      }} />
-      <ImageTile dataItem={{
-        num: '2',
-        image: image2,
-        width: 'calc(77% - (1.5% * 2))',
-        height: 'calc(500px * 0.96)',
-        float: 'right'
-      }} />
-      <ImageTile dataItem={{
-        num: '3',
-        image: image3,
-        width: 'calc(23% - (1.5% * 2))',
-        height: 'calc(500px * 0.45)'
-      }} />
-      <TextBlurb dataItem={{
-        title: 'Lorne Park Interior',
-        text: 'Updating the living area of this Lorne Park Prairie Style home is the first phase of a long term plan to remake the entire home. A dark and cluttered living-dining area was gutted, and redone with a light and modern touch.'
-      }} />
-      <ImageTile dataItem={{
-        num: '4',
-        image: image4,
-        width: 'calc(50% - (1.5% * 2))',
-        height: 'calc(500px * 0.52)',
-        backgroundPosition: '50% 30%'
-      }} />
-      <ImageTile dataItem={{
-        num: '5',
-        image: image5,
-        width: 'calc(50% - (1.5% * 2))',
-        height: 'calc(500px * 0.52)',
-        backgroundPosition: '50% 30%'
-      }} />
+      <Item
+        num={1}
+        image={{
+          image: image1
+        }}
+        styles={{
+          width: 'calc(23% - (1.5% * 2))',
+          height: 'calc(500px * 0.45)'
+        }}
+      />
+      <Item
+        num={2}
+        image={{
+          image: image2
+        }}
+        styles={{
+          width: 'calc(77% - (1.5% * 2))',
+          height: 'calc(500px * 0.96)',
+          float: 'right'
+        }}
+      />
+      <Item
+        num={3}
+        image={{
+          image: image3
+        }}
+        styles={{
+          width: 'calc(23% - (1.5% * 2))',
+          height: 'calc(500px * 0.45)'
+        }}
+      />
+      <Item
+        text={{
+          title: 'Lorne Park Interior',
+          copy: 'Updating the living area of this Lorne Park Prairie Style home is the first phase of a long term plan to remake the entire home. A dark and cluttered living-dining area was gutted, and redone with a light and modern touch.'
+        }}
+      />
+      <Item
+        num={4}
+        image={{
+          image: image4,
+          backgroundPosition: '50% 30%'
+        }}
+        styles={{
+          width: 'calc(50% - (1.5% * 2))',
+          height: 'calc(500px * 0.52)',
+        }}
+      />
+      <Item
+        num={5}
+        image={{
+          image: image5,
+          backgroundPosition: '50% 30%'
+        }}
+        styles={{
+          width: 'calc(50% - (1.5% * 2))',
+          height: 'calc(500px * 0.52)',
+        }}
+      />
       <PrevNextProjectLinks project={project} />
     </section>
   </Layout>

@@ -1,12 +1,11 @@
 import React from 'react';
 
+import constants from '../../../../public/app-constants';
+
 import Layout from '../../../components/layout';
 import SEO from '../../../components/seo';
-import ImageTile from '../../../components/imageTile';
-import TextBlurb from '../../../components/textBlurb';
-import TextBlurbFiller from '../../../components/textBlurbFiller';
+import Item from '../../../components/item';
 import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
-import constants from '../../../../public/app-constants';
 
 import image1 from '../../../images/New-Homes/Oakville-1.jpg';
 import image2 from '../../../images/New-Homes/Oakville-2.jpg';
@@ -18,28 +17,42 @@ const OakvilleExecutiveHome = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
     <section className="contentWrapper layoutAll layoutProject">
-      <ImageTile dataItem={{
-        num: '1',
-        image: image1,
-        width: 'calc(100% - (1.5% * 2))',
-        height: 'calc(500px * 1.2)'
-      }} />
-      <TextBlurb dataItem={{
-        title: 'Oakville Executive Home',
-        text: 'Dormers and a low roofline play down the size of this large stone and brick home in Oakville.'
-      }} />
-      <ImageTile dataItem={{
-        num: '2',
-        image: image2,
-        width: 'calc(62% - (1.5% * 2))',
-        height: 'calc(500px * 0.96)'
-      }} />
-      <ImageTile dataItem={{
-        num: '3',
-        image: image3,
-        width: 'calc(38% - (1.5% * 2))',
-        height: 'calc(500px * 0.96)'
-      }} />
+      <Item
+        num={1}
+        image={{
+          image: image1
+        }}
+        styles={{
+          width: 'calc(100% - (1.5% * 2))',
+          height: 'calc(500px * 1.2)'
+        }}
+      />
+      <Item
+        text={{
+          title: 'Oakville Executive Home',
+          copy: 'Dormers and a low roofline play down the size of this large stone and brick home in Oakville.'
+        }}
+      />
+      <Item
+        num={2}
+        image={{
+          image: image2
+        }}
+        styles={{
+          width: 'calc(62% - (1.5% * 2))',
+          height: 'calc(500px * 0.96)'
+        }}
+      />
+      <Item
+        num={3}
+        image={{
+          image: image3
+        }}
+        styles={{
+          width: 'calc(38% - (1.5% * 2))',
+          height: 'calc(500px * 0.96)'
+        }}
+      />
       <PrevNextProjectLinks project={project} />
     </section>
   </Layout>

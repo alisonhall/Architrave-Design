@@ -1,10 +1,10 @@
 import React from 'react';
 
+import constants from '../../../../public/app-constants';
+
 import Layout from '../../../components/layout';
 import SEO from '../../../components/seo';
-import ImageTile from '../../../components/imageTile';
-import TextBlurb from '../../../components/textBlurb';
-import TextBlurbFiller from '../../../components/textBlurbFiller';
+import Item from '../../../components/item';
 import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
 
 import image1 from '../../../images/New-Homes/KingswayTransitional-1.jpg';
@@ -15,7 +15,6 @@ import image5 from '../../../images/New-Homes/KingswayTransitional-5.jpg';
 import image6 from '../../../images/New-Homes/KingswayTransitional-4.jpg';
 import image7 from '../../../images/New-Homes/KingswayTransitional-7.jpg';
 import image8 from '../../../images/New-Homes/KingswayTransitional-8.jpg';
-import constants from '../../../../public/app-constants';
 
 const project = constants.projects.kingswayTransitional;
 
@@ -23,63 +22,99 @@ const KingswayTransitional = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
     <section className="contentWrapper layoutAll layoutProject">
-      <ImageTile dataItem={{
-        num: '1',
-        image: image1,
-        width: 'calc(100% - (1.5% * 2))',
-        height: 'calc(500px * 1.26)'
-      }} />
-      <TextBlurb dataItem={{
-        title: 'Kingsway Transitional',
-        text: 'The clients sought a street face that would fit with an established traditional neighbourhood. Contrasting that, the interior uses glass, steel and rich woods to create a light-filled contemporary feel.'
-      }} />
-      <ImageTile dataItem={{
-        num: '2',
-        image: image2,
-        width: 'calc(42% - (1.5% * 2))',
-        height: 'calc(500px * 0.58)'
-      }} />
-      <ImageTile dataItem={{
-        num: '3',
-        image: image3,
-        width: 'calc(29% - (1.5% * 2))',
-        height: 'calc(500px * 0.58)'
-      }} />
-      <ImageTile dataItem={{
-        num: '4',
-        image: image4,
-        width: 'calc(29% - (1.5% * 2))',
-        height: 'calc(500px * 0.58)'
-      }} />
-      <ImageTile dataItem={{
-        num: '5',
-        image: image5,
-        width: 'calc(50% - (1.5% * 2))',
-        height: 'calc(500px * 0.68)'
-      }} />
-      <ImageTile dataItem={{
-        num: '6',
-        image: image6,
-        width: 'calc(50% - (1.5% * 2))',
-        height: 'calc(500px * 0.52)'
-      }} />
-      <TextBlurbFiller dataItem={{
-        width: 'calc(50% - (1.5% * 2))',
-        height: '40px',
-        float: 'left'
-      }} />
-      <ImageTile dataItem={{
-        num: '7',
-        image: image7,
-        width: 'calc(58% - (1.5% * 2))',
-        height: 'calc(500px * 0.68)'
-      }} />
-      <ImageTile dataItem={{
-        num: '8',
-        image: image8,
-        width: 'calc(42% - (1.5% * 2))',
-        height: 'calc(500px * 0.68)'
-      }} />
+      <Item
+        num={1}
+        image={{
+          image: image1
+        }}
+        styles={{
+          width: 'calc(100% - (1.5% * 2))',
+          height: 'calc(500px * 1.26)'
+        }}
+      />
+      <Item
+        text={{
+          title: 'Kingsway Transitional',
+          copy: 'The clients sought a street face that would fit with an established traditional neighbourhood. Contrasting that, the interior uses glass, steel and rich woods to create a light-filled contemporary feel.'
+        }}
+      />
+      <Item
+        num={2}
+        image={{
+          image: image2
+        }}
+        styles={{
+          width: 'calc(42% - (1.5% * 2))',
+          height: 'calc(500px * 0.58)'
+        }}
+      />
+      <Item
+        num={3}
+        image={{
+          image: image3
+        }}
+        styles={{
+          width: 'calc(29% - (1.5% * 2))',
+          height: 'calc(500px * 0.58)'
+        }}
+      />
+      <Item
+        num={4}
+        image={{
+          image: image4
+        }}
+        styles={{
+          width: 'calc(29% - (1.5% * 2))',
+          height: 'calc(500px * 0.58)'
+        }}
+      />
+      <Item
+        num={5}
+        image={{
+          image: image5
+        }}
+        styles={{
+          width: 'calc(50% - (1.5% * 2))',
+          height: 'calc(500px * 0.68)'
+        }}
+      />
+      <Item
+        num={6}
+        image={{
+          image: image6
+        }}
+        styles={{
+          width: 'calc(50% - (1.5% * 2))',
+          height: 'calc(500px * 0.52)'
+        }}
+      />
+      <Item
+        styles={{
+          width: 'calc(50% - (1.5% * 2))',
+          height: '40px',
+          float: 'left'
+        }}
+      />
+      <Item
+        num={7}
+        image={{
+          image: image7
+        }}
+        styles={{
+          width: 'calc(58% - (1.5% * 2))',
+          height: 'calc(500px * 0.68)'
+        }}
+      />
+      <Item
+        num={8}
+        image={{
+          image: image8
+        }}
+        styles={{
+          width: 'calc(42% - (1.5% * 2))',
+          height: 'calc(500px * 0.68)'
+        }}
+      />
       <PrevNextProjectLinks project={project} />
     </section>
   </Layout>

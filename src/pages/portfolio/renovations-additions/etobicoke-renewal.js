@@ -1,12 +1,11 @@
 import React from 'react';
 
+import constants from '../../../../public/app-constants';
+
 import Layout from '../../../components/layout';
 import SEO from '../../../components/seo';
-import ImageTile from '../../../components/imageTile';
-import TextBlurb from '../../../components/textBlurb';
-import TextBlurbFiller from '../../../components/textBlurbFiller';
+import Item from '../../../components/item';
 import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
-import constants from '../../../../public/app-constants';
 
 import image1 from '../../../images/Renovations-Additions/Etobicoke-2.jpg';
 import image2 from '../../../images/Renovations-Additions/Etobicoke-7.jpg';
@@ -22,55 +21,87 @@ const EtobicokeRenewal = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
     <section className="contentWrapper layoutAll layoutProject">
-      <ImageTile dataItem={{
-        num: '1',
-        image: image1,
-        width: 'calc(62% - (1.5% * 2))',
-        height: 'calc(500px * 0.96)'
-      }} />
-      <ImageTile dataItem={{
-        num: '2',
-        image: image2,
-        width: 'calc(38% - (1.5% * 2))',
-        height: 'calc(500px * 0.43)',
-        float: 'right'
-      }} />
-      <ImageTile dataItem={{
-        num: '3',
-        image: image3,
-        width: 'calc(38% - (1.5% * 2))',
-        height: 'calc(500px * 1.01)',
-        float: 'right'
-      }} />
-      <ImageTile dataItem={{
-        num: '4',
-        image: image4,
-        textOverlay: 'Before',
-        width: 'calc(31% - (1.5% * 2))',
-        height: 'calc(500px * 0.48)'
-      }} />
-      <ImageTile dataItem={{
-        num: '5',
-        image: image5,
-        width: 'calc(31% - (1.5% * 2))',
-        height: 'calc(500px * 0.48)'
-      }} />
-      <TextBlurb dataItem={{
-        title: 'Etobicoke Facelift',
-        text: 'This post-war bungalow had been added onto too many times. The exterior proportions were well suited for an Arts-and-Crafts make-over. Inside, custom cabinetry add warmth and character to all the rooms.'
-      }} />
-      <ImageTile dataItem={{
-        num: '6',
-        image: image6,
-        width: 'calc(48% - (1.5% * 2))',
-        height: 'calc(500px * 0.78)'
-      }} />
-      <ImageTile dataItem={{
-        num: '7',
-        image: image7,
-        width: 'calc(52% - (1.5% * 2))',
-        height: 'calc(500px * 0.78)'
-      }} />
+      <Item
+        num={1}
+        image={{
+          image: image1
+        }}
+        styles={{
+          width: 'calc(62% - (1.5% * 2))',
+          height: 'calc(500px * 0.96)'
+        }}
+      />
+      <Item
+        num={2}
+        image={{
+          image: image2
+        }}
+        styles={{
+          width: 'calc(38% - (1.5% * 2))',
+          height: 'calc(500px * 0.43)',
+          float: 'right'
+        }}
+      />
+      <Item
+        num={3}
+        image={{
+          image: image3
+        }}
+        styles={{
+          width: 'calc(38% - (1.5% * 2))',
+          height: 'calc(500px * 1.01)',
+          float: 'right'
+        }}
+      />
+      <Item
+        num={4}
+        image={{
+          image: image4
+        }}
+        text={{
+          copy: 'Before'
+        }}
+        styles={{
+          width: 'calc(31% - (1.5% * 2))',
+          height: 'calc(500px * 0.48)'
+        }}
+      />
+      <Item
+        num={5}
+        image={{
+          image: image5
+        }}
+        styles={{
+          width: 'calc(31% - (1.5% * 2))',
+          height: 'calc(500px * 0.48)'
+        }}
+      />
+      <Item
+        text={{
+          title: 'Etobicoke Facelift',
+          copy: 'This post-war bungalow had been added onto too many times. The exterior proportions were well suited for an Arts-and-Crafts make-over. Inside, custom cabinetry add warmth and character to all the rooms.'
+        }}
+      />
+      <Item
+        num={6}
+        image={{
+          image: image6
+        }}
+        styles={{
+          width: 'calc(48% - (1.5% * 2))',
+          height: 'calc(500px * 0.78)'
+        }}
+      />
+      <Item
+        num={7}
+        image={{
+          image: image7
+        }}
+        styles={{
+          width: 'calc(52% - (1.5% * 2))',
+          height: 'calc(500px * 0.78)'
+        }}
+      />
       <PrevNextProjectLinks project={project} />
     </section>
   </Layout>
