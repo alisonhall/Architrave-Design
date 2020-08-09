@@ -2,15 +2,12 @@ import React from 'react';
 
 import Layout from '../../../components/layout';
 import SEO from '../../../components/seo';
-import ImageTile from '../../../components/imageTile';
-import TextBlurb from '../../../components/textBlurb';
-import TextBlurbFiller from '../../../components/textBlurbFiller';
+import Item from '../../../components/item';
 import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
-import constants from '../../../../public/app-constants';
+import Row from '../../../components/row';
+import Column from '../../../components/column';
 
-import image1 from '../../../images/Renovations-Additions/Rosedale-2.jpg';
-import image2 from '../../../images/Renovations-Additions/Rosedale-1.jpg';
-import image3 from '../../../images/Renovations-Additions/Rosedale-3.jpg';
+import constants from '../../../../static/app-constants';
 
 const project = constants.projects.rosedaleRevival;
 
@@ -18,29 +15,50 @@ const RosedaleRevival = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
     <section className="contentWrapper layoutAll layoutProject">
-      <ImageTile dataItem={{
-        num: '1',
-        image: image1,
-        width: 'calc(100% - (1.5% * 2))',
-        height: 'calc(500px * 1.3)'
-      }} />
-      <TextBlurb dataItem={{
-        title: 'Rosedale Revival',
-        text: 'This 1917 home was a diamond in the rough. Powercleaning revealed attractive brick under the green paint. A new Edwardian-style bay and dormers gave it a historic character and quality it always lacked.'
-      }} />
-      <ImageTile dataItem={{
-        num: '2',
-        image: image2,
-        width: 'calc(48% - (1.5% * 2))',
-        height: 'calc(500px * 0.75)',
-        textOverlay: 'Before'
-      }} />
-      <ImageTile dataItem={{
-        num: '3',
-        image: image3,
-        width: 'calc(52% - (1.5% * 2))',
-        height: 'calc(500px * 0.75)'
-      }} />
+      <Row height="650px">
+        <Column>
+          <Item
+            num={1}
+            image={{
+              imageFolder: project.imageFolder,
+              imageName: '2-Edwardian-Renewal_htqqfn.jpg'
+            }}
+          />
+        </Column>
+      </Row>
+      <Row>
+        <Column>
+          <Item
+            text={{
+              title: 'Rosedale Revival',
+              copy: 'This 1917 home was a diamond in the rough. Powercleaning revealed attractive brick under the green paint. A new Edwardian-style bay and dormers gave it a historic character and quality it always lacked.'
+            }}
+          />
+        </Column>
+      </Row>
+      <Row height="375px">
+        <Column width="48%">
+          <Item
+            num={2}
+            image={{
+              imageFolder: project.imageFolder,
+              imageName: '1-Before_olg276.jpg',
+            }}
+            text={{
+              copy: 'Before'
+            }}
+          />
+        </Column>
+        <Column width="52%">
+          <Item
+            num={3}
+            image={{
+              imageFolder: project.imageFolder,
+              imageName: '3-New-Brick-Bay_nnbw0a.jpg'
+            }}
+          />
+        </Column>
+      </Row>
       <PrevNextProjectLinks project={project} />
     </section>
   </Layout>
