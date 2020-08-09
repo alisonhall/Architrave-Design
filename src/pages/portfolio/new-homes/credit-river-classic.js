@@ -103,7 +103,7 @@ const CreditRiverClassic = (props) => (
           height: 'calc(500px * 1.1)'
         }} />
       </ImageLayout1Col1Row>
-      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/new-homes/kingsway-georgian" />
+      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/new-homes/classic-centre-hall" />
       <PrevNextProjectLink direction="next" linkUrl="/portfolio/new-homes/kingsway-transitional" />
     </section>
   </Layout>

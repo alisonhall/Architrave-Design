@@ -113,7 +113,7 @@ const KingswayGeorgian = (props) => (
         }} />
       </ImageLayout1Col1Row>
       <PrevNextProjectLink direction="previous" linkUrl="/portfolio/new-homes/hoggs-hollow-traditional" />
-      <PrevNextProjectLink direction="next" linkUrl="/portfolio/new-homes/credit-river-classic" />
+      <PrevNextProjectLink direction="next" linkUrl="/portfolio/new-homes/classic-centre-hall" />
     </section>
   </Layout>
 )

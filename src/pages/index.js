@@ -18,61 +18,6 @@ import image7 from '../images/New-Homes/KingswayTransitional-1.jpg';
 import image8 from '../images/New-Homes/CreditRiver-9.jpg';
 import image9 from '../images/New-Homes/KingswayGeorgian-2.jpg';
 
-// const data = [
-//   {
-//     type: 'image-link',
-//     linkUrl: '/portfolio/new-homes/hoggs-hollow-traditional',
-//     text: "Hogg's Hollow Traditional",
-//     num: '1'
-//   },
-//   {
-//     type: 'image-link',
-//     linkUrl: '/portfolio/new-homes/kingsway-georgian',
-//     text: 'Kingsway Georgian',
-//     num: '2'
-//   },
-//   {
-//     type: 'image-filler',
-//     num: '3'
-//   },
-//   {
-//     type: 'image-link',
-//     linkUrl: '/portfolio/new-homes/credit-river-classic',
-//     text: 'Credit River',
-//     num: '4'
-//   },
-//   {
-//     type: 'text-blurb',
-//     text: 'Designing stylish new homes and renovations in Etobicoke and the Greater Toronto Area.'
-//   },
-//   {
-//     type: 'image-link',
-//     linkUrl: '/portfolio/renovations-additions/etobicoke-renewal',
-//     text: 'Etobicoke Facelift',
-//     num: '5'
-//   },
-//   {
-//     type: 'image-link',
-//     linkUrl: '/portfolio/renovations-additions/lytton-park-update',
-//     text: 'Lytton Park Update',
-//     num: '6'
-//   },
-//   {
-//     type: 'image-link',
-//     linkUrl: '/portfolio/new-homes/kingsway-transitional',
-//     text: 'Kingsway Transitional',
-//     num: '7'
-//   },
-//   {
-//     type: 'image-filler',
-//     num: '8'
-//   },
-//   {
-//     type: 'image-filler',
-//     num: '9'
-//   }
-// ]
-
 const IndexPage = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="index home">
     <SEO />
@@ -129,13 +74,21 @@ const IndexPage = (props) => (
       }} />
       <ImageLinkTile dataItem={{
         num: '7',
+        linkUrl: '/portfolio/new-homes/classic-centre-hall',
+        text: "Classic Centre Hall",
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347266/ArchitraveDesign/1-New-Homes/5-Centre-Hall-Classic/1b-Cut-Stone-Facade_rkbnlo.jpg',
+        width: 'calc(52% - (1.5% * 2))',
+        height: 'calc(500px * 0.6)'
+      }} />
+      <ImageLinkTile dataItem={{
+        num: '8',
         linkUrl: '/portfolio/new-homes/kingsway-transitional',
         text: "Kingsway Transitional",
         image: image7,
         width: 'calc(48% - (1.5% * 2))',
         height: 'calc(500px * 0.6)'
       }} />
-      <ImageFillerTile dataItem={{
+      {/* <ImageFillerTile dataItem={{
         num: '8',
         image: image8,
         width: 'calc(21% - (1.5% * 2))',
@@ -146,7 +99,7 @@ const IndexPage = (props) => (
         image: image9,
         width: 'calc(31% - (1.5% * 2))',
         height: 'calc(500px * 0.6)'
-      }} />
+      }} /> */}
     </section>
   </Layout>
 )
