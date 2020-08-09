@@ -3,52 +3,51 @@ import React from "react"
 import { Link } from "gatsby"
 import { css, jsx } from "@emotion/core"
 
+import Image from './image';
+
 const ImageLinkTile = ({
-  dataItem: {
-    linkUrl = '/',
-    text = '',
-    num = '0',
-    image,
-    imageUrl,
-    altText = '',
-    backgroundPosition = '50% 40%',
+  image,
+  link: {
+    linkUrl = '/'
+  } = {},
+  text: {
+    copy = ''
+  } = {},
+  customClass = '',
+  num = '0',
+  styles: {
     width = '100px',
     height = '100px',
     float = 'left'
   } = {}
 }) => {
-  if (width && height && (image || imageUrl)) {
+  if (width && height && image) {
     return (
-      <Link to={linkUrl} className={`image image${num} clearfix`} css={css`
-        width: ${width};
-        height: ${height};
-        float: ${float};
-      `}>
+      <Link
+        to={linkUrl}
+        className={`image image${num} clearfix ${customClass}`}
+        css={css`
+          width: ${width};
+          height: ${height};
+          float: ${float};
+        `}
+      >
         <div className="shadowOverlay clearfix">
-          {imageUrl ? (
-            <img className={`imageDiv imageDiv${num}`} src={imageUrl} alt={altText} css={css`
-              object-position: ${backgroundPosition};
-            `} />
-          ) : (
-            <picture>
-              <source media="(min-width: 650px)" srcSet={image} />
-              <source media="(max-width: 649px)" srcSet={image} />
-              <img className={`imageDiv imageDiv${num}`} src={image} alt={altText} css={css`
-                object-position: ${backgroundPosition};
-              `} />
-            </picture>
-          )}
+          <Image num={num} {...image} />
         </div>
-        <p className="textOverlay">{text}</p>
+        <p className="textOverlay">{copy}</p>
       </Link>
     )
   }
   return (
-    <Link to={linkUrl} className={`image image${num} clearfix`}>
+    <Link
+      to={linkUrl}
+      className={`image image${num} clearfix ${customClass}`}
+    >
       <div className="shadowOverlay clearfix">
         <div className={`imageDiv imageDiv${num}`}></div>
       </div>
-      <p className="textOverlay">{text}</p>
+      <p className="textOverlay">{copy}</p>
     </Link>
   )
 }

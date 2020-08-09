@@ -1,17 +1,17 @@
 /** @jsx jsx */
-import React from "react"
-import { css, jsx } from "@emotion/core"
+import React from "react";
+import { css, jsx } from "@emotion/core";
+
+import Image from './image';
 
 const ImageFillerTile = ({
-  dataItem:{
-    num = '0',
-    image,
-    altText = '',
-    backgroundPosition = '50% 40%',
+  image,
+  styles: {
     width = '100px',
     height = '100px',
     float = 'left'
-  } = {}
+  } = {},
+  num = '0'
 }) => (
   <div className={`image image${num} clearfix imageFiller`} css={css`
     width: ${width};
@@ -19,14 +19,11 @@ const ImageFillerTile = ({
     float: ${float};
   `}>
     <div className="shadowOverlay clearfix">
-      <picture>
-        <source media="(min-width: 650px)" srcSet={image} />
-        <source media="(max-width: 649px)" srcSet={image} />
-        <img className={`imageDiv imageDiv${num} filler`} src={image} alt={altText} css={css`
-          object-position: ${backgroundPosition};
-        `} />
-      </picture>
-    </div>
+      <Image
+        customClass="filler"
+        {...image}
+      />
+    </div>    
     <p className="textOverlay"></p>
   </div>
 )
