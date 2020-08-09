@@ -7,7 +7,7 @@ const NotFoundPage = (props) => (
   <Layout urlPath={props.location.pathname}>
     <SEO title="404: Not found" />
     <h1>NOT FOUND</h1>
-    <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
+    <p>You just hit a page that doesn't exist. Please try a different URL.</p>
   </Layout>
 )
 
