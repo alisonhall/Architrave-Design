@@ -58,22 +58,6 @@ const IndexPage = (props) => (
       }} />
       <ImageLinkTile dataItem={{
         num: '5',
-        linkUrl: '/portfolio/renovations-additions/etobicoke-renewal',
-        text: "Etobicoke Facelift",
-        image: image5,
-        width: 'calc(36% - (1.5% * 2))',
-        height: 'calc(500px * 0.691748)'
-      }} />
-      <ImageLinkTile dataItem={{
-        num: '6',
-        linkUrl: '/portfolio/renovations-additions/lytton-park-update',
-        text: "Lytton Park Update",
-        image: image6,
-        width: 'calc(64% - (1.5% * 2))',
-        height: 'calc(500px * 0.691748)'
-      }} />
-      <ImageLinkTile dataItem={{
-        num: '7',
         linkUrl: '/portfolio/new-homes/classic-centre-hall',
         text: "Classic Centre Hall",
         imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_300,c_scale,f_auto,q_auto/v1595347266/ArchitraveDesign/1-New-Homes/5-Centre-Hall-Classic/1b-Cut-Stone-Facade_rkbnlo.jpg',
@@ -81,12 +65,28 @@ const IndexPage = (props) => (
         height: 'calc(500px * 0.6)'
       }} />
       <ImageLinkTile dataItem={{
-        num: '8',
+        num: '6',
         linkUrl: '/portfolio/new-homes/kingsway-transitional',
         text: "Kingsway Transitional",
         image: image7,
         width: 'calc(48% - (1.5% * 2))',
         height: 'calc(500px * 0.6)'
+      }} />
+      <ImageLinkTile dataItem={{
+        num: '7',
+        linkUrl: '/portfolio/renovations-additions/etobicoke-renewal',
+        text: "Etobicoke Facelift",
+        image: image5,
+        width: 'calc(36% - (1.5% * 2))',
+        height: 'calc(500px * 0.691748)'
+      }} />
+      <ImageLinkTile dataItem={{
+        num: '8',
+        linkUrl: '/portfolio/renovations-additions/lytton-park-update',
+        text: "Lytton Park Update",
+        image: image6,
+        width: 'calc(64% - (1.5% * 2))',
+        height: 'calc(500px * 0.691748)'
       }} />
       {/* <ImageFillerTile dataItem={{
         num: '8',
