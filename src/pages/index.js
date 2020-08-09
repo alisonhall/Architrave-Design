@@ -3,7 +3,6 @@ import { Link } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import ImageLayout1Col1Row from '../components/imageLayout1Col1Row';
 import ImageLinkTile from "../components/imageLinkTile";
 import ImageFillerTile from '../components/imageFillerTile';
 import TextBlurb from '../components/textBlurb';

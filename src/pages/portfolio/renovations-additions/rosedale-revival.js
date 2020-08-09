@@ -2,7 +2,6 @@ import React from "react"
 
 import Layout from "../../../components/layout"
 import SEO from "../../../components/seo"
-import ImageLayout1Col1Row from '../../../components/imageLayout1Col1Row';
 import ImageTile from '../../../components/imageTile';
 import TextBlurb from '../../../components/textBlurb';
 import TextBlurbFiller from '../../../components/textBlurbFiller';
