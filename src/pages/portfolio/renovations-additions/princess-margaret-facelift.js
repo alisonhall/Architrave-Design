@@ -1,11 +1,14 @@
-import React from "react"
+import React from 'react';
 
-import Layout from "../../../components/layout"
-import SEO from "../../../components/seo"
+import Layout from '../../../components/layout';
+import SEO from '../../../components/seo';
 import ImageTile from '../../../components/imageTile';
 import TextBlurb from '../../../components/textBlurb';
 import TextBlurbFiller from '../../../components/textBlurbFiller';
-import PrevNextProjectLink from '../../../components/prevNextProjectLink';
+import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
+import constants from '../../../../public/app-constants';
+
+const project = constants.projects.princessMargaretFacelift;
 
 const PrincessMargaretFacelift = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
@@ -35,8 +38,7 @@ const PrincessMargaretFacelift = (props) => (
         width: 'calc(50% - (1.5% * 2))',
         height: 'calc(500px * 0.75)'
       }} />
-      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/renovations-additions/lytton-park-update" />
-      <PrevNextProjectLink direction="next" linkUrl="/portfolio/renovations-additions/cornwall-heritage-addition" />
+      <PrevNextProjectLinks project={project} />
     </section>
   </Layout>
 )

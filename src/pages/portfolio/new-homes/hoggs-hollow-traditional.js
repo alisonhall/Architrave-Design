@@ -1,10 +1,11 @@
-import React from "react"
+import React from 'react';
 
-import Layout from "../../../components/layout"
-import SEO from "../../../components/seo"
+import Layout from '../../../components/layout';
+import SEO from '../../../components/seo';
 import ImageTile from '../../../components/imageTile';
 import TextBlurb from '../../../components/textBlurb';
-import PrevNextProjectLink from "../../../components/prevNextProjectLink"
+import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
+import constants from '../../../../public/app-constants';
 
 import image1 from '../../../images/New-Homes/HoggsHollowTraditional-4.jpg';
 import image2 from '../../../images/New-Homes/HoggsHollowTraditional-1.jpg';
@@ -12,6 +13,7 @@ import image3 from '../../../images/New-Homes/HoggsHollowTraditional-2.jpg';
 import image4 from '../../../images/New-Homes/HoggsHollowTraditional-3.jpg';
 import image5 from '../../../images/New-Homes/HoggsHollowTraditional-5.jpg';
 
+const project = constants.projects.hoggsHollowTraditional;
 
 const HoggsHollowTraditional = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
@@ -52,8 +54,7 @@ const HoggsHollowTraditional = (props) => (
         width: 'calc(52% - (1.5% * 2))',
         height: 'calc(500px * 0.6)'
       }} />
-      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/new-homes/kingsway-traditional" />
-      <PrevNextProjectLink direction="next" linkUrl="/portfolio/new-homes/kingsway-georgian" />
+      <PrevNextProjectLinks project={project} />
     </section>
   </Layout>
 )

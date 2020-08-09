@@ -1,11 +1,12 @@
-import React from "react"
+import React from 'react';
 
-import Layout from "../../../components/layout"
-import SEO from "../../../components/seo"
+import Layout from '../../../components/layout';
+import SEO from '../../../components/seo';
 import ImageTile from '../../../components/imageTile';
 import TextBlurb from '../../../components/textBlurb';
-import PrevNextProjectLink from "../../../components/prevNextProjectLink"
+import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
 import TextBlurbFiller from '../../../components/textBlurbFiller';
+import constants from '../../../../public/app-constants';
 
 import image1 from '../../../images/New-Homes/KingswayGeorgian-1.jpg';
 import image2 from '../../../images/New-Homes/KingswayGeorgian-2.jpg';
@@ -20,6 +21,7 @@ import image10 from '../../../images/New-Homes/KingswayGeorgian-7.jpg';
 import image11 from '../../../images/New-Homes/KingswayGeorgian-12.jpg';
 import image12 from '../../../images/New-Homes/KingswayGeorgian-13.jpg';
 
+const project = constants.projects.kingswayGeorgian;
 
 const KingswayGeorgian = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
@@ -109,8 +111,7 @@ const KingswayGeorgian = (props) => (
         width: 'calc(34% - (1.5% * 2))',
         height: 'calc(500px * 0.7)'
       }} />
-      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/new-homes/hoggs-hollow-traditional" />
-      <PrevNextProjectLink direction="next" linkUrl="/portfolio/new-homes/classic-centre-hall" />
+      <PrevNextProjectLinks project={project} />
     </section>
   </Layout>
 )

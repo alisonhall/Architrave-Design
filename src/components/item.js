@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react';
 
 import ImageTile from './imageTile';
 import ImageLinkTile from './imageLinkTile';

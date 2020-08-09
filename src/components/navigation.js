@@ -1,8 +1,8 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
-import React from "react"
-import architraveLogo from "../images/ArchitraveNewLogo.jpg"
-import houzzLogo from "../images/HouzzH.png"
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'gatsby';
+import architraveLogo from '../images/ArchitraveNewLogo.jpg';
+import houzzLogo from '../images/HouzzH.png';
 
 const Navigation = ({urlPath}) => {
   const subNavVisible = (urlPath.indexOf('portfolio') >= 0) ? 'subNavVisible' : '';

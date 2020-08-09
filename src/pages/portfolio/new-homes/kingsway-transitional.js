@@ -1,11 +1,11 @@
-import React from "react"
+import React from 'react';
 
-import Layout from "../../../components/layout"
-import SEO from "../../../components/seo"
+import Layout from '../../../components/layout';
+import SEO from '../../../components/seo';
 import ImageTile from '../../../components/imageTile';
 import TextBlurb from '../../../components/textBlurb';
 import TextBlurbFiller from '../../../components/textBlurbFiller';
-import PrevNextProjectLink from "../../../components/prevNextProjectLink";
+import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
 
 import image1 from '../../../images/New-Homes/KingswayTransitional-1.jpg';
 import image2 from '../../../images/New-Homes/KingswayTransitional-2.jpg';
@@ -15,6 +15,9 @@ import image5 from '../../../images/New-Homes/KingswayTransitional-5.jpg';
 import image6 from '../../../images/New-Homes/KingswayTransitional-4.jpg';
 import image7 from '../../../images/New-Homes/KingswayTransitional-7.jpg';
 import image8 from '../../../images/New-Homes/KingswayTransitional-8.jpg';
+import constants from '../../../../public/app-constants';
+
+const project = constants.projects.kingswayTransitional;
 
 const KingswayTransitional = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
@@ -77,8 +80,7 @@ const KingswayTransitional = (props) => (
         width: 'calc(42% - (1.5% * 2))',
         height: 'calc(500px * 0.68)'
       }} />
-      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/new-homes/credit-river-classic" />
-      <PrevNextProjectLink direction="next" linkUrl="/portfolio/new-homes/oakville-executive-home" />
+      <PrevNextProjectLinks project={project} />
     </section>
   </Layout>
 )

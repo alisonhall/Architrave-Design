@@ -1,10 +1,11 @@
-import React from "react"
+import React from 'react';
 
-import Layout from "../../../components/layout"
-import SEO from "../../../components/seo"
+import Layout from '../../../components/layout';
+import SEO from '../../../components/seo';
 import ImageTile from '../../../components/imageTile';
 import TextBlurb from '../../../components/textBlurb';
-import PrevNextProjectLink from "../../../components/prevNextProjectLink"
+import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
+import constants from '../../../../public/app-constants';
 
 import image1 from '../../../images/New-Homes/CreditRiver-3.jpg';
 import image2 from '../../../images/New-Homes/CreditRiver-1b.jpg';
@@ -19,6 +20,7 @@ import image10 from '../../../images/New-Homes/CreditRiver-12.jpg';
 import image11 from '../../../images/New-Homes/CreditRiver-11.jpg';
 import image12 from '../../../images/New-Homes/CreditRiver-13.jpg';
 
+const project = constants.projects.creditRiverClassic;
 
 const CreditRiverClassic = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
@@ -100,8 +102,7 @@ const CreditRiverClassic = (props) => (
         width: 'calc(100% - (1.5% * 2))',
         height: 'calc(500px * 1.1)'
       }} />
-      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/new-homes/classic-centre-hall" />
-      <PrevNextProjectLink direction="next" linkUrl="/portfolio/new-homes/kingsway-transitional" />
+      <PrevNextProjectLinks project={project} />
     </section>
   </Layout>
 )

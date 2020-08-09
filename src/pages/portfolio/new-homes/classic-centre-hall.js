@@ -1,11 +1,14 @@
-import React from "react"
+import React from 'react';
 
-import Layout from "../../../components/layout"
-import SEO from "../../../components/seo"
+import Layout from '../../../components/layout';
+import SEO from '../../../components/seo';
 import ImageTile from '../../../components/imageTile';
 import TextBlurb from '../../../components/textBlurb';
 import TextBlurbFiller from '../../../components/textBlurbFiller';
-import PrevNextProjectLink from '../../../components/prevNextProjectLink';
+import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
+import constants from '../../../../public/app-constants';
+
+const project = constants.projects.classicCentreHall;
 
 const ClassicCentreHall = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
@@ -81,8 +84,7 @@ const ClassicCentreHall = (props) => (
         width: 'calc(33.3% - (1.5% * 2))',
         height: 'calc(500px * 0.5)'
       }} />
-      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/new-homes/kingsway-georgian" />
-      <PrevNextProjectLink direction="next" linkUrl="/portfolio/new-homes/credit-river-classic" />
+      <PrevNextProjectLinks project={project} />
     </section>
   </Layout>
 )

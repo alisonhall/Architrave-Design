@@ -1,6 +1,6 @@
-import { Link } from "gatsby"
-import React from "react"
-import houzzLogo from "../images/HouzzH.png"
+import { Link } from 'gatsby';
+import React from 'react';
+import houzzLogo from '../images/HouzzH.png';
 
 const Footer = () => (
   <footer>

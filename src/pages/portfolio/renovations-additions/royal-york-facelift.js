@@ -1,14 +1,17 @@
-import React from "react"
+import React from 'react';
 
-import Layout from "../../../components/layout"
-import SEO from "../../../components/seo"
+import Layout from '../../../components/layout';
+import SEO from '../../../components/seo';
 import ImageTile from '../../../components/imageTile';
 import TextBlurb from '../../../components/textBlurb';
 import TextBlurbFiller from '../../../components/textBlurbFiller';
-import PrevNextProjectLink from '../../../components/prevNextProjectLink';
+import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
+import constants from '../../../../public/app-constants';
 
 import image1 from '../../../images/Renovations-Additions/Royal-York-1.jpg';
 import image2 from '../../../images/Renovations-Additions/Royal-York-2.jpg';
+
+const project = constants.projects.royalYorkFacelift;
 
 const RoyalYorkFacelift = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
@@ -31,8 +34,7 @@ const RoyalYorkFacelift = (props) => (
       <TextBlurb dataItem={{
         title: 'Royal York Facelift',
       }} />
-      <PrevNextProjectLink direction="previous" linkUrl="" />
-      <PrevNextProjectLink direction="next" linkUrl="" />
+      <PrevNextProjectLinks project={project} />
     </section>
   </Layout>
 )

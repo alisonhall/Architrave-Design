@@ -1,11 +1,12 @@
-import React from "react"
+import React from 'react';
 
-import Layout from "../../../components/layout"
-import SEO from "../../../components/seo"
+import Layout from '../../../components/layout';
+import SEO from '../../../components/seo';
 import ImageTile from '../../../components/imageTile';
 import TextBlurb from '../../../components/textBlurb';
 import TextBlurbFiller from '../../../components/textBlurbFiller';
-import PrevNextProjectLink from "../../../components/prevNextProjectLink";
+import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';;
+import constants from '../../../../public/app-constants';
 
 import image1 from '../../../images/Renovations-Additions/Cornwall-1.jpg';
 import image2 from '../../../images/Renovations-Additions/Cornwall-2.jpg';
@@ -13,6 +14,8 @@ import image3 from '../../../images/Renovations-Additions/Cornwall-3.jpg';
 import image4 from '../../../images/Renovations-Additions/Cornwall-4.jpg';
 import image5 from '../../../images/Renovations-Additions/Cornwall-5.jpg';
 import image6 from '../../../images/Renovations-Additions/Cornwall-6.jpg';
+
+const project = constants.projects.cornwallHeritageAddition;
 
 const CornwallHeritageAddition = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
@@ -58,8 +61,7 @@ const CornwallHeritageAddition = (props) => (
         width: 'calc(38% - (1.5% * 2))',
         height: 'calc(500px * 0.7)'
       }} />
-      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/renovations-additions/princess-margaret-facelift" />
-      <PrevNextProjectLink direction="next" linkUrl="/portfolio/renovations-additions/rosedale-revival" />
+      <PrevNextProjectLinks project={project} />
     </section>
   </Layout>
 )

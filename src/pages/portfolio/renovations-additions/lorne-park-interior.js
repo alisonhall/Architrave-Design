@@ -1,17 +1,20 @@
-import React from "react"
+import React from 'react';
 
-import Layout from "../../../components/layout"
-import SEO from "../../../components/seo"
+import Layout from '../../../components/layout';
+import SEO from '../../../components/seo';
 import ImageTile from '../../../components/imageTile';
 import TextBlurb from '../../../components/textBlurb';
 import TextBlurbFiller from '../../../components/textBlurbFiller';
-import PrevNextProjectLink from "../../../components/prevNextProjectLink";
+import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
+import constants from '../../../../public/app-constants';
 
 import image1 from '../../../images/Renovations-Additions/Lorne-Park-2.jpg';
 import image2 from '../../../images/Renovations-Additions/Lorne-Park-4.jpg';
 import image3 from '../../../images/Renovations-Additions/Lorne-Park-1.jpg';
 import image4 from '../../../images/Renovations-Additions/Lorne-Park-5.jpg';
 import image5 from '../../../images/Renovations-Additions/Lorne-Park-6.jpg';
+
+const project = constants.projects.lorneParkInterior;
 
 const LorneParkInterior = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
@@ -54,8 +57,7 @@ const LorneParkInterior = (props) => (
         height: 'calc(500px * 0.52)',
         backgroundPosition: '50% 30%'
       }} />
-      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/renovations-additions/rosedale-revival" />
-      <PrevNextProjectLink direction="next" linkUrl="/portfolio/renovations-additions/lytton-park-update" />
+      <PrevNextProjectLinks project={project} />
     </section>
   </Layout>
 )

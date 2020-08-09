@@ -1,17 +1,20 @@
-import React from "react"
+import React from 'react';
 
-import Layout from "../../../components/layout"
-import SEO from "../../../components/seo"
+import Layout from '../../../components/layout';
+import SEO from '../../../components/seo';
 import ImageTile from '../../../components/imageTile';
 import TextBlurb from '../../../components/textBlurb';
 import TextBlurbFiller from '../../../components/textBlurbFiller';
-import PrevNextProjectLink from "../../../components/prevNextProjectLink";
+import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
+import constants from '../../../../public/app-constants';
 
 import image1 from '../../../images/Renovations-Additions/Lytton-Park-2.jpg';
 import image2 from '../../../images/Renovations-Additions/Lytton-Park-1.jpg';
 import image3 from '../../../images/Renovations-Additions/Lytton-Park-4.jpg';
 import image4 from '../../../images/Renovations-Additions/Lytton-Park-5.jpg';
 import image5 from '../../../images/Renovations-Additions/Lytton-Park-3.jpg';
+
+const project = constants.projects.lyttonParkUpdate;
 
 const LyttonParkUpdate = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
@@ -52,8 +55,7 @@ const LyttonParkUpdate = (props) => (
         width: 'calc(100% - (1.5% * 2))',
         height: 'calc(500px * 0.9)'
       }} />
-      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/renovations-additions/etobicoke-renewal" />
-      <PrevNextProjectLink direction="next" linkUrl="/portfolio/renovations-additions/princess-margaret-facelift" />
+      <PrevNextProjectLinks project={project} />
     </section>
   </Layout>
 )

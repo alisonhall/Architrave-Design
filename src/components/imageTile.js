@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import React from "react"
-import { css, jsx } from "@emotion/core"
+import React from 'react';
+import { css, jsx } from '@emotion/core';
 
 import Image from './image';
 

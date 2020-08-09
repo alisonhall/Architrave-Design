@@ -1,11 +1,12 @@
-import React from "react"
+import React from 'react';
 
-import Layout from "../../../components/layout"
-import SEO from "../../../components/seo"
+import Layout from '../../../components/layout';
+import SEO from '../../../components/seo';
 import ImageTile from '../../../components/imageTile';
 import TextBlurb from '../../../components/textBlurb';
 import TextBlurbFiller from '../../../components/textBlurbFiller';
-import PrevNextProjectLink from "../../../components/prevNextProjectLink";
+import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
+import constants from '../../../../public/app-constants';
 
 import image1 from '../../../images/Renovations-Additions/Etobicoke-2.jpg';
 import image2 from '../../../images/Renovations-Additions/Etobicoke-7.jpg';
@@ -14,6 +15,8 @@ import image4 from '../../../images/Renovations-Additions/Etobicoke-1.jpg';
 import image5 from '../../../images/Renovations-Additions/Etobicoke-5.jpg';
 import image6 from '../../../images/Renovations-Additions/Etobicoke-4.jpg';
 import image7 from '../../../images/Renovations-Additions/Etobicoke-8.jpg';
+
+const project = constants.projects.etobicokeRenewal;
 
 const EtobicokeRenewal = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
@@ -68,8 +71,7 @@ const EtobicokeRenewal = (props) => (
         width: 'calc(52% - (1.5% * 2))',
         height: 'calc(500px * 0.78)'
       }} />
-      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/renovations-additions/rosedale-revival" />
-      <PrevNextProjectLink direction="next" linkUrl="/portfolio/renovations-additions/lytton-park-update" />
+      <PrevNextProjectLinks project={project} />
     </section>
   </Layout>
 )

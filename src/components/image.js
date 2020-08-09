@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import React from "react";
-import { css, jsx } from "@emotion/core";
+import React from 'react';
+import { css, jsx } from '@emotion/core';
 
 import constants from '../../static/app-constants';
 

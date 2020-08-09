@@ -1,9 +1,8 @@
-import React from "react"
-import { Link } from "gatsby"
+import React from 'react';
 
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import houzzReviewsLogo from "../images/houzz_logo_reviews.png"
+import Layout from '../components/layout';
+import SEO from '../components/seo';
+import houzzReviewsLogo from '../images/houzz_logo_reviews.png';
 
 const Reviews = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="reviews">
