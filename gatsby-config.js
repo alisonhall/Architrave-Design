@@ -1,3 +1,7 @@
+// require('dotenv').config({
+//   path: `.env.${process.env.NODE_ENV}`,
+// });
+
 module.exports = {
   siteMetadata: {
     title: `Architrave Design, Architect | Residential Designs`,
@@ -60,7 +64,27 @@ module.exports = {
       options: {
         // Accepts all options defined by `babel-plugin-emotion` plugin.
       },
-    }
+    },
+    // {
+    //   resolve: `gatsby-source-cloudinary`,
+    //   options: {
+    //     cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+    //     apiKey: process.env.CLOUDINARY_API_KEY,
+    //     apiSecret: process.env.CLOUDINARY_API_SECRET,
+    //     resourceType: `image`,
+    //     prefix: `Architrave-Design/`
+    //   }
+    // },
+    // {
+    //   resolve: 'gatsby-transformer-cloudinary',
+    //   options: {
+    //     cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+    //     apiKey: process.env.CLOUDINARY_API_KEY,
+    //     apiSecret: process.env.CLOUDINARY_API_SECRET,
+    //     // This folder will be created if it doesn’t exist.
+    //     uploadFolder: 'Architrave-Design/gatsby-cloudinary',
+    //   },
+    // }
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // 'gatsby-plugin-offline',
