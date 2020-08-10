@@ -33,7 +33,7 @@ const CreditRiverClassic = (props) => (
         }}
         styles={{
           width: 'calc(48% - (1.5% * 2))',
-          height: 'calc(500px * 1.29)'
+          height: '645px'
         }}
       />
       <Item
@@ -43,7 +43,7 @@ const CreditRiverClassic = (props) => (
         }}
         styles={{
           width: 'calc(52% - (1.5% * 2))',
-          height: 'calc(500px * 0.68)'
+          height: '340px'
         }}
       />
       <Item
@@ -53,7 +53,7 @@ const CreditRiverClassic = (props) => (
         }}
         styles={{
           width: 'calc(52% - (1.5% * 2))',
-          height: 'calc(500px * 0.54)'
+          height: '270px'
         }}
       />
       <Item
@@ -69,7 +69,7 @@ const CreditRiverClassic = (props) => (
         }}
         styles={{
           width: 'calc(48% - (1.5% * 2))',
-          height: 'calc(500px * 0.6)'
+          height: '300px'
         }}
       />
       <Item
@@ -79,7 +79,7 @@ const CreditRiverClassic = (props) => (
         }}
         styles={{
           width: 'calc(52% - (1.5% * 2))',
-          height: 'calc(500px * 0.6)'
+          height: '300px'
         }}
       />
       <Item
@@ -89,7 +89,7 @@ const CreditRiverClassic = (props) => (
         }}
         styles={{
           width: 'calc(48% - (1.5% * 2))',
-          height: 'calc(500px * 0.6)'
+          height: '300px'
         }}
       />
       <Item
@@ -99,7 +99,7 @@ const CreditRiverClassic = (props) => (
         }}
         styles={{
           width: 'calc(52% - (1.5% * 2))',
-          height: 'calc(500px * 0.6)'
+          height: '300px'
         }}
       />
       <Item
@@ -109,7 +109,7 @@ const CreditRiverClassic = (props) => (
         }}
         styles={{
           width: 'calc(100% - (1.5% * 2))',
-          height: 'calc(500px * 1.2)'
+          height: '600px'
         }}
       />
       <Item
@@ -119,7 +119,7 @@ const CreditRiverClassic = (props) => (
         }}
         styles={{
           width: 'calc(48% - (1.5% * 2))',
-          height: 'calc(500px * 1.35)'
+          height: '675px'
         }}
       />
       <Item
@@ -129,7 +129,7 @@ const CreditRiverClassic = (props) => (
         }}
         styles={{
           width: 'calc(52% - (1.5% * 2))',
-          height: 'calc(500px * 0.61)'
+          height: '305px'
         }}
       />
       <Item
@@ -139,7 +139,7 @@ const CreditRiverClassic = (props) => (
         }}
         styles={{
           width: 'calc(52% - (1.5% * 2))',
-          height: 'calc(500px * 0.664)'
+          height: '332px'
         }}
       />
       <Item
@@ -149,7 +149,7 @@ const CreditRiverClassic = (props) => (
         }}
         styles={{
           width: 'calc(100% - (1.5% * 2))',
-          height: 'calc(500px * 1.1)'
+          height: '550px'
         }}
       />
       <PrevNextProjectLinks project={project} />

@@ -29,7 +29,7 @@ const KingswayTransitional = (props) => (
         }}
         styles={{
           width: 'calc(100% - (1.5% * 2))',
-          height: 'calc(500px * 1.26)'
+          height: '630px'
         }}
       />
       <Item
@@ -45,7 +45,7 @@ const KingswayTransitional = (props) => (
         }}
         styles={{
           width: 'calc(42% - (1.5% * 2))',
-          height: 'calc(500px * 0.58)'
+          height: '290px'
         }}
       />
       <Item
@@ -55,7 +55,7 @@ const KingswayTransitional = (props) => (
         }}
         styles={{
           width: 'calc(29% - (1.5% * 2))',
-          height: 'calc(500px * 0.58)'
+          height: '290px'
         }}
       />
       <Item
@@ -65,7 +65,7 @@ const KingswayTransitional = (props) => (
         }}
         styles={{
           width: 'calc(29% - (1.5% * 2))',
-          height: 'calc(500px * 0.58)'
+          height: '290px'
         }}
       />
       <Item
@@ -75,7 +75,7 @@ const KingswayTransitional = (props) => (
         }}
         styles={{
           width: 'calc(50% - (1.5% * 2))',
-          height: 'calc(500px * 0.68)'
+          height: '340px'
         }}
       />
       <Item
@@ -85,7 +85,7 @@ const KingswayTransitional = (props) => (
         }}
         styles={{
           width: 'calc(50% - (1.5% * 2))',
-          height: 'calc(500px * 0.52)'
+          height: '260px'
         }}
       />
       <Item
@@ -102,7 +102,7 @@ const KingswayTransitional = (props) => (
         }}
         styles={{
           width: 'calc(58% - (1.5% * 2))',
-          height: 'calc(500px * 0.68)'
+          height: '340px'
         }}
       />
       <Item
@@ -112,7 +112,7 @@ const KingswayTransitional = (props) => (
         }}
         styles={{
           width: 'calc(42% - (1.5% * 2))',
-          height: 'calc(500px * 0.68)'
+          height: '340px'
         }}
       />
       <PrevNextProjectLinks project={project} />

@@ -27,7 +27,7 @@ const KingswayTraditional = (props) => (
         }}
         styles={{
           width: 'calc(100% - (1.5% * 2))',
-          height: 'calc(500px * 1.26)'
+          height: '630px'
         }}
       />
       <Item
@@ -43,7 +43,7 @@ const KingswayTraditional = (props) => (
         }}
         styles={{
           width: 'calc(34% - (1.5% * 2))',
-          height: 'calc(500px * 0.85)'
+          height: '425px'
         }}
       />
       <Item
@@ -53,7 +53,7 @@ const KingswayTraditional = (props) => (
         }}
         styles={{
           width: 'calc(66% - (1.5% * 2))',
-          height: 'calc(500px * 0.85)'
+          height: '425px'
         }}
       />
       <Item
@@ -63,7 +63,7 @@ const KingswayTraditional = (props) => (
         }}
         styles={{
           width: 'calc(100% - (1.5% * 2))',
-          height: 'calc(500px * 1.05)'
+          height: '525px'
         }}
       />
       <Item
@@ -80,7 +80,7 @@ const KingswayTraditional = (props) => (
         }}
         styles={{
           width: 'calc(53% - (1.5% * 2))',
-          height: 'calc(500px * 0.54)',
+          height: '270px',
           float: 'right'
         }}
       />
@@ -91,7 +91,7 @@ const KingswayTraditional = (props) => (
         }}
         styles={{
           width: 'calc(47% - (1.5% * 2))',
-          height: 'calc(500px * 0.4)',
+          height: '200px'
         }}
       />
       <PrevNextProjectLinks project={project} />

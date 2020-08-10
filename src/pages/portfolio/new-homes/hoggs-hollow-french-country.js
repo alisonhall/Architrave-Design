@@ -27,7 +27,7 @@ const HoggsHollowFrenchCountry = (props) => (
         }}
         styles={{
           width: 'calc(63% - (1.5% * 2))',
-          height: 'calc(500px * 0.78)'
+          height: '390px'
         }}
       />
       <Item
@@ -37,7 +37,7 @@ const HoggsHollowFrenchCountry = (props) => (
         }}
         styles={{
           width: 'calc(37% - (1.5% * 2))',
-          height: 'calc(500px * 0.78)'
+          height: '390px'
         }}
       />
       <Item
@@ -47,7 +47,7 @@ const HoggsHollowFrenchCountry = (props) => (
         }}
         styles={{
           width: 'calc(48% - (1.5% * 2))',
-          height: 'calc(500px * 0.58)'
+          height: '290px'
         }}
       />
       <Item
@@ -57,7 +57,7 @@ const HoggsHollowFrenchCountry = (props) => (
         }}
         styles={{
           width: 'calc(52% - (1.5% * 2))',
-          height: 'calc(500px * 0.58)'
+          height: '290px'
         }}
       />
       <Item
@@ -73,7 +73,7 @@ const HoggsHollowFrenchCountry = (props) => (
         }}
         styles={{
           width: 'calc(63% - (1.5% * 2))',
-          height: 'calc(500px * 0.73)'
+          height: '365px'
         }}
       />
       <Item
@@ -83,7 +83,7 @@ const HoggsHollowFrenchCountry = (props) => (
         }}
         styles={{
           width: 'calc(37% - (1.5% * 2))',
-          height: 'calc(500px * 0.73)'
+          height: '365px'
         }}
       />
       <PrevNextProjectLinks project={project} />

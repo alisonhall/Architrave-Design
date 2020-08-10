@@ -20,7 +20,7 @@ const ClassicCentreHall = (props) => (
         }}
         styles={{
           width: 'calc(50% - (1.5% * 2))',
-          height: 'calc(500px * 0.9)'
+          height: '450px'
         }}
       />
       <Item
@@ -30,7 +30,7 @@ const ClassicCentreHall = (props) => (
         }}
         styles={{
           width: 'calc(50% - (1.5% * 2))',
-          height: 'calc(500px * 0.9)'
+          height: '450px'
         }}
       />
       <Item
@@ -46,7 +46,7 @@ const ClassicCentreHall = (props) => (
         }}
         styles={{
           width: 'calc(33.3% - (1.5% * 2))',
-          height: 'calc(500px * 0.5)'
+          height: '250px'
         }}
       />
       <Item
@@ -56,7 +56,7 @@ const ClassicCentreHall = (props) => (
         }}
         styles={{
           width: 'calc(33.3% - (1.5% * 2))',
-          height: 'calc(500px * 0.5)'
+          height: '250px'
         }}
       />
       <Item
@@ -66,7 +66,7 @@ const ClassicCentreHall = (props) => (
         }}
         styles={{
           width: 'calc(33.3% - (1.5% * 2))',
-          height: 'calc(500px * 0.5)'
+          height: '250px'
         }}
       />
       <Item
@@ -76,7 +76,7 @@ const ClassicCentreHall = (props) => (
         }}
         styles={{
           width: 'calc(33.3% - (1.5% * 2))',
-          height: 'calc(500px * 0.5)'
+          height: '250px'
         }}
       />
       <Item
@@ -86,7 +86,7 @@ const ClassicCentreHall = (props) => (
         }}
         styles={{
           width: 'calc(33.3% - (1.5% * 2))',
-          height: 'calc(500px * 0.5)'
+          height: '250px'
         }}
       />
       <Item
@@ -96,7 +96,7 @@ const ClassicCentreHall = (props) => (
         }}
         styles={{
           width: 'calc(33.3% - (1.5% * 2))',
-          height: 'calc(500px * 0.5)'
+          height: '250px'
         }}
       />
       <Item
@@ -106,7 +106,7 @@ const ClassicCentreHall = (props) => (
         }}
         styles={{
           width: 'calc(33.3% - (1.5% * 2))',
-          height: 'calc(500px * 0.5)'
+          height: '250px'
         }}
       />
       <Item
@@ -116,7 +116,7 @@ const ClassicCentreHall = (props) => (
         }}
         styles={{
           width: 'calc(33.3% - (1.5% * 2))',
-          height: 'calc(500px * 0.5)'
+          height: '250px'
         }}
       />
       <Item
@@ -126,7 +126,7 @@ const ClassicCentreHall = (props) => (
         }}
         styles={{
           width: 'calc(33.3% - (1.5% * 2))',
-          height: 'calc(500px * 0.5)'
+          height: '250px'
         }}
       />
       <PrevNextProjectLinks project={project} />

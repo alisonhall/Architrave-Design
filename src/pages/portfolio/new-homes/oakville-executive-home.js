@@ -24,7 +24,7 @@ const OakvilleExecutiveHome = (props) => (
         }}
         styles={{
           width: 'calc(100% - (1.5% * 2))',
-          height: 'calc(500px * 1.2)'
+          height: '600px'
         }}
       />
       <Item
@@ -40,7 +40,7 @@ const OakvilleExecutiveHome = (props) => (
         }}
         styles={{
           width: 'calc(62% - (1.5% * 2))',
-          height: 'calc(500px * 0.96)'
+          height: '480px'
         }}
       />
       <Item
@@ -50,7 +50,7 @@ const OakvilleExecutiveHome = (props) => (
         }}
         styles={{
           width: 'calc(38% - (1.5% * 2))',
-          height: 'calc(500px * 0.96)'
+          height: '480px'
         }}
       />
       <PrevNextProjectLinks project={project} />

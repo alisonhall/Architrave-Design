@@ -26,7 +26,7 @@ const LyttonParkUpdate = (props) => (
         }}
         styles={{
           width: 'calc(100% - (1.5% * 2))',
-          height: 'calc(500px * 1.2)'
+          height: '600px'
         }}
       />
       <Item
@@ -42,7 +42,7 @@ const LyttonParkUpdate = (props) => (
         }}
         styles={{
           width: 'calc(54% - (1.5% * 2))',
-          height: 'calc(500px * 0.7)'
+          height: '350px'
         }}
       />
       <Item
@@ -52,7 +52,7 @@ const LyttonParkUpdate = (props) => (
         }}
         styles={{
           width: 'calc(46% - (1.5% * 2))',
-          height: 'calc(500px * 1.4)',
+          height: '700px',
           float: 'right'
         }}
       />
@@ -63,7 +63,7 @@ const LyttonParkUpdate = (props) => (
         }}
         styles={{
           width: 'calc(54% - (1.5% * 2))',
-          height: 'calc(500px * 0.62)'
+          height: '310px'
         }}
       />
       <Item
@@ -73,7 +73,7 @@ const LyttonParkUpdate = (props) => (
         }}
         styles={{
           width: 'calc(100% - (1.5% * 2))',
-          height: 'calc(500px * 0.9)'
+          height: '450px'
         }}
       />
       <PrevNextProjectLinks project={project} />

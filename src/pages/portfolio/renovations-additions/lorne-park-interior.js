@@ -26,7 +26,7 @@ const LorneParkInterior = (props) => (
         }}
         styles={{
           width: 'calc(23% - (1.5% * 2))',
-          height: 'calc(500px * 0.45)'
+          height: '225px'
         }}
       />
       <Item
@@ -36,7 +36,7 @@ const LorneParkInterior = (props) => (
         }}
         styles={{
           width: 'calc(77% - (1.5% * 2))',
-          height: 'calc(500px * 0.96)',
+          height: '480px',
           float: 'right'
         }}
       />
@@ -47,7 +47,7 @@ const LorneParkInterior = (props) => (
         }}
         styles={{
           width: 'calc(23% - (1.5% * 2))',
-          height: 'calc(500px * 0.45)'
+          height: '225px'
         }}
       />
       <Item
@@ -64,7 +64,7 @@ const LorneParkInterior = (props) => (
         }}
         styles={{
           width: 'calc(50% - (1.5% * 2))',
-          height: 'calc(500px * 0.52)',
+          height: '260px',
         }}
       />
       <Item
@@ -75,7 +75,7 @@ const LorneParkInterior = (props) => (
         }}
         styles={{
           width: 'calc(50% - (1.5% * 2))',
-          height: 'calc(500px * 0.52)',
+          height: '260px',
         }}
       />
       <PrevNextProjectLinks project={project} />

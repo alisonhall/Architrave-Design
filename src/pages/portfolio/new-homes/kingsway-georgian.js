@@ -33,7 +33,7 @@ const KingswayGeorgian = (props) => (
         }}
         styles={{
           width: 'calc(100% - (1.5% * 2))',
-          height: 'calc(500px * 1.5)'
+          height: '750px'
         }}
       />
       <Item
@@ -49,7 +49,7 @@ const KingswayGeorgian = (props) => (
         }}
         styles={{
           width: 'calc(35% - (1.5% * 2))',
-          height: 'calc(500px * 0.8)'
+          height: '400px'
         }}
       />
       <Item
@@ -59,7 +59,7 @@ const KingswayGeorgian = (props) => (
         }}
         styles={{
           width: 'calc(65% - (1.5% * 2))',
-          height: 'calc(500px * 1.46)',
+          height: '730px',
           float: 'right'
         }}
       />
@@ -70,7 +70,7 @@ const KingswayGeorgian = (props) => (
         }}
         styles={{
           width: 'calc(34% - (1.5% * 2))',
-          height: 'calc(500px * 0.8)'
+          height: '400px'
         }}
       />
       <Item
@@ -87,7 +87,7 @@ const KingswayGeorgian = (props) => (
         }}
         styles={{
           width: 'calc(58% - (1.5% * 2))',
-          height: 'calc(500px * 0.7)'
+          height: '350px'
         }}
       />
       <Item
@@ -97,7 +97,7 @@ const KingswayGeorgian = (props) => (
         }}
         styles={{
           width: 'calc(42% - (1.5% * 2))',
-          height: 'calc(500px * 1.08)',
+          height: '540px',
           float: 'right'
         }}
       />
@@ -108,7 +108,7 @@ const KingswayGeorgian = (props) => (
         }}
         styles={{
           width: 'calc(58% - (1.5% * 2))',
-          height: 'calc(500px * 0.7)'
+          height: '350px'
         }}
       />
       <Item
@@ -118,7 +118,7 @@ const KingswayGeorgian = (props) => (
         }}
         styles={{
           width: 'calc(42% - (1.5% * 2))',
-          height: 'calc(500px * 1.08)',
+          height: '540px',
           float: 'right'
         }}
       />
@@ -129,7 +129,7 @@ const KingswayGeorgian = (props) => (
         }}
         styles={{
           width: 'calc(58% - (1.5% * 2))',
-          height: 'calc(500px * 0.7)'
+          height: '350px'
         }}
       />
       <Item
@@ -139,7 +139,7 @@ const KingswayGeorgian = (props) => (
         }}
         styles={{
           width: 'calc(34% - (1.5% * 2))',
-          height: 'calc(500px * 0.7)'
+          height: '350px'
         }}
       />
       <Item
@@ -149,7 +149,7 @@ const KingswayGeorgian = (props) => (
         }}
         styles={{
           width: 'calc(32% - (1.5% * 2))',
-          height: 'calc(500px * 0.7)'
+          height: '350px'
         }}
       />
       <Item
@@ -159,7 +159,7 @@ const KingswayGeorgian = (props) => (
         }}
         styles={{
           width: 'calc(34% - (1.5% * 2))',
-          height: 'calc(500px * 0.7)'
+          height: '350px'
         }}
       />
       <PrevNextProjectLinks project={project} />

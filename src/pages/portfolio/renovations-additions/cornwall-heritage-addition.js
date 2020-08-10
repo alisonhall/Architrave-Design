@@ -26,7 +26,7 @@ const CornwallHeritageAddition = (props) => (
         }}
         styles={{
           width: 'calc(100% - (1.5% * 2))',
-          height: 'calc(500px * 1.24)'
+          height: '620px'
         }}
       />
       <Item
@@ -42,7 +42,7 @@ const CornwallHeritageAddition = (props) => (
         }}
         styles={{
           width: 'calc(62% - (1.5% * 2))',
-          height: 'calc(500px * 1.62)'
+          height: '810px'
         }}
       />
       <Item
@@ -52,7 +52,7 @@ const CornwallHeritageAddition = (props) => (
         }}
         styles={{
           width: 'calc(38% - (1.5% * 2))',
-          height: 'calc(500px * 0.97)'
+          height: '485px'
         }}
       />
       <Item
@@ -62,7 +62,7 @@ const CornwallHeritageAddition = (props) => (
         }}
         styles={{
           width: 'calc(38% - (1.5% * 2))',
-          height: 'calc(500px * 0.58)'
+          height: '290px'
         }}
       />
       <Item
@@ -72,7 +72,7 @@ const CornwallHeritageAddition = (props) => (
         }}
         styles={{
           width: 'calc(62% - (1.5% * 2))',
-          height: 'calc(500px * 0.7)'
+          height: '350px'
         }}
       />
       <Item
@@ -82,7 +82,7 @@ const CornwallHeritageAddition = (props) => (
         }}
         styles={{
           width: 'calc(38% - (1.5% * 2))',
-          height: 'calc(500px * 0.7)'
+          height: '350px'
         }}
       />
       <PrevNextProjectLinks project={project} />

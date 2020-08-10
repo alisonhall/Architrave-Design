@@ -27,7 +27,7 @@ const HoggsHollowTraditional = (props) => (
         }}
         styles={{
           width: 'calc(48% - (1.5% * 2))',
-          height: 'calc(500px * 1.29)'
+          height: '645px'
         }}
       />
       <Item
@@ -37,7 +37,7 @@ const HoggsHollowTraditional = (props) => (
         }}
         styles={{
           width: 'calc(52% - (1.5% * 2))',
-          height: 'calc(500px * 0.68)'
+          height: '340px'
         }}
       />
       <Item
@@ -47,7 +47,7 @@ const HoggsHollowTraditional = (props) => (
         }}
         styles={{
           width: 'calc(52% - (1.5% * 2))',
-          height: 'calc(500px * 0.54)'
+          height: '270px'
         }}
       />
       <Item
@@ -63,7 +63,7 @@ const HoggsHollowTraditional = (props) => (
         }}
         styles={{
           width: 'calc(48% - (1.5% * 2))',
-          height: 'calc(500px * 0.6)'
+          height: '300px'
         }}
       />
       <Item
@@ -73,7 +73,7 @@ const HoggsHollowTraditional = (props) => (
         }}
         styles={{
           width: 'calc(52% - (1.5% * 2))',
-          height: 'calc(500px * 0.6)'
+          height: '300px'
         }}
       />
       <PrevNextProjectLinks project={project} />

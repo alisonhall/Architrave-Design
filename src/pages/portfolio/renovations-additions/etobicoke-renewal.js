@@ -28,7 +28,7 @@ const EtobicokeRenewal = (props) => (
         }}
         styles={{
           width: 'calc(62% - (1.5% * 2))',
-          height: 'calc(500px * 0.96)'
+          height: '480px'
         }}
       />
       <Item
@@ -38,7 +38,7 @@ const EtobicokeRenewal = (props) => (
         }}
         styles={{
           width: 'calc(38% - (1.5% * 2))',
-          height: 'calc(500px * 0.43)',
+          height: '215px',
           float: 'right'
         }}
       />
@@ -49,7 +49,7 @@ const EtobicokeRenewal = (props) => (
         }}
         styles={{
           width: 'calc(38% - (1.5% * 2))',
-          height: 'calc(500px * 1.01)',
+          height: '505px',
           float: 'right'
         }}
       />
@@ -63,7 +63,7 @@ const EtobicokeRenewal = (props) => (
         }}
         styles={{
           width: 'calc(31% - (1.5% * 2))',
-          height: 'calc(500px * 0.48)'
+          height: '240px'
         }}
       />
       <Item
@@ -73,7 +73,7 @@ const EtobicokeRenewal = (props) => (
         }}
         styles={{
           width: 'calc(31% - (1.5% * 2))',
-          height: 'calc(500px * 0.48)'
+          height: '240px'
         }}
       />
       <Item
@@ -89,7 +89,7 @@ const EtobicokeRenewal = (props) => (
         }}
         styles={{
           width: 'calc(48% - (1.5% * 2))',
-          height: 'calc(500px * 0.78)'
+          height: '390px'
         }}
       />
       <Item
@@ -99,7 +99,7 @@ const EtobicokeRenewal = (props) => (
         }}
         styles={{
           width: 'calc(52% - (1.5% * 2))',
-          height: 'calc(500px * 0.78)'
+          height: '390px'
         }}
       />
       <PrevNextProjectLinks project={project} />

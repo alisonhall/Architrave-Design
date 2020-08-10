@@ -32,7 +32,7 @@ const NewHomes = (props) => (
         }}
         styles={{
           width: 'calc(48% - (1.5% * 2))',
-          height: 'calc(500px * 1.405)'
+          height: '705.5px'
         }}
       />
       <Item
@@ -48,7 +48,7 @@ const NewHomes = (props) => (
         }}
         styles={{
           width: 'calc(52% - (1.5% * 2))',
-          height: 'calc(500px * 0.74058)'
+          height: '370.29px'
         }}
       />
       <Item
@@ -58,7 +58,7 @@ const NewHomes = (props) => (
         }}
         styles={{
           width: 'calc(21% - (1.5% * 2))',
-          height: 'calc(500px * 0.598266)'
+          height: '299.133px'
         }}
       />
       <Item
@@ -74,7 +74,7 @@ const NewHomes = (props) => (
         }}
         styles={{
           width: 'calc(31% - (1.5% * 2))',
-          height: 'calc(500px * 0.598266)'
+          height: '299.133'
         }}
       />
       <Item
@@ -95,7 +95,7 @@ const NewHomes = (props) => (
         }}
         styles={{
           width: 'calc(48% - (1.5% * 2))',
-          height: 'calc(500px * 0.6)'
+          height: '300px'
         }}
       />
       <Item
@@ -111,7 +111,7 @@ const NewHomes = (props) => (
         }}
         styles={{
           width: 'calc(52% - (1.5% * 2))',
-          height: 'calc(500px * 0.6)'
+          height: '300px'
         }}
       />
       <Item
@@ -127,7 +127,7 @@ const NewHomes = (props) => (
         }}
         styles={{
           width: 'calc(33.3% - (1.5% * 2))',
-          height: 'calc(500px * 0.6)'
+          height: '300px'
         }}
       />
       <Item
@@ -143,7 +143,7 @@ const NewHomes = (props) => (
         }}
         styles={{
           width: 'calc(33.3% - (1.5% * 2))',
-          height: 'calc(500px * 0.6)'
+          height: '300px'
         }}
       />
       <Item
@@ -160,7 +160,7 @@ const NewHomes = (props) => (
         }}
         styles={{
           width: 'calc(33.3% - (1.5% * 2))',
-          height: 'calc(500px * 0.6)'
+          height: '300px'
         }}
       />
     </section>

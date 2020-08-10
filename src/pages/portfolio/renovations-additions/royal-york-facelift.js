@@ -26,7 +26,7 @@ const RoyalYorkFacelift = (props) => (
         }}
         styles={{
           width: 'calc(50% - (1.5% * 2))',
-          height: 'calc(500px * 0.75)',
+          height: '375px',
         }}
       />
       <Item
@@ -39,7 +39,7 @@ const RoyalYorkFacelift = (props) => (
         }}
         styles={{
           width: 'calc(50% - (1.5% * 2))',
-          height: 'calc(500px * 0.75)',
+          height: '375px',
         }}
       />
       <Item

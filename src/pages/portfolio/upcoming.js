@@ -21,7 +21,7 @@ const Upcoming = (props) => (
         }}
         styles={{
           width: 'calc(100% - (1.5% * 2))',
-          height: 'calc(500px * 1.4)'
+          height: '700px'
         }}
       />
       <section className="textBlurb">
@@ -35,7 +35,7 @@ const Upcoming = (props) => (
         }}
         styles={{
           width: 'calc(100% - (1.5% * 2))',
-          height: 'calc(500px * 0.8)'
+          height: '400px'
         }}
       />
       <Item
