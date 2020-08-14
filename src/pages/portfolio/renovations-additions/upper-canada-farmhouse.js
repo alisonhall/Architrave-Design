@@ -26,8 +26,8 @@ const CornwallHeritageAddition = (props) => (
         height: 'calc(500px * 1.24)'
       }} />
       <TextBlurb dataItem={{
-        title: 'Loyalist Farmhouse Addition',
-        text: 'A modern addition to this charming 1820’s home mirrors it’s proportions but more than doubles the living space. The ground floor is a country kitchen, topped by a vaulted master with sweeping views.'
+        title: 'Upper Canada Farmhouse',
+        text: 'An addition to this charming 1820’s Loyalist farmhouse respects the character of the old, while more than doubling the living space. A flagged centre hall joins old and new, and leads into a sunny country kitchen. Above it is an airy master bedroom with a vaulted ceiling, cozy sitting area, private balcony and sweeping views. '
       }} />
       <ImageTile dataItem={{
         num: '2',
@@ -59,8 +59,8 @@ const CornwallHeritageAddition = (props) => (
         width: 'calc(38% - (1.5% * 2))',
         height: 'calc(500px * 0.7)'
       }} />
-      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/renovations-additions/princess-margaret-facelift" />
-      <PrevNextProjectLink direction="next" linkUrl="/portfolio/renovations-additions/rosedale-revival" />
+      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/renovations-additions/princess-margaret-modern" />
+      <PrevNextProjectLink direction="next" linkUrl="/portfolio/renovations-additions/rosedale-edwardian" />
     </section>
   </Layout>
 )

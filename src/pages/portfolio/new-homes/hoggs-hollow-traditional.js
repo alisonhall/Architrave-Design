@@ -55,7 +55,7 @@ const HoggsHollowTraditional = (props) => (
           height: 'calc(500px * 0.6)'
         }} />
       </ImageLayout1Col1Row>
-      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/new-homes/kingsway-traditional" />
+      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/new-homes/traditional-kingsway-park" />
       <PrevNextProjectLink direction="next" linkUrl="/portfolio/new-homes/kingsway-georgian" />
     </section>
   </Layout>

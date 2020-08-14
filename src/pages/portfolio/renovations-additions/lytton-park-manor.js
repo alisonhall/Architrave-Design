@@ -25,8 +25,8 @@ const LyttonParkUpdate = (props) => (
         height: 'calc(500px * 1.2)'
       }} />
       <TextBlurb dataItem={{
-        title: 'Lytton Park Update',
-        text: 'This lovely old home was full of charm and detail, but inside it was dark and lacked modern amenities. A new addition provided more space, while new windows and arches open the inside to light and views.'
+        title: 'Lytton Park Manor',
+        text: 'Built in 1908, this lovely home was full of charming detail but the interior was dark and lacked modern amenities. A seamless addition incorporates a bright eat-in kitchen and master suite above. New windows and wide archways let in the sun, while keeping the original character intact all.'
       }} />
       <ImageTile dataItem={{
         num: '2',
@@ -53,8 +53,8 @@ const LyttonParkUpdate = (props) => (
         width: 'calc(100% - (1.5% * 2))',
         height: 'calc(500px * 0.9)'
       }} />
-      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/renovations-additions/etobicoke-renewal" />
-      <PrevNextProjectLink direction="next" linkUrl="/portfolio/renovations-additions/princess-margaret-facelift" />
+      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/renovations-additions/etobicoke-arts-and-crafts" />
+      <PrevNextProjectLink direction="next" linkUrl="/portfolio/renovations-additions/princess-margaret-modern" />
     </section>
   </Layout>
 )

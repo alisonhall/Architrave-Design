@@ -26,7 +26,7 @@ const ClassicCentreHall = (props) => (
       }} />
       <TextBlurb dataItem={{
         title: 'Classic Centre Hall',
-        text: ''
+        text: 'This luxury home in The Kingsway boasts a classically inspired stone façade. Inside, a two-story main hall adds a sense of drama with its wrap-around second floor balcony. The bright, contemporary family room opens to the backyard with wall to wall french doors.'
       }} />
       <ImageTile dataItem={{
         num: '3',
@@ -83,7 +83,7 @@ const ClassicCentreHall = (props) => (
         height: 'calc(500px * 0.5)'
       }} />
       <PrevNextProjectLink direction="previous" linkUrl="/portfolio/new-homes/kingsway-georgian" />
-      <PrevNextProjectLink direction="next" linkUrl="/portfolio/new-homes/credit-river-classic" />
+      <PrevNextProjectLink direction="next" linkUrl="/portfolio/new-homes/credit-river-manor" />
     </section>
   </Layout>
 )

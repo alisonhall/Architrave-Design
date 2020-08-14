@@ -47,8 +47,8 @@ const IndexPage = (props) => (
       }} />
       <ImageLinkTile dataItem={{
         num: '4',
-        linkUrl: '/portfolio/new-homes/credit-river-classic',
-        text: "Credit River",
+        linkUrl: '/portfolio/new-homes/credit-river-manor',
+        text: "Credit River Manor",
         image: image4,
         width: 'calc(31% - (1.5% * 2))',
         height: 'calc(500px * 0.598266)'
@@ -74,16 +74,16 @@ const IndexPage = (props) => (
       }} />
       <ImageLinkTile dataItem={{
         num: '7',
-        linkUrl: '/portfolio/renovations-additions/etobicoke-renewal',
-        text: "Etobicoke Facelift",
+        linkUrl: '/portfolio/renovations-additions/etobicoke-arts-and-crafts',
+        text: "Etobicoke Arts and Crafts",
         image: image5,
         width: 'calc(36% - (1.5% * 2))',
         height: 'calc(500px * 0.691748)'
       }} />
       <ImageLinkTile dataItem={{
         num: '8',
-        linkUrl: '/portfolio/renovations-additions/lytton-park-update',
-        text: "Lytton Park Update",
+        linkUrl: '/portfolio/renovations-additions/lytton-park-manor',
+        text: "Lytton Park Manor",
         image: image6,
         width: 'calc(64% - (1.5% * 2))',
         height: 'calc(500px * 0.691748)'

@@ -29,7 +29,7 @@ const KingswayTransitional = (props) => (
       }} />
       <TextBlurb dataItem={{
         title: 'Kingsway Transitional',
-        text: 'The clients sought a street face that would fit with an established traditional neighbourhood. Contrasting that, the interior uses glass, steel and rich woods to create a light-filled contemporary feel.'
+        text: 'A traditional street face respects the neighbourhood, but the interior of this family home is all glass, stone and clean modern lines. A winding central stair opens up the interior, flooding the home with light.'
       }} />
       <ImageTile dataItem={{
         num: '2',
@@ -78,7 +78,7 @@ const KingswayTransitional = (props) => (
         width: 'calc(42% - (1.5% * 2))',
         height: 'calc(500px * 0.68)'
       }} />
-      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/new-homes/credit-river-classic" />
+      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/new-homes/credit-river-manor" />
       <PrevNextProjectLink direction="next" linkUrl="/portfolio/new-homes/oakville-executive-home" />
     </section>
   </Layout>

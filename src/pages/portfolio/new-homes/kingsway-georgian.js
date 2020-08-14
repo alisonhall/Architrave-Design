@@ -35,7 +35,7 @@ const KingswayGeorgian = (props) => (
         }} />
         <TextBlurb dataItem={{
           title: 'Kingsway Georgian',
-          text: 'This classic 3-storey Georgian home was built with an attention to detail. Rich cut limestone on the exterior and a beautifully paneled interior make it a home perfect for elegant entertaining or casual family living.'
+          text: 'This classic 3-storey Georgian home was built with hand-crafted detail throughout. A limestone portico leads guests into a gracious marble foyer and paneled hall. Designed for elegant entertaining, it still remains a warm and welcoming family home.'
         }} />
         <ImageTile dataItem={{
           num: '2',

@@ -23,8 +23,8 @@ const RosedaleRevival = (props) => (
         height: 'calc(500px * 1.3)'
       }} />
       <TextBlurb dataItem={{
-        title: 'Rosedale Revival',
-        text: 'This 1917 home was a diamond in the rough. Powercleaning revealed attractive brick under the green paint. A new Edwardian-style bay and dormers gave it a historic character and quality it always lacked.'
+        title: 'Rosedale Edwardian',
+        text: 'The original façade of this 1917 home had been painted over, but careful power washing revealed handsome Toronto brick hidden beneath. With Heritage approval, the front was re-imagined with a bold Edwardian-style bay and copper dormers. '
       }} />
       <ImageTile dataItem={{
         num: '2',
@@ -39,8 +39,8 @@ const RosedaleRevival = (props) => (
         width: 'calc(52% - (1.5% * 2))',
         height: 'calc(500px * 0.75)'
       }} />
-      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/renovations-additions/cornwall-heritage-addition" />
-      <PrevNextProjectLink direction="next" linkUrl="/portfolio/renovations-additions/etobicoke-renewal" />
+      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/renovations-additions/upper-canada-farmhouse" />
+      <PrevNextProjectLink direction="next" linkUrl="/portfolio/renovations-additions/etobicoke-arts-and-crafts" />
     </section>
   </Layout>
 )

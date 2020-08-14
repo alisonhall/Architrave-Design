@@ -45,8 +45,8 @@ const CreditRiverClassic = (props) => (
           height: 'calc(500px * 0.54)'
         }} />
         <TextBlurb dataItem={{
-          title: 'Credit River Classic',
-          text: 'The home owners sought a home suitable for both family living and entertaining on their riverside lot. Rich materials and the finest craftsmanship combine to create an atmosphere of casual elegance.'
+          title: 'Credit River Manor',
+          text: 'Meticulous detail and the finest craftsmanship combine to make this spacious home a show-piece. Stonework by Gino Gentile is topped with a slate roof and imported copper details. Inside, a two-storey front foyer cascades down to a wood-beamed family room and a coffered kitchen.'
         }} />
         <ImageTile dataItem={{
           num: '4',

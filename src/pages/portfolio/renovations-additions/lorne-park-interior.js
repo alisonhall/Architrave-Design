@@ -55,8 +55,8 @@ const LorneParkInterior = (props) => (
         height: 'calc(500px * 0.52)',
         backgroundPosition: '50% 30%'
       }} />
-      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/renovations-additions/rosedale-revival" />
-      <PrevNextProjectLink direction="next" linkUrl="/portfolio/renovations-additions/lytton-park-update" />
+      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/renovations-additions/rosedale-edwardian" />
+      <PrevNextProjectLink direction="next" linkUrl="/portfolio/renovations-additions/lytton-park-manor" />
     </section>
   </Layout>
 )

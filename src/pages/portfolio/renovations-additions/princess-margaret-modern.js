@@ -20,8 +20,8 @@ const PrincessMargaretFacelift = (props) => (
         backgroundPosition: '50% 30%'
       }} />
       <TextBlurb dataItem={{
-        title: 'Princess Margaret Facelift',
-        text: 'A sixties era side-split needed a complete update inside and out. A new 2nd floor and contemporary facing gives a familiar style a modern twist.'
+        title: 'Princess Margaret Modern',
+        text: 'This sixties era side-split needed a complete update inside and out. The main level was opened up, and a second floor master suite added. Stone and contemporary wood cladding combine to give the exterior a new modern look.'
       }} />
       <ImageTile dataItem={{
         num: '2',
@@ -36,8 +36,8 @@ const PrincessMargaretFacelift = (props) => (
         width: 'calc(50% - (1.5% * 2))',
         height: 'calc(500px * 0.75)'
       }} />
-      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/renovations-additions/lytton-park-update" />
-      <PrevNextProjectLink direction="next" linkUrl="/portfolio/renovations-additions/cornwall-heritage-addition" />
+      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/renovations-additions/lytton-park-manor" />
+      <PrevNextProjectLink direction="next" linkUrl="/portfolio/renovations-additions/upper-canada-farmhouse" />
     </section>
   </Layout>
 )
