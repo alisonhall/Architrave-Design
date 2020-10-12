@@ -11,7 +11,7 @@ const projects = {
     fileName: 'credit-river-manor',
     type: projectTypes.new,
     imageFolder: '',
-    projectName: '',
+    projectName: 'Credit River Manor',
     projectDescription: '',
     completion: null
   },
@@ -20,7 +20,7 @@ const projects = {
     fileName: 'hoggs-hollow-french-country',
     type: projectTypes.new,
     imageFolder: '',
-    projectName: '',
+    projectName: "Hogg's Hollow French Country",
     projectDescription: '',
     completion: null
   },
@@ -29,7 +29,7 @@ const projects = {
     fileName: 'hoggs-hollow-traditional',
     type: projectTypes.new,
     imageFolder: '',
-    projectName: '',
+    projectName: "Hogg's Hollow Traditional",
     projectDescription: '',
     completion: null
   },
@@ -38,7 +38,7 @@ const projects = {
     fileName: 'kingsway-georgian',
     type: projectTypes.new,
     imageFolder: '',
-    projectName: '',
+    projectName: 'Kingsway Georgian',
     projectDescription: '',
     completion: null
   },
@@ -47,7 +47,7 @@ const projects = {
     fileName: 'traditional-kingsway-park',
     type: projectTypes.new,
     imageFolder: '',
-    projectName: '',
+    projectName: 'Traditional Kingsway Park',
     projectDescription: '',
     completion: null
   },
@@ -56,7 +56,7 @@ const projects = {
     fileName: 'kingsway-transitional',
     type: projectTypes.new,
     imageFolder: '',
-    projectName: '',
+    projectName: 'Kingsway Transitional',
     projectDescription: '',
     completion: null
   },
@@ -65,7 +65,7 @@ const projects = {
     fileName: 'oakville-executive-home',
     type: projectTypes.new,
     imageFolder: '',
-    projectName: '',
+    projectName: 'Oakville Executive Home',
     projectDescription: '',
     completion: null
   },
@@ -74,7 +74,7 @@ const projects = {
     fileName: 'lytton-park-manor',
     type: projectTypes.renovations,
     imageFolder: '',
-    projectName: '',
+    projectName: 'Lytton Park Manor',
     projectDescription: '',
     completion: null
   },
@@ -83,8 +83,8 @@ const projects = {
     fileName: 'princess-margaret-modern',
     type: projectTypes.renovations,
     imageFolder: '2-Renovations-and-Additions/10-Princess-Margaret-Modern/',
-    projectName: '',
-    projectDescription: '',
+    projectName: 'Princess Margaret Modern',
+    projectDescription: 'This sixties era side-split needed a complete update inside and out. The main level was opened up, and a second floor master suite added. Stone and contemporary wood cladding combine to give the exterior a new modern look.',
     completion: null
   },
   cornwallHeritageAddition: {
@@ -92,7 +92,7 @@ const projects = {
     fileName: 'upper-canada-farmhouse',
     type: projectTypes.renovations,
     imageFolder: '',
-    projectName: '',
+    projectName: 'Upper Canada Farmhouse',
     projectDescription: '',
     completion: null
   },
@@ -101,7 +101,7 @@ const projects = {
     fileName: 'rosedale-edwardian',
     type: projectTypes.renovations,
     imageFolder: '2-Renovations-and-Additions/4-Rosedale-Edwardian/',
-    projectName: '',
+    projectName: 'Rosedale Edwardian',
     projectDescription: '',
     completion: null
   },
@@ -110,7 +110,7 @@ const projects = {
     fileName: 'etobicoke-arts-and-crafts',
     type: projectTypes.renovations,
     imageFolder: '',
-    projectName: '',
+    projectName: 'Etobicoke Arts and Crafts',
     projectDescription: '',
     completion: null
   },
@@ -119,7 +119,7 @@ const projects = {
     fileName: 'lorne-park-interior',
     type: projectTypes.renovations,
     imageFolder: '',
-    projectName: '',
+    projectName: 'Lorne Park Interior',
     projectDescription: '',
     completion: null
   },
@@ -128,7 +128,7 @@ const projects = {
     fileName: 'royal-york-facelift',
     type: projectTypes.renovations,
     imageFolder: '',
-    projectName: '',
+    projectName: 'Royal York Facelift',
     projectDescription: '',
     completion: null
   },
@@ -146,7 +146,7 @@ const projects = {
     fileName: null,
     type: projectTypes.upcoming,
     imageFolder: null,
-    projectName: '',
+    projectName: "St. George's Rebuild",
     projectDescription: null,
     completion: 'Completion 2019'
   },
@@ -155,8 +155,8 @@ const projects = {
     fileName: 'classic-centre-hall',
     type: projectTypes.new,
     imageFolder: '1-New-Homes/5-Centre-Hall-Classic/',
-    projectName: '',
-    projectDescription: '',
+    projectName: 'Classic Centre Hall',
+    projectDescription: 'This luxury home in The Kingsway boasts a classically inspired stone façade. Inside, a two-story main hall adds a sense of drama with its wrap-around second floor balcony. The bright, contemporary family room opens to the backyard with wall to wall french doors.',
     completion: null
   }
 }
