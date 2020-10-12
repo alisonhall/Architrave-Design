@@ -12,7 +12,7 @@ const projects = {
     type: projectTypes.new,
     imageFolder: '',
     projectName: 'Credit River Manor',
-    projectDescription: '',
+    projectDescription: 'Meticulous detail and the finest craftsmanship combine to make this spacious home a show-piece. Stonework by Gino Gentile is topped with a slate roof and imported copper details. Inside, a two-storey front foyer cascades down to a wood-beamed family room and a coffered kitchen.',
     completion: null
   },
   hoggsHollowFrenchCountry: {
@@ -21,7 +21,7 @@ const projects = {
     type: projectTypes.new,
     imageFolder: '',
     projectName: "Hogg's Hollow French Country",
-    projectDescription: '',
+    projectDescription: 'This riverside retreat is a blend of formal and casual living. The heart of the home is a gracious three-story central hall wrapping around an elliptical staircase. At the rear, floor to ceiling French doors lead out to terraces, pool and gardens.',
     completion: null
   },
   hoggsHollowTraditional: {
@@ -30,7 +30,7 @@ const projects = {
     type: projectTypes.new,
     imageFolder: '',
     projectName: "Hogg's Hollow Traditional",
-    projectDescription: '',
+    projectDescription: 'This Don River family home opens itself to the lovely natural setting with balconies, terraces and plenty of glass. The interior wraps around a soaring elliptical staircase topped by a light-filled skylight.',
     completion: null
   },
   kingswayGeorgian: {
@@ -39,7 +39,7 @@ const projects = {
     type: projectTypes.new,
     imageFolder: '',
     projectName: 'Kingsway Georgian',
-    projectDescription: '',
+    projectDescription: 'This classic 3-storey Georgian home was built with hand-crafted detail throughout. A limestone portico leads guests into a gracious marble foyer and paneled hall. Designed for elegant entertaining, it still remains a warm and welcoming family home.',
     completion: null
   },
   kingswayTraditional: {
@@ -48,7 +48,7 @@ const projects = {
     type: projectTypes.new,
     imageFolder: '',
     projectName: 'Traditional Kingsway Park',
-    projectDescription: '',
+    projectDescription: 'Set in the heart of Kingsway Park, this home uses traditional proportions and materials to evoke the character of its established neighbourhood.  Inside, a light and contemporary palette of materials makes for relaxed and casual family living.',
     completion: null
   },
   kingswayTransitional: {
@@ -57,7 +57,7 @@ const projects = {
     type: projectTypes.new,
     imageFolder: '',
     projectName: 'Kingsway Transitional',
-    projectDescription: '',
+    projectDescription: 'A traditional street face respects the neighbourhood, but the interior of this family home is all glass, stone and clean modern lines. A winding central stair opens up the interior, flooding the home with light.',
     completion: null
   },
   oakvilleExecutiveHome: {
@@ -66,7 +66,7 @@ const projects = {
     type: projectTypes.new,
     imageFolder: '',
     projectName: 'Oakville Executive Home',
-    projectDescription: '',
+    projectDescription: 'Dormers and a low roofline combine to artfully downplay the size of this sprawling stone and brick home located on a private Oakville cul-de-sac.',
     completion: null
   },
   lyttonParkUpdate: {
@@ -75,7 +75,7 @@ const projects = {
     type: projectTypes.renovations,
     imageFolder: '',
     projectName: 'Lytton Park Manor',
-    projectDescription: '',
+    projectDescription: 'Built in 1908, this lovely home was full of charming detail but the interior was dark and lacked modern amenities. A seamless addition incorporates a bright eat-in kitchen and master suite above. New windows and wide archways let in the sun, while keeping the original character intact all.',
     completion: null
   },
   princessMargaretFacelift: {
@@ -93,7 +93,7 @@ const projects = {
     type: projectTypes.renovations,
     imageFolder: '',
     projectName: 'Upper Canada Farmhouse',
-    projectDescription: '',
+    projectDescription: 'An addition to this charming 1820’s Loyalist farmhouse respects the character of the old, while more than doubling the living space. A flagged centre hall joins old and new, and leads into a sunny country kitchen. Above it is an airy master bedroom with a vaulted ceiling, cozy sitting area, private balcony and sweeping views. ',
     completion: null
   },
   rosedaleRevival: {
@@ -102,7 +102,7 @@ const projects = {
     type: projectTypes.renovations,
     imageFolder: '2-Renovations-and-Additions/4-Rosedale-Edwardian/',
     projectName: 'Rosedale Edwardian',
-    projectDescription: '',
+    projectDescription: 'The original façade of this 1917 home had been painted over, but careful power washing revealed handsome Toronto brick hidden beneath. With Heritage approval, the front was re-imagined with a bold Edwardian-style bay and copper dormers. ',
     completion: null
   },
   etobicokeRenewal: {
@@ -111,7 +111,7 @@ const projects = {
     type: projectTypes.renovations,
     imageFolder: '',
     projectName: 'Etobicoke Arts and Crafts',
-    projectDescription: '',
+    projectDescription: 'This post-war bungalow had been marred with characterless additions, but the proportions were ideally suited for a make-over in period Arts-and-Crafts style. The interior was rebuilt with warm wood, custom cabinetry and plenty of glass. ',
     completion: null
   },
   lorneParkInterior: {
@@ -120,7 +120,7 @@ const projects = {
     type: projectTypes.renovations,
     imageFolder: '',
     projectName: 'Lorne Park Interior',
-    projectDescription: '',
+    projectDescription: 'Updating the living area of this Lorne Park Prairie Style home is the first phase of a long term plan to remake the entire home. A dark and cluttered living-dining area was gutted, and redone with a light and modern touch.',
     completion: null
   },
   royalYorkFacelift: {
