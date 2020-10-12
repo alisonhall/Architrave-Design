@@ -32,8 +32,8 @@ const KingswayTraditional = (props) => (
       />
       <Item
         text={{
-          title: 'Kingsway Traditional',
-          copy: 'Set in the heart of The Kingsway, this new family home evokes the character and flavour of the neighbourhood. Local stone and brick outside conceal a double-height foyer, panelled formal rooms and a casual great-room.'
+          title: project.projectName,
+          copy: project.projectDescription
         }}
       />
       <Item

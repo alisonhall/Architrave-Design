@@ -30,8 +30,8 @@ const RosedaleRevival = (props) => (
         <Column>
           <Item
             text={{
-              title: 'Rosedale Revival',
-              copy: 'This 1917 home was a diamond in the rough. Powercleaning revealed attractive brick under the green paint. A new Edwardian-style bay and dormers gave it a historic character and quality it always lacked.'
+              title: project.projectName,
+              copy: project.projectDescription
             }}
           />
         </Column>

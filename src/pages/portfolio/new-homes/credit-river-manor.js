@@ -58,8 +58,8 @@ const CreditRiverClassic = (props) => (
       />
       <Item
         text={{
-          title: 'Credit River Classic',
-          copy: 'The home owners sought a home suitable for both family living and entertaining on their riverside lot. Rich materials and the finest craftsmanship combine to create an atmosphere of casual elegance.'
+          title: project.projectName,
+          copy: project.projectDescription
         }}
       />
       <Item

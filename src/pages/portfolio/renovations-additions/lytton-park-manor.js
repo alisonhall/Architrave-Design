@@ -31,8 +31,8 @@ const LyttonParkUpdate = (props) => (
       />
       <Item
         text={{
-        title: 'Lytton Park Update',
-        copy: 'This lovely old home was full of charm and detail, but inside it was dark and lacked modern amenities. A new addition provided more space, while new windows and arches open the inside to light and views.'
+          title: project.projectName,
+          copy: project.projectDescription
         }}
       />
       <Item

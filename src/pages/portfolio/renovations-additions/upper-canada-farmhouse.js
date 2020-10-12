@@ -31,8 +31,8 @@ const CornwallHeritageAddition = (props) => (
       />
       <Item
         text={{
-          title: 'Loyalist Farmhouse Addition',
-          copy: 'A modern addition to this charming 1820’s home mirrors it’s proportions but more than doubles the living space. The ground floor is a country kitchen, topped by a vaulted master with sweeping views.'
+          title: project.projectName,
+          copy: project.projectDescription
         }}
       />
       <Item

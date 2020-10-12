@@ -31,8 +31,8 @@ const PrincessMargaretFacelift = (props) => (
         <Column>
           <Item
             text={{
-              title: 'Princess Margaret Facelift',
-              copy: 'A sixties era side-split needed a complete update inside and out. A new 2nd floor and contemporary facing gives a familiar style a modern twist.'
+              title: project.projectName,
+              copy: project.projectDescription
             }}
           />
         </Column>

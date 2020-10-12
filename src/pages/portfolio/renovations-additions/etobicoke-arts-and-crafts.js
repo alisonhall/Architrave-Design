@@ -78,8 +78,8 @@ const EtobicokeRenewal = (props) => (
       />
       <Item
         text={{
-          title: 'Etobicoke Facelift',
-          copy: 'This post-war bungalow had been added onto too many times. The exterior proportions were well suited for an Arts-and-Crafts make-over. Inside, custom cabinetry add warmth and character to all the rooms.'
+          title: project.projectName,
+          copy: project.projectDescription
         }}
       />
       <Item
