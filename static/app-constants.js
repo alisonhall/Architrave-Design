@@ -5,146 +5,197 @@ const projectTypes = {
   upcoming: 'upcoming'
 }
 
-const projectKeys = {
-  creditRiverClassic: 'creditRiverClassic',
-  hoggsHollowFrenchCountry: 'hoggsHollowFrenchCountry',
-  hoggsHollowTraditional: 'hoggsHollowTraditional',
-  kingswayGeorgian: 'kingswayGeorgian',
-  kingswayTraditional: 'kingswayTraditional',
-  kingswayTransitional: 'kingswayTransitional',
-  oakvilleExecutiveHome: 'oakvilleExecutiveHome',
-  lyttonParkUpdate: 'lyttonParkUpdate',
-  princessMargaretFacelift: 'princessMargaretFacelift',
-  cornwallHeritageAddition: 'cornwallHeritageAddition',
-  rosedaleRevival: 'rosedaleRevival',
-  etobicokeRenewal: 'etobicokeRenewal',
-  lorneParkInterior: 'lorneParkInterior',
-  royalYorkFacelift: 'royalYorkFacelift',
-  kingswayClassic: 'kingswayClassic',
-  stGeorgesRebuild: 'stGeorgesRebuild'
-}
-
 const projects = {
-  [projectKeys.creditRiverClassic]: {
-    fileName: 'credit-river-classic',
+  creditRiverClassic: {
+    key: 'creditRiverClassic',
+    fileName: 'credit-river-manor',
     type: projectTypes.new,
     imageFolder: '',
-    key: projectKeys.creditRiverClassic
+    projectName: '',
+    projectDescription: '',
+    completion: null
   },
-  [projectKeys.hoggsHollowFrenchCountry]: {
+  hoggsHollowFrenchCountry: {
+    key: 'hoggsHollowFrenchCountry',
     fileName: 'hoggs-hollow-french-country',
     type: projectTypes.new,
     imageFolder: '',
-    key: projectKeys.hoggsHollowFrenchCountry
+    projectName: '',
+    projectDescription: '',
+    completion: null
   },
-  [projectKeys.hoggsHollowTraditional]: {
+  hoggsHollowTraditional: {
+    key: 'hoggsHollowTraditional',
     fileName: 'hoggs-hollow-traditional',
     type: projectTypes.new,
     imageFolder: '',
-    key: projectKeys.hoggsHollowTraditional
+    projectName: '',
+    projectDescription: '',
+    completion: null
   },
-  [projectKeys.kingswayGeorgian]: {
+  kingswayGeorgian: {
+    key: 'kingswayGeorgian',
     fileName: 'kingsway-georgian',
     type: projectTypes.new,
     imageFolder: '',
-    key: projectKeys.kingswayGeorgian
+    projectName: '',
+    projectDescription: '',
+    completion: null
   },
-  [projectKeys.kingswayTraditional]: {
-    fileName: 'kingsway-traditional',
+  kingswayTraditional: {
+    key: 'kingswayTraditional',
+    fileName: 'traditional-kingsway-park',
     type: projectTypes.new,
     imageFolder: '',
-    key: projectKeys.kingswayTraditional
+    projectName: '',
+    projectDescription: '',
+    completion: null
   },
-  [projectKeys.kingswayTransitional]: {
+  kingswayTransitional: {
+    key: 'kingswayTransitional',
     fileName: 'kingsway-transitional',
     type: projectTypes.new,
     imageFolder: '',
-    key: projectKeys.kingswayTransitional
+    projectName: '',
+    projectDescription: '',
+    completion: null
   },
-  [projectKeys.oakvilleExecutiveHome]: {
+  oakvilleExecutiveHome: {
+    key: 'oakvilleExecutiveHome',
     fileName: 'oakville-executive-home',
     type: projectTypes.new,
     imageFolder: '',
-    key: projectKeys.oakvilleExecutiveHome
+    projectName: '',
+    projectDescription: '',
+    completion: null
   },
-  [projectKeys.lyttonParkUpdate]: {
-    fileName: 'lytton-park-update',
+  lyttonParkUpdate: {
+    key: 'lyttonParkUpdate',
+    fileName: 'lytton-park-manor',
     type: projectTypes.renovations,
     imageFolder: '',
-    key: projectKeys.lyttonParkUpdate
+    projectName: '',
+    projectDescription: '',
+    completion: null
   },
-  [projectKeys.princessMargaretFacelift]: {
-    fileName: 'princess-margaret-facelift',
+  princessMargaretFacelift: {
+    key: 'princessMargaretFacelift',
+    fileName: 'princess-margaret-modern',
     type: projectTypes.renovations,
     imageFolder: '2-Renovations-and-Additions/10-Princess-Margaret-Modern/',
-    key: projectKeys.princessMargaretFacelift
+    projectName: '',
+    projectDescription: '',
+    completion: null
   },
-  [projectKeys.cornwallHeritageAddition]: {
-    fileName: 'cornwall-heritage-addition',
+  cornwallHeritageAddition: {
+    key: 'cornwallHeritageAddition',
+    fileName: 'upper-canada-farmhouse',
     type: projectTypes.renovations,
     imageFolder: '',
-    key: projectKeys.cornwallHeritageAddition
+    projectName: '',
+    projectDescription: '',
+    completion: null
   },
-  [projectKeys.rosedaleRevival]: {
-    fileName: 'rosedale-revival',
+  rosedaleRevival: {
+    key: 'rosedaleRevival',
+    fileName: 'rosedale-edwardian',
     type: projectTypes.renovations,
     imageFolder: '2-Renovations-and-Additions/4-Rosedale-Edwardian/',
-    key: projectKeys.rosedaleRevival
+    projectName: '',
+    projectDescription: '',
+    completion: null
   },
-  [projectKeys.etobicokeRenewal]: {
-    fileName: 'etobicoke-renewal',
+  etobicokeRenewal: {
+    key: 'etobicokeRenewal',
+    fileName: 'etobicoke-arts-and-crafts',
     type: projectTypes.renovations,
     imageFolder: '',
-    key: projectKeys.etobicokeRenewal
+    projectName: '',
+    projectDescription: '',
+    completion: null
   },
-  [projectKeys.lorneParkInterior]: {
+  lorneParkInterior: {
+    key: 'lorneParkInterior',
     fileName: 'lorne-park-interior',
     type: projectTypes.renovations,
     imageFolder: '',
-    key: projectKeys.lorneParkInterior
+    projectName: '',
+    projectDescription: '',
+    completion: null
   },
-  [projectKeys.royalYorkFacelift]: {
+  royalYorkFacelift: {
+    key: 'royalYorkFacelift',
     fileName: 'royal-york-facelift',
     type: projectTypes.renovations,
     imageFolder: '',
-    key: projectKeys.royalYorkFacelift
+    projectName: '',
+    projectDescription: '',
+    completion: null
   },
-  [projectKeys.kingswayClassic]: {
+  kingswayClassic: {
+    key: 'kingswayClassic',
+    fileName: null,
     type: projectTypes.upcoming,
     imageFolder: 'Kingsway-Classic',
-    key: projectKeys.kingswayClassic
+    projectName: 'Kingsway Classic',
+    projectDescription: null,
+    completion: null
   },
-  [projectKeys.stGeorgesRebuild]: {
+  stGeorgesRebuild: {
+    key: 'stGeorgesRebuild',
+    fileName: null,
     type: projectTypes.upcoming,
     imageFolder: null,
-    key: projectKeys.stGeorgesRebuild
+    projectName: '',
+    projectDescription: null,
+    completion: 'Completion 2019'
+  },
+  classicCentreHall: {
+    key: 'classicCentreHall',
+    fileName: 'classic-centre-hall',
+    type: projectTypes.new,
+    imageFolder: '1-New-Homes/5-Centre-Hall-Classic/',
+    projectName: '',
+    projectDescription: '',
+    completion: null
   }
 }
 
 const constants = {
+  portfolio: 'portfolio',
   projectTypes,
   projects,
-  projectKeys,
-  [projectTypes.new + 'order']: [
-    projectKeys.hoggsHollowTraditional,
-    projectKeys.kingswayGeorgian,
-    projectKeys.creditRiverClassic,
-    projectKeys.kingswayTransitional,
-    projectKeys.oakvilleExecutiveHome,
-    projectKeys.hoggsHollowFrenchCountry,
-    projectKeys.kingswayTraditional
+  newProjectsOrder: [
+    projects.hoggsHollowTraditional.key,
+    projects.kingswayGeorgian.key,
+    projects.creditRiverClassic.key,
+    projects.kingswayTransitional.key,
+    projects.oakvilleExecutiveHome.key,
+    projects.classicCentreHall.key,
+    projects.hoggsHollowFrenchCountry.key,
+    projects.kingswayTraditional.key
   ],
-  [projectTypes.renovations + '-order']: [
-    projectKeys.lyttonParkUpdate,
-    projectKeys.princessMargaretFacelift,
-    projectKeys.cornwallHeritageAddition,
-    projectKeys.rosedaleRevival,
-    projectKeys.etobicokeRenewal
+  renovationProjectsOrder: [
+    projects.lyttonParkUpdate.key,
+    projects.princessMargaretFacelift.key,
+    projects.cornwallHeritageAddition.key,
+    projects.rosedaleRevival.key,
+    projects.etobicokeRenewal.key
+  ],
+  unusedNewProjects: [],
+  unusedRenovationProjects: [
+    projects.lorneParkInterior.key,
+    projects.royalYorkFacelift.key
   ],
   cloudinary: {
     user: 'alisonkhall',
     account: 'v1571329783',
     siteFolder: 'ArchitraveDesign/'
+  },
+  defaultIntroductionText: 'Designing stylish new homes and renovations in Etobicoke and the Greater Toronto Area.',
+  houzz: {
+    url: 'http://www.houzz.com/pro/architrave/architrave-design-architect',
+    reviewsUrl: 'http://www.houzz.com/browseReviews/architrave'
   }
 }
 
