@@ -19,7 +19,7 @@ const ImageTile = ({
   } = {}
 }) => (
   <div
-    className={`image image${num} clearfix ${customClass}`}
+    className={`image-tile image image${num} clearfix ${customClass}`}
     css={css`
       width: ${width};
       height: ${height};

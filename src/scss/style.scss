@@ -22,8 +22,6 @@ $contentWrapperWidth: 100% - ($asideWidth + $spacingHalf) - $spacing;
 $contentWrapperMaxWidth: 1000px;
 $contentWrapperMinHeight: 89vh;
 $asidePlusSpacing: $asideWidth + $spacingHalf;
-$headerPlusSpacing: 0;
-$headerPlusExtraSpacing: 0;
 
 $blurbColour: #7ba7ba;
 $grayLinkColour: #999;
@@ -121,10 +119,11 @@ body {
 }
 
 .contentWrapper {
+	width: $contentWrapperWidth;
 	max-width: $contentWrapperMaxWidth;
 	float: left;
 	font-size: 1.653em;
-	margin-top: 5px;
+	margin-top: $headerHeight;
 	margin-left: $asideWidth;
 	min-height: $viewportHeightDefault;
 	overflow: hidden;
@@ -142,6 +141,7 @@ body {
 
 @media screen and (max-width: $breakpointLarge) {
 	.contentWrapper {
+		width: 100%;
 		max-width: 100%;
 		float: left;
 		margin-top: 6em; //150px
@@ -161,7 +161,13 @@ body {
 	border-top: 25px solid white;
 	border-bottom: 25px solid white;
 	display: flex;
-	flex-flow: row nowrap;
+  flex-flow: row nowrap;
+  overflow: hidden;
+  height: 100%;
+
+  &:first-of-type {
+    border-top: none;
+  }
 }
 
 .row + .row {
@@ -171,11 +177,33 @@ body {
 .column {
 	border-left: 25px solid white;
 	border-right: 25px solid white;
-	height: 100%;
+  // height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-flow: column nowrap;
+
+  > .image + .image {
+    border-top: 25px solid white;
+  }
 }
 
 .column + .column {
 	border-left: none;
+}
+
+.column > .row:last-of-type {
+  border-bottom: none;
+}
+
+.column .row {
+  > .column:first-of-type {
+    border-left: none;
+  }
+
+  > .column:last-of-type {
+    border-right: none;
+  }
 }
 
 

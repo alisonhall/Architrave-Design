@@ -16,13 +16,32 @@ const PrincessMargaretFacelift = (props) => (
     <SEO />
     <section className="contentWrapper layoutAll layoutProject">
       <Row height="450px">
-        <Column>
+        <Column width="66%">
           <Item
             num={1}
             image={{
               imageFolder: project.imageFolder,
               imageName: '2-Addition-_-_Re-facing_xddgjt.jpg',
               backgroundPosition: '50% 30%'
+            }}
+          />
+        </Column>
+        <Column width="33%">
+          <Item
+            num={2}
+            image={{
+              imageFolder: project.imageFolder,
+              imageName: '1-Original-1970-Sidesplit_vrexby.jpg'
+            }}
+            text={{
+              copy: 'Before'
+            }}
+          />
+          <Item
+            num={3}
+            image={{
+              imageFolder: project.imageFolder,
+              imageName: '3-New-Second-Floor_sxdhhx.jpg',
             }}
           />
         </Column>
@@ -40,13 +59,10 @@ const PrincessMargaretFacelift = (props) => (
       <Row height="375px">
         <Column width="50%">
           <Item
-            num={2}
+            num={3}
             image={{
               imageFolder: project.imageFolder,
-              imageName: '1-Original-1970-Sidesplit_vrexby.jpg'
-            }}
-            text={{
-              copy: 'Before'
+              imageName: '4_hxynkz.jpg',
             }}
           />
         </Column>
@@ -55,7 +71,27 @@ const PrincessMargaretFacelift = (props) => (
             num={3}
             image={{
               imageFolder: project.imageFolder,
-              imageName: '3-New-Second-Floor_sxdhhx.jpg',
+              imageName: '6_g3yq1e.jpg',
+            }}
+          />
+        </Column>
+      </Row>
+      <Row height="375px">
+        <Column width="50%">
+          <Item
+            num={3}
+            image={{
+              imageFolder: project.imageFolder,
+              imageName: '8_rzkvl5.jpg',
+            }}
+          />
+        </Column>
+        <Column width="50%">
+          <Item
+            num={3}
+            image={{
+              imageFolder: project.imageFolder,
+              imageName: '9_o4ahxq.jpg',
             }}
           />
         </Column>

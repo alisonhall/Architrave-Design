@@ -3,16 +3,14 @@ $textBlurbPadding: calc(1em + #{$padding});
 $textBlurbWidth: calc(100% - #{$spacingX2} - (#{$textBlurbPadding} * 2));
 
 .layoutAll {
+	.image {
+		width: 100%;
+	}
 	.image,
 	.textBlurb {
 		position: relative;
-		// margin: $spacing;
 		max-width: 100%;
 		height: 100%;
-
-		img {
-			object-fit: cover;
-		}
 	}
 	.image,
 	.textBlurbFiller {
@@ -41,18 +39,15 @@ $textBlurbWidth: calc(100% - #{$spacingX2} - (#{$textBlurbPadding} * 2));
 	}
 	.textBlurb {
 		background-color: #7ba7ba;
-		// margin: $spacing;
-		padding: 20px;
-		// width: $textBlurbWidth;
-		// min-height: 75px;
-		// float: left;
+		padding: 0 $textBlurbPadding;
+		min-height: 75px;
 		color: white;
 		font-size: 0.7em;
 		.headingSection {
 			display: flex;
 			flex-flow: row wrap;
 			justify-content: space-between;
-			margin-top: 0.7em;
+			margin-top: 1.5em;
 		}
 		.title {
 			display: inline-block;
@@ -72,7 +67,7 @@ $textBlurbWidth: calc(100% - #{$spacingX2} - (#{$textBlurbPadding} * 2));
 			color: #CAE1EB;
 		}
 		.headingSection ~ .text {
-			//   margin-bottom: 1.7em;
+			margin-bottom: 1.7em;
 		}
 	}
 	.shadowOverlay {
@@ -113,7 +108,7 @@ $textBlurbWidth: calc(100% - #{$spacingX2} - (#{$textBlurbPadding} * 2));
 		max-width: 100%;
 		width: 100%;
 		height: 100%;
-		overflow: hidden;
+		// overflow: hidden;
 	}
 	.prevProject,
 	.nextProject {
@@ -164,13 +159,8 @@ $textBlurbWidth: calc(100% - #{$spacingX2} - (#{$textBlurbPadding} * 2));
 .layoutHome,
 .layoutNewHomes,
 .layoutRenovations {
-	a:hover .imageDiv,
-	.imageDiv:hover {
+	.image-link:hover .imageDiv {
 		opacity: 0.7;
-	}
-	a:hover .filler,
-	.filler:hover {
-		opacity: 1;
 	}
 }
 
@@ -178,15 +168,15 @@ $textBlurbWidth: calc(100% - #{$spacingX2} - (#{$textBlurbPadding} * 2));
 	.layoutAll .textBlurbFiller {
 		display: none !important;
 	}
-	// .layoutAll .image {
-	// 	width: 96% !important;
-	// 	max-height: 400px !important;
-	// }
-	// .layoutAll .imageFiller + .image {
-	// 	width: 96% !important;
-	// }
+	.layoutAll .image {
+		width: 96% !important;
+		max-height: 400px !important;
+	}
+	.layoutAll .imageFiller + .image {
+		width: 96% !important;
+	}
 	.layoutAll .textBlurb {
-		// width: 86% !important;
+		width: 86% !important;
 		padding: 0 5% !important;
 	}
 	.textBlurb {
@@ -209,9 +199,9 @@ $textBlurbWidth: calc(100% - #{$spacingX2} - (#{$textBlurbPadding} * 2));
 }
 
 @media screen and (max-width: $breakpointExtraSmall) {
-	// .layoutAll .image {
-	// 	max-height: 300px !important;
-	// }
+	.layoutAll .image {
+		max-height: 300px !important;
+	}
 	.layoutAll .textBlurb {
 		font-size: 0.7em !important;
 	}

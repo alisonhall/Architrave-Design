@@ -25,7 +25,7 @@ const ImageLinkTile = ({
     return (
       <Link
         to={linkUrl}
-        className={`image image${num} clearfix ${customClass}`}
+        className={`image-link image image${num} clearfix ${customClass}`}
         css={css`
           width: ${width};
           height: ${height};
@@ -42,7 +42,7 @@ const ImageLinkTile = ({
   return (
     <Link
       to={linkUrl}
-      className={`image image${num} clearfix ${customClass}`}
+      className={`image-link image image${num} clearfix ${customClass}`}
     >
       <div className="shadowOverlay clearfix">
         <div className={`imageDiv imageDiv${num}`}></div>
