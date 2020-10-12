@@ -1,13 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
+
+import constants from '../../static/app-constants';
+
 import architraveLogo from '../images/ArchitraveNewLogo.jpg';
 import houzzLogo from '../images/HouzzH.png';
 
+const { portfolio, projectTypes, houzz } = constants;
+
 const Navigation = ({urlPath}) => {
-  const subNavVisible = (urlPath.indexOf('portfolio') >= 0) ? 'subNavVisible' : '';
-  const isNewHomes = (urlPath.indexOf('new-homes') >= 0) ? 'selected' : '';
-  const isRenovationsAdditions = (urlPath.indexOf('renovations-additions') >= 0) ? 'selected' : '';
+  const subNavVisible = (urlPath.indexOf(portfolio) >= 0) ? 'subNavVisible' : '';
+  const isNewHomes = (urlPath.indexOf(projectTypes.new) >= 0) ? 'selected' : '';
+  const isRenovationsAdditions = (urlPath.indexOf(projectTypes.renovations) >= 0) ? 'selected' : '';
   return (
   <aside>
     <Link to="/">
@@ -16,16 +21,16 @@ const Navigation = ({urlPath}) => {
     <nav>
       <ul className="mainNav">
         <li>
-          <Link to="/portfolio/new-homes" className="portfolioNav">Portfolio</Link>
+          <Link to={`/${portfolio}/${projectTypes.new}`} className="portfolioNav">Portfolio</Link>
           <ul className={`subNav ${subNavVisible}`}>
             <li>
-              <Link to="/portfolio/new-homes" activeClassName="selected" className={isNewHomes}>New Homes</Link>
+              <Link to={`/${portfolio}/${projectTypes.new}`} activeClassName="selected" className={isNewHomes}>New Homes</Link>
             </li>
             <li>
-              <Link to="/portfolio/renovations-additions" activeClassName="selected" className={isRenovationsAdditions}>Renovations</Link>
+              <Link to={`/${portfolio}/${projectTypes.renovations}`} activeClassName="selected" className={isRenovationsAdditions}>Renovations</Link>
             </li>
             <li>
-              <Link to="/portfolio/upcoming" activeClassName="selected">Upcoming</Link>
+              <Link to={`/${portfolio}/${projectTypes.upcoming}`} activeClassName="selected">Upcoming</Link>
             </li>
           </ul>
         </li>
@@ -40,7 +45,7 @@ const Navigation = ({urlPath}) => {
         </li>
       </ul>
     </nav>
-    <a className="houzzLogo" href="http://www.houzz.com/pro/architrave/architrave-design-architect">
+    <a className="houzzLogo" href={houzz.url}>
       <img src={houzzLogo} alt="Houzz logo" />
     </a>
   </aside>

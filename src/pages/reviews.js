@@ -1,8 +1,12 @@
 import React from 'react';
 
+import constants from '../../static/app-constants';
+
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import houzzReviewsLogo from '../images/houzz_logo_reviews.png';
+
+const { houzz } = constants;
 
 const Reviews = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="reviews">
@@ -48,7 +52,7 @@ const Reviews = (props) => (
           </section>
           <section className="textBlurb">
             <p>
-              <a href="http://www.houzz.com/browseReviews/architrave">
+              <a href={houzz.reviewsUrl}>
                 <img src={houzzReviewsLogo} alt="Houzz Reviews"/>
               </a>
             </p>

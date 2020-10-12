@@ -52,8 +52,8 @@ const HoggsHollowTraditional = (props) => (
       />
       <Item
         text={{
-          title: "Hogg's Hollow Traditional",
-          copy: "This Don River family home opens itself to the lovely natural setting with balconies, terraces and plenty of glass. The interior wraps around a soaring elliptical staircase topped by a light-filled skylight."
+          title: project.projectName,
+          copy: project.projectDescription
         }}
       />
       <Item

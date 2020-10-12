@@ -62,8 +62,8 @@ const HoggsHollowFrenchCountry = (props) => (
       />
       <Item
         text={{
-          title: "Hogg's Hollow French Country",
-          copy: "This home captures Hogg's Hollow's dual nature - rustic but refined. The exterior is stone and reclaimed brick, with a richly panelled and classically proportioned interior."
+          title: project.projectName,
+          copy: project.projectDescription
         }}
       />
       <Item

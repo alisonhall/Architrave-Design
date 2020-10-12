@@ -1,5 +1,7 @@
 import React from 'react';
 
+import constants from '../../../static/app-constants';
+
 import Layout from '../../components/layout';
 import SEO from '../../components/seo';
 import Item from '../../components/item';
@@ -10,6 +12,8 @@ import image3 from '../../images/Renovations-Additions/Cornwall-1.jpg';
 import image4 from '../../images/Renovations-Additions/Rosedale-2.jpg';
 // import image5 from '../../images/Renovations-Additions/Lorne-Park-4.jpg';
 
+const { projects, portfolio, defaultIntroductionText } = constants;
+
 
 const RenovationsAdditions = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="renosAndAdditionsOverview">
@@ -17,15 +21,16 @@ const RenovationsAdditions = (props) => (
     <section className="contentWrapper layoutAll layoutRenovations">
       <Item
         num={1}
+        project={projects.lyttonParkUpdate}
         image={{
           image: image1,
           backgroundPosition: '50% 40%'
         }}
         link={{
-          linkUrl: '/portfolio/renovations-additions/lytton-park-update'
+          linkUrl: `/${portfolio}/${projects.lyttonParkUpdate.type}/${projects.lyttonParkUpdate.fileName}`
         }}
         text={{
-          text: "Lytton Park"
+          text: projects.lyttonParkUpdate.projectName
         }}
         styles={{
           width: 'calc(48% - (1.5% * 2))',
@@ -34,15 +39,17 @@ const RenovationsAdditions = (props) => (
       />
       <Item
         num={2}
+        project={projects.princessMargaretFacelift}
         image={{
-          imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_345,c_scale,f_auto,q_auto/v1571329784/ArchitraveDesign/Princess-Margaret-Transitional/Princess_Margaret_Transitional1_yp7fuo.jpg',
+          imageFolder: projects.princessMargaretFacelift.imageFolder,
+          imageName: 'Princess_Margaret_Transitional1_yp7fuo.jpg',
           backgroundPosition: '50% 30%'
         }}
         link={{
-          linkUrl: '/portfolio/renovations-additions/princess-margaret-facelift'
+          linkUrl: `/${portfolio}/${projects.princessMargaretFacelift.type}/${projects.princessMargaretFacelift.fileName}`
         }}
         text={{
-          text: "Princess Margaret Facelift"
+          text: projects.princessMargaretFacelift.projectName
         }}
         styles={{
           width: 'calc(52% - (1.5% * 2))',
@@ -51,15 +58,16 @@ const RenovationsAdditions = (props) => (
       />
       <Item
         num={3}
+        project={projects.cornwallHeritageAddition}
         image={{
           image: image3,
           backgroundPosition: '50% 40%'
         }}
         link={{
-          linkUrl: '/portfolio/renovations-additions/cornwall-heritage-addition'
+          linkUrl: `/${portfolio}/${projects.cornwallHeritageAddition.type}/${projects.cornwallHeritageAddition.fileName}`
         }}
         text={{
-          text: "Loyalist Addition"
+          text: projects.cornwallHeritageAddition.projectName
         }}
         styles={{
           width: 'calc(52% - (1.5% * 2))',
@@ -68,20 +76,21 @@ const RenovationsAdditions = (props) => (
       />
       <Item
         text={{
-          copy: 'Designing stylish new homes and renovations in Etobicoke and the Greater Toronto Area.'
+          copy: defaultIntroductionText
         }}
       />
       <Item
         num={4}
+        project={projects.rosedaleRevival}
         image={{
           image: image4,
           backgroundPosition: '50% 40%'
         }}
         link={{
-          linkUrl: '/portfolio/renovations-additions/rosedale-revival'
+          linkUrl: `/${portfolio}/${projects.rosedaleRevival.type}/${projects.rosedaleRevival.fileName}`
         }}
         text={{
-          text: "Rosedale Revival"
+          text: projects.rosedaleRevival.projectName
         }}
         styles={{
           width: 'calc(48% - (1.5% * 2))',
@@ -90,15 +99,16 @@ const RenovationsAdditions = (props) => (
       />
       <Item
         num={5}
+        project={projects.etobicokeRenewal}
         image={{
           image: image2,
           backgroundPosition: '50% 40%'
         }}
         link={{
-          linkUrl: '/portfolio/renovations-additions/etobicoke-renewal'
+          linkUrl: `/${portfolio}/${projects.etobicokeRenewal.type}/${projects.etobicokeRenewal.fileName}`
         }}
         text={{
-          text: "Etobicoke Restyling"
+          text: projects.etobicokeRenewal.projectName
         }}
         styles={{
           width: 'calc(52% - (1.5% * 2))',

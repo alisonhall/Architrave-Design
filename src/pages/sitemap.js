@@ -1,8 +1,21 @@
 import React from 'react';
 import { Link } from 'gatsby';
 
+import constants from '../../static/app-constants';
+
 import Layout from '../components/layout';
 import SEO from '../components/seo';
+
+const { projects, projectTypes, portfolio, newProjectsOrder, renovationProjectsOrder, unusedNewProjects, unusedRenovationProjects } = constants;
+
+const buildProjectLink = (projectKey, index) => {
+  const project = projects[projectKey];
+  return (
+    <li key={index}>
+      <Link to={`/${portfolio}/${project.type}/${project.fileName}`}>{project.projectName}</Link>
+    </li>
+  );
+}
 
 const Sitemap = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="sitemap">
@@ -19,56 +32,19 @@ const Sitemap = (props) => (
               <p>Portfolio</p>
               <ul>
                 <li>
-                  <Link to="/portfolio/new-homes">New Homes</Link>
+                  <Link to={`/${portfolio}/${projectTypes.new}`}>New Homes</Link>
                   <ul>
-                    <li>
-                      <Link to="/portfolio/new-homes/hoggs-hollow-traditional">Hogg's Hollow Traditional</Link>
-                    </li>
-                    <li>
-                      <Link to="/portfolio/new-homes/kingsway-transitional">Kingsway Transitional</Link>
-                    </li>
-                    <li>
-                      <Link to="/portfolio/new-homes/credit-river-classic">Credit River</Link>
-                    </li>
-                    <li>
-                      <Link to="/portfolio/new-homes/oakville-executive-home">Oakville Executive</Link>
-                    </li>
-                    <li>
-                      <Link to="/portfolio/new-homes/hoggs-hollow-french-country">Hogg's Hollow French Country</Link>
-                    </li>
-                    <li>
-                      <Link to="/portfolio/new-homes/kingsway-traditional">Kingsway Traditional</Link>
-                    </li>
-                    <li>
-                      <Link to="/portfolio/new-homes/kingsway-georgian">Kingsway Georgian</Link>
-                    </li>
+                    {[...newProjectsOrder, ...unusedNewProjects].map(buildProjectLink)}
                   </ul>
                 </li>
                 <li>
-                  <Link to="/portfolio/renovations-additions">Renovations</Link>
+                  <Link to={`/${portfolio}/${projectTypes.renovations}`}>Renovations</Link>
                   <ul>
-                    <li>
-                      <Link to="/portfolio/renovations-additions/lytton-park-update">Lytton Park</Link>
-                    </li>
-                    <li>
-                      <Link to="/portfolio/renovations-additions/etobicoke-renewal">Etobicoke Restyling</Link>
-                    </li>
-                    <li>
-                      <Link to="/portfolio/renovations-additions/cornwall-heritage-addition">Loyalist Addition</Link>
-                    </li>
-                    <li>
-                      <Link to="/portfolio/renovations-additions/rosedale-revival">Rosedale Revival</Link>
-                    </li>
-                    <li>
-                      <Link to="/portfolio/renovations-additions/lorne-park-interior">Lorne Park Interior</Link>
-                    </li>
-                    <li>
-                      <Link to="/portfolio/renovations-additions/princess-margaret-facelift">Princess Margaret Facelift</Link>
-                    </li>
+                    {[...renovationProjectsOrder, ...unusedRenovationProjects].map(buildProjectLink)}
                   </ul>
                 </li>
                 <li>
-                  <Link to="/portfolio/upcoming">Upcoming</Link>
+                  <Link to={`/${portfolio}/${projectTypes.upcoming}`}>Upcoming</Link>
                 </li>
               </ul>
             </li>

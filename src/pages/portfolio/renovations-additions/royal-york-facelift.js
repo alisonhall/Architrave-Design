@@ -44,7 +44,8 @@ const RoyalYorkFacelift = (props) => (
       />
       <Item
         text={{
-          copy: 'Royal York Facelift',
+          title: project.projectName,
+          copy: project.projectDescription
         }}
       />
       <PrevNextProjectLinks project={project} />

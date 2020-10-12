@@ -38,8 +38,8 @@ const KingswayGeorgian = (props) => (
       />
       <Item
         text={{
-          title: 'Kingsway Georgian',
-          copy: 'This classic 3-storey Georgian home was built with an attention to detail. Rich cut limestone on the exterior and a beautifully paneled interior make it a home perfect for elegant entertaining or casual family living.'
+          title: project.projectName,
+          copy: project.projectDescription
         }}
       />
       <Item

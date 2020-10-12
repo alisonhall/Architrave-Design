@@ -1,5 +1,7 @@
 import React from 'react';
 
+import constants from '../../../static/app-constants';
+
 import Layout from '../../components/layout';
 import SEO from '../../components/seo';
 import Item from '../../components/item';
@@ -13,6 +15,8 @@ import image6 from '../../images/New-Homes/Oakville-1.jpg';
 import image7 from '../../images/New-Homes/FrenchCountry-4.jpg';
 import image8 from '../../images/New-Homes/KingswayTraditional-1.jpg';
 
+const { projects, portfolio, defaultIntroductionText } = constants;
+
 
 const NewHomes = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="newHomesOverview">
@@ -20,15 +24,16 @@ const NewHomes = (props) => (
     <section className="contentWrapper layoutAll layoutNewHomes">
       <Item
         num={1}
+        project={projects.hoggsHollowTraditional}
         image={{
           image: image1,
           backgroundPosition: '100% 0%'
         }}
         link={{
-          linkUrl: '/portfolio/new-homes/hoggs-hollow-traditional'
+          linkUrl: `/${portfolio}/${projects.hoggsHollowTraditional.type}/${projects.hoggsHollowTraditional.fileName}`
         }}
         text={{
-          copy: "Hogg's Hollow Traditional"
+          copy: projects.hoggsHollowTraditional.projectName
         }}
         styles={{
           width: 'calc(48% - (1.5% * 2))',
@@ -37,14 +42,15 @@ const NewHomes = (props) => (
       />
       <Item
         num={2}
+        project={projects.kingswayGeorgian}
         image={{
           image: image2
         }}
         link={{
-          linkUrl: '/portfolio/new-homes/kingsway-georgian'
+          linkUrl: `/${portfolio}/${projects.kingswayGeorgian.type}/${projects.kingswayGeorgian.fileName}`
         }}
         text={{
-          copy: "Kingsway Georgian"
+          copy: projects.kingswayGeorgian.projectName
         }}
         styles={{
           width: 'calc(52% - (1.5% * 2))',
@@ -53,6 +59,7 @@ const NewHomes = (props) => (
       />
       <Item
         num={3}
+        project={projects.kingswayTransitional}
         image={{
           image: image3
         }}
@@ -63,14 +70,15 @@ const NewHomes = (props) => (
       />
       <Item
         num={4}
+        project={projects.creditRiverClassic}
         image={{
           image: image4
         }}
         link={{
-          linkUrl: '/portfolio/new-homes/credit-river-classic'
+          linkUrl: `/${portfolio}/${projects.creditRiverClassic.type}/${projects.creditRiverClassic.fileName}`
         }}
         text={{
-          copy: "Credit River"
+          copy: projects.creditRiverClassic.projectName
         }}
         styles={{
           width: 'calc(31% - (1.5% * 2))',
@@ -79,19 +87,20 @@ const NewHomes = (props) => (
       />
       <Item
         text={{
-          copy: 'Designing stylish new homes and renovations in Etobicoke and the Greater Toronto Area.'
+          copy: defaultIntroductionText
         }}
       />
       <Item
         num={5}
+        project={projects.kingswayTransitional}
         image={{
           image: image5
         }}
         link={{
-          linkUrl: '/portfolio/new-homes/kingsway-transitional'
+          linkUrl: `/${portfolio}/${projects.kingswayTransitional.type}/${projects.kingswayTransitional.fileName}`
         }}
         text={{
-          copy: "Kingsway Transitional"
+          copy: projects.kingswayTransitional.projectName
         }}
         styles={{
           width: 'calc(48% - (1.5% * 2))',
@@ -100,14 +109,15 @@ const NewHomes = (props) => (
       />
       <Item
         num={6}
+        project={projects.oakvilleExecutiveHome}
         image={{
           image: image6
         }}
         link={{
-          linkUrl: '/portfolio/new-homes/oakville-executive-home'
+          linkUrl: `/${portfolio}/${projects.oakvilleExecutiveHome.type}/${projects.oakvilleExecutiveHome.fileName}`
         }}
         text={{
-          copy: "Oakville Executive"
+          copy: projects.oakvilleExecutiveHome.projectName
         }}
         styles={{
           width: 'calc(52% - (1.5% * 2))',
@@ -116,14 +126,16 @@ const NewHomes = (props) => (
       />
       <Item
         num={7}
+        project={projects.classicCentreHall}
         image={{
-          imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_300,c_scale,f_auto,q_auto/v1595347266/ArchitraveDesign/1-New-Homes/5-Centre-Hall-Classic/1b-Cut-Stone-Facade_rkbnlo.jpg'
+          imageFolder: projects.classicCentreHall.imageFolder,
+          imageName: '1b-Cut-Stone-Facade_rkbnlo.jpg'
         }}
         link={{
-          linkUrl: '/portfolio/new-homes/classic-centre-hall'
+          linkUrl: `/${portfolio}/${projects.classicCentreHall.type}/${projects.classicCentreHall.fileName}`
         }}
         text={{
-          copy: "Classic Centre Hall"
+          copy: projects.classicCentreHall.projectName
         }}
         styles={{
           width: 'calc(33.3% - (1.5% * 2))',
@@ -132,14 +144,15 @@ const NewHomes = (props) => (
       />
       <Item
         num={8}
+        project={projects.hoggsHollowFrenchCountry}
         image={{
           image: image7
         }}
         link={{
-          linkUrl: '/portfolio/new-homes/hoggs-hollow-french-country'
+          linkUrl: `/${portfolio}/${projects.hoggsHollowFrenchCountry.type}/${projects.hoggsHollowFrenchCountry.fileName}`
         }}
         text={{
-          copy: "Hogg's Hollow French Country"
+          copy: projects.hoggsHollowFrenchCountry.projectName
         }}
         styles={{
           width: 'calc(33.3% - (1.5% * 2))',
@@ -148,15 +161,16 @@ const NewHomes = (props) => (
       />
       <Item
         num={9}
+        project={projects.kingswayTraditional}
         image={{
           image: image8,
           backgroundPosition: '30% 40%'
         }}
         link={{
-          linkUrl: '/portfolio/new-homes/kingsway-traditional'
+          linkUrl: `/${portfolio}/${projects.kingswayTraditional.type}/${projects.kingswayTraditional.fileName}`
         }}
         text={{
-          copy: "Kingsway Traditional"
+          copy: projects.kingswayTraditional.projectName
         }}
         styles={{
           width: 'calc(33.3% - (1.5% * 2))',

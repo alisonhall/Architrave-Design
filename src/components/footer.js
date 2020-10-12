@@ -1,10 +1,15 @@
-import { Link } from 'gatsby';
 import React from 'react';
+import { Link } from 'gatsby';
+
+import constants from '../../static/app-constants';
+
 import houzzLogo from '../images/HouzzH.png';
+
+const { houzz } = constants;
 
 const Footer = () => (
   <footer>
-    <a className="houzzLogoFooter" href="http://www.houzz.com/pro/architrave/architrave-design-architect">
+    <a className="houzzLogoFooter" href={houzz.url}>
       <img src={houzzLogo} alt="Houzz logo" />
     </a>
     <Link to="/sitemap" className="sitemap">Site Map</Link>

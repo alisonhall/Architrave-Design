@@ -1,5 +1,7 @@
 import React from 'react';
 
+import constants from '../../../static/app-constants';
+
 import Layout from '../../components/layout';
 import SEO from '../../components/seo';
 import Item from '../../components/item';
@@ -9,14 +11,18 @@ import image2 from '../../images/Upcoming/StGeorges-GC.jpg';
 // import image3 from '../../images/Upcoming/King-Georges6.jpg';
 import image4 from '../../images/Upcoming/Before-StGeorges.jpg';
 
+const { projects } = constants;
+
 const Upcoming = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio upcoming">
     <SEO />
     <section className="contentWrapper layoutAll layoutUpcoming">
       <Item
         num={5}
+        project={projects.kingswayClassic}
         image={{
-          imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_700,c_scale,f_auto,q_auto/v1571329986/ArchitraveDesign/Kingsway-Classic/_Kingsway_Classic_hpwrk4.jpg',
+          imageFolder: projects.kingswayClassic.imageFolder,
+          imageName: '_Kingsway_Classic_hpwrk4.jpg',
           backgroundPosition: '50% 25%'
         }}
         styles={{
@@ -25,10 +31,12 @@ const Upcoming = (props) => (
         }}
       />
       <section className="textBlurb">
-        <p className="textOverlay">Kingsway Classic</p>
+        <p className="textOverlay">{projects.kingswayClassic.projectName}</p>
+        {projects.kingswayClassic.completion ? (<p className="completionDate">{projects.kingswayClassic.completion}</p>) : null}
       </section>
       <Item
         num={2}
+        project={projects.stGeorgesRebuild}
         image={{
           image: image2,
           backgroundPosition: '50% 80%'
@@ -40,6 +48,7 @@ const Upcoming = (props) => (
       />
       <Item
         num={4}
+        project={projects.stGeorgesRebuild}
         image={{
           image: image4,
           backgroundPosition: '50% 80%'
@@ -52,8 +61,8 @@ const Upcoming = (props) => (
         }}
       />
       <section className="textBlurb">
-        <p className="textOverlay">St. George's Rebuild</p>
-        <p className="completionDate">Completion 2019</p>
+        <p className="textOverlay">{projects.stGeorgesRebuild.projectName}</p>
+        {projects.stGeorgesRebuild.completion ? (<p className="completionDate">{projects.stGeorgesRebuild.completion}</p>) : null}
       </section>
     </section>
   </Layout>

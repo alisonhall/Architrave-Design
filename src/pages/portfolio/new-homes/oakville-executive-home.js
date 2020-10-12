@@ -29,8 +29,8 @@ const OakvilleExecutiveHome = (props) => (
       />
       <Item
         text={{
-          title: 'Oakville Executive Home',
-          copy: 'Dormers and a low roofline play down the size of this large stone and brick home in Oakville.'
+          title: project.projectName,
+          copy: project.projectDescription
         }}
       />
       <Item

@@ -52,8 +52,8 @@ const LorneParkInterior = (props) => (
       />
       <Item
         text={{
-          title: 'Lorne Park Interior',
-          copy: 'Updating the living area of this Lorne Park Prairie Style home is the first phase of a long term plan to remake the entire home. A dark and cluttered living-dining area was gutted, and redone with a light and modern touch.'
+          title: project.projectName,
+          copy: project.projectDescription
         }}
       />
       <Item

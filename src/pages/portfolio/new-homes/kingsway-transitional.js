@@ -34,8 +34,8 @@ const KingswayTransitional = (props) => (
       />
       <Item
         text={{
-          title: 'Kingsway Transitional',
-          copy: 'The clients sought a street face that would fit with an established traditional neighbourhood. Contrasting that, the interior uses glass, steel and rich woods to create a light-filled contemporary feel.'
+          title: project.projectName,
+          copy: project.projectDescription
         }}
       />
       <Item
