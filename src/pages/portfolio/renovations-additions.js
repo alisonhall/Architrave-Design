@@ -20,8 +20,8 @@ const RenovationsAdditions = (props) => (
       <ImageLayout1Col1Row>
         <ImageLinkTile dataItem={{
           num: '1',
-          linkUrl: '/portfolio/renovations-additions/lytton-park-update',
-          text: "Lytton Park",
+          linkUrl: '/portfolio/renovations-additions/lytton-park-manor',
+          text: "Lytton Park Manor",
           image: image1,
           backgroundPosition: '50% 40%',
           width: 'calc(48% - (1.5% * 2))',
@@ -29,8 +29,8 @@ const RenovationsAdditions = (props) => (
         }} />
         <ImageLinkTile dataItem={{
           num: '2',
-          linkUrl: '/portfolio/renovations-additions/princess-margaret-facelift',
-          text: "Princess Margaret Facelift",
+          linkUrl: '/portfolio/renovations-additions/princess-margaret-modern',
+          text: "Princess Margaret Modern",
           imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_345,c_scale,f_auto,q_auto/v1571329784/ArchitraveDesign/Princess-Margaret-Transitional/Princess_Margaret_Transitional1_yp7fuo.jpg',
           backgroundPosition: '50% 30%',
           width: 'calc(52% - (1.5% * 2))',
@@ -38,8 +38,8 @@ const RenovationsAdditions = (props) => (
         }} />
         <ImageLinkTile dataItem={{
           num: '3',
-          linkUrl: '/portfolio/renovations-additions/cornwall-heritage-addition',
-          text: "Loyalist Addition",
+          linkUrl: '/portfolio/renovations-additions/upper-canada-farmhouse',
+          text: "Upper Canada Farmhouse",
           image: image3,
           backgroundPosition: '50% 40%',
           width: 'calc(52% - (1.5% * 2))',
@@ -50,8 +50,8 @@ const RenovationsAdditions = (props) => (
         }} />
         <ImageLinkTile dataItem={{
           num: '4',
-          linkUrl: '/portfolio/renovations-additions/rosedale-revival',
-          text: "Rosedale Revival",
+          linkUrl: '/portfolio/renovations-additions/rosedale-edwardian',
+          text: "Rosedale Edwardian",
           image: image4,
           backgroundPosition: '50% 40%',
           width: 'calc(48% - (1.5% * 2))',
@@ -59,8 +59,8 @@ const RenovationsAdditions = (props) => (
         }} />
         <ImageLinkTile dataItem={{
           num: '5',
-          linkUrl: '/portfolio/renovations-additions/etobicoke-renewal',
-          text: "Etobicoke Restyling",
+          linkUrl: '/portfolio/renovations-additions/etobicoke-arts-and-crafts',
+          text: "Etobicoke Arts and Crafts",
           image: image2,
           backgroundPosition: '50% 40%',
           width: 'calc(52% - (1.5% * 2))',

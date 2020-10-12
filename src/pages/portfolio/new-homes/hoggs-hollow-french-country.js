@@ -46,7 +46,7 @@ const HoggsHollowFrenchCountry = (props) => (
         }} />
         <TextBlurb dataItem={{
           title: "Hogg's Hollow French Country",
-          text: "This home captures Hogg's Hollow's dual nature - rustic but refined. The exterior is stone and reclaimed brick, with a richly panelled and classically proportioned interior."
+          text: "This riverside retreat is a blend of formal and casual living. The heart of the home is a gracious three-story central hall wrapping around an elliptical staircase. At the rear, floor to ceiling French doors lead out to terraces, pool and gardens."
         }} />
         <ImageTile dataItem={{
           num: '5',
@@ -62,7 +62,7 @@ const HoggsHollowFrenchCountry = (props) => (
         }} />
       </ImageLayout1Col1Row>
       <PrevNextProjectLink direction="previous" linkUrl="/portfolio/new-homes/oakville-executive-home" />
-      <PrevNextProjectLink direction="next" linkUrl="/portfolio/new-homes/kingsway-traditional" />
+      <PrevNextProjectLink direction="next" linkUrl="/portfolio/new-homes/traditional-kingsway-park" />
     </section>
   </Layout>
 )

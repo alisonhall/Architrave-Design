@@ -54,8 +54,8 @@ const EtobicokeRenewal = (props) => (
         height: 'calc(500px * 0.48)'
       }} />
       <TextBlurb dataItem={{
-        title: 'Etobicoke Facelift',
-        text: 'This post-war bungalow had been added onto too many times. The exterior proportions were well suited for an Arts-and-Crafts make-over. Inside, custom cabinetry add warmth and character to all the rooms.'
+        title: 'Etobicoke Arts and Crafts',
+        text: 'This post-war bungalow had been marred with characterless additions, but the proportions were ideally suited for a make-over in period Arts-and-Crafts style. The interior was rebuilt with warm wood, custom cabinetry and plenty of glass. '
       }} />
       <ImageTile dataItem={{
         num: '6',
@@ -69,8 +69,8 @@ const EtobicokeRenewal = (props) => (
         width: 'calc(52% - (1.5% * 2))',
         height: 'calc(500px * 0.78)'
       }} />
-      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/renovations-additions/rosedale-revival" />
-      <PrevNextProjectLink direction="next" linkUrl="/portfolio/renovations-additions/lytton-park-update" />
+      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/renovations-additions/rosedale-edwardian" />
+      <PrevNextProjectLink direction="next" linkUrl="/portfolio/renovations-additions/lytton-park-manor" />
     </section>
   </Layout>
 )

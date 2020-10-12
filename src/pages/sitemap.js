@@ -28,19 +28,22 @@ const Sitemap = (props) => (
                       <Link to="/portfolio/new-homes/kingsway-transitional">Kingsway Transitional</Link>
                     </li>
                     <li>
-                      <Link to="/portfolio/new-homes/credit-river-classic">Credit River</Link>
+                      <Link to="/portfolio/new-homes/credit-river-manor">Credit River Manor</Link>
                     </li>
                     <li>
-                      <Link to="/portfolio/new-homes/oakville-executive-home">Oakville Executive</Link>
+                      <Link to="/portfolio/new-homes/oakville-executive-home">Oakville Executive Home</Link>
                     </li>
                     <li>
                       <Link to="/portfolio/new-homes/hoggs-hollow-french-country">Hogg's Hollow French Country</Link>
                     </li>
                     <li>
-                      <Link to="/portfolio/new-homes/kingsway-traditional">Kingsway Traditional</Link>
+                      <Link to="/portfolio/new-homes/traditional-kingsway-park">Traditional Kingsway Park</Link>
                     </li>
                     <li>
                       <Link to="/portfolio/new-homes/kingsway-georgian">Kingsway Georgian</Link>
+                    </li>
+                    <li>
+                      <Link to="/portfolio/new-homes/classic-centre-hall">Classic Centre Hall</Link>
                     </li>
                   </ul>
                 </li>
@@ -48,22 +51,22 @@ const Sitemap = (props) => (
                   <Link to="/portfolio/renovations-additions">Renovations</Link>
                   <ul>
                     <li>
-                      <Link to="/portfolio/renovations-additions/lytton-park-update">Lytton Park</Link>
+                      <Link to="/portfolio/renovations-additions/lytton-park-manor">Lytton Park Manor</Link>
                     </li>
                     <li>
-                      <Link to="/portfolio/renovations-additions/etobicoke-renewal">Etobicoke Restyling</Link>
+                      <Link to="/portfolio/renovations-additions/etobicoke-arts-and-crafts">Etobicoke Arts and Crafts</Link>
                     </li>
                     <li>
-                      <Link to="/portfolio/renovations-additions/cornwall-heritage-addition">Loyalist Addition</Link>
+                      <Link to="/portfolio/renovations-additions/upper-canada-farmhouse">Upper Canada Farmhouse</Link>
                     </li>
                     <li>
-                      <Link to="/portfolio/renovations-additions/rosedale-revival">Rosedale Revival</Link>
+                      <Link to="/portfolio/renovations-additions/rosedale-edwardian">Rosedale Edwardian</Link>
                     </li>
                     <li>
                       <Link to="/portfolio/renovations-additions/lorne-park-interior">Lorne Park Interior</Link>
                     </li>
                     <li>
-                      <Link to="/portfolio/renovations-additions/princess-margaret-facelift">Princess Margaret Facelift</Link>
+                      <Link to="/portfolio/renovations-additions/princess-margaret-modern">Princess Margaret Modern</Link>
                     </li>
                   </ul>
                 </li>

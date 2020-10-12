@@ -24,7 +24,7 @@ const OakvilleExecutiveHome = (props) => (
       }} />
       <TextBlurb dataItem={{
         title: 'Oakville Executive Home',
-        text: 'Dormers and a low roofline play down the size of this large stone and brick home in Oakville.'
+        text: 'Dormers and a low roofline combine to artfully downplay the size of this sprawling stone and brick home located on a private Oakville cul-de-sac.'
       }} />
       <ImageTile dataItem={{
         num: '2',

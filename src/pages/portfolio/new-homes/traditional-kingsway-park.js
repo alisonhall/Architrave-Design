@@ -26,8 +26,8 @@ const KingswayTraditional = (props) => (
         height: 'calc(500px * 1.26)'
       }} />
       <TextBlurb dataItem={{
-        title: 'Kingsway Traditional',
-        text: 'Set in the heart of The Kingsway, this new family home evokes the character and flavour of the neighbourhood. Local stone and brick outside conceal a double-height foyer, panelled formal rooms and a casual great-room.'
+        title: 'Traditional Kingsway Park',
+        text: 'Set in the heart of Kingsway Park, this home uses traditional proportions and materials to evoke the character of its established neighbourhood.  Inside, a light and contemporary palette of materials makes for relaxed and casual family living.'
       }} />
       <ImageTile dataItem={{
         num: '2',

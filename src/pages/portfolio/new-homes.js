@@ -47,8 +47,8 @@ const NewHomes = (props) => (
         }} />
         <ImageLinkTile dataItem={{
           num: '4',
-          linkUrl: '/portfolio/new-homes/credit-river-classic',
-          text: "Credit River",
+          linkUrl: '/portfolio/new-homes/credit-river-manor',
+          text: "Credit River Manor",
           image: image4,
           width: 'calc(31% - (1.5% * 2))',
           height: 'calc(500px * 0.598266)'
@@ -67,7 +67,7 @@ const NewHomes = (props) => (
         <ImageLinkTile dataItem={{
           num: '6',
           linkUrl: '/portfolio/new-homes/oakville-executive-home',
-          text: "Oakville Executive",
+          text: "Oakville Executive Home",
           image: image6,
           width: 'calc(52% - (1.5% * 2))',
           height: 'calc(500px * 0.6)'
@@ -90,8 +90,8 @@ const NewHomes = (props) => (
         }} />
         <ImageLinkTile dataItem={{
           num: '9',
-          linkUrl: '/portfolio/new-homes/kingsway-traditional',
-          text: "Kingsway Traditional",
+          linkUrl: '/portfolio/new-homes/traditional-kingsway-park',
+          text: "Traditional Kingsway Park",
           image: image8,
           backgroundPosition: '30% 40%',
           width: 'calc(33.3% - (1.5% * 2))',
