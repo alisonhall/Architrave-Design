@@ -2,32 +2,33 @@ import React from "react"
 
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
-import ImageLayout1Col1Row from '../../components/imageLayout1Col1Row';
-import ImageLinkTile from "../../components/imageLinkTile";
-import ImageFillerTile from '../../components/imageFillerTile';
 import ImageTile from '../../components/imageTile';
-import TextBlurb from '../../components/textBlurb';
-
-// import image1 from '../../images/Upcoming/Oakville-New-Home-01.jpg';
-import image2 from '../../images/Upcoming/StGeorges-GC.jpg';
-// import image3 from '../../images/Upcoming/King-Georges6.jpg';
-import image4 from '../../images/Upcoming/Before-StGeorges.jpg';
 
 const Upcoming = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio upcoming">
     <SEO />
     <section className="contentWrapper layoutAll layoutUpcoming">
       <ImageTile dataItem={{
-        num: '5',
-        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_700,c_scale,f_auto,q_auto/v1571329986/ArchitraveDesign/Kingsway-Classic/_Kingsway_Classic_hpwrk4.jpg',
+        num: '1',
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_700,c_scale,f_auto,q_auto/v1602976686/ArchitraveDesign/3-Upcoming/Lorne_Park_Renovation_mihiez.jpg',
         width: 'calc(100% - (1.5% * 2))',
         height: 'calc(500px * 1.4)',
         backgroundPosition: '50% 25%'
       }} />
       <section className="textBlurb">
-        <p className="textOverlay">Kingsway Classic</p>
+        <p className="textOverlay">Lorne Park Renovation</p>
       </section>
       <ImageTile dataItem={{
+        num: '2',
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_700,c_scale,f_auto,q_auto/v1602976682/ArchitraveDesign/3-Upcoming/Etobicoke_Transitional_dotjej.jpg',
+        width: 'calc(100% - (1.5% * 2))',
+        height: 'calc(500px * 1.4)',
+        backgroundPosition: '50% 25%'
+      }} />
+      <section className="textBlurb">
+        <p className="textOverlay">Etobicoke Transitional</p>
+      </section>
+      {/* <ImageTile dataItem={{
         num: '2',
         image: image2,
         width: 'calc(100% - (1.5% * 2))',
@@ -46,7 +47,7 @@ const Upcoming = (props) => (
       <section className="textBlurb">
         <p className="textOverlay">St. George's Rebuild</p>
         <p className="completionDate">Completion 2019</p>
-      </section>
+      </section> */}
     </section>
   </Layout>
 )
