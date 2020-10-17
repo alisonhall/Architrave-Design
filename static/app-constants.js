@@ -75,7 +75,7 @@ const projects = {
     type: projectTypes.renovations,
     imageFolder: '',
     projectName: 'Lytton Park Manor',
-    projectDescription: 'Built in 1908, this lovely home was full of charming detail but the interior was dark and lacked modern amenities. A seamless addition incorporates a bright eat-in kitchen and master suite above. New windows and wide archways let in the sun, while keeping the original character intact all.',
+    projectDescription: 'Built in 1908, this lovely home was full of charming detail but the interior was dark and lacked modern amenities. A seamless addition incorporates a bright eat-in kitchen and master suite above. New windows and wide archways let in the sun, while keeping the original character intact.',
     completion: null
   },
   princessMargaretFacelift: {
