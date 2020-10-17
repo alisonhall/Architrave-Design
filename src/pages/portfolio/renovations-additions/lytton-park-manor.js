@@ -26,7 +26,7 @@ const LyttonParkUpdate = (props) => (
       }} />
       <TextBlurb dataItem={{
         title: 'Lytton Park Manor',
-        text: 'Built in 1908, this lovely home was full of charming detail but the interior was dark and lacked modern amenities. A seamless addition incorporates a bright eat-in kitchen and master suite above. New windows and wide archways let in the sun, while keeping the original character intact all.'
+        text: 'Built in 1908, this lovely home was full of charming detail but the interior was dark and lacked modern amenities. A seamless addition incorporates a bright eat-in kitchen and master suite above. New windows and wide archways let in the sun, while keeping the original character intact.'
       }} />
       <ImageTile dataItem={{
         num: '2',
