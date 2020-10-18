@@ -137,6 +137,8 @@ const projects = {
     fileName: null,
     type: projectTypes.upcoming,
     imageFolder: 'Kingsway-Classic',
+    mainImage: null,
+    beforeImage: null,
     projectName: 'Kingsway Classic',
     projectDescription: null,
     completion: null
@@ -146,6 +148,8 @@ const projects = {
     fileName: null,
     type: projectTypes.upcoming,
     imageFolder: null,
+    mainImage: null,
+    beforeImage: null,
     projectName: "St. George's Rebuild",
     projectDescription: null,
     completion: 'Completion 2019'
@@ -157,6 +161,28 @@ const projects = {
     imageFolder: '1-New-Homes/5-Centre-Hall-Classic/',
     projectName: 'Classic Centre Hall',
     projectDescription: 'This luxury home in The Kingsway boasts a classically inspired stone façade. Inside, a two-story main hall adds a sense of drama with its wrap-around second floor balcony. The bright, contemporary family room opens to the backyard with wall to wall french doors.',
+    completion: null
+  },
+  lorneParkRenovation: {
+    key: 'lorneParkRenovation',
+    fileName: null,
+    type: projectTypes.upcoming,
+    imageFolder: null,
+    mainImage: 'Lorne_Park_Renovation_mihiez.jpg',
+    beforeImage: 'Lorne_Park_Renovation_mihiez.jpg',
+    projectName: 'Lorne Park Renovation',
+    projectDescription: null,
+    completion: null
+  },
+  etobicokeTransitional: {
+    key: 'etobicokeTransitional',
+    fileName: null,
+    type: projectTypes.upcoming,
+    imageFolder: null,
+    mainImage: 'Etobicoke_Transitional_dotjej.jpg',
+    beforeImage: null,
+    projectName: 'Etobicoke Transitional',
+    projectDescription: null,
     completion: null
   }
 }
@@ -182,10 +208,18 @@ const constants = {
     projects.rosedaleRevival.key,
     projects.etobicokeRenewal.key
   ],
+  upcomingProjectsOrder: [
+    projects.lorneParkRenovation.key,
+    projects.etobicokeTransitional.key
+  ],
   unusedNewProjects: [],
   unusedRenovationProjects: [
     projects.lorneParkInterior.key,
     projects.royalYorkFacelift.key
+  ],
+  unusedUpcomingProjects: [
+    projects.stGeorgesRebuild.key,
+    projects.kingswayClassic.key
   ],
   cloudinary: {
     user: 'alisonkhall',
@@ -196,7 +230,8 @@ const constants = {
   houzz: {
     url: 'http://www.houzz.com/pro/architrave/architrave-design-architect',
     reviewsUrl: 'http://www.houzz.com/browseReviews/architrave'
-  }
+  },
+  defaultUpcomingImageFolder: '3-Upcoming/'
 }
 
 export default constants;
