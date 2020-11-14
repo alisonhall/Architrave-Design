@@ -10,6 +10,16 @@ const Upcoming = (props) => (
     <section className="contentWrapper layoutAll layoutUpcoming">
       <ImageTile dataItem={{
         num: '1',
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_700,c_scale,f_auto,q_auto/v1602976697/ArchitraveDesign/3-Upcoming/Norseman_Top_Up_hvicw4.jpg',
+        width: 'calc(100% - (1.5% * 2))',
+        height: 'calc(500px * 1.4)',
+        backgroundPosition: '50% 25%'
+      }} />
+      <section className="textBlurb">
+        <p className="textOverlay">Norseman Top Up</p>
+      </section>
+      <ImageTile dataItem={{
+        num: '1',
         imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_700,c_scale,f_auto,q_auto/v1602976686/ArchitraveDesign/3-Upcoming/Lorne_Park_Renovation_mihiez.jpg',
         width: 'calc(100% - (1.5% * 2))',
         height: 'calc(500px * 1.4)',
