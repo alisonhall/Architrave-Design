@@ -12,6 +12,20 @@ const Reviews = (props) => (
       <div className="contentBackground clearfix">
         <section className="textContent">
           <section className="review">
+            <h3>Mike Langdon</h3>
+            <h4>Project Date: </h4>
+            <h5>November 2020</h5>
+            <p>From the minute we met Bill, we had a sense he was the right architect to guide us through the design stage of our new home build. Bill designed a number of houses in our central Etobicoke neighbourhood (all of which we liked), so we were confident from the outset that his plans would be to our taste (which turned out to be absolutely true).</p>
+            <p>And while that's important, it's not actually the reason we hired Bill.  More important to us were traits that were evident in our first meeting: Bill is calm, experienced and isn't afraid to share his perspective about what will actually work.  All three of those traits were exceptionally helpful during the design process -- and even as questions (mostly caused by our indecision) arose during the build.  Bill even gave us great counsel on some landscaping issues that arose with the city once the build was complete.</p>
+            <p>In short: We love the house Bill designed.  We found him a calming and helpful resource when needed during the build phase.  And he really seemed invested in delivering on the design we had in mind.  10/10.  Would recommend him without reservation.</p>
+          </section>
+          <section className="review">
+            <h3>Sean Holman</h3>
+            <h4>Project Date: </h4>
+            <h5>October 2020</h5>
+            <p>Doing a home renovation requires a lot of decision making and one of the most critical decisions is the selection of your architect.  After considering our options we selected Bill Hall and Architrave as our architect.  Simply put, Bill just "got" our project and had the same enthusiasm for it as we did.  He didn't see it simply as a job, he saw it as an opportunity to do something special in delivering on our dream.  He presented excellent drawings, continually asked us questions, was open to our thoughts and presented us options to get us to where we wanted to be.  Most importantly he listened.  He was there when we needed his feedback, but wasn't pushing us to his deadlines - he worked with our schedule.  He explained all the steps, simplified the permit process, including the challenge of the arborist and always made sure we were comfortable before we moved forward.  We couldn't be happier with the results.  We make sure to tell people who compliment us on the house the role that Bill and Architrave played.  If you want an architect that is easy to work with Bill and Architrave should be your choiuce.</p>
+          </section>
+          <section className="review">
             <h3>sandyporter</h3>
             <h4>Project Date: </h4>
             <h5>September 2020</h5>
