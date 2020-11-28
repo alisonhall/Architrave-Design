@@ -49,13 +49,13 @@ const NewHomes = (props) => (
           num: '4',
           linkUrl: '/portfolio/new-homes/credit-river-manor',
           text: "Credit River Manor",
-          image: image4,
+          imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_300,c_scale,f_auto,q_auto/v1595347266/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/_1_fbaept.jpg',
           width: 'calc(31% - (1.5% * 2))',
           height: 'calc(500px * 0.598266)'
         }} />
         <TextBlurb dataItem={{
           text: 'Designing stylish new homes and renovations in Etobicoke and the Greater Toronto Area.'
-        }}/>
+        }} />
         <ImageLinkTile dataItem={{
           num: '5',
           linkUrl: '/portfolio/new-homes/kingsway-transitional',

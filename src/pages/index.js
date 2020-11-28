@@ -11,7 +11,6 @@ import TextBlurb from '../components/textBlurb';
 import image1 from '../images/New-Homes/HoggsHollowTraditional-4.jpg';
 import image2 from '../images/New-Homes/KingswayGeorgian-1.jpg';
 import image3 from '../images/New-Homes/KingswayTransitional-6.jpg';
-import image4 from '../images/New-Homes/CreditRiver-1.jpg';
 import image5 from '../images/Renovations-Additions/Etobicoke-2.jpg';
 import image6 from '../images/Renovations-Additions/Lytton-Park-3.jpg';
 import image7 from '../images/New-Homes/KingswayTransitional-1.jpg';
@@ -49,7 +48,7 @@ const IndexPage = (props) => (
         num: '4',
         linkUrl: '/portfolio/new-homes/credit-river-manor',
         text: "Credit River Manor",
-        image: image4,
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_300,c_scale,f_auto,q_auto/v1595347266/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/_1_fbaept.jpg',
         width: 'calc(31% - (1.5% * 2))',
         height: 'calc(500px * 0.598266)'
       }} />

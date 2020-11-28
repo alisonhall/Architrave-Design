@@ -7,20 +7,6 @@ import ImageTile from '../../../components/imageTile';
 import TextBlurb from '../../../components/textBlurb';
 import PrevNextProjectLink from "../../../components/prevNextProjectLink"
 
-import image1 from '../../../images/New-Homes/CreditRiver-3.jpg';
-import image2 from '../../../images/New-Homes/CreditRiver-1b.jpg';
-import image3 from '../../../images/New-Homes/CreditRiver-10.jpg';
-import image4 from '../../../images/New-Homes/CreditRiver-4.jpg';
-import image5 from '../../../images/New-Homes/CreditRiver-5.jpg';
-import image6 from '../../../images/New-Homes/CreditRiver-7.jpg';
-import image7 from '../../../images/New-Homes/CreditRiver-6.jpg';
-import image8 from '../../../images/New-Homes/CreditRiver-8.jpg';
-import image9 from '../../../images/New-Homes/CreditRiver-9.jpg';
-import image10 from '../../../images/New-Homes/CreditRiver-12.jpg';
-import image11 from '../../../images/New-Homes/CreditRiver-11.jpg';
-import image12 from '../../../images/New-Homes/CreditRiver-13.jpg';
-
-
 const CreditRiverClassic = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
@@ -28,79 +14,91 @@ const CreditRiverClassic = (props) => (
       <ImageLayout1Col1Row>
         <ImageTile dataItem={{
           num: '1',
-          image: image1,
-          width: 'calc(48% - (1.5% * 2))',
-          height: 'calc(500px * 1.29)'
+          imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_600,c_scale,f_auto,q_auto/v1595347266/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/_1_fbaept.jpg',
+          width: 'calc(50% - (1.5% * 2))',
+          height: '380px'
         }} />
         <ImageTile dataItem={{
           num: '2',
-          image: image2,
-          width: 'calc(52% - (1.5% * 2))',
-          height: 'calc(500px * 0.68)'
-        }} />
-        <ImageTile dataItem={{
-          num: '3',
-          image: image3,
-          width: 'calc(52% - (1.5% * 2))',
-          height: 'calc(500px * 0.54)'
+          imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_600,c_scale,f_auto,q_auto/v1606592704/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/_2_dzqicp.jpg',
+          width: 'calc(50% - (1.5% * 2))',
+          height: '380px'
         }} />
         <TextBlurb dataItem={{
           title: 'Credit River Manor',
           text: 'Meticulous detail and the finest craftsmanship combine to make this spacious home a show-piece. Stonework by Gino Gentile is topped with a slate roof and imported copper details. Inside, a two-storey front foyer cascades down to a wood-beamed family room and a coffered kitchen.'
         }} />
         <ImageTile dataItem={{
+          num: '3',
+          imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_600,c_scale,f_auto,q_auto/v1606592703/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/_4_jt4uq1.jpg',
+          width: 'calc(50% - (1.5% * 2))',
+          height: '380px'
+        }} />
+        <ImageTile dataItem={{
           num: '4',
-          image: image4,
-          width: 'calc(48% - (1.5% * 2))',
-          height: 'calc(500px * 0.6)'
+          imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_600,c_scale,f_auto,q_auto/v1595347202/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/3-Two-Story-Front-Foyer_lkcpir.jpg',
+          width: 'calc(25% - (1.5% * 2))',
+          height: '380px'
         }} />
         <ImageTile dataItem={{
           num: '5',
-          image: image5,
-          width: 'calc(52% - (1.5% * 2))',
-          height: 'calc(500px * 0.6)'
+          imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_600,c_scale,f_auto,q_auto/v1595347209/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/10-Main-Stair_bsfa5r.jpg',
+          width: 'calc(25% - (1.5% * 2))',
+          height: '380px'
         }} />
         <ImageTile dataItem={{
           num: '6',
-          image: image6,
-          width: 'calc(48% - (1.5% * 2))',
-          height: 'calc(500px * 0.6)'
+          imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_600,c_scale,f_auto,q_auto/v1595347196/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/2-Front-Foyer_y8wodd.jpg',
+          width: 'calc(38% - (1.5% * 2))',
+          height: '290px'
         }} />
         <ImageTile dataItem={{
           num: '7',
-          image: image7,
-          width: 'calc(52% - (1.5% * 2))',
-          height: 'calc(500px * 0.6)'
+          imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_600,c_scale,f_auto,q_auto/v1595347190/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/7-Hallway-Arch_nsi6eb.jpg',
+          width: 'calc(24% - (1.5% * 2))',
+          height: '290px'
         }} />
         <ImageTile dataItem={{
           num: '8',
-          image: image8,
-          width: 'calc(100% - (1.5% * 2))',
-          height: 'calc(500px * 1.2)'
+          imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_600,c_scale,f_auto,q_auto/v1595347196/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/5-Sitting-Room_dt8nwa.jpg',
+          width: 'calc(38% - (1.5% * 2))',
+          height: '290px'
         }} />
         <ImageTile dataItem={{
           num: '9',
-          image: image9,
-          width: 'calc(48% - (1.5% * 2))',
-          height: 'calc(500px * 1.35)'
+          imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_600,c_scale,f_auto,q_auto/v1595347192/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/6-Dining-Room_n7r1av.jpg',
+          width: 'calc(33.33% - (1.5% * 2))',
+          height: '230px'
         }} />
         <ImageTile dataItem={{
           num: '10',
-          image: image10,
-          width: 'calc(52% - (1.5% * 2))',
-          height: 'calc(500px * 0.61)'
+          imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_600,c_scale,f_auto,q_auto/v1595347209/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/9-Kitchen-_-Breakfast-Bay_k8qrcz.jpg',
+          width: 'calc(33.33% - (1.5% * 2))',
+          height: '230px'
         }} />
         <ImageTile dataItem={{
           num: '11',
-          image: image11,
-          width: 'calc(52% - (1.5% * 2))',
-          height: 'calc(500px * 0.664)'
+          imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_600,c_scale,f_auto,q_auto/v1595347196/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/8-Family-Room-with-Custom-Mantel_vvgqso.jpg',
+          width: 'calc(33.33% - (1.5% * 2))',
+          height: '230px'
         }} />
         <ImageTile dataItem={{
           num: '12',
-          image: image12,
-          width: 'calc(100% - (1.5% * 2))',
-          height: 'calc(500px * 1.1)'
+          imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_600,c_scale,f_auto,q_auto/v1595347202/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/11-Upper-Hall_yfoloe.jpg',
+          width: 'calc(20% - (1.5% * 2))',
+          height: '290px'
+        }} />
+        <ImageTile dataItem={{
+          num: '12',
+          imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_600,c_scale,f_auto,q_auto/v1595347210/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/12-Vaulted-Master_z9t3hj.jpg',
+          width: 'calc(45% - (1.5% * 2))',
+          height: '290px'
+        }} />
+        <ImageTile dataItem={{
+          num: '12',
+          imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_600,c_scale,f_auto,q_auto/v1595347209/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/13-Bedroom_nesbsz.jpg',
+          width: 'calc(35% - (1.5% * 2))',
+          height: '290px'
         }} />
       </ImageLayout1Col1Row>
       <PrevNextProjectLink direction="previous" linkUrl="/portfolio/new-homes/classic-centre-hall" />
