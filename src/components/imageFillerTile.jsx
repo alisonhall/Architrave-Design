@@ -4,6 +4,17 @@ import { css, jsx } from '@emotion/core';
 
 import Image from './image';
 
+/**
+ * @description A filler image for one of the navigation pages.
+ * 
+ * @param {Object} param
+ * @param {Object} param.image
+ * @param {Object} param.styles
+ * @param {string} param.styles.width
+ * @param {string} param.styles.height
+ * @param {string} param.styles.float
+ * @param {string} param.num
+ */
 const ImageFillerTile = ({
   image,
   styles: {

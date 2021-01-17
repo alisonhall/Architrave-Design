@@ -2,6 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
+/**
+ * @description All of the SEO data for a page.
+ * 
+ * @param {Object} param
+ * @param {string} param.description
+ * @param {string} param.lang
+ * @param {string} param.meta
+ * @param {Array|string} param.keywords
+ * @param {string} param.title
+ */
 function SEO({ description, lang, meta, keywords, title }) {
   const site = {
     siteMetadata: {

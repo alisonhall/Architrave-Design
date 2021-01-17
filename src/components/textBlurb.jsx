@@ -1,5 +1,15 @@
 import React from 'react';
 
+/**
+ * @description A blue section with text on top.
+ * 
+ * @param {Object} param
+ * @param {Object} param.text
+ * @param {string} param.text.copy
+ * @param {string} param.text.title
+ * @param {string} param.text.subTitle
+ * @param {string} param.customClass
+ */
 const TextBlurb = ({
   text: {
     copy = '',

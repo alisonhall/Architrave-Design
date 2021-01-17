@@ -8,6 +8,14 @@ import rightArrow from '../images/arrow-right-solid.svg';
 
 const { projectTypes, projects, newProjectsOrder, renovationProjectsOrder, portfolio } = constants;
 
+/**
+ * @description Either the previous or the next project links. Link is dynamically generated based on the project passed in.
+ * 
+ * @param {Object} param
+ * @param {Object} param.project
+ * @param {string} param.project.type
+ * @param {string} param.project.key
+ */
 const PrevNextProjectLinks = ({
   project: {
     type,

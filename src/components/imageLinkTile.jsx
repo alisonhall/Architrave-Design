@@ -5,6 +5,22 @@ import { css, jsx } from '@emotion/core';
 
 import Image from './image';
 
+/**
+ * @description An image tile that links to a project and has the title of the project on it.
+ * 
+ * @param {Object} param
+ * @param {Object} param.image
+ * @param {Object} param.link
+ * @param {string} param.link.linkUrl
+ * @param {Object} param.text
+ * @param {string} param.text.copy
+ * @param {string} param.customClass
+ * @param {string} param.num
+ * @param {Object} param.styles
+ * @param {string} param.styles.width
+ * @param {string} param.styles.height
+ * @param {string} param.styles.float
+ */
 const ImageLinkTile = ({
   image,
   link: {

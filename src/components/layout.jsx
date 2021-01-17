@@ -6,6 +6,14 @@ import Navigation from './navigation';
 import Footer from './footer';
 import '../scss/style.scss'
 
+/**
+ * @description The layout of all of the pages. Includes the header, navigation, body, and footer.
+ * 
+ * @param {Object} param
+ * @param {Node} param.children
+ * @param {string} param.mainClasses
+ * @param {string} param.urlPath
+ */
 const Layout = ({ children, mainClasses, urlPath }) => (
   <>
     <Header />

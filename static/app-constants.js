@@ -5,6 +5,21 @@ const projectTypes = {
   upcoming: 'upcoming'
 }
 
+/**
+ * Project constants
+ * 
+ * @param {Object} projectKeyName
+ * @param {string} projectKeyName.key - the projectKeyName
+ * @param {string} projectKeyName.fileName - the filename of the page
+ * @param {string} projectKeyName.type - the type of project it is (one of the options from the projectTypes constant object)
+ * @param {string} projectKeyName.imageFolder - the path to the folder within Cloudinary that contains the project's images
+ * @param {string} projectKeyName.projectName - the title related to the project; used as text within the site
+ * @param {string} projectKeyName.projectDescription - the description of the project; used on the project details page
+ * @param {string} projectKeyName.completion - the future completion date, if applicable
+ * @param {string} projectKeyName.mainImage - the name of the main thumbnail image of the project within Cloudinary
+ * @param {string} projectKeyName.beforeImage - the name of the 'before' image of the project within Cloudinary
+ */
+
 const projects = {
   creditRiverClassic: {
     key: 'creditRiverClassic',

@@ -4,6 +4,20 @@ import { css, jsx } from '@emotion/core';
 
 import constants from '../../static/app-constants';
 
+/**
+ * @description An image within a tile.
+ * 
+ * @param {Object} param
+ * @param {string} param.customClass
+ * @param {number} param.num
+ * @param {File} param.image
+ * @param {string} param.imageUrl
+ * @param {string} param.imageFolder
+ * @param {string} param.imageName
+ * @param {string} param.imageModifier
+ * @param {string} param.altText
+ * @param {string} param.backgroundPosition
+ */
 const Image = ({
   customClass = '',
   num = 0,

@@ -9,6 +9,12 @@ import houzzLogo from '../images/HouzzH.png';
 
 const { portfolio, projectTypes, houzz } = constants;
 
+/**
+ * @description The navigation sidebar and the logo.
+ * 
+ * @param {Object} param
+ * @param {string} param.urlPath
+ */
 const Navigation = ({urlPath}) => {
   const subNavVisible = (urlPath.indexOf(portfolio) >= 0) ? 'subNavVisible' : '';
   const isNewHomes = (urlPath.indexOf(projectTypes.new) >= 0) ? 'selected' : '';
