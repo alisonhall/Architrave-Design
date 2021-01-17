@@ -2,7 +2,7 @@
   "name": "gatsby-starter-default",
   "private": true,
   "description": "Architrave Design's professional website",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Alison K. Hall <alison@alisonkhall.com>",
   "dependencies": {
     "@emotion/core": "^10.0.28",
