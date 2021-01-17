@@ -37,45 +37,40 @@ const Image = ({
     } = {}
   } = constants;
 
+  let imageSrc;
+
+  /* Handle/Compile the imageSrc based on the props */
   if (imageFolder && imageName) {
-    return (
-      <img
-        className={`imageDiv imageDiv${num} cld-responsive ${customClass}`}
-        src={`https://res.cloudinary.com/${user}/image/upload/${imageModifier}/${account}/${siteFolder}${imageFolder}${imageName}`}
-        alt={altText}
-        css={css`
-          object-position: ${backgroundPosition};
-        `}
-      />
-    )
+    imageSrc = `https://res.cloudinary.com/${user}/image/upload/${imageModifier}/${account}/${siteFolder}${imageFolder}${imageName}`
   } else if (imageUrl) {
-    let modifiedImage = imageUrl;
-    if (imageUrl.indexOf(account) >= 0) {
+    let imageSrc = imageUrl;
+    if (imageUrl.indexOf(account) >= 0 && imageUrl.indexOf('w_auto') === -1) {
       const imageParts = imageUrl.split(account);
-      modifiedImage = `${imageParts[0]}${imageModifier}/${account}${imageParts[1]}`
+      imageSrc = `${imageParts[0]}${imageModifier}/${account}${imageParts[1]}`
     }
-    return (
-      <img
-        className={`imageDiv imageDiv${num} cld-responsive ${customClass}`}
-        src={modifiedImage}
-        alt={altText}
-        css={css`
-          object-position: ${backgroundPosition};
-        `}
-      />
-    );
   } else if (image) {
-    return (
-      <picture>
-        <source media="(min-width: 650px)" srcSet={image} />
-        <source media="(max-width: 649px)" srcSet={image} />
-        <img className={`imageDiv imageDiv${num} ${customClass}`} src={image} alt={altText} css={css`
-                object-position: ${backgroundPosition};
-              `} />
-      </picture>
-    )
+    imageSrc = image;
+  } else {
+    return null;
   }
-  return null;
+
+  return (
+    <img
+      className={`imageDiv imageDiv${num} cld-responsive ${customClass}`}
+      src={imageSrc}
+      alt={altText}
+      css={css`
+        object-position: ${backgroundPosition};
+      `}
+    />
+    // <picture>
+      //   <source media="(min-width: 650px)" srcSet={image} />
+      //   <source media="(max-width: 649px)" srcSet={image} />
+      //   <img className={`imageDiv imageDiv${num} ${customClass}`} src={image} alt={altText} css={css`
+      //           object-position: ${backgroundPosition};
+      //         `} />
+      // </picture>
+  );
 }
 
 export default Image;
