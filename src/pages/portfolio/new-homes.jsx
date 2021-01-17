@@ -86,7 +86,7 @@ const NewHomes = (props) => (
                 num={4}
                 project={projects.creditRiverClassic}
                 image={{
-                  image: image4
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347266/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/_1_fbaept.jpg'
                 }}
                 link={{
                   linkUrl: `/${portfolio}/${projects.creditRiverClassic.type}/${projects.creditRiverClassic.fileName}`
