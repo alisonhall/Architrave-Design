@@ -4,10 +4,10 @@ import constants from '../../../../static/app-constants';
 
 import Layout from '../../../components/layout';
 import SEO from '../../../components/seo';
-import Item from '../../../components/item';
-import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
 import Row from '../../../components/row';
 import Column from '../../../components/column';
+import Item from '../../../components/item';
+import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
 
 const project = constants.projects.princessMargaretFacelift;
 

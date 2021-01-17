@@ -4,6 +4,8 @@ import constants from '../../../../public/app-constants';
 
 import Layout from '../../../components/layout';
 import SEO from '../../../components/seo';
+import Row from '../../../components/row';
+import Column from '../../../components/column';
 import Item from '../../../components/item';
 import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
 
@@ -20,72 +22,98 @@ const HoggsHollowFrenchCountry = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
     <section className="contentWrapper layoutAll layoutProject">
-      <Item
-        num={1}
-        image={{
-          image: image1
-        }}
-        styles={{
-          width: 'calc(63% - (1.5% * 2))',
-          height: '390px'
-        }}
-      />
-      <Item
-        num={2}
-        image={{
-          image: image2
-        }}
-        styles={{
-          width: 'calc(37% - (1.5% * 2))',
-          height: '390px'
-        }}
-      />
-      <Item
-        num={3}
-        image={{
-          image: image3
-        }}
-        styles={{
-          width: 'calc(48% - (1.5% * 2))',
-          height: '290px'
-        }}
-      />
-      <Item
-        num={4}
-        image={{
-          image: image4
-        }}
-        styles={{
-          width: 'calc(52% - (1.5% * 2))',
-          height: '290px'
-        }}
-      />
-      <Item
-        text={{
-          title: project.projectName,
-          copy: project.projectDescription
-        }}
-      />
-      <Item
-        num={5}
-        image={{
-          image: image5
-        }}
-        styles={{
-          width: 'calc(63% - (1.5% * 2))',
-          height: '365px'
-        }}
-      />
-      <Item
-        num={6}
-        image={{
-          image: image6
-        }}
-        styles={{
-          width: 'calc(37% - (1.5% * 2))',
-          height: '365px'
-        }}
-      />
+      <Row height="390px">
+        <Column width="63%">
+          <Item
+            num={1}
+            image={{
+              image: image1
+            }}
+            styles={{
+              width: 'calc(63% - (1.5% * 2))',
+              height: '390px'
+            }}
+          />
+        </Column>
+        <Column width="37%">
+          <Item
+            num={2}
+            image={{
+              image: image2
+            }}
+            styles={{
+              width: 'calc(37% - (1.5% * 2))',
+              height: '390px'
+            }}
+          />
+        </Column>
+      </Row>
+      <Row height="290px">
+        <Column width="48%">
+          <Item
+            num={3}
+            image={{
+              image: image3
+            }}
+            styles={{
+              width: 'calc(48% - (1.5% * 2))',
+              height: '290px'
+            }}
+          />
+        </Column>
+        <Column width="52%">
+          <Item
+            num={4}
+            image={{
+              image: image4
+            }}
+            styles={{
+              width: 'calc(52% - (1.5% * 2))',
+              height: '290px'
+            }}
+          />
+        </Column>
+      </Row>
+      <Row>
+        <Column>
+          <Item
+            text={{
+              title: project.projectName,
+              copy: project.projectDescription
+            }}
+          />
+        </Column>
+      </Row>
+      <Row height="365px">
+        <Column width="63%">
+          <Item
+            num={5}
+            image={{
+              image: image5
+            }}
+            styles={{
+              width: 'calc(63% - (1.5% * 2))',
+              height: '365px'
+            }}
+          />
+        </Column>
+        <Column width="37%">
+          <Item
+            num={6}
+            image={{
+              image: image6
+            }}
+            styles={{
+              width: 'calc(37% - (1.5% * 2))',
+              height: '365px'
+            }}
+          />
+        </Column>
+      </Row>
+      
+      
+      
+      
       <PrevNextProjectLinks project={project} />
     </section>
   </Layout>

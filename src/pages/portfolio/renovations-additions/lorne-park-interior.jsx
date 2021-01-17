@@ -4,6 +4,8 @@ import constants from '../../../../public/app-constants';
 
 import Layout from '../../../components/layout';
 import SEO from '../../../components/seo';
+import Row from '../../../components/row';
+import Column from '../../../components/column';
 import Item from '../../../components/item';
 import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
 
@@ -19,65 +21,89 @@ const LorneParkInterior = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
     <section className="contentWrapper layoutAll layoutProject">
-      <Item
-        num={1}
-        image={{
-          image: image1
-        }}
-        styles={{
-          width: 'calc(23% - (1.5% * 2))',
-          height: '225px'
-        }}
-      />
-      <Item
-        num={2}
-        image={{
-          image: image2
-        }}
-        styles={{
-          width: 'calc(77% - (1.5% * 2))',
-          height: '480px',
-          float: 'right'
-        }}
-      />
-      <Item
-        num={3}
-        image={{
-          image: image3
-        }}
-        styles={{
-          width: 'calc(23% - (1.5% * 2))',
-          height: '225px'
-        }}
-      />
-      <Item
-        text={{
-          title: project.projectName,
-          copy: project.projectDescription
-        }}
-      />
-      <Item
-        num={4}
-        image={{
-          image: image4,
-          backgroundPosition: '50% 30%'
-        }}
-        styles={{
-          width: 'calc(50% - (1.5% * 2))',
-          height: '260px',
-        }}
-      />
-      <Item
-        num={5}
-        image={{
-          image: image5,
-          backgroundPosition: '50% 30%'
-        }}
-        styles={{
-          width: 'calc(50% - (1.5% * 2))',
-          height: '260px',
-        }}
-      />
+      <Row>
+        <Column width="23%">
+          <Row height="225px">
+            <Column>
+              <Item
+                num={1}
+                image={{
+                  image: image1
+                }}
+                styles={{
+                  width: 'calc(23% - (1.5% * 2))',
+                  height: '225px'
+                }}
+              />
+            </Column>
+          </Row>
+          <Row height="225px">
+            <Column>
+              <Item
+                num={3}
+                image={{
+                  image: image3
+                }}
+                styles={{
+                  width: 'calc(23% - (1.5% * 2))',
+                  height: '225px'
+                }}
+              />
+            </Column>
+          </Row>
+        </Column>
+        <Column width="77%">
+          <Item
+            num={2}
+            image={{
+              image: image2
+            }}
+            styles={{
+              width: 'calc(77% - (1.5% * 2))',
+              height: '480px',
+              float: 'right'
+            }}
+          />
+        </Column>
+      </Row>
+      <Row>
+        <Column>
+          <Item
+            text={{
+              title: project.projectName,
+              copy: project.projectDescription
+            }}
+          />
+        </Column>
+      </Row>
+      <Row height="260px">
+        <Column>
+          <Item
+            num={4}
+            image={{
+              image: image4,
+              backgroundPosition: '50% 30%'
+            }}
+            styles={{
+              width: 'calc(50% - (1.5% * 2))',
+              height: '260px',
+            }}
+          />
+        </Column>
+        <Column>
+          <Item
+            num={5}
+            image={{
+              image: image5,
+              backgroundPosition: '50% 30%'
+            }}
+            styles={{
+              width: 'calc(50% - (1.5% * 2))',
+              height: '260px',
+            }}
+          />
+        </Column>
+      </Row>
       <PrevNextProjectLinks project={project} />
     </section>
   </Layout>
