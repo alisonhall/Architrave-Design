@@ -180,25 +180,21 @@ const projects = {
   },
   lorneParkRenovation: {
     key: 'lorneParkRenovation',
-    fileName: null,
     type: projectTypes.upcoming,
-    imageFolder: null,
-    mainImage: 'Lorne_Park_Renovation_mihiez.jpg',
-    beforeImage: 'Lorne_Park_Renovation_mihiez.jpg',
-    projectName: 'Lorne Park Renovation',
-    projectDescription: null,
-    completion: null
+    mainImageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1602976686/ArchitraveDesign/3-Upcoming/Lorne_Park_Renovation_mihiez.jpg',
+    projectName: 'Lorne Park Renovation'
   },
   etobicokeTransitional: {
     key: 'etobicokeTransitional',
-    fileName: null,
     type: projectTypes.upcoming,
-    imageFolder: null,
-    mainImage: 'Etobicoke_Transitional_dotjej.jpg',
-    beforeImage: null,
-    projectName: 'Etobicoke Transitional',
-    projectDescription: null,
-    completion: null
+    mainImageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1602976682/ArchitraveDesign/3-Upcoming/Etobicoke_Transitional_dotjej.jpg',
+    projectName: 'Etobicoke Transitional'
+  },
+  norsemanTopUp: {
+    key: 'norsemanTopUp',
+    type: projectTypes.upcoming,
+    mainImageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1602976697/ArchitraveDesign/3-Upcoming/Norseman_Top_Up_hvicw4.jpg',
+    projectName: 'Norseman Top Up'
   }
 }
 
@@ -224,6 +220,7 @@ const constants = {
     projects.etobicokeRenewal.key
   ],
   upcomingProjectsOrder: [
+    projects.norsemanTopUp.key,
     projects.lorneParkRenovation.key,
     projects.etobicokeTransitional.key
   ],
@@ -234,7 +231,7 @@ const constants = {
   ],
   unusedUpcomingProjects: [
     projects.stGeorgesRebuild.key,
-    projects.kingswayClassic.key
+    projects.kingswayClassic.key,
   ],
   cloudinary: {
     user: 'alisonkhall',

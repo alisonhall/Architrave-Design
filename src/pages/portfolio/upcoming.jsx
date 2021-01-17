@@ -13,16 +13,16 @@ const { projects, upcomingProjectsOrder, defaultUpcomingImageFolder } = constant
 const UpcomingProject = (projectKey, index) => {
   const project = projects[projectKey];
   return (
-    <>
+    <React.Fragment key={index}>
       <Row height="700px" key={`${index}-image`}>
         <Column>
           <Item
             num={index}
             project={project}
             image={{
-              imageFolder: project.imageFolder || defaultUpcomingImageFolder,
-              imageName: project.mainImage,
-              backgroundPosition: '50% 25%'
+              imageUrl: project.mainImageUrl,
+              backgroundPosition: '50% 25%',
+              imageModifier: 'h_700,c_scale,f_auto,q_auto'
             }}
             styles={{
               width: 'calc(100% - (1.5% * 2))',
@@ -31,16 +31,16 @@ const UpcomingProject = (projectKey, index) => {
           />
         </Column>
       </Row>
-      {project.beforeImage && (
+      {project.beforeImageUrl && (
         <Row height="700px" key={`${index}-before`}>
           <Column>
             <Item
               num={index}
               project={project}
               image={{
-                imageFolder: project.imageFolder || defaultUpcomingImageFolder,
-                imageName: project.beforeImage,
-                backgroundPosition: '50% 25%'
+                imageUrl: project.beforeImageUrl,
+                backgroundPosition: '50% 25%',
+                imageModifier: 'h_500,c_scale,f_auto,q_auto'
               }}
               styles={{
                 width: 'calc(45% - (1.5% * 2))',
@@ -60,7 +60,7 @@ const UpcomingProject = (projectKey, index) => {
           </section>
         </Column>
       </Row>
-    </>
+    </React.Fragment>
   );
 }
 
