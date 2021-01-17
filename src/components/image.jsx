@@ -49,10 +49,15 @@ const Image = ({
       />
     )
   } else if (imageUrl) {
+    let modifiedImage = imageUrl;
+    if (imageUrl.indexOf(account) >= 0) {
+      const imageParts = imageUrl.split(account);
+      modifiedImage = `${imageParts[0]}${imageModifier}/${account}${imageParts[1]}`
+    }
     return (
       <img
         className={`imageDiv imageDiv${num} cld-responsive ${customClass}`}
-        src={imageUrl}
+        src={modifiedImage}
         alt={altText}
         css={css`
           object-position: ${backgroundPosition};
