@@ -17,10 +17,11 @@ const TextBlurbFiller = ({
     width = 0,
     height = 0,
     float = 'none'
-  } = {}
+  } = {},
+  customClass = ''
 }) => (
   <section
-    className="textBlurbFiller"
+    className={`textBlurbFiller ${customClass}`}
     css={css`
       width: ${width};
       height: ${height};
