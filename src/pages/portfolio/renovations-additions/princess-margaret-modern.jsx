@@ -9,9 +9,9 @@ import Column from '../../../components/column';
 import Item from '../../../components/item';
 import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
 
-const project = constants.projects.princessMargaretFacelift;
+const project = constants.projects.princessMargaretModern;
 
-const PrincessMargaretFacelift = (props) => (
+const PrincessMargaretModern = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
     <section className="contentWrapper layoutAll layoutProject">
@@ -101,4 +101,4 @@ const PrincessMargaretFacelift = (props) => (
   </Layout>
 )
 
-export default PrincessMargaretFacelift;
+export default PrincessMargaretModern;

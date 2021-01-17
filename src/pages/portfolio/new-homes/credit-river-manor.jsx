@@ -9,9 +9,9 @@ import Column from '../../../components/column';
 import Item from '../../../components/item';
 import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
 
-const project = constants.projects.creditRiverClassic;
+const project = constants.projects.creditRiverManor;
 
-const CreditRiverClassic = (props) => (
+const CreditRiverManor = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
     <section className="contentWrapper layoutAll layoutProject">
@@ -208,4 +208,4 @@ const CreditRiverClassic = (props) => (
   </Layout>
 )
 
-export default CreditRiverClassic;
+export default CreditRiverManor;

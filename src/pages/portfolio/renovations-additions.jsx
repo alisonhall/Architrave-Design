@@ -25,16 +25,16 @@ const RenovationsAdditions = (props) => (
         <Column width="48%">
           <Item
             num={1}
-            project={projects.lyttonParkUpdate}
+            project={projects.lyttonParkManor}
             image={{
               image: image1,
               backgroundPosition: '50% 40%'
             }}
             link={{
-              linkUrl: `/${portfolio}/${projects.lyttonParkUpdate.type}/${projects.lyttonParkUpdate.fileName}`
+              linkUrl: `/${portfolio}/${projects.lyttonParkManor.type}/${projects.lyttonParkManor.fileName}`
             }}
             text={{
-              copy: projects.lyttonParkUpdate.projectName
+              copy: projects.lyttonParkManor.projectName
             }}
             styles={{
               width: 'calc(48% - (1.5% * 2))',
@@ -47,17 +47,17 @@ const RenovationsAdditions = (props) => (
             <Column>
               <Item
                 num={2}
-                project={projects.princessMargaretFacelift}
+                project={projects.princessMargaretModern}
                 image={{
-                  imageFolder: projects.princessMargaretFacelift.imageFolder,
+                  imageFolder: projects.princessMargaretModern.imageFolder,
                   imageName: '2-Addition-_-_Re-facing_xddgjt.jpg',
                   backgroundPosition: '50% 30%'
                 }}
                 link={{
-                  linkUrl: `/${portfolio}/${projects.princessMargaretFacelift.type}/${projects.princessMargaretFacelift.fileName}`
+                  linkUrl: `/${portfolio}/${projects.princessMargaretModern.type}/${projects.princessMargaretModern.fileName}`
                 }}
                 text={{
-                  copy: projects.princessMargaretFacelift.projectName
+                  copy: projects.princessMargaretModern.projectName
                 }}
                 styles={{
                   width: 'calc(52% - (1.5% * 2))',
@@ -70,16 +70,16 @@ const RenovationsAdditions = (props) => (
             <Column>
               <Item
                 num={3}
-                project={projects.cornwallHeritageAddition}
+                project={projects.upperCanadaFarmhouse}
                 image={{
                   image: image3,
                   backgroundPosition: '50% 40%'
                 }}
                 link={{
-                  linkUrl: `/${portfolio}/${projects.cornwallHeritageAddition.type}/${projects.cornwallHeritageAddition.fileName}`
+                  linkUrl: `/${portfolio}/${projects.upperCanadaFarmhouse.type}/${projects.upperCanadaFarmhouse.fileName}`
                 }}
                 text={{
-                  copy: projects.cornwallHeritageAddition.projectName
+                  copy: projects.upperCanadaFarmhouse.projectName
                 }}
                 styles={{
                   width: 'calc(52% - (1.5% * 2))',
@@ -103,16 +103,16 @@ const RenovationsAdditions = (props) => (
         <Column width="48%">
           <Item
             num={4}
-            project={projects.rosedaleRevival}
+            project={projects.rosedaleEdwardian}
             image={{
               image: image4,
               backgroundPosition: '50% 40%'
             }}
             link={{
-              linkUrl: `/${portfolio}/${projects.rosedaleRevival.type}/${projects.rosedaleRevival.fileName}`
+              linkUrl: `/${portfolio}/${projects.rosedaleEdwardian.type}/${projects.rosedaleEdwardian.fileName}`
             }}
             text={{
-              copy: projects.rosedaleRevival.projectName
+              copy: projects.rosedaleEdwardian.projectName
             }}
             styles={{
               width: 'calc(48% - (1.5% * 2))',
@@ -123,16 +123,16 @@ const RenovationsAdditions = (props) => (
         <Column width="52%">
           <Item
             num={5}
-            project={projects.etobicokeRenewal}
+            project={projects.etobicokeArtsAndCrafts}
             image={{
               image: image2,
               backgroundPosition: '50% 40%'
             }}
             link={{
-              linkUrl: `/${portfolio}/${projects.etobicokeRenewal.type}/${projects.etobicokeRenewal.fileName}`
+              linkUrl: `/${portfolio}/${projects.etobicokeArtsAndCrafts.type}/${projects.etobicokeArtsAndCrafts.fileName}`
             }}
             text={{
-              copy: projects.etobicokeRenewal.projectName
+              copy: projects.etobicokeArtsAndCrafts.projectName
             }}
             styles={{
               width: 'calc(52% - (1.5% * 2))',

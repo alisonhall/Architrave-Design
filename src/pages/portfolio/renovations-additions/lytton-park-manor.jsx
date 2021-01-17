@@ -15,9 +15,9 @@ import image3 from '../../../images/Renovations-Additions/Lytton-Park-4.jpg';
 import image4 from '../../../images/Renovations-Additions/Lytton-Park-5.jpg';
 import image5 from '../../../images/Renovations-Additions/Lytton-Park-3.jpg';
 
-const project = constants.projects.lyttonParkUpdate;
+const project = constants.projects.lyttonParkManor;
 
-const LyttonParkUpdate = (props) => (
+const LyttonParkManor = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
     <section className="contentWrapper layoutAll layoutProject">
@@ -109,4 +109,4 @@ const LyttonParkUpdate = (props) => (
   </Layout>
 )
 
-export default LyttonParkUpdate;
+export default LyttonParkManor;

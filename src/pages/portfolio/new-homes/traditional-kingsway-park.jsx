@@ -16,9 +16,9 @@ import image4 from '../../../images/New-Homes/KingswayTraditional-4.jpg';
 import image5 from '../../../images/New-Homes/KingswayTraditional-6.jpg';
 import image6 from '../../../images/New-Homes/KingswayTraditional-5.jpg';
 
-const project = constants.projects.kingswayTraditional;
+const project = constants.projects.traditionalKingswayPark;
 
-const KingswayTraditional = (props) => (
+const TraditionalKingswayPark = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
     <section className="contentWrapper layoutAll layoutProject">
@@ -133,4 +133,4 @@ const KingswayTraditional = (props) => (
   </Layout>
 )
 
-export default KingswayTraditional;
+export default TraditionalKingswayPark;

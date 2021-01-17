@@ -90,15 +90,15 @@ const IndexPage = (props) => (
             <Column width="60%">
               <Item
                 num={4}
-                project={projects.creditRiverClassic}
+                project={projects.creditRiverManor}
                 image={{
                   imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347266/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/_1_fbaept.jpg'
                 }}
                 link={{
-                  linkUrl: `/${portfolio}/${projects.creditRiverClassic.type}/${projects.creditRiverClassic.fileName}`
+                  linkUrl: `/${portfolio}/${projects.creditRiverManor.type}/${projects.creditRiverManor.fileName}`
                 }}
                 text={{
-                  copy: projects.creditRiverClassic.projectName
+                  copy: projects.creditRiverManor.projectName
                 }}
                 styles={{
                   width: 'calc(31% - (1.5% * 2))',
@@ -163,15 +163,15 @@ const IndexPage = (props) => (
         <Column width="36%">
           <Item
             num={7}
-            project={projects.etobicokeRenewal}
+            project={projects.etobicokeArtsAndCrafts}
             image={{
               image: image5
             }}
             link={{
-              linkUrl: `/${portfolio}/${projects.etobicokeRenewal.type}/${projects.etobicokeRenewal.fileName}`
+              linkUrl: `/${portfolio}/${projects.etobicokeArtsAndCrafts.type}/${projects.etobicokeArtsAndCrafts.fileName}`
             }}
             text={{
-              copy: projects.etobicokeRenewal.projectName
+              copy: projects.etobicokeArtsAndCrafts.projectName
             }}
             styles={{
               width: 'calc(36% - (1.5% * 2))',
@@ -182,15 +182,15 @@ const IndexPage = (props) => (
         <Column width="64%">
           <Item
             num={8}
-            project={projects.lyttonParkUpdate}
+            project={projects.lyttonParkManor}
             image={{
               image: image6
             }}
             link={{
-              linkUrl: `/${portfolio}/${projects.lyttonParkUpdate.type}/${projects.lyttonParkUpdate.fileName}`
+              linkUrl: `/${portfolio}/${projects.lyttonParkManor.type}/${projects.lyttonParkManor.fileName}`
             }}
             text={{
-              copy: projects.lyttonParkUpdate.projectName
+              copy: projects.lyttonParkManor.projectName
             }}
             styles={{
               width: 'calc(64% - (1.5% * 2))',
@@ -203,7 +203,7 @@ const IndexPage = (props) => (
         <Column>
           <Item
             num={8}
-            project={projects.creditRiverClassic}
+            project={projects.creditRiverManor}
             image={{
               image: image8
             }}

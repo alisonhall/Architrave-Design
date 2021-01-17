@@ -84,15 +84,15 @@ const NewHomes = (props) => (
             <Column width="60%">
               <Item
                 num={4}
-                project={projects.creditRiverClassic}
+                project={projects.creditRiverManor}
                 image={{
                   imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347266/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/_1_fbaept.jpg'
                 }}
                 link={{
-                  linkUrl: `/${portfolio}/${projects.creditRiverClassic.type}/${projects.creditRiverClassic.fileName}`
+                  linkUrl: `/${portfolio}/${projects.creditRiverManor.type}/${projects.creditRiverManor.fileName}`
                 }}
                 text={{
-                  copy: projects.creditRiverClassic.projectName
+                  copy: projects.creditRiverManor.projectName
                 }}
                 styles={{
                   width: 'calc(31% - (1.5% * 2))',
@@ -195,16 +195,16 @@ const NewHomes = (props) => (
         <Column>
           <Item
             num={9}
-            project={projects.kingswayTraditional}
+            project={projects.traditionalKingswayPark}
             image={{
               image: image8,
               backgroundPosition: '30% 40%'
             }}
             link={{
-              linkUrl: `/${portfolio}/${projects.kingswayTraditional.type}/${projects.kingswayTraditional.fileName}`
+              linkUrl: `/${portfolio}/${projects.traditionalKingswayPark.type}/${projects.traditionalKingswayPark.fileName}`
             }}
             text={{
-              copy: projects.kingswayTraditional.projectName
+              copy: projects.traditionalKingswayPark.projectName
             }}
             styles={{
               width: 'calc(33.3% - (1.5% * 2))',

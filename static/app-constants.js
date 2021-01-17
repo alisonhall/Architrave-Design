@@ -21,8 +21,8 @@ const projectTypes = {
  */
 
 const projects = {
-  creditRiverClassic: {
-    key: 'creditRiverClassic',
+  creditRiverManor: {
+    key: 'creditRiverManor',
     fileName: 'credit-river-manor',
     type: projectTypes.new,
     projectName: 'Credit River Manor',
@@ -49,8 +49,8 @@ const projects = {
     projectName: 'Kingsway Georgian',
     projectDescription: 'This classic 3-storey Georgian home was built with hand-crafted detail throughout. A limestone portico leads guests into a gracious marble foyer and paneled hall. Designed for elegant entertaining, it still remains a warm and welcoming family home.'
   },
-  kingswayTraditional: {
-    key: 'kingswayTraditional',
+  traditionalKingswayPark: {
+    key: 'traditionalKingswayPark',
     fileName: 'traditional-kingsway-park',
     type: projectTypes.new,
     projectName: 'Traditional Kingsway Park',
@@ -70,38 +70,38 @@ const projects = {
     projectName: 'Oakville Executive Home',
     projectDescription: 'Dormers and a low roofline combine to artfully downplay the size of this sprawling stone and brick home located on a private Oakville cul-de-sac.'
   },
-  lyttonParkUpdate: {
-    key: 'lyttonParkUpdate',
+  lyttonParkManor: {
+    key: 'lyttonParkManor',
     fileName: 'lytton-park-manor',
     type: projectTypes.renovations,
     projectName: 'Lytton Park Manor',
     projectDescription: 'Built in 1908, this lovely home was full of charming detail but the interior was dark and lacked modern amenities. A seamless addition incorporates a bright eat-in kitchen and master suite above. New windows and wide archways let in the sun, while keeping the original character intact.'
   },
-  princessMargaretFacelift: {
-    key: 'princessMargaretFacelift',
+  princessMargaretModern: {
+    key: 'princessMargaretModern',
     fileName: 'princess-margaret-modern',
     type: projectTypes.renovations,
     imageFolder: '2-Renovations-and-Additions/10-Princess-Margaret-Modern/',
     projectName: 'Princess Margaret Modern',
     projectDescription: 'This sixties era side-split needed a complete update inside and out. The main level was opened up, and a second floor master suite added. Stone and contemporary wood cladding combine to give the exterior a new modern look.'
   },
-  cornwallHeritageAddition: {
-    key: 'cornwallHeritageAddition',
+  upperCanadaFarmhouse: {
+    key: 'upperCanadaFarmhouse',
     fileName: 'upper-canada-farmhouse',
     type: projectTypes.renovations,
     projectName: 'Upper Canada Farmhouse',
     projectDescription: 'An addition to this charming 1820’s Loyalist farmhouse respects the character of the old, while more than doubling the living space. A flagged centre hall joins old and new, and leads into a sunny country kitchen. Above it is an airy master bedroom with a vaulted ceiling, cozy sitting area, private balcony and sweeping views. '
   },
-  rosedaleRevival: {
-    key: 'rosedaleRevival',
+  rosedaleEdwardian: {
+    key: 'rosedaleEdwardian',
     fileName: 'rosedale-edwardian',
     type: projectTypes.renovations,
     imageFolder: '2-Renovations-and-Additions/4-Rosedale-Edwardian/',
     projectName: 'Rosedale Edwardian',
     projectDescription: 'The original façade of this 1917 home had been painted over, but careful power washing revealed handsome Toronto brick hidden beneath. With Heritage approval, the front was re-imagined with a bold Edwardian-style bay and copper dormers. '
   },
-  etobicokeRenewal: {
-    key: 'etobicokeRenewal',
+  etobicokeArtsAndCrafts: {
+    key: 'etobicokeArtsAndCrafts',
     fileName: 'etobicoke-arts-and-crafts',
     type: projectTypes.renovations,
     projectName: 'Etobicoke Arts and Crafts',
@@ -167,19 +167,19 @@ const constants = {
   newProjectsOrder: [
     projects.hoggsHollowTraditional.key,
     projects.kingswayGeorgian.key,
-    projects.creditRiverClassic.key,
+    projects.creditRiverManor.key,
     projects.kingswayTransitional.key,
     projects.oakvilleExecutiveHome.key,
     projects.classicCentreHall.key,
     projects.hoggsHollowFrenchCountry.key,
-    projects.kingswayTraditional.key
+    projects.traditionalKingswayPark.key
   ],
   renovationProjectsOrder: [
-    projects.lyttonParkUpdate.key,
-    projects.princessMargaretFacelift.key,
-    projects.cornwallHeritageAddition.key,
-    projects.rosedaleRevival.key,
-    projects.etobicokeRenewal.key
+    projects.lyttonParkManor.key,
+    projects.princessMargaretModern.key,
+    projects.upperCanadaFarmhouse.key,
+    projects.rosedaleEdwardian.key,
+    projects.etobicokeArtsAndCrafts.key
   ],
   upcomingProjectsOrder: [
     projects.norsemanTopUp.key,

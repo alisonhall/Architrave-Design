@@ -9,9 +9,9 @@ import Column from '../../../components/column';
 import Item from '../../../components/item';
 import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
 
-const project = constants.projects.rosedaleRevival;
+const project = constants.projects.rosedaleEdwardian;
 
-const RosedaleRevival = (props) => (
+const RosedaleEdwardian = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
     <section className="contentWrapper layoutAll layoutProject">
@@ -64,4 +64,4 @@ const RosedaleRevival = (props) => (
   </Layout>
 )
 
-export default RosedaleRevival;
+export default RosedaleEdwardian;

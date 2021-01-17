@@ -15,9 +15,9 @@ import Column from '../../../components/column';
 import Item from '../../../components/item';
 import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
 
-const project = constants.projects.cornwallHeritageAddition;
+const project = constants.projects.upperCanadaFarmhouse;
 
-const CornwallHeritageAddition = (props) => (
+const UpperCanadaFarmhouse = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
     <section className="contentWrapper layoutAll layoutProject">
@@ -120,4 +120,4 @@ const CornwallHeritageAddition = (props) => (
   </Layout>
 )
 
-export default CornwallHeritageAddition;
+export default UpperCanadaFarmhouse;
