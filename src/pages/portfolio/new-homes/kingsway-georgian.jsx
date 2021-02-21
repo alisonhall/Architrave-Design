@@ -35,10 +35,6 @@ const KingswayGeorgian = (props) => (
             image={{
               image: image1
             }}
-            styles={{
-              width: 'calc(100% - (1.5% * 2))',
-              height: '750px'
-            }}
           />
         </Column>
       </Row>
@@ -61,10 +57,6 @@ const KingswayGeorgian = (props) => (
                 image={{
                   image: image2
                 }}
-                styles={{
-                  width: 'calc(35% - (1.5% * 2))',
-                  height: '400px'
-                }}
               />
             </Column>  
           </Row>
@@ -75,25 +67,17 @@ const KingswayGeorgian = (props) => (
                 image={{
                   image: image4
                 }}
-                styles={{
-                  width: 'calc(35% - (1.5% * 2))',
-                  height: '400px'
-                }}
               />
             </Column>  
           </Row>
         </Column>
         <Column width="65%">
-          <Row height="730px">
+          <Row height="700px">
             <Column>
               <Item
                 num={3}
                 image={{
                   image: image3
-                }}
-                styles={{
-                  width: 'calc(65% - (1.5% * 2))',
-                  height: '730px'
                 }}
               />
             </Column>  
@@ -112,90 +96,66 @@ const KingswayGeorgian = (props) => (
       </Row>
       <Row>
         <Column width="58%">
-          <Row>
+          <Row height="350px">
             <Column>
               <Item
                 num={5}
                 image={{
                   image: image5
                 }}
-                styles={{
-                  width: 'calc(58% - (1.5% * 2))',
-                  height: '350px'
-                }}
               />
             </Column>
           </Row>
-          <Row>
+          <Row height="350px">
             <Column>
               <Item
                 num={7}
                 image={{
                   image: image7
                 }}
-                styles={{
-                  width: 'calc(58% - (1.5% * 2))',
-                  height: '350px'
-                }}
               />
             </Column>
           </Row>
-          <Row>
+          <Row height="350px">
             <Column>
               <Item
                 num={9}
                 image={{
                   image: image9
                 }}
-                styles={{
-                  width: 'calc(58% - (1.5% * 2))',
-                  height: '350px'
-                }}
               />
             </Column>
           </Row>
         </Column>
         <Column width="42%">
-          <Row>
+          <Row height="540px">
             <Column>
               <Item
                 num={6}
                 image={{
                   image: image6
                 }}
-                styles={{
-                  width: 'calc(42% - (1.5% * 2))',
-                  height: '540px'
-                }}
               />
             </Column>
           </Row>
-          <Row>
+          <Row height="540px">
             <Column>
               <Item
                 num={8}
                 image={{
                   image: image8
                 }}
-                styles={{
-                  width: 'calc(42% - (1.5% * 2))',
-                  height: '540px'
-                }}
               />
             </Column>
           </Row>
         </Column>
       </Row>
-      <Row>
+      <Row height="350px">
         <Column width="34%">
           <Item
             num={10}
             image={{
               image: image10
-            }}
-            styles={{
-              width: 'calc(34% - (1.5% * 2))',
-              height: '350px'
             }}
           />
         </Column>
@@ -205,10 +165,6 @@ const KingswayGeorgian = (props) => (
             image={{
               image: image11
             }}
-            styles={{
-              width: 'calc(32% - (1.5% * 2))',
-              height: '350px'
-            }}
           />
         </Column>
         <Column width="34%">
@@ -216,10 +172,6 @@ const KingswayGeorgian = (props) => (
             num={12}
             image={{
               image: image12
-            }}
-            styles={{
-              width: 'calc(34% - (1.5% * 2))',
-              height: '350px'
             }}
           />
         </Column>

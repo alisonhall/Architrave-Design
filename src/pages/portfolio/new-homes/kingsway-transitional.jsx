@@ -24,16 +24,12 @@ const KingswayTransitional = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
     <section className="contentWrapper layoutAll layoutProject">
-      <Row>
+      <Row height="630px">
         <Column>
           <Item
             num={1}
             image={{
               image: image1
-            }}
-            styles={{
-              width: 'calc(100% - (1.5% * 2))',
-              height: '630px'
             }}
           />
         </Column>
@@ -55,10 +51,6 @@ const KingswayTransitional = (props) => (
             image={{
               image: image2
             }}
-            styles={{
-              width: 'calc(42% - (1.5% * 2))',
-              height: '290px'
-            }}
           />
         </Column>
         <Column width="29%">
@@ -67,10 +59,6 @@ const KingswayTransitional = (props) => (
             image={{
               image: image3
             }}
-            styles={{
-              width: 'calc(29% - (1.5% * 2))',
-              height: '290px'
-            }}
           />
         </Column>
         <Column width="29%">
@@ -78,10 +66,6 @@ const KingswayTransitional = (props) => (
             num={4}
             image={{
               image: image4
-            }}
-            styles={{
-              width: 'calc(29% - (1.5% * 2))',
-              height: '290px'
             }}
           />
         </Column>
@@ -93,10 +77,6 @@ const KingswayTransitional = (props) => (
             image={{
               image: image5
             }}
-            styles={{
-              width: 'calc(50% - (1.5% * 2))',
-              height: '340px'
-            }}
           />
         </Column>
         <Column>
@@ -106,10 +86,6 @@ const KingswayTransitional = (props) => (
                 num={6}
                 image={{
                   image: image6
-                }}
-                styles={{
-                  width: 'calc(50% - (1.5% * 2))',
-                  height: '260px'
                 }}
               />
             </Column>  
@@ -133,10 +109,6 @@ const KingswayTransitional = (props) => (
             image={{
               image: image7
             }}
-            styles={{
-              width: 'calc(58% - (1.5% * 2))',
-              height: '340px'
-            }}
           />
         </Column>
         <Column width="42%">
@@ -144,10 +116,6 @@ const KingswayTransitional = (props) => (
             num={8}
             image={{
               image: image8
-            }}
-            styles={{
-              width: 'calc(42% - (1.5% * 2))',
-              height: '340px'
             }}
           />
         </Column>

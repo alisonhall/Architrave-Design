@@ -32,10 +32,6 @@ const EtobicokeArtsAndCrafts = (props) => (
                 image={{
                   image: image1
                 }}
-                styles={{
-                  width: 'calc(62% - (1.5% * 2))',
-                  height: '480px'
-                }}
               />
             </Column>
           </Row>
@@ -49,10 +45,6 @@ const EtobicokeArtsAndCrafts = (props) => (
                 text={{
                   copy: 'Before'
                 }}
-                styles={{
-                  width: 'calc(31% - (1.5% * 2))',
-                  height: '240px'
-                }}
               />
             </Column>
             <Column>
@@ -60,10 +52,6 @@ const EtobicokeArtsAndCrafts = (props) => (
                 num={5}
                 image={{
                   image: image5
-                }}
-                styles={{
-                  width: 'calc(31% - (1.5% * 2))',
-                  height: '240px'
                 }}
               />
             </Column>
@@ -77,11 +65,6 @@ const EtobicokeArtsAndCrafts = (props) => (
                 image={{
                   image: image2
                 }}
-                styles={{
-                  width: 'calc(38% - (1.5% * 2))',
-                  height: '215px',
-                  float: 'right'
-                }}
               />
             </Column>
           </Row>
@@ -91,11 +74,6 @@ const EtobicokeArtsAndCrafts = (props) => (
                 num={3}
                 image={{
                   image: image3
-                }}
-                styles={{
-                  width: 'calc(38% - (1.5% * 2))',
-                  height: '505px',
-                  float: 'right'
                 }}
               />
             </Column>
@@ -119,10 +97,6 @@ const EtobicokeArtsAndCrafts = (props) => (
             image={{
               image: image6
             }}
-            styles={{
-              width: 'calc(48% - (1.5% * 2))',
-              height: '390px'
-            }}
           />
         </Column>
         <Column width="52%">
@@ -130,10 +104,6 @@ const EtobicokeArtsAndCrafts = (props) => (
             num={7}
             image={{
               image: image7
-            }}
-            styles={{
-              width: 'calc(52% - (1.5% * 2))',
-              height: '390px'
             }}
           />
         </Column>

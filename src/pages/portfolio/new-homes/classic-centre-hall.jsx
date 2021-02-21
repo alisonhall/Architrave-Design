@@ -22,10 +22,6 @@ const ClassicCentreHall = (props) => (
             image={{
               imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347266/ArchitraveDesign/1-New-Homes/5-Centre-Hall-Classic/1b-Cut-Stone-Facade_rkbnlo.jpg'
             }}
-            styles={{
-              width: 'calc(50% - (1.5% * 2))',
-              height: '332px'
-            }}
           />
         </Column>
         <Column>
@@ -33,10 +29,6 @@ const ClassicCentreHall = (props) => (
             num={2}
             image={{
               imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347266/ArchitraveDesign/1-New-Homes/5-Centre-Hall-Classic/2-Limestone-Detail_l6fs59.jpg'
-            }}
-            styles={{
-              width: 'calc(50% - (1.5% * 2))',
-              height: '332px'
             }}
           />
         </Column>
@@ -58,10 +50,6 @@ const ClassicCentreHall = (props) => (
             image={{
               imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347266/ArchitraveDesign/1-New-Homes/5-Centre-Hall-Classic/3-Two-Storey-Main-Hall_ejywhy.jpg'
             }}
-            styles={{
-              width: 'calc(33.3% - (1.5% * 2))',
-              height: '200px'
-            }}
           />
         </Column>
         <Column>
@@ -70,10 +58,6 @@ const ClassicCentreHall = (props) => (
             image={{
               imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347266/ArchitraveDesign/1-New-Homes/5-Centre-Hall-Classic/4-Custom-Kitchen_odkxdb.jpg'
             }}
-            styles={{
-              width: 'calc(33.3% - (1.5% * 2))',
-              height: '200px'
-            }}
           />
         </Column>
         <Column>
@@ -81,10 +65,6 @@ const ClassicCentreHall = (props) => (
             num={5}
             image={{
               imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347266/ArchitraveDesign/1-New-Homes/5-Centre-Hall-Classic/5-Family-Room_gdmmua.jpg'
-            }}
-            styles={{
-              width: 'calc(33.3% - (1.5% * 2))',
-              height: '200px'
             }}
           />
         </Column>
@@ -96,10 +76,6 @@ const ClassicCentreHall = (props) => (
             image={{
               imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347266/ArchitraveDesign/1-New-Homes/5-Centre-Hall-Classic/6-Mudroom_lkonse.jpg'
             }}
-            styles={{
-              width: 'calc(33.3% - (1.5% * 2))',
-              height: '200px'
-            }}
           />
         </Column>
         <Column>
@@ -108,10 +84,6 @@ const ClassicCentreHall = (props) => (
             image={{
               imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347266/ArchitraveDesign/1-New-Homes/5-Centre-Hall-Classic/7-Upper_Hall_mvytmk.jpg'
             }}
-            styles={{
-              width: 'calc(33.3% - (1.5% * 2))',
-              height: '200px'
-            }}
           />
         </Column>
         <Column>
@@ -119,10 +91,6 @@ const ClassicCentreHall = (props) => (
             num={8}
             image={{
               imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347266/ArchitraveDesign/1-New-Homes/5-Centre-Hall-Classic/10-Home-Office_aozszs.jpg'
-            }}
-            styles={{
-              width: 'calc(33.3% - (1.5% * 2))',
-              height: '200px'
             }}
           />
         </Column>
@@ -134,10 +102,6 @@ const ClassicCentreHall = (props) => (
             image={{
               imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347266/ArchitraveDesign/1-New-Homes/5-Centre-Hall-Classic/8-Master-Bedroom_l9mlyp.jpg'
             }}
-            styles={{
-              width: 'calc(33.3% - (1.5% * 2))',
-              height: '200px'
-            }}
           />
         </Column>
         <Column>
@@ -146,10 +110,6 @@ const ClassicCentreHall = (props) => (
             image={{
               imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347266/ArchitraveDesign/1-New-Homes/5-Centre-Hall-Classic/9-Master-Ensuite_ce0yej.jpg'
             }}
-            styles={{
-              width: 'calc(33.3% - (1.5% * 2))',
-              height: '200px'
-            }}
           />
         </Column>
         <Column>
@@ -157,10 +117,6 @@ const ClassicCentreHall = (props) => (
             num={11}
             image={{
               imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347266/ArchitraveDesign/1-New-Homes/5-Centre-Hall-Classic/11-Jack_n_Jill-Vanities_btkar8.jpg'
-            }}
-            styles={{
-              width: 'calc(33.3% - (1.5% * 2))',
-              height: '200px'
             }}
           />
         </Column>

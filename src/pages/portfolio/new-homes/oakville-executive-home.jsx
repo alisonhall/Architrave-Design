@@ -26,10 +26,6 @@ const OakvilleExecutiveHome = (props) => (
             image={{
               image: image1
             }}
-            styles={{
-              width: 'calc(100% - (1.5% * 2))',
-              height: '600px'
-            }}
           />
         </Column>
       </Row>
@@ -50,10 +46,6 @@ const OakvilleExecutiveHome = (props) => (
             image={{
               image: image2
             }}
-            styles={{
-              width: 'calc(62% - (1.5% * 2))',
-              height: '480px'
-            }}
           />
         </Column>
         <Column width="38%">
@@ -61,10 +53,6 @@ const OakvilleExecutiveHome = (props) => (
             num={3}
             image={{
               image: image3
-            }}
-            styles={{
-              width: 'calc(38% - (1.5% * 2))',
-              height: '480px'
             }}
           />
         </Column>

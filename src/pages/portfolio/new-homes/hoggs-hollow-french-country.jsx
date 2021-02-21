@@ -9,13 +9,6 @@ import Column from '../../../components/column';
 import Item from '../../../components/item';
 import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
 
-import image1 from '../../../images/New-Homes/FrenchCountry-4.jpg';
-import image2 from '../../../images/New-Homes/FrenchCountry-2.jpg';
-import image3 from '../../../images/New-Homes/FrenchCountry-3.jpg';
-import image4 from '../../../images/New-Homes/FrenchCountry-1.jpg';
-import image5 from '../../../images/New-Homes/FrenchCountry-7.jpg';
-import image6 from '../../../images/New-Homes/FrenchCountry-5.jpg';
-
 const project = constants.projects.hoggsHollowFrenchCountry;
 
 const HoggsHollowFrenchCountry = (props) => (
@@ -27,11 +20,7 @@ const HoggsHollowFrenchCountry = (props) => (
           <Item
             num={1}
             image={{
-              image: image1
-            }}
-            styles={{
-              width: 'calc(63% - (1.5% * 2))',
-              height: '390px'
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347167/ArchitraveDesign/1-New-Homes/2-Hoggs-Hollow-French-Country/4-Eat-in-Kitchen_owcnvf.jpg'
             }}
           />
         </Column>
@@ -39,11 +28,7 @@ const HoggsHollowFrenchCountry = (props) => (
           <Item
             num={2}
             image={{
-              image: image2
-            }}
-            styles={{
-              width: 'calc(37% - (1.5% * 2))',
-              height: '390px'
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1613943332/ArchitraveDesign/1-New-Homes/2-Hoggs-Hollow-French-Country/FrenchCountry-2_zo3i9y.jpg'
             }}
           />
         </Column>
@@ -53,11 +38,7 @@ const HoggsHollowFrenchCountry = (props) => (
           <Item
             num={3}
             image={{
-              image: image3
-            }}
-            styles={{
-              width: 'calc(48% - (1.5% * 2))',
-              height: '290px'
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1613943418/ArchitraveDesign/1-New-Homes/2-Hoggs-Hollow-French-Country/FrenchCountry-3_ybwxyq.jpg'
             }}
           />
         </Column>
@@ -65,11 +46,7 @@ const HoggsHollowFrenchCountry = (props) => (
           <Item
             num={4}
             image={{
-              image: image4
-            }}
-            styles={{
-              width: 'calc(52% - (1.5% * 2))',
-              height: '290px'
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1613943414/ArchitraveDesign/1-New-Homes/2-Hoggs-Hollow-French-Country/FrenchCountry-1_dpiasd.jpg'
             }}
           />
         </Column>
@@ -89,11 +66,7 @@ const HoggsHollowFrenchCountry = (props) => (
           <Item
             num={5}
             image={{
-              image: image5
-            }}
-            styles={{
-              width: 'calc(63% - (1.5% * 2))',
-              height: '365px'
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347168/ArchitraveDesign/1-New-Homes/2-Hoggs-Hollow-French-Country/7-Living-Rm_x76pxj.jpg'
             }}
           />
         </Column>
@@ -101,19 +74,11 @@ const HoggsHollowFrenchCountry = (props) => (
           <Item
             num={6}
             image={{
-              image: image6
-            }}
-            styles={{
-              width: 'calc(37% - (1.5% * 2))',
-              height: '365px'
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1613943500/ArchitraveDesign/1-New-Homes/2-Hoggs-Hollow-French-Country/FrenchCountry-5_iumyvo.jpg'
             }}
           />
         </Column>
       </Row>
-      
-      
-      
-      
       <PrevNextProjectLinks project={project} />
     </section>
   </Layout>

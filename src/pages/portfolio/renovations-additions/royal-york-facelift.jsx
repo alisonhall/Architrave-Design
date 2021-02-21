@@ -18,7 +18,7 @@ const RoyalYorkFacelift = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
     <section className="contentWrapper layoutAll layoutProject">
-      <Row>
+      <Row height="375px">
         <Column>
           <Item
             num={1}
@@ -27,10 +27,6 @@ const RoyalYorkFacelift = (props) => (
             }}
             text={{
               copy: 'Before'
-            }}
-            styles={{
-              width: 'calc(50% - (1.5% * 2))',
-              height: '375px',
             }}
           />
         </Column>
@@ -42,10 +38,6 @@ const RoyalYorkFacelift = (props) => (
             }}
             text={{
               copy: 'New Facade'
-            }}
-            styles={{
-              width: 'calc(50% - (1.5% * 2))',
-              height: '375px',
             }}
           />
         </Column>

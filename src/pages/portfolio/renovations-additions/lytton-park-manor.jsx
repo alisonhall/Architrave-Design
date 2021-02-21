@@ -21,16 +21,12 @@ const LyttonParkManor = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
     <section className="contentWrapper layoutAll layoutProject">
-      <Row>
+      <Row height="600px">
         <Column>
           <Item
             num={1}
             image={{
               image: image1
-            }}
-            styles={{
-              width: 'calc(100% - (1.5% * 2))',
-              height: '600px'
             }}
           />
         </Column>
@@ -54,10 +50,6 @@ const LyttonParkManor = (props) => (
                 image={{
                   image: image2
                 }}
-                styles={{
-                  width: 'calc(54% - (1.5% * 2))',
-                  height: '350px'
-                }}
               />
             </Column>
           </Row>
@@ -68,26 +60,21 @@ const LyttonParkManor = (props) => (
                 image={{
                   image: image4
                 }}
-                styles={{
-                  width: 'calc(54% - (1.5% * 2))',
-                  height: '310px'
-                }}
               />
             </Column>
           </Row>
         </Column>
         <Column width="54%">
-          <Item
-            num={3}
-            image={{
-              image: image3
-            }}
-            styles={{
-              width: 'calc(46% - (1.5% * 2))',
-              height: '700px',
-              float: 'right'
-            }}
-          />
+          {/* <Row height="700px"> */}
+            {/* <Column> */}
+              <Item
+                num={3}
+                image={{
+                  image: image3
+                }}
+              />
+            {/* </Column> */}
+          {/* </Row> */}
         </Column>
       </Row>
       <Row height="450px">
@@ -96,10 +83,6 @@ const LyttonParkManor = (props) => (
             num={5}
             image={{
               image: image5
-            }}
-            styles={{
-              width: 'calc(100% - (1.5% * 2))',
-              height: '450px'
             }}
           />
         </Column>

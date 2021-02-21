@@ -29,10 +29,6 @@ const TraditionalKingswayPark = (props) => (
             image={{
               image: image1
             }}
-            styles={{
-              width: 'calc(100% - (1.5% * 2))',
-              height: '630px'
-            }}
           />
         </Column>
       </Row>
@@ -53,10 +49,6 @@ const TraditionalKingswayPark = (props) => (
             image={{
               image: image2
             }}
-            styles={{
-              width: 'calc(34% - (1.5% * 2))',
-              height: '425px'
-            }}
           />
         </Column>
         <Column width="66%">
@@ -64,10 +56,6 @@ const TraditionalKingswayPark = (props) => (
             num={3}
             image={{
               image: image3
-            }}
-            styles={{
-              width: 'calc(66% - (1.5% * 2))',
-              height: '425px'
             }}
           />
         </Column>
@@ -79,10 +67,6 @@ const TraditionalKingswayPark = (props) => (
             image={{
               image: image4
             }}
-            styles={{
-              width: 'calc(100% - (1.5% * 2))',
-              height: '525px'
-            }}
           />
         </Column>
       </Row>
@@ -93,8 +77,7 @@ const TraditionalKingswayPark = (props) => (
               <Item
                 styles={{
                   width: '100%',
-                  height: '100%',
-                  float: 'left'
+                  height: '100%'
                 }}
               />
             </Column>
@@ -106,10 +89,6 @@ const TraditionalKingswayPark = (props) => (
                 image={{
                   image: image6
                 }}
-                styles={{
-                  width: 'calc(47% - (1.5% * 2))',
-                  height: '200px'
-                }}
               />
             </Column>
           </Row>
@@ -119,11 +98,6 @@ const TraditionalKingswayPark = (props) => (
             num={5}
             image={{
               image: image5
-            }}
-            styles={{
-              width: 'calc(53% - (1.5% * 2))',
-              height: '270px',
-              float: 'right'
             }}
           />
         </Column>

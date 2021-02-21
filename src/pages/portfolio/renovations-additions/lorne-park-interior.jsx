@@ -30,10 +30,6 @@ const LorneParkInterior = (props) => (
                 image={{
                   image: image1
                 }}
-                styles={{
-                  width: 'calc(23% - (1.5% * 2))',
-                  height: '225px'
-                }}
               />
             </Column>
           </Row>
@@ -44,10 +40,6 @@ const LorneParkInterior = (props) => (
                 image={{
                   image: image3
                 }}
-                styles={{
-                  width: 'calc(23% - (1.5% * 2))',
-                  height: '225px'
-                }}
               />
             </Column>
           </Row>
@@ -57,11 +49,6 @@ const LorneParkInterior = (props) => (
             num={2}
             image={{
               image: image2
-            }}
-            styles={{
-              width: 'calc(77% - (1.5% * 2))',
-              height: '480px',
-              float: 'right'
             }}
           />
         </Column>
@@ -84,10 +71,6 @@ const LorneParkInterior = (props) => (
               image: image4,
               backgroundPosition: '50% 30%'
             }}
-            styles={{
-              width: 'calc(50% - (1.5% * 2))',
-              height: '260px',
-            }}
           />
         </Column>
         <Column>
@@ -96,10 +79,6 @@ const LorneParkInterior = (props) => (
             image={{
               image: image5,
               backgroundPosition: '50% 30%'
-            }}
-            styles={{
-              width: 'calc(50% - (1.5% * 2))',
-              height: '260px',
             }}
           />
         </Column>

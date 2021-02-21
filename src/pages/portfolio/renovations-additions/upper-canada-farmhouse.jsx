@@ -28,10 +28,6 @@ const UpperCanadaFarmhouse = (props) => (
             image={{
               image: image1
             }}
-            styles={{
-              width: 'calc(100% - (1.5% * 2))',
-              height: '620px'
-            }}
           />
         </Column>
       </Row>
@@ -52,10 +48,6 @@ const UpperCanadaFarmhouse = (props) => (
             image={{
               image: image2
             }}
-            styles={{
-              width: 'calc(62% - (1.5% * 2))',
-              height: '810px'
-            }}
           />
         </Column>
         <Column width="38%">
@@ -66,10 +58,6 @@ const UpperCanadaFarmhouse = (props) => (
                 image={{
                   image: image3
                 }}
-                styles={{
-                  width: 'calc(38% - (1.5% * 2))',
-                  height: '485px'
-                }}
               />
             </Column>
           </Row>
@@ -79,10 +67,6 @@ const UpperCanadaFarmhouse = (props) => (
                 num={4}
                 image={{
                   image: image4
-                }}
-                styles={{
-                  width: 'calc(38% - (1.5% * 2))',
-                  height: '290px'
                 }}
               />
             </Column>
@@ -96,10 +80,6 @@ const UpperCanadaFarmhouse = (props) => (
             image={{
               image: image5
             }}
-            styles={{
-              width: 'calc(62% - (1.5% * 2))',
-              height: '350px'
-            }}
           />
         </Column>
         <Column width="38%">
@@ -107,10 +87,6 @@ const UpperCanadaFarmhouse = (props) => (
             num={6}
             image={{
               image: image6
-            }}
-            styles={{
-              width: 'calc(38% - (1.5% * 2))',
-              height: '350px'
             }}
           />
         </Column>

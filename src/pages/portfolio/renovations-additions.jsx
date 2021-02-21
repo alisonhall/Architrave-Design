@@ -8,12 +8,6 @@ import Row from '../../components/row';
 import Column from '../../components/column';
 import Item from '../../components/item';
 
-import image1 from '../../images/Renovations-Additions/Lytton-Park-4.jpg';
-import image2 from '../../images/Renovations-Additions/Etobicoke-2.jpg';
-import image3 from '../../images/Renovations-Additions/Cornwall-1.jpg';
-import image4 from '../../images/Renovations-Additions/Rosedale-2.jpg';
-// import image5 from '../../images/Renovations-Additions/Lorne-Park-4.jpg';
-
 const { projects, portfolio, defaultIntroductionText } = constants;
 
 
@@ -21,13 +15,13 @@ const RenovationsAdditions = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="renosAndAdditionsOverview">
     <SEO />
     <section className="contentWrapper layoutAll layoutRenovations">
-      <Row>
+      <Row height="645px">
         <Column width="48%">
           <Item
             num={1}
             project={projects.lyttonParkManor}
             image={{
-              image: image1,
+              imageUrl: projects.lyttonParkManor.mainImageUrl,
               backgroundPosition: '50% 40%'
             }}
             link={{
@@ -36,14 +30,10 @@ const RenovationsAdditions = (props) => (
             text={{
               copy: projects.lyttonParkManor.projectName
             }}
-            styles={{
-              width: 'calc(48% - (1.5% * 2))',
-              height: '645px'
-            }}
           />
         </Column>
         <Column width="52%">
-          <Row>
+          <Row height="345px">
             <Column>
               <Item
                 num={2}
@@ -58,10 +48,6 @@ const RenovationsAdditions = (props) => (
                 text={{
                   copy: projects.princessMargaretModern.projectName
                 }}
-                styles={{
-                  width: 'calc(52% - (1.5% * 2))',
-                  height: '345px'
-                }}
               />
             </Column>
           </Row>
@@ -71,7 +57,7 @@ const RenovationsAdditions = (props) => (
                 num={3}
                 project={projects.upperCanadaFarmhouse}
                 image={{
-                  image: image3,
+                  imageUrl: projects.upperCanadaFarmhouse.mainImageUrl,
                   backgroundPosition: '50% 40%'
                 }}
                 link={{
@@ -79,10 +65,6 @@ const RenovationsAdditions = (props) => (
                 }}
                 text={{
                   copy: projects.upperCanadaFarmhouse.projectName
-                }}
-                styles={{
-                  width: 'calc(52% - (1.5% * 2))',
-                  height: '265px'
                 }}
               />
             </Column>
@@ -98,13 +80,13 @@ const RenovationsAdditions = (props) => (
           />
         </Column>
       </Row>
-      <Row>
+      <Row height="300px">
         <Column width="48%">
           <Item
             num={4}
             project={projects.rosedaleEdwardian}
             image={{
-              image: image4,
+              imageUrl: projects.rosedaleEdwardian.mainImageUrl,
               backgroundPosition: '50% 40%'
             }}
             link={{
@@ -113,10 +95,6 @@ const RenovationsAdditions = (props) => (
             text={{
               copy: projects.rosedaleEdwardian.projectName
             }}
-            styles={{
-              width: 'calc(48% - (1.5% * 2))',
-              height: '300px'
-            }}
           />
         </Column>
         <Column width="52%">
@@ -124,7 +102,7 @@ const RenovationsAdditions = (props) => (
             num={5}
             project={projects.etobicokeArtsAndCrafts}
             image={{
-              image: image2,
+              imageUrl: projects.etobicokeArtsAndCrafts.mainImageUrl,
               backgroundPosition: '50% 40%'
             }}
             link={{
@@ -132,10 +110,6 @@ const RenovationsAdditions = (props) => (
             }}
             text={{
               copy: projects.etobicokeArtsAndCrafts.projectName
-            }}
-            styles={{
-              width: 'calc(52% - (1.5% * 2))',
-              height: '300px'
             }}
           />
         </Column>

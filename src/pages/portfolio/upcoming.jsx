@@ -7,8 +7,9 @@ import SEO from '../../components/seo';
 import Row from '../../components/row';
 import Column from '../../components/column';
 import Item from '../../components/item';
+import '../../scss/_layoutUpcoming.scss';
 
-const { projects, upcomingProjectsOrder, defaultUpcomingImageFolder } = constants;
+const { projects, upcomingProjectsOrder } = constants;
 
 const UpcomingProject = (projectKey, index) => {
   const project = projects[projectKey];

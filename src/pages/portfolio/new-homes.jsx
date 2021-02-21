@@ -8,15 +8,6 @@ import Row from '../../components/row';
 import Column from '../../components/column';
 import Item from '../../components/item';
 
-import image1 from '../../images/New-Homes/HoggsHollowTraditional-4.jpg';
-import image2 from '../../images/New-Homes/KingswayGeorgian-1.jpg';
-import image3 from '../../images/New-Homes/KingswayTransitional-6.jpg';
-import image4 from '../../images/New-Homes/CreditRiver-1.jpg';
-import image5 from '../../images/New-Homes/KingswayTransitional-1.jpg';
-import image6 from '../../images/New-Homes/Oakville-1.jpg';
-import image7 from '../../images/New-Homes/FrenchCountry-4.jpg';
-import image8 from '../../images/New-Homes/KingswayTraditional-1.jpg';
-
 const { projects, portfolio, defaultIntroductionText } = constants;
 
 
@@ -24,13 +15,13 @@ const NewHomes = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="newHomesOverview">
     <SEO />
     <section className="contentWrapper layoutAll layoutNewHomes">
-      <Row>
+      <Row height="705px">
         <Column width="48%">
           <Item
             num={1}
             project={projects.hoggsHollowTraditional}
             image={{
-              image: image1,
+              imageUrl: projects.hoggsHollowTraditional.mainImageUrl,
               backgroundPosition: '100% 0%'
             }}
             link={{
@@ -39,30 +30,22 @@ const NewHomes = (props) => (
             text={{
               copy: projects.hoggsHollowTraditional.projectName
             }}
-            styles={{
-              width: 'calc(48% - (1.5% * 2))',
-              height: '705.5px'
-            }}
           />
         </Column>
         <Column width="52%">
-          <Row>
+          <Row height="370px">
             <Column>
               <Item
                 num={2}
                 project={projects.kingswayGeorgian}
                 image={{
-                  image: image2
+                  imageUrl: projects.kingswayGeorgian.mainImageUrl
                 }}
                 link={{
                   linkUrl: `/${portfolio}/${projects.kingswayGeorgian.type}/${projects.kingswayGeorgian.fileName}`
                 }}
                 text={{
                   copy: projects.kingswayGeorgian.projectName
-                }}
-                styles={{
-                  width: 'calc(52% - (1.5% * 2))',
-                  height: '370.29px'
                 }}
               />
             </Column>
@@ -73,11 +56,7 @@ const NewHomes = (props) => (
                 num={3}
                 project={projects.kingswayTransitional}
                 image={{
-                  image: image3
-                }}
-                styles={{
-                  width: 'calc(21% - (1.5% * 2))',
-                  height: '299.133px'
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347224/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/6-Banquette-seating_oe01cy.jpg'
                 }}
               />
             </Column>
@@ -86,17 +65,13 @@ const NewHomes = (props) => (
                 num={4}
                 project={projects.creditRiverManor}
                 image={{
-                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347266/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/_1_fbaept.jpg'
+                  imageUrl: projects.creditRiverManor.mainImageUrl
                 }}
                 link={{
                   linkUrl: `/${portfolio}/${projects.creditRiverManor.type}/${projects.creditRiverManor.fileName}`
                 }}
                 text={{
                   copy: projects.creditRiverManor.projectName
-                }}
-                styles={{
-                  width: 'calc(31% - (1.5% * 2))',
-                  height: '299.133'
                 }}
               />
             </Column>
@@ -112,23 +87,19 @@ const NewHomes = (props) => (
           />
         </Column>
       </Row>
-      <Row>
+      <Row height="300px">
         <Column width="48%">
           <Item
             num={5}
             project={projects.kingswayTransitional}
             image={{
-              image: image5
+              imageUrl: projects.kingswayTransitional.mainImageUrl
             }}
             link={{
               linkUrl: `/${portfolio}/${projects.kingswayTransitional.type}/${projects.kingswayTransitional.fileName}`
             }}
             text={{
               copy: projects.kingswayTransitional.projectName
-            }}
-            styles={{
-              width: 'calc(48% - (1.5% * 2))',
-              height: '300px'
             }}
           />
         </Column>
@@ -137,7 +108,7 @@ const NewHomes = (props) => (
             num={6}
             project={projects.oakvilleExecutiveHome}
             image={{
-              image: image6
+              imageUrl: projects.oakvilleExecutiveHome.mainImageUrl
             }}
             link={{
               linkUrl: `/${portfolio}/${projects.oakvilleExecutiveHome.type}/${projects.oakvilleExecutiveHome.fileName}`
@@ -145,14 +116,10 @@ const NewHomes = (props) => (
             text={{
               copy: projects.oakvilleExecutiveHome.projectName
             }}
-            styles={{
-              width: 'calc(52% - (1.5% * 2))',
-              height: '300px'
-            }}
           />
         </Column>
       </Row>
-      <Row>
+      <Row height="300px">
         <Column>
           <Item
             num={7}
@@ -166,10 +133,6 @@ const NewHomes = (props) => (
             text={{
               copy: projects.classicCentreHall.projectName
             }}
-            styles={{
-              width: 'calc(33.3% - (1.5% * 2))',
-              height: '300px'
-            }}
           />
         </Column>
         <Column>
@@ -177,17 +140,13 @@ const NewHomes = (props) => (
             num={8}
             project={projects.hoggsHollowFrenchCountry}
             image={{
-              image: image7
+              imageUrl: projects.hoggsHollowFrenchCountry.mainImageUrl
             }}
             link={{
               linkUrl: `/${portfolio}/${projects.hoggsHollowFrenchCountry.type}/${projects.hoggsHollowFrenchCountry.fileName}`
             }}
             text={{
               copy: projects.hoggsHollowFrenchCountry.projectName
-            }}
-            styles={{
-              width: 'calc(33.3% - (1.5% * 2))',
-              height: '300px'
             }}
           />
         </Column>
@@ -196,7 +155,7 @@ const NewHomes = (props) => (
             num={9}
             project={projects.traditionalKingswayPark}
             image={{
-              image: image8,
+              imageUrl: projects.traditionalKingswayPark.mainImageUrl,
               backgroundPosition: '30% 40%'
             }}
             link={{
@@ -204,10 +163,6 @@ const NewHomes = (props) => (
             }}
             text={{
               copy: projects.traditionalKingswayPark.projectName
-            }}
-            styles={{
-              width: 'calc(33.3% - (1.5% * 2))',
-              height: '300px'
             }}
           />
         </Column>
