@@ -1,0 +1,16 @@
+.row {
+    border-top: 25px solid white;
+    border-bottom: 25px solid white;
+    display: flex;
+    flex-flow: row nowrap;
+    overflow: hidden;
+    height: 100%;
+
+    &:first-of-type {
+        border-top: none;
+    }
+
+    + .row {
+        border-top: none;
+    }
+}

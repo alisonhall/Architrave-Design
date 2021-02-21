@@ -1,0 +1,43 @@
+
+/********************
+VARIABLES
+********************/
+
+$breakpointLarge: 1000px;
+$breakpointMedium: 750px;
+$breakpointMediumSmall: 600px;
+$breakpointSmall: 520px;
+$breakpointExtraSmall: 380px;
+
+$baseHeight: 500px;
+
+$spacing: 1.5%;
+$spacingX2: $spacing * 2;
+$spacingHalf: $spacing / 2;
+$negativeSpacing: $spacing * (-1);
+$negativeSpacingHalf: $spacingHalf * (-1);
+
+$headerHeight: 2.1875em;
+$asideWidth: 22%;
+$contentWrapperWidth: 100% - $asideWidth;
+$contentWrapperMaxWidth: 1000px;
+$contentWrapperMinHeight: 89vh;
+$asidePlusSpacing: $asideWidth + $spacingHalf;
+
+$padding: 1%;
+$textBlurbPadding: calc(1em + #{$padding});
+$textBlurbWidth: calc(100% - #{$spacingX2} - (#{$textBlurbPadding} * 2));
+
+$blurbColour: #7ba7ba;
+$grayLinkColour: #999;
+$lightGrayLinkColour: #DDD;
+$architraveLogoColour: #9B5C6C;
+
+$viewportHeightDefault: 82vh;
+$viewportHeightContact: 87vh;
+$viewportHeightReviews: 95vh;
+$viewportHeightSitemap: 85vh;
+$viewportHeightDefaultLarge: $viewportHeightDefault - 10vh;
+$viewportHeightContactLarge: $viewportHeightContact - 15vh;
+$viewportHeightReviewsLarge: $viewportHeightReviews - 10vh;
+$viewportHeightSitemapLarge: $viewportHeightSitemap - 10vh;

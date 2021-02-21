@@ -1,3 +1,7 @@
+@import '_contentFadeIn';
+
+$fadeInDuration: 3s;
+
 @mixin transition($args...) {
     -webkit-transition: $args;
     -moz-transition: $args;

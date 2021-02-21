@@ -1,19 +1,28 @@
+@import 'variables';
 
 /********************
 ABOUT
 ********************/
 
-
+$contactImageHeight: 250px;
+$contactImageWidth: 24%;
+$contactBlurbHeight: $contactImageHeight;
+$contactBlurbWidth: 62%;
+$contactImageHeightSmall: 520px;
+$contactImageWidthSmall: 100%;
+$contactBlurbHeightSmall: auto;
+$contactBlurbWidthSmall: 100% - 10%;
 
 .about {
 	.contentBackground {
 		margin: $spacing;
-		background-image: url("../images/About/CreditRiver-Background.jpg");
+		background-image: url("https://res.cloudinary.com/alisonkhall/image/upload/v1595346993/ArchitraveDesign/4-About/CreditRiver_Background_cnt0km.jpg");
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
 		-o-background-size: cover;
 		background-size: cover;
 	}
+
 	.textContent {
 		padding: $spacing 5%;
 		float: left;
@@ -23,17 +32,20 @@ ABOUT
 		color: white;
 		/*font-variant: small-caps;*/
 	}
+
 	h2 {
 		text-transform: uppercase;
 		/*font-variant: small-caps;*/
 		font-weight: 500;
 		font-size: 1.2em;
 	}
+
 	.centerContent {
 		width: 100%;
 		float: left;
 		background-color: white;
 	}
+
 	.textBlurb {
 		padding: 0 5%;
 		margin: $spacingX2 0 $spacingX2 $spacing;
@@ -42,9 +54,16 @@ ABOUT
 		background-color: #7ba7ba;
 		width: $contactBlurbWidth;
 		min-height: $contactBlurbHeight;
+
+		@media screen and (max-width: $breakpointSmall) {
+			width: $contactBlurbWidthSmall;
+			max-width: $contactBlurbWidthSmall;
+			height: $contactBlurbHeightSmall;
+		}
 	}
+
 	.aboutImage {
-		background-image: url("../images/About/Bill-Hall.jpg");
+		background-image: url("https://res.cloudinary.com/alisonkhall/image/upload/v1595346996/ArchitraveDesign/4-About/Bill_Hall_q0cxw3.jpg");
 		background-position: 50% 40%;
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
@@ -57,17 +76,8 @@ ABOUT
 		float: left;
 		margin: $spacingX2 $spacing $spacingX2 0;
 		overflow: hidden;
-	}
-}
 
-@media screen and (max-width: $breakpointSmall) {
-	.about {
-		.textBlurb {
-			width: $contactBlurbWidthSmall;
-			max-width: $contactBlurbWidthSmall;
-			height: $contactBlurbHeightSmall;
-		}
-		.aboutImage {
+		@media screen and (max-width: $breakpointSmall) {
 			width: 100%;
 			max-width: $contactImageWidthSmall;
 			height: $contactImageHeightSmall;

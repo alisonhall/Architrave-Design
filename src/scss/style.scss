@@ -1,69 +1,3 @@
-/********************
-VARIABLES
-********************/
-
-$breakpointLarge: 1000px;
-$breakpointMedium: 750px;
-$breakpointMediumSmall: 600px;
-$breakpointSmall: 520px;
-$breakpointExtraSmall: 380px;
-
-$baseHeight: 500px;
-
-$spacing: 1.5%;
-$spacingX2: $spacing * 2;
-$spacingHalf: $spacing / 2;
-$negativeSpacing: $spacing * (-1);
-$negativeSpacingHalf: $spacingHalf * (-1);
-
-$headerHeight: 2.1875em;
-$asideWidth: 22%;
-$contentWrapperWidth: 100% - ($asideWidth + $spacingHalf) - $spacing;
-$contentWrapperMaxWidth: 1000px;
-$contentWrapperMinHeight: 89vh;
-$asidePlusSpacing: $asideWidth + $spacingHalf;
-
-$blurbColour: #7ba7ba;
-$grayLinkColour: #999;
-$lightGrayLinkColour: #DDD;
-$architraveLogoColour: #9B5C6C;
-
-$viewportHeightDefault: 82vh;
-$viewportHeightContact: 87vh;
-$viewportHeightReviews: 95vh;
-$viewportHeightSitemap: 85vh;
-$viewportHeightDefaultLarge: $viewportHeightDefault - 10vh;
-$viewportHeightContactLarge: $viewportHeightContact - 15vh;
-$viewportHeightReviewsLarge: $viewportHeightReviews - 10vh;
-$viewportHeightSitemapLarge: $viewportHeightSitemap - 10vh;
-
-$contactImageHeight: 250px;
-$contactImageWidth: 24%;
-$contactBlurbHeight: $contactImageHeight;
-$contactBlurbWidth: 62%;
-$contactImageHeightSmall: 520px;
-$contactImageWidthSmall: 100%;
-$contactBlurbHeightSmall: auto;
-$contactBlurbWidthSmall: 100% - 10%;
-
-$fadeInDuration: 3s;
-$fadeInDelay1: 1s;
-$fadeInDelay2: 1.5s;
-$fadeInDelay3: 2s;
-$fadeInDelay4: 2.5s;
-$fadeInDelay5: 3s;
-$fadeInDelay6: 3.5s;
-$stayFadedDelay1: $fadeInDelay1 + 3s;
-$stayFadedDelay2: $fadeInDelay2 + 3s;
-$stayFadedDelay3: $fadeInDelay3 + 3s;
-$stayFadedDelay4: $fadeInDelay4 + 3s;
-$stayFadedDelay5: $fadeInDelay5 + 3s;
-$stayFadedDelay6: $fadeInDelay6 + 3s;
-
-
-
-
-
 
 
 
@@ -71,32 +5,14 @@ $stayFadedDelay6: $fadeInDelay6 + 3s;
 FILES
 ********************/
 
-@import 'mixins';
-@import 'header';
-@import 'footer';
-@import 'about';
-@import 'reviews';
-@import 'contact';
-@import 'sitemap';
-@import 'contentFadeIn';
-@import 'layoutAll';
-// @import 'layoutHome';
-// @import 'layoutNewHomes';
-// @import 'layoutRenovations';
-@import 'layoutUpcoming';
-// @import 'layoutNewHomesHoggsHollowTraditional';
-// @import 'layoutNewHomesKingswayTransitional';
-// @import 'layoutNewHomesCreditRiverClassic';
-// @import 'layoutNewHomesOakvilleExecutiveHome';
-// @import 'layoutNewHomesHoggsHollowFrenchCountry';
-// @import 'layoutNewHomesKingswayTraditional';
-// @import 'layoutNewHomesKingswayGeorgian';
-// @import 'layoutRenovationsLyttonParkUpdate';
-// @import 'layoutRenovationsEtobicokeRenewal';
-// @import 'layoutRenovationsCornwallHeritageAddition';
-// @import 'layoutRenovationsRosedaleRevival';
-// @import 'layoutRenovationsLorneParkInterior';
-/*@import 'layoutRenovationsRoyalYorkFacelift';*/
+// @import 'variables';
+// @import 'mixins';
+
+// @import 'reviews';
+// @import 'contact';
+// @import 'sitemap';
+// @import 'contentFadeIn';
+// @import 'layoutUpcoming';
 
 
 /********************
@@ -116,94 +32,6 @@ body {
 }
 body {
 	font-family: 'Raleway', sans-serif;
-}
-
-.contentWrapper {
-	width: $contentWrapperWidth;
-	max-width: $contentWrapperMaxWidth;
-	float: left;
-	font-size: 1.653em;
-	margin-top: $headerHeight;
-	margin-left: $asideWidth;
-	min-height: $viewportHeightDefault;
-	overflow: hidden;
-}
-
-.contact,
-.about,
-.reviews,
-.sitemap {
-	.contentWrapper {
-		font-size: 1.2em;
-	}
-}
-
-
-@media screen and (max-width: $breakpointLarge) {
-	.contentWrapper {
-		width: 100%;
-		max-width: 100%;
-		float: left;
-		margin-top: 6em; //150px
-		margin-left: 0;
-		min-height: $viewportHeightDefaultLarge;
-	}
-}
-
-@media screen and (max-width: $breakpointExtraSmall) {
-	.contentWrapper {
-		margin-top: 7em; //200px
-	}
-}
-
-
-.row {
-	border-top: 25px solid white;
-	border-bottom: 25px solid white;
-	display: flex;
-  flex-flow: row nowrap;
-  overflow: hidden;
-  height: 100%;
-
-  &:first-of-type {
-    border-top: none;
-  }
-}
-
-.row + .row {
-	border-top: none;
-}
-
-.column {
-	border-left: 25px solid white;
-	border-right: 25px solid white;
-  // height: 100%;
-  width: 100%;
-  overflow: hidden;
-  display: flex;
-  flex-flow: column nowrap;
-
-  > .image + .image {
-    border-top: 25px solid white;
-  }
-}
-
-.column + .column {
-	border-left: none;
-}
-
-.column > .row:last-of-type {
-  border-bottom: none;
-}
-
-.column .row {
-  > .column:first-of-type {
-    border-left: none;
-  }
-
-  > .column:last-of-type {
-    border-right: none;
-  }
 }
 
 

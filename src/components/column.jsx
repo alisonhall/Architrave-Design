@@ -1,5 +1,6 @@
 import React from 'react';
 import { css, jsx } from '@emotion/core';
+import './column.scss';
 
 /**
  * @description The column layout.

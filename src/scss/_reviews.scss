@@ -1,14 +1,22 @@
+@import 'variables';
+@import 'mixins';
 
 /********************
 REVIEWS
 ********************/
+
 .reviews {
 	.contentBackground {
 		margin: $spacing;
-		background-image: url("../images/Reviews/Reviews-Background.jpg");
+		background-image: url("https://res.cloudinary.com/alisonkhall/image/upload/v1595346978/ArchitraveDesign/5-Reviews/Lytton_Park_4_w4tfbc.jpg");
 		@include backgroundSize(cover);
 		background-position: 100% 100%;
+
+		@media screen and (max-width: $breakpointLarge) {
+			min-height: $viewportHeightReviewsLarge;
+		}
 	}
+
 	.textContent {
 		min-height: $viewportHeightReviews;
 		height: 100%;
@@ -16,6 +24,7 @@ REVIEWS
 		margin: 0;
 		padding: 0;
 	}
+
 	.review {
 		padding: 4% 4% 4% 12%;
 		float: left;
@@ -33,20 +42,25 @@ REVIEWS
 			padding: 0;
 			margin: 0;
 		}
+
 		h4,
 		h5 {
 			display: inline-block;
 		}
+
 		h5 {
 			font-weight: normal;
 		}
+
 		p {
 			max-width: 600px;
 		}
 	}
+
 	.review:first-of-type {
 		border: none;
 	}
+
 	.textBlurb {
 		padding: 4%;
 		float: left;
@@ -63,11 +77,5 @@ REVIEWS
 			margin-bottom: -10px;
 			padding: 0 5px 0 30%;
 		}
-	}
-}
-
-@media screen and (max-width: $breakpointLarge) {
-	.reviews .contentBackground {
-		min-height: $viewportHeightReviewsLarge;
 	}
 }

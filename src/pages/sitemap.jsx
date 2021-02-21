@@ -5,6 +5,7 @@ import constants from '../../static/app-constants';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
+import '../scss/_sitemap.scss';
 
 const { projects, projectTypes, portfolio, newProjectsOrder, renovationProjectsOrder, unusedNewProjects, unusedRenovationProjects } = constants;
 

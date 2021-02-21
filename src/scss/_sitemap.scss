@@ -1,8 +1,11 @@
+@import 'variables';
+
 $sitemapWidth: 100% - $spacingX2;
 
 /********************
 SITEMAP
 ********************/
+
 .sitemap {
 	.contentBackground {
 		margin: $spacing;

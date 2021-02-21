@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 
 import constants from '../../static/app-constants';
+import './footer.scss';
 
 import houzzLogo from '../images/HouzzH.png';
 

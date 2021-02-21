@@ -1,3 +1,5 @@
+@import 'variables';
+
 footer {
 	color: $grayLinkColour;
 	width: $contentWrapperWidth;
@@ -8,24 +10,36 @@ footer {
 	padding: 10px 0;
 	font-size: 1em;
 
+	@media screen and (max-width: $breakpointLarge) {
+		width: 100%;
+		margin-left: 0;
+	}
+
 	a:link,
 	a:visited {
 		color: $grayLinkColour;
 		text-decoration: none;
 	}
+
 	a:hover {
 		color: black;
 	}
+
 	.houzzLogoFooter {
 		display: none;
 		float: left;
 		padding: 0 10px;
 		margin-top: -5px;
 		margin-left: $spacingHalf;
-	}
-	.houzzLogoFooter img {
-		width: 40px;
-		height: 40px;
+
+		@media screen and (max-width: $breakpointLarge) {
+			display: inline-block;
+		}
+
+		img {
+			width: 40px;
+			height: 40px;
+		}
 	}
 	.sitemap,
 	.copyright {
@@ -34,22 +48,12 @@ footer {
 		margin: 0 0 0 $spacingHalf;
 		// display: inline-block;
 	}
+
 	.websiteBy {
 		float: right;
 		// display: inline-block;
 		padding: 3px 10px;
 		margin: 0;
 		margin-right: $spacingHalf;
-	}
-
-}
-@media screen and (max-width: $breakpointLarge) {
-	footer {
-		width: 100%;
-		margin-left: 0;
-
-		.houzzLogoFooter {
-			display: inline-block;
-		}
 	}
 }

@@ -1,0 +1,31 @@
+.column {
+    border-left: 25px solid white;
+    border-right: 25px solid white;
+    // height: 100%;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-flow: column nowrap;
+
+    > .image + .image {
+        border-top: 25px solid white;
+    }
+
+    + .column {
+        border-left: none;
+    }
+
+    > .row:last-of-type {
+        border-bottom: none;
+    }
+
+    .row {
+        > .column:first-of-type {
+            border-left: none;
+        }
+
+        > .column:last-of-type {
+            border-right: none;
+        }
+    }
+}

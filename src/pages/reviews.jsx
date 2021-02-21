@@ -4,6 +4,8 @@ import constants from '../../static/app-constants';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
+import '../scss/_reviews.scss';
+
 import houzzReviewsLogo from '../images/houzz_logo_reviews.png';
 
 const { houzz } = constants;

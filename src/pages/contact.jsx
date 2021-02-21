@@ -2,6 +2,7 @@ import React from 'react';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
+import '../scss/_contact.scss';
 
 const Contact = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="contact">

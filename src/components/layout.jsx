@@ -5,6 +5,7 @@ import Header from './header';
 import Navigation from './navigation';
 import Footer from './footer';
 import '../scss/style.scss'
+import './layout.scss';
 
 /**
  * @description The layout of all of the pages. Includes the header, navigation, body, and footer.

@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import { css, jsx } from '@emotion/core';
+import './imageLinkTile.scss'
 
 import Image from './image';
 
@@ -32,8 +33,8 @@ const ImageLinkTile = ({
   customClass = '',
   num = '0',
   styles: {
-    width = '100px',
-    height = '100px',
+    width = '100%',
+    height = '100%',
     float = 'left'
   } = {}
 }) => {
