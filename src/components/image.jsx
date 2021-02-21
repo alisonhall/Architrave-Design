@@ -12,8 +12,6 @@ import constants from '../../static/app-constants';
  * @param {number} param.num
  * @param {File} param.image
  * @param {string} param.imageUrl
- * @param {string} param.imageFolder
- * @param {string} param.imageName
  * @param {string} param.imageModifier
  * @param {string} param.altText
  * @param {string} param.backgroundPosition
@@ -23,26 +21,20 @@ const Image = ({
   num = 0,
   image,
   imageUrl,
-  imageFolder,
-  imageName,
   imageModifier = 'w_auto,c_scale,f_auto,q_auto',
   altText = '',
   backgroundPosition = '50% 40%'
 }) => {
   const {
     cloudinary: {
-      user,
-      account,
-      siteFolder
+      account
     } = {}
   } = constants;
 
   let imageSrc;
 
   /* Handle/Compile the imageSrc based on the props */
-  if (imageFolder && imageName) {
-    imageSrc = `https://res.cloudinary.com/${user}/image/upload/${imageModifier}/${account}/${siteFolder}${imageFolder}${imageName}`
-  } else if (imageUrl) {
+  if (imageUrl) {
     let imageSrc = imageUrl;
     if (imageUrl.indexOf(account) >= 0 && imageUrl.indexOf('w_auto') === -1) {
       const imageParts = imageUrl.split(account);

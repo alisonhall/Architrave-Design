@@ -20,8 +20,7 @@ const PrincessMargaretModern = (props) => (
           <Item
             num={1}
             image={{
-              imageFolder: project.imageFolder,
-              imageName: '2-Addition-_-_Re-facing_xddgjt.jpg',
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347401/ArchitraveDesign/2-Renovations-and-Additions/10-Princess-Margaret-Modern/2-Addition-_-_Re-facing_xddgjt.jpg',
               backgroundPosition: '50% 30%'
             }}
           />
@@ -30,8 +29,7 @@ const PrincessMargaretModern = (props) => (
           <Item
             num={2}
             image={{
-              imageFolder: project.imageFolder,
-              imageName: '1-Original-1970-Sidesplit_vrexby.jpg'
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347401/ArchitraveDesign/2-Renovations-and-Additions/10-Princess-Margaret-Modern/1-Original-1970-Sidesplit_vrexby.jpg'
             }}
             text={{
               copy: 'Before'
@@ -40,8 +38,7 @@ const PrincessMargaretModern = (props) => (
           <Item
             num={3}
             image={{
-              imageFolder: project.imageFolder,
-              imageName: '3-New-Second-Floor_sxdhhx.jpg',
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347401/ArchitraveDesign/2-Renovations-and-Additions/10-Princess-Margaret-Modern/3-New-Second-Floor_sxdhhx.jpg',
             }}
           />
         </Column>
@@ -61,8 +58,7 @@ const PrincessMargaretModern = (props) => (
           <Item
             num={3}
             image={{
-              imageFolder: project.imageFolder,
-              imageName: '4_hxynkz.jpg',
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347401/ArchitraveDesign/2-Renovations-and-Additions/10-Princess-Margaret-Modern/4_hxynkz.jpg',
             }}
           />
         </Column>
@@ -70,8 +66,7 @@ const PrincessMargaretModern = (props) => (
           <Item
             num={3}
             image={{
-              imageFolder: project.imageFolder,
-              imageName: '6_g3yq1e.jpg',
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347401/ArchitraveDesign/2-Renovations-and-Additions/10-Princess-Margaret-Modern/6_g3yq1e.jpg',
             }}
           />
         </Column>
@@ -81,8 +76,7 @@ const PrincessMargaretModern = (props) => (
           <Item
             num={3}
             image={{
-              imageFolder: project.imageFolder,
-              imageName: '8_rzkvl5.jpg',
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347401/ArchitraveDesign/2-Renovations-and-Additions/10-Princess-Margaret-Modern/8_rzkvl5.jpg',
             }}
           />
         </Column>
@@ -90,8 +84,7 @@ const PrincessMargaretModern = (props) => (
           <Item
             num={3}
             image={{
-              imageFolder: project.imageFolder,
-              imageName: '9_o4ahxq.jpg',
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347401/ArchitraveDesign/2-Renovations-and-Additions/10-Princess-Margaret-Modern/9_o4ahxq.jpg',
             }}
           />
         </Column>

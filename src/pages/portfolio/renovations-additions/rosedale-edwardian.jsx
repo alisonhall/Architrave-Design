@@ -20,8 +20,7 @@ const RosedaleEdwardian = (props) => (
           <Item
             num={1}
             image={{
-              imageFolder: project.imageFolder,
-              imageName: '2-Edwardian-Renewal_htqqfn.jpg'
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347393/ArchitraveDesign/2-Renovations-and-Additions/4-Rosedale-Edwardian/2-Edwardian-Renewal_htqqfn.jpg'
             }}
           />
         </Column>
@@ -41,8 +40,7 @@ const RosedaleEdwardian = (props) => (
           <Item
             num={2}
             image={{
-              imageFolder: project.imageFolder,
-              imageName: '1-Before_olg276.jpg',
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347393/ArchitraveDesign/2-Renovations-and-Additions/4-Rosedale-Edwardian/1-Before_olg276.jpg',
             }}
             text={{
               copy: 'Before'
@@ -53,8 +51,7 @@ const RosedaleEdwardian = (props) => (
           <Item
             num={3}
             image={{
-              imageFolder: project.imageFolder,
-              imageName: '3-New-Brick-Bay_nnbw0a.jpg'
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347393/ArchitraveDesign/2-Renovations-and-Additions/4-Rosedale-Edwardian/3-New-Brick-Bay_nnbw0a.jpg'
             }}
           />
         </Column>

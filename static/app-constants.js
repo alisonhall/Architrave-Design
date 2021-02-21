@@ -12,7 +12,6 @@ const projectTypes = {
  * @param {string} projectKeyName.key - the projectKeyName
  * @param {string} projectKeyName.fileName - the filename of the page
  * @param {string} projectKeyName.type - the type of project it is (one of the options from the projectTypes constant object)
- * @param {string} projectKeyName.imageFolder - the path to the folder within Cloudinary that contains the project's images
  * @param {string} projectKeyName.projectName - the title related to the project; used as text within the site
  * @param {string} projectKeyName.projectDescription - the description of the project; used on the project details page
  * @param {string} projectKeyName.completion - the future completion date, if applicable
@@ -81,7 +80,6 @@ const projects = {
     key: 'princessMargaretModern',
     fileName: 'princess-margaret-modern',
     type: projectTypes.renovations,
-    imageFolder: '2-Renovations-and-Additions/10-Princess-Margaret-Modern/',
     projectName: 'Princess Margaret Modern',
     projectDescription: 'This sixties era side-split needed a complete update inside and out. The main level was opened up, and a second floor master suite added. Stone and contemporary wood cladding combine to give the exterior a new modern look.'
   },
@@ -96,7 +94,6 @@ const projects = {
     key: 'rosedaleEdwardian',
     fileName: 'rosedale-edwardian',
     type: projectTypes.renovations,
-    imageFolder: '2-Renovations-and-Additions/4-Rosedale-Edwardian/',
     projectName: 'Rosedale Edwardian',
     projectDescription: 'The original façade of this 1917 home had been painted over, but careful power washing revealed handsome Toronto brick hidden beneath. With Heritage approval, the front was re-imagined with a bold Edwardian-style bay and copper dormers. '
   },
@@ -136,7 +133,6 @@ const projects = {
     key: 'classicCentreHall',
     fileName: 'classic-centre-hall',
     type: projectTypes.new,
-    imageFolder: '1-New-Homes/5-Centre-Hall-Classic/',
     projectName: 'Classic Centre Hall',
     projectDescription: 'This luxury home in The Kingsway boasts a classically inspired stone façade. Inside, a two-story main hall adds a sense of drama with its wrap-around second floor balcony. The bright, contemporary family room opens to the backyard with wall to wall french doors.'
   },

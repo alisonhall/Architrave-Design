@@ -158,8 +158,7 @@ const NewHomes = (props) => (
             num={7}
             project={projects.classicCentreHall}
             image={{
-              imageFolder: projects.classicCentreHall.imageFolder,
-              imageName: '1b-Cut-Stone-Facade_rkbnlo.jpg'
+              imageUrl: projects.classicCentreHall.mainImageUrl,
             }}
             link={{
               linkUrl: `/${portfolio}/${projects.classicCentreHall.type}/${projects.classicCentreHall.fileName}`

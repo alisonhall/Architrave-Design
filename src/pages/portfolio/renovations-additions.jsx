@@ -49,8 +49,7 @@ const RenovationsAdditions = (props) => (
                 num={2}
                 project={projects.princessMargaretModern}
                 image={{
-                  imageFolder: projects.princessMargaretModern.imageFolder,
-                  imageName: '2-Addition-_-_Re-facing_xddgjt.jpg',
+                  imageUrl: projects.princessMargaretModern.mainImageUrl,
                   backgroundPosition: '50% 30%'
                 }}
                 link={{
