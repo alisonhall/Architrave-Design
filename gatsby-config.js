@@ -32,7 +32,14 @@ module.exports = {
         icon: `src/images/ArchitraveNewLogo.jpg`, // This path is relative to the root of the site.
       },
     },
-    `gatsby-plugin-sass`,
+    {
+      resolve: `gatsby-plugin-sass`,
+      options: {
+        sassOptions: {
+          includePaths: ["src/scss"],
+        }
+      }
+    },
     // {
     //   resolve: `gatsby-plugin-prefetch-google-fonts`,
     //   options: {
