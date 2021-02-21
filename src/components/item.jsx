@@ -17,8 +17,6 @@ import TextBlurbFiller from './textBlurbFiller';
  * @param {Object|boolean} image
  * @param {File} image.image
  * @param {string} image.imageUrl
- * @param {string} image.imageFolder
- * @param {string} image.imageName
  * @param {string} image.imageModifier
  * @param {string} image.altText
  * @param {string} image.backgroundPosition
