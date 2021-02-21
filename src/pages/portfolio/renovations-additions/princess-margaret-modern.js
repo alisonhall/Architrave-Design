@@ -14,21 +14,21 @@ const PrincessMargaretFacelift = (props) => (
     <section className="contentWrapper layoutAll layoutProject">
       <ImageTile dataItem={{
         num: '1',
-        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_450,c_scale,f_auto,q_auto/v1571329784/ArchitraveDesign/Princess-Margaret-Transitional/Princess_Margaret_Transitional1_yp7fuo.jpg',
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_450,c_scale,f_auto,q_auto/v1595347401/ArchitraveDesign/2-Renovations-and-Additions/10-Princess-Margaret-Modern/2-Addition-_-_Re-facing_xddgjt.jpg',
         width: 'calc(66% - (1.5% * 2))',
         height: 'calc(500px * 0.9)',
         backgroundPosition: '50% 30%'
       }} />
       <ImageTile dataItem={{
         num: '2',
-        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_375,c_scale,f_auto,q_auto/v1571329783/ArchitraveDesign/Princess-Margaret-Transitional/Princess_Margaret_Before_sco67f.jpg',
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_450,c_scale,f_auto,q_auto/v1595347397/ArchitraveDesign/2-Renovations-and-Additions/10-Princess-Margaret-Modern/1-Original-1970-Sidesplit_vrexby.jpg',
         width: 'calc(33% - (1.5% * 2))',
         height: '213px',
         textOverlay: 'Before'
       }} />
       <ImageTile dataItem={{
         num: '3',
-        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_375,c_scale,f_auto,q_auto/v1571329784/ArchitraveDesign/Princess-Margaret-Transitional/Princess_Margaret_Transitional2_j8wr8i.jpg',
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_450,c_scale,f_auto,q_auto/v1595347402/ArchitraveDesign/2-Renovations-and-Additions/10-Princess-Margaret-Modern/3-New-Second-Floor_sxdhhx.jpg',
         width: 'calc(33% - (1.5% * 2))',
         height: '213px'
       }} />
