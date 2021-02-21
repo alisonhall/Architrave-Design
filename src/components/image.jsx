@@ -35,7 +35,7 @@ const Image = ({
 
   /* Handle/Compile the imageSrc based on the props */
   if (imageUrl) {
-    let imageSrc = imageUrl;
+    imageSrc = imageUrl;
     if (imageUrl.indexOf(account) >= 0 && imageUrl.indexOf('w_auto') === -1) {
       const imageParts = imageUrl.split(account);
       imageSrc = `${imageParts[0]}${imageModifier}/${account}${imageParts[1]}`
