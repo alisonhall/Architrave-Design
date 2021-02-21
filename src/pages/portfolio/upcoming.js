@@ -10,7 +10,7 @@ const Upcoming = (props) => (
     <section className="contentWrapper layoutAll layoutUpcoming">
       <ImageTile dataItem={{
         num: '1',
-        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_700,c_scale,f_auto,q_auto/v1602976697/ArchitraveDesign/3-Upcoming/Norseman_Top_Up_hvicw4.jpg',
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_700,c_scale,f_auto,q_auto/v1602976697/ArchitraveDesign/3-Upcoming/Norseman-Top-Up/Norseman_Top_Up_hvicw4.jpg',
         width: 'calc(100% - (1.5% * 2))',
         height: 'calc(500px * 1.4)',
         backgroundPosition: '50% 25%'
@@ -20,7 +20,7 @@ const Upcoming = (props) => (
       </section>
       <ImageTile dataItem={{
         num: '1',
-        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_700,c_scale,f_auto,q_auto/v1602976686/ArchitraveDesign/3-Upcoming/Lorne_Park_Renovation_mihiez.jpg',
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_700,c_scale,f_auto,q_auto/v1602976686/ArchitraveDesign/3-Upcoming/Lorne-Park-Renovation/Lorne_Park_Renovation_mihiez.jpg',
         width: 'calc(100% - (1.5% * 2))',
         height: 'calc(500px * 1.4)',
         backgroundPosition: '50% 25%'
@@ -30,7 +30,7 @@ const Upcoming = (props) => (
       </section>
       <ImageTile dataItem={{
         num: '2',
-        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_700,c_scale,f_auto,q_auto/v1602976682/ArchitraveDesign/3-Upcoming/Etobicoke_Transitional_dotjej.jpg',
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_700,c_scale,f_auto,q_auto/v1602976682/ArchitraveDesign/3-Upcoming/Etobicoke-Transitional/Etobicoke_Transitional_dotjej.jpg',
         width: 'calc(100% - (1.5% * 2))',
         height: 'calc(500px * 1.4)',
         backgroundPosition: '50% 25%'

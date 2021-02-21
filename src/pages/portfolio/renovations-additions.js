@@ -31,7 +31,7 @@ const RenovationsAdditions = (props) => (
           num: '2',
           linkUrl: '/portfolio/renovations-additions/princess-margaret-modern',
           text: "Princess Margaret Modern",
-          imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_345,c_scale,f_auto,q_auto/v1571329784/ArchitraveDesign/Princess-Margaret-Transitional/Princess_Margaret_Transitional1_yp7fuo.jpg',
+          imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/h_450,c_scale,f_auto,q_auto/v1595347401/ArchitraveDesign/2-Renovations-and-Additions/10-Princess-Margaret-Modern/2-Addition-_-_Re-facing_xddgjt.jpg',
           backgroundPosition: '50% 30%',
           width: 'calc(52% - (1.5% * 2))',
           height: 'calc(500px * 0.69)'
