@@ -1,6 +1,6 @@
 import React from 'react';
 
-import constants from '../../../../public/app-constants';
+import constants from '../../../../static/app-constants';
 import image1 from '../../../images/Renovations-Additions/Cornwall-1.jpg';
 import image2 from '../../../images/Renovations-Additions/Cornwall-2.jpg';
 import image3 from '../../../images/Renovations-Additions/Cornwall-3.jpg';

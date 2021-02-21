@@ -1,6 +1,6 @@
 import React from 'react';
 
-import constants from '../../../../public/app-constants';
+import constants from '../../../../static/app-constants';
 
 import Layout from '../../../components/layout';
 import SEO from '../../../components/seo';
