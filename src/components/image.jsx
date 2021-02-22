@@ -25,20 +25,14 @@ const Image = ({
   altText = '',
   backgroundPosition = '50% 40%'
 }) => {
-  const {
-    cloudinary: {
-      account
-    } = {}
-  } = constants;
-
   let imageSrc;
 
   /* Handle/Compile the imageSrc based on the props */
   if (imageUrl) {
     imageSrc = imageUrl;
-    if (imageUrl.indexOf(account) >= 0 && imageUrl.indexOf('w_auto') === -1) {
-      const imageParts = imageUrl.split(account);
-      imageSrc = `${imageParts[0]}${imageModifier}/${account}${imageParts[1]}`
+    if (imageUrl.indexOf('upload') >= 0 && imageUrl.indexOf('w_auto') === -1 && imageUrl.indexOf('h_auto') === -1) {
+      const imageParts = imageUrl.split('upload');
+      imageSrc = `${imageParts[0]}upload/${imageModifier}${imageParts[1]}`
     }
   } else if (image) {
     imageSrc = image;
