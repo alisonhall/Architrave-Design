@@ -9,9 +9,6 @@ import Column from '../../../components/column';
 import Item from '../../../components/item';
 import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
 
-import image1 from '../../../images/Renovations-Additions/Royal-York-1.jpg';
-import image2 from '../../../images/Renovations-Additions/Royal-York-2.jpg';
-
 const project = constants.projects.royalYorkFacelift;
 
 const RoyalYorkFacelift = (props) => (
@@ -23,7 +20,7 @@ const RoyalYorkFacelift = (props) => (
           <Item
             num={1}
             image={{
-              image: image1
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1613940687/ArchitraveDesign/2-Renovations-and-Additions/Royal-York-Facelift/Royal-York-1_luwupq.jpg'
             }}
             text={{
               copy: 'Before'
@@ -34,7 +31,7 @@ const RoyalYorkFacelift = (props) => (
           <Item
             num={2}
             image={{
-              image: image2
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1613940687/ArchitraveDesign/2-Renovations-and-Additions/Royal-York-Facelift/Royal-York-2_ejplbx.jpg'
             }}
             text={{
               copy: 'New Facade'

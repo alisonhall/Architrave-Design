@@ -9,14 +9,6 @@ import Column from '../../../components/column';
 import Item from '../../../components/item';
 import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
 
-import image1 from '../../../images/Renovations-Additions/Etobicoke-2.jpg';
-import image2 from '../../../images/Renovations-Additions/Etobicoke-7.jpg';
-import image3 from '../../../images/Renovations-Additions/Etobicoke-6.jpg';
-import image4 from '../../../images/Renovations-Additions/Etobicoke-1.jpg';
-import image5 from '../../../images/Renovations-Additions/Etobicoke-5.jpg';
-import image6 from '../../../images/Renovations-Additions/Etobicoke-4.jpg';
-import image7 from '../../../images/Renovations-Additions/Etobicoke-8.jpg';
-
 const project = constants.projects.etobicokeArtsAndCrafts;
 
 const EtobicokeArtsAndCrafts = (props) => (
@@ -30,7 +22,7 @@ const EtobicokeArtsAndCrafts = (props) => (
               <Item
                 num={1}
                 image={{
-                  image: image1
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347380/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/2-Arts-and-Crafts-Restyling_jydm2x.jpg'
                 }}
               />
             </Column>
@@ -40,7 +32,7 @@ const EtobicokeArtsAndCrafts = (props) => (
               <Item
                 num={4}
                 image={{
-                  image: image4
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347373/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/1b-Before_2_hhwjuw.jpg'
                 }}
                 text={{
                   copy: 'Before'
@@ -51,7 +43,7 @@ const EtobicokeArtsAndCrafts = (props) => (
               <Item
                 num={5}
                 image={{
-                  image: image5
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347382/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/6-New-Reading-Nook_khsnqo.jpg'
                 }}
               />
             </Column>
@@ -63,7 +55,7 @@ const EtobicokeArtsAndCrafts = (props) => (
               <Item
                 num={2}
                 image={{
-                  image: image2
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347383/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/xxSeat_Drawers_uityi0.jpg'
                 }}
               />
             </Column>
@@ -73,7 +65,7 @@ const EtobicokeArtsAndCrafts = (props) => (
               <Item
                 num={3}
                 image={{
-                  image: image3
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347548/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/7-Window-Seat_qspbju.jpg'
                 }}
               />
             </Column>
@@ -95,7 +87,7 @@ const EtobicokeArtsAndCrafts = (props) => (
           <Item
             num={6}
             image={{
-              image: image6
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347384/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/5-Custom-Cabinetry_zay5pm.jpg'
             }}
           />
         </Column>
@@ -103,7 +95,7 @@ const EtobicokeArtsAndCrafts = (props) => (
           <Item
             num={7}
             image={{
-              image: image7
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347379/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/9-Master_lsvfyq.jpg'
             }}
           />
         </Column>

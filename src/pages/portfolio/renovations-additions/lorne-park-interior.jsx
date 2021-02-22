@@ -9,12 +9,6 @@ import Column from '../../../components/column';
 import Item from '../../../components/item';
 import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
 
-import image1 from '../../../images/Renovations-Additions/Lorne-Park-2.jpg';
-import image2 from '../../../images/Renovations-Additions/Lorne-Park-4.jpg';
-import image3 from '../../../images/Renovations-Additions/Lorne-Park-1.jpg';
-import image4 from '../../../images/Renovations-Additions/Lorne-Park-5.jpg';
-import image5 from '../../../images/Renovations-Additions/Lorne-Park-6.jpg';
-
 const project = constants.projects.lorneParkInterior;
 
 const LorneParkInterior = (props) => (
@@ -28,7 +22,7 @@ const LorneParkInterior = (props) => (
               <Item
                 num={1}
                 image={{
-                  image: image1
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1613940569/ArchitraveDesign/2-Renovations-and-Additions/Lorne-Park-Interior/Lorne-Park-2_whsiom.jpg'
                 }}
               />
             </Column>
@@ -38,7 +32,7 @@ const LorneParkInterior = (props) => (
               <Item
                 num={3}
                 image={{
-                  image: image3
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1613940569/ArchitraveDesign/2-Renovations-and-Additions/Lorne-Park-Interior/Lorne-Park-1_zlu8rc.jpg'
                 }}
               />
             </Column>
@@ -48,7 +42,7 @@ const LorneParkInterior = (props) => (
           <Item
             num={2}
             image={{
-              image: image2
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1613940569/ArchitraveDesign/2-Renovations-and-Additions/Lorne-Park-Interior/Lorne-Park-4_usn7jd.jpg'
             }}
           />
         </Column>
@@ -68,7 +62,7 @@ const LorneParkInterior = (props) => (
           <Item
             num={4}
             image={{
-              image: image4,
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1613940569/ArchitraveDesign/2-Renovations-and-Additions/Lorne-Park-Interior/Lorne-Park-5_l7ardg.jpg',
               backgroundPosition: '50% 30%'
             }}
           />
@@ -77,7 +71,7 @@ const LorneParkInterior = (props) => (
           <Item
             num={5}
             image={{
-              image: image5,
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1613940569/ArchitraveDesign/2-Renovations-and-Additions/Lorne-Park-Interior/Lorne-Park-6_kwdbb0.jpg',
               backgroundPosition: '50% 30%'
             }}
           />

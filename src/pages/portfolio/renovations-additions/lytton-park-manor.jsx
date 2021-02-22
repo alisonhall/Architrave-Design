@@ -9,12 +9,6 @@ import Column from '../../../components/column';
 import Item from '../../../components/item';
 import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
 
-import image1 from '../../../images/Renovations-Additions/Lytton-Park-2.jpg';
-import image2 from '../../../images/Renovations-Additions/Lytton-Park-1.jpg';
-import image3 from '../../../images/Renovations-Additions/Lytton-Park-4.jpg';
-import image4 from '../../../images/Renovations-Additions/Lytton-Park-5.jpg';
-import image5 from '../../../images/Renovations-Additions/Lytton-Park-3.jpg';
-
 const project = constants.projects.lyttonParkManor;
 
 const LyttonParkManor = (props) => (
@@ -26,7 +20,7 @@ const LyttonParkManor = (props) => (
           <Item
             num={1}
             image={{
-              image: image1
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347342/ArchitraveDesign/2-Renovations-and-Additions/1-Lytton-Park-Manor/2-New-Rear-Addition_lsnrso.jpg'
             }}
           />
         </Column>
@@ -48,7 +42,7 @@ const LyttonParkManor = (props) => (
               <Item
                 num={2}
                 image={{
-                  image: image2
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347346/ArchitraveDesign/2-Renovations-and-Additions/1-Lytton-Park-Manor/1-Sandstone-and-Brick-Front_ftxidf.jpg'
                 }}
               />
             </Column>
@@ -58,23 +52,19 @@ const LyttonParkManor = (props) => (
               <Item
                 num={4}
                 image={{
-                  image: image4
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347345/ArchitraveDesign/2-Renovations-and-Additions/1-Lytton-Park-Manor/5-New-Eat-in-Kitchen_oho9g6.jpg'
                 }}
               />
             </Column>
           </Row>
         </Column>
         <Column width="54%">
-          {/* <Row height="700px"> */}
-            {/* <Column> */}
-              <Item
-                num={3}
-                image={{
-                  image: image3
-                }}
-              />
-            {/* </Column> */}
-          {/* </Row> */}
+          <Item
+            num={3}
+            image={{
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347340/ArchitraveDesign/2-Renovations-and-Additions/1-Lytton-Park-Manor/4-New-Landing-_-Stairs-to-Master-Suite_jydo7j.jpg'
+            }}
+          />
         </Column>
       </Row>
       <Row height="450px">
@@ -82,7 +72,7 @@ const LyttonParkManor = (props) => (
           <Item
             num={5}
             image={{
-              image: image5
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347345/ArchitraveDesign/2-Renovations-and-Additions/1-Lytton-Park-Manor/3-Front-Hallway_tasjdc.jpg'
             }}
           />
         </Column>

@@ -9,15 +9,6 @@ import Column from '../../../components/column';
 import Item from '../../../components/item';
 import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
 
-import image1 from '../../../images/New-Homes/KingswayTransitional-1.jpg';
-import image2 from '../../../images/New-Homes/KingswayTransitional-2.jpg';
-import image3 from '../../../images/New-Homes/KingswayTransitional-6.jpg';
-import image4 from '../../../images/New-Homes/KingswayTransitional-3.jpg';
-import image5 from '../../../images/New-Homes/KingswayTransitional-5.jpg';
-import image6 from '../../../images/New-Homes/KingswayTransitional-4.jpg';
-import image7 from '../../../images/New-Homes/KingswayTransitional-7.jpg';
-import image8 from '../../../images/New-Homes/KingswayTransitional-8.jpg';
-
 const project = constants.projects.kingswayTransitional;
 
 const KingswayTransitional = (props) => (
@@ -29,7 +20,7 @@ const KingswayTransitional = (props) => (
           <Item
             num={1}
             image={{
-              image: image1
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347231/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/1-Traditional-Front-Facade_xapffn.jpg'
             }}
           />
         </Column>
@@ -49,7 +40,7 @@ const KingswayTransitional = (props) => (
           <Item
             num={2}
             image={{
-              image: image2
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347233/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/2-Modern-Rear_juviao.jpg'
             }}
           />
         </Column>
@@ -57,7 +48,7 @@ const KingswayTransitional = (props) => (
           <Item
             num={3}
             image={{
-              image: image3
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347224/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/6-Banquette-seating_oe01cy.jpg'
             }}
           />
         </Column>
@@ -65,7 +56,7 @@ const KingswayTransitional = (props) => (
           <Item
             num={4}
             image={{
-              image: image4
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347216/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/3-Central-Stair_svysch.jpg'
             }}
           />
         </Column>
@@ -75,7 +66,7 @@ const KingswayTransitional = (props) => (
           <Item
             num={5}
             image={{
-              image: image5
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347230/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/5._Family-Room-_-Kitchen_ydyxys.jpg'
             }}
           />
         </Column>
@@ -85,7 +76,7 @@ const KingswayTransitional = (props) => (
               <Item
                 num={6}
                 image={{
-                  image: image6
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347222/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/4-Family-Room_kacy5b.jpg'
                 }}
               />
             </Column>  
@@ -107,7 +98,7 @@ const KingswayTransitional = (props) => (
           <Item
             num={7}
             image={{
-              image: image7
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347223/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/7-Vaulted-Master_shswjo.jpg'
             }}
           />
         </Column>
@@ -115,7 +106,7 @@ const KingswayTransitional = (props) => (
           <Item
             num={8}
             image={{
-              image: image8
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347229/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/8-Marble-Ensuite_ev33ah.jpg'
             }}
           />
         </Column>

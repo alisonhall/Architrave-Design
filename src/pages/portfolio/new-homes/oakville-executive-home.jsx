@@ -9,10 +9,6 @@ import Column from '../../../components/column';
 import Item from '../../../components/item';
 import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
 
-import image1 from '../../../images/New-Homes/Oakville-1.jpg';
-import image2 from '../../../images/New-Homes/Oakville-2.jpg';
-import image3 from '../../../images/New-Homes/Oakville-3.jpg';
-
 const project = constants.projects.oakvilleExecutiveHome;
 
 const OakvilleExecutiveHome = (props) => (
@@ -24,7 +20,7 @@ const OakvilleExecutiveHome = (props) => (
           <Item
             num={1}
             image={{
-              image: image1
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347328/ArchitraveDesign/1-New-Homes/7-Oakville-Executive-Home/1-Front-Facade_rpftbr.jpg'
             }}
           />
         </Column>
@@ -44,7 +40,7 @@ const OakvilleExecutiveHome = (props) => (
           <Item
             num={2}
             image={{
-              image: image2
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347327/ArchitraveDesign/1-New-Homes/7-Oakville-Executive-Home/2-Three-car-Garage_wxoxdf.jpg'
             }}
           />
         </Column>
@@ -52,7 +48,7 @@ const OakvilleExecutiveHome = (props) => (
           <Item
             num={3}
             image={{
-              image: image3
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347331/ArchitraveDesign/1-New-Homes/7-Oakville-Executive-Home/3-Front-Entry_ryc4yl.jpg'
             }}
           />
         </Column>

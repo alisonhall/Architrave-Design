@@ -1,12 +1,6 @@
 import React from 'react';
 
 import constants from '../../../../static/app-constants';
-import image1 from '../../../images/Renovations-Additions/Cornwall-1.jpg';
-import image2 from '../../../images/Renovations-Additions/Cornwall-2.jpg';
-import image3 from '../../../images/Renovations-Additions/Cornwall-3.jpg';
-import image4 from '../../../images/Renovations-Additions/Cornwall-4.jpg';
-import image5 from '../../../images/Renovations-Additions/Cornwall-5.jpg';
-import image6 from '../../../images/Renovations-Additions/Cornwall-6.jpg';
 
 import Layout from '../../../components/layout';
 import SEO from '../../../components/seo';
@@ -26,7 +20,7 @@ const UpperCanadaFarmhouse = (props) => (
           <Item
             num={1}
             image={{
-              image: image1
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347369/ArchitraveDesign/2-Renovations-and-Additions/2-Cornwall-Loyalist-Farmhouse/1-1820_s-Farmhouse-_-New-Addition_qh1ha2.jpg'
             }}
           />
         </Column>
@@ -46,7 +40,7 @@ const UpperCanadaFarmhouse = (props) => (
           <Item
             num={2}
             image={{
-              image: image2
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347367/ArchitraveDesign/2-Renovations-and-Additions/2-Cornwall-Loyalist-Farmhouse/2-Side-Entrance_smshkr.jpg'
             }}
           />
         </Column>
@@ -56,7 +50,7 @@ const UpperCanadaFarmhouse = (props) => (
               <Item
                 num={3}
                 image={{
-                  image: image3
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347367/ArchitraveDesign/2-Renovations-and-Additions/2-Cornwall-Loyalist-Farmhouse/3c-Entrance-Hall_szk4bq.jpg'
                 }}
               />
             </Column>
@@ -66,7 +60,7 @@ const UpperCanadaFarmhouse = (props) => (
               <Item
                 num={4}
                 image={{
-                  image: image4
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347369/ArchitraveDesign/2-Renovations-and-Additions/2-Cornwall-Loyalist-Farmhouse/4-Country-Kitchen-Dining-Room_iqgnfl.jpg'
                 }}
               />
             </Column>
@@ -78,7 +72,7 @@ const UpperCanadaFarmhouse = (props) => (
           <Item
             num={5}
             image={{
-              image: image5
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347370/ArchitraveDesign/2-Renovations-and-Additions/2-Cornwall-Loyalist-Farmhouse/6-Master-Fireplace_wjx75m.jpg'
             }}
           />
         </Column>
@@ -86,7 +80,7 @@ const UpperCanadaFarmhouse = (props) => (
           <Item
             num={6}
             image={{
-              image: image6
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347364/ArchitraveDesign/2-Renovations-and-Additions/2-Cornwall-Loyalist-Farmhouse/7-Ensuite_wb7epo.jpg'
             }}
           />
         </Column>
