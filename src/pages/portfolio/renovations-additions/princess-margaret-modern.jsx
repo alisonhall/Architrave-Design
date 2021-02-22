@@ -56,7 +56,7 @@ const PrincessMargaretModern = (props) => (
       <Row height="375px">
         <Column width="50%">
           <Item
-            num={3}
+            num={4}
             image={{
               imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347401/ArchitraveDesign/2-Renovations-and-Additions/10-Princess-Margaret-Modern/4_hxynkz.jpg',
             }}
@@ -64,7 +64,7 @@ const PrincessMargaretModern = (props) => (
         </Column>
         <Column width="50%">
           <Item
-            num={3}
+            num={5}
             image={{
               imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347401/ArchitraveDesign/2-Renovations-and-Additions/10-Princess-Margaret-Modern/6_g3yq1e.jpg',
             }}
@@ -74,7 +74,7 @@ const PrincessMargaretModern = (props) => (
       <Row height="375px">
         <Column width="50%">
           <Item
-            num={3}
+            num={6}
             image={{
               imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347401/ArchitraveDesign/2-Renovations-and-Additions/10-Princess-Margaret-Modern/8_rzkvl5.jpg',
             }}
@@ -82,7 +82,7 @@ const PrincessMargaretModern = (props) => (
         </Column>
         <Column width="50%">
           <Item
-            num={3}
+            num={7}
             image={{
               imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347401/ArchitraveDesign/2-Renovations-and-Additions/10-Princess-Margaret-Modern/9_o4ahxq.jpg',
             }}

@@ -159,7 +159,7 @@ const IndexPage = (props) => (
       {/* <Row>
         <Column>
           <Item
-            num={8}
+            num={9}
             project={projects.creditRiverManor}
             image={{
               imageUrl: projects.creditRiverManor.mainImageUrl
@@ -171,7 +171,7 @@ const IndexPage = (props) => (
         </Column>
         <Column>
           <Item
-            num={9}
+            num={10}
             project={projects.kingswayGeorgian}
             image={{
               imageUrl: projects.kingswayGeorgian.mainImageUrl

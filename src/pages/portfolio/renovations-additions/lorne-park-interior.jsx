@@ -30,7 +30,7 @@ const LorneParkInterior = (props) => (
           <Row height="225px">
             <Column>
               <Item
-                num={3}
+                num={2}
                 image={{
                   imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1613940569/ArchitraveDesign/2-Renovations-and-Additions/Lorne-Park-Interior/Lorne-Park-1_zlu8rc.jpg'
                 }}
@@ -40,7 +40,7 @@ const LorneParkInterior = (props) => (
         </Column>
         <Column width="77%">
           <Item
-            num={2}
+            num={3}
             image={{
               imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1613940569/ArchitraveDesign/2-Renovations-and-Additions/Lorne-Park-Interior/Lorne-Park-4_usn7jd.jpg'
             }}

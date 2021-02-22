@@ -62,7 +62,7 @@ const KingswayGeorgian = (props) => (
           <Row height="700px">
             <Column>
               <Item
-                num={3}
+                num={4}
                 image={{
                   imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347141/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/5-Main-Hall_txsam1.jpg'
                 }}
@@ -96,7 +96,7 @@ const KingswayGeorgian = (props) => (
           <Row height="350px">
             <Column>
               <Item
-                num={7}
+                num={6}
                 image={{
                   imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347144/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/8-Kitchen_mrd8z9.jpg'
                 }}
@@ -106,7 +106,7 @@ const KingswayGeorgian = (props) => (
           <Row height="350px">
             <Column>
               <Item
-                num={9}
+                num={7}
                 image={{
                   imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347149/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/10-Island-_-Servery_whpyxm.jpg'
                 }}
@@ -118,7 +118,7 @@ const KingswayGeorgian = (props) => (
           <Row height="540px">
             <Column>
               <Item
-                num={6}
+                num={8}
                 image={{
                   imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347140/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/6-Sitting-Room_et7o9z.jpg'
                 }}
@@ -128,7 +128,7 @@ const KingswayGeorgian = (props) => (
           <Row height="540px">
             <Column>
               <Item
-                num={8}
+                num={9}
                 image={{
                   imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347150/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/9-Breakfast-Banquette_plhghs.jpg'
                 }}

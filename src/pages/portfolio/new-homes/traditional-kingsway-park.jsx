@@ -78,7 +78,7 @@ const TraditionalKingswayPark = (props) => (
           <Row height="200px">
             <Column>
               <Item
-                num={6}
+                num={5}
                 image={{
                   imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347270/ArchitraveDesign/1-New-Homes/6-Kingsway-Park-Traditional/5-Family-_Room-_-Kitchen_nqonjc.jpg'
                 }}
@@ -88,7 +88,7 @@ const TraditionalKingswayPark = (props) => (
         </Column>
         <Column width="53%">
           <Item
-            num={5}
+            num={6}
             image={{
               imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347270/ArchitraveDesign/1-New-Homes/6-Kingsway-Park-Traditional/7-Master-Ensuite_g5n9vl.jpg'
             }}

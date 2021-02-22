@@ -50,7 +50,7 @@ const LyttonParkManor = (props) => (
           <Row height="310px">
             <Column>
               <Item
-                num={4}
+                num={3}
                 image={{
                   imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347345/ArchitraveDesign/2-Renovations-and-Additions/1-Lytton-Park-Manor/5-New-Eat-in-Kitchen_oho9g6.jpg'
                 }}
@@ -60,7 +60,7 @@ const LyttonParkManor = (props) => (
         </Column>
         <Column width="54%">
           <Item
-            num={3}
+            num={4}
             image={{
               imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347340/ArchitraveDesign/2-Renovations-and-Additions/1-Lytton-Park-Manor/4-New-Landing-_-Stairs-to-Master-Suite_jydo7j.jpg'
             }}

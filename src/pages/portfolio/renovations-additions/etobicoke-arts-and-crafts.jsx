@@ -30,7 +30,7 @@ const EtobicokeArtsAndCrafts = (props) => (
           <Row height="240px">
             <Column>
               <Item
-                num={4}
+                num={2}
                 image={{
                   imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347373/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/1b-Before_2_hhwjuw.jpg'
                 }}
@@ -41,7 +41,7 @@ const EtobicokeArtsAndCrafts = (props) => (
             </Column>
             <Column>
               <Item
-                num={5}
+                num={3}
                 image={{
                   imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347382/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/6-New-Reading-Nook_khsnqo.jpg'
                 }}
@@ -53,7 +53,7 @@ const EtobicokeArtsAndCrafts = (props) => (
           <Row height="215px">
             <Column>
               <Item
-                num={2}
+                num={4}
                 image={{
                   imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347383/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/xxSeat_Drawers_uityi0.jpg'
                 }}
@@ -63,7 +63,7 @@ const EtobicokeArtsAndCrafts = (props) => (
           <Row height="505px">
             <Column>
               <Item
-                num={3}
+                num={5}
                 image={{
                   imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347548/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/7-Window-Seat_qspbju.jpg'
                 }}
