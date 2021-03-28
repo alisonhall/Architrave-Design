@@ -31,6 +31,7 @@ import TextBlurbFiller from './textBlurbFiller';
  */
 export default (data) => {
   const {
+    customClass,
     image,
     link,
     text
@@ -38,10 +39,19 @@ export default (data) => {
 
   if (image && link) {
     return <ImageLinkTile {...data} />;
-  } else if (image) {
+  }
+
+  if (image && customClass === 'filler') {
+    return <ImageFillerTile {...data} />;
+  }
+  
+  if (image) {
     return <ImageTile {...data} />;
-  } else if (text) {
+  }
+  
+  if (text) {
     return <TextBlurb {...data} />;
   }
+
   return <TextBlurbFiller {...data} />;
 }
