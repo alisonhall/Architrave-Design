@@ -37,7 +37,6 @@ $contactBlurbWidthSmall: 100% - 10%;
 		text-transform: uppercase;
 		/*font-variant: small-caps;*/
 		font-weight: 500;
-		font-size: 1.2em;
 	}
 
 	.centerContent {
@@ -54,6 +53,7 @@ $contactBlurbWidthSmall: 100% - 10%;
 		background-color: #7ba7ba;
 		width: $contactBlurbWidth;
 		min-height: $contactBlurbHeight;
+		font-size: 1.2rem;
 
 		@media screen and (max-width: $breakpointSmall) {
 			width: $contactBlurbWidthSmall;

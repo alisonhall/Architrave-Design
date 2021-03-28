@@ -24,8 +24,7 @@ $contentWrapperMaxWidth: 1000px;
 $contentWrapperMinHeight: 89vh;
 $asidePlusSpacing: $asideWidth + $spacingHalf;
 
-$padding: 1%;
-$textBlurbPadding: calc(1em + #{$padding});
+$textBlurbPadding: calc(16px + #{$spacing});
 $textBlurbWidth: calc(100% - #{$spacingX2} - (#{$textBlurbPadding} * 2));
 
 $blurbColour: #7ba7ba;

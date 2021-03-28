@@ -32,8 +32,8 @@ header {
 
 	p {
 		/*font-size: 1.80375em;*/
-		font-size: 1.75em;
-		line-height: 0.8em;
+		font-size: 1.75rem;
+		line-height: 0.8rem;
 		margin: 20px 0 0 0;
 		display: inline-block;
 		color: $grayLinkColour;
@@ -42,33 +42,33 @@ header {
 		/*letter-spacing: 0.05em;*/
 
 		@media screen and (max-width: $breakpointMedium) {
-			font-size: 1.5em;
+			font-size: 1.5rem;
 			padding-left: 1%;
-			letter-spacing: 0em;
-			line-height: 0.2em;
+			letter-spacing: 0rem;
+			line-height: 0.2rem;
 		}
 
 		@media screen and (max-width: $breakpointSmall) {
 			margin: 0;
-			font-size: 1.1em;
-			letter-spacing: 0.02em;
-			line-height: 1.2em;
+			font-size: 1.1rem;
+			letter-spacing: 0.02rem;
+			line-height: 1.2rem;
 		}
 
 		&:first-child{
 			color: $architraveLogoColour;
-			font-size: 1.75em;
-			letter-spacing: 0.05em;
+			font-size: 1.75rem;
+			letter-spacing: 0.05rem;
 			font-weight: 500;
 
 			@media screen and (max-width: $breakpointMedium) {
-				letter-spacing: 0.02em;
+				letter-spacing: 0.02rem;
 			}
 
 			@media screen and (max-width: $breakpointSmall) {
 				margin-top: 1%;
-				font-size: 1.5em;
-				letter-spacing: 0.08em;
+				font-size: 1.5rem;
+				letter-spacing: 0.08rem;
 			}
 
 			+ p {
