@@ -13,9 +13,10 @@ const { projects, upcomingProjectsOrder } = constants;
 
 const UpcomingProject = (projectKey, index) => {
   const project = projects[projectKey];
+  const height = project.beforeImageUrl ? '885px' : '700px';
   return (
     <React.Fragment key={index}>
-      <Row height="700px" key={`${index}-image`}>
+      <Row height={height} key={`${index}-image`}>
         <Column>
           <Item
             num={index}
@@ -23,36 +24,26 @@ const UpcomingProject = (projectKey, index) => {
             image={{
               imageUrl: project.mainImageUrl,
               backgroundPosition: '50% 25%',
-              imageModifier: 'h_700,c_scale,f_auto,q_auto'
-            }}
-            styles={{
-              width: 'calc(100% - (1.5% * 2))',
-              height: '700px'
+              height
             }}
           />
-        </Column>
-      </Row>
-      {project.beforeImageUrl && (
-        <Row height="700px" key={`${index}-before`}>
-          <Column>
+          {project.beforeImageUrl && (
             <Item
+              customClass="upcomingBefore"
               num={index}
               project={project}
               image={{
                 imageUrl: project.beforeImageUrl,
                 backgroundPosition: '50% 25%',
-                imageModifier: 'h_500,c_scale,f_auto,q_auto'
+                height: 500
               }}
-              styles={{
-                width: 'calc(45% - (1.5% * 2))',
-                height: '170px',
-                float: 'right',
-                marginTop: '-115px !important'
+              text={{
+                copy: 'Before'
               }}
             />
-          </Column>
-        </Row>
-      )}
+          )}
+        </Column>
+      </Row>
       <Row key={`${index}-text`}>
         <Column>
           <section className="textBlurb">
