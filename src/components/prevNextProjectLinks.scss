@@ -5,14 +5,14 @@ a.prevProject,
 a.nextProject {
     font-size: 1.322rem;
     color: $darkTextColour;
-    padding: 15px 3% 25px 2%;
+    padding: $spacing;
     @include transition(all 0.2s linear 0s);
 
     img {
         display: none;
         opacity: 0;
-        width: 16px;
-        height: 16px;
+        width: 1rem;
+        height: 1rem;
         @include transition(all 0.2s ease-out 0s);
     }
 
