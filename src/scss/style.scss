@@ -5,24 +5,13 @@
 FILES
 ********************/
 
-// @import 'variables';
-// @import 'mixins';
-
-// @import 'reviews';
-// @import 'contact';
-// @import 'sitemap';
-// @import 'contentFadeIn';
-// @import 'layoutUpcoming';
+@import 'variables';
 
 
 /********************
 GENERAL
 ********************/
 
-* {
-	/*box-sizing: border-box;*/
-	/*border: 1px solid red;*/
-}
 html,
 body {
 	margin: 0;
@@ -32,7 +21,7 @@ body {
 }
 body {
 	font-family: 'Raleway', sans-serif;
-	font-size: 1em;
+	font-size: $bodyFontSize;
 }
 
 

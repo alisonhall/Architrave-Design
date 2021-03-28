@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 
 /********************
 CONTACT
@@ -8,11 +9,8 @@ CONTACT
 	.contentBackground {
 		margin: $spacing;
 		background-image: url("https://res.cloudinary.com/alisonkhall/image/upload/v1613951882/ArchitraveDesign/6-Contact/HoggsHollowTraditional-4-Background_odujg8.jpg");
+		@include backgroundSize(cover);
 		background-position: 100% 0%;
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
-		background-size: cover;
 		height: $viewportHeightContact;
 
 		@media screen and (max-width: $breakpointLarge) {
@@ -23,11 +21,11 @@ CONTACT
 		padding: $spacing 5%;
 		float: left;
 		width: 90%;
-		background-color: #7ba7ba;
+		background-color: $blurbColour;
 		margin: 17% 0 $spacing 0;
-		color: white;
+		color: $lightTextColour;
 		border-style: solid;
-		border-color: white;
+		border-color: $pageColour;
 		border-width: 25px 0;
 		font-size: 1.4rem;
 		line-height: 1rem;
@@ -48,7 +46,7 @@ CONTACT
 	.textBlurb a:link,
 	.textBlurb a:visited {
 		text-decoration: none;
-		color: white;
+		color: $lightTextColour;
 	}
 
 	.textBlurb a:hover {

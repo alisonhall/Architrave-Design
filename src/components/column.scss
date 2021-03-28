@@ -1,14 +1,15 @@
+@import 'variables';
+
 .column {
-    border-left: 25px solid white;
-    border-right: 25px solid white;
-    // height: 100%;
+    border-left: $spacing solid $pageColour;
+    border-right: $spacing solid $pageColour;
     width: 100%;
     overflow: hidden;
     display: flex;
     flex-flow: column nowrap;
 
     > .image + .image {
-        border-top: 25px solid white;
+        border-top: $spacing solid $pageColour;
     }
 
     + .column {

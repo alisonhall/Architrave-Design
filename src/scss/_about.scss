@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 
 /********************
 ABOUT
@@ -17,40 +18,34 @@ $contactBlurbWidthSmall: 100% - 10%;
 	.contentBackground {
 		margin: $spacing;
 		background-image: url("https://res.cloudinary.com/alisonkhall/image/upload/v1595346993/ArchitraveDesign/4-About/CreditRiver_Background_cnt0km.jpg");
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
-		background-size: cover;
+		@include backgroundSize(cover);
 	}
 
 	.textContent {
 		padding: $spacing 5%;
-		float: left;
 		max-width: 100%;
 		background-color: transparent;
 		margin: $spacing auto;
-		color: white;
-		/*font-variant: small-caps;*/
+		color: $lightTextColour;
 	}
 
 	h2 {
 		text-transform: uppercase;
-		/*font-variant: small-caps;*/
 		font-weight: 500;
 	}
 
 	.centerContent {
 		width: 100%;
 		float: left;
-		background-color: white;
+		background-color: $pageColour;
 	}
 
 	.textBlurb {
 		padding: 0 5%;
 		margin: $spacingX2 0 $spacingX2 $spacing;
 		float: right;
-		color: white;
-		background-color: #7ba7ba;
+		color: $lightTextColour;
+		background-color: $blurbColour;
 		width: $contactBlurbWidth;
 		min-height: $contactBlurbHeight;
 		font-size: 1.2rem;
@@ -65,10 +60,7 @@ $contactBlurbWidthSmall: 100% - 10%;
 	.aboutImage {
 		background-image: url("https://res.cloudinary.com/alisonkhall/image/upload/v1595346996/ArchitraveDesign/4-About/Bill_Hall_q0cxw3.jpg");
 		background-position: 50% 40%;
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
-		background-size: cover;
+		@include backgroundSize(cover);
 		max-width: 100%;
 		overflow: hidden;
 		width: $contactImageWidth;

@@ -9,13 +9,17 @@ SITEMAP
 .sitemap {
 	.contentBackground {
 		margin: $spacing;
+		@media screen and (max-width: $breakpointLarge) {
+			height: $viewportHeightSitemapLarge;
+			min-height: $viewportHeightSitemapLarge;
+		}
 	}
 	.textContent {
 		background-color: $blurbColour;
 		min-height: $viewportHeightSitemap;
 		width: $sitemapWidth;
 		padding: $spacing;
-		color: white;
+		color: $lightTextColour;
 		
 		ul {
 			list-style-type: none;
@@ -33,17 +37,10 @@ SITEMAP
 		}
 		a:link,
 		a:visited {
-			color: white;
+			color: $lightTextColour;
 		}
 		a:hover {
 			color: $lightGrayLinkColour;
 		}
-	}
-}
-
-@media screen and (max-width: $breakpointLarge) {
-	.sitemap .contentBackground {
-		height: $viewportHeightSitemapLarge;
-		min-height: $viewportHeightSitemapLarge;
 	}
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 
 import constants from '../../static/app-constants';
+import './prevNextProjectLinks.scss';
 
 import leftArrow from '../images/arrow-left-solid.svg';
 import rightArrow from '../images/arrow-right-solid.svg';

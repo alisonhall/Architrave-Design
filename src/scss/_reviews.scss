@@ -27,7 +27,6 @@ REVIEWS
 
 	.review {
 		padding: 4% 4% 4% 12%;
-		float: left;
 		max-width: 100%;
 		margin: 0;
 		width: 95%;
@@ -63,12 +62,11 @@ REVIEWS
 
 	.textBlurb {
 		padding: 4%;
-		float: left;
 		width: 92%;
-		color: white;
+		color: $lightTextColour;
 		background-color: $blurbColour;
 		border-style: solid;
-		border-color: white;
+		border-color: $pageColour;
 		border-width: 30px 0 30px 0;
 
 		img {

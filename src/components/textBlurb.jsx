@@ -1,4 +1,5 @@
 import React from 'react';
+import './textBlurb.scss';
 
 /**
  * @description A blue section with text on top.

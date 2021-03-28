@@ -1,81 +1,26 @@
 @import 'variables';
 
+$logoFontSize: 1.75rem;
+$navFontSize: 1.68rem;
+
 header {
-	width: $contentWrapperWidth;
-	// height: 0px;
-	float: left;
-	margin-left: calc($asideWidth + $spacingHalf);
-	background: white;
 	text-transform: uppercase;
-
-	@media screen and (max-width: $breakpointLarge) {
-		// height: $headerHeight;
-		position: absolute;
-		top: 0;
-		left: 150px;
-		margin: 0;
-	}
-
-	@media screen and (max-width: $breakpointMedium) {
-		// left: 15%;
-		width: 85%;
-	}
-
-	@media screen and (max-width: $breakpointSmall) {
-		width: 85%;
-		// height: $headerHeight;
-		position: absolute;
-		top: 0;
-		left: 70px;
-		margin: 0;
-	}
+	margin: 15px 0 10px $asideWidth;
 
 	p {
-		/*font-size: 1.80375em;*/
-		font-size: 1.75rem;
-		line-height: 0.8rem;
-		margin: 20px 0 0 0;
+		font-size: $logoFontSize;
 		display: inline-block;
 		color: $grayLinkColour;
-		padding-left: $spacing;
 		font-weight: 400;
-		/*letter-spacing: 0.05em;*/
-
-		@media screen and (max-width: $breakpointMedium) {
-			font-size: 1.5rem;
-			padding-left: 1%;
-			letter-spacing: 0rem;
-			line-height: 0.2rem;
-		}
-
-		@media screen and (max-width: $breakpointSmall) {
-			margin: 0;
-			font-size: 1.1rem;
-			letter-spacing: 0.02rem;
-			line-height: 1.2rem;
-		}
+		margin: 0;
+		padding-left: 1rem;
 
 		&:first-child{
 			color: $architraveLogoColour;
-			font-size: 1.75rem;
-			letter-spacing: 0.05rem;
+			font-size: $logoFontSize;
+			letter-spacing: 0.0875rem;
 			font-weight: 500;
-
-			@media screen and (max-width: $breakpointMedium) {
-				letter-spacing: 0.02rem;
-			}
-
-			@media screen and (max-width: $breakpointSmall) {
-				margin-top: 1%;
-				font-size: 1.5rem;
-				letter-spacing: 0.08rem;
-			}
-
-			+ p {
-				@media screen and (max-width: $breakpointSmall) {
-					display: none;
-				}
-			}
+			padding-left: $spacing;
 		}
 	}
 }
@@ -150,21 +95,20 @@ aside {
 
 			> li {
 				@media screen and (max-width: $breakpointSmall) {
-					font-size: 1.3em !important;
+					font-size: 1.3rem !important;
 					color: red !important;
 				}
 
 				@media screen and (max-width: $breakpointExtraSmall) {
-					line-height: 0.9em !important;
+					line-height: 0.9rem !important;
 				}
 			}
 		}
 
 		li {
 			display: block;
-			font-size: 1.7rem;
-			line-height: 1.7rem;
-			padding: 0;
+			font-size: $navFontSize;
+			padding: 0.4375rem 0;
 			color: $grayLinkColour;
 
 			@media screen and (max-width: $breakpointLarge) {
@@ -177,7 +121,7 @@ aside {
 				color: $grayLinkColour;
 
 				&:hover {
-					color: black;
+					color: $darkTextColour;
 				}
 			}
 		}
@@ -195,7 +139,7 @@ aside {
 				position: absolute;
 				top: 25px;
 				right: 0;
-				font-size: 1.7rem;
+				font-size: $navFontSize;
 				text-align: right;
 				width: 96%;
 				margin: $spacing 0;
@@ -211,8 +155,8 @@ aside {
 			}
 
 			li {
-				font-size: 1.7rem;
-				line-height: 1.7rem;
+				font-size: $navFontSize;
+				line-height: $navFontSize;
 
 				@media screen and (max-width: $breakpointExtraSmall) {
 					line-height: 0.9em !important;

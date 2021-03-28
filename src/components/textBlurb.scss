@@ -1,0 +1,58 @@
+@import 'variables';
+
+.textBlurb {
+    position: relative;
+    max-width: 100%;
+    height: 100%;
+    min-height: 75px;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    background-color: $blurbColour;
+    padding: 0 $spacing;
+    color: $lightTextColour;
+    font-size: $descriptionFontSize;
+
+    .headingSection {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        margin-top: $spacing;
+    }
+
+    .title {
+        display: inline-block;
+        font-weight: normal;
+        font-size: $titleFontSize;
+        margin: 0;
+
+        @media screen and (max-width: $breakpointSmall) {
+            display: block;
+            width: 100%;
+            margin-bottom: 4px !important;
+        }
+    }
+
+    .subTitle {
+        display: inline-block;
+        font-weight: normal;
+        font-size: 1.3rem;
+        line-height: 1.1rem;
+        text-align: right;
+        margin: 0;
+        color: $subTitleColour;
+
+        @media screen and (max-width: $breakpointSmall) {
+            display: block;
+            width: 100%;
+            font-size: 1.3rem;
+            text-align: left;
+            padding: 0;
+            margin-top: 0;
+        }
+    }
+
+    .headingSection ~ .text {
+        margin-bottom: 28px;
+    }
+}

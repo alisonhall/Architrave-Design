@@ -3,34 +3,45 @@
 VARIABLES
 ********************/
 
+/* Breakpoints */
 $breakpointLarge: 1000px;
 $breakpointMedium: 750px;
 $breakpointMediumSmall: 600px;
 $breakpointSmall: 520px;
 $breakpointExtraSmall: 380px;
 
-$baseHeight: 500px;
+/* Text Sizes */
+$bodyFontSize: 16px;
+$descriptionFontSize: 1.156rem;
+$titleFontSize: 1.736rem;
+$tileLinkFontSize: 1.4rem;
 
-$spacing: 20px;
+/* Spacing */
+$spacing: 25px;
 $spacingX2: $spacing * 2;
 $spacingHalf: $spacing / 2;
 $negativeSpacing: $spacing * (-1);
 $negativeSpacingHalf: $spacingHalf * (-1);
+$textBlurbPadding: calc(#{$descriptionFontSize} + #{$spacing});
 
+/* Heading and Content */
 $headerHeight: 70px;
 $asideWidth: 22%;
 $contentWrapperWidth: 100% - $asideWidth;
 $contentWrapperMaxWidth: 1000px;
-$contentWrapperMinHeight: 89vh;
 
-$textBlurbPadding: calc(16px + #{$spacing});
-$textBlurbWidth: calc(100% - #{$spacingX2} - (#{$textBlurbPadding} * 2));
-
+/* Colours */
+$pageColour: white;
+$lightTextColour: white;
+$darkTextColour: black;
+$shadowOverlayColour: black;
 $blurbColour: #7ba7ba;
+$subTitleColour: #CAE1EB;
 $grayLinkColour: #999;
 $lightGrayLinkColour: #DDD;
 $architraveLogoColour: #9B5C6C;
 
+/* Content Heights */
 $viewportHeightDefault: 82vh;
 $viewportHeightContact: 87vh;
 $viewportHeightReviews: 95vh;
