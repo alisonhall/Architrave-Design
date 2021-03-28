@@ -17,10 +17,6 @@ import Image from './image';
  * @param {string} param.text.copy
  * @param {string} param.customClass
  * @param {string} param.num
- * @param {Object} param.styles
- * @param {string} param.styles.width
- * @param {string} param.styles.height
- * @param {string} param.styles.float
  */
 const ImageLinkTile = ({
   image,
@@ -32,22 +28,12 @@ const ImageLinkTile = ({
   } = {},
   customClass = '',
   num = '0',
-  styles: {
-    width = '100%',
-    height = '100%',
-    float = 'left'
-  } = {}
 }) => {
-  if (width && height && image) {
+  if (image) {
     return (
       <Link
         to={linkUrl}
         className={`image-link image image${num} clearfix ${customClass}`}
-        css={css`
-          width: ${width};
-          height: ${height};
-          float: ${float};
-        `}
       >
         <div className="shadowOverlay clearfix">
           <Image num={num} {...image} />

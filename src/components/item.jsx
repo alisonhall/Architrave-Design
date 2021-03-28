@@ -17,9 +17,9 @@ import TextBlurbFiller from './textBlurbFiller';
  * @param {Object|boolean} image
  * @param {File} image.image
  * @param {string} image.imageUrl
- * @param {string} image.imageModifier
  * @param {string} image.altText
  * @param {string} image.backgroundPosition
+ * @param {number} image.height
  * 
  * @param {Object|boolean} link
  * @param {string} link.linkUrl
@@ -28,12 +28,6 @@ import TextBlurbFiller from './textBlurbFiller';
  * @param {string} text.copy
  * @param {string} text.title
  * @param {string} text.subTitle
- * 
- * @param {Object} styles
- * @param {string} styles.width
- * @param {string} styles.height
- * @param {string} styles.float
- * @param {Object} styles.marginTop
  */
 export default (data) => {
   const {

@@ -1,6 +1,6 @@
 @import 'variables';
 
-$sitemapWidth: 100% - $spacingX2;
+$sitemapWidth: calc(100% - $spacingX2);
 
 /********************
 SITEMAP

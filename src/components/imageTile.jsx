@@ -13,11 +13,6 @@ import Image from './image';
  * @param {string} param.text.copy
  * @param {string} param.num
  * @param {string} param.customClass
- * @param {Object} param.styles
- * @param {Object} param.styles.width
- * @param {Object} param.styles.height
- * @param {Object} param.styles.float
- * @param {Object} param.styles.marginTop
  */
 const ImageTile = ({
   image = {},
@@ -26,21 +21,9 @@ const ImageTile = ({
   } = {},
   num = '0',
   customClass = '',
-  styles: {
-    width = null,
-    height = null,
-    float = null,
-    marginTop = null
-  } = {}
 }) => (
   <div
     className={`image-tile image image${num} clearfix ${customClass}`}
-    css={css`
-      width: ${width};
-      height: ${height};
-      float: ${float};
-      ${marginTop ? `margin-top: ${marginTop}` : ''};
-    `}
   >
     <div className="shadowOverlay clearfix">
       <Image num={num} {...image} />

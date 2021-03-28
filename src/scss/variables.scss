@@ -11,18 +11,17 @@ $breakpointExtraSmall: 380px;
 
 $baseHeight: 500px;
 
-$spacing: 1.5%;
+$spacing: 20px;
 $spacingX2: $spacing * 2;
 $spacingHalf: $spacing / 2;
 $negativeSpacing: $spacing * (-1);
 $negativeSpacingHalf: $spacingHalf * (-1);
 
-$headerHeight: 2.1875em;
+$headerHeight: 70px;
 $asideWidth: 22%;
 $contentWrapperWidth: 100% - $asideWidth;
 $contentWrapperMaxWidth: 1000px;
 $contentWrapperMinHeight: 89vh;
-$asidePlusSpacing: $asideWidth + $spacingHalf;
 
 $textBlurbPadding: calc(16px + #{$spacing});
 $textBlurbWidth: calc(100% - #{$spacingX2} - (#{$textBlurbPadding} * 2));

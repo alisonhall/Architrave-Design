@@ -83,12 +83,7 @@ const KingswayTransitional = (props) => (
           </Row>
           <Row>
             <Column>
-              <Item
-                styles={{
-                  width: '100%',
-                  height: '100%'
-                }}
-              />
+              <Item />
             </Column>  
           </Row>
         </Column>
