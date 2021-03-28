@@ -21,7 +21,8 @@ const IndexPage = (props) => (
             project={projects.hoggsHollowTraditional}
             image={{
               imageUrl: projects.hoggsHollowTraditional.mainImageUrl,
-              backgroundPosition: '100% 0%'
+              backgroundPosition: '100% 0%',
+              height: 702
             }}
             link={{
               linkUrl: `/${portfolio}/${projects.hoggsHollowTraditional.type}/${projects.hoggsHollowTraditional.fileName}`
@@ -38,7 +39,8 @@ const IndexPage = (props) => (
                 num={2}
                 project={projects.kingswayGeorgian}
                 image={{
-                  imageUrl: projects.kingswayGeorgian.mainImageUrl
+                  imageUrl: projects.kingswayGeorgian.mainImageUrl,
+                  height: 702 * 0.55
                 }}
                 link={{
                   linkUrl: `/${portfolio}/${projects.kingswayGeorgian.type}/${projects.kingswayGeorgian.fileName}`
@@ -56,21 +58,17 @@ const IndexPage = (props) => (
                 project={projects.kingswayTransitional}
                 image={{
                   imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347224/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/6-Banquette-seating_oe01cy.jpg',
+                  height: 702 * 0.55
                 }}
               />
-              {/* <ImageFillerTile dataItem={{
-                num: '3',
-                image: image3,
-                width: 'calc(21% - (1.5% * 2))',
-                height: 'calc(500px * 0.598266)'
-              }} /> */}
             </Column>
             <Column width="60%">
               <Item
                 num={4}
                 project={projects.creditRiverManor}
                 image={{
-                  imageUrl: projects.creditRiverManor.mainImageUrl
+                  imageUrl: projects.creditRiverManor.mainImageUrl,
+                  height: 702 * 0.55
                 }}
                 link={{
                   linkUrl: `/${portfolio}/${projects.creditRiverManor.type}/${projects.creditRiverManor.fileName}`
@@ -98,7 +96,8 @@ const IndexPage = (props) => (
             num={5}
             project={projects.classicCentreHall}
             image={{
-              imageUrl: projects.classicCentreHall.mainImageUrl
+              imageUrl: projects.classicCentreHall.mainImageUrl,
+              height: 300
             }}
             link={{
               linkUrl: `/${portfolio}/${projects.classicCentreHall.type}/${projects.classicCentreHall.fileName}`
@@ -113,7 +112,8 @@ const IndexPage = (props) => (
             num={6}
             project={projects.kingswayTransitional}
             image={{
-              imageUrl: projects.kingswayTransitional.mainImageUrl
+              imageUrl: projects.kingswayTransitional.mainImageUrl,
+              height: 300
             }}
             link={{
               linkUrl: `/${portfolio}/${projects.kingswayTransitional.type}/${projects.kingswayTransitional.fileName}`
@@ -130,7 +130,8 @@ const IndexPage = (props) => (
             num={7}
             project={projects.etobicokeArtsAndCrafts}
             image={{
-              imageUrl: projects.etobicokeArtsAndCrafts.mainImageUrl
+              imageUrl: projects.etobicokeArtsAndCrafts.mainImageUrl,
+              height: 345
             }}
             link={{
               linkUrl: `/${portfolio}/${projects.etobicokeArtsAndCrafts.type}/${projects.etobicokeArtsAndCrafts.fileName}`
@@ -145,7 +146,8 @@ const IndexPage = (props) => (
             num={8}
             project={projects.lyttonParkManor}
             image={{
-              imageUrl: projects.lyttonParkManor.mainImageUrl
+              imageUrl: projects.lyttonParkManor.mainImageUrl,
+              height: 345
             }}
             link={{
               linkUrl: `/${portfolio}/${projects.lyttonParkManor.type}/${projects.lyttonParkManor.fileName}`
@@ -156,32 +158,6 @@ const IndexPage = (props) => (
           />
         </Column>
       </Row>
-      {/* <Row>
-        <Column>
-          <Item
-            num={9}
-            project={projects.creditRiverManor}
-            image={{
-              imageUrl: projects.creditRiverManor.mainImageUrl
-            }}
-            styles={{
-              height: '300px'
-            }}
-          />
-        </Column>
-        <Column>
-          <Item
-            num={10}
-            project={projects.kingswayGeorgian}
-            image={{
-              imageUrl: projects.kingswayGeorgian.mainImageUrl
-            }}
-            styles={{
-              height: '300px'
-            }}
-          />
-        </Column>
-      </Row> */}
     </section>
   </Layout>
 )

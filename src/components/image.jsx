@@ -12,20 +12,21 @@ import constants from '../../static/app-constants';
  * @param {number} param.num
  * @param {File} param.image
  * @param {string} param.imageUrl
- * @param {string} param.imageModifier
  * @param {string} param.altText
  * @param {string} param.backgroundPosition
+ * @param {number} param.height
  */
 const Image = ({
   customClass = '',
   num = 0,
   image,
   imageUrl,
-  imageModifier = 'w_auto,c_scale,f_auto,q_auto',
   altText = '',
-  backgroundPosition = '50% 40%'
+  backgroundPosition = '50% 40%',
+  height
 }) => {
   let imageSrc;
+  const imageModifier = height ? `h_${Math.ceil(height * 2)},c_scale,f_auto,q_auto` : 'w_auto,c_scale,f_auto,q_auto';
 
   /* Handle/Compile the imageSrc based on the props */
   if (imageUrl) {
