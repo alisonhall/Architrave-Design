@@ -20,7 +20,8 @@ const RoyalYorkFacelift = (props) => (
           <Item
             num={1}
             image={{
-              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1613940687/ArchitraveDesign/2-Renovations-and-Additions/Royal-York-Facelift/Royal-York-1_luwupq.jpg'
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1613940687/ArchitraveDesign/2-Renovations-and-Additions/Royal-York-Facelift/Royal-York-1_luwupq.jpg',
+              height: 375
             }}
             text={{
               copy: 'Before'
@@ -31,7 +32,8 @@ const RoyalYorkFacelift = (props) => (
           <Item
             num={2}
             image={{
-              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1613940687/ArchitraveDesign/2-Renovations-and-Additions/Royal-York-Facelift/Royal-York-2_ejplbx.jpg'
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1613940687/ArchitraveDesign/2-Renovations-and-Additions/Royal-York-Facelift/Royal-York-2_ejplbx.jpg',
+              height: 375
             }}
             text={{
               copy: 'New Facade'

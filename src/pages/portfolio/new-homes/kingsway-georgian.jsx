@@ -20,7 +20,8 @@ const KingswayGeorgian = (props) => (
           <Item
             num={1}
             image={{
-              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347141/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/1-Front-Facade_eohlwb.jpg'
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347141/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/1-Front-Facade_eohlwb.jpg',
+              height: 750
             }}
           />
         </Column>
@@ -42,7 +43,8 @@ const KingswayGeorgian = (props) => (
               <Item
                 num={2}
                 image={{
-                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347138/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/2-Cut-Stone_Portico_doxm8y.jpg'
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347138/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/2-Cut-Stone_Portico_doxm8y.jpg',
+                  height: 400
                 }}
               />
             </Column>  
@@ -52,7 +54,8 @@ const KingswayGeorgian = (props) => (
               <Item
                 num={4}
                 image={{
-                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347150/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/3-Back-Garden_bczadu.jpg'
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347150/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/3-Back-Garden_bczadu.jpg',
+                  height: 400
                 }}
               />
             </Column>  
@@ -64,7 +67,8 @@ const KingswayGeorgian = (props) => (
               <Item
                 num={4}
                 image={{
-                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347141/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/5-Main-Hall_txsam1.jpg'
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347141/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/5-Main-Hall_txsam1.jpg',
+                  height: 700
                 }}
               />
             </Column>  
@@ -83,7 +87,8 @@ const KingswayGeorgian = (props) => (
               <Item
                 num={5}
                 image={{
-                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347145/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/7-Family-Room_lh91x1.jpg'
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347145/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/7-Family-Room_lh91x1.jpg',
+                  height: 350
                 }}
               />
             </Column>
@@ -93,7 +98,8 @@ const KingswayGeorgian = (props) => (
               <Item
                 num={6}
                 image={{
-                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347144/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/8-Kitchen_mrd8z9.jpg'
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347144/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/8-Kitchen_mrd8z9.jpg',
+                  height: 350
                 }}
               />
             </Column>
@@ -103,7 +109,8 @@ const KingswayGeorgian = (props) => (
               <Item
                 num={7}
                 image={{
-                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347149/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/10-Island-_-Servery_whpyxm.jpg'
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347149/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/10-Island-_-Servery_whpyxm.jpg',
+                  height: 350
                 }}
               />
             </Column>
@@ -115,7 +122,8 @@ const KingswayGeorgian = (props) => (
               <Item
                 num={8}
                 image={{
-                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347140/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/6-Sitting-Room_et7o9z.jpg'
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347140/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/6-Sitting-Room_et7o9z.jpg',
+                  height: 540
                 }}
               />
             </Column>
@@ -125,7 +133,8 @@ const KingswayGeorgian = (props) => (
               <Item
                 num={9}
                 image={{
-                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347150/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/9-Breakfast-Banquette_plhghs.jpg'
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347150/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/9-Breakfast-Banquette_plhghs.jpg',
+                  height: 540
                 }}
               />
             </Column>
@@ -137,7 +146,8 @@ const KingswayGeorgian = (props) => (
           <Item
             num={10}
             image={{
-              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347144/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/11-Landing-_-Window-seat_y0xb7c.jpg'
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347144/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/11-Landing-_-Window-seat_y0xb7c.jpg',
+              height: 350
             }}
           />
         </Column>
@@ -145,7 +155,8 @@ const KingswayGeorgian = (props) => (
           <Item
             num={11}
             image={{
-              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347149/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/13-Freestanding-Tub_oo8ylx.jpg'
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347149/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/13-Freestanding-Tub_oo8ylx.jpg',
+              height: 350
             }}
           />
         </Column>
@@ -153,7 +164,8 @@ const KingswayGeorgian = (props) => (
           <Item
             num={12}
             image={{
-              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347151/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/15-Third-Floor-Guest-Suite_my5izk.jpg'
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347151/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/15-Third-Floor-Guest-Suite_my5izk.jpg',
+              height: 350
             }}
           />
         </Column>

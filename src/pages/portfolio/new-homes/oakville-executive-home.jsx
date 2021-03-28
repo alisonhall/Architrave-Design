@@ -20,7 +20,8 @@ const OakvilleExecutiveHome = (props) => (
           <Item
             num={1}
             image={{
-              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347328/ArchitraveDesign/1-New-Homes/7-Oakville-Executive-Home/1-Front-Facade_rpftbr.jpg'
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347328/ArchitraveDesign/1-New-Homes/7-Oakville-Executive-Home/1-Front-Facade_rpftbr.jpg',
+              height: 600
             }}
           />
         </Column>
@@ -40,7 +41,8 @@ const OakvilleExecutiveHome = (props) => (
           <Item
             num={2}
             image={{
-              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347327/ArchitraveDesign/1-New-Homes/7-Oakville-Executive-Home/2-Three-car-Garage_wxoxdf.jpg'
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347327/ArchitraveDesign/1-New-Homes/7-Oakville-Executive-Home/2-Three-car-Garage_wxoxdf.jpg',
+              height: 480
             }}
           />
         </Column>
@@ -48,7 +50,8 @@ const OakvilleExecutiveHome = (props) => (
           <Item
             num={3}
             image={{
-              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347331/ArchitraveDesign/1-New-Homes/7-Oakville-Executive-Home/3-Front-Entry_ryc4yl.jpg'
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347331/ArchitraveDesign/1-New-Homes/7-Oakville-Executive-Home/3-Front-Entry_ryc4yl.jpg',
+              height: 480
             }}
           />
         </Column>

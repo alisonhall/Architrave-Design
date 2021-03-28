@@ -22,7 +22,8 @@ const EtobicokeArtsAndCrafts = (props) => (
               <Item
                 num={1}
                 image={{
-                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347380/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/2-Arts-and-Crafts-Restyling_jydm2x.jpg'
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347380/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/2-Arts-and-Crafts-Restyling_jydm2x.jpg',
+                  height: 480
                 }}
               />
             </Column>
@@ -32,7 +33,8 @@ const EtobicokeArtsAndCrafts = (props) => (
               <Item
                 num={2}
                 image={{
-                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347373/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/1b-Before_2_hhwjuw.jpg'
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347373/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/1b-Before_2_hhwjuw.jpg',
+                  height: 240
                 }}
                 text={{
                   copy: 'Before'
@@ -43,7 +45,8 @@ const EtobicokeArtsAndCrafts = (props) => (
               <Item
                 num={3}
                 image={{
-                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347382/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/6-New-Reading-Nook_khsnqo.jpg'
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347382/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/6-New-Reading-Nook_khsnqo.jpg',
+                  height: 240
                 }}
               />
             </Column>
@@ -55,7 +58,8 @@ const EtobicokeArtsAndCrafts = (props) => (
               <Item
                 num={4}
                 image={{
-                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347383/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/xxSeat_Drawers_uityi0.jpg'
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347383/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/xxSeat_Drawers_uityi0.jpg',
+                  height: 215
                 }}
               />
             </Column>
@@ -65,7 +69,8 @@ const EtobicokeArtsAndCrafts = (props) => (
               <Item
                 num={5}
                 image={{
-                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347548/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/7-Window-Seat_qspbju.jpg'
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347548/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/7-Window-Seat_qspbju.jpg',
+                  height: 505
                 }}
               />
             </Column>
@@ -87,7 +92,8 @@ const EtobicokeArtsAndCrafts = (props) => (
           <Item
             num={6}
             image={{
-              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347384/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/5-Custom-Cabinetry_zay5pm.jpg'
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347384/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/5-Custom-Cabinetry_zay5pm.jpg',
+              height: 390
             }}
           />
         </Column>
@@ -95,7 +101,8 @@ const EtobicokeArtsAndCrafts = (props) => (
           <Item
             num={7}
             image={{
-              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347379/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/9-Master_lsvfyq.jpg'
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347379/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/9-Master_lsvfyq.jpg',
+              height: 390
             }}
           />
         </Column>

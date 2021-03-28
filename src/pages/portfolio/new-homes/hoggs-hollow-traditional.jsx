@@ -21,7 +21,8 @@ const HoggsHollowTraditional = (props) => (
             num={1}
             image={{
               imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347176/ArchitraveDesign/1-New-Homes/2-Hoggs-Hollow-French-Country/2-Centre-Hall-_-Elliptical-Stair_xlu5rz.jpg',
-              backgroundPosition: '100% 0%'
+              backgroundPosition: '100% 0%',
+              height: 645
             }}
           />
         </Column>
@@ -31,7 +32,8 @@ const HoggsHollowTraditional = (props) => (
               <Item
                 num={2}
                 image={{
-                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347168/ArchitraveDesign/1-New-Homes/2-Hoggs-Hollow-French-Country/1-Front-Facade_iieaut.jpg'
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347168/ArchitraveDesign/1-New-Homes/2-Hoggs-Hollow-French-Country/1-Front-Facade_iieaut.jpg',
+                  height: 340
                 }}
               />
             </Column>
@@ -41,7 +43,8 @@ const HoggsHollowTraditional = (props) => (
               <Item
                 num={3}
                 image={{
-                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347175/ArchitraveDesign/1-New-Homes/2-Hoggs-Hollow-French-Country/8-Riverside-Terraces_ukricc.jpg'
+                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347175/ArchitraveDesign/1-New-Homes/2-Hoggs-Hollow-French-Country/8-Riverside-Terraces_ukricc.jpg',
+                  height: 645 - 340
                 }}
               />
             </Column>
@@ -63,7 +66,8 @@ const HoggsHollowTraditional = (props) => (
           <Item
             num={4}
             image={{
-              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347176/ArchitraveDesign/1-New-Homes/2-Hoggs-Hollow-French-Country/9-Custom-Pool_rj5teb.jpg'
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347176/ArchitraveDesign/1-New-Homes/2-Hoggs-Hollow-French-Country/9-Custom-Pool_rj5teb.jpg',
+              height: 300
             }}
           />
         </Column>
@@ -71,7 +75,8 @@ const HoggsHollowTraditional = (props) => (
           <Item
             num={5}
             image={{
-              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347177/ArchitraveDesign/1-New-Homes/2-Hoggs-Hollow-French-Country/3-Coffered-Family-Room_ayggrb.jpg'
+              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347177/ArchitraveDesign/1-New-Homes/2-Hoggs-Hollow-French-Country/3-Coffered-Family-Room_ayggrb.jpg',
+              height: 300
             }}
           />
         </Column>

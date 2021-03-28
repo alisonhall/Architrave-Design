@@ -22,7 +22,8 @@ const RenovationsAdditions = (props) => (
             project={projects.lyttonParkManor}
             image={{
               imageUrl: projects.lyttonParkManor.mainImageUrl,
-              backgroundPosition: '50% 40%'
+              backgroundPosition: '50% 40%',
+              height: 645
             }}
             link={{
               linkUrl: `/${portfolio}/${projects.lyttonParkManor.type}/${projects.lyttonParkManor.fileName}`
@@ -40,7 +41,8 @@ const RenovationsAdditions = (props) => (
                 project={projects.princessMargaretModern}
                 image={{
                   imageUrl: projects.princessMargaretModern.mainImageUrl,
-                  backgroundPosition: '50% 30%'
+                  backgroundPosition: '50% 30%',
+                  height: 345
                 }}
                 link={{
                   linkUrl: `/${portfolio}/${projects.princessMargaretModern.type}/${projects.princessMargaretModern.fileName}`
@@ -58,7 +60,8 @@ const RenovationsAdditions = (props) => (
                 project={projects.upperCanadaFarmhouse}
                 image={{
                   imageUrl: projects.upperCanadaFarmhouse.mainImageUrl,
-                  backgroundPosition: '50% 40%'
+                  backgroundPosition: '50% 40%',
+                  height: 645 - 345
                 }}
                 link={{
                   linkUrl: `/${portfolio}/${projects.upperCanadaFarmhouse.type}/${projects.upperCanadaFarmhouse.fileName}`
@@ -87,7 +90,8 @@ const RenovationsAdditions = (props) => (
             project={projects.rosedaleEdwardian}
             image={{
               imageUrl: projects.rosedaleEdwardian.mainImageUrl,
-              backgroundPosition: '50% 40%'
+              backgroundPosition: '50% 40%',
+              height: 300
             }}
             link={{
               linkUrl: `/${portfolio}/${projects.rosedaleEdwardian.type}/${projects.rosedaleEdwardian.fileName}`
@@ -103,7 +107,8 @@ const RenovationsAdditions = (props) => (
             project={projects.etobicokeArtsAndCrafts}
             image={{
               imageUrl: projects.etobicokeArtsAndCrafts.mainImageUrl,
-              backgroundPosition: '50% 40%'
+              backgroundPosition: '50% 40%',
+              height: 300
             }}
             link={{
               linkUrl: `/${portfolio}/${projects.etobicokeArtsAndCrafts.type}/${projects.etobicokeArtsAndCrafts.fileName}`
