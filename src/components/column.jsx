@@ -12,6 +12,9 @@ import './column.scss';
 const Column = ({ children, width }) => (
   <div className="column" css={css`
     ${width ? `width: ${width}` : ''};
+    @media screen and (max-width: 520px) {
+      width: 100%;
+    }
   `}>
     {children}
   </div>

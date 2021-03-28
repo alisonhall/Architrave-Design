@@ -48,7 +48,10 @@ const Image = ({
       src={imageSrc}
       alt={altText}
       css={css`
-        object-position: ${backgroundPosition};
+        object-position: 50% 50%;
+        @media screen and (min-width: 521px) {
+          object-position: ${backgroundPosition};
+        }
       `}
     />
     // <picture>

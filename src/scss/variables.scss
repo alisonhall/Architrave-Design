@@ -5,9 +5,14 @@ VARIABLES
 
 /* Breakpoints */
 $breakpointLarge: 1000px;
+$breakpointAboveLarge: 1001px;
 $breakpointMedium: 750px;
+$breakpointAboveMedium: 751px;
+$breakpointAboveMediumSmall: 601px;
 $breakpointMediumSmall: 600px;
+$breakpointAboveSmall: 521px;
 $breakpointSmall: 520px;
+$breakpointAboveExtraSmall: 381px;
 $breakpointExtraSmall: 380px;
 
 /* Text Sizes */
@@ -17,6 +22,7 @@ $titleFontSize: 1.736rem;
 $tileLinkFontSize: 1.4rem;
 
 /* Spacing */
+$mobileSpacing: 15px;
 $spacing: 25px;
 $spacingX2: $spacing * 2;
 $spacingHalf: $spacing / 2;

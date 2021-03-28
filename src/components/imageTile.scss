@@ -1,16 +1,2 @@
 @import 'variables';
 
-.image {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    max-width: 100%;
-
-    @media screen and (max-width: $breakpointSmall) {
-        max-height: 400px;
-    }
-
-    @media screen and (max-width: $breakpointExtraSmall) {
-        max-height: 300px;
-    }
-}

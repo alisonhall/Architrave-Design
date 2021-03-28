@@ -8,14 +8,16 @@ import Image from './image';
  * @description A filler image for one of the navigation pages.
  * 
  * @param {Object} param
+ * @param {Object} param.customClass
  * @param {Object} param.image
  * @param {string} param.num
  */
 const ImageFillerTile = ({
+  customClass,
   image,
   num = '0'
 }) => (
-  <div className={`image image${num} clearfix imageFiller`}>
+  <div className={`${customClass} image image${num} clearfix imageFiller`}>
     <div className="shadowOverlay clearfix">
       <Image
         customClass="filler"
