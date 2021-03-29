@@ -1,11 +1,18 @@
 @import 'variables';
 
 $logoFontSize: 1.75rem;
-$navFontSize: 1.68rem;
 
 header {
 	text-transform: uppercase;
-	margin: 15px 0 10px $asideWidth;
+	margin: calc(#{$mobileSpacing} - 4px) 0 10px calc(#{$mobileLogoSize} + #{$mobileSpacing});
+	
+	@media screen and (min-width: $breakpointAboveSmall) {
+		margin: calc(#{$spacing} - 4px) 0 10px calc(#{$logoSize} + #{$spacing});
+	}
+
+	@media screen and (min-width: $breakpointAboveLarge) {
+		margin: 15px 0 10px calc(#{$asideWidth} + #{$spacing});
+	}
 
 	p {
 		font-size: $logoFontSize;
@@ -20,175 +27,10 @@ header {
 			font-size: $logoFontSize;
 			letter-spacing: 0.0875rem;
 			font-weight: 500;
-			padding-left: $spacing;
-		}
-	}
-}
-
-aside {
-	width: $asideWidth;
-	height: 100%;
-	position: fixed;
-	padding-right: $spacingHalf;
-	margin: 0 0 0 $negativeSpacingHalf;
-	top: 0;
-	left: 0;
-	float: left;
-	background: transparent;
-	z-index: 9999;
-
-	@media screen and (max-width: $breakpointLarge) {
-		width: 100%;
-		height: 0px;
-		position: absolute;
-		top: 0;
-		left: 0;
-		margin: 0;
-		float: left;
-		z-index: 9999;
-	}
-
-	#logo {
-		float: right;
-		padding: 0;
-		padding-top: 20px;
-		width: 112px;
-		min-width: 60px;
-
-		@media screen and (max-width: $breakpointLarge) {
-			float: left;
-			padding: $spacing $spacing 0 $spacing;
-		}
-	}
-
-	nav {
-		float: right;
-		padding: 0;
-		margin: 80px 0 0;
-		text-transform: uppercase;
-
-		@media screen and (max-width: $breakpointLarge) {
-			margin: 0;
-			padding: 0;
-			text-transform: none;
-		}
-
-		> ul {
-			width: 445px;
-			margin: 0;
-			text-align: right;
-
-			@media screen and (max-width: $breakpointLarge) {
-				float: left;
-				text-align: right;
-				position: absolute;
-				top: 70px;
-				right: 1%;
-				width: 96%;
-				margin: 0 $spacing $spacing $spacing;
-				padding: 0;
+			
+			@media screen and (min-width: $breakpointAboveLarge) {
+				padding-left: 0;
 			}
-
-			@media screen and (max-width: $breakpointExtraSmall) {
-				top: 100px;
-			}
-
-			> li {
-				@media screen and (max-width: $breakpointSmall) {
-					font-size: 1.3rem !important;
-					color: red !important;
-				}
-
-				@media screen and (max-width: $breakpointExtraSmall) {
-					line-height: 0.9rem !important;
-				}
-			}
-		}
-
-		li {
-			display: block;
-			font-size: $navFontSize;
-			padding: 0.4375rem 0;
-			color: $grayLinkColour;
-
-			@media screen and (max-width: $breakpointLarge) {
-				display: inline-block;
-				padding-left: 10px;
-			}
-
-			a {
-				text-decoration: none;
-				color: $grayLinkColour;
-
-				&:hover {
-					color: $darkTextColour;
-				}
-			}
-		}
-
-		.selected {
-			font-weight: 500;
-			color: $architraveLogoColour;
-		}
-
-		.subNav {
-			display: none;
-			margin: 4% 4%;
-
-			@media screen and (max-width: $breakpointLarge) {
-				position: absolute;
-				top: 25px;
-				right: 0;
-				font-size: $navFontSize;
-				text-align: right;
-				width: 96%;
-				margin: $spacing 0;
-				padding: 0;
-			}
-
-			@media screen and (max-width: $breakpointSmall) {
-				top: 30px;
-			}
-
-			@media screen and (max-width: $breakpointExtraSmall) {
-				top: 50px !important;
-			}
-
-			li {
-				font-size: $navFontSize;
-				line-height: $navFontSize;
-
-				@media screen and (max-width: $breakpointExtraSmall) {
-					line-height: 0.9em !important;
-				}
-			}
-		}
-
-		.subNavVisible {
-			display: block;
-
-			@media screen and (max-width: $breakpointLarge) {
-				display: inline-block;
-			}
-		}
-	}
-
-	.houzzLogo {
-		position: absolute;
-		bottom: $spacing;
-		right: 3%;
-
-		@media screen and (max-width: $breakpointLarge) {
-			display: none;
-		}
-
-		@media screen and (max-width: $breakpointMedium) {
-			width: 10%;
-		}
-
-		img {
-			width: 50px;
-			height: 50px;
 		}
 	}
 }

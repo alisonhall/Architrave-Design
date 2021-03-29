@@ -6,6 +6,13 @@
     display: block;
     height: 100%;
 
+    &a {
+        text-decoration: none;
+        color: $lightTextColour;
+        font-size: $tileLinkFontSize;
+        font-weight: 300;
+    }
+
     .imageDiv {
         @include backgroundSize(cover);
         width: 100%;

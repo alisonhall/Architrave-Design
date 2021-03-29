@@ -1,0 +1,98 @@
+@import 'variables';
+@import 'mixins';
+
+$fadeInDelay1: 1s;
+$fadeInDelay2: 1.5s;
+$fadeInDelay3: 2s;
+$fadeInDelay4: 2.5s;
+$fadeInDelay5: 3s;
+$fadeInDelay6: 3.5s;
+
+.item {
+    &.image {
+        position: relative;
+        width: calc(100% - #{$mobileSpacing} * 2);
+        height: 100%;
+        max-width: 100%;
+        max-height: 300px;
+        border-left: $mobileSpacing solid $pageColour;
+        border-right: $mobileSpacing solid $pageColour;
+        border-bottom: $mobileSpacing solid $pageColour;
+        overflow: hidden;
+
+        @media screen and (min-width: $breakpointAboveExtraSmall) {
+            max-height: 400px;
+        }
+
+        @media screen and (min-width: $breakpointAboveSmall) {
+            width: 100%;
+            max-height: none;
+            border: none;
+        }
+        
+        &.filler {
+            display: none;
+
+            @media screen and (min-width: $breakpointAboveSmall) {
+                display: block;
+            }
+        }
+    }
+
+
+    &.image,
+    &.textBlurbFiller {
+        @include fade-in($fadeInDelay6);
+    }
+    
+    &.image1 {
+        @include fade-in($fadeInDelay1);
+    }
+    
+    &.image2,
+    &.textBlurb  {
+        @include fade-in($fadeInDelay2);
+    }
+    
+    &.image3 {
+        @include fade-in($fadeInDelay3);
+    }
+    
+    &.image4 {
+        @include fade-in($fadeInDelay4);
+    }
+    
+    &.image5 {
+        @include fade-in($fadeInDelay5);
+    }
+    
+    a .imageDiv,
+    .imageDiv {
+        @include transition(all 0.2s linear 0s);
+        object-fit: cover;
+    }
+
+    .textOverlay,
+    .completionDate {
+        position: relative;
+        z-index: 200;
+        color: $lightTextColour;
+        font-size: 1.405rem;
+        text-shadow: 0px 0px 5px rgba(0, 0, 0, 1);
+    }
+    
+    .textOverlay {
+        position: absolute;
+        bottom: 0;
+        width: calc(100% - #{$spacing} * 2);
+        margin: $spacing;
+    }
+    
+    .completionDate {
+        margin-top: -65px;
+        margin-right: 20px;
+        display: block;
+        text-align: right;
+        font-size: 0.9rem;
+    }
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 
+import './navigation.scss';
 import constants from '../../static/app-constants';
 
 import architraveLogo from '../images/ArchitraveNewLogo.jpg';
@@ -21,7 +22,7 @@ const Navigation = ({urlPath}) => {
   const isRenovationsAdditions = (urlPath.indexOf(projectTypes.renovations) >= 0) ? 'selected' : '';
   return (
   <aside>
-    <Link to="/">
+    <Link to="/" className="logo-link">
       <img id="logo" src={architraveLogo} alt="Architrave Design, Architect logo" />
     </Link>
     <nav>

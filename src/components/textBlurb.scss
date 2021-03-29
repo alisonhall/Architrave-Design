@@ -18,7 +18,7 @@
     border-bottom: $mobileSpacing solid $pageColour;
 
     @media screen and (min-width: $breakpointAboveSmall) {
-        width: 100%;
+        width: calc(100% - #{$spacing} * 2);
         border: none;
     }
 

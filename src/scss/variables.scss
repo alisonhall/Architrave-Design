@@ -33,6 +33,8 @@ $textBlurbPadding: calc(#{$descriptionFontSize} + #{$spacing});
 /* Heading and Content */
 $headerHeight: 70px;
 $asideWidth: 22%;
+$logoSize: 112px;
+$mobileLogoSize: 80px;
 $contentWrapperWidth: 100% - $asideWidth;
 $contentWrapperMaxWidth: 1500px;
 
