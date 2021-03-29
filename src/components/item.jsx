@@ -13,6 +13,7 @@ import TextBlurbFiller from './textBlurbFiller';
  * @param {string|number} num
  * @param {Object} project
  * @param {string} customClass
+ * @param {boolean} isFiller
  * 
  * @param {Object|boolean} image
  * @param {File} image.image
@@ -31,7 +32,7 @@ import TextBlurbFiller from './textBlurbFiller';
  */
 export default (data) => {
   const {
-    customClass,
+    isFiller,
     image,
     link,
     text
@@ -41,7 +42,7 @@ export default (data) => {
     return <ImageLinkTile {...data} />;
   }
 
-  if (image && customClass === 'filler') {
+  if (image && isFiller) {
     return <ImageFillerTile {...data} />;
   }
   

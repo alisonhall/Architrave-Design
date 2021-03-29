@@ -56,7 +56,7 @@ const IndexPage = (props) => (
               <Item
                 num={3}
                 project={projects.kingswayTransitional}
-                customClass="filler"
+                isFiller
                 image={{
                   imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347224/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/6-Banquette-seating_oe01cy.jpg',
                   height: 702 * 0.55
