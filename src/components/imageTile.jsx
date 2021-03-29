@@ -1,6 +1,5 @@
-/** @jsx jsx */
 import React from 'react';
-import { css, jsx } from '@emotion/core';
+import { PropTypes } from 'prop-types';
 
 import Image from './image';
 import './imageTile.scss';
@@ -24,13 +23,23 @@ const ImageTile = ({
   customClass = '',
 }) => (
   <div
-    className={`image-tile image image${num} clearfix ${customClass}`}
+    className={`image-tile clearfix ${customClass}`}
   >
-    <div className="shadowOverlay clearfix">
-      <Image num={num} {...image} />
-    </div>
+    <Image num={num} {...image} />
     {copy && <p className="textOverlay">{copy}</p>}
   </div>
-)
+);
 
-export default ImageTile
+ImageTile.propTypes = {
+  image: PropTypes.object.isRequired,
+  text: PropTypes.shape({
+    copy: PropTypes.string
+  }),
+  num: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]).isRequired,
+  customClass: PropTypes.string
+};
+
+export default ImageTile;

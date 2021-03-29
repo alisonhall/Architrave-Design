@@ -1,4 +1,5 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 import './textBlurb.scss';
 
 /**
@@ -28,6 +29,15 @@ const TextBlurb = ({
     )}
     <p className="text">{copy}</p>
   </section>
-)
+);
 
-export default TextBlurb
+TextBlurb.propTypes = {
+  text: PropTypes.shape({
+    copy: PropTypes.string,
+    title: PropTypes.string,
+    subTitle: PropTypes.string
+  }).isRequired,
+  customClass: PropTypes.string
+};
+
+export default TextBlurb;

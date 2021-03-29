@@ -1,5 +1,7 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 
+import './item.scss';
 import ImageTile from './imageTile';
 import ImageLinkTile from './imageLinkTile';
 import ImageFillerTile from './imageFillerTile';
@@ -30,29 +32,67 @@ import TextBlurbFiller from './textBlurbFiller';
  * @param {string} text.title
  * @param {string} text.subTitle
  */
-export default (data) => {
+const Item = (data) => {
   const {
     isFiller,
+    customClass = '',
+    num = '0',
     image,
     link,
     text
   } = data;
 
   if (image && link) {
-    return <ImageLinkTile {...data} />;
+    return <ImageLinkTile customClass={`${customClass} item image image${num}`} {...data} />;
   }
 
   if (image && isFiller) {
-    return <ImageFillerTile {...data} />;
+    return <ImageFillerTile customClass={`${customClass} item image image${num}`} {...data} />;
   }
   
   if (image) {
-    return <ImageTile {...data} />;
+    return <ImageTile customClass={`${customClass} item image image${num}`} {...data} />;
   }
   
   if (text) {
-    return <TextBlurb {...data} />;
+    return <TextBlurb customClass={`${customClass} item`} {...data} />;
   }
 
-  return <TextBlurbFiller {...data} />;
-}
+  return <TextBlurbFiller customClass={`${customClass} item`} {...data} />;
+};
+
+Item.propTypes = {
+  num: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
+  project: PropTypes.object,
+  customClass: PropTypes.string,
+  isFiller: PropTypes.bool,
+  image: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.shape({
+      image: PropTypes.any,
+      imageUrl: PropTypes.string,
+      altText: PropTypes.string,
+      backgroundPosition: PropTypes.string,
+      height: PropTypes.number
+    })
+  ]),
+  link: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.shape({
+      linkUrl: PropTypes.string
+    })
+  ]),
+  text: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.shape({
+      copy: PropTypes.string,
+      title: PropTypes.string,
+      subTitle: PropTypes.string
+    })
+  ])
+};
+
+export default Item;

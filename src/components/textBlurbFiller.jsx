@@ -1,6 +1,5 @@
-/** @jsx jsx */
 import React from 'react';
-import { css, jsx } from '@emotion/core';
+import { PropTypes } from 'prop-types';
 import './textBlurbFiller.scss';
 
 /**
@@ -15,6 +14,10 @@ const TextBlurbFiller = ({
   <section
     className={`textBlurbFiller ${customClass}`}
   />
-)
+);
 
-export default TextBlurbFiller
+TextBlurbFiller.propTypes = {
+  customClass: PropTypes.string
+};
+
+export default TextBlurbFiller;

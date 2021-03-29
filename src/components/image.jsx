@@ -1,8 +1,8 @@
 /** @jsx jsx */
 import React from 'react';
+import { PropTypes } from 'prop-types';
 import { css, jsx } from '@emotion/core';
 
-import constants from '../../static/app-constants';
 import './image.scss';
 
 /**
@@ -42,26 +42,43 @@ const Image = ({
     return null;
   }
 
-  return (
-    <img
-      className={`imageDiv imageDiv${num} cld-responsive ${customClass}`}
-      src={imageSrc}
-      alt={altText}
-      css={css`
-        object-position: 50% 50%;
+  const imageStyle = imageSrc ? css`
+        object-position: 50% 40%;
         @media screen and (min-width: 521px) {
           object-position: ${backgroundPosition};
         }
-      `}
-    />
+      ` : null;
+
+  return (
+    <div className="shadowOverlay clearfix">
+      <img
+        className={`imageDiv imageDiv${num} cld-responsive ${customClass}`}
+        src={imageSrc}
+        alt={altText}
+        css={imageStyle}
+      />
+    </div>
     // <picture>
-      //   <source media="(min-width: 650px)" srcSet={image} />
-      //   <source media="(max-width: 649px)" srcSet={image} />
-      //   <img className={`imageDiv imageDiv${num} ${customClass}`} src={image} alt={altText} css={css`
-      //           object-position: ${backgroundPosition};
-      //         `} />
-      // </picture>
+    //   <source media="(min-width: 650px)" srcSet={image} />
+    //   <source media="(max-width: 649px)" srcSet={image} />
+    //   <img className={`imageDiv imageDiv${num} ${customClass}`} src={image} alt={altText} css={css`
+    //           object-position: ${backgroundPosition};
+    //         `} />
+    // </picture>
   );
-}
+};
+
+Image.propTypes = {
+  customClass: PropTypes.string,
+  num: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
+  image: PropTypes.any,
+  imageUrl: PropTypes.string,
+  altText: PropTypes.string,
+  backgroundPosition: PropTypes.string,
+  height: PropTypes.number
+};
 
 export default Image;

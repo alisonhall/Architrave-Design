@@ -1,5 +1,8 @@
+/** @jsx jsx */
 import React from 'react';
+import { PropTypes } from 'prop-types';
 import { css, jsx } from '@emotion/core';
+
 import './column.scss';
 
 /**
@@ -18,6 +21,11 @@ const Column = ({ children, width }) => (
   `}>
     {children}
   </div>
-)
+);
 
-export default Column
+Column.propTypes = {
+  children: PropTypes.node.isRequired,
+  width: PropTypes.string
+};
+
+export default Column;

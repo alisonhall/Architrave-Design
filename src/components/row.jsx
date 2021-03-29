@@ -1,4 +1,6 @@
+/** @jsx jsx */
 import React from 'react';
+import { PropTypes } from 'prop-types';
 import { css, jsx } from '@emotion/core';
 import './row.scss';
 
@@ -19,6 +21,11 @@ const Row = ({ children, height }) => (
   `}>
     {children}
   </div>
-)
+);
 
-export default Row
+Row.propTypes = {
+  children: PropTypes.node.isRequired,
+  height: PropTypes.string
+};
+
+export default Row;

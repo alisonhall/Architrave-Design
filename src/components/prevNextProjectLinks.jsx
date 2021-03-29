@@ -1,4 +1,5 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 import { Link } from 'gatsby';
 
 import constants from '../../static/app-constants';
@@ -62,6 +63,13 @@ const PrevNextProjectLinks = ({
   }
 
   return null;
-}
+};
 
-export default PrevNextProjectLinks
+PrevNextProjectLinks.propTypes = {
+  project: PropTypes.shape({
+    type: PropTypes.string.isRequired,
+    key: PropTypes.string.isRequired
+  }).isRequired
+};
+
+export default PrevNextProjectLinks;
