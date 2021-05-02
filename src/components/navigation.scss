@@ -31,7 +31,7 @@ aside {
         padding: $mobileSpacing $mobileSpacing 0 $mobileSpacing;
 
         @media screen and (min-width: $breakpointAboveSmall) {
-            width: $logoSize;
+			width: $logoSize;
             height: $logoSize;
             padding: $spacing $spacing 0 $spacing;
         }
@@ -51,11 +51,12 @@ aside {
         float: right;
         width: calc(100% - #{$mobileLogoSize} - #{$mobileSpacing} * 4);
 		padding: 0;
-        margin: 5rem $spacing $spacing $spacing;
+        margin: 4.5rem $mobileSpacing $mobileSpacing $mobileSpacing;
 		flex: 10 10 auto;
 
         @media screen and (min-width: $breakpointAboveSmall) {
-            width: calc(100% - #{$logoSize} - #{$mobileSpacing} * 4);
+            width: calc(100% - #{$logoSize} - #{$spacing} * 4);
+			margin: 4.5rem $spacing $spacing $spacing;
         }
         
 		@media screen and (min-width: $breakpointAboveLarge) {
@@ -75,10 +76,20 @@ aside {
 
 		li {
             display: inline-block;
-			font-size: 1rem;
+			font-size: 1.1rem;
 			line-height: 1.1em;
-            padding-left: 10px;
+            padding: 0 0 0 10px;
 			color: $grayLinkColour;
+
+			@media screen and (min-width: $breakpointAboveSmall) {
+				font-size: 1.2rem;
+				padding: 10px 0 0 20px;
+			}
+
+			@media screen and (min-width: $breakpointAboveMedium) {
+				font-size: 1.4rem;
+				padding: 10px 0 0 20px;
+			}
             
 			@media screen and (min-width: $breakpointAboveLarge) {
                 display: block;
@@ -120,6 +131,19 @@ aside {
 
 			li {
 				line-height: 1em;
+				font-size: 1rem;
+
+				@media screen and (min-width: $breakpointAboveSmall) {
+					font-size: 1.1rem;
+				}
+
+				@media screen and (min-width: $breakpointAboveMedium) {
+					font-size: 1.3rem;
+				}
+				
+				@media screen and (min-width: $breakpointAboveLarge) {
+					font-size: $navFontSize;
+				}
 			}
 		}
 

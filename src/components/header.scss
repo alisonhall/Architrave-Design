@@ -17,7 +17,7 @@ header {
 	}
 
 	p {
-		font-size: $logoFontSize;
+		font-size: 1.2rem;
 		display: inline-block;
 		color: $grayLinkColour;
 		font-weight: 400;
@@ -26,11 +26,24 @@ header {
 
 		&:first-child{
 			color: $architraveLogoColour;
-			font-size: $logoFontSize;
+			font-size: 1.2rem;
 			letter-spacing: 0.0875rem;
 			font-weight: 500;
-			
-			@media screen and (min-width: $breakpointAboveLarge) {
+		}
+
+		@media screen and (min-width: $breakpointAboveMedium) {
+			font-size: 1.5rem;
+
+			&:first-child {
+				font-size: 1.5rem;
+			}
+		}
+
+		@media screen and (min-width: $breakpointAboveLarge) {
+			font-size: $logoFontSize;
+
+			&:first-child {
+				font-size: $logoFontSize;
 				padding-left: 0;
 			}
 		}
