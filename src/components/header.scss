@@ -5,6 +5,7 @@ $logoFontSize: 1.75rem;
 header {
 	text-transform: uppercase;
 	margin: calc(#{$mobileSpacing} - 4px) 0 10px calc(#{$mobileLogoSize} + #{$mobileSpacing});
+	position: absolute;
 	
 	@media screen and (min-width: $breakpointAboveSmall) {
 		margin: calc(#{$spacing} - 4px) 0 10px calc(#{$logoSize} + #{$spacing});
@@ -12,6 +13,7 @@ header {
 
 	@media screen and (min-width: $breakpointAboveLarge) {
 		margin: 15px 0 10px calc(#{$asideWidth} + #{$spacing});
+		position: relative;
 	}
 
 	p {
