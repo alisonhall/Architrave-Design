@@ -8,37 +8,46 @@ SITEMAP
 
 .sitemap {
 	.contentBackground {
-		margin: $spacing;
+		margin: 0 $spacing;
+
 		@media screen and (max-width: $breakpointLarge) {
-			height: $viewportHeightSitemapLarge;
 			min-height: $viewportHeightSitemapLarge;
 		}
+
+		@media screen and (max-width: $breakpointSmall) {
+			margin: 0 $mobileSpacing;
+		}
 	}
+
 	.textContent {
 		background-color: $blurbColour;
 		min-height: $viewportHeightSitemap;
-		width: $sitemapWidth;
 		padding: $spacing;
 		color: $lightTextColour;
 		
 		ul {
 			list-style-type: none;
 		}
+
 		li,
 		p {
 			line-height: 1.7rem;
 		}
+
 		p {
 			padding: 0;
 			margin: 0;
 		}
+
 		li a {
 			text-decoration: none;
 		}
+
 		a:link,
 		a:visited {
 			color: $lightTextColour;
 		}
+
 		a:hover {
 			color: $lightGrayLinkColour;
 		}

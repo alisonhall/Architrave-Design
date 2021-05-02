@@ -16,44 +16,52 @@ $contactBlurbWidthSmall: 100% - 10%;
 
 .about {
 	.contentBackground {
-		margin: $spacing;
+		margin: 0 $spacing;
 		background-image: url("https://res.cloudinary.com/alisonkhall/image/upload/v1595346993/ArchitraveDesign/4-About/CreditRiver_Background_cnt0km.jpg");
 		@include backgroundSize(cover);
+
+		@media screen and (max-width: $breakpointSmall) {
+			margin: 0 $mobileSpacing;
+		}
 	}
 
 	.textContent {
 		padding: $spacing 5%;
 		max-width: 100%;
 		background-color: transparent;
-		margin: $spacing auto;
 		color: $lightTextColour;
 	}
 
-	h2 {
+	.heading {
 		text-transform: uppercase;
 		font-weight: 500;
+		font-size: 1.4375rem;
 	}
 
 	.centerContent {
 		width: 100%;
-		float: left;
 		background-color: $pageColour;
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: space-between;
 	}
 
 	.textBlurb {
 		padding: 0 5%;
-		margin: $spacingX2 0 $spacingX2 $spacing;
-		float: right;
+		margin: $spacing 0 $spacing $spacing;
 		color: $lightTextColour;
 		background-color: $blurbColour;
 		width: $contactBlurbWidth;
 		min-height: $contactBlurbHeight;
 		font-size: 1.2rem;
+		display: block;
+		border: 0;
 
 		@media screen and (max-width: $breakpointSmall) {
 			width: $contactBlurbWidthSmall;
 			max-width: $contactBlurbWidthSmall;
 			height: $contactBlurbHeightSmall;
+			margin: $mobileSpacing 0;
 		}
 	}
 
@@ -64,16 +72,14 @@ $contactBlurbWidthSmall: 100% - 10%;
 		max-width: 100%;
 		overflow: hidden;
 		width: $contactImageWidth;
-		height: $contactImageHeight;
-		float: left;
-		margin: $spacingX2 $spacing $spacingX2 0;
+		margin: $spacing 0;
 		overflow: hidden;
 
 		@media screen and (max-width: $breakpointSmall) {
 			width: 100%;
 			max-width: $contactImageWidthSmall;
 			height: $contactImageHeightSmall;
-			margin-bottom: 0;
+			margin: $mobileSpacing 0 0;
 		}
 	}
 }

@@ -7,7 +7,7 @@ CONTACT
 
 .contact {
 	.contentBackground {
-		margin: $spacing;
+		margin: 0 $spacing;
 		background-image: url("https://res.cloudinary.com/alisonkhall/image/upload/v1613951882/ArchitraveDesign/6-Contact/HoggsHollowTraditional-4-Background_odujg8.jpg");
 		@include backgroundSize(cover);
 		background-position: 100% 0%;
@@ -16,8 +16,13 @@ CONTACT
 		@media screen and (max-width: $breakpointLarge) {
 			height: $viewportHeightContactLarge;
 		}
+
+		@media screen and (max-width: $breakpointSmall) {
+			margin: 0 $mobileSpacing;
+		}
 	}
 	.textBlurb {
+		height: auto;
 		padding: $spacing 5%;
 		float: left;
 		width: 90%;
@@ -26,12 +31,16 @@ CONTACT
 		color: $lightTextColour;
 		border-style: solid;
 		border-color: $pageColour;
-		border-width: 25px 0;
-		font-size: 1.4rem;
+		border-width: $spacing 0;
+		font-size: 1.625rem;
 		line-height: 1rem;
 
 		@media screen and (max-width: $breakpointLarge) {
 			font-size: 1.2rem;
+		}
+
+		@media screen and (max-width: $breakpointSmall) {
+			border-width: $mobileSpacing 0;
 		}
 
 		@media screen and (max-width: $breakpointExtraSmall) {
@@ -40,7 +49,7 @@ CONTACT
 	}
 
 	.textBlurb p {
-		margin: $spacing 0;
+		margin: 10px 0;
 	}
 
 	.textBlurb a:link,
