@@ -13,10 +13,10 @@ const { projects, upcomingProjectsOrder } = constants;
 
 const UpcomingProject = (projectKey, index) => {
   const project = projects[projectKey];
-  const height = project.beforeImageUrl ? '885px' : '700px';
+  const height = project.beforeImageUrl ? 885 : 700;
   return (
     <React.Fragment key={index}>
-      <Row height={height} key={`${index}-image`}>
+      <Row height={`${height}px`} key={`${index}-image`}>
         <Column>
           <Item
             num={index}
