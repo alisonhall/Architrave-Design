@@ -4,6 +4,7 @@ import { Link } from 'gatsby';
 
 import './navigation.scss';
 import constants from '../../static/app-constants';
+import Header from './header';
 
 import architraveLogo from '../images/ArchitraveNewLogo.jpg';
 import houzzLogo from '../images/HouzzH.png';
@@ -26,21 +27,22 @@ const Navigation = ({urlPath}) => {
       <img id="logo" src={architraveLogo} alt="Architrave Design, Architect logo" />
     </Link>
     <nav>
+      <Header className="side" />
       <ul className="mainNav">
         <li>
           <Link to={`/${portfolio}/${projectTypes.new}`} className="portfolioNav">Portfolio</Link>
-          <ul className={`subNav ${subNavVisible}`}>
-            <li>
-              <Link to={`/${portfolio}/${projectTypes.new}`} activeClassName="selected" className={isNewHomes}>New Homes</Link>
-            </li>
-            <li>
-              <Link to={`/${portfolio}/${projectTypes.renovations}`} activeClassName="selected" className={isRenovationsAdditions}>Renovations</Link>
-            </li>
-            <li>
-              <Link to={`/${portfolio}/${projectTypes.upcoming}`} activeClassName="selected">Upcoming</Link>
-            </li>
-          </ul>
         </li>
+        <ul className={`subNav ${subNavVisible}`}>
+          <li>
+            <Link to={`/${portfolio}/${projectTypes.new}`} activeClassName="selected" className={isNewHomes}>New Homes</Link>
+          </li>
+          <li>
+            <Link to={`/${portfolio}/${projectTypes.renovations}`} activeClassName="selected" className={isRenovationsAdditions}>Renovations</Link>
+          </li>
+          <li>
+            <Link to={`/${portfolio}/${projectTypes.upcoming}`} activeClassName="selected">Upcoming</Link>
+          </li>
+        </ul>
         <li>
           <Link to="/about" activeClassName="selected">About</Link>
         </li>

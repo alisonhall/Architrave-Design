@@ -10,15 +10,8 @@
     @media screen and (max-width: $breakpointLarge) {
         width: 100%;
 		max-width: 100%;
-		margin-top: 150px;
 		margin-left: 0;
 		min-height: $viewportHeightDefaultLarge;
-    }
-
-    @media screen and (max-width: $breakpointExtraSmall) {
-        .contentWrapper {
-            margin-top: 200px;
-        }
     }
 
     .contact &,
