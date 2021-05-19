@@ -14,6 +14,21 @@
 		min-height: $viewportHeightDefaultLarge;
     }
 
+    &.defaultLayout {
+        @media screen and (min-width: $breakpointAboveExtraLarge) {
+            display: none;
+        }
+    }
+
+    &.wideLayout {
+        display: none;
+
+        @media screen and (min-width: $breakpointAboveExtraLarge) {
+            display: block;
+        }
+    }
+
+
     .contact &,
     .about &,
     .reviews &,
