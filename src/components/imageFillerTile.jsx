@@ -9,15 +9,18 @@ import Image from './image';
  * @param {Object} param
  * @param {Object} param.customClass
  * @param {Object} param.image
+ * @param {Object} param.dimensions
  */
 const ImageFillerTile = ({
   customClass,
-  image
+  image,
+  dimensions
 }) => (
   <div className={`${customClass} clearfix imageFiller`}>
     <Image
       customClass="filler"
       {...image}
+      dimensions={dimensions}
     />
     <p className="textOverlay"></p>
   </div>
@@ -25,7 +28,11 @@ const ImageFillerTile = ({
 
 ImageFillerTile.propTypes = {
   customClass: PropTypes.string,
-  image: PropTypes.shape({}).isRequired
+  image: PropTypes.shape({}).isRequired,
+  dimensions: PropTypes.shape({
+    width: PropTypes.string,
+    height: PropTypes.number
+  })
 }
 
 export default ImageFillerTile;

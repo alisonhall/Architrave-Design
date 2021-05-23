@@ -15,6 +15,8 @@ import './image.scss';
  * @param {string} param.altText
  * @param {string} param.backgroundPosition
  * @param {number} param.height
+ * @param {Object} param.dimensions
+ * @param {number} param.dimensions.height
  */
 const Image = ({
   customClass = '',
@@ -23,10 +25,14 @@ const Image = ({
   imageUrl,
   altText = '',
   backgroundPosition = '50% 40%',
-  height
+  height,
+  dimensions: {
+    height: height2
+  } = {}
 }) => {
   let imageSrc;
-  const imageModifier = height ? `h_${Math.ceil(height * 2)},c_scale,f_auto,q_auto` : 'w_auto,c_scale,f_auto,q_auto';
+  const imageHeight = height || height2;
+  const imageModifier = imageHeight ? `h_${Math.ceil(imageHeight * 2)},c_scale,f_auto,q_auto` : 'w_auto,c_scale,f_auto,q_auto';
 
   /* Handle/Compile the imageSrc based on the props */
   if (imageUrl) {
@@ -77,7 +83,11 @@ Image.propTypes = {
   imageUrl: PropTypes.string,
   altText: PropTypes.string,
   backgroundPosition: PropTypes.string,
-  height: PropTypes.number
+  height: PropTypes.number,
+  dimensions: PropTypes.shape({
+    width: PropTypes.string,
+    height: PropTypes.number
+  })
 };
 
 export default Image;

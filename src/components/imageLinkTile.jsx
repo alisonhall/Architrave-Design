@@ -16,6 +16,7 @@ import Image from './image';
  * @param {string} param.text.copy
  * @param {string} param.customClass
  * @param {string} param.num
+ * @param {Object} param.dimensions
  */
 const ImageLinkTile = ({
   image = {},
@@ -27,12 +28,13 @@ const ImageLinkTile = ({
   } = {},
   customClass = '',
   num = '0',
+  dimensions
 }) => (
   <Link
     to={linkUrl}
     className={`image-link clearfix ${customClass}`}
   >
-    <Image num={num} {...image} />
+    <Image num={num} {...image} dimensions={dimensions} />
     <p className="textOverlay">{copy}</p>
   </Link>
 );
@@ -49,7 +51,11 @@ ImageLinkTile.propTypes = {
   num: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number
-  ]).isRequired
+  ]).isRequired,
+  dimensions: PropTypes.shape({
+    width: PropTypes.string,
+    height: PropTypes.number
+  })
 };
 
 export default ImageLinkTile

@@ -16,6 +16,10 @@ import TextBlurbFiller from './textBlurbFiller';
  * @param {Object} project
  * @param {string} customClass
  * @param {boolean} isFiller
+ *
+ * @param {Object} dimensions
+ * @param {number} dimensions.height
+ * @param {string} dimensions.width
  * 
  * @param {Object|boolean} image
  * @param {File} image.image
@@ -69,6 +73,10 @@ Item.propTypes = {
   project: PropTypes.object,
   customClass: PropTypes.string,
   isFiller: PropTypes.bool,
+  dimensions: PropTypes.shape({
+    width: PropTypes.string,
+    height: PropTypes.number
+  }),
   image: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.shape({

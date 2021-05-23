@@ -13,6 +13,7 @@ import './imageTile.scss';
  * @param {string} param.text.copy
  * @param {string} param.num
  * @param {string} param.customClass
+ * @param {Object} param.dimensions
  */
 const ImageTile = ({
   image = {},
@@ -21,11 +22,12 @@ const ImageTile = ({
   } = {},
   num = '0',
   customClass = '',
+  dimensions
 }) => (
   <div
     className={`image-tile clearfix ${customClass}`}
   >
-    <Image num={num} {...image} />
+    <Image num={num} {...image} dimensions={dimensions} />
     {copy && <p className="textOverlay">{copy}</p>}
   </div>
 );
@@ -39,7 +41,11 @@ ImageTile.propTypes = {
     PropTypes.string,
     PropTypes.number
   ]).isRequired,
-  customClass: PropTypes.string
+  customClass: PropTypes.string,
+  dimensions: PropTypes.shape({
+    width: PropTypes.string,
+    height: PropTypes.number
+  })
 };
 
 export default ImageTile;
