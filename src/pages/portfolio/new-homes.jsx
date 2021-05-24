@@ -19,7 +19,7 @@ const tiles = {
       }}
     />
   ),
-  hoggsHollowTraditional: buildProjectTile(projects.hoggsHollowTraditional, 1, { backgroundPosition: '100% 0%' }),
+  hoggsHollowFrench: buildProjectTile(projects.hoggsHollowFrench, 1, { backgroundPosition: '100% 0%' }),
   kingswayGeorgian: buildProjectTile(projects.kingswayGeorgian, 2),
   kingswayTransitionalFiller: (
     <Item
@@ -45,7 +45,6 @@ const tiles = {
   kingswayTransitional: buildProjectTile(projects.kingswayTransitional, 5),
   oakvilleExecutiveHome: buildProjectTile(projects.oakvilleExecutiveHome, 6),
   classicCentreHall: buildProjectTile(projects.classicCentreHall, 7),
-  hoggsHollowFrenchCountry: buildProjectTile(projects.hoggsHollowFrenchCountry, 8),
   traditionalKingswayPark: buildProjectTile(projects.traditionalKingswayPark, 9, { backgroundPosition: '30% 40% ' }),
   kingswayGeorgianFiller: (
     <Item
@@ -76,7 +75,7 @@ const NewHomes = (props) => (
     <section className="contentWrapper layoutAll layoutNewHomes defaultLayout">
       <Row height={705}>
         <Column width="48%">
-          {tiles.hoggsHollowTraditional}
+          {tiles.hoggsHollowFrench}
         </Column>
         <Column width="52%">
           <Row height={370}>
@@ -108,13 +107,13 @@ const NewHomes = (props) => (
         </Column>
       </Row>
       <Row height={300}>
-        <Column>
+        <Column width="39%">
           {tiles.classicCentreHall}
         </Column>
-        <Column>
-          {tiles.hoggsHollowFrenchCountry}
+        <Column width="22%">
+          {tiles.kingswayGeorgianFiller}
         </Column>
-        <Column>
+        <Column width="39%">
           {tiles.traditionalKingswayPark}
         </Column>
       </Row>
@@ -122,7 +121,7 @@ const NewHomes = (props) => (
     <section className="contentWrapper layoutAll layoutHome wideLayout">
       <Row height={550}>
         <Column width="48%">
-          {tiles.hoggsHollowTraditional}
+          {tiles.hoggsHollowFrench}
         </Column>
         <Column>
           <Row imageHeight={275}>

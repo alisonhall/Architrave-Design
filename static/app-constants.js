@@ -44,6 +44,14 @@ const projects = {
     projectDescription: 'This Don River family home opens itself to the lovely natural setting with balconies, terraces and plenty of glass. The interior wraps around a soaring elliptical staircase topped by a light-filled skylight.',
     mainImageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347176/ArchitraveDesign/1-New-Homes/2-Hoggs-Hollow-French-Country/2-Centre-Hall-_-Elliptical-Stair_xlu5rz.jpg'
   },
+  hoggsHollowFrench: {
+    key: 'hoggsHollowFrench',
+    fileName: 'hoggs-hollow-french',
+    type: projectTypes.new,
+    projectName: "Hogg's Hollow French",
+    projectDescription: 'This Don River family home opens itself to the lovely natural setting with balconies, terraces and plenty of glass. The interior wraps around a soaring elliptical staircase topped by a light-filled skylight.',
+    mainImageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347176/ArchitraveDesign/1-New-Homes/2-Hoggs-Hollow-French-Country/2-Centre-Hall-_-Elliptical-Stair_xlu5rz.jpg'
+  },
   kingswayGeorgian: {
     key: 'kingswayGeorgian',
     fileName: 'kingsway-georgian',
@@ -176,13 +184,12 @@ const constants = {
   projectTypes,
   projects,
   newProjectsOrder: [
-    projects.hoggsHollowTraditional.key,
+    projects.hoggsHollowFrench.key,
     projects.kingswayGeorgian.key,
     projects.creditRiverManor.key,
     projects.kingswayTransitional.key,
     projects.oakvilleExecutiveHome.key,
     projects.classicCentreHall.key,
-    projects.hoggsHollowFrenchCountry.key,
     projects.traditionalKingswayPark.key
   ],
   renovationProjectsOrder: [
@@ -197,7 +204,10 @@ const constants = {
     projects.lorneParkRenovation.key,
     projects.etobicokeTransitional.key
   ],
-  unusedNewProjects: [],
+  unusedNewProjects: [
+    projects.hoggsHollowTraditional.key,
+    projects.hoggsHollowFrenchCountry.key
+  ],
   unusedRenovationProjects: [
     projects.lorneParkInterior.key,
     projects.royalYorkFacelift.key

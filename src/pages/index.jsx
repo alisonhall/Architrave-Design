@@ -19,7 +19,7 @@ const tiles = {
       }}
     />
   ),
-  hoggsHollowTraditional: buildProjectTile(projects.hoggsHollowTraditional, 1, { backgroundPosition: '100% 0%' }),
+  hoggsHollowFrench: buildProjectTile(projects.hoggsHollowFrench, 1, { backgroundPosition: '100% 0%' }),
   kingswayGeorgian: buildProjectTile(projects.kingswayGeorgian, 2),
   kingswayTransitionalFiller: (
     <Item
@@ -57,7 +57,7 @@ const IndexPage = (props) => (
     <section className="contentWrapper layoutAll layoutHome defaultLayout">
       <Row height={702}>
         <Column width="48%">
-          {tiles.hoggsHollowTraditional}
+          {tiles.hoggsHollowFrench}
         </Column>
         <Column width="52%">
           <Row height={386}>
@@ -65,7 +65,7 @@ const IndexPage = (props) => (
               {tiles.kingswayGeorgian}
             </Column>
           </Row>
-          <Row height={316}>
+          <Row imageHeight={316}>
             <Column width="40%">
               {tiles.kingswayTransitionalFiller}
             </Column>
@@ -100,7 +100,7 @@ const IndexPage = (props) => (
     <section className="contentWrapper layoutAll layoutHome wideLayout">
       <Row height={550}>
         <Column width="48%">
-          {tiles.hoggsHollowTraditional}
+          {tiles.hoggsHollowFrench}
         </Column>
         <Column>
           <Row imageHeight={275}>
