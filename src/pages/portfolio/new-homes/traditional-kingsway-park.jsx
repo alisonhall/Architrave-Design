@@ -67,13 +67,21 @@ const tiles = {
         imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347270/ArchitraveDesign/1-New-Homes/6-Kingsway-Park-Traditional/7-Master-Ensuite_g5n9vl.jpg'
       }}
     />
+  ),
+  kitchenIsland: (
+    <Item
+      num={6}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347268/ArchitraveDesign/1-New-Homes/6-Kingsway-Park-Traditional/6-Kitchen-Island_htgx13.jpg'
+      }}
+    />
   )
 };
 
 const TraditionalKingswayPark = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
-    <section className="contentWrapper layoutAll layoutProject">
+    <section className="contentWrapper layoutAll layoutProject defaultLayout">
       <Row height={630}>
         <Column>
           {tiles.traditionalStoneFront}
@@ -112,6 +120,36 @@ const TraditionalKingswayPark = (props) => (
         </Column>
         <Column width="53%">
           {tiles.masterEnsuite}
+        </Column>
+      </Row>
+      <PrevNextProjectLinks project={project} />
+    </section>
+    <section className="contentWrapper layoutAll layoutProject wideLayout">
+      <Row height={400}>
+        <Column width="44%">
+          {tiles.traditionalStoneFront}
+        </Column>
+        <Column width="20%">
+          {tiles.frontFoyer}
+        </Column>
+        <Column width="36%">
+          {tiles.diningRoom}
+        </Column>
+      </Row>
+      <Row>
+        <Column>
+          {tiles.description}
+        </Column>
+      </Row>
+      <Row height={325}>
+        <Column width="38%">
+          {tiles.familyRoomBuiltins}
+        </Column>
+        <Column width="24%">
+          {tiles.kitchenIsland}
+        </Column>
+        <Column width="38%">
+          {tiles.familyRoomKitchen}
         </Column>
       </Row>
       <PrevNextProjectLinks project={project} />
