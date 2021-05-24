@@ -115,13 +115,37 @@ const tiles = {
         imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347151/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/15-Third-Floor-Guest-Suite_my5izk.jpg',
       }}
     />
+  ),
+  marbleFoyer: (
+    <Item
+      num={13}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347139/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/4-Marble-Foyer_ogejte.jpg'
+      }}
+    />
+  ),
+  ensuiteWithHisHersVanities: (
+    <Item
+      num={14}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347146/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/12-Ensuite-with-His-_-Hers-Vanities_x1h75n.jpg'
+      }}
+    />
+  ),
+  jackNJillBathroom: (
+    <Item
+      num={15}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347150/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/14-Jack_n_Jill-Bathroom_lxvxyl.jpg'
+      }}
+    />
   )
 }
 
 const KingswayGeorgian = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
-    <section className="contentWrapper layoutAll layoutProject">
+    <section className="contentWrapper layoutAll layoutProject defaultLayout">
       <Row height={750}>
         <Column>
           {tiles.frontFacade}
@@ -137,24 +161,24 @@ const KingswayGeorgian = (props) => (
           <Row height={400}>
             <Column>
               {tiles.cutStonePortico}
-            </Column>  
+            </Column>
           </Row>
           <Row>
             <Column>
               {tiles.backGarden}
-            </Column>  
+            </Column>
           </Row>
         </Column>
         <Column width="65%">
           <Row height={700}>
             <Column>
               {tiles.mainHall}
-            </Column>  
+            </Column>
           </Row>
           <Row>
             <Column>
               <Item />
-            </Column>  
+            </Column>
           </Row>
         </Column>
       </Row>
@@ -197,6 +221,73 @@ const KingswayGeorgian = (props) => (
           {tiles.freestandingTub}
         </Column>
         <Column width="34%">
+          {tiles.thirdFloorGuestSuite}
+        </Column>
+      </Row>
+      <PrevNextProjectLinks project={project} />
+    </section>
+    <section className="contentWrapper layoutAll layoutProject wideLayout">
+      <Row height={500}>
+        <Column width="45%">
+          {tiles.frontFacade}
+        </Column>
+        <Column width="25%">
+          {tiles.cutStonePortico}
+        </Column>
+        <Column width="30%">
+          {tiles.backGarden}
+        </Column>
+      </Row>
+      <Row>
+        <Column>
+          {tiles.description}
+        </Column>
+      </Row>
+      <Row height={350}>
+        <Column width="20%">
+          {tiles.marbleFoyer}
+        </Column>
+        <Column width="20%">
+          {tiles.sittingRoom}
+        </Column>
+        <Column width="20%">
+          {tiles.mainHall}
+        </Column>
+        <Column width="40%">
+          <Row height={275}>
+            <Column>
+              {tiles.familyRoom}
+            </Column>
+          </Row>
+          <Row>
+            <Column>
+              <Item />
+            </Column>
+          </Row>
+        </Column>
+      </Row>
+      <Row height={325}>
+        <Column width="17%">
+          {tiles.breakfastBanquette}
+        </Column>
+        <Column width="43%">
+          {tiles.kitchen}
+        </Column>
+        <Column width="40%">
+          {tiles.islandServery}
+        </Column>
+      </Row>
+      <Row height={400}>
+        <Column width="27%">
+          {tiles.landingWindowSeat}
+        </Column>
+        <Column width="23%">
+          {tiles.ensuiteWithHisHersVanities}
+        </Column>
+        <Column width="23%">
+          {tiles.jackNJillBathroom}
+        </Column>
+        <Column width="27%">
           {tiles.thirdFloorGuestSuite}
         </Column>
       </Row>
