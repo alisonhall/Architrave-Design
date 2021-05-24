@@ -89,7 +89,7 @@ const tiles = {
 const KingswayTransitional = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
-    <section className="contentWrapper layoutAll layoutProject">
+    <section className="contentWrapper layoutAll layoutProject defaultLayout">
       <Row height={630}>
         <Column>
           {tiles.traditionalFrontFacade}
@@ -134,6 +134,44 @@ const KingswayTransitional = (props) => (
         </Column>
         <Column width="42%">
           {tiles.marbleEnsuite}
+        </Column>
+      </Row>
+      <PrevNextProjectLinks project={project} />
+    </section>
+    <section className="contentWrapper layoutAll layoutProject wideLayout">
+      <Row height={450}>
+        <Column>
+          {tiles.traditionalFrontFacade}
+        </Column>
+        <Column>
+          {tiles.modernRear}
+        </Column>
+      </Row>
+      <Row>
+        <Column>
+          {tiles.description}
+        </Column>
+      </Row>
+      <Row height={325}>
+        <Column width="40%">
+          {tiles.familyRoom}
+        </Column>
+        <Column width="40%">
+          {tiles.familyRoomKitchen}
+        </Column>
+        <Column width="20%">
+          {tiles.banquetteSeating}
+        </Column>
+      </Row>
+      <Row height={350}>
+        <Column width="22%">
+          {tiles.centralStair}
+        </Column>
+        <Column width="35%">
+          {tiles.marbleEnsuite}
+        </Column>
+        <Column width="43%">
+          {tiles.vaultedMaster}
         </Column>
       </Row>
       <PrevNextProjectLinks project={project} />

@@ -9,7 +9,7 @@ import Row from '../../components/rowHOC';
 import Column from '../../components/columnHOC';
 import Item from '../../components/item';
 
-const { projects, portfolio, defaultIntroductionText } = constants;
+const { projects, defaultIntroductionText } = constants;
 
 const tiles = {
   description: (
