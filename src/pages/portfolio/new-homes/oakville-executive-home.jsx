@@ -4,56 +4,68 @@ import constants from '../../../../static/app-constants';
 
 import Layout from '../../../components/layout';
 import SEO from '../../../components/seo';
-import Row from '../../../components/row';
-import Column from '../../../components/column';
+import Row from '../../../components/rowHOC';
+import Column from '../../../components/columnHOC';
 import Item from '../../../components/item';
 import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
 
 const project = constants.projects.oakvilleExecutiveHome;
 
+const tiles = {
+  description: (
+    <Item
+      text={{
+        title: project.projectName,
+        copy: project.projectDescription
+      }}
+    />
+  ),
+  frontFacade: (
+    <Item
+      num={1}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347328/ArchitraveDesign/1-New-Homes/7-Oakville-Executive-Home/1-Front-Facade_rpftbr.jpg'
+      }}
+    />
+  ),
+  threeCarGarage: (
+    <Item
+      num={2}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347327/ArchitraveDesign/1-New-Homes/7-Oakville-Executive-Home/2-Three-car-Garage_wxoxdf.jpg'
+      }}
+    />
+  ),
+  frontEntry: (
+    <Item
+      num={3}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347331/ArchitraveDesign/1-New-Homes/7-Oakville-Executive-Home/3-Front-Entry_ryc4yl.jpg'
+      }}
+    />
+  )
+};
+
 const OakvilleExecutiveHome = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
     <section className="contentWrapper layoutAll layoutProject">
-      <Row height="600px">
+      <Row height={600}>
         <Column>
-          <Item
-            num={1}
-            image={{
-              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347328/ArchitraveDesign/1-New-Homes/7-Oakville-Executive-Home/1-Front-Facade_rpftbr.jpg',
-              height: 600
-            }}
-          />
+          {tiles.frontFacade}
         </Column>
       </Row>
       <Row>
         <Column>
-          <Item
-            text={{
-              title: project.projectName,
-              copy: project.projectDescription
-            }}
-          />
+          {tiles.description}
         </Column>
       </Row>
-      <Row height="480px">
+      <Row height={480}>
         <Column width="62%">
-          <Item
-            num={2}
-            image={{
-              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347327/ArchitraveDesign/1-New-Homes/7-Oakville-Executive-Home/2-Three-car-Garage_wxoxdf.jpg',
-              height: 480
-            }}
-          />
+          {tiles.threeCarGarage}
         </Column>
         <Column width="38%">
-          <Item
-            num={3}
-            image={{
-              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347331/ArchitraveDesign/1-New-Homes/7-Oakville-Executive-Home/3-Front-Entry_ryc4yl.jpg',
-              height: 480
-            }}
-          />
+          {tiles.frontEntry}
         </Column>
       </Row>
       <PrevNextProjectLinks project={project} />

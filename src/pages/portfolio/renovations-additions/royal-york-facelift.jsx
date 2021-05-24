@@ -4,51 +4,61 @@ import constants from '../../../../static/app-constants';
 
 import Layout from '../../../components/layout';
 import SEO from '../../../components/seo';
-import Row from '../../../components/row';
-import Column from '../../../components/column';
+import Row from '../../../components/rowHOC';
+import Column from '../../../components/columnHOC';
 import Item from '../../../components/item';
 import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
 
 const project = constants.projects.royalYorkFacelift;
 
+const tiles = {
+  description: (
+    <Item
+      text={{
+        title: project.projectName,
+        copy: project.projectDescription
+      }}
+    />
+  ),
+  before: (
+    <Item
+      num={1}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1613940687/ArchitraveDesign/2-Renovations-and-Additions/Royal-York-Facelift/Royal-York-1_luwupq.jpg'
+      }}
+      text={{
+        copy: 'Before'
+      }}
+    />
+  ),
+  newFacade: (
+    <Item
+      num={2}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1613940687/ArchitraveDesign/2-Renovations-and-Additions/Royal-York-Facelift/Royal-York-2_ejplbx.jpg'
+      }}
+      text={{
+        copy: 'New Facade'
+      }}
+    />
+  )
+};
+
 const RoyalYorkFacelift = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
     <section className="contentWrapper layoutAll layoutProject">
-      <Row height="375px">
+      <Row height={375}>
         <Column>
-          <Item
-            num={1}
-            image={{
-              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1613940687/ArchitraveDesign/2-Renovations-and-Additions/Royal-York-Facelift/Royal-York-1_luwupq.jpg',
-              height: 375
-            }}
-            text={{
-              copy: 'Before'
-            }}
-          />
+          {tiles.before}
         </Column>
         <Column>
-          <Item
-            num={2}
-            image={{
-              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1613940687/ArchitraveDesign/2-Renovations-and-Additions/Royal-York-Facelift/Royal-York-2_ejplbx.jpg',
-              height: 375
-            }}
-            text={{
-              copy: 'New Facade'
-            }}
-          />
+          {tiles.newFacade}
         </Column>
       </Row>
       <Row>
         <Column>
-          <Item
-            text={{
-              title: project.projectName,
-              copy: project.projectDescription
-            }}
-          />
+          {tiles.description}
         </Column>
       </Row>
       <PrevNextProjectLinks project={project} />

@@ -4,96 +4,114 @@ import constants from '../../../../static/app-constants';
 
 import Layout from '../../../components/layout';
 import SEO from '../../../components/seo';
-import Row from '../../../components/row';
-import Column from '../../../components/column';
+import Row from '../../../components/rowHOC';
+import Column from '../../../components/columnHOC';
 import Item from '../../../components/item';
 import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
 
 const project = constants.projects.traditionalKingswayPark;
 
+const tiles = {
+  description: (
+    <Item
+      text={{
+        title: project.projectName,
+        copy: project.projectDescription
+      }}
+    />
+  ),
+  traditionalStoneFront: (
+    <Item
+      num={1}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347271/ArchitraveDesign/1-New-Homes/6-Kingsway-Park-Traditional/1-Traditional-Stone-Front_mk1zvn.jpg'
+      }}
+    />
+  ),
+  frontFoyer: (
+    <Item
+      num={2}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347268/ArchitraveDesign/1-New-Homes/6-Kingsway-Park-Traditional/2-Front-Foyer_uc6wxy.jpg'
+      }}
+    />
+  ),
+  diningRoom: (
+    <Item
+      num={3}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347269/ArchitraveDesign/1-New-Homes/6-Kingsway-Park-Traditional/3-Dining-Room_hegcnz.jpg'
+      }}
+    />
+  ),
+  familyRoomBuiltins: (
+    <Item
+      num={4}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347269/ArchitraveDesign/1-New-Homes/6-Kingsway-Park-Traditional/4-Family-Room-Builtins_duyso3.jpg'
+      }}
+    />
+  ),
+  familyRoomKitchen: (
+    <Item
+      num={5}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347270/ArchitraveDesign/1-New-Homes/6-Kingsway-Park-Traditional/5-Family-_Room-_-Kitchen_nqonjc.jpg'
+      }}
+    />
+  ),
+  masterEnsuite: (
+    <Item
+      num={6}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347270/ArchitraveDesign/1-New-Homes/6-Kingsway-Park-Traditional/7-Master-Ensuite_g5n9vl.jpg'
+      }}
+    />
+  )
+};
+
 const TraditionalKingswayPark = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
     <section className="contentWrapper layoutAll layoutProject">
-      <Row height="630px">
+      <Row height={630}>
         <Column>
-          <Item
-            num={1}
-            image={{
-              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347271/ArchitraveDesign/1-New-Homes/6-Kingsway-Park-Traditional/1-Traditional-Stone-Front_mk1zvn.jpg',
-              height: 630
-            }}
-          />
+          {tiles.traditionalStoneFront}
         </Column>
       </Row>
       <Row>
         <Column>
-          <Item
-            text={{
-              title: project.projectName,
-              copy: project.projectDescription
-            }}
-          />
+          {tiles.description}
         </Column>
       </Row>
-      <Row height="425px">
+      <Row height={425}>
         <Column width="34%">
-          <Item
-            num={2}
-            image={{
-              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347268/ArchitraveDesign/1-New-Homes/6-Kingsway-Park-Traditional/2-Front-Foyer_uc6wxy.jpg',
-              height: 425
-            }}
-          />
+          {tiles.frontFoyer}
         </Column>
         <Column width="66%">
-          <Item
-            num={3}
-            image={{
-              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347269/ArchitraveDesign/1-New-Homes/6-Kingsway-Park-Traditional/3-Dining-Room_hegcnz.jpg',
-              height: 425
-            }}
-          />
+          {tiles.diningRoom}
         </Column>
       </Row>
-      <Row height="525px">
+      <Row height={525}>
         <Column>
-          <Item
-            num={4}
-            image={{
-              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347269/ArchitraveDesign/1-New-Homes/6-Kingsway-Park-Traditional/4-Family-Room-Builtins_duyso3.jpg',
-              height: 525
-            }}
-          />
+          {tiles.familyRoomBuiltins}
         </Column>
       </Row>
-      <Row height="270px">
+      <Row height={270}>
         <Column width="47%">
           <Row>
             <Column>
               <Item />
             </Column>
           </Row>
-          <Row height="200px">
+          <Row height={200}>
             <Column>
-              <Item
-                num={5}
-                image={{
-                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347270/ArchitraveDesign/1-New-Homes/6-Kingsway-Park-Traditional/5-Family-_Room-_-Kitchen_nqonjc.jpg',
-                  height: 270
-                }}
-              />
+              {tiles.familyRoomKitchen}
             </Column>
           </Row>
         </Column>
         <Column width="53%">
-          <Item
-            num={6}
-            image={{
-              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347270/ArchitraveDesign/1-New-Homes/6-Kingsway-Park-Traditional/7-Master-Ensuite_g5n9vl.jpg',
-              height: 270
-            }}
-          />
+          {tiles.masterEnsuite}
         </Column>
       </Row>
       <PrevNextProjectLinks project={project} />

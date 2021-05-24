@@ -4,91 +4,109 @@ import constants from '../../../../static/app-constants';
 
 import Layout from '../../../components/layout';
 import SEO from '../../../components/seo';
-import Row from '../../../components/row';
-import Column from '../../../components/column';
+import Row from '../../../components/rowHOC';
+import Column from '../../../components/columnHOC';
 import Item from '../../../components/item';
 import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';
 
 const project = constants.projects.upperCanadaFarmhouse;
 
+const tiles = {
+  description: (
+    <Item
+      text={{
+        title: project.projectName,
+        copy: project.projectDescription
+      }}
+    />
+  ),
+  newAddition: (
+    <Item
+      num={1}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347369/ArchitraveDesign/2-Renovations-and-Additions/2-Cornwall-Loyalist-Farmhouse/1-1820_s-Farmhouse-_-New-Addition_qh1ha2.jpg'
+      }}
+    />
+  ),
+  sideEntrance: (
+    <Item
+      num={2}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347367/ArchitraveDesign/2-Renovations-and-Additions/2-Cornwall-Loyalist-Farmhouse/2-Side-Entrance_smshkr.jpg'
+      }}
+    />
+  ),
+  entranceHall: (
+    <Item
+      num={3}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347367/ArchitraveDesign/2-Renovations-and-Additions/2-Cornwall-Loyalist-Farmhouse/3c-Entrance-Hall_szk4bq.jpg'
+      }}
+    />
+  ),
+  countryKitchenDiningRoom: (
+    <Item
+      num={4}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347369/ArchitraveDesign/2-Renovations-and-Additions/2-Cornwall-Loyalist-Farmhouse/4-Country-Kitchen-Dining-Room_iqgnfl.jpg'
+      }}
+    />
+  ),
+  masterFireplace: (
+    <Item
+      num={5}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347370/ArchitraveDesign/2-Renovations-and-Additions/2-Cornwall-Loyalist-Farmhouse/6-Master-Fireplace_wjx75m.jpg'
+      }}
+    />
+  ),
+  ensuite: (
+    <Item
+      num={6}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347364/ArchitraveDesign/2-Renovations-and-Additions/2-Cornwall-Loyalist-Farmhouse/7-Ensuite_wb7epo.jpg'
+      }}
+    />
+  )
+};
+
 const UpperCanadaFarmhouse = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
     <section className="contentWrapper layoutAll layoutProject">
-      <Row height="620px">
+      <Row height={620}>
         <Column>
-          <Item
-            num={1}
-            image={{
-              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347369/ArchitraveDesign/2-Renovations-and-Additions/2-Cornwall-Loyalist-Farmhouse/1-1820_s-Farmhouse-_-New-Addition_qh1ha2.jpg',
-              height: 620
-            }}
-          />
+          {tiles.newAddition}
         </Column>
       </Row>
       <Row>
         <Column>
-          <Item
-            text={{
-              title: project.projectName,
-              copy: project.projectDescription
-            }}
-          />
+          {tiles.description}
         </Column>
       </Row>
-      <Row height="810px">
+      <Row height={810}>
         <Column width="62%">
-          <Item
-            num={2}
-            image={{
-              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347367/ArchitraveDesign/2-Renovations-and-Additions/2-Cornwall-Loyalist-Farmhouse/2-Side-Entrance_smshkr.jpg',
-              height: 810
-            }}
-          />
+          {tiles.sideEntrance}
         </Column>
         <Column width="38%">
-          <Row height="485px">
+          <Row height={485}>
             <Column>
-              <Item
-                num={3}
-                image={{
-                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347367/ArchitraveDesign/2-Renovations-and-Additions/2-Cornwall-Loyalist-Farmhouse/3c-Entrance-Hall_szk4bq.jpg',
-                  height: 485
-                }}
-              />
+              {tiles.entranceHall}
             </Column>
           </Row>
-          <Row height="290px">
+          <Row height={290}>
             <Column>
-              <Item
-                num={4}
-                image={{
-                  imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347369/ArchitraveDesign/2-Renovations-and-Additions/2-Cornwall-Loyalist-Farmhouse/4-Country-Kitchen-Dining-Room_iqgnfl.jpg',
-                  height: 290
-                }}
-              />
+              {tiles.countryKitchenDiningRoom}
             </Column>
           </Row>
         </Column>
       </Row>
-      <Row height="350px">
+      <Row height={350}>
         <Column width="62%">
-          <Item
-            num={5}
-            image={{
-              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347370/ArchitraveDesign/2-Renovations-and-Additions/2-Cornwall-Loyalist-Farmhouse/6-Master-Fireplace_wjx75m.jpg',
-              height: 350
-            }}
-          />
+          {tiles.masterFireplace}
         </Column>
         <Column width="38%">
-          <Item
-            num={6}
-            image={{
-              imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347364/ArchitraveDesign/2-Renovations-and-Additions/2-Cornwall-Loyalist-Farmhouse/7-Ensuite_wb7epo.jpg',
-              height: 350
-            }}
-          />
+          {tiles.ensuite}
         </Column>
       </Row>
       <PrevNextProjectLinks project={project} />
