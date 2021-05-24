@@ -84,7 +84,7 @@ const tiles = {
 const EtobicokeArtsAndCrafts = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
-    <section className="contentWrapper layoutAll layoutProject">
+    <section className="contentWrapper layoutAll layoutProject defaultLayout">
       <Row>
         <Column width="62%">
           <Row height={480}>
@@ -125,6 +125,42 @@ const EtobicokeArtsAndCrafts = (props) => (
         </Column>
         <Column width="52%">
           {tiles.master}
+        </Column>
+      </Row>
+      <PrevNextProjectLinks project={project} />
+    </section>
+    <section className="contentWrapper layoutAll layoutProject wideLayout">
+      <Row height={600}>
+        <Column width="70%">
+          {tiles.artsAndCraftsRestyling}
+        </Column>
+        <Column width="30%">
+          <Row>
+            <Column>
+              {tiles.before}
+            </Column>
+          </Row>
+          <Row>
+            <Column>
+              {tiles.seatDrawers}
+            </Column>
+          </Row>
+        </Column>
+      </Row>
+      <Row>
+        <Column>
+          {tiles.description}
+        </Column>
+      </Row>
+      <Row height={340}>
+        <Column>
+          {tiles.master}
+        </Column>
+        <Column>
+          {tiles.customCabinetry}
+        </Column>
+        <Column>
+          {tiles.newReadingNook}
         </Column>
       </Row>
       <PrevNextProjectLinks project={project} />
