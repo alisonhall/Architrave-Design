@@ -167,11 +167,15 @@ aside {
 		}
 	}
 
-	.houzzLogo {
+	.houzz-badges {
 		margin-bottom: $spacing;
 
 		@media screen and (max-width: $breakpointLarge) {
 			display: none;
+		}
+
+		.houzz-badge {
+			margin-left: $spacing;
 		}
 
 		img {

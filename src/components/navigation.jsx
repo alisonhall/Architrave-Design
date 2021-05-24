@@ -8,6 +8,7 @@ import Header from './header';
 
 import architraveLogo from '../images/ArchitraveNewLogo.jpg';
 import houzzLogo from '../images/HouzzH.png';
+import bestOfHouzz from '../images/best-of-houzz.png';
 
 const { portfolio, projectTypes, houzz } = constants;
 
@@ -54,9 +55,14 @@ const Navigation = ({urlPath}) => {
         </li>
       </ul>
     </nav>
-    <a className="houzzLogo" href={houzz.url}>
-      <img src={houzzLogo} alt="Houzz logo" />
-    </a>
+    <div className="houzz-badges">
+      <a className="houzz-badge houzz-logo" href={houzz.url}>
+        <img src={houzzLogo} alt="Houzz logo" />
+      </a>
+      <a className="houzz-badge best-of-houzz" href={houzz.url}>
+        <img src={bestOfHouzz} alt="Best of Houzz 2021 badge" />
+      </a>
+    </div>
   </aside>
 )}
 
