@@ -49,7 +49,7 @@ const tiles = {
 const OakvilleExecutiveHome = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
-    <section className="contentWrapper layoutAll layoutProject">
+    <section className="contentWrapper layoutAll layoutProject defaultLayout">
       <Row height={600}>
         <Column>
           {tiles.frontFacade}
@@ -66,6 +66,31 @@ const OakvilleExecutiveHome = (props) => (
         </Column>
         <Column width="38%">
           {tiles.frontEntry}
+        </Column>
+      </Row>
+      <PrevNextProjectLinks project={project} />
+    </section>
+    <section className="contentWrapper layoutAll layoutProject wideLayout">
+      <Row height={650}>
+        <Column width="75%">
+          {tiles.frontFacade}
+        </Column>
+        <Column width="25%">
+          <Row height={400}>
+            <Column>
+              {tiles.frontEntry}
+            </Column>
+          </Row>
+          <Row imageHeight={200}>
+            <Column>
+              {tiles.threeCarGarage}
+            </Column>
+          </Row>
+        </Column>
+      </Row>
+      <Row>
+        <Column>
+          {tiles.description}
         </Column>
       </Row>
       <PrevNextProjectLinks project={project} />
