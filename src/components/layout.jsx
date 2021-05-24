@@ -16,17 +16,15 @@ import './layout.scss';
  * @param {string} param.urlPath
  */
 const Layout = ({ children, mainClasses, urlPath }) => (
-  <>
-    <Header className="top" />
-    <div className="page">
-      <Navigation urlPath={urlPath} />
-      <div className={mainClasses}>
-        <main>{children}</main>
-        <Footer />
-      </div>
+  <div className="page">
+    <Navigation urlPath={urlPath} />
+    <div className={mainClasses}>
+      <Header className="top" />
+      <main>{children}</main>
+      <Footer />
     </div>
-  </>
-)
+  </div>
+);
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
