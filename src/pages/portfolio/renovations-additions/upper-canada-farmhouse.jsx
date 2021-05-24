@@ -67,13 +67,21 @@ const tiles = {
         imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347364/ArchitraveDesign/2-Renovations-and-Additions/2-Cornwall-Loyalist-Farmhouse/7-Ensuite_wb7epo.jpg'
       }}
     />
+  ),
+  vaultedMasterSuite: (
+    <Item
+      num={7}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347357/ArchitraveDesign/2-Renovations-and-Additions/2-Cornwall-Loyalist-Farmhouse/5-Vaulted-Master-Suite_gdt5k0.jpg'
+      }}
+    />
   )
 };
 
 const UpperCanadaFarmhouse = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
-    <section className="contentWrapper layoutAll layoutProject">
+    <section className="contentWrapper layoutAll layoutProject defaultLayout">
       <Row height={620}>
         <Column>
           {tiles.newAddition}
@@ -106,6 +114,41 @@ const UpperCanadaFarmhouse = (props) => (
           {tiles.masterFireplace}
         </Column>
         <Column width="38%">
+          {tiles.ensuite}
+        </Column>
+      </Row>
+      <PrevNextProjectLinks project={project} />
+    </section>
+    <section className="contentWrapper layoutAll layoutProject wideLayout">
+      <Row height={600}>
+        <Column width="60%">
+          {tiles.newAddition}
+        </Column>
+        <Column width="30%">
+          {tiles.entranceHall}
+        </Column>
+      </Row>
+      <Row>
+        <Column>
+          {tiles.description}
+        </Column>
+      </Row>
+      <Row height={550}>
+        <Column width="30%">
+          {tiles.sideEntrance}
+        </Column>
+        <Column width="60%">
+          {tiles.countryKitchenDiningRoom}
+        </Column>
+      </Row>
+      <Row height={350}>
+        <Column width="35%">
+          {tiles.masterFireplace}
+        </Column>
+        <Column width="40%">
+          {tiles.vaultedMasterSuite}
+        </Column>
+        <Column width="25%">
           {tiles.ensuite}
         </Column>
       </Row>
