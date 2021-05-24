@@ -65,7 +65,7 @@ const tiles = {
 const LyttonParkManor = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
-    <section className="contentWrapper layoutAll layoutProject">
+    <section className="contentWrapper layoutAll layoutProject defaultLayout">
       <Row height={600}>
         <Column>
           {tiles.newRearAddition}
@@ -95,6 +95,33 @@ const LyttonParkManor = (props) => (
       </Row>
       <Row height={450}>
         <Column>
+          {tiles.frontHallway}
+        </Column>
+      </Row>
+      <PrevNextProjectLinks project={project} />
+    </section>
+    <section className="contentWrapper layoutAll layoutProject wideLayout">
+      <Row height={400}>
+        <Column width="40%">
+          {tiles.sandstoneAndBrickFront}
+        </Column>
+        <Column width="20%">
+          {tiles.newLandingStairsToMasterSuite}
+        </Column>
+        <Column width="40%">
+          {tiles.newRearAddition}
+        </Column>
+      </Row>
+      <Row>
+        <Column>
+          {tiles.description}
+        </Column>
+      </Row>
+      <Row height={450}>
+        <Column width="45%">
+          {tiles.newEatInKitchen}
+        </Column>
+        <Column width="55%">
           {tiles.frontHallway}
         </Column>
       </Row>
