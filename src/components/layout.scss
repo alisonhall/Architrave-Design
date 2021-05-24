@@ -1,5 +1,11 @@
 @import 'variables';
 
+.page {
+    @media screen and (min-width: $breakpointAboveLarge) {
+        display: flex;
+    }
+}
+
 .contentWrapper {
 	max-width: $contentWrapperMaxWidth;
 	font-size: $descriptionFontSize;

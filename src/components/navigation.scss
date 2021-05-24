@@ -24,6 +24,7 @@ aside {
 
 	@media screen and (min-width: $breakpointAboveLarge) {
 		align-items: flex-end;
+		max-width: 300px;
 	}
 
     .logo-link {

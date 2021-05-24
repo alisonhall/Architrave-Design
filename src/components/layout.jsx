@@ -18,10 +18,12 @@ import './layout.scss';
 const Layout = ({ children, mainClasses, urlPath }) => (
   <>
     <Header className="top" />
-    <Navigation urlPath={urlPath} />
-    <div className={mainClasses}>
-      <main>{children}</main>
-      <Footer />
+    <div className="page">
+      <Navigation urlPath={urlPath} />
+      <div className={mainClasses}>
+        <main>{children}</main>
+        <Footer />
+      </div>
     </div>
   </>
 )
