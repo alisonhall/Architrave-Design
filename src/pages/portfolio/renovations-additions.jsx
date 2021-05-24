@@ -40,7 +40,7 @@ const RenovationsAdditions = (props) => (
               {tiles.princessMargaretModern}
             </Column>
           </Row>
-          <Row height={645 - 345}>
+          <Row imageHeight={645 - 345}>
             <Column>
               {tiles.upperCanadaFarmhouse}
             </Column>

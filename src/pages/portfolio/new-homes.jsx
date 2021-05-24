@@ -54,7 +54,7 @@ const NewHomes = (props) => (
               {tiles.kingswayGeorgian}
             </Column>
           </Row>
-          <Row height={705 - 370}>
+          <Row imageHeight={705 - 370}>
             <Column width="40%">
               {tiles.kingswayTransitionalFiller}
             </Column>

@@ -12,8 +12,9 @@ import './row.scss';
  * @param {number} param.height
  * @param {Object} param.dimensions
  */
-const Row = ({ children, height, dimensions = {} }) => {
+const Row = ({ children, height, imageHeight, dimensions = {} }) => {
     if (height) dimensions.height = height;
+    if (imageHeight) dimensions.height = imageHeight;
     const items = React.Children.map(children,
         (child) => {
             return React.cloneElement(child, { dimensions });
