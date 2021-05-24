@@ -1,6 +1,7 @@
 import React from 'react';
 
 import constants from '../../../static/app-constants';
+import { buildProjectTile } from '../../../static/helpers';
 
 import Layout from '../../components/layout';
 import SEO from '../../components/seo';
@@ -18,86 +19,11 @@ const tiles = {
       }}
     />
   ),
-  lyttonParkManor: (
-    <Item
-      num={1}
-      project={projects.lyttonParkManor}
-      image={{
-        imageUrl: projects.lyttonParkManor.mainImageUrl,
-        backgroundPosition: '50% 40%'
-      }}
-      link={{
-        linkUrl: `/${portfolio}/${projects.lyttonParkManor.type}/${projects.lyttonParkManor.fileName}`
-      }}
-      text={{
-        copy: projects.lyttonParkManor.projectName
-      }}
-    />
-  ),
-  princessMargaretModern: (
-    <Item
-      num={2}
-      project={projects.princessMargaretModern}
-      image={{
-        imageUrl: projects.princessMargaretModern.mainImageUrl,
-        backgroundPosition: '50% 30%'
-      }}
-      link={{
-        linkUrl: `/${portfolio}/${projects.princessMargaretModern.type}/${projects.princessMargaretModern.fileName}`
-      }}
-      text={{
-        copy: projects.princessMargaretModern.projectName
-      }}
-    />
-  ),
-  upperCanadaFarmhouse: (
-    <Item
-      num={3}
-      project={projects.upperCanadaFarmhouse}
-      image={{
-        imageUrl: projects.upperCanadaFarmhouse.mainImageUrl,
-        backgroundPosition: '50% 40%'
-      }}
-      link={{
-        linkUrl: `/${portfolio}/${projects.upperCanadaFarmhouse.type}/${projects.upperCanadaFarmhouse.fileName}`
-      }}
-      text={{
-        copy: projects.upperCanadaFarmhouse.projectName
-      }}
-    />
-  ),
-  rosedaleEdwardian: (
-    <Item
-      num={4}
-      project={projects.rosedaleEdwardian}
-      image={{
-        imageUrl: projects.rosedaleEdwardian.mainImageUrl,
-        backgroundPosition: '50% 40%'
-      }}
-      link={{
-        linkUrl: `/${portfolio}/${projects.rosedaleEdwardian.type}/${projects.rosedaleEdwardian.fileName}`
-      }}
-      text={{
-        copy: projects.rosedaleEdwardian.projectName
-      }}
-    />
-  ),
-  etobicokeArtsAndCrafts: (
-    <Item
-      num={5}
-      project={projects.etobicokeArtsAndCrafts}
-      image={{
-        imageUrl: projects.etobicokeArtsAndCrafts.mainImageUrl,
-        backgroundPosition: '50% 40%'
-      }}
-      link={{
-        linkUrl: `/${portfolio}/${projects.etobicokeArtsAndCrafts.type}/${projects.etobicokeArtsAndCrafts.fileName}`
-      }}
-      text={{
-        copy: projects.etobicokeArtsAndCrafts.projectName
-      }}
-    />
-  )
+  lyttonParkManor: buildProjectTile(projects.lyttonParkManor, 1),
+  princessMargaretModern: buildProjectTile(projects.princessMargaretModern, 2, { backgroundPosition: '50% 30%' }),
+  upperCanadaFarmhouse: buildProjectTile(projects.upperCanadaFarmhouse, 3),
+  rosedaleEdwardian: buildProjectTile(projects.rosedaleEdwardian, 4),
+  etobicokeArtsAndCrafts: buildProjectTile(projects.etobicokeArtsAndCrafts, 5)
 }
 
 const RenovationsAdditions = (props) => (

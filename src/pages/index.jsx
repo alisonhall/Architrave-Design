@@ -1,6 +1,7 @@
 import React from 'react';
 
 import constants from '../../static/app-constants';
+import { buildProjectTile } from '../../static/helpers';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
@@ -8,7 +9,7 @@ import Row from '../components/rowHOC';
 import Column from '../components/columnHOC';
 import Item from '../components/item';
 
-const { projects, portfolio, defaultIntroductionText } = constants;
+const { projects, defaultIntroductionText } = constants;
 
 const tiles = {
   description: (
@@ -18,37 +19,8 @@ const tiles = {
       }}
     />
   ),
-  hoggsHollowTraditional: (
-    <Item
-      num={1}
-      project={projects.hoggsHollowTraditional}
-      image={{
-        imageUrl: projects.hoggsHollowTraditional.mainImageUrl,
-        backgroundPosition: '100% 0%'
-      }}
-      link={{
-        linkUrl: `/${portfolio}/${projects.hoggsHollowTraditional.type}/${projects.hoggsHollowTraditional.fileName}`
-      }}
-      text={{
-        copy: projects.hoggsHollowTraditional.projectName
-      }}
-    />
-  ),
-  kingswayGeorgian: (
-    <Item
-      num={2}
-      project={projects.kingswayGeorgian}
-      image={{
-        imageUrl: projects.kingswayGeorgian.mainImageUrl
-      }}
-      link={{
-        linkUrl: `/${portfolio}/${projects.kingswayGeorgian.type}/${projects.kingswayGeorgian.fileName}`
-      }}
-      text={{
-        copy: projects.kingswayGeorgian.projectName
-      }}
-    />
-  ),
+  hoggsHollowTraditional: buildProjectTile(projects.hoggsHollowTraditional, 1, { backgroundPosition: '100% 0%' }),
+  kingswayGeorgian: buildProjectTile(projects.kingswayGeorgian, 2),
   kingswayTransitionalFiller: (
     <Item
       num={3}
@@ -59,81 +31,11 @@ const tiles = {
       }}
     />
   ),
-  creditRiverManor: (
-    <Item
-      num={4}
-      project={projects.creditRiverManor}
-      image={{
-        imageUrl: projects.creditRiverManor.mainImageUrl
-      }}
-      link={{
-        linkUrl: `/${portfolio}/${projects.creditRiverManor.type}/${projects.creditRiverManor.fileName}`
-      }}
-      text={{
-        copy: projects.creditRiverManor.projectName
-      }}
-    />
-  ),
-  classicCentreHall: (
-    <Item
-      num={5}
-      project={projects.classicCentreHall}
-      image={{
-        imageUrl: projects.classicCentreHall.mainImageUrl
-      }}
-      link={{
-        linkUrl: `/${portfolio}/${projects.classicCentreHall.type}/${projects.classicCentreHall.fileName}`
-      }}
-      text={{
-        copy: projects.classicCentreHall.projectName
-      }}
-    />
-  ),
-  kingswayTransitional: (
-    <Item
-      num={6}
-      project={projects.kingswayTransitional}
-      image={{
-        imageUrl: projects.kingswayTransitional.mainImageUrl
-      }}
-      link={{
-        linkUrl: `/${portfolio}/${projects.kingswayTransitional.type}/${projects.kingswayTransitional.fileName}`
-      }}
-      text={{
-        copy: projects.kingswayTransitional.projectName
-      }}
-    />
-  ),
-  etobicokeArtsAndCrafts: (
-    <Item
-      num={7}
-      project={projects.etobicokeArtsAndCrafts}
-      image={{
-        imageUrl: projects.etobicokeArtsAndCrafts.mainImageUrl
-      }}
-      link={{
-        linkUrl: `/${portfolio}/${projects.etobicokeArtsAndCrafts.type}/${projects.etobicokeArtsAndCrafts.fileName}`
-      }}
-      text={{
-        copy: projects.etobicokeArtsAndCrafts.projectName
-      }}
-    />
-  ),
-  lyttonParkManor: (
-    <Item
-      num={8}
-      project={projects.lyttonParkManor}
-      image={{
-        imageUrl: projects.lyttonParkManor.mainImageUrl
-      }}
-      link={{
-        linkUrl: `/${portfolio}/${projects.lyttonParkManor.type}/${projects.lyttonParkManor.fileName}`
-      }}
-      text={{
-        copy: projects.lyttonParkManor.projectName
-      }}
-    />
-  )
+  creditRiverManor: buildProjectTile(projects.creditRiverManor, 4),
+  classicCentreHall: buildProjectTile(projects.classicCentreHall, 5),
+  kingswayTransitional: buildProjectTile(projects.kingswayTransitional, 6),
+  etobicokeArtsAndCrafts: buildProjectTile(projects.etobicokeArtsAndCrafts, 7),
+  lyttonParkManor: buildProjectTile(projects.lyttonParkManor, 8)
 };
 
 const IndexPage = (props) => (

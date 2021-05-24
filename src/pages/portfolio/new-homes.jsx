@@ -1,6 +1,7 @@
 import React from 'react';
 
 import constants from '../../../static/app-constants';
+import { buildProjectTile } from '../../../static/helpers';
 
 import Layout from '../../components/layout';
 import SEO from '../../components/seo';
@@ -8,7 +9,7 @@ import Row from '../../components/rowHOC';
 import Column from '../../components/columnHOC';
 import Item from '../../components/item';
 
-const { projects, portfolio, defaultIntroductionText } = constants;
+const { projects, defaultIntroductionText } = constants;
 
 const tiles = {
   description: (
@@ -18,37 +19,8 @@ const tiles = {
       }}
     />
   ),
-  hoggsHollowTraditional: (
-    <Item
-      num={1}
-      project={projects.hoggsHollowTraditional}
-      image={{
-        imageUrl: projects.hoggsHollowTraditional.mainImageUrl,
-        backgroundPosition: '100% 0%'
-      }}
-      link={{
-        linkUrl: `/${portfolio}/${projects.hoggsHollowTraditional.type}/${projects.hoggsHollowTraditional.fileName}`
-      }}
-      text={{
-        copy: projects.hoggsHollowTraditional.projectName
-      }}
-    />
-  ),
-  kingswayGeorgian: (
-    <Item
-      num={2}
-      project={projects.kingswayGeorgian}
-      image={{
-        imageUrl: projects.kingswayGeorgian.mainImageUrl
-      }}
-      link={{
-        linkUrl: `/${portfolio}/${projects.kingswayGeorgian.type}/${projects.kingswayGeorgian.fileName}`
-      }}
-      text={{
-        copy: projects.kingswayGeorgian.projectName
-      }}
-    />
-  ),
+  hoggsHollowTraditional: buildProjectTile(projects.hoggsHollowTraditional, 1, { backgroundPosition: '100% 0%' }),
+  kingswayGeorgian: buildProjectTile(projects.kingswayGeorgian, 2),
   kingswayTransitionalFiller: (
     <Item
       num={3}
@@ -59,97 +31,12 @@ const tiles = {
       }}
     />
   ),
-  creditRiverManor: (
-    <Item
-      num={4}
-      project={projects.creditRiverManor}
-      image={{
-        imageUrl: projects.creditRiverManor.mainImageUrl
-      }}
-      link={{
-        linkUrl: `/${portfolio}/${projects.creditRiverManor.type}/${projects.creditRiverManor.fileName}`
-      }}
-      text={{
-        copy: projects.creditRiverManor.projectName
-      }}
-    />
-  ),
-  kingswayTransitional: (
-    <Item
-      num={5}
-      project={projects.kingswayTransitional}
-      image={{
-        imageUrl: projects.kingswayTransitional.mainImageUrl
-      }}
-      link={{
-        linkUrl: `/${portfolio}/${projects.kingswayTransitional.type}/${projects.kingswayTransitional.fileName}`
-      }}
-      text={{
-        copy: projects.kingswayTransitional.projectName
-      }}
-    />
-  ),
-  oakvilleExecutiveHome: (
-    <Item
-      num={6}
-      project={projects.oakvilleExecutiveHome}
-      image={{
-        imageUrl: projects.oakvilleExecutiveHome.mainImageUrl
-      }}
-      link={{
-        linkUrl: `/${portfolio}/${projects.oakvilleExecutiveHome.type}/${projects.oakvilleExecutiveHome.fileName}`
-      }}
-      text={{
-        copy: projects.oakvilleExecutiveHome.projectName
-      }}
-    />
-  ),
-  classicCentreHall: (
-    <Item
-      num={7}
-      project={projects.classicCentreHall}
-      image={{
-        imageUrl: projects.classicCentreHall.mainImageUrl
-      }}
-      link={{
-        linkUrl: `/${portfolio}/${projects.classicCentreHall.type}/${projects.classicCentreHall.fileName}`
-      }}
-      text={{
-        copy: projects.classicCentreHall.projectName
-      }}
-    />
-  ),
-  hoggsHollowFrenchCountry: (
-    <Item
-      num={8}
-      project={projects.hoggsHollowFrenchCountry}
-      image={{
-        imageUrl: projects.hoggsHollowFrenchCountry.mainImageUrl
-      }}
-      link={{
-        linkUrl: `/${portfolio}/${projects.hoggsHollowFrenchCountry.type}/${projects.hoggsHollowFrenchCountry.fileName}`
-      }}
-      text={{
-        copy: projects.hoggsHollowFrenchCountry.projectName
-      }}
-    />
-  ),
-  traditionalKingswayPark: (
-    <Item
-      num={9}
-      project={projects.traditionalKingswayPark}
-      image={{
-        imageUrl: projects.traditionalKingswayPark.mainImageUrl,
-        backgroundPosition: '30% 40%'
-      }}
-      link={{
-        linkUrl: `/${portfolio}/${projects.traditionalKingswayPark.type}/${projects.traditionalKingswayPark.fileName}`
-      }}
-      text={{
-        copy: projects.traditionalKingswayPark.projectName
-      }}
-    />
-  )
+  creditRiverManor: buildProjectTile(projects.creditRiverManor, 4),
+  kingswayTransitional: buildProjectTile(projects.kingswayTransitional, 5),
+  oakvilleExecutiveHome: buildProjectTile(projects.oakvilleExecutiveHome, 6),
+  classicCentreHall: buildProjectTile(projects.classicCentreHall, 7),
+  hoggsHollowFrenchCountry: buildProjectTile(projects.hoggsHollowFrenchCountry, 8),
+  traditionalKingswayPark: buildProjectTile(projects.traditionalKingswayPark, 9, { backgroundPosition: '30% 40% '})
 }
 
 
