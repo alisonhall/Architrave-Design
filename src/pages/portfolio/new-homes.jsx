@@ -66,7 +66,7 @@ const tiles = {
         imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347150/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/9-Breakfast-Banquette_plhghs.jpg'
       }}
     />
-  ),
+  )
 }
 
 
