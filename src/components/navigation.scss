@@ -82,6 +82,10 @@ aside {
 				margin: 0 $spacing 0 0;
 				align-content: flex-start;
 			}
+
+			@media screen and (min-width: $breakpointAboveLarge) {
+				margin: 0;
+			}
 		}
 
 		li {
