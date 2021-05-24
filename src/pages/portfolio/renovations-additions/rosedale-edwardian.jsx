@@ -52,7 +52,7 @@ const tiles = {
 const RosedaleEdwardian = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <SEO />
-    <section className="contentWrapper layoutAll layoutProject">
+    <section className="contentWrapper layoutAll layoutProject defaultLayout">
       <Row height={650}>
         <Column>
           {tiles.edwardianRenewal}
@@ -69,6 +69,31 @@ const RosedaleEdwardian = (props) => (
         </Column>
         <Column width="52%">
           {tiles.newBrickBay}
+        </Column>
+      </Row>
+      <PrevNextProjectLinks project={project} />
+    </section>
+    <section className="contentWrapper layoutAll layoutProject wideLayout">
+      <Row height={650}>
+        <Column width="67%">
+          {tiles.edwardianRenewal}
+        </Column>
+        <Column width="33%">
+          <Row imageHeight={325}>
+            <Column>
+              {tiles.before}
+            </Column>
+          </Row>
+          <Row imageHeight={325}>
+            <Column>
+              {tiles.newBrickBay}
+            </Column>
+          </Row>
+        </Column>
+      </Row>
+      <Row>
+        <Column>
+          {tiles.description}
         </Column>
       </Row>
       <PrevNextProjectLinks project={project} />
