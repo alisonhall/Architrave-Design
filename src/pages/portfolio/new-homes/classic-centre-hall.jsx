@@ -107,6 +107,9 @@ const tiles = {
         imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347266/ArchitraveDesign/1-New-Homes/5-Centre-Hall-Classic/11-Jack_n_Jill-Vanities_btkar8.jpg'
       }}
     />
+  ),
+  entraceway360: (
+    <iframe title="Entranceway 360 degree interactive panorama" width="100%" height="100%" frameborder="0" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer" scrolling="no" src="https://kuula.co/share/7rcnJ?fs=1&vr=0&zoom=1&sd=1&thumbs=1&info=1&logo=1"></iframe>
   )
 };
 
@@ -160,6 +163,11 @@ const ClassicCentreHall = (props) => (
           {tiles.jackNJillVanities}
         </Column>
       </Row>
+      <Row height={500}>
+        <Column>
+          {tiles.entraceway360}
+        </Column>
+      </Row>
       <PrevNextProjectLinks project={project} />
     </section>
     <section className="contentWrapper layoutAll layoutProject wideLayout">
@@ -207,6 +215,11 @@ const ClassicCentreHall = (props) => (
         </Column>
         <Column>
           {tiles.jackNJillVanities}
+        </Column>
+      </Row>
+      <Row height={500}>
+        <Column>
+          {tiles.entraceway360}
         </Column>
       </Row>
       <PrevNextProjectLinks project={project} />
