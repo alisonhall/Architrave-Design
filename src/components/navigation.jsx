@@ -56,10 +56,10 @@ const Navigation = ({urlPath}) => {
       </ul>
     </nav>
     <div className="houzz-badges">
-      <a className="houzz-badge houzz-logo" href={houzz.url}>
+      <a className="houzz-badge houzz-logo" title="Architrave Design on Houzz" href={houzz.url}>
         <img src={houzzLogo} alt="Houzz logo" />
       </a>
-      <a className="houzz-badge best-of-houzz" href={houzz.url}>
+      <a className="houzz-badge best-of-houzz" title="Best of Houzz 2021" href={houzz.url}>
         <img src={bestOfHouzz} alt="Best of Houzz 2021 badge" />
       </a>
     </div>

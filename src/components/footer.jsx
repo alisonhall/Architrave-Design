@@ -12,10 +12,10 @@ const { houzz } = constants;
 const Footer = () => (
   <footer>
     <div className="houzz-badges">
-      <a className="houzz-logo-footer" href={houzz.url}>
+      <a className="houzz-badge houzz-logo-footer" title="Architrave Design on Houzz" href={houzz.url}>
         <img src={houzzLogo} alt="Houzz logo" />
       </a>
-      <a className="best-of-houzz-footer" href={houzz.url}>
+      <a className="houzz-badge best-of-houzz-footer" title="Best of Houzz 2021" href={houzz.url}>
         <img src={bestOfHouzz} alt="Best of Houzz 2021 badge" />
       </a>
     </div>
