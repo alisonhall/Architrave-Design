@@ -6,7 +6,7 @@ import './navigation.scss';
 import constants from '../../static/app-constants';
 import Header from './header';
 
-import architraveLogo from '../images/ArchitraveNewLogo.jpg';
+import architraveLogo from '../images/ArchitraveLogo.svg';
 import houzzLogo from '../images/HouzzH.png';
 import bestOfHouzz from '../images/best-of-houzz.png';
 
