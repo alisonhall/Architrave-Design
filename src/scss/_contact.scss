@@ -48,8 +48,8 @@ CONTACT
 		}
 	}
 
-	.textBlurb p {
-		margin: 10px 0;
+	.textBlurb .item {
+		display: flex;
 	}
 
 	.textBlurb a:link,
@@ -62,8 +62,8 @@ CONTACT
 		text-decoration: underline;
 	}
 
-	i.fa {
-		font-size: 0.8rem;
-		margin: 10px;
+	.icon {
+		margin: 0.625rem;
+		width: 1.5rem;
 	}
 }
