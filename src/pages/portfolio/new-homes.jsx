@@ -31,16 +31,6 @@ const tiles = {
       }}
     />
   ),
-  creditRiverManorFiller: (
-    <Item
-      num={3}
-      project={projects.creditRiverManor}
-      isFiller
-      image={{
-        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347209/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/10-Main-Stair_bsfa5r.jpg'
-      }}
-    />
-  ),
   creditRiverManor: buildProjectTile(projects.creditRiverManor, 4),
   kingswayTransitional: buildProjectTile(projects.kingswayTransitional, 5),
   oakvilleExecutiveHome: buildProjectTile(projects.oakvilleExecutiveHome, 6),
@@ -52,17 +42,7 @@ const tiles = {
       project={projects.kingswayGeorgian}
       isFiller
       image={{
-        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347141/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/5-Main-Hall_txsam1.jpg'
-      }}
-    />
-  ),
-  kingswayGeorgianFiller2: (
-    <Item
-      num={10}
-      project={projects.kingswayGeorgian}
-      isFiller
-      image={{
-        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347150/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/9-Breakfast-Banquette_plhghs.jpg'
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347144/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/11-Landing-_-Window-seat_y0xb7c.jpg',
       }}
     />
   )
@@ -84,11 +64,8 @@ const NewHomes = (props) => (
             </Column>
           </Row>
           <Row imageHeight={705 - 370}>
-            <Column width="40%">
-              {tiles.kingswayTransitionalFiller}
-            </Column>
-            <Column width="60%">
-              {tiles.creditRiverManor}
+            <Column>
+              {tiles.classicCentreHall}
             </Column>
           </Row>
         </Column>
@@ -103,15 +80,15 @@ const NewHomes = (props) => (
           {tiles.kingswayTransitional}
         </Column>
         <Column width="52%">
-          {tiles.oakvilleExecutiveHome}
+          {tiles.creditRiverManor}
         </Column>
       </Row>
       <Row height={300}>
         <Column width="39%">
-          {tiles.classicCentreHall}
+          {tiles.oakvilleExecutiveHome}
         </Column>
         <Column width="22%">
-          {tiles.kingswayGeorgianFiller}
+          {tiles.kingswayTransitionalFiller}
         </Column>
         <Column width="39%">
           {tiles.traditionalKingswayPark}
@@ -125,14 +102,11 @@ const NewHomes = (props) => (
         </Column>
         <Column>
           <Row imageHeight={275}>
-            <Column width="37%">
+            <Column width="54%">
               {tiles.kingswayGeorgian}
             </Column>
-            <Column width="21%">
-              {tiles.kingswayTransitionalFiller}
-            </Column>
-            <Column width="42%">
-              {tiles.oakvilleExecutiveHome}
+            <Column width="46%">
+              {tiles.classicCentreHall}
             </Column>
           </Row>
           <Row imageHeight={275}>
@@ -140,7 +114,7 @@ const NewHomes = (props) => (
               {tiles.creditRiverManor}
             </Column>
             <Column width="21%">
-              {tiles.creditRiverManorFiller}
+              {tiles.kingswayTransitionalFiller}
             </Column>
             <Column width="37%">
               {tiles.kingswayTransitional}
@@ -154,16 +128,13 @@ const NewHomes = (props) => (
         </Column>
       </Row>
       <Row height={300}>
-        <Column width="37%">
-          {tiles.classicCentreHall}
+        <Column width="39%">
+          {tiles.oakvilleExecutiveHome}
         </Column>
-        <Column width="15%">
-          {tiles.kingswayGeorgianFiller2}
-        </Column>
-        <Column width="15%">
+        <Column width="23%">
           {tiles.kingswayGeorgianFiller}
         </Column>
-        <Column width="33%">
+        <Column width="38%">
           {tiles.traditionalKingswayPark}
         </Column>
       </Row>

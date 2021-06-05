@@ -68,7 +68,7 @@ const LyttonParkManor = (props) => (
     <section className="contentWrapper layoutAll layoutProject defaultLayout">
       <Row height={600}>
         <Column>
-          {tiles.newRearAddition}
+          {tiles.sandstoneAndBrickFront}
         </Column>
       </Row>
       <Row>
@@ -80,7 +80,7 @@ const LyttonParkManor = (props) => (
         <Column width="46%">
           <Row height={350}>
             <Column>
-              {tiles.sandstoneAndBrickFront}
+              {tiles.newRearAddition}
             </Column>
           </Row>
           <Row height={310}>

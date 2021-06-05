@@ -186,10 +186,10 @@ const constants = {
   newProjectsOrder: [
     projects.hoggsHollowFrench.key,
     projects.kingswayGeorgian.key,
+    projects.classicCentreHall.key,
     projects.creditRiverManor.key,
     projects.kingswayTransitional.key,
     projects.oakvilleExecutiveHome.key,
-    projects.classicCentreHall.key,
     projects.traditionalKingswayPark.key
   ],
   renovationProjectsOrder: [

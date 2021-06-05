@@ -124,7 +124,7 @@ const UpperCanadaFarmhouse = (props) => (
         <Column width="60%">
           {tiles.newAddition}
         </Column>
-        <Column width="30%">
+        <Column width="40%">
           {tiles.entranceHall}
         </Column>
       </Row>
@@ -134,7 +134,7 @@ const UpperCanadaFarmhouse = (props) => (
         </Column>
       </Row>
       <Row height={550}>
-        <Column width="30%">
+        <Column width="40%">
           {tiles.sideEntrance}
         </Column>
         <Column width="60%">

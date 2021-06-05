@@ -31,19 +31,17 @@ const tiles = {
       }}
     />
   ),
-  oakvilleExecutiveHome: buildProjectTile(projects.oakvilleExecutiveHome, 4),
   creditRiverManor: buildProjectTile(projects.creditRiverManor, 4),
   classicCentreHall: buildProjectTile(projects.classicCentreHall, 5),
   kingswayTransitional: buildProjectTile(projects.kingswayTransitional, 6),
-  etobicokeArtsAndCrafts: buildProjectTile(projects.etobicokeArtsAndCrafts, 7),
   lyttonParkManor: buildProjectTile(projects.lyttonParkManor, 8),
-  kingswayGeorgianFiller: (
+  creditRiverManorFiller: (
     <Item
       num={3}
-      project={projects.kingswayGeorgian}
+      project={projects.creditRiverManor}
       isFiller
       image={{
-        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347141/ArchitraveDesign/1-New-Homes/1-Kingsway-Classic-Georgian/5-Main-Hall_txsam1.jpg'
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347209/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/10-Main-Stair_bsfa5r.jpg'
       }}
     />
   ),
@@ -85,15 +83,18 @@ const IndexPage = (props) => (
           {tiles.classicCentreHall}
         </Column>
         <Column width="48%">
-          {tiles.kingswayTransitional}
+          {tiles.princessMargaretModern}
         </Column>
       </Row>
-      <Row height={345}>
+      <Row height={300}>
         <Column width="36%">
-          {tiles.etobicokeArtsAndCrafts}
-        </Column>
-        <Column width="64%">
           {tiles.lyttonParkManor}
+        </Column>
+        <Column width="31%">
+          {tiles.upperCanadaFarmhouse}
+        </Column>
+        <Column width="33%">
+          {tiles.kingswayTransitional}
         </Column>
       </Row>
     </section>
@@ -108,10 +109,10 @@ const IndexPage = (props) => (
               {tiles.kingswayGeorgian}
             </Column>
             <Column width="21%">
-              {tiles.kingswayGeorgianFiller}
+              {tiles.kingswayTransitionalFiller}
             </Column>
             <Column width="42%">
-              {tiles.oakvilleExecutiveHome}
+              {tiles.classicCentreHall}
             </Column>
           </Row>
           <Row imageHeight={275}>
@@ -119,10 +120,10 @@ const IndexPage = (props) => (
               {tiles.creditRiverManor}
             </Column>
             <Column width="21%">
-              {tiles.kingswayTransitionalFiller}
+              {tiles.creditRiverManorFiller}
             </Column>
             <Column width="37%">
-              {tiles.kingswayTransitional}
+              {tiles.lyttonParkManor}
             </Column>
           </Row>
         </Column>
@@ -134,7 +135,7 @@ const IndexPage = (props) => (
       </Row>
       <Row height={300}>
         <Column width="35%">
-          {tiles.classicCentreHall}
+          {tiles.kingswayTransitional}
         </Column>
         <Column width="31%">
           {tiles.princessMargaretModern}

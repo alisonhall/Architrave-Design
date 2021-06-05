@@ -60,11 +60,11 @@ const tiles = {
       }}
     />
   ),
-  mudroom: (
+  entranceway: (
     <Item
       num={6}
       image={{
-        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347266/ArchitraveDesign/1-New-Homes/5-Centre-Hall-Classic/6-Mudroom_lkonse.jpg'
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347266/ArchitraveDesign/1-New-Homes/5-Centre-Hall-Classic/xxKing_Georges_Rd_003_cneudt.jpg'
       }}
     />
   ),
@@ -130,9 +130,14 @@ const ClassicCentreHall = (props) => (
           {tiles.description}
         </Column>
       </Row>
+      <Row height={500}>
+        <Column>
+          {tiles.entraceway360}
+        </Column>
+      </Row>
       <Row height={300}>
         <Column>
-          {tiles.twoStoreyMainHall}
+          {tiles.entranceway}
         </Column>
         <Column>
           {tiles.customKitchen}
@@ -143,7 +148,7 @@ const ClassicCentreHall = (props) => (
       </Row>
       <Row height={300}>
         <Column>
-          {tiles.mudroom}
+          {tiles.twoStoreyMainHall}
         </Column>
         <Column>
           {tiles.upperHall}
@@ -161,11 +166,6 @@ const ClassicCentreHall = (props) => (
         </Column>
         <Column>
           {tiles.jackNJillVanities}
-        </Column>
-      </Row>
-      <Row height={500}>
-        <Column>
-          {tiles.entraceway360}
         </Column>
       </Row>
       <PrevNextProjectLinks project={project} />
@@ -184,9 +184,14 @@ const ClassicCentreHall = (props) => (
           {tiles.description}
         </Column>
       </Row>
+      <Row height={500}>
+        <Column>
+          {tiles.entraceway360}
+        </Column>
+      </Row>
       <Row height={300}>
         <Column>
-          {tiles.twoStoreyMainHall}
+          {tiles.entranceway}
         </Column>
         <Column>
           {tiles.customKitchen}
@@ -197,10 +202,10 @@ const ClassicCentreHall = (props) => (
       </Row>
       <Row height={300}>
         <Column>
-          {tiles.mudroom}
+          {tiles.upperHall}
         </Column>
         <Column>
-          {tiles.upperHall}
+          {tiles.twoStoreyMainHall}
         </Column>
         <Column>
           {tiles.homeOffice}
@@ -215,11 +220,6 @@ const ClassicCentreHall = (props) => (
         </Column>
         <Column>
           {tiles.jackNJillVanities}
-        </Column>
-      </Row>
-      <Row height={500}>
-        <Column>
-          {tiles.entraceway360}
         </Column>
       </Row>
       <PrevNextProjectLinks project={project} />
