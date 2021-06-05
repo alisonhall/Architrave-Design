@@ -12,7 +12,7 @@ import Helmet from 'react-helmet';
  * @param {Array|string} param.keywords
  * @param {string} param.title
  */
-function SEO({ description, lang, meta, keywords, title }) {
+function Seo({ description, lang, meta, keywords, title }) {
   const site = {
     siteMetadata: {
       title: `Architrave Design, Architect | Residential Designs`,
@@ -78,13 +78,13 @@ function SEO({ description, lang, meta, keywords, title }) {
   )
 }
 
-SEO.defaultProps = {
+Seo.defaultProps = {
   lang: `en`,
   meta: [],
   keywords: [],
 }
 
-SEO.propTypes = {
+Seo.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
   meta: PropTypes.array,
@@ -92,4 +92,4 @@ SEO.propTypes = {
   title: PropTypes.string
 }
 
-export default SEO
+export default Seo

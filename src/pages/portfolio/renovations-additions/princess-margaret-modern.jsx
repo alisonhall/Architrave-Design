@@ -3,7 +3,7 @@ import React from 'react';
 import constants from '../../../../static/app-constants';
 
 import Layout from '../../../components/layout';
-import SEO from '../../../components/seo';
+import Seo from '../../../components/seo';
 import Row from '../../../components/rowHOC';
 import Column from '../../../components/columnHOC';
 import Item from '../../../components/item';
@@ -84,7 +84,7 @@ const tiles = {
 
 const PrincessMargaretModern = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
-    <SEO />
+    <Seo />
     <section className="contentWrapper layoutAll layoutProject">
       <Row height={450}>
         <Column width="66%">

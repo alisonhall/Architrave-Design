@@ -8,7 +8,7 @@
 import React from "react"
 
 import Layout from "../../../components/layout"
-import SEO from "../../../components/seo"
+import Seo from "../../../components/seo"
 import ImageLayout1Col1Row from '../../../components/imageLayout1Col1Row';
 import ImageTile from '../../../components/imageTile';
 import TextBlurb from '../../../components/textBlurb';
@@ -17,7 +17,7 @@ import PrevNextProjectLink from '../../../components/prevNextProjectLink';
 
 const PageName = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio pageName">
-    <SEO />
+    <Seo />
     <section class="contentWrapper layoutAll layoutRenovationsPageName">
 
       {/* COMPONENTS GO HERE */}

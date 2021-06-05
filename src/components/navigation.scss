@@ -4,9 +4,11 @@ $navFontSize: 1.68rem;
 
 aside {
 	width: calc(#{$asideWidth} - #{$spacing});
+	height: 100%;
 	min-height: 100vh;
 	position: fixed;
-	margin: 0 $spacing;
+	overflow: scroll;
+	padding: 0 $spacing;
 	top: 0;
 	left: 0;
 	background: transparent;
@@ -19,7 +21,7 @@ aside {
 		flex-flow: row nowrap;
 		width: 100%;
 		min-height: 0px;
-		margin: 0 0 $spacing;
+		padding: 0 0 $spacing;
 	}
 
 	@media screen and (min-width: $breakpointAboveLarge) {
@@ -168,7 +170,7 @@ aside {
 	}
 
 	.houzz-badges {
-		margin-bottom: $spacing;
+		margin: $spacing 0;
 
 		@media screen and (max-width: $breakpointLarge) {
 			display: none;

@@ -3,7 +3,7 @@ import React from 'react';
 import constants from '../../static/app-constants';
 
 import Layout from '../components/layout';
-import SEO from '../components/seo';
+import Seo from '../components/seo';
 import '../scss/_reviews.scss';
 
 import houzzReviewsLogo from '../images/houzz_logo_reviews.png';
@@ -12,7 +12,7 @@ const { houzz } = constants;
 
 const Reviews = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="reviews">
-    <SEO />
+    <Seo />
     <section className="contentWrapper clearfix">
       <div className="contentBackground clearfix">
         <section className="textContent">
