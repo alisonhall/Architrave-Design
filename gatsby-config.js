@@ -28,23 +28,19 @@ module.exports = {
         icon: `src/images/ArchitraveNewLogo.jpg`, // This path is relative to the root of the site.
       },
     },
-    `gatsby-plugin-sass`,
-    // {
-    //   resolve: `gatsby-plugin-prefetch-google-fonts`,
-    //   options: {
-    //     fonts: [
-    //       {
-    //         family: `Raleway`,
-    //         variants: [`400`, `700`, `600`, `500`, `300`]
-    //       }
-    //     ],
-    //   },
-    // },
+    {
+      resolve: `gatsby-plugin-sass`,
+      options: {
+        sassOptions: {
+          includePaths: ["src/scss"],
+        }
+      }
+    },
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
         fonts: [
-          `Raleway\:300,400,500,600,700` // you can also specify font weights and styles
+          `Raleway\:300,400,500,600,700`
         ],
         display: 'swap'
       }
@@ -60,7 +56,7 @@ module.exports = {
       options: {
         // Accepts all options defined by `babel-plugin-emotion` plugin.
       },
-    }
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // 'gatsby-plugin-offline',

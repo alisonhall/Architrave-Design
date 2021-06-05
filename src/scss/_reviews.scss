@@ -1,17 +1,26 @@
+@import 'variables';
+@import 'mixins';
 
 /********************
 REVIEWS
 ********************/
+
 .reviews {
 	.contentBackground {
-		margin: $spacing;
-		background-image: url("../images/Reviews/Reviews-Background.jpg");
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
-		background-size: cover;
+		margin: 0 $spacing $spacing;
+		background-image: url("https://res.cloudinary.com/alisonkhall/image/upload/v1613951833/ArchitraveDesign/5-Reviews/Reviews-Background_vxw01r.jpg");
+		@include backgroundSize(cover);
 		background-position: 100% 100%;
+
+		@media screen and (max-width: $breakpointLarge) {
+			min-height: $viewportHeightReviewsLarge;
+		}
+
+		@media screen and (max-width: $breakpointSmall) {
+			margin: 0 $mobileSpacing $mobileSpacing;
+		}
 	}
+
 	.textContent {
 		min-height: $viewportHeightReviews;
 		height: 100%;
@@ -19,47 +28,59 @@ REVIEWS
 		margin: 0;
 		padding: 0;
 	}
+
 	.review {
 		padding: 4% 4% 4% 12%;
-		float: left;
 		max-width: 100%;
 		margin: 0;
-		width: 95%;
 		color: white;
-		border-top: 30px solid white;
+		border-top: $spacing solid white;
+
+		@media screen and (max-width: $breakpointSmall) {
+			padding: 4% 4% 4% 4%;
+			border-top: $mobileSpacing solid white;
+		}
 
 		h3,
 		h4,
 		h5 {
-			font-size: 1em;
-			line-height: 1em;
+			font-size: 1rem;
+			line-height: 1rem;
 			padding: 0;
 			margin: 0;
 		}
+
 		h4,
 		h5 {
 			display: inline-block;
 		}
+
 		h5 {
 			font-weight: normal;
 			padding-left: 5px;
 		}
+
 		p {
 			max-width: 600px;
 		}
 	}
+
 	.review:first-of-type {
 		border: none;
 	}
+
 	.textBlurb {
 		padding: 4%;
-		float: left;
 		width: 92%;
-		color: white;
+		color: $lightTextColour;
 		background-color: $blurbColour;
 		border-style: solid;
-		border-color: white;
-		border-width: 30px 0 30px 0;
+		border-color: $pageColour;
+		border-width: $spacing 0 0;
+
+		@media screen and (max-width: $breakpointSmall) {
+			border-width: $mobileSpacing 0 0;
+		}
 
 		img {
 			max-width: 200px;
@@ -67,11 +88,5 @@ REVIEWS
 			margin-bottom: -10px;
 			padding: 0 5px 0 30%;
 		}
-	}
-}
-
-@media screen and (max-width: $breakpointLarge) {
-	.reviews .contentBackground {
-		min-height: $viewportHeightReviewsLarge;
 	}
 }

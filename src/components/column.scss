@@ -1,0 +1,36 @@
+@import 'variables';
+
+.column {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+
+    @media screen and (min-width: $breakpointAboveSmall) {
+        display: flex;
+        flex-flow: column nowrap;
+        border-left: $spacing solid $pageColour;
+        border-right: $spacing solid $pageColour;
+
+        > .image + .image {
+            border-top: $spacing solid $pageColour;
+        }
+    
+        + .column {
+            border-left: none;
+        }
+    
+        > .row:last-of-type {
+            border-bottom: none;
+        }
+    
+        .row {
+            > .column:first-of-type {
+                border-left: none;
+            }
+    
+            > .column:last-of-type {
+                border-right: none;
+            }
+        }
+    }
+}

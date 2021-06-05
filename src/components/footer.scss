@@ -1,0 +1,57 @@
+@import 'variables';
+
+footer {
+	color: $grayLinkColour;
+	width: $contentWrapperWidth;
+	max-width: $contentWrapperMaxWidth;
+	margin-left: $asideWidth;
+	z-index: 99999;
+	padding: 10px 0;
+	font-size: 1rem;
+
+	@media screen and (max-width: $breakpointLarge) {
+		width: 100%;
+		margin-left: 0;
+	}
+
+	a:link,
+	a:visited {
+		color: $grayLinkColour;
+		text-decoration: none;
+	}
+
+	a:hover {
+		color: $darkTextColour;
+	}
+
+	.houzz-logo-footer,
+	.best-of-houzz-footer {
+		display: none;
+		float: left;
+		padding: 0 10px;
+		margin-top: -5px;
+		margin-left: $spacingHalf;
+
+		@media screen and (max-width: $breakpointLarge) {
+			display: inline-block;
+		}
+
+		img {
+			width: 40px;
+			height: 40px;
+		}
+	}
+	.sitemap,
+	.copyright {
+		float: left;
+		padding: 3px 10px;
+		margin: 0 0 0 $spacingHalf;
+	}
+
+	.websiteBy {
+		float: right;
+		padding: 3px 10px;
+		margin: 0;
+		margin-right: $spacingHalf;
+	}
+}

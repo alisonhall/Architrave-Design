@@ -1,77 +1,85 @@
+@import 'variables';
+@import 'mixins';
 
 /********************
 ABOUT
 ********************/
 
-
+$contactImageHeight: 250px;
+$contactImageWidth: 38%;
+$contactBlurbHeight: $contactImageHeight;
+$contactImageHeightSmall: 520px;
+$contactImageWidthSmall: 100%;
+$contactBlurbHeightSmall: auto;
+$contactBlurbWidthSmall: 100% - 10%;
 
 .about {
 	.contentBackground {
-		margin: $spacing;
-		background-image: url("../images/About/CreditRiver-Background.jpg");
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
-		background-size: cover;
+		margin: 0 $spacing $spacing;
+		background-image: url("https://res.cloudinary.com/alisonkhall/image/upload/v1595346993/ArchitraveDesign/4-About/CreditRiver_Background_cnt0km.jpg");
+		@include backgroundSize(cover);
+
+		@media screen and (max-width: $breakpointSmall) {
+			margin: 0 $mobileSpacing $mobileSpacing;
+		}
 	}
+
 	.textContent {
 		padding: $spacing 5%;
-		float: left;
 		max-width: 100%;
-		background-color: transparent;
-		margin: $spacing auto;
-		color: white;
-		/*font-variant: small-caps;*/
+		color: $lightTextColour;
 	}
-	h2 {
+
+	.heading {
 		text-transform: uppercase;
-		/*font-variant: small-caps;*/
 		font-weight: 500;
-		font-size: 1.2em;
+		font-size: 1.4375rem;
 	}
+
 	.centerContent {
-		width: 100%;
-		float: left;
-		background-color: white;
+		background-color: $pageColour;
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: space-between;
+
+		@media screen and (max-width: $breakpointSmall) {
+			flex-flow: row wrap;
+		}
 	}
+
 	.textBlurb {
 		padding: 0 5%;
-		margin: $spacingX2 0 $spacingX2 $spacing;
-		float: right;
-		color: white;
-		background-color: #7ba7ba;
-		width: $contactBlurbWidth;
+		margin: $spacing 0 $spacing $spacing;
+		color: $lightTextColour;
+		background-color: $blurbColour;
 		min-height: $contactBlurbHeight;
-	}
-	.aboutImage {
-		background-image: url("../images/About/Bill-Hall.jpg");
-		background-position: 50% 40%;
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
-		background-size: cover;
-		max-width: 100%;
-		overflow: hidden;
-		width: $contactImageWidth;
-		height: $contactImageHeight;
-		float: left;
-		margin: $spacingX2 $spacing $spacingX2 0;
-		overflow: hidden;
-	}
-}
+		font-size: 1.2rem;
+		display: block;
+		border: 0;
 
-@media screen and (max-width: $breakpointSmall) {
-	.about {
-		.textBlurb {
+		@media screen and (max-width: $breakpointSmall) {
 			width: $contactBlurbWidthSmall;
 			max-width: $contactBlurbWidthSmall;
 			height: $contactBlurbHeightSmall;
+			margin: $mobileSpacing 0;
 		}
-		.aboutImage {
+	}
+
+	.aboutImage {
+		background-image: url("https://res.cloudinary.com/alisonkhall/image/upload/v1595346996/ArchitraveDesign/4-About/Bill_Hall_q0cxw3.jpg");
+		background-position: 50% 40%;
+		@include backgroundSize(cover);
+		max-width: 100%;
+		overflow: hidden;
+		width: $contactImageWidth;
+		margin: $spacing 0;
+		overflow: hidden;
+
+		@media screen and (max-width: $breakpointSmall) {
 			width: 100%;
 			max-width: $contactImageWidthSmall;
 			height: $contactImageHeightSmall;
-			margin-bottom: 0;
+			margin: $mobileSpacing 0 0;
 		}
 	}
 }

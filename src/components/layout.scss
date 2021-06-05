@@ -1,0 +1,48 @@
+@import 'variables';
+
+.page {
+    @media screen and (min-width: $breakpointAboveLarge) {
+        display: flex;
+    }
+
+    .content {
+        width: 100%;
+    }
+}
+
+.contentWrapper {
+	max-width: $contentWrapperMaxWidth;
+	font-size: $descriptionFontSize;
+	margin-left: $asideWidth;
+	min-height: $viewportHeightDefault;
+    overflow: hidden;
+    
+    @media screen and (max-width: $breakpointLarge) {
+        width: 100%;
+		max-width: 100%;
+		margin-left: 0;
+		min-height: $viewportHeightDefaultLarge;
+    }
+
+    &.defaultLayout {
+        @media screen and (min-width: $breakpointAboveExtraLarge) {
+            display: none;
+        }
+    }
+
+    &.wideLayout {
+        display: none;
+
+        @media screen and (min-width: $breakpointAboveExtraLarge) {
+            display: block;
+        }
+    }
+
+
+    .contact &,
+    .about &,
+    .reviews &,
+    .sitemap & {
+        font-size: 1.2rem;
+    }
+}

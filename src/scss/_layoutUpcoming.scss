@@ -1,19 +1,8 @@
-$extraSpace: 3%;
-$extraTextBlurbSpaceTop: 3%;
-$extraTextBlurbSpaceBottom: 3%;
+@import 'variables';
 
 .upcoming .layoutUpcoming {
-	.image {
-		padding-top: $spacing + $extraSpace;
-		padding-bottom: $spacing + $extraSpace;
-	}
-
-	.textBlurb {
-		background-color: #7ba7ba;
-		margin-top: 0;
-		margin-bottom: $spacing + $extraTextBlurbSpaceBottom;
-		padding: 0 $textBlurbPadding;
-		width: $textBlurbWidth;
+	.row {
+		padding-bottom: 40px;
 	}
 
 	.textOverlay,
@@ -21,8 +10,12 @@ $extraTextBlurbSpaceBottom: 3%;
 		display: flex;
 		flex-flow: row wrap;
 		position: relative;
-		padding: 1%;
+		padding: $spacingX2 0;
 		z-index: 200;
+	}
+
+	.textBlurb {
+		margin-bottom: 50px;
 	}
 
 	.textOverlay {
@@ -32,5 +25,27 @@ $extraTextBlurbSpaceBottom: 3%;
 	.completionDate {
 		display: block;
 		text-align: right;
+	}
+
+	.upcomingBefore {
+		width: auto;
+		height: auto;
+		margin-top: -115px !important;
+		border: 0;
+		padding: 0;
+
+		.shadowOverlay {
+			width: 45%;
+			max-height: 300px;
+			float: right;
+		}
+
+		.textOverlay {
+			position: absolute;
+			width: calc(45% - 40px);
+			right: 0;
+			bottom: 0;
+			padding: 0;
+		}
 	}
 }

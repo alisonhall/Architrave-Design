@@ -1,0 +1,66 @@
+@import 'variables';
+
+$logoFontSize: 1.75rem;
+
+header {
+	text-transform: uppercase;
+	margin: calc(#{$mobileSpacing} - 4px) 0 10px calc(#{$mobileLogoSize} + #{$mobileSpacing});
+	position: relative;
+
+	&.top {
+		display: none;
+	}
+
+	&.side {
+		margin: 0 $spacing 0 -1rem;
+	}
+	
+	@media screen and (min-width: $breakpointAboveSmall) {
+		margin: calc(#{$spacing} - 4px) 0 10px calc(#{$logoSize} + #{$spacing});
+	}
+
+	@media screen and (min-width: $breakpointAboveLarge) {
+		margin: 15px 0 10px calc(#{$asideWidth} + #{$spacing});
+
+		&.side {
+			display: none;
+		}
+
+		&.top {
+			display: inline-block;
+		}
+	}
+
+	p {
+		font-size: 1.2rem;
+		display: inline-block;
+		color: $grayLinkColour;
+		font-weight: 400;
+		margin: 0;
+		padding-left: 1rem;
+
+		&:first-child{
+			color: $architraveLogoColour;
+			font-size: 1.2rem;
+			letter-spacing: 0.0875rem;
+			font-weight: 500;
+		}
+
+		@media screen and (min-width: $breakpointAboveMedium) {
+			font-size: 1.5rem;
+
+			&:first-child {
+				font-size: 1.5rem;
+			}
+		}
+
+		@media screen and (min-width: $breakpointAboveLarge) {
+			font-size: $logoFontSize;
+
+			&:first-child {
+				font-size: $logoFontSize;
+				padding-left: 0;
+			}
+		}
+	}
+}

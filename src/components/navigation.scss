@@ -1,0 +1,186 @@
+@import 'variables';
+
+$navFontSize: 1.68rem;
+
+aside {
+	width: calc(#{$asideWidth} - #{$spacing});
+	min-height: 100vh;
+	position: fixed;
+	margin: 0 $spacing;
+	top: 0;
+	left: 0;
+	background: transparent;
+	z-index: 9999;
+	display: flex;
+	flex-flow: column nowrap;
+
+	@media screen and (max-width: $breakpointLarge) {
+        position: initial;
+		flex-flow: row nowrap;
+		width: 100%;
+		min-height: 0px;
+		margin: 0 0 $spacing;
+	}
+
+	@media screen and (min-width: $breakpointAboveLarge) {
+		align-items: flex-end;
+		max-width: 300px;
+	}
+
+    .logo-link {
+        display: inline-block;
+        width: $mobileLogoSize;
+        height: $mobileLogoSize;
+        padding: $mobileSpacing $mobileSpacing 0 $mobileSpacing;
+
+        @media screen and (min-width: $breakpointAboveSmall) {
+			width: $logoSize;
+            height: $logoSize;
+            padding: $spacing $spacing 0 $spacing;
+        }
+
+        @media screen and (min-width: $breakpointAboveLarge) {
+            padding: $spacing 0 0 0;
+        }
+
+        #logo {
+            width: 100%;
+            min-width: 60px;
+        }
+    }
+
+	nav {
+        width: calc(100% - #{$mobileLogoSize} - #{$mobileSpacing} * 4);
+		padding: 0;
+        margin: $mobileSpacing 0 0;
+		flex: 10 10 auto;
+		display: flex;
+		flex-flow: row wrap;
+
+        @media screen and (min-width: $breakpointAboveSmall) {
+            width: calc(100% - #{$logoSize} - #{$spacing} * 4);
+			margin: $spacing 0 0;
+        }
+        
+		@media screen and (min-width: $breakpointAboveLarge) {
+            width: 100%;
+            margin: 75px 0 0;
+            text-transform: uppercase;
+		}
+
+		> ul {
+            position: relative;
+			width: 100%;
+			text-align: right;
+            margin: 0 $mobileSpacing 0 0;
+            padding: 0;
+			display: flex;
+			flex-flow: row wrap;
+			align-content: flex-end;
+			justify-content: flex-end;
+
+			@media screen and (min-width: $breakpointAboveSmall) {
+				margin: 0 $spacing 0 0;
+				align-content: flex-start;
+			}
+
+			@media screen and (min-width: $breakpointAboveLarge) {
+				margin: 0;
+			}
+		}
+
+		li {
+            display: inline-block;
+			font-size: 1.1rem;
+			line-height: 1.1em;
+            padding: 0 0 0 10px;
+			color: $grayLinkColour;
+
+			@media screen and (min-width: $breakpointAboveSmall) {
+				font-size: 1.2rem;
+				padding: 10px 0 0 20px;
+			}
+
+			@media screen and (min-width: $breakpointAboveMedium) {
+				font-size: 1.4rem;
+				padding: 10px 0 0 20px;
+			}
+            
+			@media screen and (min-width: $breakpointAboveLarge) {
+                display: block;
+                font-size: $navFontSize;
+                padding: 0.4375rem 0;
+				width: 100%;
+			}
+
+			a {
+				text-decoration: none;
+				color: $grayLinkColour;
+
+				&:hover {
+					color: $darkTextColour;
+				}
+			}
+		}
+
+        .subNav {
+			display: none;
+			width: 100%;
+			order: 4;
+            
+			@media screen and (min-width: $breakpointAboveLarge) {
+				position: relative;
+				width: auto;
+				margin: $spacing 15px 20px 0;
+				order: 0;
+			}
+
+            &.subNavVisible {
+                display: inline-block;
+                
+                @media screen and (min-width: $breakpointAboveLarge) {
+                    display: block;
+                }
+            }
+
+			li {
+				line-height: 1em;
+				font-size: 1rem;
+
+				@media screen and (min-width: $breakpointAboveSmall) {
+					font-size: 1.1rem;
+				}
+
+				@media screen and (min-width: $breakpointAboveMedium) {
+					font-size: 1.3rem;
+				}
+				
+				@media screen and (min-width: $breakpointAboveLarge) {
+					font-size: $navFontSize;
+				}
+			}
+		}
+
+		.selected {
+			font-weight: 500;
+			color: $architraveLogoColour;
+		}
+	}
+
+	.houzz-badges {
+		margin-bottom: $spacing;
+
+		@media screen and (max-width: $breakpointLarge) {
+			display: none;
+		}
+
+		.houzz-badge {
+			margin-left: $spacing;
+		}
+
+		img {
+			width: 50px;
+			height: 50px;
+		}
+	}
+}
