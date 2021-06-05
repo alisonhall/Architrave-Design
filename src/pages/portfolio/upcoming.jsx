@@ -3,7 +3,7 @@ import React from 'react';
 import constants from '../../../static/app-constants';
 
 import Layout from '../../components/layout';
-import SEO from '../../components/seo';
+import Seo from '../../components/seo';
 import Row from '../../components/row';
 import Column from '../../components/column';
 import Item from '../../components/item';
@@ -58,7 +58,7 @@ const UpcomingProject = (projectKey, index) => {
 
 const Upcoming = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio upcoming">
-    <SEO />
+    <Seo />
     <section className="contentWrapper layoutAll layoutUpcoming">
       {upcomingProjectsOrder.map(UpcomingProject)}
     </section>

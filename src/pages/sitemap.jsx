@@ -4,7 +4,7 @@ import { Link } from 'gatsby';
 import constants from '../../static/app-constants';
 
 import Layout from '../components/layout';
-import SEO from '../components/seo';
+import Seo from '../components/seo';
 import '../scss/_sitemap.scss';
 
 const { projects, projectTypes, portfolio, newProjectsOrder, renovationProjectsOrder, unusedNewProjects, unusedRenovationProjects } = constants;
@@ -20,7 +20,7 @@ const buildProjectLink = (projectKey, index) => {
 
 const Sitemap = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="sitemap">
-    <SEO />
+    <Seo />
     <section className="contentWrapper clearfix">
       <div className="contentBackground clearfix">
         <section className="textContent">

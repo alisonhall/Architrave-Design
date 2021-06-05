@@ -1,14 +1,14 @@
 import React from 'react';
 
 import Layout from '../components/layout';
-import SEO from '../components/seo';
+import Seo from '../components/seo';
 import EmailIcon from '../images/email-icon.svg';
 import PhoneIcon from '../images/phone-icon.svg';
 import '../scss/_contact.scss';
 
 const Contact = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="contact">
-    <SEO />
+    <Seo />
     <section className="contentWrapper clearfix">
       <div className="contentBackground clearfix">
         <section className="textBlurb">

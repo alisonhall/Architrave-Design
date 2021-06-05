@@ -4,7 +4,7 @@ import constants from '../../../static/app-constants';
 import { buildProjectTile } from '../../../static/helpers';
 
 import Layout from '../../components/layout';
-import SEO from '../../components/seo';
+import Seo from '../../components/seo';
 import Row from '../../components/rowHOC';
 import Column from '../../components/columnHOC';
 import Item from '../../components/item';
@@ -38,7 +38,7 @@ const tiles = {
 
 const RenovationsAdditions = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="renosAndAdditionsOverview">
-    <SEO />
+    <Seo />
     <section className="contentWrapper layoutAll layoutRenovations defaultLayout">
       <Row height={645}>
         <Column width="48%">

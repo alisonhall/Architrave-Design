@@ -1,12 +1,12 @@
 import React from 'react';
 
 import Layout from '../components/layout';
-import SEO from '../components/seo';
+import Seo from '../components/seo';
 import '../scss/_about.scss';
 
 const About = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="about">
-    <SEO />
+    <Seo />
     <section className="contentWrapper">
       <div className="contentBackground">
         <section className="textContent">
