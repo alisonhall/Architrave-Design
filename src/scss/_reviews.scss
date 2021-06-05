@@ -7,7 +7,7 @@ REVIEWS
 
 .reviews {
 	.contentBackground {
-		margin: 0 $spacing;
+		margin: 0 $spacing $spacing;
 		background-image: url("https://res.cloudinary.com/alisonkhall/image/upload/v1613951833/ArchitraveDesign/5-Reviews/Reviews-Background_vxw01r.jpg");
 		@include backgroundSize(cover);
 		background-position: 100% 100%;
@@ -17,7 +17,7 @@ REVIEWS
 		}
 
 		@media screen and (max-width: $breakpointSmall) {
-			margin: 0 $mobileSpacing;
+			margin: 0 $mobileSpacing $mobileSpacing;
 		}
 	}
 

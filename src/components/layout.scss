@@ -4,6 +4,10 @@
     @media screen and (min-width: $breakpointAboveLarge) {
         display: flex;
     }
+
+    .content {
+        width: 100%;
+    }
 }
 
 .contentWrapper {

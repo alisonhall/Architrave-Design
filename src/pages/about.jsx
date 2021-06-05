@@ -7,14 +7,14 @@ import '../scss/_about.scss';
 const About = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="about">
     <SEO />
-    <section className="contentWrapper clearfix">
-      <div className="contentBackground clearfix">
+    <section className="contentWrapper">
+      <div className="contentBackground">
         <section className="textContent">
           <h2 className="heading">Architrave Design, Architect</h2>
           <p>Architrave Design is an architectural firm known for its stylish, imaginative designs and personalized service. There is no typical project for us. We design small one-room additions to full custom homes. Whether working in Traditional or Contemporary style, we always explore a range of options with our clients until we find the perfect expression of their vision and sensibilities.</p>
           <p>As a member of the Ontario Association of Architects, we have the experience to take you through the entire design, approvals, and building process.</p>
         </section>
-        <section className="centerContent clearfix">
+        <section className="centerContent">
           <section className="aboutImage">
           </section>
           <section className="textBlurb">

@@ -6,9 +6,8 @@ ABOUT
 ********************/
 
 $contactImageHeight: 250px;
-$contactImageWidth: 24%;
+$contactImageWidth: 38%;
 $contactBlurbHeight: $contactImageHeight;
-$contactBlurbWidth: 62%;
 $contactImageHeightSmall: 520px;
 $contactImageWidthSmall: 100%;
 $contactBlurbHeightSmall: auto;
@@ -16,19 +15,18 @@ $contactBlurbWidthSmall: 100% - 10%;
 
 .about {
 	.contentBackground {
-		margin: 0 $spacing;
+		margin: 0 $spacing $spacing;
 		background-image: url("https://res.cloudinary.com/alisonkhall/image/upload/v1595346993/ArchitraveDesign/4-About/CreditRiver_Background_cnt0km.jpg");
 		@include backgroundSize(cover);
 
 		@media screen and (max-width: $breakpointSmall) {
-			margin: 0 $mobileSpacing;
+			margin: 0 $mobileSpacing $mobileSpacing;
 		}
 	}
 
 	.textContent {
 		padding: $spacing 5%;
 		max-width: 100%;
-		background-color: transparent;
 		color: $lightTextColour;
 	}
 
@@ -39,11 +37,14 @@ $contactBlurbWidthSmall: 100% - 10%;
 	}
 
 	.centerContent {
-		width: 100%;
 		background-color: $pageColour;
 		display: flex;
-		flex-flow: row wrap;
+		flex-flow: row nowrap;
 		justify-content: space-between;
+
+		@media screen and (max-width: $breakpointSmall) {
+			flex-flow: row wrap;
+		}
 	}
 
 	.textBlurb {
@@ -51,7 +52,6 @@ $contactBlurbWidthSmall: 100% - 10%;
 		margin: $spacing 0 $spacing $spacing;
 		color: $lightTextColour;
 		background-color: $blurbColour;
-		width: $contactBlurbWidth;
 		min-height: $contactBlurbHeight;
 		font-size: 1.2rem;
 		display: block;

@@ -18,7 +18,7 @@ import './layout.scss';
 const Layout = ({ children, mainClasses, urlPath }) => (
   <div className="page">
     <Navigation urlPath={urlPath} />
-    <div className={mainClasses}>
+    <div className={`content ${mainClasses}`}>
       <Header className="top" />
       <main>{children}</main>
       <Footer />
