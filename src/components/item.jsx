@@ -35,6 +35,8 @@ import TextBlurbFiller from './textBlurbFiller';
  * @param {string} text.copy
  * @param {string} text.title
  * @param {string} text.subTitle
+ * 
+ * @param {Node} content
  */
 const Item = (data) => {
   const {
@@ -43,7 +45,8 @@ const Item = (data) => {
     num = '0',
     image,
     link,
-    text
+    text,
+    content
   } = data;
 
   if (image && link) {
@@ -60,6 +63,14 @@ const Item = (data) => {
   
   if (text) {
     return <TextBlurb customClass={`${customClass} item`} {...data} />;
+  }
+
+  if (content) {
+    return (
+      <div className={`item ${customClass} image image${num}`}>
+        {content}
+      </div>
+    );
   }
 
   return <TextBlurbFiller customClass={`${customClass} item`} {...data} />;
@@ -87,6 +98,7 @@ Item.propTypes = {
       height: PropTypes.number
     })
   ]),
+  content: PropTypes.node,
   link: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.shape({
