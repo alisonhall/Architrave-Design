@@ -24,63 +24,127 @@ const tiles = {
     <Item
       num={1}
       image={{
-        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347231/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/1-Traditional-Front-Facade_xapffn.jpg'
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1690224718/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/wllgq8z17m_qlavce.jpg'
+      }}
+    />
+  ),
+  frontAlternative: (
+    <Item
+      num={2}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1690224720/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/t3me2mc9ik_so4o4x.jpg'
       }}
     />
   ),
   modernRear: (
     <Item
-      num={2}
+      num={3}
       image={{
         imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347233/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/2-Modern-Rear_juviao.jpg'
       }}
     />
   ),
-  banquetteSeating: (
-    <Item
-      num={3}
-      image={{
-        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347224/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/6-Banquette-seating_oe01cy.jpg'
-      }}
-    />
-  ),
-  centralStair: (
+  entrancewayDining: (
     <Item
       num={4}
       image={{
-        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347216/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/3-Central-Stair_svysch.jpg'
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1690224738/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/inzkd3co1u_k78khw.jpg'
       }}
     />
   ),
-  familyRoomKitchen: (
+  entrance: (
     <Item
       num={5}
       image={{
-        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347230/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/5._Family-Room-_-Kitchen_ydyxys.jpg'
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1690224731/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/9ynkmnemea_xi4jy3.jpg'
       }}
     />
   ),
-  familyRoom: (
+  entranceHallway: (
     <Item
       num={6}
       image={{
-        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347222/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/4-Family-Room_kacy5b.jpg',
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1690224712/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/wyiw0roxqk_pdosis.jpg'
       }}
     />
   ),
-  vaultedMaster: (
+  livingRoomKitchen: (
     <Item
       num={7}
       image={{
-        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347223/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/7-Vaulted-Master_shswjo.jpg'
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1690224715/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/wpmfr17qls_cwaye2.jpg'
       }}
     />
   ),
-  marbleEnsuite: (
+  livingRoom: (
     <Item
       num={8}
       image={{
-        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1595347229/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/8-Marble-Ensuite_ev33ah.jpg'
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1690224733/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/8a5rn0jhm9_yayhnq.jpg'
+      }}
+    />
+  ),
+  kitchen: (
+    <Item
+      num={9}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1690224735/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/9yil46v4lj_s8tjbi.jpg'
+      }}
+    />
+  ),
+  breakfastTable: (
+    <Item
+      num={10}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1690224715/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/vkdzuxidqt_qcdfzk.jpg'
+      }}
+    />
+  ),
+  staircase: (
+    <Item
+      num={11}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1690224730/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/nb2m6t67mu_intdkd.jpg'
+      }}
+    />
+  ),
+  upstairsHallway: (
+    <Item
+      num={12}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1690224736/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/tfeivoj6j0_ztt97m.jpg'
+      }}
+    />
+  ),
+  masterBedroom: (
+    <Item
+      num={13}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1690224733/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/5ezfxtm9pp_cdqizs.jpg'
+      }}
+    />
+  ),
+  bedroomDoors: (
+    <Item
+      num={14}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1690224726/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/5wxqms5oi8_ohgn7k.jpg'
+      }}
+    />
+  ),
+  bathroomSinks: (
+    <Item
+      num={15}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1690224713/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/2wl8dux9ys_pirdbm.jpg'
+      }}
+    />
+  ),
+  bathroomTub: (
+    <Item
+      num={16}
+      image={{
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1690224735/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/qih7wzw9i8_egspcu.jpg'
       }}
     />
   )
@@ -90,9 +154,12 @@ const KingswayTransitional = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <Seo />
     <section className="contentWrapper layoutAll layoutProject defaultLayout">
-      <Row height={630}>
+      <Row height={340}>
         <Column>
           {tiles.traditionalFrontFacade}
+        </Column>
+        <Column>
+          {tiles.frontAlternative}
         </Column>
       </Row>
       <Row>
@@ -100,51 +167,56 @@ const KingswayTransitional = (props) => (
           {tiles.description}
         </Column>
       </Row>
-      <Row height={290}>
-        <Column width="42%">
+      <Row height={400}>
+        <Column width="50%">
           {tiles.modernRear}
         </Column>
-        <Column width="29%">
-          {tiles.banquetteSeating}
-        </Column>
-        <Column width="29%">
-          {tiles.centralStair}
-        </Column>
-      </Row>
-      <Row height={340}>
-        <Column>
-          {tiles.familyRoomKitchen}
-        </Column>
-        <Column>
-          <Row height={260}>
+        <Column width="50%">
+          <Row height={350}>
             <Column>
-              {tiles.familyRoom}
-            </Column>  
+              {tiles.entrancewayDining}
+            </Column>
           </Row>
           <Row>
             <Column>
               <Item />
-            </Column>  
+            </Column>
           </Row>
         </Column>
       </Row>
       <Row height={340}>
-        <Column width="58%">
-          {tiles.vaultedMaster}
-        </Column>
-        <Column width="42%">
-          {tiles.marbleEnsuite}
-        </Column>
+        <Column>{tiles.entrance}</Column>
+        <Column>{tiles.entranceHallway}</Column>
+      </Row>
+      <Row height={340}>
+        <Column>{tiles.livingRoomKitchen}</Column>
+        <Column>{tiles.livingRoom}</Column>
+      </Row>
+      <Row height={340}>
+        <Column>{tiles.kitchen}</Column>
+        <Column>{tiles.breakfastTable}</Column>
+      </Row>
+      <Row height={340}>
+        <Column>{tiles.staircase}</Column>
+        <Column>{tiles.upstairsHallway}</Column>
+      </Row>
+      <Row height={340}>
+        <Column>{tiles.masterBedroom}</Column>
+        <Column>{tiles.bedroomDoors}</Column>
+      </Row>
+      <Row height={340}>
+        <Column>{tiles.bathroomSinks}</Column>
+        <Column>{tiles.bathroomTub}</Column>
       </Row>
       <PrevNextProjectLinks project={project} />
     </section>
     <section className="contentWrapper layoutAll layoutProject wideLayout">
-      <Row height={450}>
+      <Row height={440}>
         <Column>
           {tiles.traditionalFrontFacade}
         </Column>
         <Column>
-          {tiles.modernRear}
+          {tiles.frontAlternative}
         </Column>
       </Row>
       <Row>
@@ -152,27 +224,46 @@ const KingswayTransitional = (props) => (
           {tiles.description}
         </Column>
       </Row>
-      <Row height={325}>
-        <Column width="40%">
-          {tiles.familyRoom}
+      <Row height={500}>
+        <Column width="50%">
+          {tiles.modernRear}
         </Column>
-        <Column width="40%">
-          {tiles.familyRoomKitchen}
-        </Column>
-        <Column width="20%">
-          {tiles.banquetteSeating}
+        <Column width="50%">
+          <Row height={400}>
+            <Column>
+              {tiles.entrancewayDining}
+            </Column>
+          </Row>
+          <Row>
+            <Column>
+              <Item />
+            </Column>
+          </Row>
         </Column>
       </Row>
-      <Row height={350}>
-        <Column width="22%">
-          {tiles.centralStair}
-        </Column>
-        <Column width="35%">
-          {tiles.marbleEnsuite}
-        </Column>
-        <Column width="43%">
-          {tiles.vaultedMaster}
-        </Column>
+      <Row height={440}>
+        <Column>{tiles.entrance}</Column>
+        <Column>{tiles.entranceHallway}</Column>
+      </Row>
+      <Row height={440}>
+        <Column>{tiles.livingRoomKitchen}</Column>
+        <Column>{tiles.livingRoom}</Column>
+      </Row>
+      <Row height={440}>
+        <Column>{tiles.kitchen}</Column>
+        <Column>{tiles.breakfastTable}</Column>
+      </Row>
+      <Row height={440}>
+        <Column>{tiles.staircase}</Column>
+        <Column>{tiles.upstairsHallway}</Column>
+      </Row>
+      <Row height={440}>
+        <Column>{tiles.masterBedroom}</Column>
+        <Column>{tiles.bedroomDoors}</Column>
+      </Row>
+      <Row height={440}>
+        <Column>{tiles.bathroomSinks}</Column>
+        <Column>{tiles.bathroomTub}</Column>
       </Row>
       <PrevNextProjectLinks project={project} />
     </section>
