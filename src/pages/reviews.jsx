@@ -22,6 +22,12 @@ const Reviews = (props) => (
             <h5>April 2025</h5>
             <p>My husband and I are so incredibly happy that we chose Bill from Architrave Design to design our custom build in Etobicoke. Bill was an absolute pleasure to work with. Highly attentive to clients, detail oriented, excellent in exploring creative innovative solutions, problem solving, budget management. Bill was very professional and clear in his communication in all aspects of his service from design to documentation through to tender process. Highly personable and a significantly talented Architect with decades of expertise behind him. Bill most certainly went above and beyond to ensure our development was approved with council, which we are very grateful for. Thank you Bill for making this such a remarkable experience. We could not be more thrilled with our home.</p>
           </section>
+	<section className="review">
+		<h3>Client</h3>	
+		<h4>Project Date:</h4>
+		<h5>July 2025</h5>
+		<p>We engaged Bill from Architrave to design a whole house renovation and addition, essentially giving us a new house. Our experience working with Bill was very positive. He was very knowledgeable and experienced in his field. He thought of everything that we could possibly want in our house, took us through the various permits required with ease, and checked in with us and our contractors throughout the process. We couldn't be happier with the end result! We absolutely love our new space and plan to enjoy it for many years to come.</p>
+	</section>
           <section className="review">
             <h3>Mike Langdon</h3>
             <h4>Project Date: </h4>
