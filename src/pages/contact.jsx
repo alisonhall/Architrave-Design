@@ -20,10 +20,6 @@ const Contact = (props) => (
             <img className="icon phone-icon" src={PhoneIcon} alt="" />
             <p>Toronto: <a href="tel:4162078881">416-207-8881</a></p>
           </div>
-          <div className="item phone">
-            <img className="icon phone-icon" src={PhoneIcon} alt="" />
-            <p>Mississauga & Oakville: <a href="tel:9055993097">905-599-3097</a></p>
-          </div>
         </section>
       </div>
     </section>
