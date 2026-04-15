@@ -33,7 +33,7 @@ const tiles = {
   ),
   creditRiverManor: buildProjectTile(projects.creditRiverManor, 4),
   kingswayTransitional: buildProjectTile(projects.kingswayTransitional, 5),
-  oakvilleExecutiveHome: buildProjectTile(projects.oakvilleExecutiveHome, 6),
+  princessMargaretClassic: buildProjectTile(projects.princessMargaretClassic, 6),
   classicCentreHall: buildProjectTile(projects.classicCentreHall, 7),
   traditionalKingswayPark: buildProjectTile(projects.traditionalKingswayPark, 9, { backgroundPosition: '30% 40% ' }),
   kingswayGeorgianFiller: (
@@ -85,7 +85,7 @@ const NewHomes = (props) => (
       </Row>
       <Row height={300}>
         <Column width="39%">
-          {tiles.oakvilleExecutiveHome}
+          {tiles.princessMargaretClassic}
         </Column>
         <Column width="22%">
           {tiles.kingswayTransitionalFiller}
@@ -129,7 +129,7 @@ const NewHomes = (props) => (
       </Row>
       <Row height={300}>
         <Column width="39%">
-          {tiles.oakvilleExecutiveHome}
+          {tiles.princessMargaretClassic}
         </Column>
         <Column width="23%">
           {tiles.kingswayGeorgianFiller}
