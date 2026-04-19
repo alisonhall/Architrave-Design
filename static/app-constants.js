@@ -187,6 +187,20 @@ const projects = {
         type: projectTypes.upcoming,
         mainImageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1742767803/ArchitraveDesign/3-Upcoming/Strath-Classic_o039op.jpg',
         projectName: 'Strath Classic'
+    },
+    princessMargaretClassic: {
+        key: 'princessMargaretClassic',
+        type: projectTypes.new,
+        fileName: 'princess-margaret-classic',
+        projectName: 'Princess Margaret Classic',
+        projectDescription: 'This expansive home is designed for family gatherings and entertaining. Everything centres on a light-filled double-height dining room.',
+        mainImageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1776209319/ArchitraveDesign/1-New-Homes/8-Princess-Margaret-Classic/1_x7zkiz.jpg'
+    },
+    kingGeorgesBacksplit: {
+        key: 'kingGeorgesBacksplit',
+        type: projectTypes.upcoming,
+        projectName: "King George's Backsplit",
+        mainImageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1776209609/ArchitraveDesign/3-Upcoming/St_Georges_Backsplit_Renovation_frqrkd.jpg'
     }
 }
 
@@ -200,8 +214,9 @@ const constants = {
         projects.classicCentreHall.key,
         projects.creditRiverManor.key,
         projects.kingswayTransitional.key,
-        projects.oakvilleExecutiveHome.key,
-        projects.traditionalKingswayPark.key
+        projects.princessMargaretClassic.key,
+        projects.traditionalKingswayPark.key,
+        projects.oakvilleExecutiveHome.key
     ],
     renovationProjectsOrder: [
         projects.lyttonParkManor.key,
@@ -212,11 +227,12 @@ const constants = {
     ],
     upcomingProjectsOrder: [
         projects.kingsgardenGeorgian.key,
-        projects.strathClassic.key
+        projects.kingGeorgesBacksplit.key
     ],
     unusedNewProjects: [
         projects.hoggsHollowTraditional.key,
-        projects.hoggsHollowFrenchCountry.key
+        projects.hoggsHollowFrenchCountry.key,
+        projects.oakvilleExecutiveHome.key
     ],
     unusedRenovationProjects: [
         projects.lorneParkInterior.key,
