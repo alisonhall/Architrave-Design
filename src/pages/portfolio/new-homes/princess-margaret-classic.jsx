@@ -100,13 +100,37 @@ const tiles = {
       }}
     />
   ),
+  kitchen360: (
+    <Item
+      num={11}
+      content={(
+        <iframe width="100%" height="640" frameborder="0" allow="xr-spatial-tracking; gyroscope; accelerometer" allowfullscreen scrolling="no" src="https://kuula.co/share/LlHdJ?logo=1&info=1&fs=1&vr=0&sd=1&autorotate=0.43&thumbs=1"></iframe>
+      )}
+    />
+  ),
+  livingDining360: (
+    <Item
+      num={12}
+      content={(
+        <iframe width="100%" height="640" frameborder="0" allow="xr-spatial-tracking; gyroscope; accelerometer" allowfullscreen scrolling="no" src="https://kuula.co/share/LlHdT?logo=1&info=1&fs=1&vr=0&sd=1&autorotate=0.43&thumbs=1"></iframe>
+      )}
+    />
+  ),
+  upstairs360: (
+    <Item
+      num={13}
+      content={(
+        <iframe width="100%" height="640" frameborder="0" allow="xr-spatial-tracking; gyroscope; accelerometer" allowfullscreen scrolling="no" src="https://kuula.co/share/LlHdt?logo=1&info=1&fs=1&vr=0&sd=1&autorotate=0.43&thumbs=1"></iframe>
+      )}
+    />
+  )
 };
 
 const PrincessMargaretClassic = (props) => (
   <Layout urlPath={props.location.pathname} mainClasses="portfolio">
     <Seo />
     <section className="contentWrapper layoutAll layoutProject defaultLayout">
-      <Row height={600}>
+      <Row height={450}>
         <Column width="48%">
           {tiles.frontFacadeWithGarage}
         </Column>
@@ -119,7 +143,12 @@ const PrincessMargaretClassic = (props) => (
           {tiles.description}
         </Column>
       </Row>
-      <Row height={480}>
+      <Row height={400}>
+        <Column>
+          {tiles.kitchen360}
+        </Column>
+      </Row>
+      <Row height={350}>
         <Column width="62%">
           {tiles.pool}
         </Column>
@@ -127,7 +156,15 @@ const PrincessMargaretClassic = (props) => (
           {tiles.couch}
         </Column>
       </Row>
-      <Row height={480}>
+      <Row height={350}>
+        <Column>
+          {tiles.livingDining360}
+        </Column>
+        <Column>
+          {tiles.upstairs360}
+        </Column>
+      </Row>
+      <Row height={350}>
         <Column width="32%">
           {tiles.entranceStairway}
         </Column>
@@ -138,7 +175,7 @@ const PrincessMargaretClassic = (props) => (
           {tiles.kitchen}
         </Column>
       </Row>
-      <Row height={480}>
+      <Row height={350}>
         <Column width="48%">
           {tiles.fireplace}
         </Column>
@@ -165,12 +202,25 @@ const PrincessMargaretClassic = (props) => (
           {tiles.description}
         </Column>
       </Row>
+      <Row height={600}>
+        <Column>
+          {tiles.kitchen360}
+        </Column>
+      </Row>
       <Row height={480}>
         <Column width="62%">
           {tiles.pool}
         </Column>
         <Column width="38%">
           {tiles.couch}
+        </Column>
+      </Row>
+      <Row height={450}>
+        <Column>
+          {tiles.livingDining360}
+        </Column>
+        <Column>
+          {tiles.upstairs360}
         </Column>
       </Row>
       <Row height={480}>
