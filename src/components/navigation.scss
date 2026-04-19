@@ -172,8 +172,8 @@ aside {
 	.houzz-badges {
 		width: 100%;
 		margin: $spacing 0;
-		display: 'flex';
-		flex-flow: 'row nowrap';
+		display: flex;
+		flex-flow: row nowrap;
 		gap: $spacing;
 
 		@media screen and (max-width: $breakpointLarge) {
