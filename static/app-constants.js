@@ -199,7 +199,7 @@ const projects = {
     kingGeorgesBacksplit: {
         key: 'kingGeorgesBacksplit',
         type: projectTypes.upcoming,
-        profileName: "King George's Backsplit",
+        projectName: "King George's Backsplit",
         mainImageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1776209609/ArchitraveDesign/3-Upcoming/St_Georges_Backsplit_Renovation_frqrkd.jpg'
     }
 }
