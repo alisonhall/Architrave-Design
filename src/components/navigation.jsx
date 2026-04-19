@@ -61,10 +61,10 @@ const Navigation = ({urlPath}) => {
         <img src={houzzLogo} alt="Houzz logo" />
       </a>
       <a className="houzz-badge best-of-houzz" title="Best of Houzz 2021" href={houzz.url}>
-        <img src={bestOfHouzz} alt="Best of Houzz 2021 badge" />
+        <img src={bestOfHouzz2021} alt="Best of Houzz 2021 badge" />
       </a>
       <a className="houzz-badge best-of-houzz" title="Best of Houzz 2026" href={houzz.url}>
-        <img src={bestOfHouzz} alt="Best of Houzz 2026 badge" />
+        <img src={bestOfHouzz2026} alt="Best of Houzz 2026 badge" />
       </a>
     </div>
   </aside>
