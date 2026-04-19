@@ -195,6 +195,12 @@ const projects = {
         projectName: 'Princess Margaret Classic',
         projectDescription: 'This expansive home is designed for family gatherings and entertaining. Everything centres on a light-filled double-height dining room.',
         mainImageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1776209319/ArchitraveDesign/1-New-Homes/8-Princess-Margaret-Classic/1_x7zkiz.jpg'
+    },
+    kingGeorgesBacksplit: {
+        key: 'kingGeorgesBacksplit',
+        type: projectTypes.upcoming,
+        profileName: "King George's Backsplit",
+        mainImageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1776209609/ArchitraveDesign/3-Upcoming/St_Georges_Backsplit_Renovation_frqrkd.jpg'
     }
 }
 
@@ -221,7 +227,7 @@ const constants = {
     ],
     upcomingProjectsOrder: [
         projects.kingsgardenGeorgian.key,
-        projects.strathClassic.key
+        projects.kingGeorgesBacksplit.key
     ],
     unusedNewProjects: [
         projects.hoggsHollowTraditional.key,
