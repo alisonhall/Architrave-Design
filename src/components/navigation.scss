@@ -170,14 +170,14 @@ aside {
 	}
 
 	.houzz-badges {
+		width: 100%;
 		margin: $spacing 0;
+		display: 'flex';
+		flex-flow: 'row nowrap';
+		gap: $spacing;
 
 		@media screen and (max-width: $breakpointLarge) {
 			display: none;
-		}
-
-		.houzz-badge {
-			margin-left: $spacing;
 		}
 
 		img {
