@@ -112,7 +112,7 @@ const tiles = {
     <Item
       num={4}
       content={(
-        <iframe title="Entranceway 360 degree interactive panorama" width="100%" height="500px" frameBorder="0" allowFullScreen allow="xr-spatial-tracking; gyroscope; accelerometer" scrolling="no" src="https://kuula.co/share/7rcnJ?fs=1&vr=0&zoom=1&sd=1&thumbs=1&info=1&logo=1"></iframe>
+        <iframe title="Entranceway 360 degree interactive panorama" width="100%" height="640" frameborder="0" allow="xr-spatial-tracking; gyroscope; accelerometer" allowfullscreen scrolling="no" src="https://kuula.co/share/7rcnJ?logo=1&info=1&fs=1&vr=0&sd=1&autorotate=0.43&thumbs=1"></iframe>
       )}
     />
   )
