@@ -175,6 +175,7 @@ aside {
 		display: flex;
 		flex-flow: row nowrap;
 		gap: $spacing;
+		justify-content: flex-end;
 
 		@media screen and (max-width: $breakpointLarge) {
 			display: none;
