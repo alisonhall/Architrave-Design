@@ -139,10 +139,10 @@ const PrincessMargaretClassic = (props) => (
     <Seo />
     <section className="contentWrapper layoutAll layoutProject defaultLayout">
       <Row height={450}>
-        <Column width="48%">
+        <Column width="66%">
           {tiles.frontFacadeWithGarage}
         </Column>
-        <Column width="52%">
+        <Column width="33%">
           {tiles.frontFacade}
         </Column>
       </Row>
@@ -198,10 +198,10 @@ const PrincessMargaretClassic = (props) => (
     </section>
     <section className="contentWrapper layoutAll layoutProject wideLayout">
       <Row height={600}>
-        <Column width="48%">
+        <Column width="66%">
           {tiles.frontFacadeWithGarage}
         </Column>
-        <Column width="52%">
+        <Column width="33%">
           {tiles.frontFacade}
         </Column>
       </Row>
