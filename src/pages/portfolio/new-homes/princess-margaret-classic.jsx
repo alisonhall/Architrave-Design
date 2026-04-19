@@ -24,7 +24,8 @@ const tiles = {
     <Item
       num={1}
       image={{
-        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1776209319/ArchitraveDesign/1-New-Homes/8-Princess-Margaret-Classic/1_x7zkiz.jpg'
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1776209319/ArchitraveDesign/1-New-Homes/8-Princess-Margaret-Classic/1_x7zkiz.jpg',
+        backgroundPosition: '100% 0%'
       }}
     />
   ),
@@ -32,7 +33,8 @@ const tiles = {
     <Item
       num={2}
       image={{
-        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1776209319/ArchitraveDesign/1-New-Homes/8-Princess-Margaret-Classic/2_ah1ebs.jpg'
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1776209319/ArchitraveDesign/1-New-Homes/8-Princess-Margaret-Classic/2_ah1ebs.jpg',
+        backgroundPosition: '35% 40%'
       }}
     />
   ),
@@ -40,7 +42,8 @@ const tiles = {
     <Item
       num={3}
       image={{
-        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1776209319/ArchitraveDesign/1-New-Homes/8-Princess-Margaret-Classic/3_bf2mb2.jpg'
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1776209319/ArchitraveDesign/1-New-Homes/8-Princess-Margaret-Classic/3_bf2mb2.jpg',
+        backgroundPosition: '100% 100%'
       }}
     />
   ),
@@ -48,7 +51,8 @@ const tiles = {
     <Item
       num={4}
       image={{
-        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1776209318/ArchitraveDesign/1-New-Homes/8-Princess-Margaret-Classic/4_im2bye.jpg'
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1776209318/ArchitraveDesign/1-New-Homes/8-Princess-Margaret-Classic/4_im2bye.jpg',
+        backgroundPosition: '50% 70%'
       }}
     />
   ),
@@ -56,7 +60,8 @@ const tiles = {
     <Item
       num={5}
       image={{
-        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1776209318/ArchitraveDesign/1-New-Homes/8-Princess-Margaret-Classic/5_fzrdsw.jpg'
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1776209318/ArchitraveDesign/1-New-Homes/8-Princess-Margaret-Classic/5_fzrdsw.jpg',
+        backgroundPosition: '0% 100%'
       }}
     />
   ),
@@ -64,7 +69,8 @@ const tiles = {
     <Item
       num={6}
       image={{
-        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1776209343/ArchitraveDesign/1-New-Homes/8-Princess-Margaret-Classic/6_uimiia.jpg'
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1776209343/ArchitraveDesign/1-New-Homes/8-Princess-Margaret-Classic/6_uimiia.jpg',
+        backgroundPosition: '50% 80%'
       }}
     />
   ),
@@ -72,7 +78,8 @@ const tiles = {
     <Item
       num={7}
       image={{
-        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1776209343/ArchitraveDesign/1-New-Homes/8-Princess-Margaret-Classic/8_uii1fg.jpg'
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1776209343/ArchitraveDesign/1-New-Homes/8-Princess-Margaret-Classic/8_uii1fg.jpg',
+        backgroundPosition: '20% 80%'
       }}
     />
   ),
@@ -96,7 +103,8 @@ const tiles = {
     <Item
       num={10}
       image={{
-        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1776209345/ArchitraveDesign/1-New-Homes/8-Princess-Margaret-Classic/12_goklqz.jpg'
+        imageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1776209345/ArchitraveDesign/1-New-Homes/8-Princess-Margaret-Classic/12_goklqz.jpg',
+        backgroundPosition: '70% 50%'
       }}
     />
   ),
@@ -104,7 +112,7 @@ const tiles = {
     <Item
       num={11}
       content={(
-        <iframe width="100%" height="640" frameborder="0" allow="xr-spatial-tracking; gyroscope; accelerometer" allowfullscreen scrolling="no" src="https://kuula.co/share/LlHdJ?logo=1&info=1&fs=1&vr=0&sd=1&autorotate=0.43&thumbs=1"></iframe>
+        <iframe width="100%" height="500" frameborder="0" allow="xr-spatial-tracking; gyroscope; accelerometer" allowfullscreen scrolling="no" src="https://kuula.co/share/LlHdJ?logo=1&info=1&fs=1&vr=0&sd=1&autorotate=0.43&thumbs=1"></iframe>
       )}
     />
   ),
@@ -112,7 +120,7 @@ const tiles = {
     <Item
       num={12}
       content={(
-        <iframe width="100%" height="640" frameborder="0" allow="xr-spatial-tracking; gyroscope; accelerometer" allowfullscreen scrolling="no" src="https://kuula.co/share/LlHdT?logo=1&info=1&fs=1&vr=0&sd=1&autorotate=0.43&thumbs=1"></iframe>
+        <iframe width="100%" height="400" frameborder="0" allow="xr-spatial-tracking; gyroscope; accelerometer" allowfullscreen scrolling="no" src="https://kuula.co/share/LlHdT?logo=1&info=1&fs=1&vr=0&sd=1&autorotate=0.43&thumbs=1"></iframe>
       )}
     />
   ),
@@ -120,7 +128,7 @@ const tiles = {
     <Item
       num={13}
       content={(
-        <iframe width="100%" height="640" frameborder="0" allow="xr-spatial-tracking; gyroscope; accelerometer" allowfullscreen scrolling="no" src="https://kuula.co/share/LlHdt?logo=1&info=1&fs=1&vr=0&sd=1&autorotate=0.43&thumbs=1"></iframe>
+        <iframe width="100%" height="400" frameborder="0" allow="xr-spatial-tracking; gyroscope; accelerometer" allowfullscreen scrolling="no" src="https://kuula.co/share/LlHdt?logo=1&info=1&fs=1&vr=0&sd=1&autorotate=0.43&thumbs=1"></iframe>
       )}
     />
   )
@@ -143,7 +151,7 @@ const PrincessMargaretClassic = (props) => (
           {tiles.description}
         </Column>
       </Row>
-      <Row height={400}>
+      <Row height={500}>
         <Column>
           {tiles.kitchen360}
         </Column>
@@ -156,7 +164,7 @@ const PrincessMargaretClassic = (props) => (
           {tiles.couch}
         </Column>
       </Row>
-      <Row height={350}>
+      <Row height={400}>
         <Column>
           {tiles.livingDining360}
         </Column>
@@ -202,7 +210,7 @@ const PrincessMargaretClassic = (props) => (
           {tiles.description}
         </Column>
       </Row>
-      <Row height={600}>
+      <Row height={500}>
         <Column>
           {tiles.kitchen360}
         </Column>
@@ -215,7 +223,7 @@ const PrincessMargaretClassic = (props) => (
           {tiles.couch}
         </Column>
       </Row>
-      <Row height={450}>
+      <Row height={400}>
         <Column>
           {tiles.livingDining360}
         </Column>
