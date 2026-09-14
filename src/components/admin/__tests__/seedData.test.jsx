@@ -27,6 +27,12 @@ describe('seedDraft', () => {
   it('leaves the not-yet-built sections as placeholders', () => {
     expect(seedDraft.aboutContent).toBeNull();
     expect(seedDraft.reviews).toBeNull();
-    expect(seedDraft.layouts).toEqual({});
+  });
+
+  it('seeds a transcribed layout for new-homes.jsx', () => {
+    expect(Object.keys(seedDraft.layouts)).toEqual(['newHomes']);
+    expect(seedDraft.layouts.newHomes.tiles).toBeDefined();
+    expect(seedDraft.layouts.newHomes.defaultLayout.length).toBeGreaterThan(0);
+    expect(seedDraft.layouts.newHomes.wideLayout.length).toBeGreaterThan(0);
   });
 });

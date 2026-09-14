@@ -1,6 +1,14 @@
 import constants from '../../../static/app-constants';
+import { newHomesLayout, newHomesPageConfig } from './seedLayouts/newHomes';
 
 const clone = (value) => JSON.parse(JSON.stringify(value));
+
+// Bump this whenever seedDraft's shape changes (a section added/removed/restructured).
+// draftContext.js refuses to restore a persisted draft stashed under an older version,
+// so returning users don't get a shallow merge of new seed sections with a stale
+// top-level value from before that section existed (e.g. an old empty `layouts: {}`
+// silently winning over a newly-seeded `layouts.newHomes`).
+export const SEED_VERSION = 2;
 
 /**
  * @description The admin draft's starting state. `projects` and the ordering/unused
@@ -25,5 +33,13 @@ export const seedDraft = {
   houzz: clone(constants.houzz),
   aboutContent: null,
   reviews: null,
-  layouts: {}
+  layouts: {
+    newHomes: clone(newHomesLayout)
+  }
+};
+
+// Static, non-content configuration (import paths, class names) each supported page's
+// layout generator needs — not part of the editable draft.
+export const LAYOUT_PAGE_CONFIGS = {
+  newHomes: newHomesPageConfig
 };

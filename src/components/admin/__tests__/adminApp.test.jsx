@@ -40,4 +40,23 @@ describe('AdminApp', () => {
 
     expect(screen.getByText(/no changes yet/i)).toBeInTheDocument();
   });
+
+  it('renders the layouts editor in the Layouts section', () => {
+    render(<AdminApp />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Layouts' }));
+
+    expect(screen.getByText('Editing: src/pages/portfolio/new-homes.jsx')).toBeInTheDocument();
+  });
+
+  it('shares draft state between the Projects and Layouts sections', () => {
+    render(<AdminApp />);
+
+    const introTextarea = screen.getByLabelText('Portfolio introduction text');
+    fireEvent.change(introTextarea, { target: { value: 'Shared intro across sections.' } });
+
+    fireEvent.click(screen.getByRole('button', { name: 'Layouts' }));
+
+    expect(screen.getAllByText('Shared intro across sections.').length).toBeGreaterThan(0);
+  });
 });

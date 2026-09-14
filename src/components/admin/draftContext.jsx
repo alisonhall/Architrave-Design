@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useMemo, useReducer } from 'react';
 import PropTypes from 'prop-types';
 
-import { seedDraft } from './seedData';
+import { seedDraft, SEED_VERSION } from './seedData';
 
 const STORAGE_KEY = 'architrave-admin-draft';
 
@@ -14,7 +14,16 @@ const loadInitialDraft = () => {
   try {
     const stored = window.sessionStorage.getItem(STORAGE_KEY);
     if (!stored) return seedDraft;
-    return { ...seedDraft, ...JSON.parse(stored) };
+
+    const parsed = JSON.parse(stored);
+    // A draft saved under an older seed shape isn't safe to shallow-merge — a stale
+    // top-level section (e.g. an old empty `layouts: {}`) would silently win over a
+    // newly-seeded one, leaving parts of the admin UI with nothing to show. Since this
+    // is explicitly session-only scratch space, it's safe to just start fresh instead.
+    if (parsed.__seedVersion !== SEED_VERSION) return seedDraft;
+
+    const { __seedVersion, ...draft } = parsed;
+    return { ...seedDraft, ...draft };
   } catch (error) {
     return seedDraft;
   }
@@ -46,7 +55,7 @@ export const DraftProvider = ({ children }) => {
     if (typeof window === 'undefined') return;
 
     try {
-      window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ ...state, __seedVersion: SEED_VERSION }));
     } catch (error) {
       // sessionStorage may be unavailable (e.g. private browsing); the draft simply
       // won't persist across a refresh in that case.

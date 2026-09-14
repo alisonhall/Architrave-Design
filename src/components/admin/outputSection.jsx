@@ -1,8 +1,9 @@
 import React from 'react';
 
 import { useDraftState } from './draftContext';
-import { seedDraft } from './seedData';
+import { seedDraft, LAYOUT_PAGE_CONFIGS } from './seedData';
 import { generateAppConstants } from './generators/appConstantsGenerator';
+import { generateLayoutPage } from './generators/layoutGenerator';
 import OutputPanel from './outputPanel';
 
 const APP_CONSTANTS_FIELDS = [
@@ -33,9 +34,21 @@ const OutputSection = () => {
       path: 'static/app-constants.js',
       content: generateAppConstants(draft),
       note:
-        "Any page whose snapshot renders project tiles (e.g. the home, new-homes, or reviews page tests) may need its snapshot updated afterward with `npm test -- -u` — review the diff before committing it."
+        "Any page whose snapshot renders project tiles (e.g. the home, new-homes, or reviews page tests) may need its snapshot updated afterward with `npm test -- -u` — review the diff before committing it. If a layout below still references a project you deleted, fix that layout first — the generated page would fail to render."
     });
   }
+
+  Object.keys(LAYOUT_PAGE_CONFIGS).forEach((pageKey) => {
+    const pageLayout = draft.layouts[pageKey];
+    if (!pageLayout) return;
+    if (JSON.stringify(pageLayout) === JSON.stringify(seedDraft.layouts[pageKey])) return;
+
+    files.push({
+      path: LAYOUT_PAGE_CONFIGS[pageKey].filePath,
+      content: generateLayoutPage(LAYOUT_PAGE_CONFIGS[pageKey], pageLayout),
+      note: 'Its snapshot test (if any) will need updating afterward with `npm test -- -u` — review the diff before committing it.'
+    });
+  });
 
   return <OutputPanel files={files} />;
 };

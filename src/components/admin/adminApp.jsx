@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { DraftProvider } from './draftContext';
 import ProjectsEditor from './projectsEditor';
+import LayoutsEditor from './layoutsEditor';
 import OutputSection from './outputSection';
 
 const SECTIONS = [
@@ -14,13 +15,14 @@ const SECTIONS = [
 
 const SECTION_CONTENT = {
   projects: <ProjectsEditor />,
+  layouts: <LayoutsEditor />,
   output: <OutputSection />
 };
 
 /**
  * @description The admin tool's shell: section navigation over the shared draft state,
  * ending in an output panel that turns the draft into copy-pasteable file contents.
- * Layouts/About/Reviews editors land in later phases.
+ * About/Reviews editors land in later phases.
  */
 const AdminApp = () => {
   const [activeSection, setActiveSection] = useState(SECTIONS[0].key);

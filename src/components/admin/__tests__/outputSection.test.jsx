@@ -24,6 +24,21 @@ const LayoutsMutator = () => {
   );
 };
 
+const NewHomesLayoutMutator = () => {
+  const [layouts, setLayouts] = useDraftSection('layouts');
+  return (
+    <button
+      type="button"
+      onClick={() => setLayouts({
+        ...layouts,
+        newHomes: { ...layouts.newHomes, defaultLayout: [] }
+      })}
+    >
+      mutate new-homes layout
+    </button>
+  );
+};
+
 describe('OutputSection', () => {
   beforeEach(() => {
     window.sessionStorage.clear();
@@ -77,5 +92,31 @@ describe('OutputSection', () => {
     fireEvent.click(screen.getByText('mutate intro'));
 
     expect(screen.getByText(/npm test -- -u/)).toBeInTheDocument();
+  });
+
+  it('lists the new-homes.jsx page once its layout has actually changed', () => {
+    render(
+      <DraftProvider>
+        <NewHomesLayoutMutator />
+        <OutputSection />
+      </DraftProvider>
+    );
+
+    fireEvent.click(screen.getByText('mutate new-homes layout'));
+
+    expect(screen.getByText('src/pages/portfolio/new-homes.jsx')).toBeInTheDocument();
+  });
+
+  it('does not list new-homes.jsx when only unrelated draft data changes', () => {
+    render(
+      <DraftProvider>
+        <IntroTextMutator />
+        <OutputSection />
+      </DraftProvider>
+    );
+
+    fireEvent.click(screen.getByText('mutate intro'));
+
+    expect(screen.queryByText('src/pages/portfolio/new-homes.jsx')).not.toBeInTheDocument();
   });
 });

@@ -97,7 +97,7 @@
         background: $pageColour;
         border: 1px solid #ddd;
 
-        header {
+        &Header {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -244,4 +244,151 @@
 .adminProjectPreview {
     max-width: 500px;
     overflow: hidden;
+}
+
+.adminTileLibrary {
+    margin-bottom: $spacingX2;
+    padding-bottom: $spacing;
+    border-bottom: 1px solid #ddd;
+
+    ul {
+        list-style: none;
+        margin: 0 0 10px;
+        padding: 0;
+    }
+
+    &-addButtons {
+        display: flex;
+        gap: 8px;
+    }
+}
+
+.adminLayoutsEditor {
+    &-target {
+        font-family: monospace;
+        color: $grayLinkColour;
+    }
+
+    &-variant {
+        margin-top: $spacingX2;
+
+        h3 {
+            margin-bottom: 10px;
+        }
+    }
+
+    &-columns {
+        display: flex;
+        gap: $spacingX2;
+        align-items: flex-start;
+
+        @media screen and (max-width: 900px) {
+            flex-direction: column;
+        }
+    }
+}
+
+.adminLayoutTree {
+    flex: 1;
+    min-width: 0;
+
+    &-row {
+        margin-bottom: 10px;
+        padding: 10px;
+        background: $pageColour;
+        border: 2px solid #ccc;
+    }
+
+    &-rowHeader {
+        display: flex;
+        align-items: flex-end;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+
+        label {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.85rem;
+        }
+
+        input {
+            width: 90px;
+            padding: 4px;
+        }
+    }
+
+    &-columns {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    &-column {
+        flex: 1;
+        min-width: 160px;
+        padding: 8px;
+        background: #f4f4f4;
+        border: 1px dashed #bbb;
+    }
+
+    &-columnHeader {
+        display: flex;
+        align-items: flex-end;
+        gap: 8px;
+        margin-bottom: 8px;
+
+        label {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.85rem;
+        }
+
+        input {
+            width: 80px;
+            padding: 4px;
+        }
+    }
+
+    &-placement {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 6px;
+    }
+
+    &-nestedRow {
+        margin-bottom: 6px;
+    }
+
+    &-controls {
+        display: flex;
+        gap: 4px;
+
+        button {
+            padding: 3px 8px;
+            cursor: pointer;
+        }
+    }
+
+    &-addButtons {
+        display: flex;
+        gap: 6px;
+        margin-top: 6px;
+
+        button {
+            padding: 4px 8px;
+            cursor: pointer;
+        }
+    }
+}
+
+.adminLayoutPreview {
+    flex: 1;
+    min-width: 0;
+    max-width: 600px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background: $pageColour;
 }

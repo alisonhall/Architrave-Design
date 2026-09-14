@@ -84,7 +84,7 @@ test.describe('projects editor', () => {
     await expect(newRow.getByRole('button', { name: 'Show' })).toBeVisible();
 
     await page.getByRole('button', { name: 'Review Changes' }).click();
-    await expect(page.locator('.adminOutputPanel-file header code')).toHaveText('static/app-constants.js');
+    await expect(page.locator('.adminOutputPanel-fileHeader code')).toHaveText('static/app-constants.js');
     await expect(page.locator('.adminOutputPanel-file pre')).toContainText('E2E Test Manor');
   });
 
@@ -111,6 +111,50 @@ test.describe('projects editor', () => {
     await expect(newHomesSection.locator('.adminProjectsEditor-row').first()).not.toHaveText(firstRowNameBefore);
 
     await page.getByRole('button', { name: 'Review Changes' }).click();
-    await expect(page.locator('.adminOutputPanel-file header code')).toHaveText('static/app-constants.js');
+    await expect(page.locator('.adminOutputPanel-fileHeader code')).toHaveText('static/app-constants.js');
+  });
+});
+
+test.describe('layouts editor', () => {
+  const openLayouts = async (page) => {
+    await unlock(page);
+    await page.getByRole('button', { name: 'Layouts' }).click();
+    await expect(page.locator('.adminLayoutsEditor')).toBeVisible();
+  };
+
+  test('shows the target file and a live preview matching the real page', async ({ page }) => {
+    await openLayouts(page);
+
+    await expect(page.getByText('Editing: src/pages/portfolio/new-homes.jsx')).toBeVisible();
+    await expect(page.locator('.adminLayoutPreview').first().getByText("Hogg's Hollow French")).toBeVisible();
+  });
+
+  test('editing a tile updates its live preview', async ({ page }) => {
+    await openLayouts(page);
+
+    const tileRow = page.locator('.adminTileLibrary li', { hasText: 'classicCentreHall' });
+    await tileRow.getByRole('button', { name: 'Edit' }).click();
+    await page.getByLabel(/Background position/).fill('10% 10%');
+    await page.getByRole('button', { name: 'Save' }).click();
+
+    await expect(page.locator('.adminTileLibrary li', { hasText: 'classicCentreHall' })).toBeVisible();
+  });
+
+  test('adding a row to the default layout leaves the wide layout unchanged, and surfaces the file in Review Changes', async ({
+    page
+  }) => {
+    await openLayouts(page);
+
+    const variants = page.locator('.adminLayoutsEditor-variant');
+    const defaultVariant = variants.first();
+    const wideVariant = variants.nth(1);
+
+    const wideRowCountBefore = await wideVariant.locator('.adminLayoutTree > .adminLayoutTree-row').count();
+    await defaultVariant.getByRole('button', { name: 'Add row' }).click();
+    const wideRowCountAfter = await wideVariant.locator('.adminLayoutTree > .adminLayoutTree-row').count();
+    expect(wideRowCountAfter).toBe(wideRowCountBefore);
+
+    await page.getByRole('button', { name: 'Review Changes' }).click();
+    await expect(page.locator('.adminOutputPanel-fileHeader code')).toHaveText('src/pages/portfolio/new-homes.jsx');
   });
 });
