@@ -1,5 +1,7 @@
 import constants from '../../../static/app-constants';
 import { newHomesLayout, newHomesPageConfig } from './seedLayouts/newHomes';
+import { indexPageLayout, indexPageConfig } from './seedLayouts/indexPage';
+import { renovationsAdditionsLayout, renovationsAdditionsPageConfig } from './seedLayouts/renovationsAdditions';
 
 const clone = (value) => JSON.parse(JSON.stringify(value));
 
@@ -8,7 +10,7 @@ const clone = (value) => JSON.parse(JSON.stringify(value));
 // so returning users don't get a shallow merge of new seed sections with a stale
 // top-level value from before that section existed (e.g. an old empty `layouts: {}`
 // silently winning over a newly-seeded `layouts.newHomes`).
-export const SEED_VERSION = 2;
+export const SEED_VERSION = 3;
 
 /**
  * @description The admin draft's starting state. `projects` and the ordering/unused
@@ -34,12 +36,21 @@ export const seedDraft = {
   aboutContent: null,
   reviews: null,
   layouts: {
-    newHomes: clone(newHomesLayout)
+    index: clone(indexPageLayout),
+    newHomes: clone(newHomesLayout),
+    renovationsAdditions: clone(renovationsAdditionsLayout)
   }
 };
 
 // Static, non-content configuration (import paths, class names) each supported page's
 // layout generator needs — not part of the editable draft.
+//
+// upcoming.jsx is deliberately not here: unlike the other listing pages, it isn't a
+// hand-tuned Row/Column/Item tree at all — it's already fully generated from
+// upcomingProjectsOrder (a plain map over that array), so it's already covered by the
+// Projects section's ordering controls and doesn't need a layout editor of its own.
 export const LAYOUT_PAGE_CONFIGS = {
-  newHomes: newHomesPageConfig
+  index: indexPageConfig,
+  newHomes: newHomesPageConfig,
+  renovationsAdditions: renovationsAdditionsPageConfig
 };

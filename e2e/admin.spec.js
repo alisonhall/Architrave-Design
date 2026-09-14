@@ -116,21 +116,31 @@ test.describe('projects editor', () => {
 });
 
 test.describe('layouts editor', () => {
-  const openLayouts = async (page) => {
+  const openLayouts = async (page, pageKey) => {
     await unlock(page);
     await page.getByRole('button', { name: 'Layouts' }).click();
     await expect(page.locator('.adminLayoutsEditor')).toBeVisible();
+    if (pageKey) await page.getByLabel('Page').selectOption(pageKey);
   };
 
   test('shows the target file and a live preview matching the real page', async ({ page }) => {
     await openLayouts(page);
 
-    await expect(page.getByText('Editing: src/pages/portfolio/new-homes.jsx')).toBeVisible();
+    await expect(page.getByText('Editing: src/pages/index.jsx')).toBeVisible();
     await expect(page.locator('.adminLayoutPreview').first().getByText("Hogg's Hollow French")).toBeVisible();
   });
 
-  test('editing a tile updates its live preview', async ({ page }) => {
+  test('switches between supported pages via the selector', async ({ page }) => {
     await openLayouts(page);
+
+    await page.getByLabel('Page').selectOption('renovationsAdditions');
+
+    await expect(page.getByText('Editing: src/pages/portfolio/renovations-additions.jsx')).toBeVisible();
+    await expect(page.locator('.adminLayoutPreview').first().getByText('Lytton Park Manor')).toBeVisible();
+  });
+
+  test('editing a tile updates its live preview', async ({ page }) => {
+    await openLayouts(page, 'newHomes');
 
     const tileRow = page.locator('.adminTileLibrary li', { hasText: 'classicCentreHall' });
     await tileRow.getByRole('button', { name: 'Edit' }).click();
@@ -143,7 +153,7 @@ test.describe('layouts editor', () => {
   test('adding a row to the default layout leaves the wide layout unchanged, and surfaces the file in Review Changes', async ({
     page
   }) => {
-    await openLayouts(page);
+    await openLayouts(page, 'newHomes');
 
     const variants = page.locator('.adminLayoutsEditor-variant');
     const defaultVariant = variants.first();

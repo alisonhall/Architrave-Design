@@ -29,10 +29,13 @@ describe('seedDraft', () => {
     expect(seedDraft.reviews).toBeNull();
   });
 
-  it('seeds a transcribed layout for new-homes.jsx', () => {
-    expect(Object.keys(seedDraft.layouts)).toEqual(['newHomes']);
-    expect(seedDraft.layouts.newHomes.tiles).toBeDefined();
-    expect(seedDraft.layouts.newHomes.defaultLayout.length).toBeGreaterThan(0);
-    expect(seedDraft.layouts.newHomes.wideLayout.length).toBeGreaterThan(0);
+  it('seeds a transcribed layout for each supported listing page', () => {
+    expect(Object.keys(seedDraft.layouts).sort()).toEqual(['index', 'newHomes', 'renovationsAdditions']);
+
+    Object.values(seedDraft.layouts).forEach((layout) => {
+      expect(layout.tiles).toBeDefined();
+      expect(layout.defaultLayout.length).toBeGreaterThan(0);
+      expect(layout.wideLayout.length).toBeGreaterThan(0);
+    });
   });
 });

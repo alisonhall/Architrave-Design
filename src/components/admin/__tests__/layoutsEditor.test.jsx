@@ -15,26 +15,34 @@ describe('LayoutsEditor', () => {
     window.sessionStorage.clear();
   });
 
-  it('shows which file it is editing', () => {
+  it('defaults to the first supported page', () => {
     renderEditor();
+
+    expect(screen.getByText('Editing: src/pages/index.jsx')).toBeInTheDocument();
+  });
+
+  it('shows a page selector when more than one page is supported', () => {
+    renderEditor();
+
+    expect(screen.getByLabelText('Page')).toBeInTheDocument();
+  });
+
+  it('switches pages via the selector', () => {
+    renderEditor();
+
+    fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'newHomes' } });
 
     expect(screen.getByText('Editing: src/pages/portfolio/new-homes.jsx')).toBeInTheDocument();
   });
 
-  it('does not show a page selector when only one page is supported', () => {
-    renderEditor();
-
-    expect(screen.queryByLabelText('Page')).not.toBeInTheDocument();
-  });
-
-  it('renders the tile library and both layout variants with previews', () => {
+  it('renders the tile library and both layout variants with previews for the active page', () => {
     renderEditor();
 
     expect(screen.getByRole('heading', { name: 'Tiles' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Default layout (narrow screens)' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Wide layout (wide screens)' })).toBeInTheDocument();
 
-    // The default layout's first project tile appears in its preview.
+    // The index page's first project tile appears in its preview.
     expect(screen.getAllByText("Hogg's Hollow French").length).toBeGreaterThan(0);
   });
 
@@ -67,9 +75,26 @@ describe('LayoutsEditor', () => {
     expect(wideRowCountAfter).toBe(wideRowCountBefore);
   });
 
+  it('keeps a per-page edit isolated from the other pages', () => {
+    renderEditor();
+
+    fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'newHomes' } });
+    const defaultSection = screen.getAllByText(/layout \(/)[0].closest('section');
+    const rowCountBeforeAdd = within(defaultSection).getAllByRole('button', { name: 'Remove row' }).length;
+    fireEvent.click(within(defaultSection).getByRole('button', { name: 'Add row' }));
+    expect(within(defaultSection).getAllByRole('button', { name: 'Remove row' }).length).toBe(rowCountBeforeAdd + 1);
+
+    fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'index' } });
+    fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'newHomes' } });
+
+    const defaultSectionAgain = screen.getAllByText(/layout \(/)[0].closest('section');
+    expect(within(defaultSectionAgain).getAllByRole('button', { name: 'Remove row' }).length).toBe(rowCountBeforeAdd + 1);
+  });
+
   it('still renders correctly for a returning user whose cached draft predates this section', () => {
-    // Regression test: a sessionStorage draft saved before layouts.newHomes existed
-    // (or under any other outdated shape) must not leave this section blank.
+    // Regression test: a sessionStorage draft saved before layouts.index/newHomes/
+    // renovationsAdditions existed (or under any other outdated shape) must not leave
+    // this section blank.
     window.sessionStorage.setItem(
       'architrave-admin-draft',
       JSON.stringify({ projects: {}, layouts: {} })
@@ -77,7 +102,7 @@ describe('LayoutsEditor', () => {
 
     renderEditor();
 
-    expect(screen.getByText('Editing: src/pages/portfolio/new-homes.jsx')).toBeInTheDocument();
+    expect(screen.getByText('Editing: src/pages/index.jsx')).toBeInTheDocument();
     expect(screen.getAllByText("Hogg's Hollow French").length).toBeGreaterThan(0);
   });
 });
