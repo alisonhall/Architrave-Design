@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
 import { DraftProvider } from './draftContext';
-import OutputPanel from './outputPanel';
+import ProjectsEditor from './projectsEditor';
+import OutputSection from './outputSection';
 
 const SECTIONS = [
   { key: 'projects', label: 'Projects' },
@@ -11,10 +12,15 @@ const SECTIONS = [
   { key: 'output', label: 'Review Changes' }
 ];
 
+const SECTION_CONTENT = {
+  projects: <ProjectsEditor />,
+  output: <OutputSection />
+};
+
 /**
  * @description The admin tool's shell: section navigation over the shared draft state,
  * ending in an output panel that turns the draft into copy-pasteable file contents.
- * Individual section editors (projects/layouts/about/reviews) land in later phases.
+ * Layouts/About/Reviews editors land in later phases.
  */
 const AdminApp = () => {
   const [activeSection, setActiveSection] = useState(SECTIONS[0].key);
@@ -35,9 +41,7 @@ const AdminApp = () => {
           ))}
         </nav>
         <div className="adminApp-content">
-          {activeSection === 'output' ? (
-            <OutputPanel files={[]} />
-          ) : (
+          {SECTION_CONTENT[activeSection] || (
             <p className="adminApp-placeholder">
               The {SECTIONS.find((section) => section.key === activeSection).label} editor isn't built yet.
             </p>

@@ -20,7 +20,7 @@ describe('AdminApp', () => {
     render(<AdminApp />);
 
     expect(screen.getByRole('button', { name: 'Projects' })).toHaveClass('active');
-    expect(screen.getByText(/Projects editor isn't built yet/)).toBeInTheDocument();
+    expect(screen.getByLabelText('Portfolio introduction text')).toBeInTheDocument();
   });
 
   it('switches sections when a nav button is clicked', () => {

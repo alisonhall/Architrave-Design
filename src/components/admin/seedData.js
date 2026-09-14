@@ -18,6 +18,11 @@ export const seedDraft = {
   unusedRenovationProjects: clone(constants.unusedRenovationProjects),
   unusedUpcomingProjects: clone(constants.unusedUpcomingProjects),
   defaultIntroductionText: constants.defaultIntroductionText,
+  // Not edited through the admin UI, but needed to regenerate a complete
+  // static/app-constants.js file.
+  projectTypes: clone(constants.projectTypes),
+  cloudinary: clone(constants.cloudinary),
+  houzz: clone(constants.houzz),
   aboutContent: null,
   reviews: null,
   layouts: {}
