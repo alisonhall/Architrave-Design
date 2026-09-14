@@ -1,0 +1,599 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`etobicoke-arts-and-crafts page matches the snapshot 1`] = `
+<div>
+  <div
+    class="page"
+  >
+    <aside>
+      <a
+        class="logo-link"
+        href="/"
+      >
+        <img
+          alt="Architrave Design, Architect logo"
+          id="logo"
+          src="test-file-stub"
+        />
+      </a>
+      <nav>
+        <header
+          class="side"
+        >
+          <p>
+            Architrave Design
+          </p>
+          <p>
+            |
+          </p>
+          <p>
+            Architect
+          </p>
+        </header>
+        <ul
+          class="mainNav"
+        >
+          <li>
+            <a
+              class="portfolioNav"
+              href="/portfolio/new-homes"
+            >
+              Portfolio
+            </a>
+          </li>
+          <ul
+            class="subNav subNavVisible"
+          >
+            <li>
+              <a
+                class=""
+                href="/portfolio/new-homes"
+              >
+                New Homes
+              </a>
+            </li>
+            <li>
+              <a
+                class="selected"
+                href="/portfolio/renovations-additions"
+              >
+                Renovations
+              </a>
+            </li>
+            <li>
+              <a
+                href="/portfolio/upcoming"
+              >
+                Upcoming
+              </a>
+            </li>
+          </ul>
+          <li>
+            <a
+              href="/about"
+            >
+              About
+            </a>
+          </li>
+          <li>
+            <a
+              href="/reviews"
+            >
+              Reviews
+            </a>
+          </li>
+          <li>
+            <a
+              href="/contact"
+            >
+              Contact
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div
+        class="houzz-badges"
+      >
+        <a
+          class="houzz-badge houzz-logo"
+          href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+          title="Architrave Design on Houzz"
+        >
+          <img
+            alt="Houzz logo"
+            src="test-file-stub"
+          />
+        </a>
+        <a
+          class="houzz-badge best-of-houzz"
+          href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+          title="Best of Houzz 2021"
+        >
+          <img
+            alt="Best of Houzz 2021 badge"
+            src="test-file-stub"
+          />
+        </a>
+        <a
+          class="houzz-badge best-of-houzz"
+          href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+          title="Best of Houzz 2026"
+        >
+          <img
+            alt="Best of Houzz 2026 badge"
+            src="test-file-stub"
+          />
+        </a>
+      </div>
+    </aside>
+    <div
+      class="content portfolio"
+    >
+      <header
+        class="top"
+      >
+        <p>
+          Architrave Design
+        </p>
+        <p>
+          |
+        </p>
+        <p>
+          Architect
+        </p>
+      </header>
+      <main>
+        <section
+          class="contentWrapper layoutAll layoutProject defaultLayout"
+        >
+          <div
+            class="row css-3czr7x"
+          >
+            <div
+              class="column css-ha4759"
+            >
+              <div
+                class="row css-3ltfle"
+              >
+                <div
+                  class="column css-aw7wqq"
+                >
+                  <div
+                    class="image-tile clearfix  item image image1"
+                  >
+                    <div
+                      class="shadowOverlay clearfix"
+                    >
+                      <img
+                        alt=""
+                        class="imageDiv imageDiv1 cld-responsive css-1w9t0u2"
+                        src="https://res.cloudinary.com/alisonkhall/image/upload/h_960,c_scale,f_auto,q_auto/v1595347380/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/2-Arts-and-Crafts-Restyling_jydm2x.jpg"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="row css-1adyt9s"
+              >
+                <div
+                  class="column css-aw7wqq"
+                >
+                  <div
+                    class="image-tile clearfix  item image image2"
+                  >
+                    <div
+                      class="shadowOverlay clearfix"
+                    >
+                      <img
+                        alt=""
+                        class="imageDiv imageDiv2 cld-responsive css-1w9t0u2"
+                        src="https://res.cloudinary.com/alisonkhall/image/upload/h_480,c_scale,f_auto,q_auto/v1595347373/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/1b-Before_2_hhwjuw.jpg"
+                      />
+                    </div>
+                    <p
+                      class="textOverlay"
+                    >
+                      Before
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="column css-aw7wqq"
+                >
+                  <div
+                    class="image-tile clearfix  item image image3"
+                  >
+                    <div
+                      class="shadowOverlay clearfix"
+                    >
+                      <img
+                        alt=""
+                        class="imageDiv imageDiv3 cld-responsive css-1w9t0u2"
+                        src="https://res.cloudinary.com/alisonkhall/image/upload/h_480,c_scale,f_auto,q_auto/v1595347382/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/6-New-Reading-Nook_khsnqo.jpg"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-xrwi6r"
+            >
+              <div
+                class="row css-axqjht"
+              >
+                <div
+                  class="column css-aw7wqq"
+                >
+                  <div
+                    class="image-tile clearfix  item image image4"
+                  >
+                    <div
+                      class="shadowOverlay clearfix"
+                    >
+                      <img
+                        alt=""
+                        class="imageDiv imageDiv4 cld-responsive css-1w9t0u2"
+                        src="https://res.cloudinary.com/alisonkhall/image/upload/h_430,c_scale,f_auto,q_auto/v1595347383/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/xxSeat_Drawers_uityi0.jpg"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="row css-468huv"
+              >
+                <div
+                  class="column css-aw7wqq"
+                >
+                  <div
+                    class="image-tile clearfix  item image image5"
+                  >
+                    <div
+                      class="shadowOverlay clearfix"
+                    >
+                      <img
+                        alt=""
+                        class="imageDiv imageDiv5 cld-responsive css-1w9t0u2"
+                        src="https://res.cloudinary.com/alisonkhall/image/upload/h_1010,c_scale,f_auto,q_auto/v1595347548/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/7-Window-Seat_qspbju.jpg"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row css-3czr7x"
+          >
+            <div
+              class="column css-aw7wqq"
+            >
+              <section
+                class="textBlurb  item"
+              >
+                <div
+                  class="headingSection"
+                >
+                  <h2
+                    class="title"
+                  >
+                    Etobicoke Arts and Crafts
+                  </h2>
+                </div>
+                <p
+                  class="text"
+                >
+                  This post-war bungalow had been marred with characterless additions, but the proportions were ideally suited for a make-over in period Arts-and-Crafts style. The interior was rebuilt with warm wood, custom cabinetry and plenty of glass.
+                </p>
+              </section>
+            </div>
+          </div>
+          <div
+            class="row css-1ltier6"
+          >
+            <div
+              class="column css-1lk8tvu"
+            >
+              <div
+                class="image-tile clearfix  item image image6"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv6 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_780,c_scale,f_auto,q_auto/v1595347384/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/5-Custom-Cabinetry_zay5pm.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-74pewq"
+            >
+              <div
+                class="image-tile clearfix  item image image7"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv7 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_780,c_scale,f_auto,q_auto/v1595347379/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/9-Master_lsvfyq.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <a
+            class="prevProject"
+            href="/portfolio/renovations-additions/rosedale-edwardian"
+          >
+            <img
+              alt=""
+              src="test-file-stub"
+            />
+            <span>
+              Previous Project
+            </span>
+          </a>
+          <a
+            class="nextProject"
+            href="/portfolio/renovations-additions/lytton-park-manor"
+          >
+            <span>
+              Next Project
+            </span>
+            <img
+              alt=""
+              src="test-file-stub"
+            />
+          </a>
+        </section>
+        <section
+          class="contentWrapper layoutAll layoutProject wideLayout"
+        >
+          <div
+            class="row css-1q5zdjj"
+          >
+            <div
+              class="column css-mnfglk"
+            >
+              <div
+                class="image-tile clearfix  item image image1"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv1 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_1200,c_scale,f_auto,q_auto/v1595347380/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/2-Arts-and-Crafts-Restyling_jydm2x.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-1k18avw"
+            >
+              <div
+                class="row css-3czr7x"
+              >
+                <div
+                  class="column css-aw7wqq"
+                >
+                  <div
+                    class="image-tile clearfix  item image image2"
+                  >
+                    <div
+                      class="shadowOverlay clearfix"
+                    >
+                      <img
+                        alt=""
+                        class="imageDiv imageDiv2 cld-responsive css-1w9t0u2"
+                        src="https://res.cloudinary.com/alisonkhall/image/upload/h_1200,c_scale,f_auto,q_auto/v1595347373/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/1b-Before_2_hhwjuw.jpg"
+                      />
+                    </div>
+                    <p
+                      class="textOverlay"
+                    >
+                      Before
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="row css-3czr7x"
+              >
+                <div
+                  class="column css-aw7wqq"
+                >
+                  <div
+                    class="image-tile clearfix  item image image4"
+                  >
+                    <div
+                      class="shadowOverlay clearfix"
+                    >
+                      <img
+                        alt=""
+                        class="imageDiv imageDiv4 cld-responsive css-1w9t0u2"
+                        src="https://res.cloudinary.com/alisonkhall/image/upload/h_1200,c_scale,f_auto,q_auto/v1595347383/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/xxSeat_Drawers_uityi0.jpg"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row css-3czr7x"
+          >
+            <div
+              class="column css-aw7wqq"
+            >
+              <section
+                class="textBlurb  item"
+              >
+                <div
+                  class="headingSection"
+                >
+                  <h2
+                    class="title"
+                  >
+                    Etobicoke Arts and Crafts
+                  </h2>
+                </div>
+                <p
+                  class="text"
+                >
+                  This post-war bungalow had been marred with characterless additions, but the proportions were ideally suited for a make-over in period Arts-and-Crafts style. The interior was rebuilt with warm wood, custom cabinetry and plenty of glass.
+                </p>
+              </section>
+            </div>
+          </div>
+          <div
+            class="row css-1juzpks"
+          >
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image7"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv7 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_680,c_scale,f_auto,q_auto/v1595347379/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/9-Master_lsvfyq.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image6"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv6 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_680,c_scale,f_auto,q_auto/v1595347384/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/5-Custom-Cabinetry_zay5pm.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image3"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv3 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_680,c_scale,f_auto,q_auto/v1595347382/ArchitraveDesign/2-Renovations-and-Additions/3-Etobicoke-Arts-and-Crafts/6-New-Reading-Nook_khsnqo.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <a
+            class="prevProject"
+            href="/portfolio/renovations-additions/rosedale-edwardian"
+          >
+            <img
+              alt=""
+              src="test-file-stub"
+            />
+            <span>
+              Previous Project
+            </span>
+          </a>
+          <a
+            class="nextProject"
+            href="/portfolio/renovations-additions/lytton-park-manor"
+          >
+            <span>
+              Next Project
+            </span>
+            <img
+              alt=""
+              src="test-file-stub"
+            />
+          </a>
+        </section>
+      </main>
+      <footer>
+        <div
+          class="houzz-badges"
+        >
+          <a
+            class="houzz-badge houzz-logo-footer"
+            href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+            title="Architrave Design on Houzz"
+          >
+            <img
+              alt="Houzz logo"
+              src="test-file-stub"
+            />
+          </a>
+          <a
+            class="houzz-badge best-of-houzz-footer"
+            href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+            title="Best of Houzz 2021"
+          >
+            <img
+              alt="Best of Houzz 2021 badge"
+              src="test-file-stub"
+            />
+          </a>
+          <a
+            class="houzz-badge best-of-houzz-footer"
+            href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+            title="Best of Houzz 2026"
+          >
+            <img
+              alt="Best of Houzz 2026 badge"
+              src="test-file-stub"
+            />
+          </a>
+        </div>
+        <a
+          class="sitemap"
+          href="/sitemap"
+        >
+          Site Map
+        </a>
+        <p
+          class="copyright"
+        >
+          © 
+          2026
+        </p>
+        <p
+          class="websiteBy"
+        >
+          Website by 
+          <a
+            href="https://alisonkhall.com/"
+          >
+            Alison Hall
+          </a>
+        </p>
+      </footer>
+    </div>
+  </div>
+</div>
+`;

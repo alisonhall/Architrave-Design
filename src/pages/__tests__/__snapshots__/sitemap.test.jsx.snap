@@ -1,0 +1,418 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sitemap page matches the snapshot 1`] = `
+<div>
+  <div
+    class="page"
+  >
+    <aside>
+      <a
+        class="logo-link"
+        href="/"
+      >
+        <img
+          alt="Architrave Design, Architect logo"
+          id="logo"
+          src="test-file-stub"
+        />
+      </a>
+      <nav>
+        <header
+          class="side"
+        >
+          <p>
+            Architrave Design
+          </p>
+          <p>
+            |
+          </p>
+          <p>
+            Architect
+          </p>
+        </header>
+        <ul
+          class="mainNav"
+        >
+          <li>
+            <a
+              class="portfolioNav"
+              href="/portfolio/new-homes"
+            >
+              Portfolio
+            </a>
+          </li>
+          <ul
+            class="subNav "
+          >
+            <li>
+              <a
+                class=""
+                href="/portfolio/new-homes"
+              >
+                New Homes
+              </a>
+            </li>
+            <li>
+              <a
+                class=""
+                href="/portfolio/renovations-additions"
+              >
+                Renovations
+              </a>
+            </li>
+            <li>
+              <a
+                href="/portfolio/upcoming"
+              >
+                Upcoming
+              </a>
+            </li>
+          </ul>
+          <li>
+            <a
+              href="/about"
+            >
+              About
+            </a>
+          </li>
+          <li>
+            <a
+              href="/reviews"
+            >
+              Reviews
+            </a>
+          </li>
+          <li>
+            <a
+              href="/contact"
+            >
+              Contact
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div
+        class="houzz-badges"
+      >
+        <a
+          class="houzz-badge houzz-logo"
+          href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+          title="Architrave Design on Houzz"
+        >
+          <img
+            alt="Houzz logo"
+            src="test-file-stub"
+          />
+        </a>
+        <a
+          class="houzz-badge best-of-houzz"
+          href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+          title="Best of Houzz 2021"
+        >
+          <img
+            alt="Best of Houzz 2021 badge"
+            src="test-file-stub"
+          />
+        </a>
+        <a
+          class="houzz-badge best-of-houzz"
+          href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+          title="Best of Houzz 2026"
+        >
+          <img
+            alt="Best of Houzz 2026 badge"
+            src="test-file-stub"
+          />
+        </a>
+      </div>
+    </aside>
+    <div
+      class="content sitemap"
+    >
+      <header
+        class="top"
+      >
+        <p>
+          Architrave Design
+        </p>
+        <p>
+          |
+        </p>
+        <p>
+          Architect
+        </p>
+      </header>
+      <main>
+        <section
+          class="contentWrapper clearfix"
+        >
+          <div
+            class="contentBackground clearfix"
+          >
+            <section
+              class="textContent"
+            >
+              <h3>
+                Site Map
+              </h3>
+              <ul>
+                <li>
+                  <a
+                    href="/"
+                  >
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <p>
+                    Portfolio
+                  </p>
+                  <ul>
+                    <li>
+                      <a
+                        href="/portfolio/new-homes"
+                      >
+                        New Homes
+                      </a>
+                      <ul>
+                        <li>
+                          <a
+                            href="/portfolio/new-homes/hoggs-hollow-french"
+                          >
+                            Hogg's Hollow French
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="/portfolio/new-homes/kingsway-georgian"
+                          >
+                            Kingsway Georgian
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="/portfolio/new-homes/classic-centre-hall"
+                          >
+                            Classic Centre Hall
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="/portfolio/new-homes/credit-river-manor"
+                          >
+                            Credit River Manor
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="/portfolio/new-homes/kingsway-transitional"
+                          >
+                            Kingsway Transitional
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="/portfolio/new-homes/princess-margaret-classic"
+                          >
+                            Princess Margaret Classic
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="/portfolio/new-homes/traditional-kingsway-park"
+                          >
+                            Traditional Kingsway Park
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="/portfolio/new-homes/oakville-executive-home"
+                          >
+                            Oakville Executive Home
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="/portfolio/new-homes/hoggs-hollow-traditional"
+                          >
+                            Hogg's Hollow Traditional
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="/portfolio/new-homes/hoggs-hollow-french-country"
+                          >
+                            Hogg's Hollow French Country
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="/portfolio/new-homes/oakville-executive-home"
+                          >
+                            Oakville Executive Home
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a
+                        href="/portfolio/renovations-additions"
+                      >
+                        Renovations
+                      </a>
+                      <ul>
+                        <li>
+                          <a
+                            href="/portfolio/renovations-additions/lytton-park-manor"
+                          >
+                            Lytton Park Manor
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="/portfolio/renovations-additions/princess-margaret-modern"
+                          >
+                            Princess Margaret Modern
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="/portfolio/renovations-additions/upper-canada-farmhouse"
+                          >
+                            Upper Canada Farmhouse
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="/portfolio/renovations-additions/rosedale-edwardian"
+                          >
+                            Rosedale Edwardian
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="/portfolio/renovations-additions/etobicoke-arts-and-crafts"
+                          >
+                            Etobicoke Arts and Crafts
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="/portfolio/renovations-additions/lorne-park-interior"
+                          >
+                            Lorne Park Interior
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="/portfolio/renovations-additions/royal-york-facelift"
+                          >
+                            Royal York Facelift
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a
+                        href="/portfolio/upcoming"
+                      >
+                        Upcoming
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a
+                    href="/about"
+                  >
+                    About
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/reviews"
+                  >
+                    Reviews
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/contact"
+                  >
+                    Contact
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/sitemap"
+                  >
+                    Site Map
+                  </a>
+                </li>
+              </ul>
+            </section>
+          </div>
+        </section>
+      </main>
+      <footer>
+        <div
+          class="houzz-badges"
+        >
+          <a
+            class="houzz-badge houzz-logo-footer"
+            href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+            title="Architrave Design on Houzz"
+          >
+            <img
+              alt="Houzz logo"
+              src="test-file-stub"
+            />
+          </a>
+          <a
+            class="houzz-badge best-of-houzz-footer"
+            href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+            title="Best of Houzz 2021"
+          >
+            <img
+              alt="Best of Houzz 2021 badge"
+              src="test-file-stub"
+            />
+          </a>
+          <a
+            class="houzz-badge best-of-houzz-footer"
+            href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+            title="Best of Houzz 2026"
+          >
+            <img
+              alt="Best of Houzz 2026 badge"
+              src="test-file-stub"
+            />
+          </a>
+        </div>
+        <a
+          class="sitemap"
+          href="/sitemap"
+        >
+          Site Map
+        </a>
+        <p
+          class="copyright"
+        >
+          © 
+          2026
+        </p>
+        <p
+          class="websiteBy"
+        >
+          Website by 
+          <a
+            href="https://alisonkhall.com/"
+          >
+            Alison Hall
+          </a>
+        </p>
+      </footer>
+    </div>
+  </div>
+</div>
+`;

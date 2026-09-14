@@ -1,0 +1,520 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`credit-river-manor page matches the snapshot 1`] = `
+<div>
+  <div
+    class="page"
+  >
+    <aside>
+      <a
+        class="logo-link"
+        href="/"
+      >
+        <img
+          alt="Architrave Design, Architect logo"
+          id="logo"
+          src="test-file-stub"
+        />
+      </a>
+      <nav>
+        <header
+          class="side"
+        >
+          <p>
+            Architrave Design
+          </p>
+          <p>
+            |
+          </p>
+          <p>
+            Architect
+          </p>
+        </header>
+        <ul
+          class="mainNav"
+        >
+          <li>
+            <a
+              class="portfolioNav"
+              href="/portfolio/new-homes"
+            >
+              Portfolio
+            </a>
+          </li>
+          <ul
+            class="subNav subNavVisible"
+          >
+            <li>
+              <a
+                class="selected"
+                href="/portfolio/new-homes"
+              >
+                New Homes
+              </a>
+            </li>
+            <li>
+              <a
+                class=""
+                href="/portfolio/renovations-additions"
+              >
+                Renovations
+              </a>
+            </li>
+            <li>
+              <a
+                href="/portfolio/upcoming"
+              >
+                Upcoming
+              </a>
+            </li>
+          </ul>
+          <li>
+            <a
+              href="/about"
+            >
+              About
+            </a>
+          </li>
+          <li>
+            <a
+              href="/reviews"
+            >
+              Reviews
+            </a>
+          </li>
+          <li>
+            <a
+              href="/contact"
+            >
+              Contact
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div
+        class="houzz-badges"
+      >
+        <a
+          class="houzz-badge houzz-logo"
+          href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+          title="Architrave Design on Houzz"
+        >
+          <img
+            alt="Houzz logo"
+            src="test-file-stub"
+          />
+        </a>
+        <a
+          class="houzz-badge best-of-houzz"
+          href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+          title="Best of Houzz 2021"
+        >
+          <img
+            alt="Best of Houzz 2021 badge"
+            src="test-file-stub"
+          />
+        </a>
+        <a
+          class="houzz-badge best-of-houzz"
+          href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+          title="Best of Houzz 2026"
+        >
+          <img
+            alt="Best of Houzz 2026 badge"
+            src="test-file-stub"
+          />
+        </a>
+      </div>
+    </aside>
+    <div
+      class="content portfolio"
+    >
+      <header
+        class="top"
+      >
+        <p>
+          Architrave Design
+        </p>
+        <p>
+          |
+        </p>
+        <p>
+          Architect
+        </p>
+      </header>
+      <main>
+        <section
+          class="contentWrapper layoutAll layoutProject"
+        >
+          <div
+            class="row css-1szix0k"
+          >
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image1"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv1 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_760,c_scale,f_auto,q_auto/v1595347266/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/_1_fbaept.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image2"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv2 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_760,c_scale,f_auto,q_auto/v1606592704/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/_2_dzqicp.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row css-3czr7x"
+          >
+            <div
+              class="column css-aw7wqq"
+            >
+              <section
+                class="textBlurb  item"
+              >
+                <div
+                  class="headingSection"
+                >
+                  <h2
+                    class="title"
+                  >
+                    Credit River Manor
+                  </h2>
+                </div>
+                <p
+                  class="text"
+                >
+                  Meticulous detail and the finest craftsmanship combine to make this spacious home a show-piece. Stonework by Gino Gentile is topped with a slate roof and imported copper details. Inside, a two-storey front foyer cascades down to a wood-beamed family room and a coffered kitchen.
+                </p>
+              </section>
+            </div>
+          </div>
+          <div
+            class="row css-1szix0k"
+          >
+            <div
+              class="column css-1l4pbsb"
+            >
+              <div
+                class="image-tile clearfix  item image image3"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv3 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_760,c_scale,f_auto,q_auto/v1606592703/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/_4_jt4uq1.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-1tu6jbu"
+            >
+              <div
+                class="image-tile clearfix  item image image4"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv4 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_760,c_scale,f_auto,q_auto/v1595347202/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/3-Two-Story-Front-Foyer_lkcpir.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-1tu6jbu"
+            >
+              <div
+                class="image-tile clearfix  item image image5"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv5 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_760,c_scale,f_auto,q_auto/v1595347209/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/10-Main-Stair_bsfa5r.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row css-16fwrto"
+          >
+            <div
+              class="column css-xrwi6r"
+            >
+              <div
+                class="image-tile clearfix  item image image6"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv6 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_580,c_scale,f_auto,q_auto/v1595347196/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/2-Front-Foyer_y8wodd.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-1myez65"
+            >
+              <div
+                class="image-tile clearfix  item image image7"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv7 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_580,c_scale,f_auto,q_auto/v1595347190/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/7-Hallway-Arch_nsi6eb.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-xrwi6r"
+            >
+              <div
+                class="image-tile clearfix  item image image8"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv8 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_580,c_scale,f_auto,q_auto/v1595347196/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/5-Sitting-Room_dt8nwa.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row css-xeddsf"
+          >
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image9"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv9 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_460,c_scale,f_auto,q_auto/v1595347192/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/6-Dining-Room_n7r1av.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image10"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv10 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_460,c_scale,f_auto,q_auto/v1595347209/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/9-Kitchen-_-Breakfast-Bay_k8qrcz.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image11"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv11 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_460,c_scale,f_auto,q_auto/v1595347196/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/8-Family-Room-with-Custom-Mantel_vvgqso.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row css-16fwrto"
+          >
+            <div
+              class="column css-150i8lb"
+            >
+              <div
+                class="image-tile clearfix  item image image12"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv12 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_580,c_scale,f_auto,q_auto/v1595347202/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/11-Upper-Hall_yfoloe.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-16cbdsf"
+            >
+              <div
+                class="image-tile clearfix  item image image13"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv13 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_580,c_scale,f_auto,q_auto/v1595347210/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/12-Vaulted-Master_z9t3hj.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-1k5yxij"
+            >
+              <div
+                class="image-tile clearfix  item image image14"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv14 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_580,c_scale,f_auto,q_auto/v1595347209/ArchitraveDesign/1-New-Homes/3-Credit-River-Manor/13-Bedroom_nesbsz.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <a
+            class="prevProject"
+            href="/portfolio/new-homes/classic-centre-hall"
+          >
+            <img
+              alt=""
+              src="test-file-stub"
+            />
+            <span>
+              Previous Project
+            </span>
+          </a>
+          <a
+            class="nextProject"
+            href="/portfolio/new-homes/kingsway-transitional"
+          >
+            <span>
+              Next Project
+            </span>
+            <img
+              alt=""
+              src="test-file-stub"
+            />
+          </a>
+        </section>
+      </main>
+      <footer>
+        <div
+          class="houzz-badges"
+        >
+          <a
+            class="houzz-badge houzz-logo-footer"
+            href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+            title="Architrave Design on Houzz"
+          >
+            <img
+              alt="Houzz logo"
+              src="test-file-stub"
+            />
+          </a>
+          <a
+            class="houzz-badge best-of-houzz-footer"
+            href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+            title="Best of Houzz 2021"
+          >
+            <img
+              alt="Best of Houzz 2021 badge"
+              src="test-file-stub"
+            />
+          </a>
+          <a
+            class="houzz-badge best-of-houzz-footer"
+            href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+            title="Best of Houzz 2026"
+          >
+            <img
+              alt="Best of Houzz 2026 badge"
+              src="test-file-stub"
+            />
+          </a>
+        </div>
+        <a
+          class="sitemap"
+          href="/sitemap"
+        >
+          Site Map
+        </a>
+        <p
+          class="copyright"
+        >
+          © 
+          2026
+        </p>
+        <p
+          class="websiteBy"
+        >
+          Website by 
+          <a
+            href="https://alisonkhall.com/"
+          >
+            Alison Hall
+          </a>
+        </p>
+      </footer>
+    </div>
+  </div>
+</div>
+`;
