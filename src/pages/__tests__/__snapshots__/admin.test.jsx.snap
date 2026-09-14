@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`admin page matches the snapshot 1`] = `
+<div>
+  <div
+    class="adminPasswordGate"
+  >
+    <form>
+      <h1>
+        Admin
+      </h1>
+      <label
+        for="admin-password"
+      >
+        Passphrase
+      </label>
+      <input
+        id="admin-password"
+        type="password"
+        value=""
+      />
+      <button
+        disabled=""
+        type="submit"
+      >
+        Unlock
+      </button>
+    </form>
+  </div>
+</div>
+`;
