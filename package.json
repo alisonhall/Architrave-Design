@@ -4,6 +4,10 @@
     "description": "Architrave Design's professional website",
     "version": "0.2.0",
     "author": "Alison K. Hall <alison@alisonkhall.com>",
+    "engines": {
+        "node": ">=18.0.0",
+        "npm": ">=9.0.0"
+    },
     "dependencies": {
         "@emotion/react": "^11.14.0",
         "@emotion/styled": "^11.14.0",
