@@ -8,6 +8,7 @@ import { generateLayoutPage } from '../layoutGenerator';
 import RealIndexPage from '../../../../pages/index';
 import RealNewHomes from '../../../../pages/portfolio/new-homes';
 import RealRenovationsAdditions from '../../../../pages/portfolio/renovations-additions';
+import RealCreditRiverManor from '../../../../pages/portfolio/new-homes/credit-river-manor';
 
 // For each supported page, writes the generated text next to the real one so Jest's
 // normal jsx transform picks it up, then requires and renders it — proving the
@@ -37,6 +38,14 @@ const CASES = [
     requirePath: '../../../../pages/portfolio/__generatedRenovationsAdditionsForTest',
     RealComponent: RealRenovationsAdditions,
     pathname: '/portfolio/renovations-additions/'
+  },
+  {
+    name: 'new-homes/credit-river-manor.jsx (a detail page)',
+    layoutKey: 'creditRiverManor',
+    generatedPath: path.join(__dirname, '../../../../pages/portfolio/new-homes/__generatedCreditRiverManorForTest.jsx'),
+    requirePath: '../../../../pages/portfolio/new-homes/__generatedCreditRiverManorForTest',
+    RealComponent: RealCreditRiverManor,
+    pathname: '/portfolio/new-homes/credit-river-manor/'
   }
 ];
 

@@ -30,12 +30,19 @@ describe('seedDraft', () => {
   });
 
   it('seeds a transcribed layout for each supported listing page', () => {
-    expect(Object.keys(seedDraft.layouts).sort()).toEqual(['index', 'newHomes', 'renovationsAdditions']);
-
-    Object.values(seedDraft.layouts).forEach((layout) => {
+    ['index', 'newHomes', 'renovationsAdditions'].forEach((key) => {
+      const layout = seedDraft.layouts[key];
       expect(layout.tiles).toBeDefined();
       expect(layout.defaultLayout.length).toBeGreaterThan(0);
       expect(layout.wideLayout.length).toBeGreaterThan(0);
+    });
+  });
+
+  it('seeds a transcribed layout for each supported detail page', () => {
+    ['creditRiverManor'].forEach((key) => {
+      const layout = seedDraft.layouts[key];
+      expect(layout.tiles).toBeDefined();
+      expect(layout.layout.length).toBeGreaterThan(0);
     });
   });
 });

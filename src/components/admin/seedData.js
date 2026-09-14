@@ -2,6 +2,7 @@ import constants from '../../../static/app-constants';
 import { newHomesLayout, newHomesPageConfig } from './seedLayouts/newHomes';
 import { indexPageLayout, indexPageConfig } from './seedLayouts/indexPage';
 import { renovationsAdditionsLayout, renovationsAdditionsPageConfig } from './seedLayouts/renovationsAdditions';
+import { creditRiverManorLayout, creditRiverManorPageConfig } from './seedLayouts/creditRiverManor';
 
 const clone = (value) => JSON.parse(JSON.stringify(value));
 
@@ -10,7 +11,7 @@ const clone = (value) => JSON.parse(JSON.stringify(value));
 // so returning users don't get a shallow merge of new seed sections with a stale
 // top-level value from before that section existed (e.g. an old empty `layouts: {}`
 // silently winning over a newly-seeded `layouts.newHomes`).
-export const SEED_VERSION = 3;
+export const SEED_VERSION = 4;
 
 /**
  * @description The admin draft's starting state. `projects` and the ordering/unused
@@ -38,7 +39,8 @@ export const seedDraft = {
   layouts: {
     index: clone(indexPageLayout),
     newHomes: clone(newHomesLayout),
-    renovationsAdditions: clone(renovationsAdditionsLayout)
+    renovationsAdditions: clone(renovationsAdditionsLayout),
+    creditRiverManor: clone(creditRiverManorLayout)
   }
 };
 
@@ -49,8 +51,13 @@ export const seedDraft = {
 // hand-tuned Row/Column/Item tree at all — it's already fully generated from
 // upcomingProjectsOrder (a plain map over that array), so it's already covered by the
 // Projects section's ordering controls and doesn't need a layout editor of its own.
+//
+// creditRiverManor is the first of the ~16 project detail pages to get this treatment
+// (type: 'detail' — a single tree bound to one project, rather than a listing page's
+// paired default/wide trees over many). The rest follow the same pattern.
 export const LAYOUT_PAGE_CONFIGS = {
   index: indexPageConfig,
   newHomes: newHomesPageConfig,
-  renovationsAdditions: renovationsAdditionsPageConfig
+  renovationsAdditions: renovationsAdditionsPageConfig,
+  creditRiverManor: creditRiverManorPageConfig
 };

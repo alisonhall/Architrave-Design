@@ -76,6 +76,14 @@ describe('makeBlankTile', () => {
   it('builds a blank text tile defaulting to the shared intro text', () => {
     expect(makeBlankTile('text')).toEqual({ kind: 'text', text: '', useIntroText: true });
   });
+
+  it('builds a blank image tile (detail pages)', () => {
+    expect(makeBlankTile('image')).toEqual({ kind: 'image', imageUrl: '' });
+  });
+
+  it('builds a blank description tile with no fields (detail pages)', () => {
+    expect(makeBlankTile('description')).toEqual({ kind: 'description' });
+  });
 });
 
 describe('suggestTileKey', () => {
@@ -100,7 +108,9 @@ describe('computeTileOrder', () => {
   const tiles = {
     a: { kind: 'project', projectKey: 'a' },
     b: { kind: 'project', projectKey: 'b' },
-    c: { kind: 'text', useIntroText: true }
+    c: { kind: 'text', useIntroText: true },
+    d: { kind: 'image', imageUrl: 'https://example.com/d.jpg' },
+    e: { kind: 'description' }
   };
 
   it('lists tile keys in document order, skipping text tiles', () => {
@@ -111,6 +121,15 @@ describe('computeTileOrder', () => {
     ];
 
     expect(computeTileOrder(rows, tiles)).toEqual(['b', 'a']);
+  });
+
+  it('numbers image tiles but skips description tiles (detail pages)', () => {
+    const rows = [
+      { id: 'r1', columns: [{ id: 'c1', children: [{ id: 'p1', nodeType: 'tileRef', tileKey: 'd' }] }] },
+      { id: 'r2', columns: [{ id: 'c2', children: [{ id: 'p2', nodeType: 'tileRef', tileKey: 'e' }] }] }
+    ];
+
+    expect(computeTileOrder(rows, tiles)).toEqual(['d']);
   });
 
   it('descends into nested rows', () => {

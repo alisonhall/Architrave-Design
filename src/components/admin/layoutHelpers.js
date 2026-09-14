@@ -23,9 +23,15 @@ export const makeBlankColumn = () => ({ id: makeId('column'), width: undefined, 
 export const makeRowPlacement = () => ({ id: makeId('placement'), nodeType: 'row', row: makeBlankRow() });
 export const makeTilePlacement = (tileKey) => ({ id: makeId('placement'), nodeType: 'tileRef', tileKey });
 
+// Tile kinds that never get a fade-in `num` — everything else (project/filler/image)
+// does. See computeTileOrder below.
+const UNNUMBERED_TILE_KINDS = ['text', 'description'];
+
 export const makeBlankTile = (kind) => {
   if (kind === 'project') return { kind: 'project', projectKey: '', backgroundPosition: '' };
   if (kind === 'filler') return { kind: 'filler', projectKey: '', imageUrl: '' };
+  if (kind === 'image') return { kind: 'image', imageUrl: '' };
+  if (kind === 'description') return { kind: 'description' };
   return { kind: 'text', text: '', useIntroText: true };
 };
 
@@ -62,7 +68,7 @@ export const computeTileOrder = (rows, tiles) => {
         visitColumns(child.row.columns);
       } else if (child.nodeType === 'tileRef' && !seen.has(child.tileKey)) {
         const tile = tiles[child.tileKey];
-        if (tile && tile.kind !== 'text') {
+        if (tile && !UNNUMBERED_TILE_KINDS.includes(tile.kind)) {
           seen.add(child.tileKey);
           order.push(child.tileKey);
         } else if (tile) {

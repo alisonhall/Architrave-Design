@@ -106,4 +106,45 @@ describe('TileLibraryEditor', () => {
     expect(onChange).not.toHaveBeenCalled();
     expect(screen.getByRole('button', { name: 'Add text tile' })).toBeInTheDocument();
   });
+
+  it('only offers the tile kinds passed in via the kinds prop', () => {
+    render(<TileLibraryEditor tiles={{}} onChange={jest.fn()} projects={projects} kinds={['image', 'description']} />);
+
+    expect(screen.getByRole('button', { name: 'Add image tile' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Add description tile' })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Add project tile' })).not.toBeInTheDocument();
+  });
+
+  it('adds a new image tile (detail pages)', () => {
+    const onChange = jest.fn();
+    render(<TileLibraryEditor tiles={{}} onChange={onChange} projects={projects} kinds={['image', 'description']} />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Add image tile' }));
+    fireEvent.change(screen.getByLabelText('Image URL'), { target: { value: 'https://example.com/room.jpg' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Add tile' }));
+
+    expect(onChange).toHaveBeenCalledWith({ imageTile: { kind: 'image', imageUrl: 'https://example.com/room.jpg' } });
+  });
+
+  it('adds a description tile with no configurable fields (detail pages)', () => {
+    const onChange = jest.fn();
+    render(<TileLibraryEditor tiles={{}} onChange={onChange} projects={projects} kinds={['image', 'description']} />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Add description tile' }));
+    expect(screen.getByText(/Always shows this page/)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Add tile' }));
+
+    expect(onChange).toHaveBeenCalledWith({ descriptionTile: { kind: 'description' } });
+  });
+
+  it('summarizes an image tile and a description tile in the tile list', () => {
+    const tiles = {
+      1: { kind: 'image', num: 1, imageUrl: 'https://example.com/a.jpg' },
+      description: { kind: 'description' }
+    };
+    render(<TileLibraryEditor tiles={tiles} onChange={jest.fn()} projects={projects} kinds={['image', 'description']} />);
+
+    expect(screen.getByText(/Image tile/)).toBeInTheDocument();
+    expect(screen.getByText(/Description — this page's project/)).toBeInTheDocument();
+  });
 });

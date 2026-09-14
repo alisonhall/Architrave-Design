@@ -91,6 +91,35 @@ describe('LayoutsEditor', () => {
     expect(within(defaultSectionAgain).getAllByRole('button', { name: 'Remove row' }).length).toBe(rowCountBeforeAdd + 1);
   });
 
+  it('renders a single Layout section (no default/wide split) for a detail page', () => {
+    renderEditor();
+
+    fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'creditRiverManor' } });
+
+    expect(screen.getByText('Editing: src/pages/portfolio/new-homes/credit-river-manor.jsx')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Layout' })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Default layout (narrow screens)' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Wide layout (wide screens)' })).not.toBeInTheDocument();
+  });
+
+  it('offers image/description tile kinds, not project/filler/text, for a detail page', () => {
+    renderEditor();
+
+    fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'creditRiverManor' } });
+
+    expect(screen.getByRole('button', { name: 'Add image tile' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Add description tile' })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Add project tile' })).not.toBeInTheDocument();
+  });
+
+  it("shows the detail page's live preview bound to its own project", () => {
+    renderEditor();
+
+    fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'creditRiverManor' } });
+
+    expect(screen.getByText('Credit River Manor')).toBeInTheDocument();
+  });
+
   it('still renders correctly for a returning user whose cached draft predates this section', () => {
     // Regression test: a sessionStorage draft saved before layouts.index/newHomes/
     // renovationsAdditions existed (or under any other outdated shape) must not leave

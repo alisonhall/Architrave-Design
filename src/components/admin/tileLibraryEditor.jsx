@@ -52,6 +52,23 @@ const TileFields = ({ kind, values, onChange, projects }) => {
     );
   }
 
+  if (kind === 'image') {
+    return (
+      <label>
+        Image URL
+        <input
+          type="text"
+          value={values.imageUrl || ''}
+          onChange={(e) => onChange({ ...values, imageUrl: e.target.value })}
+        />
+      </label>
+    );
+  }
+
+  if (kind === 'description') {
+    return <p className="adminProjectForm-hint">Always shows this page&apos;s project name and description — nothing to configure.</p>;
+  }
+
   return (
     <>
       <label>
@@ -83,23 +100,35 @@ TileFields.propTypes = {
   projects: PropTypes.object.isRequired
 };
 
+const TILE_KIND_LABELS = {
+  project: 'project tile',
+  filler: 'filler tile',
+  image: 'image tile',
+  text: 'text tile',
+  description: 'description tile'
+};
+
 const tileSummary = (tile, projects) => {
   if (tile.kind === 'project') return `Project tile — ${projects[tile.projectKey]?.projectName || tile.projectKey}`;
   if (tile.kind === 'filler') return `Filler image${tile.projectKey ? ` — ${projects[tile.projectKey]?.projectName}` : ''}`;
+  if (tile.kind === 'image') return 'Image tile';
+  if (tile.kind === 'description') return "Description — this page's project";
   return tile.useIntroText ? 'Text — shared introduction' : `Text — "${(tile.text || '').slice(0, 40)}"`;
 };
 
 /**
  * @description Manages the reusable tile definitions for one page's layout — each tile
- * (a project image, a filler image, or a text blurb) can be placed one or more times
- * across the defaultLayout/wideLayout trees; editing it here updates every placement.
+ * can be placed one or more times across its layout tree(s); editing it here updates
+ * every placement. Which kinds of tile can be added depends on the page: listing pages
+ * offer project/filler/text tiles, detail pages offer plain image/description tiles.
  *
  * @param {Object} param
  * @param {Object} param.tiles
  * @param {Function} param.onChange
  * @param {Object} param.projects
+ * @param {Array} param.kinds - which tile kinds this page supports adding
  */
-const TileLibraryEditor = ({ tiles, onChange, projects }) => {
+const TileLibraryEditor = ({ tiles, onChange, projects, kinds }) => {
   const [editingKey, setEditingKey] = useState(null);
   const [addingKind, setAddingKind] = useState(null);
   const [draftValues, setDraftValues] = useState(null);
@@ -181,9 +210,9 @@ const TileLibraryEditor = ({ tiles, onChange, projects }) => {
 
       {!editingKey && !addingKind && (
         <div className="adminTileLibrary-addButtons">
-          <button type="button" onClick={() => startAdd('project')}>Add project tile</button>
-          <button type="button" onClick={() => startAdd('filler')}>Add filler tile</button>
-          <button type="button" onClick={() => startAdd('text')}>Add text tile</button>
+          {kinds.map((kind) => (
+            <button key={kind} type="button" onClick={() => startAdd(kind)}>Add {TILE_KIND_LABELS[kind]}</button>
+          ))}
         </div>
       )}
     </div>
@@ -193,7 +222,12 @@ const TileLibraryEditor = ({ tiles, onChange, projects }) => {
 TileLibraryEditor.propTypes = {
   tiles: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
-  projects: PropTypes.object.isRequired
+  projects: PropTypes.object.isRequired,
+  kinds: PropTypes.arrayOf(PropTypes.string)
+};
+
+TileLibraryEditor.defaultProps = {
+  kinds: ['project', 'filler', 'text']
 };
 
 export default TileLibraryEditor;

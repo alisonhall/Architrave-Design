@@ -3,6 +3,8 @@ import { computeTileOrder } from '../layoutHelpers';
 const INDENT = '  ';
 const indent = (level) => INDENT.repeat(level);
 const quote = (value) => (value.includes("'") ? `"${value}"` : `'${value}'`);
+const isValidIdentifier = (key) => /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(key);
+const tilePropertyAccess = (tileKey) => (isValidIdentifier(tileKey) ? `.${tileKey}` : `['${tileKey}']`);
 
 // Every tile needs a number (it's what image1..image5 fade-in CSS keys off — see
 // item.scss). A tile keeps its explicit `num` if it was given one (that's how the live
@@ -50,7 +52,31 @@ ${indent(level + 1)}/>
 ${indent(level)})`;
   }
 
-  // text
+  if (tile.kind === 'image') {
+    return `(
+${indent(level + 1)}<Item
+${indent(level + 2)}num={${num}}
+${indent(level + 2)}image={{
+${indent(level + 3)}imageUrl: ${quote(tile.imageUrl)}
+${indent(level + 2)}}}
+${indent(level + 1)}/>
+${indent(level)})`;
+  }
+
+  if (tile.kind === 'description') {
+    // A detail page's description tile is always the single project this page is
+    // bound to — see generateDetailPage, which binds `const project = ...`.
+    return `(
+${indent(level + 1)}<Item
+${indent(level + 2)}text={{
+${indent(level + 3)}title: project.projectName,
+${indent(level + 3)}copy: project.projectDescription
+${indent(level + 2)}}}
+${indent(level + 1)}/>
+${indent(level)})`;
+  }
+
+  // text (a listing page's shared-introduction/free-text blurb)
   const copyExpression = tile.useIntroText ? 'defaultIntroductionText' : quote(tile.text || '');
   return `(
 ${indent(level + 1)}<Item
@@ -70,7 +96,7 @@ const generateTilesObject = (tiles, defaultLayoutRows, wideLayoutRows) => {
 };
 
 const generatePlacement = (placement, level) => {
-  if (placement.nodeType === 'tileRef') return `${indent(level)}{tiles.${placement.tileKey}}`;
+  if (placement.nodeType === 'tileRef') return `${indent(level)}{tiles${tilePropertyAccess(placement.tileKey)}}`;
   return generateRow(placement.row, level);
 };
 
@@ -93,22 +119,7 @@ const generateSection = (className, rows, level) => {
   return `${indent(level)}<section className=${quote(className)}>\n${body}\n${indent(level)}</section>`;
 };
 
-/**
- * @description Generates the full text of a portfolio listing page (index.jsx,
- * new-homes.jsx, etc.) from its admin layout draft. Pure function of its inputs — the
- * live preview renders the same { tiles, defaultLayout, wideLayout } data with the
- * real Row/Column/Item components, so what you see there is what this produces.
- *
- * @param {Object} pageConfig
- * @param {string} pageConfig.componentName
- * @param {string} pageConfig.mainClasses
- * @param {string} pageConfig.defaultSectionClassName
- * @param {string} pageConfig.wideSectionClassName
- * @param {string} pageConfig.componentsPath - relative import path to src/components
- * @param {string} pageConfig.staticPath - relative import path to static/
- * @param {Object} layoutDraft - { tiles, defaultLayout, wideLayout }
- */
-export const generateLayoutPage = (pageConfig, layoutDraft) => {
+const generateListingPage = (pageConfig, layoutDraft) => {
   const { tiles, defaultLayout, wideLayout } = layoutDraft;
   const { componentName, mainClasses, defaultSectionClassName, wideSectionClassName, componentsPath, staticPath } =
     pageConfig;
@@ -138,4 +149,54 @@ ${indent(1)}</Layout>
 
 export default ${componentName}
 `;
+};
+
+const generateDetailPage = (pageConfig, layoutDraft) => {
+  const { tiles, layout } = layoutDraft;
+  const { componentName, mainClasses, sectionClassName, projectKey, componentsPath, staticPath } = pageConfig;
+
+  return `import React from 'react';
+
+import constants from '${staticPath}/app-constants';
+
+import Layout from '${componentsPath}/layout';
+import Seo from '${componentsPath}/seo';
+import Row from '${componentsPath}/rowHOC';
+import Column from '${componentsPath}/columnHOC';
+import Item from '${componentsPath}/item';
+import PrevNextProjectLinks from '${componentsPath}/prevNextProjectLinks';
+
+const project = constants.projects.${projectKey};
+
+${generateTilesObject(tiles, layout, [])}
+
+const ${componentName} = (props) => (
+${indent(1)}<Layout urlPath={props.location.pathname} mainClasses=${quote(mainClasses)}>
+${indent(2)}<Seo />
+${indent(2)}<section className=${quote(sectionClassName)}>
+${layout.map((row) => generateRow(row, 3)).join('\n')}
+${indent(3)}<PrevNextProjectLinks project={project} />
+${indent(2)}</section>
+${indent(1)}</Layout>
+)
+
+export default ${componentName};
+`;
+};
+
+/**
+ * @description Generates the full text of a portfolio page from its admin layout
+ * draft — either a listing page (index.jsx, new-homes.jsx, etc., with `defaultLayout`/
+ * `wideLayout` trees sharing a `tiles` library) or a single project's detail page
+ * (`pageConfig.type === 'detail'`, one flat `layout` tree bound to one project, ending
+ * in PrevNextProjectLinks). Pure function of its inputs — the live preview renders the
+ * same data with the real Row/Column/Item components, so what you see there is what
+ * this produces.
+ *
+ * @param {Object} pageConfig
+ * @param {Object} layoutDraft
+ */
+export const generateLayoutPage = (pageConfig, layoutDraft) => {
+  if (pageConfig.type === 'detail') return generateDetailPage(pageConfig, layoutDraft);
+  return generateListingPage(pageConfig, layoutDraft);
 };

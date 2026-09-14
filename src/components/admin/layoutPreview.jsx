@@ -8,7 +8,7 @@ import Item from '../item';
 import { computeTileOrder } from './layoutHelpers';
 
 const renderTile = (tileKey, context) => {
-  const { tiles, projects, introText, numbers } = context;
+  const { tiles, projects, introText, numbers, boundProject } = context;
   const tile = tiles[tileKey];
   if (!tile) return null;
   const num = numbers[tileKey];
@@ -28,6 +28,15 @@ const renderTile = (tileKey, context) => {
         image={{ imageUrl: tile.imageUrl }}
       />
     );
+  }
+
+  if (tile.kind === 'image') {
+    return <Item num={num} image={{ imageUrl: tile.imageUrl }} />;
+  }
+
+  if (tile.kind === 'description') {
+    if (!boundProject) return null;
+    return <Item text={{ title: boundProject.projectName, copy: boundProject.projectDescription }} />;
   }
 
   return <Item text={{ copy: tile.useIntroText ? introText : tile.text }} />;
@@ -65,22 +74,24 @@ RenderedRow.propTypes = {
 };
 
 /**
- * @description Renders one layout variant (defaultLayout or wideLayout) with the real
- * Row/Column/Item/buildProjectTile components, using the draft's own projects data —
- * so edits to a project's image or name show up here immediately too.
+ * @description Renders one layout tree (a listing page's defaultLayout/wideLayout, or
+ * a detail page's single layout) with the real Row/Column/Item/buildProjectTile
+ * components, using the draft's own projects data — so edits to a project's image or
+ * name show up here immediately too.
  *
  * @param {Object} param
  * @param {Array} param.rows
  * @param {Object} param.tiles
  * @param {Object} param.projects
- * @param {string} param.introText
+ * @param {string} param.introText - used by a listing page's shared-intro text tile
+ * @param {Object} param.boundProject - used by a detail page's description tile
  */
-const LayoutPreview = ({ rows, tiles, projects, introText }) => {
+const LayoutPreview = ({ rows, tiles, projects, introText, boundProject }) => {
   const numbers = {};
   computeTileOrder(rows, tiles).forEach((tileKey, index) => {
     numbers[tileKey] = tiles[tileKey].num ?? index + 1;
   });
-  const context = { tiles, projects, introText, numbers };
+  const context = { tiles, projects, introText, numbers, boundProject };
 
   return (
     <div className="adminLayoutPreview">
@@ -95,7 +106,13 @@ LayoutPreview.propTypes = {
   rows: PropTypes.array.isRequired,
   tiles: PropTypes.object.isRequired,
   projects: PropTypes.object.isRequired,
-  introText: PropTypes.string.isRequired
+  introText: PropTypes.string,
+  boundProject: PropTypes.object
+};
+
+LayoutPreview.defaultProps = {
+  introText: '',
+  boundProject: null
 };
 
 export default LayoutPreview;

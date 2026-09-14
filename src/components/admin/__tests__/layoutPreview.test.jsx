@@ -80,4 +80,36 @@ describe('LayoutPreview', () => {
     expect(screen.queryByRole('img')).not.toBeInTheDocument();
     expect(screen.queryByRole('link')).not.toBeInTheDocument();
   });
+
+  it('renders a plain image tile (detail pages) without a link or filler class', () => {
+    const tiles = { image1: { kind: 'image', num: 1, imageUrl: 'https://example.com/plain.jpg' } };
+    const rows = [row('r1', [column('c1', [tileRef('p1', 'image1')])])];
+
+    render(<LayoutPreview rows={rows} tiles={tiles} projects={projects} />);
+
+    expect(screen.queryByRole('link')).not.toBeInTheDocument();
+    const img = screen.getByRole('img');
+    expect(img).toHaveAttribute('src', 'https://example.com/plain.jpg');
+    expect(img).not.toHaveClass('filler');
+  });
+
+  it('renders a description tile (detail pages) using the bound project', () => {
+    const tiles = { description: { kind: 'description' } };
+    const rows = [row('r1', [column('c1', [tileRef('p1', 'description')])])];
+    const boundProject = { projectName: 'Bound Project', projectDescription: 'A lovely description.' };
+
+    render(<LayoutPreview rows={rows} tiles={tiles} projects={projects} boundProject={boundProject} />);
+
+    expect(screen.getByText('Bound Project')).toBeInTheDocument();
+    expect(screen.getByText('A lovely description.')).toBeInTheDocument();
+  });
+
+  it('renders nothing for a description tile when no project is bound yet', () => {
+    const tiles = { description: { kind: 'description' } };
+    const rows = [row('r1', [column('c1', [tileRef('p1', 'description')])])];
+
+    render(<LayoutPreview rows={rows} tiles={tiles} projects={projects} />);
+
+    expect(screen.queryByRole('heading')).not.toBeInTheDocument();
+  });
 });

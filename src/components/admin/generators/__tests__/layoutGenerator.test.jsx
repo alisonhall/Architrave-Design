@@ -149,4 +149,86 @@ describe('generateLayoutPage', () => {
     expect(innerIndex).toBeGreaterThan(-1);
     expect(innerIndex).toBeGreaterThan(outerIndex);
   });
+
+  it('uses bracket notation for a tile key that is not a valid JS identifier', () => {
+    const layout = baseLayout({
+      tiles: { 1: { kind: 'project', projectKey: 'a', num: 1 } },
+      defaultLayout: [rowNode('r1', {}, [columnNode('c1', {}, [tileRef('p1', '1')])])],
+      wideLayout: []
+    });
+
+    const text = generateLayoutPage(pageConfig, layout);
+    expect(text).toContain("{tiles['1']}");
+    expect(text).not.toContain('{tiles.1}');
+  });
+});
+
+describe('generateLayoutPage (detail pages)', () => {
+  const detailPageConfig = {
+    componentName: 'TestDetailPage',
+    mainClasses: 'portfolio',
+    type: 'detail',
+    projectKey: 'projectA',
+    sectionClassName: 'contentWrapper layoutAll layoutProject',
+    componentsPath: '../../../components',
+    staticPath: '../../../../static'
+  };
+
+  const detailLayout = (overrides = {}) => ({
+    tiles: overrides.tiles || { image1: { kind: 'image', num: 1, imageUrl: 'https://example.com/a.jpg' } },
+    layout: overrides.layout || [
+      rowNode('r1', { height: 300 }, [columnNode('c1', {}, [tileRef('p1', 'image1')])])
+    ]
+  });
+
+  it('binds a single project instead of destructuring projects, and has no buildProjectTile import', () => {
+    const text = generateLayoutPage(detailPageConfig, detailLayout());
+
+    expect(text).toContain('const project = constants.projects.projectA;');
+    expect(text).not.toContain('buildProjectTile');
+    expect(text).not.toContain('const { projects');
+  });
+
+  it('imports and renders PrevNextProjectLinks bound to the page project, inside the section', () => {
+    const text = generateLayoutPage(detailPageConfig, detailLayout());
+
+    expect(text).toContain("import PrevNextProjectLinks from '../../../components/prevNextProjectLinks';");
+    const sectionIndex = text.indexOf('<section');
+    const linksIndex = text.indexOf('<PrevNextProjectLinks project={project} />');
+    const sectionCloseIndex = text.indexOf('</section>');
+    expect(linksIndex).toBeGreaterThan(sectionIndex);
+    expect(linksIndex).toBeLessThan(sectionCloseIndex);
+  });
+
+  it('renders a single section with no defaultLayout/wideLayout split', () => {
+    const text = generateLayoutPage(detailPageConfig, detailLayout());
+
+    expect(text.match(/<section/g)).toHaveLength(1);
+    expect(text).toContain("<section className='contentWrapper layoutAll layoutProject'>");
+  });
+
+  it('emits a plain image Item (no link, no isFiller) for an image tile', () => {
+    const text = generateLayoutPage(detailPageConfig, detailLayout());
+
+    expect(text).toContain("imageUrl: 'https://example.com/a.jpg'");
+    expect(text).not.toContain('isFiller');
+    expect(text).not.toContain('<Link');
+  });
+
+  it('emits a description Item using the bound project\'s name and description', () => {
+    const layout = detailLayout({
+      tiles: { description: { kind: 'description' } },
+      layout: [rowNode('r1', {}, [columnNode('c1', {}, [tileRef('p1', 'description')])])]
+    });
+
+    const text = generateLayoutPage(detailPageConfig, layout);
+    expect(text).toContain('title: project.projectName');
+    expect(text).toContain('copy: project.projectDescription');
+  });
+
+  it('ends the file with a semicolon after the default export, matching detail page style', () => {
+    const text = generateLayoutPage(detailPageConfig, detailLayout());
+
+    expect(text.trim().endsWith('export default TestDetailPage;')).toBe(true);
+  });
 });

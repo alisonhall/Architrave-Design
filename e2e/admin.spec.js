@@ -167,4 +167,29 @@ test.describe('layouts editor', () => {
     await page.getByRole('button', { name: 'Review Changes' }).click();
     await expect(page.locator('.adminOutputPanel-fileHeader code')).toHaveText('src/pages/portfolio/new-homes.jsx');
   });
+
+  test('a detail page shows a single layout tree bound to its own project, with only image/description tile kinds', async ({
+    page
+  }) => {
+    await openLayouts(page, 'creditRiverManor');
+
+    await expect(page.getByText('Editing: src/pages/portfolio/new-homes/credit-river-manor.jsx')).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Layout' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Default layout (narrow screens)' })).not.toBeVisible();
+    await expect(page.getByRole('button', { name: 'Add image tile' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Add description tile' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Add project tile' })).toHaveCount(0);
+    await expect(page.locator('.adminLayoutPreview').getByText('Credit River Manor')).toBeVisible();
+  });
+
+  test('editing a detail page and reviewing changes surfaces its file', async ({ page }) => {
+    await openLayouts(page, 'creditRiverManor');
+
+    await page.locator('.adminLayoutTree').getByRole('button', { name: 'Add row' }).click();
+    await page.getByRole('button', { name: 'Review Changes' }).click();
+
+    await expect(page.locator('.adminOutputPanel-fileHeader code')).toHaveText(
+      'src/pages/portfolio/new-homes/credit-river-manor.jsx'
+    );
+  });
 });
