@@ -189,6 +189,37 @@ describe('TileLibraryEditor', () => {
     expect(screen.getByText(/Embed — pasted iframe markup/)).toBeInTheDocument();
   });
 
+  it('adds a new placeholder tile with no configurable fields (detail pages)', () => {
+    const onChange = jest.fn();
+    render(<TileLibraryEditor tiles={{}} onChange={onChange} projects={projects} kinds={['image', 'description', 'placeholder']} />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Add placeholder tile' }));
+    expect(screen.getByText(/A plain blue filler section/)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Add tile' }));
+
+    expect(onChange).toHaveBeenCalledWith({ placeholderTile: { kind: 'placeholder' } });
+  });
+
+  it('summarizes a placeholder tile in the tile list', () => {
+    const tiles = { spot: { kind: 'placeholder' } };
+    render(<TileLibraryEditor tiles={tiles} onChange={jest.fn()} projects={projects} kinds={['image', 'description', 'placeholder']} />);
+
+    expect(screen.getByText(/Placeholder — plain blue filler/)).toBeInTheDocument();
+  });
+
+  it('offers the image tile kind on listing pages (a static image not tied to any project)', () => {
+    const onChange = jest.fn();
+    render(<TileLibraryEditor tiles={{}} onChange={onChange} projects={projects} kinds={['project', 'filler', 'image', 'text']} />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Add image tile' }));
+    fireEvent.change(screen.getByLabelText('Image URL'), { target: { value: 'https://example.com/static.jpg' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Add tile' }));
+
+    expect(onChange).toHaveBeenCalledWith({
+      imageTile: { kind: 'image', imageUrl: 'https://example.com/static.jpg', backgroundPosition: '', overlayText: '' }
+    });
+  });
+
   it('summarizes an image tile and a description tile in the tile list', () => {
     const tiles = {
       1: { kind: 'image', num: 1, imageUrl: 'https://example.com/a.jpg' },

@@ -92,6 +92,10 @@ describe('makeBlankTile', () => {
   it('builds a blank embed tile with an empty html field (detail pages)', () => {
     expect(makeBlankTile('embed')).toEqual({ kind: 'embed', html: '' });
   });
+
+  it('builds a blank placeholder tile with no fields (detail pages)', () => {
+    expect(makeBlankTile('placeholder')).toEqual({ kind: 'placeholder' });
+  });
 });
 
 describe('suggestTileKey', () => {

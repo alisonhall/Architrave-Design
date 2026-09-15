@@ -9,13 +9,14 @@ import Item from './item';
  * @description Walks a layout's rows in document order and returns the tile keys in
  * the order they're first placed — this is the numbering the real site's Item
  * components use (num=1, 2, 3, ...) for a staggered fade-in animation on the first few
- * tiles (see item.scss). Only "image" tiles (project/filler/image) are numbered; text
- * and description tiles never are. A tile keeps its own explicit `num` if it has one.
+ * tiles (see item.scss). Only "image" tiles (project/filler/image) are numbered; text,
+ * description, and placeholder tiles never are. A tile keeps its own explicit `num` if
+ * it has one.
  *
  * @param {Array} rows
  * @param {Object} tiles
  */
-const UNNUMBERED_TILE_KINDS = ['text', 'description'];
+const UNNUMBERED_TILE_KINDS = ['text', 'description', 'placeholder'];
 
 export const computeTileOrder = (rows, tiles) => {
   const order = [];
@@ -79,6 +80,13 @@ const renderTile = (tileKey, context) => {
   if (tile.kind === 'description') {
     if (!boundProject) return null;
     return <Item text={{ title: boundProject.projectName, copy: boundProject.projectDescription }} />;
+  }
+
+  if (tile.kind === 'placeholder') {
+    // No image, text, or content — Item's own fallback renders this as a plain blue
+    // filler section (TextBlurbFiller), matching a bare `nodeType: 'empty'` placement's
+    // appearance but reusable/nameable through the tile library like any other tile.
+    return <Item />;
   }
 
   if (tile.kind === 'embed') {

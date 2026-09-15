@@ -7,8 +7,8 @@ import TileLibraryEditor from './tileLibraryEditor';
 import LayoutTreeEditor from './layoutTreeEditor';
 import LayoutPreview from './layoutPreview';
 
-const LISTING_TILE_KINDS = ['project', 'filler', 'text'];
-const DETAIL_TILE_KINDS = ['image', 'description', 'embed'];
+const LISTING_TILE_KINDS = ['project', 'filler', 'image', 'text'];
+const DETAIL_TILE_KINDS = ['image', 'description', 'embed', 'placeholder'];
 const DETAIL_PROJECT_TYPES = ['new-homes', 'renovations-additions'];
 const FOLDER_LABELS = { 'new-homes': 'New Homes', 'renovations-additions': 'Renovations & Additions' };
 
@@ -16,10 +16,11 @@ const FOLDER_LABELS = { 'new-homes': 'New Homes', 'renovations-additions': 'Reno
  * @description The Layouts section of the admin tool: pick a portfolio page, manage
  * its reusable tiles, and edit its layout tree(s) with a live preview alongside each.
  * Two independent things vary per page: whether it's bound to one project (a "detail"
- * page — tile kinds image/description, a bound-project description tile) or shares
- * projects broadly (a "listing" page — tile kinds project/filler/text); and whether it
- * has one tree (`layout`) or two (`defaultLayout`/`wideLayout`) — a detail page can be
- * either shape, so the tree-count is read from the data itself, not from the page type.
+ * page — tile kinds image/description/embed/placeholder, a bound-project description
+ * tile) or shares projects broadly (a "listing" page — tile kinds
+ * project/filler/image/text); and whether it has one tree (`layout`) or two
+ * (`defaultLayout`/`wideLayout`) — a detail page can be either shape, so the tree-count
+ * is read from the data itself, not from the page type.
  *
  * A page can also be created here from scratch: picking a New Homes/Renovations
  * project that doesn't have one yet starts it from a blank layout (see

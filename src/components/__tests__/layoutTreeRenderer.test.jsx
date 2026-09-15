@@ -76,6 +76,16 @@ describe('renderLayoutTree', () => {
     expect(iframe).toHaveAttribute('frameborder', '0');
   });
 
+  it('renders a placeholder tile as a bare, blank Item (a plain blue filler)', () => {
+    const tiles = { spot: { kind: 'placeholder' } };
+    const rows = [row({}, [column({}, [tileRef('spot')])])];
+
+    const { container } = render(<>{renderLayoutTree({ rows, tiles, projects })}</>);
+
+    expect(container.querySelector('.textBlurbFiller')).toBeInTheDocument();
+    expect(screen.queryByRole('img')).not.toBeInTheDocument();
+  });
+
   it('renders a nested row inside a column', () => {
     const tiles = { someTile: { kind: 'project', projectKey: 'someProject', num: 1 } };
     const rows = [
@@ -109,13 +119,14 @@ describe('renderLayoutTree', () => {
 });
 
 describe('computeTileOrder', () => {
-  it('lists numbered-kind tile keys in document order, skipping text/description tiles', () => {
+  it('lists numbered-kind tile keys in document order, skipping text/description/placeholder tiles', () => {
     const tiles = {
       a: { kind: 'project', projectKey: 'a' },
-      b: { kind: 'text', useIntroText: true }
+      b: { kind: 'text', useIntroText: true },
+      c: { kind: 'placeholder' }
     };
     const rows = [
-      row({}, [column({}, [tileRef('b')])]),
+      row({}, [column({}, [tileRef('b'), tileRef('c')])]),
       row({}, [column({}, [tileRef('a')])])
     ];
 

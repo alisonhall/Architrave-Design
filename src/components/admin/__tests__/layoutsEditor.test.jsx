@@ -116,7 +116,7 @@ describe('LayoutsEditor', () => {
     expect(screen.queryByRole('heading', { name: 'Wide layout (wide screens)' })).not.toBeInTheDocument();
   });
 
-  it('offers image/description/embed tile kinds, not project/filler/text, for a detail page', () => {
+  it('offers image/description/embed/placeholder tile kinds, not project/filler/text, for a detail page', () => {
     renderEditor();
 
     fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'creditRiverManor' } });
@@ -124,7 +124,39 @@ describe('LayoutsEditor', () => {
     expect(screen.getByRole('button', { name: 'Add image tile' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Add description tile' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Add embed tile' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Add placeholder tile' })).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: 'Add project tile' })).not.toBeInTheDocument();
+  });
+
+  it('offers project/filler/image/text tile kinds for a listing page, including a static image', () => {
+    renderEditor();
+
+    expect(screen.getByRole('button', { name: 'Add project tile' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Add filler tile' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Add image tile' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Add text tile' })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Add embed tile' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Add placeholder tile' })).not.toBeInTheDocument();
+  });
+
+  it('adding a static image tile on a listing page renders it in the live preview', () => {
+    renderEditor();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Add image tile' }));
+    fireEvent.change(screen.getByLabelText('Image URL'), { target: { value: 'https://example.com/static.jpg' } });
+    fireEvent.click(within(screen.getByText('Tiles').closest('.adminTileLibrary')).getByRole('button', { name: 'Add tile' }));
+
+    expect(screen.getByText(/imageTile —/)).toBeInTheDocument();
+  });
+
+  it('adding a placeholder tile on a detail page adds it to its tile library', () => {
+    renderEditor();
+
+    fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'creditRiverManor' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Add placeholder tile' }));
+    fireEvent.click(within(screen.getByText('Tiles').closest('.adminTileLibrary')).getByRole('button', { name: 'Add tile' }));
+
+    expect(screen.getByText(/placeholderTile — Placeholder/)).toBeInTheDocument();
   });
 
   it("shows the detail page's live preview bound to its own project", () => {

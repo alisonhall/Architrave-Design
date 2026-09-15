@@ -357,3 +357,48 @@ test.describe('layouts editor — renaming a tile', () => {
     await expect(page.locator('.adminOutputPanel-file pre')).toContainText('frontFacade');
   });
 });
+
+test.describe('layouts editor — image and placeholder tiles', () => {
+  const openLayouts = async (page, pageKey) => {
+    await unlock(page);
+    await page.getByRole('button', { name: 'Layouts' }).click();
+    await expect(page.locator('.adminLayoutsEditor')).toBeVisible();
+    if (pageKey) await page.getByLabel('Page').selectOption(pageKey);
+  };
+
+  test('adding a static image tile on a listing page renders it in the live preview and surfaces the file', async ({
+    page
+  }) => {
+    await openLayouts(page, 'newHomes');
+
+    const tileLibrary = page.locator('.adminTileLibrary');
+    await tileLibrary.getByRole('button', { name: 'Add image tile' }).click();
+    await page.getByLabel('Image URL').fill('https://example.com/e2e-static-image.jpg');
+    await tileLibrary.getByRole('button', { name: 'Add tile' }).click();
+
+    await expect(tileLibrary.locator('li', { hasText: 'imageTile —' })).toBeVisible();
+
+    await page.getByRole('button', { name: 'Review Changes' }).click();
+    await expect(page.locator('.adminOutputPanel-fileHeader code')).toHaveText('static/layouts/new-homes.js');
+    await expect(page.locator('.adminOutputPanel-file pre')).toContainText('e2e-static-image.jpg');
+  });
+
+  test('adding a placeholder tile on a detail (project) page renders a blank blue filler in the live preview', async ({
+    page
+  }) => {
+    await openLayouts(page, 'creditRiverManor');
+
+    const tileLibrary = page.locator('.adminTileLibrary');
+    await tileLibrary.getByRole('button', { name: 'Add placeholder tile' }).click();
+    await tileLibrary.getByRole('button', { name: 'Add tile' }).click();
+
+    await expect(tileLibrary.locator('li', { hasText: 'placeholderTile — Placeholder' })).toBeVisible();
+
+    // Place it in the tree, and confirm the preview renders a plain blue filler for it.
+    await page.locator('.adminLayoutTree-column').first().getByRole('button', { name: 'Add tile' }).click();
+    const newPlacementSelect = page.locator('.adminLayoutTree-placement select').last();
+    await newPlacementSelect.selectOption('placeholderTile');
+
+    await expect(page.locator('.adminLayoutPreview .textBlurbFiller')).toBeVisible();
+  });
+});

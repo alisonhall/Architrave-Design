@@ -100,6 +100,10 @@ const TileFields = ({ kind, values, onChange, projects }) => {
     );
   }
 
+  if (kind === 'placeholder') {
+    return <p className="adminProjectForm-hint">A plain blue filler section — no image, text, or link. Nothing to configure.</p>;
+  }
+
   return (
     <>
       <label>
@@ -137,7 +141,8 @@ const TILE_KIND_LABELS = {
   image: 'image tile',
   text: 'text tile',
   description: 'description tile',
-  embed: 'embed tile'
+  embed: 'embed tile',
+  placeholder: 'placeholder tile'
 };
 
 const tileSummary = (tile, projects) => {
@@ -146,6 +151,7 @@ const tileSummary = (tile, projects) => {
   if (tile.kind === 'image') return 'Image tile';
   if (tile.kind === 'description') return "Description — this page's project";
   if (tile.kind === 'embed') return 'Embed — pasted iframe markup';
+  if (tile.kind === 'placeholder') return 'Placeholder — plain blue filler';
   return tile.useIntroText ? 'Text — shared introduction' : `Text — "${(tile.text || '').slice(0, 40)}"`;
 };
 
