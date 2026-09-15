@@ -6,6 +6,8 @@ import { generateAppConstants } from './generators/appConstantsGenerator';
 import { generateLayoutData } from './generators/layoutGenerator';
 import { generateNewPageFile } from './generators/newPageGenerator';
 import { generateTestScaffold } from './generators/testScaffoldGenerator';
+import { generateAboutData } from './generators/aboutGenerator';
+import { generateReviewsData } from './generators/reviewsGenerator';
 import OutputPanel from './outputPanel';
 
 const APP_CONSTANTS_FIELDS = [
@@ -37,6 +39,22 @@ const OutputSection = () => {
       content: generateAppConstants(draft),
       note:
         "Any page whose snapshot renders project tiles (e.g. the home, new-homes, or reviews page tests) may need its snapshot updated afterward with `npm test -- -u` — review the diff before committing it. If a layout below still references a project you deleted, fix that layout first — the generated page would fail to render."
+    });
+  }
+
+  if (JSON.stringify(draft.aboutContent) !== JSON.stringify(seedDraft.aboutContent)) {
+    files.push({
+      path: 'static/about.js',
+      content: generateAboutData(draft.aboutContent),
+      note: "This is plain data — the real about page's own file never needs to change. Its snapshot test will need updating afterward with `npm test -- -u` — review the diff before committing it."
+    });
+  }
+
+  if (JSON.stringify(draft.reviews) !== JSON.stringify(seedDraft.reviews)) {
+    files.push({
+      path: 'static/reviews.js',
+      content: generateReviewsData(draft.reviews),
+      note: "This is plain data — the real reviews page's own file never needs to change. Its snapshot test will need updating afterward with `npm test -- -u` — review the diff before committing it."
     });
   }
 

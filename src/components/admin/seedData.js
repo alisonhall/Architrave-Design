@@ -1,5 +1,8 @@
 import constants from '../../../static/app-constants';
+import aboutData from '../../../static/about';
+import reviewsData from '../../../static/reviews';
 import { hydrateLayoutData } from './layoutHelpers';
+import { hydrateReviews } from './reviewsHelpers';
 
 import indexLayoutData from '../../../static/layouts/index';
 import newHomesLayoutData from '../../../static/layouts/new-homes';
@@ -29,17 +32,17 @@ const clone = (value) => JSON.parse(JSON.stringify(value));
 // so returning users don't get a shallow merge of new seed sections with a stale
 // top-level value from before that section existed (e.g. an old empty `layouts: {}`
 // silently winning over a newly-seeded `layouts.newHomes`).
-export const SEED_VERSION = 9;
+export const SEED_VERSION = 10;
 
 /**
  * @description The admin draft's starting state. `projects`/order arrays come
- * straight from static/app-constants.js, and every page's layout comes straight from
- * its static/layouts/<slug>.js — the same files the real pages render from (see
- * src/components/listingPageLayout.jsx / detailPageLayout.jsx). There's nothing
- * hand-transcribed or separately maintained for layouts any more: editing a page
- * in the admin and applying the generated output via GitHub keeps this in sync
- * automatically on the next build. `aboutContent`/`reviews` are still placeholders
- * pending the same treatment in a later phase.
+ * straight from static/app-constants.js, every page's layout comes straight from
+ * its static/layouts/<slug>.js (see src/components/listingPageLayout.jsx /
+ * detailPageLayout.jsx), and `aboutContent`/`reviews` come straight from
+ * static/about.js / static/reviews.js (see src/components/aboutPageLayout.jsx /
+ * reviewsPageLayout.jsx) — there's nothing hand-transcribed or separately maintained
+ * anywhere in this draft: editing any of it in the admin and applying the generated
+ * output via GitHub keeps this in sync automatically on the next build.
  */
 export const seedDraft = {
   projects: clone(constants.projects),
@@ -55,8 +58,8 @@ export const seedDraft = {
   projectTypes: clone(constants.projectTypes),
   cloudinary: clone(constants.cloudinary),
   houzz: clone(constants.houzz),
-  aboutContent: null,
-  reviews: null,
+  aboutContent: clone(aboutData),
+  reviews: clone(hydrateReviews(reviewsData)),
   layouts: {
     index: clone(hydrateLayoutData(indexLayoutData)),
     newHomes: clone(hydrateLayoutData(newHomesLayoutData)),

@@ -255,3 +255,78 @@ test.describe('layouts editor', () => {
     ]);
   });
 });
+
+test.describe('about editor', () => {
+  test('editing a heading and paragraph updates the live preview and surfaces static/about.js', async ({ page }) => {
+    await unlock(page);
+    await page.getByRole('button', { name: 'About' }).click();
+    await expect(page.locator('.adminAboutEditor')).toBeVisible();
+
+    const introSection = page.locator('section.adminAboutEditor-section', { hasText: 'Introduction' });
+    await introSection.locator('input[type="text"]').fill('E2E New Intro Heading');
+
+    const preview = page.locator('.adminAboutPreview');
+    await expect(preview.getByText('E2E New Intro Heading')).toBeVisible();
+
+    await page.getByRole('button', { name: 'Review Changes' }).click();
+    await expect(page.locator('.adminOutputPanel-fileHeader code')).toHaveText('static/about.js');
+    await expect(page.locator('.adminOutputPanel-file pre')).toContainText('E2E New Intro Heading');
+  });
+
+  test('adding and removing a paragraph updates the live preview', async ({ page }) => {
+    await unlock(page);
+    await page.getByRole('button', { name: 'About' }).click();
+
+    const bioSection = page.locator('section.adminAboutEditor-section', { hasText: 'Bio' });
+    const paragraphCountBefore = await bioSection.locator('textarea').count();
+
+    await bioSection.getByRole('button', { name: 'Add paragraph' }).click();
+    await expect(bioSection.locator('textarea')).toHaveCount(paragraphCountBefore + 1);
+
+    await bioSection.getByRole('button', { name: 'Remove paragraph' }).last().click();
+    await expect(bioSection.locator('textarea')).toHaveCount(paragraphCountBefore);
+  });
+});
+
+test.describe('reviews editor', () => {
+  test('adding a review shows it in the live preview and surfaces static/reviews.js', async ({ page }) => {
+    await unlock(page);
+    await page.getByRole('button', { name: 'Reviews' }).click();
+    await expect(page.locator('.adminReviewsEditor')).toBeVisible();
+
+    await page.getByRole('button', { name: 'Add review' }).click();
+    await page.getByLabel('Name').fill('E2E Test Reviewer');
+    await page.getByLabel(/Project date/).fill('January 2026');
+    await page.getByLabel(/^Text/).fill('An outstanding experience from start to finish.');
+    await page.getByRole('button', { name: 'Add review' }).click();
+
+    const preview = page.locator('.adminReviewsPreview');
+    await expect(preview.getByText('E2E Test Reviewer')).toBeVisible();
+    await expect(preview.getByText('An outstanding experience from start to finish.')).toBeVisible();
+
+    await page.getByRole('button', { name: 'Review Changes' }).click();
+    await expect(page.locator('.adminOutputPanel-fileHeader code')).toHaveText('static/reviews.js');
+    await expect(page.locator('.adminOutputPanel-file pre')).toContainText('E2E Test Reviewer');
+  });
+
+  test('editing and deleting a review updates the list and live preview', async ({ page }) => {
+    await unlock(page);
+    await page.getByRole('button', { name: 'Reviews' }).click();
+
+    const row = page.locator('.adminProjectsEditor-row', { hasText: 'Marisa C' }).first();
+    await row.getByRole('button', { name: 'Edit' }).click();
+    await page.getByLabel('Name').fill('Marisa Renamed via E2E');
+    await page.getByRole('button', { name: 'Save' }).click();
+
+    await expect(page.locator('.adminProjectsEditor-row', { hasText: 'Marisa Renamed via E2E' })).toBeVisible();
+    await expect(page.locator('.adminReviewsPreview').getByText('Marisa Renamed via E2E')).toBeVisible();
+
+    page.once('dialog', (dialog) => dialog.accept());
+    await page
+      .locator('.adminProjectsEditor-row', { hasText: 'Marisa Renamed via E2E' })
+      .getByRole('button', { name: 'Delete' })
+      .click();
+
+    await expect(page.locator('.adminProjectsEditor-row', { hasText: 'Marisa Renamed via E2E' })).toHaveCount(0);
+  });
+});

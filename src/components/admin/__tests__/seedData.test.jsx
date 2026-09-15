@@ -24,9 +24,10 @@ describe('seedDraft', () => {
     seedDraft.newProjectsOrder.pop();
   });
 
-  it('leaves the not-yet-built sections as placeholders', () => {
-    expect(seedDraft.aboutContent).toBeNull();
-    expect(seedDraft.reviews).toBeNull();
+  it('seeds about content and reviews from their static data files', () => {
+    expect(seedDraft.aboutContent.intro.heading).toBe('Architrave Design, Architect');
+    expect(seedDraft.reviews.length).toBeGreaterThan(0);
+    expect(seedDraft.reviews[0].id).toBeDefined();
   });
 
   it('seeds a transcribed layout for each supported listing page', () => {
