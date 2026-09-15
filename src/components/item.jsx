@@ -36,7 +36,7 @@ import TextBlurbFiller from './textBlurbFiller';
  * @param {string} text.title
  * @param {string} text.subTitle
  * 
- * @param {Node} content
+ * @param {Node|string} content - a string is treated as raw HTML (see embed tiles)
  */
 const Item = (data) => {
   const {
@@ -63,6 +63,13 @@ const Item = (data) => {
   
   if (text) {
     return <TextBlurb customClass={`${customClass} item`} {...data} />;
+  }
+
+  if (typeof content === 'string') {
+    // Raw HTML pasted verbatim (an embed tile's iframe markup) — set directly on this
+    // wrapping div, rather than nesting another element, so the DOM shape matches a
+    // node passed as `content` exactly (just this element's own children).
+    return <div className={`item ${customClass} image image${num}`} dangerouslySetInnerHTML={{ __html: content }} />;
   }
 
   if (content) {
@@ -98,7 +105,7 @@ Item.propTypes = {
       height: PropTypes.number
     })
   ]),
-  content: PropTypes.node,
+  content: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   link: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.shape({

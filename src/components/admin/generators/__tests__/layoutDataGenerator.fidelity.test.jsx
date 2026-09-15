@@ -21,6 +21,8 @@ import princessMargaretModernData from '../../../../../static/layouts/princess-m
 import rosedaleEdwardianData from '../../../../../static/layouts/rosedale-edwardian';
 import royalYorkFaceliftData from '../../../../../static/layouts/royal-york-facelift';
 import upperCanadaFarmhouseData from '../../../../../static/layouts/upper-canada-farmhouse';
+import princessMargaretClassicData from '../../../../../static/layouts/princess-margaret-classic';
+import classicCentreHallData from '../../../../../static/layouts/classic-centre-hall';
 
 // For each page migrated to the data-driven form, proves that hydrating its
 // static/layouts/<slug>.js data for editing and then generating it back produces text
@@ -62,7 +64,9 @@ const CASES = [
   { name: 'princess-margaret-modern.js', data: princessMargaretModernData, slug: '__generatedPrincessMargaretModernDataFidelity' },
   { name: 'rosedale-edwardian.js', data: rosedaleEdwardianData, slug: '__generatedRosedaleEdwardianDataFidelity' },
   { name: 'royal-york-facelift.js', data: royalYorkFaceliftData, slug: '__generatedRoyalYorkFaceliftDataFidelity' },
-  { name: 'upper-canada-farmhouse.js', data: upperCanadaFarmhouseData, slug: '__generatedUpperCanadaFarmhouseDataFidelity' }
+  { name: 'upper-canada-farmhouse.js', data: upperCanadaFarmhouseData, slug: '__generatedUpperCanadaFarmhouseDataFidelity' },
+  { name: 'princess-margaret-classic.js', data: princessMargaretClassicData, slug: '__generatedPrincessMargaretClassicDataFidelity' },
+  { name: 'classic-centre-hall.js', data: classicCentreHallData, slug: '__generatedClassicCentreHallDataFidelity' }
 ];
 
 describe('generateLayoutData fidelity against committed static/layouts files', () => {

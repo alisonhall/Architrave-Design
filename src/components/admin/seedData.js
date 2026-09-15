@@ -19,6 +19,8 @@ import princessMargaretModernLayoutData from '../../../static/layouts/princess-m
 import rosedaleEdwardianLayoutData from '../../../static/layouts/rosedale-edwardian';
 import royalYorkFaceliftLayoutData from '../../../static/layouts/royal-york-facelift';
 import upperCanadaFarmhouseLayoutData from '../../../static/layouts/upper-canada-farmhouse';
+import princessMargaretClassicLayoutData from '../../../static/layouts/princess-margaret-classic';
+import classicCentreHallLayoutData from '../../../static/layouts/classic-centre-hall';
 
 const clone = (value) => JSON.parse(JSON.stringify(value));
 
@@ -27,7 +29,7 @@ const clone = (value) => JSON.parse(JSON.stringify(value));
 // so returning users don't get a shallow merge of new seed sections with a stale
 // top-level value from before that section existed (e.g. an old empty `layouts: {}`
 // silently winning over a newly-seeded `layouts.newHomes`).
-export const SEED_VERSION = 7;
+export const SEED_VERSION = 8;
 
 /**
  * @description The admin draft's starting state. `projects`/order arrays come
@@ -73,7 +75,9 @@ export const seedDraft = {
     princessMargaretModernDetail: clone(hydrateLayoutData(princessMargaretModernLayoutData)),
     rosedaleEdwardianDetail: clone(hydrateLayoutData(rosedaleEdwardianLayoutData)),
     royalYorkFaceliftDetail: clone(hydrateLayoutData(royalYorkFaceliftLayoutData)),
-    upperCanadaFarmhouseDetail: clone(hydrateLayoutData(upperCanadaFarmhouseLayoutData))
+    upperCanadaFarmhouseDetail: clone(hydrateLayoutData(upperCanadaFarmhouseLayoutData)),
+    princessMargaretClassicDetail: clone(hydrateLayoutData(princessMargaretClassicLayoutData)),
+    classicCentreHallDetail: clone(hydrateLayoutData(classicCentreHallLayoutData))
   }
 };
 
@@ -90,9 +94,6 @@ export const seedDraft = {
 // upcomingProjectsOrder (a plain map over that array), so it's already covered by the
 // Projects section's ordering controls and doesn't need a layout editor of its own.
 //
-// princess-margaret-classic.jsx and classic-centre-hall.jsx aren't here either: both
-// embed Kuula 360°-tour iframes via a raw `content` prop, a page-specific pattern this
-// schema doesn't support yet (would need a dedicated `embed` tile kind).
 const listingConfig = (key, label, slug) => ({ key, label, dataFile: true, dataFilePath: `static/layouts/${slug}.js`, type: 'listing' });
 const detailConfig = (key, label, slug, projectKey) => ({
   key,
@@ -200,5 +201,17 @@ export const LAYOUT_PAGE_CONFIGS = {
     'Upper Canada Farmhouse (Renovations detail page)',
     'upper-canada-farmhouse',
     'upperCanadaFarmhouse'
+  ),
+  princessMargaretClassicDetail: detailConfig(
+    'princessMargaretClassicDetail',
+    'Princess Margaret Classic (New Homes detail page)',
+    'princess-margaret-classic',
+    'princessMargaretClassic'
+  ),
+  classicCentreHallDetail: detailConfig(
+    'classicCentreHallDetail',
+    'Classic Centre Hall (New Homes detail page)',
+    'classic-centre-hall',
+    'classicCentreHall'
   )
 };

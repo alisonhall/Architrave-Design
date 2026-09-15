@@ -83,9 +83,10 @@ const renderTile = (tileKey, context) => {
 
   if (tile.kind === 'embed') {
     // tile.html is raw markup pasted by the site owner (a Kuula 360°-tour iframe, e.g.)
-    // straight into static/layouts/<slug>.js — rendered verbatim so pasted HTML
-    // attributes (frameborder, allowfullscreen, etc.) don't need JSX-name translation.
-    return <Item num={num} content={<div dangerouslySetInnerHTML={{ __html: tile.html }} />} />;
+    // straight into static/layouts/<slug>.js — rendered verbatim (Item treats a string
+    // `content` as raw HTML) so pasted attributes (frameborder, allowfullscreen, etc.)
+    // don't need JSX-name translation or risk being silently dropped by it.
+    return <Item num={num} content={tile.html} />;
   }
 
   return <Item text={{ copy: tile.useIntroText ? introText : tile.text }} />;
