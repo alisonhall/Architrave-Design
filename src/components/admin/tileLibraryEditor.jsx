@@ -4,7 +4,10 @@ import PropTypes from 'prop-types';
 import { makeBlankTile, suggestTileKey } from './layoutHelpers';
 import AdminThumbnail from './adminThumbnail';
 
-const TileFields = ({ kind, values, onChange, projects }) => {
+// Exported so tileEditPopover.jsx (the click-to-edit-in-preview UI) can reuse the exact
+// same kind-specific fields as this library's own add/edit forms — one set of tile
+// field definitions, two entry points to them.
+export const TileFields = ({ kind, values, onChange, projects }) => {
   if (kind === 'project') {
     return (
       <>
@@ -136,7 +139,7 @@ TileFields.propTypes = {
   projects: PropTypes.object.isRequired
 };
 
-const TILE_KIND_LABELS = {
+export const TILE_KIND_LABELS = {
   project: 'project tile',
   filler: 'filler tile',
   image: 'image tile',
@@ -146,7 +149,7 @@ const TILE_KIND_LABELS = {
   placeholder: 'placeholder tile'
 };
 
-const tileSummary = (tile, projects) => {
+export const tileSummary = (tile, projects) => {
   if (tile.kind === 'project') return `Project tile — ${projects[tile.projectKey]?.projectName || tile.projectKey}`;
   if (tile.kind === 'filler') return `Filler image${tile.projectKey ? ` — ${projects[tile.projectKey]?.projectName}` : ''}`;
   if (tile.kind === 'image') return 'Image tile';
@@ -158,7 +161,7 @@ const tileSummary = (tile, projects) => {
 
 // A quick visual identifier for the tile list — only the kinds that actually carry an
 // image URL have one; everything else (text/description/embed/placeholder) has none.
-const tileThumbnailUrl = (tile, projects) => {
+export const tileThumbnailUrl = (tile, projects) => {
   if (tile.kind === 'project') return projects[tile.projectKey]?.mainImageUrl;
   if (tile.kind === 'filler' || tile.kind === 'image') return tile.imageUrl;
   return null;

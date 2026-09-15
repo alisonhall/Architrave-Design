@@ -5,7 +5,7 @@ import { LAYOUT_PAGE_CONFIGS } from './seedData';
 import { makeBlankDetailLayout, renameTileKeyInLayoutData } from './layoutHelpers';
 import TileLibraryEditor from './tileLibraryEditor';
 import LayoutTreeEditor from './layoutTreeEditor';
-import LayoutPreview from './layoutPreview';
+import EditableLayoutPreview from './editableLayoutPreview';
 
 const LISTING_TILE_KINDS = ['project', 'filler', 'image', 'text'];
 const DETAIL_TILE_KINDS = ['image', 'description', 'embed', 'placeholder'];
@@ -86,6 +86,15 @@ const LayoutsEditor = () => {
     ...renameTileKeyInLayoutData(pageLayout, oldKey, newKey)
   });
 
+  // Creating a brand-new tile from the click-to-edit-in-preview popover and assigning
+  // it to the clicked slot touches both `tiles` and one tree's `rows` — done here as one
+  // atomic updatePageLayout call per field, not two separate ones (see
+  // layoutClickOverlay.jsx's own note on why that would silently clobber one of them).
+  const createTileAndAssign = (field) => (key, values, rows) => updatePageLayout({
+    tiles: { ...pageLayout.tiles, [key]: values },
+    [field]: rows
+  });
+
   const isDual = pageLayout ? Boolean(pageLayout.defaultLayout) : false;
   const targetPath = pageConfig?.dataFilePath;
 
@@ -139,12 +148,17 @@ const LayoutsEditor = () => {
                     onChange={(rows) => updatePageLayout({ defaultLayout: rows })}
                     tiles={pageLayout.tiles}
                   />
-                  <LayoutPreview
+                  <EditableLayoutPreview
                     rows={pageLayout.defaultLayout}
                     tiles={pageLayout.tiles}
                     projects={projects}
                     introText={introText}
                     boundProject={boundProject}
+                    kinds={isDetailPage ? DETAIL_TILE_KINDS : LISTING_TILE_KINDS}
+                    onChangeRows={(rows) => updatePageLayout({ defaultLayout: rows })}
+                    onChangeTiles={(tiles) => updatePageLayout({ tiles })}
+                    onCreateTileAndAssign={createTileAndAssign('defaultLayout')}
+                    onRenameTile={renameTileKey}
                   />
                 </div>
               </section>
@@ -157,12 +171,17 @@ const LayoutsEditor = () => {
                     onChange={(rows) => updatePageLayout({ wideLayout: rows })}
                     tiles={pageLayout.tiles}
                   />
-                  <LayoutPreview
+                  <EditableLayoutPreview
                     rows={pageLayout.wideLayout}
                     tiles={pageLayout.tiles}
                     projects={projects}
                     introText={introText}
                     boundProject={boundProject}
+                    kinds={isDetailPage ? DETAIL_TILE_KINDS : LISTING_TILE_KINDS}
+                    onChangeRows={(rows) => updatePageLayout({ wideLayout: rows })}
+                    onChangeTiles={(tiles) => updatePageLayout({ tiles })}
+                    onCreateTileAndAssign={createTileAndAssign('wideLayout')}
+                    onRenameTile={renameTileKey}
                   />
                 </div>
               </section>
@@ -176,11 +195,16 @@ const LayoutsEditor = () => {
                   onChange={(rows) => updatePageLayout({ layout: rows })}
                   tiles={pageLayout.tiles}
                 />
-                <LayoutPreview
+                <EditableLayoutPreview
                   rows={pageLayout.layout}
                   tiles={pageLayout.tiles}
                   projects={projects}
                   boundProject={boundProject}
+                  kinds={isDetailPage ? DETAIL_TILE_KINDS : LISTING_TILE_KINDS}
+                  onChangeRows={(rows) => updatePageLayout({ layout: rows })}
+                  onChangeTiles={(tiles) => updatePageLayout({ tiles })}
+                  onCreateTileAndAssign={createTileAndAssign('layout')}
+                  onRenameTile={renameTileKey}
                 />
               </div>
             </section>

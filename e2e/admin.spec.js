@@ -418,3 +418,59 @@ test.describe('layouts editor — image and placeholder tiles', () => {
     await expect(page.locator('.adminLayoutPreview .textBlurbFiller')).toBeVisible();
   });
 });
+
+test.describe('layouts editor — click-to-edit-in-preview', () => {
+  const openLayouts = async (page, pageKey) => {
+    await unlock(page);
+    await page.getByRole('button', { name: 'Layouts' }).click();
+    await expect(page.locator('.adminLayoutsEditor')).toBeVisible();
+    if (pageKey) await page.getByLabel('Page').selectOption(pageKey);
+  };
+
+  test('clicking a tile in the preview opens a popover to edit it, and the edit reaches the Tile Library', async ({
+    page
+  }) => {
+    await openLayouts(page, 'creditRiverManor');
+
+    await page.locator('.adminLayoutPreview img').first().click();
+    const dialog = page.getByRole('dialog');
+    await expect(dialog).toBeVisible();
+    await expect(dialog.getByText('Editing tile: 1')).toBeVisible();
+
+    await dialog.getByLabel(/Background position/).fill('12% 34%');
+    await dialog.getByRole('button', { name: 'Save' }).click();
+    await expect(dialog).toHaveCount(0);
+
+    const tileRow = page.locator('.adminTileLibrary li', { hasText: '1 —' });
+    await tileRow.getByRole('button', { name: 'Edit' }).click();
+    await expect(page.getByLabel(/Background position/)).toHaveValue('12% 34%');
+  });
+
+  test('assigning an existing tile to an empty slot from the preview updates the layout', async ({ page }) => {
+    await openLayouts(page, 'kingswayGeorgianDetail');
+
+    await page.locator('.adminLayoutPreview .textBlurbFiller:visible').first().click();
+    const dialog = page.getByRole('dialog');
+    await expect(dialog.getByText('Assign a tile')).toBeVisible();
+
+    await dialog.getByText(/^frontFacade —/).click();
+    await expect(dialog).toHaveCount(0);
+
+    await page.getByRole('button', { name: 'Review Changes' }).click();
+    await expect(page.locator('.adminOutputPanel-fileHeader code')).toHaveText('static/layouts/kingsway-georgian.js');
+    await expect(page.locator('.adminOutputPanel-file pre')).toContainText("nodeType: 'tileRef'");
+  });
+
+  test('creating a new tile from an empty slot assigns it and adds it to the Tile Library', async ({ page }) => {
+    await openLayouts(page, 'kingswayGeorgianDetail');
+
+    await page.locator('.adminLayoutPreview .textBlurbFiller:visible').first().click();
+    const dialog = page.getByRole('dialog');
+    await dialog.getByRole('button', { name: 'Add image tile' }).click();
+    await dialog.getByLabel('Image URL').fill('https://example.com/e2e-popover-image.jpg');
+    await dialog.getByRole('button', { name: 'Add & assign' }).click();
+
+    await expect(dialog).toHaveCount(0);
+    await expect(page.locator('.adminTileLibrary li', { hasText: 'imageTile —' })).toBeVisible();
+  });
+});

@@ -310,3 +310,74 @@ describe('LayoutsEditor — renaming a tile', () => {
     expect(screen.getByText(/^2 —/)).toBeInTheDocument();
   });
 });
+
+describe('LayoutsEditor — click-to-edit-in-preview', () => {
+  beforeEach(() => {
+    window.sessionStorage.clear();
+  });
+
+  it('clicking a tile in the preview opens a popover for that exact tile', () => {
+    renderEditor();
+
+    fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'creditRiverManor' } });
+    fireEvent.click(document.querySelector('.adminLayoutPreview img'));
+
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+    expect(screen.getByText('Editing tile: 1')).toBeInTheDocument();
+  });
+
+  it('saving from the popover updates the tile and is reflected in the Tile Library list', () => {
+    renderEditor();
+
+    fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'creditRiverManor' } });
+    fireEvent.click(document.querySelector('.adminLayoutPreview img'));
+    fireEvent.change(screen.getByLabelText(/Background position/), { target: { value: '5% 5%' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    const row = screen.getByText(/^1 —/).closest('li');
+    fireEvent.click(within(row).getByRole('button', { name: 'Edit' }));
+    expect(screen.getByDisplayValue('5% 5%')).toBeInTheDocument();
+  });
+
+  it('renaming a tile from the popover keeps its placement working', () => {
+    renderEditor();
+
+    fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'creditRiverManor' } });
+    fireEvent.click(document.querySelector('.adminLayoutPreview img'));
+    fireEvent.change(screen.getByLabelText(/^Key/), { target: { value: 'frontFacadeViaPopover' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+
+    expect(screen.getByText(/^frontFacadeViaPopover —/)).toBeInTheDocument();
+    expect(screen.getAllByRole('img').length).toBeGreaterThan(0);
+  });
+
+  it('assigning an existing tile to an empty slot works from the preview', () => {
+    renderEditor();
+
+    // kingswayGeorgianDetail has real `empty` placements to click.
+    fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'kingswayGeorgianDetail' } });
+    const emptySlots = document.querySelectorAll('.adminLayoutPreview .textBlurbFiller');
+    expect(emptySlots.length).toBeGreaterThan(0);
+
+    fireEvent.click(emptySlots[0]);
+    const dialog = screen.getByRole('dialog');
+    expect(within(dialog).getByText('Assign a tile')).toBeInTheDocument();
+
+    fireEvent.click(within(dialog).getByText(/^frontFacade —/));
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  });
+
+  it('creating a brand-new tile from an empty slot adds it to the Tile Library and assigns it', () => {
+    renderEditor();
+
+    fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'kingswayGeorgianDetail' } });
+    fireEvent.click(document.querySelector('.adminLayoutPreview .textBlurbFiller'));
+    fireEvent.click(within(screen.getByRole('dialog')).getByRole('button', { name: 'Add image tile' }));
+    fireEvent.change(screen.getByLabelText('Image URL'), { target: { value: 'https://example.com/brand-new.jpg' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Add & assign' }));
+
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    expect(screen.getByText(/^imageTile —/)).toBeInTheDocument();
+  });
+});

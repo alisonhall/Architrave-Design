@@ -123,14 +123,14 @@ const renderColumn = (column, key, context) => {
     .map((child, index) => renderPlacement(child, index, context))
     .filter(Boolean);
   return (
-    <Column key={key} width={column.width}>
+    <Column key={key} width={column.width} domId={column.id}>
       {items}
     </Column>
   );
 };
 
 const renderRow = (row, key, context) => (
-  <Row key={key} height={row.height} imageHeight={row.imageHeight}>
+  <Row key={key} height={row.height} imageHeight={row.imageHeight} domId={row.id}>
     {row.columns.map((column, index) => renderColumn(column, column.id ?? index, context))}
   </Row>
 );
