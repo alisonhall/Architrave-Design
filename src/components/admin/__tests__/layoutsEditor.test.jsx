@@ -32,7 +32,7 @@ describe('LayoutsEditor', () => {
 
     fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'newHomes' } });
 
-    expect(screen.getByText('Editing: src/pages/portfolio/new-homes.jsx')).toBeInTheDocument();
+    expect(screen.getByText('Editing: static/layouts/new-homes.js')).toBeInTheDocument();
   });
 
   it('renders the tile library and both layout variants with previews for the active page', () => {

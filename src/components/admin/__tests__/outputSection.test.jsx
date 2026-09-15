@@ -104,7 +104,7 @@ describe('OutputSection', () => {
 
     fireEvent.click(screen.getByText('mutate new-homes layout'));
 
-    expect(screen.getByText('src/pages/portfolio/new-homes.jsx')).toBeInTheDocument();
+    expect(screen.getByText('static/layouts/new-homes.js')).toBeInTheDocument();
   });
 
   it('does not list new-homes.jsx when only unrelated draft data changes', () => {
@@ -117,6 +117,6 @@ describe('OutputSection', () => {
 
     fireEvent.click(screen.getByText('mutate intro'));
 
-    expect(screen.queryByText('src/pages/portfolio/new-homes.jsx')).not.toBeInTheDocument();
+    expect(screen.queryByText('static/layouts/new-homes.js')).not.toBeInTheDocument();
   });
 });

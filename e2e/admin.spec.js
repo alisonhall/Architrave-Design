@@ -135,7 +135,7 @@ test.describe('layouts editor', () => {
 
     await page.getByLabel('Page').selectOption('renovationsAdditions');
 
-    await expect(page.getByText('Editing: src/pages/portfolio/renovations-additions.jsx')).toBeVisible();
+    await expect(page.getByText('Editing: static/layouts/renovations-additions.js')).toBeVisible();
     await expect(page.locator('.adminLayoutPreview').first().getByText('Lytton Park Manor')).toBeVisible();
   });
 
@@ -165,7 +165,7 @@ test.describe('layouts editor', () => {
     expect(wideRowCountAfter).toBe(wideRowCountBefore);
 
     await page.getByRole('button', { name: 'Review Changes' }).click();
-    await expect(page.locator('.adminOutputPanel-fileHeader code')).toHaveText('src/pages/portfolio/new-homes.jsx');
+    await expect(page.locator('.adminOutputPanel-fileHeader code')).toHaveText('static/layouts/new-homes.js');
   });
 
   test('a detail page shows a single layout tree bound to its own project, with only image/description tile kinds', async ({

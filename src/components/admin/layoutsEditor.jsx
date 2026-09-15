@@ -35,7 +35,7 @@ const LayoutsEditor = () => {
   if (!pageLayout) return null;
 
   const isDual = Boolean(pageLayout.defaultLayout);
-  const targetPath = pageConfig.dataFilePath || pageConfig.filePath;
+  const targetPath = pageConfig.dataFilePath;
 
   return (
     <div className="adminLayoutsEditor">

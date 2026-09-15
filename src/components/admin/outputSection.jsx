@@ -3,7 +3,7 @@ import React from 'react';
 import { useDraftState } from './draftContext';
 import { seedDraft, LAYOUT_PAGE_CONFIGS } from './seedData';
 import { generateAppConstants } from './generators/appConstantsGenerator';
-import { generateLayoutPage, generateLayoutData } from './generators/layoutGenerator';
+import { generateLayoutData } from './generators/layoutGenerator';
 import OutputPanel from './outputPanel';
 
 const APP_CONSTANTS_FIELDS = [
@@ -44,19 +44,10 @@ const OutputSection = () => {
     if (!pageLayout) return;
     if (JSON.stringify(pageLayout) === JSON.stringify(seedDraft.layouts[pageKey])) return;
 
-    if (pageConfig.dataFile) {
-      files.push({
-        path: pageConfig.dataFilePath,
-        content: generateLayoutData(pageLayout),
-        note: "This is plain data — the real page's own file never needs to change. Its snapshot test (if any) will need updating afterward with `npm test -- -u` — review the diff before committing it."
-      });
-      return;
-    }
-
     files.push({
-      path: pageConfig.filePath,
-      content: generateLayoutPage(pageConfig, pageLayout),
-      note: 'Its snapshot test (if any) will need updating afterward with `npm test -- -u` — review the diff before committing it.'
+      path: pageConfig.dataFilePath,
+      content: generateLayoutData(pageLayout),
+      note: "This is plain data — the real page's own file never needs to change. Its snapshot test (if any) will need updating afterward with `npm test -- -u` — review the diff before committing it."
     });
   });
 

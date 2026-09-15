@@ -1,23 +1,24 @@
 import constants from '../../../static/app-constants';
-import indexLayoutData from '../../../static/layouts/index';
-import creditRiverManorLayoutData from '../../../static/layouts/credit-river-manor';
 import { hydrateLayoutData } from './layoutHelpers';
-import { newHomesLayout, newHomesPageConfig } from './seedLayouts/newHomes';
-import { renovationsAdditionsLayout, renovationsAdditionsPageConfig } from './seedLayouts/renovationsAdditions';
-import { hoggsHollowFrenchCountryLayout, hoggsHollowFrenchCountryPageConfig } from './seedLayouts/hoggsHollowFrenchCountry';
-import { hoggsHollowFrenchDetailLayout, hoggsHollowFrenchDetailPageConfig } from './seedLayouts/hoggsHollowFrenchDetail';
-import { hoggsHollowTraditionalDetailLayout, hoggsHollowTraditionalDetailPageConfig } from './seedLayouts/hoggsHollowTraditionalDetail';
-import { kingswayGeorgianDetailLayout, kingswayGeorgianDetailPageConfig } from './seedLayouts/kingswayGeorgianDetail';
-import { kingswayTransitionalDetailLayout, kingswayTransitionalDetailPageConfig } from './seedLayouts/kingswayTransitionalDetail';
-import { oakvilleExecutiveHomeDetailLayout, oakvilleExecutiveHomeDetailPageConfig } from './seedLayouts/oakvilleExecutiveHomeDetail';
-import { traditionalKingswayParkDetailLayout, traditionalKingswayParkDetailPageConfig } from './seedLayouts/traditionalKingswayParkDetail';
-import { etobicokeArtsAndCraftsDetailLayout, etobicokeArtsAndCraftsDetailPageConfig } from './seedLayouts/etobicokeArtsAndCraftsDetail';
-import { lorneParkInteriorDetailLayout, lorneParkInteriorDetailPageConfig } from './seedLayouts/lorneParkInteriorDetail';
-import { lyttonParkManorDetailLayout, lyttonParkManorDetailPageConfig } from './seedLayouts/lyttonParkManorDetail';
-import { princessMargaretModernDetailLayout, princessMargaretModernDetailPageConfig } from './seedLayouts/princessMargaretModernDetail';
-import { rosedaleEdwardianDetailLayout, rosedaleEdwardianDetailPageConfig } from './seedLayouts/rosedaleEdwardianDetail';
-import { royalYorkFaceliftDetailLayout, royalYorkFaceliftDetailPageConfig } from './seedLayouts/royalYorkFaceliftDetail';
-import { upperCanadaFarmhouseDetailLayout, upperCanadaFarmhouseDetailPageConfig } from './seedLayouts/upperCanadaFarmhouseDetail';
+
+import indexLayoutData from '../../../static/layouts/index';
+import newHomesLayoutData from '../../../static/layouts/new-homes';
+import renovationsAdditionsLayoutData from '../../../static/layouts/renovations-additions';
+import creditRiverManorLayoutData from '../../../static/layouts/credit-river-manor';
+import hoggsHollowFrenchCountryLayoutData from '../../../static/layouts/hoggs-hollow-french-country';
+import hoggsHollowFrenchLayoutData from '../../../static/layouts/hoggs-hollow-french';
+import hoggsHollowTraditionalLayoutData from '../../../static/layouts/hoggs-hollow-traditional';
+import kingswayGeorgianLayoutData from '../../../static/layouts/kingsway-georgian';
+import kingswayTransitionalLayoutData from '../../../static/layouts/kingsway-transitional';
+import oakvilleExecutiveHomeLayoutData from '../../../static/layouts/oakville-executive-home';
+import traditionalKingswayParkLayoutData from '../../../static/layouts/traditional-kingsway-park';
+import etobicokeArtsAndCraftsLayoutData from '../../../static/layouts/etobicoke-arts-and-crafts';
+import lorneParkInteriorLayoutData from '../../../static/layouts/lorne-park-interior';
+import lyttonParkManorLayoutData from '../../../static/layouts/lytton-park-manor';
+import princessMargaretModernLayoutData from '../../../static/layouts/princess-margaret-modern';
+import rosedaleEdwardianLayoutData from '../../../static/layouts/rosedale-edwardian';
+import royalYorkFaceliftLayoutData from '../../../static/layouts/royal-york-facelift';
+import upperCanadaFarmhouseLayoutData from '../../../static/layouts/upper-canada-farmhouse';
 
 const clone = (value) => JSON.parse(JSON.stringify(value));
 
@@ -26,14 +27,17 @@ const clone = (value) => JSON.parse(JSON.stringify(value));
 // so returning users don't get a shallow merge of new seed sections with a stale
 // top-level value from before that section existed (e.g. an old empty `layouts: {}`
 // silently winning over a newly-seeded `layouts.newHomes`).
-export const SEED_VERSION = 6;
+export const SEED_VERSION = 7;
 
 /**
- * @description The admin draft's starting state. `projects` and the ordering/unused
- * arrays already live as plain data in static/app-constants.js, so they're cloned
- * directly rather than transcribed. `aboutContent`, `reviews`, and the page `layouts`
- * are currently hardcoded JSX on their respective pages — those get filled in with a
- * hand-transcribed snapshot of the live markup as their editor phases land.
+ * @description The admin draft's starting state. `projects`/order arrays come
+ * straight from static/app-constants.js, and every page's layout comes straight from
+ * its static/layouts/<slug>.js — the same files the real pages render from (see
+ * src/components/listingPageLayout.jsx / detailPageLayout.jsx). There's nothing
+ * hand-transcribed or separately maintained for layouts any more: editing a page
+ * in the admin and applying the generated output via GitHub keeps this in sync
+ * automatically on the next build. `aboutContent`/`reviews` are still placeholders
+ * pending the same treatment in a later phase.
  */
 export const seedDraft = {
   projects: clone(constants.projects),
@@ -52,75 +56,149 @@ export const seedDraft = {
   aboutContent: null,
   reviews: null,
   layouts: {
-    // index and creditRiverManor are migrated to the data-driven form: their layout
-    // comes straight from static/layouts/*.js, the same file the real page renders
-    // from, hydrated with fresh ids for the tree editor. No transcription, no drift.
     index: clone(hydrateLayoutData(indexLayoutData)),
-    newHomes: clone(newHomesLayout),
-    renovationsAdditions: clone(renovationsAdditionsLayout),
+    newHomes: clone(hydrateLayoutData(newHomesLayoutData)),
+    renovationsAdditions: clone(hydrateLayoutData(renovationsAdditionsLayoutData)),
     creditRiverManor: clone(hydrateLayoutData(creditRiverManorLayoutData)),
-    hoggsHollowFrenchCountry: clone(hoggsHollowFrenchCountryLayout),
-    hoggsHollowFrenchDetail: clone(hoggsHollowFrenchDetailLayout),
-    hoggsHollowTraditionalDetail: clone(hoggsHollowTraditionalDetailLayout),
-    kingswayGeorgianDetail: clone(kingswayGeorgianDetailLayout),
-    kingswayTransitionalDetail: clone(kingswayTransitionalDetailLayout),
-    oakvilleExecutiveHomeDetail: clone(oakvilleExecutiveHomeDetailLayout),
-    traditionalKingswayParkDetail: clone(traditionalKingswayParkDetailLayout),
-    etobicokeArtsAndCraftsDetail: clone(etobicokeArtsAndCraftsDetailLayout),
-    lorneParkInteriorDetail: clone(lorneParkInteriorDetailLayout),
-    lyttonParkManorDetail: clone(lyttonParkManorDetailLayout),
-    princessMargaretModernDetail: clone(princessMargaretModernDetailLayout),
-    rosedaleEdwardianDetail: clone(rosedaleEdwardianDetailLayout),
-    royalYorkFaceliftDetail: clone(royalYorkFaceliftDetailLayout),
-    upperCanadaFarmhouseDetail: clone(upperCanadaFarmhouseDetailLayout)
+    hoggsHollowFrenchCountry: clone(hydrateLayoutData(hoggsHollowFrenchCountryLayoutData)),
+    hoggsHollowFrenchDetail: clone(hydrateLayoutData(hoggsHollowFrenchLayoutData)),
+    hoggsHollowTraditionalDetail: clone(hydrateLayoutData(hoggsHollowTraditionalLayoutData)),
+    kingswayGeorgianDetail: clone(hydrateLayoutData(kingswayGeorgianLayoutData)),
+    kingswayTransitionalDetail: clone(hydrateLayoutData(kingswayTransitionalLayoutData)),
+    oakvilleExecutiveHomeDetail: clone(hydrateLayoutData(oakvilleExecutiveHomeLayoutData)),
+    traditionalKingswayParkDetail: clone(hydrateLayoutData(traditionalKingswayParkLayoutData)),
+    etobicokeArtsAndCraftsDetail: clone(hydrateLayoutData(etobicokeArtsAndCraftsLayoutData)),
+    lorneParkInteriorDetail: clone(hydrateLayoutData(lorneParkInteriorLayoutData)),
+    lyttonParkManorDetail: clone(hydrateLayoutData(lyttonParkManorLayoutData)),
+    princessMargaretModernDetail: clone(hydrateLayoutData(princessMargaretModernLayoutData)),
+    rosedaleEdwardianDetail: clone(hydrateLayoutData(rosedaleEdwardianLayoutData)),
+    royalYorkFaceliftDetail: clone(hydrateLayoutData(royalYorkFaceliftLayoutData)),
+    upperCanadaFarmhouseDetail: clone(hydrateLayoutData(upperCanadaFarmhouseLayoutData))
   }
 };
 
 // Static, non-content configuration each supported page's layout generator needs —
-// not part of the editable draft.
-//
-// Pages with `dataFile: true` are migrated to the data-driven form: their layout lives
-// in static/layouts/<slug>.js (imported directly above), and editing them generates
-// that same plain-data file via generateLayoutData — no JSX, no separate seed, no
-// import-path/component-name bookkeeping needed. Pages without it are still on the
-// original hand-transcribed-seed mechanism (see seedLayouts/*.js) pending migration;
-// those need the fuller JSX-generation config (componentName, import paths, etc.)
-// consumed by generateLayoutPage.
+// not part of the editable draft. Every page here is on the data-driven form
+// (dataFile: true — see architecture notes in the project plan): its layout lives in
+// static/layouts/<slug>.js, and generateLayoutData serializes edits straight back to
+// that same file. `type` is 'detail' for a page bound to one project (tile kinds
+// image/description) or 'listing' for one that shares projects broadly (tile kinds
+// project/filler/text) — whether it has one tree or two is read from the data itself.
 //
 // upcoming.jsx is deliberately not here at all: unlike the other listing pages, it
 // isn't a hand-tuned Row/Column/Item tree — it's already fully generated from
 // upcomingProjectsOrder (a plain map over that array), so it's already covered by the
 // Projects section's ordering controls and doesn't need a layout editor of its own.
+//
+// princess-margaret-classic.jsx and classic-centre-hall.jsx aren't here either: both
+// embed Kuula 360°-tour iframes via a raw `content` prop, a page-specific pattern this
+// schema doesn't support yet (would need a dedicated `embed` tile kind).
+const listingConfig = (key, label, slug) => ({ key, label, dataFile: true, dataFilePath: `static/layouts/${slug}.js`, type: 'listing' });
+const detailConfig = (key, label, slug, projectKey) => ({
+  key,
+  label,
+  dataFile: true,
+  dataFilePath: `static/layouts/${slug}.js`,
+  type: 'detail',
+  projectKey
+});
+
 export const LAYOUT_PAGE_CONFIGS = {
-  index: {
-    key: 'index',
-    label: 'Home (index)',
-    dataFile: true,
-    dataFilePath: 'static/layouts/index.js',
-    type: 'listing'
-  },
-  newHomes: newHomesPageConfig,
-  renovationsAdditions: renovationsAdditionsPageConfig,
-  creditRiverManor: {
-    key: 'creditRiverManor',
-    label: 'Credit River Manor (New Homes detail page)',
-    dataFile: true,
-    dataFilePath: 'static/layouts/credit-river-manor.js',
-    type: 'detail',
-    projectKey: 'creditRiverManor'
-  },
-  hoggsHollowFrenchCountry: hoggsHollowFrenchCountryPageConfig,
-  hoggsHollowFrenchDetail: hoggsHollowFrenchDetailPageConfig,
-  hoggsHollowTraditionalDetail: hoggsHollowTraditionalDetailPageConfig,
-  kingswayGeorgianDetail: kingswayGeorgianDetailPageConfig,
-  kingswayTransitionalDetail: kingswayTransitionalDetailPageConfig,
-  oakvilleExecutiveHomeDetail: oakvilleExecutiveHomeDetailPageConfig,
-  traditionalKingswayParkDetail: traditionalKingswayParkDetailPageConfig,
-  etobicokeArtsAndCraftsDetail: etobicokeArtsAndCraftsDetailPageConfig,
-  lorneParkInteriorDetail: lorneParkInteriorDetailPageConfig,
-  lyttonParkManorDetail: lyttonParkManorDetailPageConfig,
-  princessMargaretModernDetail: princessMargaretModernDetailPageConfig,
-  rosedaleEdwardianDetail: rosedaleEdwardianDetailPageConfig,
-  royalYorkFaceliftDetail: royalYorkFaceliftDetailPageConfig,
-  upperCanadaFarmhouseDetail: upperCanadaFarmhouseDetailPageConfig
+  index: listingConfig('index', 'Home (index)', 'index'),
+  newHomes: listingConfig('newHomes', 'New Homes (portfolio listing)', 'new-homes'),
+  renovationsAdditions: listingConfig(
+    'renovationsAdditions',
+    'Renovations & Additions (portfolio listing)',
+    'renovations-additions'
+  ),
+  creditRiverManor: detailConfig(
+    'creditRiverManor',
+    'Credit River Manor (New Homes detail page)',
+    'credit-river-manor',
+    'creditRiverManor'
+  ),
+  hoggsHollowFrenchCountry: detailConfig(
+    'hoggsHollowFrenchCountry',
+    'Hoggs Hollow French Country (New Homes detail page)',
+    'hoggs-hollow-french-country',
+    'hoggsHollowFrenchCountry'
+  ),
+  hoggsHollowFrenchDetail: detailConfig(
+    'hoggsHollowFrenchDetail',
+    'Hoggs Hollow French (New Homes detail page)',
+    'hoggs-hollow-french',
+    'hoggsHollowFrench'
+  ),
+  hoggsHollowTraditionalDetail: detailConfig(
+    'hoggsHollowTraditionalDetail',
+    'Hoggs Hollow Traditional (New Homes detail page)',
+    'hoggs-hollow-traditional',
+    'hoggsHollowTraditional'
+  ),
+  kingswayGeorgianDetail: detailConfig(
+    'kingswayGeorgianDetail',
+    'Kingsway Georgian (New Homes detail page)',
+    'kingsway-georgian',
+    'kingswayGeorgian'
+  ),
+  kingswayTransitionalDetail: detailConfig(
+    'kingswayTransitionalDetail',
+    'Kingsway Transitional (New Homes detail page)',
+    'kingsway-transitional',
+    'kingswayTransitional'
+  ),
+  oakvilleExecutiveHomeDetail: detailConfig(
+    'oakvilleExecutiveHomeDetail',
+    'Oakville Executive Home (New Homes detail page)',
+    'oakville-executive-home',
+    'oakvilleExecutiveHome'
+  ),
+  traditionalKingswayParkDetail: detailConfig(
+    'traditionalKingswayParkDetail',
+    'Traditional Kingsway Park (New Homes detail page)',
+    'traditional-kingsway-park',
+    'traditionalKingswayPark'
+  ),
+  etobicokeArtsAndCraftsDetail: detailConfig(
+    'etobicokeArtsAndCraftsDetail',
+    'Etobicoke Arts and Crafts (Renovations detail page)',
+    'etobicoke-arts-and-crafts',
+    'etobicokeArtsAndCrafts'
+  ),
+  lorneParkInteriorDetail: detailConfig(
+    'lorneParkInteriorDetail',
+    'Lorne Park Interior (Renovations detail page)',
+    'lorne-park-interior',
+    'lorneParkInterior'
+  ),
+  lyttonParkManorDetail: detailConfig(
+    'lyttonParkManorDetail',
+    'Lytton Park Manor (Renovations detail page)',
+    'lytton-park-manor',
+    'lyttonParkManor'
+  ),
+  princessMargaretModernDetail: detailConfig(
+    'princessMargaretModernDetail',
+    'Princess Margaret Modern (Renovations detail page)',
+    'princess-margaret-modern',
+    'princessMargaretModern'
+  ),
+  rosedaleEdwardianDetail: detailConfig(
+    'rosedaleEdwardianDetail',
+    'Rosedale Edwardian (Renovations detail page)',
+    'rosedale-edwardian',
+    'rosedaleEdwardian'
+  ),
+  royalYorkFaceliftDetail: detailConfig(
+    'royalYorkFaceliftDetail',
+    'Royal York Facelift (Renovations detail page)',
+    'royal-york-facelift',
+    'royalYorkFacelift'
+  ),
+  upperCanadaFarmhouseDetail: detailConfig(
+    'upperCanadaFarmhouseDetail',
+    'Upper Canada Farmhouse (Renovations detail page)',
+    'upper-canada-farmhouse',
+    'upperCanadaFarmhouse'
+  )
 };
