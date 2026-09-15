@@ -31,7 +31,13 @@ const renderTile = (tileKey, context) => {
   }
 
   if (tile.kind === 'image') {
-    return <Item num={num} image={{ imageUrl: tile.imageUrl }} />;
+    return (
+      <Item
+        num={num}
+        image={{ imageUrl: tile.imageUrl, backgroundPosition: tile.backgroundPosition }}
+        text={tile.overlayText ? { copy: tile.overlayText } : undefined}
+      />
+    );
   }
 
   if (tile.kind === 'description') {
@@ -46,6 +52,7 @@ const renderPlacement = (placement, context) => {
   if (placement.nodeType === 'tileRef') {
     return <React.Fragment key={placement.id}>{renderTile(placement.tileKey, context)}</React.Fragment>;
   }
+  if (placement.nodeType === 'empty') return <Item key={placement.id} />;
   return <RenderedRow key={placement.id} row={placement.row} context={context} />;
 };
 

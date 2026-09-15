@@ -54,14 +54,32 @@ const TileFields = ({ kind, values, onChange, projects }) => {
 
   if (kind === 'image') {
     return (
-      <label>
-        Image URL
-        <input
-          type="text"
-          value={values.imageUrl || ''}
-          onChange={(e) => onChange({ ...values, imageUrl: e.target.value })}
-        />
-      </label>
+      <>
+        <label>
+          Image URL
+          <input
+            type="text"
+            value={values.imageUrl || ''}
+            onChange={(e) => onChange({ ...values, imageUrl: e.target.value })}
+          />
+        </label>
+        <label>
+          Background position <span className="adminProjectForm-hint">(optional, e.g. "100% 0%")</span>
+          <input
+            type="text"
+            value={values.backgroundPosition || ''}
+            onChange={(e) => onChange({ ...values, backgroundPosition: e.target.value })}
+          />
+        </label>
+        <label>
+          Overlay text <span className="adminProjectForm-hint">(optional, e.g. "Before")</span>
+          <input
+            type="text"
+            value={values.overlayText || ''}
+            onChange={(e) => onChange({ ...values, overlayText: e.target.value })}
+          />
+        </label>
+      </>
     );
   }
 

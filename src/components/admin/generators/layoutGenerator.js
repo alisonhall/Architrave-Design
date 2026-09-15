@@ -53,12 +53,18 @@ ${indent(level)})`;
   }
 
   if (tile.kind === 'image') {
+    const backgroundPositionLine = tile.backgroundPosition
+      ? `,\n${indent(level + 3)}backgroundPosition: ${quote(tile.backgroundPosition)}`
+      : '';
+    const textLines = tile.overlayText
+      ? `\n${indent(level + 2)}text={{\n${indent(level + 3)}copy: ${quote(tile.overlayText)}\n${indent(level + 2)}}}`
+      : '';
     return `(
 ${indent(level + 1)}<Item
 ${indent(level + 2)}num={${num}}
 ${indent(level + 2)}image={{
-${indent(level + 3)}imageUrl: ${quote(tile.imageUrl)}
-${indent(level + 2)}}}
+${indent(level + 3)}imageUrl: ${quote(tile.imageUrl)}${backgroundPositionLine}
+${indent(level + 2)}}}${textLines}
 ${indent(level + 1)}/>
 ${indent(level)})`;
   }
@@ -97,6 +103,7 @@ const generateTilesObject = (tiles, defaultLayoutRows, wideLayoutRows) => {
 
 const generatePlacement = (placement, level) => {
   if (placement.nodeType === 'tileRef') return `${indent(level)}{tiles${tilePropertyAccess(placement.tileKey)}}`;
+  if (placement.nodeType === 'empty') return `${indent(level)}<Item />`;
   return generateRow(placement.row, level);
 };
 
@@ -151,9 +158,35 @@ export default ${componentName}
 `;
 };
 
+// A detail page's section, ending in a PrevNextProjectLinks bound to its one project —
+// unlike a listing page's section, this is repeated inside each section on a
+// dual-layout detail page (see generateDetailPage), not placed once outside them.
+const generateDetailSection = (className, rows, level) => {
+  const body = rows.map((row) => generateRow(row, level + 1)).join('\n');
+  return `${indent(level)}<section className=${quote(className)}>
+${body}
+${indent(level + 1)}<PrevNextProjectLinks project={project} />
+${indent(level)}</section>`;
+};
+
 const generateDetailPage = (pageConfig, layoutDraft) => {
-  const { tiles, layout } = layoutDraft;
-  const { componentName, mainClasses, sectionClassName, projectKey, componentsPath, staticPath } = pageConfig;
+  const { tiles } = layoutDraft;
+  const { componentName, mainClasses, projectKey, componentsPath, staticPath } = pageConfig;
+  // Most detail pages have a single flat layout tree; some (e.g. ones transcribed from
+  // pages with a lot of content) also have a separate wide-screen tree, exactly like a
+  // listing page's defaultLayout/wideLayout split — pageConfig.defaultSectionClassName
+  // being set is what distinguishes the two shapes.
+  const isDual = Boolean(pageConfig.defaultSectionClassName);
+
+  const sectionsText = isDual
+    ? [
+        generateDetailSection(pageConfig.defaultSectionClassName, layoutDraft.defaultLayout, 2),
+        generateDetailSection(pageConfig.wideSectionClassName, layoutDraft.wideLayout, 2)
+      ].join('\n')
+    : generateDetailSection(pageConfig.sectionClassName, layoutDraft.layout, 2);
+
+  const primaryRows = isDual ? layoutDraft.defaultLayout : layoutDraft.layout;
+  const secondaryRows = isDual ? layoutDraft.wideLayout : [];
 
   return `import React from 'react';
 
@@ -168,15 +201,12 @@ import PrevNextProjectLinks from '${componentsPath}/prevNextProjectLinks';
 
 const project = constants.projects.${projectKey};
 
-${generateTilesObject(tiles, layout, [])}
+${generateTilesObject(tiles, primaryRows, secondaryRows)}
 
 const ${componentName} = (props) => (
 ${indent(1)}<Layout urlPath={props.location.pathname} mainClasses=${quote(mainClasses)}>
 ${indent(2)}<Seo />
-${indent(2)}<section className=${quote(sectionClassName)}>
-${layout.map((row) => generateRow(row, 3)).join('\n')}
-${indent(3)}<PrevNextProjectLinks project={project} />
-${indent(2)}</section>
+${sectionsText}
 ${indent(1)}</Layout>
 )
 

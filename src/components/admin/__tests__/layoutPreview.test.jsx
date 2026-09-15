@@ -112,4 +112,23 @@ describe('LayoutPreview', () => {
 
     expect(screen.queryByRole('heading')).not.toBeInTheDocument();
   });
+
+  it('renders an image tile with an overlay caption', () => {
+    const tiles = { beforeImage: { kind: 'image', num: 2, imageUrl: 'https://example.com/before.jpg', overlayText: 'Before' } };
+    const rows = [row('r1', [column('c1', [tileRef('p1', 'beforeImage')])])];
+
+    render(<LayoutPreview rows={rows} tiles={tiles} projects={projects} />);
+
+    expect(screen.getByText('Before')).toBeInTheDocument();
+  });
+
+  it('renders an empty placeholder placement without throwing', () => {
+    const rows = [row('r1', [column('c1', [{ id: 'empty1', nodeType: 'empty' }])])];
+
+    const { container } = render(<LayoutPreview rows={rows} tiles={{}} projects={projects} />);
+
+    expect(container.querySelector('.column')).toBeInTheDocument();
+    expect(screen.queryByRole('img')).not.toBeInTheDocument();
+    expect(screen.queryByRole('link')).not.toBeInTheDocument();
+  });
 });

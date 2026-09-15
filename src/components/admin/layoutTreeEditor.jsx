@@ -8,7 +8,8 @@ import {
   makeBlankRow,
   makeBlankColumn,
   makeRowPlacement,
-  makeTilePlacement
+  makeTilePlacement,
+  makeEmptyPlacement
 } from './layoutHelpers';
 
 const numberOrUndefined = (value) => (value === '' ? undefined : Number(value));
@@ -50,6 +51,21 @@ const PlacementEditor = ({ placement, onChange, onRemove, onMoveUp, onMoveDown, 
     );
   }
 
+  if (placement.nodeType === 'empty') {
+    return (
+      <div className="adminLayoutTree-placement">
+        <span className="adminProjectForm-hint">Empty placeholder</span>
+        <ReorderControls
+          onMoveUp={onMoveUp}
+          onMoveDown={onMoveDown}
+          canMoveUp={canMoveUp}
+          canMoveDown={canMoveDown}
+          onRemove={onRemove}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="adminLayoutTree-placement">
       <select value={placement.tileKey} onChange={(e) => onChange({ ...placement, tileKey: e.target.value })}>
@@ -84,6 +100,7 @@ const ColumnEditor = ({ column, onChange, onRemove, onMoveUp, onMoveDown, canMov
   const moveChild = (index, delta) => onChange({ ...column, children: moveAt(column.children, index, delta) });
   const addTile = () => onChange({ ...column, children: [...column.children, makeTilePlacement('')] });
   const addNestedRow = () => onChange({ ...column, children: [...column.children, makeRowPlacement()] });
+  const addEmpty = () => onChange({ ...column, children: [...column.children, makeEmptyPlacement()] });
 
   return (
     <div className="adminLayoutTree-column">
@@ -117,6 +134,7 @@ const ColumnEditor = ({ column, onChange, onRemove, onMoveUp, onMoveDown, canMov
       <div className="adminLayoutTree-addButtons">
         <button type="button" onClick={addTile}>Add tile</button>
         <button type="button" onClick={addNestedRow}>Add nested row</button>
+        <button type="button" onClick={addEmpty}>Add empty placeholder</button>
       </div>
     </div>
   );

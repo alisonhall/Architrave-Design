@@ -3,6 +3,20 @@ import { newHomesLayout, newHomesPageConfig } from './seedLayouts/newHomes';
 import { indexPageLayout, indexPageConfig } from './seedLayouts/indexPage';
 import { renovationsAdditionsLayout, renovationsAdditionsPageConfig } from './seedLayouts/renovationsAdditions';
 import { creditRiverManorLayout, creditRiverManorPageConfig } from './seedLayouts/creditRiverManor';
+import { hoggsHollowFrenchCountryLayout, hoggsHollowFrenchCountryPageConfig } from './seedLayouts/hoggsHollowFrenchCountry';
+import { hoggsHollowFrenchDetailLayout, hoggsHollowFrenchDetailPageConfig } from './seedLayouts/hoggsHollowFrenchDetail';
+import { hoggsHollowTraditionalDetailLayout, hoggsHollowTraditionalDetailPageConfig } from './seedLayouts/hoggsHollowTraditionalDetail';
+import { kingswayGeorgianDetailLayout, kingswayGeorgianDetailPageConfig } from './seedLayouts/kingswayGeorgianDetail';
+import { kingswayTransitionalDetailLayout, kingswayTransitionalDetailPageConfig } from './seedLayouts/kingswayTransitionalDetail';
+import { oakvilleExecutiveHomeDetailLayout, oakvilleExecutiveHomeDetailPageConfig } from './seedLayouts/oakvilleExecutiveHomeDetail';
+import { traditionalKingswayParkDetailLayout, traditionalKingswayParkDetailPageConfig } from './seedLayouts/traditionalKingswayParkDetail';
+import { etobicokeArtsAndCraftsDetailLayout, etobicokeArtsAndCraftsDetailPageConfig } from './seedLayouts/etobicokeArtsAndCraftsDetail';
+import { lorneParkInteriorDetailLayout, lorneParkInteriorDetailPageConfig } from './seedLayouts/lorneParkInteriorDetail';
+import { lyttonParkManorDetailLayout, lyttonParkManorDetailPageConfig } from './seedLayouts/lyttonParkManorDetail';
+import { princessMargaretModernDetailLayout, princessMargaretModernDetailPageConfig } from './seedLayouts/princessMargaretModernDetail';
+import { rosedaleEdwardianDetailLayout, rosedaleEdwardianDetailPageConfig } from './seedLayouts/rosedaleEdwardianDetail';
+import { royalYorkFaceliftDetailLayout, royalYorkFaceliftDetailPageConfig } from './seedLayouts/royalYorkFaceliftDetail';
+import { upperCanadaFarmhouseDetailLayout, upperCanadaFarmhouseDetailPageConfig } from './seedLayouts/upperCanadaFarmhouseDetail';
 
 const clone = (value) => JSON.parse(JSON.stringify(value));
 
@@ -11,7 +25,7 @@ const clone = (value) => JSON.parse(JSON.stringify(value));
 // so returning users don't get a shallow merge of new seed sections with a stale
 // top-level value from before that section existed (e.g. an old empty `layouts: {}`
 // silently winning over a newly-seeded `layouts.newHomes`).
-export const SEED_VERSION = 4;
+export const SEED_VERSION = 6;
 
 /**
  * @description The admin draft's starting state. `projects` and the ordering/unused
@@ -40,7 +54,21 @@ export const seedDraft = {
     index: clone(indexPageLayout),
     newHomes: clone(newHomesLayout),
     renovationsAdditions: clone(renovationsAdditionsLayout),
-    creditRiverManor: clone(creditRiverManorLayout)
+    creditRiverManor: clone(creditRiverManorLayout),
+    hoggsHollowFrenchCountry: clone(hoggsHollowFrenchCountryLayout),
+    hoggsHollowFrenchDetail: clone(hoggsHollowFrenchDetailLayout),
+    hoggsHollowTraditionalDetail: clone(hoggsHollowTraditionalDetailLayout),
+    kingswayGeorgianDetail: clone(kingswayGeorgianDetailLayout),
+    kingswayTransitionalDetail: clone(kingswayTransitionalDetailLayout),
+    oakvilleExecutiveHomeDetail: clone(oakvilleExecutiveHomeDetailLayout),
+    traditionalKingswayParkDetail: clone(traditionalKingswayParkDetailLayout),
+    etobicokeArtsAndCraftsDetail: clone(etobicokeArtsAndCraftsDetailLayout),
+    lorneParkInteriorDetail: clone(lorneParkInteriorDetailLayout),
+    lyttonParkManorDetail: clone(lyttonParkManorDetailLayout),
+    princessMargaretModernDetail: clone(princessMargaretModernDetailLayout),
+    rosedaleEdwardianDetail: clone(rosedaleEdwardianDetailLayout),
+    royalYorkFaceliftDetail: clone(royalYorkFaceliftDetailLayout),
+    upperCanadaFarmhouseDetail: clone(upperCanadaFarmhouseDetailLayout)
   }
 };
 
@@ -59,5 +87,19 @@ export const LAYOUT_PAGE_CONFIGS = {
   index: indexPageConfig,
   newHomes: newHomesPageConfig,
   renovationsAdditions: renovationsAdditionsPageConfig,
-  creditRiverManor: creditRiverManorPageConfig
+  creditRiverManor: creditRiverManorPageConfig,
+  hoggsHollowFrenchCountry: hoggsHollowFrenchCountryPageConfig,
+  hoggsHollowFrenchDetail: hoggsHollowFrenchDetailPageConfig,
+  hoggsHollowTraditionalDetail: hoggsHollowTraditionalDetailPageConfig,
+  kingswayGeorgianDetail: kingswayGeorgianDetailPageConfig,
+  kingswayTransitionalDetail: kingswayTransitionalDetailPageConfig,
+  oakvilleExecutiveHomeDetail: oakvilleExecutiveHomeDetailPageConfig,
+  traditionalKingswayParkDetail: traditionalKingswayParkDetailPageConfig,
+  etobicokeArtsAndCraftsDetail: etobicokeArtsAndCraftsDetailPageConfig,
+  lorneParkInteriorDetail: lorneParkInteriorDetailPageConfig,
+  lyttonParkManorDetail: lyttonParkManorDetailPageConfig,
+  princessMargaretModernDetail: princessMargaretModernDetailPageConfig,
+  rosedaleEdwardianDetail: rosedaleEdwardianDetailPageConfig,
+  royalYorkFaceliftDetail: royalYorkFaceliftDetailPageConfig,
+  upperCanadaFarmhouseDetail: upperCanadaFarmhouseDetailPageConfig
 };

@@ -78,7 +78,7 @@ describe('makeBlankTile', () => {
   });
 
   it('builds a blank image tile (detail pages)', () => {
-    expect(makeBlankTile('image')).toEqual({ kind: 'image', imageUrl: '' });
+    expect(makeBlankTile('image')).toEqual({ kind: 'image', imageUrl: '', backgroundPosition: '', overlayText: '' });
   });
 
   it('builds a blank description tile with no fields (detail pages)', () => {

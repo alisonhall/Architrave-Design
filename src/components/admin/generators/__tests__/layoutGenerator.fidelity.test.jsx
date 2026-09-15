@@ -9,6 +9,35 @@ import RealIndexPage from '../../../../pages/index';
 import RealNewHomes from '../../../../pages/portfolio/new-homes';
 import RealRenovationsAdditions from '../../../../pages/portfolio/renovations-additions';
 import RealCreditRiverManor from '../../../../pages/portfolio/new-homes/credit-river-manor';
+import RealHoggsHollowFrenchCountry from '../../../../pages/portfolio/new-homes/hoggs-hollow-french-country';
+import RealHoggsHollowFrench from '../../../../pages/portfolio/new-homes/hoggs-hollow-french';
+import RealHoggsHollowTraditional from '../../../../pages/portfolio/new-homes/hoggs-hollow-traditional';
+import RealKingswayGeorgian from '../../../../pages/portfolio/new-homes/kingsway-georgian';
+import RealKingswayTransitional from '../../../../pages/portfolio/new-homes/kingsway-transitional';
+import RealOakvilleExecutiveHome from '../../../../pages/portfolio/new-homes/oakville-executive-home';
+import RealTraditionalKingswayPark from '../../../../pages/portfolio/new-homes/traditional-kingsway-park';
+import RealEtobicokeArtsAndCrafts from '../../../../pages/portfolio/renovations-additions/etobicoke-arts-and-crafts';
+import RealLorneParkInterior from '../../../../pages/portfolio/renovations-additions/lorne-park-interior';
+import RealLyttonParkManor from '../../../../pages/portfolio/renovations-additions/lytton-park-manor';
+import RealPrincessMargaretModern from '../../../../pages/portfolio/renovations-additions/princess-margaret-modern';
+import RealRosedaleEdwardian from '../../../../pages/portfolio/renovations-additions/rosedale-edwardian';
+import RealRoyalYorkFacelift from '../../../../pages/portfolio/renovations-additions/royal-york-facelift';
+import RealUpperCanadaFarmhouse from '../../../../pages/portfolio/renovations-additions/upper-canada-farmhouse';
+
+const detailCase = (folder, name, layoutKey, RealComponent, slug) => ({
+  name: `${folder}/${slug}.jsx (a detail page)`,
+  layoutKey,
+  generatedPath: path.join(__dirname, `../../../../pages/portfolio/${folder}/__generated${name}ForTest.jsx`),
+  requirePath: `../../../../pages/portfolio/${folder}/__generated${name}ForTest`,
+  RealComponent,
+  pathname: `/portfolio/${folder}/${slug}/`
+});
+
+const newHomesDetailCase = (name, layoutKey, RealComponent, slug) =>
+  detailCase('new-homes', name, layoutKey, RealComponent, slug);
+
+const renovationsDetailCase = (name, layoutKey, RealComponent, slug) =>
+  detailCase('renovations-additions', name, layoutKey, RealComponent, slug);
 
 // For each supported page, writes the generated text next to the real one so Jest's
 // normal jsx transform picks it up, then requires and renders it — proving the
@@ -39,14 +68,61 @@ const CASES = [
     RealComponent: RealRenovationsAdditions,
     pathname: '/portfolio/renovations-additions/'
   },
-  {
-    name: 'new-homes/credit-river-manor.jsx (a detail page)',
-    layoutKey: 'creditRiverManor',
-    generatedPath: path.join(__dirname, '../../../../pages/portfolio/new-homes/__generatedCreditRiverManorForTest.jsx'),
-    requirePath: '../../../../pages/portfolio/new-homes/__generatedCreditRiverManorForTest',
-    RealComponent: RealCreditRiverManor,
-    pathname: '/portfolio/new-homes/credit-river-manor/'
-  }
+  newHomesDetailCase('CreditRiverManor', 'creditRiverManor', RealCreditRiverManor, 'credit-river-manor'),
+  newHomesDetailCase(
+    'HoggsHollowFrenchCountry',
+    'hoggsHollowFrenchCountry',
+    RealHoggsHollowFrenchCountry,
+    'hoggs-hollow-french-country'
+  ),
+  newHomesDetailCase('HoggsHollowFrenchDetail', 'hoggsHollowFrenchDetail', RealHoggsHollowFrench, 'hoggs-hollow-french'),
+  newHomesDetailCase(
+    'HoggsHollowTraditionalDetail',
+    'hoggsHollowTraditionalDetail',
+    RealHoggsHollowTraditional,
+    'hoggs-hollow-traditional'
+  ),
+  newHomesDetailCase('KingswayGeorgianDetail', 'kingswayGeorgianDetail', RealKingswayGeorgian, 'kingsway-georgian'),
+  newHomesDetailCase(
+    'KingswayTransitionalDetail',
+    'kingswayTransitionalDetail',
+    RealKingswayTransitional,
+    'kingsway-transitional'
+  ),
+  newHomesDetailCase(
+    'OakvilleExecutiveHomeDetail',
+    'oakvilleExecutiveHomeDetail',
+    RealOakvilleExecutiveHome,
+    'oakville-executive-home'
+  ),
+  newHomesDetailCase(
+    'TraditionalKingswayParkDetail',
+    'traditionalKingswayParkDetail',
+    RealTraditionalKingswayPark,
+    'traditional-kingsway-park'
+  ),
+  renovationsDetailCase(
+    'EtobicokeArtsAndCraftsDetail',
+    'etobicokeArtsAndCraftsDetail',
+    RealEtobicokeArtsAndCrafts,
+    'etobicoke-arts-and-crafts'
+  ),
+  renovationsDetailCase('LorneParkInteriorDetail', 'lorneParkInteriorDetail', RealLorneParkInterior, 'lorne-park-interior'),
+  renovationsDetailCase('LyttonParkManorDetail', 'lyttonParkManorDetail', RealLyttonParkManor, 'lytton-park-manor'),
+  renovationsDetailCase(
+    'PrincessMargaretModernDetail',
+    'princessMargaretModernDetail',
+    RealPrincessMargaretModern,
+    'princess-margaret-modern'
+  ),
+  renovationsDetailCase('RosedaleEdwardianDetail', 'rosedaleEdwardianDetail', RealRosedaleEdwardian, 'rosedale-edwardian'),
+  renovationsDetailCase('RoyalYorkFaceliftDetail', 'royalYorkFaceliftDetail', RealRoyalYorkFacelift, 'royal-york-facelift'),
+  renovationsDetailCase(
+    'UpperCanadaFarmhouseDetail',
+    'upperCanadaFarmhouseDetail',
+    RealUpperCanadaFarmhouse,
+    'upper-canada-farmhouse'
+  )
 ];
 
 describe('generateLayoutPage fidelity', () => {

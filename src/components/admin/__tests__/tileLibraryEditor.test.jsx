@@ -123,7 +123,37 @@ describe('TileLibraryEditor', () => {
     fireEvent.change(screen.getByLabelText('Image URL'), { target: { value: 'https://example.com/room.jpg' } });
     fireEvent.click(screen.getByRole('button', { name: 'Add tile' }));
 
-    expect(onChange).toHaveBeenCalledWith({ imageTile: { kind: 'image', imageUrl: 'https://example.com/room.jpg' } });
+    expect(onChange).toHaveBeenCalledWith({
+      imageTile: { kind: 'image', imageUrl: 'https://example.com/room.jpg', backgroundPosition: '', overlayText: '' }
+    });
+  });
+
+  it('sets a background position on an image tile', () => {
+    const onChange = jest.fn();
+    render(<TileLibraryEditor tiles={{}} onChange={onChange} projects={projects} kinds={['image', 'description']} />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Add image tile' }));
+    fireEvent.change(screen.getByLabelText('Image URL'), { target: { value: 'https://example.com/room.jpg' } });
+    fireEvent.change(screen.getByLabelText(/Background position/), { target: { value: '100% 0%' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Add tile' }));
+
+    expect(onChange).toHaveBeenCalledWith({
+      imageTile: { kind: 'image', imageUrl: 'https://example.com/room.jpg', backgroundPosition: '100% 0%', overlayText: '' }
+    });
+  });
+
+  it('sets an overlay text on an image tile', () => {
+    const onChange = jest.fn();
+    render(<TileLibraryEditor tiles={{}} onChange={onChange} projects={projects} kinds={['image', 'description']} />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Add image tile' }));
+    fireEvent.change(screen.getByLabelText('Image URL'), { target: { value: 'https://example.com/before.jpg' } });
+    fireEvent.change(screen.getByLabelText(/Overlay text/), { target: { value: 'Before' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Add tile' }));
+
+    expect(onChange).toHaveBeenCalledWith({
+      imageTile: { kind: 'image', imageUrl: 'https://example.com/before.jpg', backgroundPosition: '', overlayText: 'Before' }
+    });
   });
 
   it('adds a description tile with no configurable fields (detail pages)', () => {

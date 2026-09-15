@@ -161,6 +161,20 @@ describe('generateLayoutPage', () => {
     expect(text).toContain("{tiles['1']}");
     expect(text).not.toContain('{tiles.1}');
   });
+
+  it('emits a bare <Item /> for an empty placeholder placement', () => {
+    const layout = baseLayout({
+      defaultLayout: [
+        rowNode('r1', {}, [
+          columnNode('c1', {}, [tileRef('p1', 'projectA')]),
+          columnNode('c2', {}, [{ id: 'empty1', nodeType: 'empty' }])
+        ])
+      ],
+      wideLayout: []
+    });
+
+    expect(generateLayoutPage(pageConfig, layout)).toContain('<Item />');
+  });
 });
 
 describe('generateLayoutPage (detail pages)', () => {
@@ -215,6 +229,32 @@ describe('generateLayoutPage (detail pages)', () => {
     expect(text).not.toContain('<Link');
   });
 
+  it('includes a backgroundPosition on an image tile only when one is set', () => {
+    const withPosition = detailLayout({
+      tiles: {
+        image1: { kind: 'image', num: 1, imageUrl: 'https://example.com/a.jpg', backgroundPosition: '100% 0%' }
+      }
+    });
+
+    const text = generateLayoutPage(detailPageConfig, withPosition);
+    expect(text).toContain("backgroundPosition: '100% 0%'");
+
+    const withoutPosition = generateLayoutPage(detailPageConfig, detailLayout());
+    expect(withoutPosition).not.toContain('backgroundPosition');
+  });
+
+  it('includes an overlay text block on an image tile only when one is set', () => {
+    const withOverlay = detailLayout({
+      tiles: { image1: { kind: 'image', num: 1, imageUrl: 'https://example.com/a.jpg', overlayText: 'Before' } }
+    });
+
+    const text = generateLayoutPage(detailPageConfig, withOverlay);
+    expect(text).toContain("text={{\n        copy: 'Before'\n      }}");
+
+    const withoutOverlay = generateLayoutPage(detailPageConfig, detailLayout());
+    expect(withoutOverlay).not.toContain('text={{');
+  });
+
   it('emits a description Item using the bound project\'s name and description', () => {
     const layout = detailLayout({
       tiles: { description: { kind: 'description' } },
@@ -230,5 +270,38 @@ describe('generateLayoutPage (detail pages)', () => {
     const text = generateLayoutPage(detailPageConfig, detailLayout());
 
     expect(text.trim().endsWith('export default TestDetailPage;')).toBe(true);
+  });
+
+  describe('a dual-layout detail page (defaultSectionClassName set)', () => {
+    const dualDetailPageConfig = {
+      ...detailPageConfig,
+      defaultSectionClassName: 'contentWrapper layoutAll layoutProject defaultLayout',
+      wideSectionClassName: 'contentWrapper layoutAll layoutProject wideLayout'
+    };
+
+    const dualDetailLayout = {
+      tiles: { image1: { kind: 'image', num: 1, imageUrl: 'https://example.com/a.jpg' } },
+      defaultLayout: [rowNode('r1', { height: 300 }, [columnNode('c1', {}, [tileRef('p1', 'image1')])])],
+      wideLayout: [rowNode('r1w', { height: 400 }, [columnNode('c1w', {}, [tileRef('p1w', 'image1')])])]
+    };
+
+    it('renders two sections, each ending in its own PrevNextProjectLinks', () => {
+      const text = generateLayoutPage(dualDetailPageConfig, dualDetailLayout);
+
+      expect(text.match(/<section/g)).toHaveLength(2);
+      expect(text.match(/<PrevNextProjectLinks project={project} \/>/g)).toHaveLength(2);
+      expect(text).toContain("<section className='contentWrapper layoutAll layoutProject defaultLayout'>");
+      expect(text).toContain("<section className='contentWrapper layoutAll layoutProject wideLayout'>");
+    });
+
+    it('numbers a tile using both the default and wide trees', () => {
+      const layout = {
+        tiles: { onlyInWide: { kind: 'image', imageUrl: 'https://example.com/b.jpg' } },
+        defaultLayout: [],
+        wideLayout: [rowNode('r1', {}, [columnNode('c1', {}, [tileRef('p1', 'onlyInWide')])])]
+      };
+
+      expect(generateLayoutPage(dualDetailPageConfig, layout)).toContain('num={1}');
+    });
   });
 });

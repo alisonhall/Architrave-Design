@@ -22,6 +22,10 @@ export const makeBlankRow = () => ({ id: makeId('row'), height: undefined, image
 export const makeBlankColumn = () => ({ id: makeId('column'), width: undefined, children: [] });
 export const makeRowPlacement = () => ({ id: makeId('placement'), nodeType: 'row', row: makeBlankRow() });
 export const makeTilePlacement = (tileKey) => ({ id: makeId('placement'), nodeType: 'tileRef', tileKey });
+// A bare `<Item />` placeholder — some detail pages use one as an empty spacer, placed
+// directly rather than through the shared tile library (there's nothing to reuse or
+// configure about it).
+export const makeEmptyPlacement = () => ({ id: makeId('placement'), nodeType: 'empty' });
 
 // Tile kinds that never get a fade-in `num` — everything else (project/filler/image)
 // does. See computeTileOrder below.
@@ -30,7 +34,7 @@ const UNNUMBERED_TILE_KINDS = ['text', 'description'];
 export const makeBlankTile = (kind) => {
   if (kind === 'project') return { kind: 'project', projectKey: '', backgroundPosition: '' };
   if (kind === 'filler') return { kind: 'filler', projectKey: '', imageUrl: '' };
-  if (kind === 'image') return { kind: 'image', imageUrl: '' };
+  if (kind === 'image') return { kind: 'image', imageUrl: '', backgroundPosition: '', overlayText: '' };
   if (kind === 'description') return { kind: 'description' };
   return { kind: 'text', text: '', useIntroText: true };
 };

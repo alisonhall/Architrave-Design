@@ -1,5 +1,5 @@
 import constants from '../../../../static/app-constants';
-import { seedDraft } from '../seedData';
+import { seedDraft, LAYOUT_PAGE_CONFIGS } from '../seedData';
 
 describe('seedDraft', () => {
   it('clones projects and ordering data from app-constants', () => {
@@ -38,11 +38,24 @@ describe('seedDraft', () => {
     });
   });
 
-  it('seeds a transcribed layout for each supported detail page', () => {
-    ['creditRiverManor'].forEach((key) => {
-      const layout = seedDraft.layouts[key];
-      expect(layout.tiles).toBeDefined();
-      expect(layout.layout.length).toBeGreaterThan(0);
+  it('seeds a transcribed layout for each supported detail page (single or dual tree)', () => {
+    Object.keys(LAYOUT_PAGE_CONFIGS)
+      .filter((key) => LAYOUT_PAGE_CONFIGS[key].type === 'detail')
+      .forEach((key) => {
+        const layout = seedDraft.layouts[key];
+        expect(layout.tiles).toBeDefined();
+        if (layout.layout) {
+          expect(layout.layout.length).toBeGreaterThan(0);
+        } else {
+          expect(layout.defaultLayout.length).toBeGreaterThan(0);
+          expect(layout.wideLayout.length).toBeGreaterThan(0);
+        }
+      });
+  });
+
+  it('registers a seed layout for every page listed in LAYOUT_PAGE_CONFIGS', () => {
+    Object.keys(LAYOUT_PAGE_CONFIGS).forEach((key) => {
+      expect(seedDraft.layouts[key]).toBeDefined();
     });
   });
 });
