@@ -78,6 +78,17 @@ describe('generateLayoutData', () => {
     expect(generated.wideLayout).toBeDefined();
   });
 
+  it('round-trips an embed tile\'s pasted HTML, including mixed quotes and newlines', () => {
+    const html = '<iframe title="Tour" src=\'https://kuula.co/share/abc\'\n  width="100%"></iframe>';
+    const draft = hydrateLayoutData({
+      tiles: { tour: { kind: 'embed', num: 1, html } },
+      layout: [{ columns: [{ children: [{ nodeType: 'tileRef', tileKey: 'tour' }] }] }]
+    });
+
+    const generated = evalGeneratedData(generateLayoutData(draft));
+    expect(generated.tiles.tour.html).toBe(html);
+  });
+
   it('recurses into a nested row placement', () => {
     const draft = hydrateLayoutData({
       tiles: { a: { kind: 'image', num: 1, imageUrl: 'https://example.com/a.jpg' } },

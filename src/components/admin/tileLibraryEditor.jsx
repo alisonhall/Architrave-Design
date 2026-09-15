@@ -87,6 +87,19 @@ const TileFields = ({ kind, values, onChange, projects }) => {
     return <p className="adminProjectForm-hint">Always shows this page&apos;s project name and description — nothing to configure.</p>;
   }
 
+  if (kind === 'embed') {
+    return (
+      <label>
+        Embed HTML <span className="adminProjectForm-hint">(paste an iframe embed's full markup, e.g. from Kuula)</span>
+        <textarea
+          rows={4}
+          value={values.html || ''}
+          onChange={(e) => onChange({ ...values, html: e.target.value })}
+        />
+      </label>
+    );
+  }
+
   return (
     <>
       <label>
@@ -123,7 +136,8 @@ const TILE_KIND_LABELS = {
   filler: 'filler tile',
   image: 'image tile',
   text: 'text tile',
-  description: 'description tile'
+  description: 'description tile',
+  embed: 'embed tile'
 };
 
 const tileSummary = (tile, projects) => {
@@ -131,6 +145,7 @@ const tileSummary = (tile, projects) => {
   if (tile.kind === 'filler') return `Filler image${tile.projectKey ? ` — ${projects[tile.projectKey]?.projectName}` : ''}`;
   if (tile.kind === 'image') return 'Image tile';
   if (tile.kind === 'description') return "Description — this page's project";
+  if (tile.kind === 'embed') return 'Embed — pasted iframe markup';
   return tile.useIntroText ? 'Text — shared introduction' : `Text — "${(tile.text || '').slice(0, 40)}"`;
 };
 

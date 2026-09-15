@@ -86,6 +86,10 @@ describe('makeBlankTile', () => {
   it('builds a blank description tile with no fields (detail pages)', () => {
     expect(makeBlankTile('description')).toEqual({ kind: 'description' });
   });
+
+  it('builds a blank embed tile with an empty html field (detail pages)', () => {
+    expect(makeBlankTile('embed')).toEqual({ kind: 'embed', html: '' });
+  });
 });
 
 describe('suggestTileKey', () => {

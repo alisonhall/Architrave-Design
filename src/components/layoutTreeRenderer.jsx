@@ -81,6 +81,13 @@ const renderTile = (tileKey, context) => {
     return <Item text={{ title: boundProject.projectName, copy: boundProject.projectDescription }} />;
   }
 
+  if (tile.kind === 'embed') {
+    // tile.html is raw markup pasted by the site owner (a Kuula 360°-tour iframe, e.g.)
+    // straight into static/layouts/<slug>.js — rendered verbatim so pasted HTML
+    // attributes (frameborder, allowfullscreen, etc.) don't need JSX-name translation.
+    return <Item num={num} content={<div dangerouslySetInnerHTML={{ __html: tile.html }} />} />;
+  }
+
   return <Item text={{ copy: tile.useIntroText ? introText : tile.text }} />;
 };
 

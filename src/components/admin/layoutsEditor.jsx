@@ -8,7 +8,7 @@ import LayoutPreview from './layoutPreview';
 
 const PAGE_KEYS = Object.keys(LAYOUT_PAGE_CONFIGS);
 const LISTING_TILE_KINDS = ['project', 'filler', 'text'];
-const DETAIL_TILE_KINDS = ['image', 'description'];
+const DETAIL_TILE_KINDS = ['image', 'description', 'embed'];
 
 /**
  * @description The Layouts section of the admin tool: pick a portfolio page, manage

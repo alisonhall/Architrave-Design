@@ -167,6 +167,28 @@ describe('TileLibraryEditor', () => {
     expect(onChange).toHaveBeenCalledWith({ descriptionTile: { kind: 'description' } });
   });
 
+  it('adds a new embed tile by pasting iframe markup (detail pages)', () => {
+    const onChange = jest.fn();
+    render(<TileLibraryEditor tiles={{}} onChange={onChange} projects={projects} kinds={['image', 'description', 'embed']} />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Add embed tile' }));
+    fireEvent.change(screen.getByLabelText(/Embed HTML/), {
+      target: { value: '<iframe width="100%" height="500" src="https://kuula.co/share/abc"></iframe>' }
+    });
+    fireEvent.click(screen.getByRole('button', { name: 'Add tile' }));
+
+    expect(onChange).toHaveBeenCalledWith({
+      embedTile: { kind: 'embed', html: '<iframe width="100%" height="500" src="https://kuula.co/share/abc"></iframe>' }
+    });
+  });
+
+  it('summarizes an embed tile in the tile list', () => {
+    const tiles = { tour: { kind: 'embed', num: 11, html: '<iframe src="https://kuula.co/share/abc"></iframe>' } };
+    render(<TileLibraryEditor tiles={tiles} onChange={jest.fn()} projects={projects} kinds={['image', 'description', 'embed']} />);
+
+    expect(screen.getByText(/Embed — pasted iframe markup/)).toBeInTheDocument();
+  });
+
   it('summarizes an image tile and a description tile in the tile list', () => {
     const tiles = {
       1: { kind: 'image', num: 1, imageUrl: 'https://example.com/a.jpg' },

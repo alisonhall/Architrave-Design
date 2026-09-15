@@ -63,6 +63,19 @@ describe('renderLayoutTree', () => {
     expect(screen.getByText('A lovely description.')).toBeInTheDocument();
   });
 
+  it('renders an embed tile\'s raw HTML markup verbatim, including non-JSX attribute names', () => {
+    const tiles = {
+      tour: { kind: 'embed', num: 11, html: '<iframe title="Tour" width="100%" height="500" frameborder="0" src="https://kuula.co/share/abc"></iframe>' }
+    };
+    const rows = [row({}, [column({}, [tileRef('tour')])])];
+
+    const { container } = render(<>{renderLayoutTree({ rows, tiles, projects })}</>);
+
+    const iframe = container.querySelector('iframe');
+    expect(iframe).toHaveAttribute('src', 'https://kuula.co/share/abc');
+    expect(iframe).toHaveAttribute('frameborder', '0');
+  });
+
   it('renders a nested row inside a column', () => {
     const tiles = { someTile: { kind: 'project', projectKey: 'someProject', num: 1 } };
     const rows = [

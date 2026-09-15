@@ -204,4 +204,21 @@ test.describe('layouts editor', () => {
     await expect(page.getByRole('button', { name: 'Add image tile' })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Add project tile' })).toHaveCount(0);
   });
+
+  test('adding an embed tile by pasting iframe markup lists it and surfaces its file in Review Changes', async ({
+    page
+  }) => {
+    await openLayouts(page, 'creditRiverManor');
+
+    await page.getByRole('button', { name: 'Add embed tile' }).click();
+    await page.getByLabel(/Embed HTML/).fill('<iframe title="Tour" width="100%" height="500" src="https://kuula.co/share/abc"></iframe>');
+    await page.locator('.adminTileLibrary').getByRole('button', { name: 'Add tile' }).click();
+
+    await expect(page.getByText(/Embed — pasted iframe markup/)).toBeVisible();
+
+    await page.getByRole('button', { name: 'Review Changes' }).click();
+    await expect(page.locator('.adminOutputPanel-fileHeader code')).toHaveText(
+      'static/layouts/credit-river-manor.js'
+    );
+  });
 });

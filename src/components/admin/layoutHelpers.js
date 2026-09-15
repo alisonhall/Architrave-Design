@@ -36,6 +36,7 @@ export const makeBlankTile = (kind) => {
   if (kind === 'filler') return { kind: 'filler', projectKey: '', imageUrl: '' };
   if (kind === 'image') return { kind: 'image', imageUrl: '', backgroundPosition: '', overlayText: '' };
   if (kind === 'description') return { kind: 'description' };
+  if (kind === 'embed') return { kind: 'embed', html: '' };
   return { kind: 'text', text: '', useIntroText: true };
 };
 

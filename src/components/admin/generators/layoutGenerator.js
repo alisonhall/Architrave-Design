@@ -2,7 +2,18 @@ import { stripLayoutData } from '../layoutHelpers';
 
 const INDENT = '  ';
 const indent = (level) => INDENT.repeat(level);
-const quote = (value) => (value.includes("'") ? `"${value}"` : `'${value}'`);
+// Picks whichever quote char needs fewer escapes, then escapes backslashes, that quote
+// char, and literal newlines — needed once embed tiles let arbitrary multi-line, mixed-
+// quote HTML markup (see tile.html) flow into a plain string literal.
+const quote = (value) => {
+  const quoteChar = value.includes("'") ? '"' : "'";
+  const escaped = value
+    .replace(/\\/g, '\\\\')
+    .replace(new RegExp(quoteChar, 'g'), `\\${quoteChar}`)
+    .replace(/\n/g, '\\n')
+    .replace(/\r/g, '\\r');
+  return `${quoteChar}${escaped}${quoteChar}`;
+};
 const isValidIdentifier = (key) => /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(key);
 
 // Plain-value serializer for static/layouts/<slug>.js — every page's canonical layout

@@ -102,13 +102,14 @@ describe('LayoutsEditor', () => {
     expect(screen.queryByRole('heading', { name: 'Wide layout (wide screens)' })).not.toBeInTheDocument();
   });
 
-  it('offers image/description tile kinds, not project/filler/text, for a detail page', () => {
+  it('offers image/description/embed tile kinds, not project/filler/text, for a detail page', () => {
     renderEditor();
 
     fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'creditRiverManor' } });
 
     expect(screen.getByRole('button', { name: 'Add image tile' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Add description tile' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Add embed tile' })).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: 'Add project tile' })).not.toBeInTheDocument();
   });
 
