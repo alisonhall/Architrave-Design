@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 
 import { useDraftSection } from './draftContext';
 import { LAYOUT_PAGE_CONFIGS } from './seedData';
+import { makeBlankDetailLayout } from './layoutHelpers';
 import TileLibraryEditor from './tileLibraryEditor';
 import LayoutTreeEditor from './layoutTreeEditor';
 import LayoutPreview from './layoutPreview';
 
-const PAGE_KEYS = Object.keys(LAYOUT_PAGE_CONFIGS);
 const LISTING_TILE_KINDS = ['project', 'filler', 'text'];
 const DETAIL_TILE_KINDS = ['image', 'description', 'embed'];
+const DETAIL_PROJECT_TYPES = ['new-homes', 'renovations-additions'];
+const FOLDER_LABELS = { 'new-homes': 'New Homes', 'renovations-additions': 'Renovations & Additions' };
 
 /**
  * @description The Layouts section of the admin tool: pick a portfolio page, manage
@@ -18,102 +20,165 @@ const DETAIL_TILE_KINDS = ['image', 'description', 'embed'];
  * projects broadly (a "listing" page — tile kinds project/filler/text); and whether it
  * has one tree (`layout`) or two (`defaultLayout`/`wideLayout`) — a detail page can be
  * either shape, so the tree-count is read from the data itself, not from the page type.
+ *
+ * A page can also be created here from scratch: picking a New Homes/Renovations
+ * project that doesn't have one yet starts it from a blank layout (see
+ * makeBlankDetailLayout) and registers it in draft.newLayoutPages, so it behaves
+ * exactly like an already-committed page for the rest of the session — outputSection.jsx
+ * additionally generates its fixed wrapper page file and a test scaffold for it.
  */
 const LayoutsEditor = () => {
-  const [activePage, setActivePage] = useState(PAGE_KEYS[0]);
   const [layouts, setLayouts] = useDraftSection('layouts');
   const [projects] = useDraftSection('projects');
   const [introText] = useDraftSection('defaultIntroductionText');
+  const [newLayoutPages, setNewLayoutPages] = useDraftSection('newLayoutPages');
+
+  const pageConfigs = { ...LAYOUT_PAGE_CONFIGS, ...newLayoutPages };
+  const pageKeys = Object.keys(pageConfigs);
+  const [activePage, setActivePage] = useState(pageKeys[0]);
+
+  const usedProjectKeys = new Set(Object.values(pageConfigs).map((config) => config.projectKey).filter(Boolean));
+  const availableProjects = Object.keys(projects).filter(
+    (key) => DETAIL_PROJECT_TYPES.includes(projects[key].type) && !usedProjectKeys.has(key)
+  );
+
+  const createPage = (projectKey) => {
+    const project = projects[projectKey];
+    const key = `${projectKey}Detail`;
+    const config = {
+      key,
+      label: `${project.projectName} (${FOLDER_LABELS[project.type]} detail page)`,
+      dataFile: true,
+      dataFilePath: `static/layouts/${project.fileName}.js`,
+      type: 'detail',
+      projectKey,
+      folder: project.type,
+      slug: project.fileName,
+      isNew: true
+    };
+    setNewLayoutPages({ ...newLayoutPages, [key]: config });
+    setLayouts({ ...layouts, [key]: makeBlankDetailLayout(projectKey) });
+    setActivePage(key);
+  };
+
+  const deletePage = (key) => {
+    // eslint-disable-next-line no-alert
+    if (!window.confirm('Delete this new page? Its draft layout will be lost.')) return;
+    const nextPages = { ...newLayoutPages };
+    delete nextPages[key];
+    setNewLayoutPages(nextPages);
+    const nextLayouts = { ...layouts };
+    delete nextLayouts[key];
+    setLayouts(nextLayouts);
+    setActivePage(Object.keys(LAYOUT_PAGE_CONFIGS)[0]);
+  };
 
   const pageLayout = layouts[activePage];
-  const pageConfig = LAYOUT_PAGE_CONFIGS[activePage];
+  const pageConfig = pageConfigs[activePage];
   const isDetailPage = pageConfig?.type === 'detail';
   const boundProject = isDetailPage ? projects[pageConfig.projectKey] : null;
 
   const updatePageLayout = (updates) => setLayouts({ ...layouts, [activePage]: { ...pageLayout, ...updates } });
 
-  if (!pageLayout) return null;
-
-  const isDual = Boolean(pageLayout.defaultLayout);
-  const targetPath = pageConfig.dataFilePath;
+  const isDual = pageLayout ? Boolean(pageLayout.defaultLayout) : false;
+  const targetPath = pageConfig?.dataFilePath;
 
   return (
     <div className="adminLayoutsEditor">
-      {PAGE_KEYS.length > 1 && (
+      {pageKeys.length > 1 && (
         <label>
           Page
           <select value={activePage} onChange={(e) => setActivePage(e.target.value)}>
-            {PAGE_KEYS.map((key) => (
-              <option key={key} value={key}>{LAYOUT_PAGE_CONFIGS[key].label}</option>
+            {pageKeys.map((key) => (
+              <option key={key} value={key}>{pageConfigs[key].label}</option>
             ))}
           </select>
         </label>
       )}
 
-      <p className="adminLayoutsEditor-target">Editing: {targetPath}</p>
+      {availableProjects.length > 0 && (
+        <label className="adminLayoutsEditor-newPage">
+          Create a page for
+          <select value="" onChange={(e) => { if (e.target.value) createPage(e.target.value); }}>
+            <option value="">Select a project…</option>
+            {availableProjects.map((key) => (
+              <option key={key} value={key}>{projects[key].projectName}</option>
+            ))}
+          </select>
+        </label>
+      )}
 
-      <TileLibraryEditor
-        tiles={pageLayout.tiles}
-        onChange={(tiles) => updatePageLayout({ tiles })}
-        projects={projects}
-        kinds={isDetailPage ? DETAIL_TILE_KINDS : LISTING_TILE_KINDS}
-      />
-
-      {isDual ? (
+      {pageConfig && pageLayout && (
         <>
-          <section className="adminLayoutsEditor-variant">
-            <h3>Default layout (narrow screens)</h3>
-            <div className="adminLayoutsEditor-columns">
-              <LayoutTreeEditor
-                rows={pageLayout.defaultLayout}
-                onChange={(rows) => updatePageLayout({ defaultLayout: rows })}
-                tiles={pageLayout.tiles}
-              />
-              <LayoutPreview
-                rows={pageLayout.defaultLayout}
-                tiles={pageLayout.tiles}
-                projects={projects}
-                introText={introText}
-                boundProject={boundProject}
-              />
-            </div>
-          </section>
+          <p className="adminLayoutsEditor-target">Editing: {targetPath}</p>
+          {pageConfig.isNew && (
+            <button type="button" onClick={() => deletePage(activePage)}>Delete this new page</button>
+          )}
 
-          <section className="adminLayoutsEditor-variant">
-            <h3>Wide layout (wide screens)</h3>
-            <div className="adminLayoutsEditor-columns">
-              <LayoutTreeEditor
-                rows={pageLayout.wideLayout}
-                onChange={(rows) => updatePageLayout({ wideLayout: rows })}
-                tiles={pageLayout.tiles}
-              />
-              <LayoutPreview
-                rows={pageLayout.wideLayout}
-                tiles={pageLayout.tiles}
-                projects={projects}
-                introText={introText}
-                boundProject={boundProject}
-              />
-            </div>
-          </section>
+          <TileLibraryEditor
+            tiles={pageLayout.tiles}
+            onChange={(tiles) => updatePageLayout({ tiles })}
+            projects={projects}
+            kinds={isDetailPage ? DETAIL_TILE_KINDS : LISTING_TILE_KINDS}
+          />
+
+          {isDual ? (
+            <>
+              <section className="adminLayoutsEditor-variant">
+                <h3>Default layout (narrow screens)</h3>
+                <div className="adminLayoutsEditor-columns">
+                  <LayoutTreeEditor
+                    rows={pageLayout.defaultLayout}
+                    onChange={(rows) => updatePageLayout({ defaultLayout: rows })}
+                    tiles={pageLayout.tiles}
+                  />
+                  <LayoutPreview
+                    rows={pageLayout.defaultLayout}
+                    tiles={pageLayout.tiles}
+                    projects={projects}
+                    introText={introText}
+                    boundProject={boundProject}
+                  />
+                </div>
+              </section>
+
+              <section className="adminLayoutsEditor-variant">
+                <h3>Wide layout (wide screens)</h3>
+                <div className="adminLayoutsEditor-columns">
+                  <LayoutTreeEditor
+                    rows={pageLayout.wideLayout}
+                    onChange={(rows) => updatePageLayout({ wideLayout: rows })}
+                    tiles={pageLayout.tiles}
+                  />
+                  <LayoutPreview
+                    rows={pageLayout.wideLayout}
+                    tiles={pageLayout.tiles}
+                    projects={projects}
+                    introText={introText}
+                    boundProject={boundProject}
+                  />
+                </div>
+              </section>
+            </>
+          ) : (
+            <section className="adminLayoutsEditor-variant">
+              <h3>Layout</h3>
+              <div className="adminLayoutsEditor-columns">
+                <LayoutTreeEditor
+                  rows={pageLayout.layout}
+                  onChange={(rows) => updatePageLayout({ layout: rows })}
+                  tiles={pageLayout.tiles}
+                />
+                <LayoutPreview
+                  rows={pageLayout.layout}
+                  tiles={pageLayout.tiles}
+                  projects={projects}
+                  boundProject={boundProject}
+                />
+              </div>
+            </section>
+          )}
         </>
-      ) : (
-        <section className="adminLayoutsEditor-variant">
-          <h3>Layout</h3>
-          <div className="adminLayoutsEditor-columns">
-            <LayoutTreeEditor
-              rows={pageLayout.layout}
-              onChange={(rows) => updatePageLayout({ layout: rows })}
-              tiles={pageLayout.tiles}
-            />
-            <LayoutPreview
-              rows={pageLayout.layout}
-              tiles={pageLayout.tiles}
-              projects={projects}
-              boundProject={boundProject}
-            />
-          </div>
-        </section>
       )}
     </div>
   );

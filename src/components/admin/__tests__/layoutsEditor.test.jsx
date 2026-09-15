@@ -3,12 +3,26 @@ import { render, screen, fireEvent, within } from '@testing-library/react';
 
 import { DraftProvider } from '../draftContext';
 import LayoutsEditor from '../layoutsEditor';
+import AdminApp from '../adminApp';
 
 const renderEditor = () => render(
   <DraftProvider>
     <LayoutsEditor />
   </DraftProvider>
 );
+
+// Adds a brand-new New Homes project via the Projects section, then switches to
+// Layouts — the only way to get a project with no layout page yet, since every project
+// in the real seed data already has one.
+const addNewHomesProjectAndSwitchToLayouts = () => {
+  fireEvent.click(screen.getByRole('button', { name: 'Projects' }));
+  fireEvent.click(screen.getByRole('button', { name: 'Add New Homes project' }));
+  fireEvent.change(screen.getByLabelText('Project name'), { target: { value: 'Test Manor' } });
+  fireEvent.change(screen.getByLabelText(/File name/), { target: { value: 'test-manor' } });
+  fireEvent.change(screen.getByLabelText('Main image URL'), { target: { value: 'https://example.com/a.jpg' } });
+  fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+  fireEvent.click(screen.getByRole('button', { name: 'Layouts' }));
+};
 
 describe('LayoutsEditor', () => {
   beforeEach(() => {
@@ -149,5 +163,73 @@ describe('LayoutsEditor', () => {
 
     expect(screen.getByText('Editing: static/layouts/index.js')).toBeInTheDocument();
     expect(screen.getAllByText("Hogg's Hollow French").length).toBeGreaterThan(0);
+  });
+});
+
+describe('LayoutsEditor — creating a new page', () => {
+  beforeEach(() => {
+    window.sessionStorage.clear();
+    window.confirm = jest.fn(() => true);
+  });
+
+  it('does not offer the "create a page for" selector when every project already has one', () => {
+    render(<AdminApp />);
+    fireEvent.click(screen.getByRole('button', { name: 'Layouts' }));
+
+    expect(screen.queryByLabelText('Create a page for')).not.toBeInTheDocument();
+  });
+
+  it('offers a project with no layout page yet in the "create a page for" selector', () => {
+    render(<AdminApp />);
+    addNewHomesProjectAndSwitchToLayouts();
+
+    expect(screen.getByLabelText('Create a page for')).toBeInTheDocument();
+    expect(screen.getByRole('option', { name: 'Test Manor' })).toBeInTheDocument();
+  });
+
+  it('creating a page starts a blank layout, switches to editing it, and offers a delete button', () => {
+    render(<AdminApp />);
+    addNewHomesProjectAndSwitchToLayouts();
+
+    fireEvent.change(screen.getByLabelText('Create a page for'), { target: { value: 'testManor' } });
+
+    expect(screen.getByText('Editing: static/layouts/test-manor.js')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Layout' })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Default layout (narrow screens)' })).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Add row' })).toBeInTheDocument();
+    expect(screen.getByText(/Description — this page's project/)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Delete this new page' })).toBeInTheDocument();
+  });
+
+  it('does not offer a delete button for an already-committed page', () => {
+    render(<AdminApp />);
+    fireEvent.click(screen.getByRole('button', { name: 'Layouts' }));
+
+    expect(screen.queryByRole('button', { name: 'Delete this new page' })).not.toBeInTheDocument();
+  });
+
+  it('deletes a newly created page after confirmation, returning to the first committed page', () => {
+    render(<AdminApp />);
+    addNewHomesProjectAndSwitchToLayouts();
+    fireEvent.change(screen.getByLabelText('Create a page for'), { target: { value: 'testManor' } });
+
+    fireEvent.click(screen.getByRole('button', { name: 'Delete this new page' }));
+
+    expect(window.confirm).toHaveBeenCalled();
+    expect(screen.queryByText('Editing: static/layouts/test-manor.js')).not.toBeInTheDocument();
+    expect(screen.getByText('Editing: static/layouts/index.js')).toBeInTheDocument();
+    // The project is unchanged, so it's offered again for a new page.
+    expect(screen.getByRole('option', { name: 'Test Manor' })).toBeInTheDocument();
+  });
+
+  it('does not delete when confirmation is declined', () => {
+    window.confirm = jest.fn(() => false);
+    render(<AdminApp />);
+    addNewHomesProjectAndSwitchToLayouts();
+    fireEvent.change(screen.getByLabelText('Create a page for'), { target: { value: 'testManor' } });
+
+    fireEvent.click(screen.getByRole('button', { name: 'Delete this new page' }));
+
+    expect(screen.getByText('Editing: static/layouts/test-manor.js')).toBeInTheDocument();
   });
 });

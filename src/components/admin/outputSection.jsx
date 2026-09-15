@@ -4,6 +4,8 @@ import { useDraftState } from './draftContext';
 import { seedDraft, LAYOUT_PAGE_CONFIGS } from './seedData';
 import { generateAppConstants } from './generators/appConstantsGenerator';
 import { generateLayoutData } from './generators/layoutGenerator';
+import { generateNewPageFile } from './generators/newPageGenerator';
+import { generateTestScaffold } from './generators/testScaffoldGenerator';
 import OutputPanel from './outputPanel';
 
 const APP_CONSTANTS_FIELDS = [
@@ -38,8 +40,10 @@ const OutputSection = () => {
     });
   }
 
-  Object.keys(LAYOUT_PAGE_CONFIGS).forEach((pageKey) => {
-    const pageConfig = LAYOUT_PAGE_CONFIGS[pageKey];
+  const pageConfigs = { ...LAYOUT_PAGE_CONFIGS, ...draft.newLayoutPages };
+
+  Object.keys(pageConfigs).forEach((pageKey) => {
+    const pageConfig = pageConfigs[pageKey];
     const pageLayout = draft.layouts[pageKey];
     if (!pageLayout) return;
     if (JSON.stringify(pageLayout) === JSON.stringify(seedDraft.layouts[pageKey])) return;
@@ -49,6 +53,19 @@ const OutputSection = () => {
       content: generateLayoutData(pageLayout),
       note: "This is plain data — the real page's own file never needs to change. Its snapshot test (if any) will need updating afterward with `npm test -- -u` — review the diff before committing it."
     });
+
+    if (pageConfig.isNew) {
+      files.push({
+        path: `src/pages/portfolio/${pageConfig.folder}/${pageConfig.slug}.jsx`,
+        content: generateNewPageFile(pageConfig),
+        note: 'A brand-new page — this fixed wrapper file never needs to change again once created.'
+      });
+      files.push({
+        path: `src/pages/portfolio/${pageConfig.folder}/__tests__/${pageConfig.slug}.test.jsx`,
+        content: generateTestScaffold(pageConfig),
+        note: 'Run `npm test -- -u` locally after adding this file to generate its actual snapshot, then commit the resulting .snap file alongside it.'
+      });
+    }
   });
 
   return <OutputPanel files={files} />;

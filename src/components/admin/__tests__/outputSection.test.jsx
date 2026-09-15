@@ -39,6 +39,38 @@ const NewHomesLayoutMutator = () => {
   );
 };
 
+const NewPageAdder = () => {
+  const [layouts, setLayouts] = useDraftSection('layouts');
+  const [newLayoutPages, setNewLayoutPages] = useDraftSection('newLayoutPages');
+  const addPage = () => {
+    setNewLayoutPages({
+      ...newLayoutPages,
+      testManorDetail: {
+        key: 'testManorDetail',
+        label: 'Test Manor (New Homes detail page)',
+        dataFile: true,
+        dataFilePath: 'static/layouts/test-manor.js',
+        type: 'detail',
+        projectKey: 'testManor',
+        folder: 'new-homes',
+        slug: 'test-manor',
+        isNew: true
+      }
+    });
+    setLayouts({
+      ...layouts,
+      testManorDetail: {
+        mainClasses: 'portfolio',
+        sectionClassName: 'contentWrapper layoutAll layoutProject',
+        projectKey: 'testManor',
+        tiles: { description: { kind: 'description' } },
+        layout: []
+      }
+    });
+  };
+  return <button type="button" onClick={addPage}>add new page</button>;
+};
+
 describe('OutputSection', () => {
   beforeEach(() => {
     window.sessionStorage.clear();
@@ -118,5 +150,20 @@ describe('OutputSection', () => {
     fireEvent.click(screen.getByText('mutate intro'));
 
     expect(screen.queryByText('static/layouts/new-homes.js')).not.toBeInTheDocument();
+  });
+
+  it('lists the data file, wrapper page, and test scaffold for a brand-new page', () => {
+    render(
+      <DraftProvider>
+        <NewPageAdder />
+        <OutputSection />
+      </DraftProvider>
+    );
+
+    fireEvent.click(screen.getByText('add new page'));
+
+    expect(screen.getByText('static/layouts/test-manor.js')).toBeInTheDocument();
+    expect(screen.getByText('src/pages/portfolio/new-homes/test-manor.jsx')).toBeInTheDocument();
+    expect(screen.getByText('src/pages/portfolio/new-homes/__tests__/test-manor.test.jsx')).toBeInTheDocument();
   });
 });

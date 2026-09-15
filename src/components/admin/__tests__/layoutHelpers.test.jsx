@@ -10,7 +10,8 @@ import {
   suggestTileKey,
   computeTileOrder,
   hydrateLayoutData,
-  stripLayoutData
+  stripLayoutData,
+  makeBlankDetailLayout
 } from '../layoutHelpers';
 
 describe('array helpers', () => {
@@ -235,5 +236,28 @@ describe('hydrateLayoutData / stripLayoutData', () => {
 
   it('stripLayoutData leaves data with no ids unchanged', () => {
     expect(stripLayoutData(rawData)).toEqual(rawData);
+  });
+});
+
+describe('makeBlankDetailLayout', () => {
+  it('builds a blank single-tree layout bound to the given project, with just a description tile', () => {
+    const layout = makeBlankDetailLayout('someProject');
+
+    expect(layout.mainClasses).toBe('portfolio');
+    expect(layout.projectKey).toBe('someProject');
+    expect(layout.tiles).toEqual({ description: { kind: 'description' } });
+    expect(layout.layout).toEqual([]);
+    expect(layout.defaultLayout).toBeUndefined();
+  });
+
+  it('is already hydrated, ready to drop into a draft (round-trips cleanly through stripLayoutData)', () => {
+    const layout = makeBlankDetailLayout('someProject');
+    expect(stripLayoutData(layout)).toEqual({
+      mainClasses: 'portfolio',
+      sectionClassName: 'contentWrapper layoutAll layoutProject',
+      projectKey: 'someProject',
+      tiles: { description: { kind: 'description' } },
+      layout: []
+    });
   });
 });

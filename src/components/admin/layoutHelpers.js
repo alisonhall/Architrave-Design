@@ -106,3 +106,17 @@ export const stripLayoutData = (data) => {
   if (data.wideLayout) stripped.wideLayout = stripLayoutRows(data.wideLayout);
   return stripped;
 };
+
+/**
+ * @description Starting layout draft for a brand-new detail page: a single, empty tree
+ * (just a description tile in its library, no rows yet — the tree editor's own "Add
+ * row" button takes it from there) bound to the given project. Already hydrated with
+ * editor-only ids, ready to drop straight into draft.layouts.
+ */
+export const makeBlankDetailLayout = (projectKey) => hydrateLayoutData({
+  mainClasses: 'portfolio',
+  sectionClassName: 'contentWrapper layoutAll layoutProject',
+  projectKey,
+  tiles: { description: { kind: 'description' } },
+  layout: []
+});

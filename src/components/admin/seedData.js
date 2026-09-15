@@ -29,7 +29,7 @@ const clone = (value) => JSON.parse(JSON.stringify(value));
 // so returning users don't get a shallow merge of new seed sections with a stale
 // top-level value from before that section existed (e.g. an old empty `layouts: {}`
 // silently winning over a newly-seeded `layouts.newHomes`).
-export const SEED_VERSION = 8;
+export const SEED_VERSION = 9;
 
 /**
  * @description The admin draft's starting state. `projects`/order arrays come
@@ -78,7 +78,14 @@ export const seedDraft = {
     upperCanadaFarmhouseDetail: clone(hydrateLayoutData(upperCanadaFarmhouseLayoutData)),
     princessMargaretClassicDetail: clone(hydrateLayoutData(princessMargaretClassicLayoutData)),
     classicCentreHallDetail: clone(hydrateLayoutData(classicCentreHallLayoutData))
-  }
+  },
+  // Layout-page configs (see LAYOUT_PAGE_CONFIGS below) for pages created within the
+  // admin session itself, keyed the same way — merged with LAYOUT_PAGE_CONFIGS by
+  // layoutsEditor.jsx/outputSection.jsx so a brand-new page behaves identically to an
+  // already-committed one for the rest of the session. Empty until "create a page" is
+  // used; each entry also carries `folder`/`slug`/`isNew` so outputSection.jsx knows to
+  // additionally generate the fixed wrapper page file and its test scaffold.
+  newLayoutPages: {}
 };
 
 // Static, non-content configuration each supported page's layout generator needs —

@@ -221,4 +221,37 @@ test.describe('layouts editor', () => {
       'static/layouts/credit-river-manor.js'
     );
   });
+
+  test('creating a page for a new project, editing it, and reviewing changes surfaces all 3 of its files', async ({
+    page
+  }) => {
+    await unlock(page);
+
+    const newHomesSection = page.locator('section', { has: page.getByRole('heading', { name: 'New Homes' }) });
+    await newHomesSection.getByRole('button', { name: 'Add New Homes project' }).click();
+    await page.locator('#project-name').fill('E2E New Page Manor');
+    await page.locator('#project-fileName').fill('e2e-new-page-manor');
+    await page.locator('#project-mainImageUrl').fill('https://example.com/e2e-new-page-manor.jpg');
+    await page.getByRole('button', { name: 'Save' }).click();
+
+    await page.getByRole('button', { name: 'Layouts' }).click();
+    await page.getByLabel('Create a page for').selectOption({ label: 'E2E New Page Manor' });
+
+    await expect(page.getByText('Editing: static/layouts/e2e-new-page-manor.js')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Delete this new page' })).toBeVisible();
+    await expect(page.locator('.adminLayoutTree').getByRole('button', { name: 'Add row' })).toBeVisible();
+
+    await page.locator('.adminLayoutTree').getByRole('button', { name: 'Add row' }).click();
+    await page.getByRole('button', { name: 'Review Changes' }).click();
+
+    // Adding the project itself also changes static/app-constants.js, so it's expected
+    // alongside the 3 new-page files.
+    const fileHeaders = page.locator('.adminOutputPanel-fileHeader code');
+    await expect(fileHeaders).toHaveText([
+      'static/app-constants.js',
+      'static/layouts/e2e-new-page-manor.js',
+      'src/pages/portfolio/new-homes/e2e-new-page-manor.jsx',
+      'src/pages/portfolio/new-homes/__tests__/e2e-new-page-manor.test.jsx'
+    ]);
+  });
 });
