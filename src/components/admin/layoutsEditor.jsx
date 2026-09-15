@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { useDraftSection } from './draftContext';
 import { LAYOUT_PAGE_CONFIGS } from './seedData';
-import { makeBlankDetailLayout } from './layoutHelpers';
+import { makeBlankDetailLayout, renameTileKeyInLayoutData } from './layoutHelpers';
 import TileLibraryEditor from './tileLibraryEditor';
 import LayoutTreeEditor from './layoutTreeEditor';
 import LayoutPreview from './layoutPreview';
@@ -80,6 +80,11 @@ const LayoutsEditor = () => {
 
   const updatePageLayout = (updates) => setLayouts({ ...layouts, [activePage]: { ...pageLayout, ...updates } });
 
+  const renameTileKey = (oldKey, newKey, nextTiles) => updatePageLayout({
+    tiles: nextTiles,
+    ...renameTileKeyInLayoutData(pageLayout, oldKey, newKey)
+  });
+
   const isDual = pageLayout ? Boolean(pageLayout.defaultLayout) : false;
   const targetPath = pageConfig?.dataFilePath;
 
@@ -118,6 +123,7 @@ const LayoutsEditor = () => {
           <TileLibraryEditor
             tiles={pageLayout.tiles}
             onChange={(tiles) => updatePageLayout({ tiles })}
+            onRenameTile={renameTileKey}
             projects={projects}
             kinds={isDetailPage ? DETAIL_TILE_KINDS : LISTING_TILE_KINDS}
           />

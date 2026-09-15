@@ -11,7 +11,8 @@ import {
   computeTileOrder,
   hydrateLayoutData,
   stripLayoutData,
-  makeBlankDetailLayout
+  makeBlankDetailLayout,
+  renameTileKeyInLayoutData
 } from '../layoutHelpers';
 
 describe('array helpers', () => {
@@ -259,5 +260,57 @@ describe('makeBlankDetailLayout', () => {
       tiles: { description: { kind: 'description' } },
       layout: []
     });
+  });
+});
+
+describe('renameTileKeyInLayoutData', () => {
+  const row = (columns) => ({ columns });
+  const column = (children) => ({ children });
+  const tileRef = (tileKey) => ({ nodeType: 'tileRef', tileKey });
+
+  it('updates a matching tileRef in a single-tree layout', () => {
+    const pageLayout = {
+      layout: [row([column([tileRef('oldKey')])])]
+    };
+
+    const updates = renameTileKeyInLayoutData(pageLayout, 'oldKey', 'newKey');
+
+    expect(updates.layout[0].columns[0].children[0]).toEqual({ nodeType: 'tileRef', tileKey: 'newKey' });
+    expect(updates.defaultLayout).toBeUndefined();
+    expect(updates.wideLayout).toBeUndefined();
+  });
+
+  it('updates matching tileRefs in both trees of a dual-tree layout', () => {
+    const pageLayout = {
+      defaultLayout: [row([column([tileRef('oldKey')])])],
+      wideLayout: [row([column([tileRef('oldKey'), tileRef('otherKey')])])]
+    };
+
+    const updates = renameTileKeyInLayoutData(pageLayout, 'oldKey', 'newKey');
+
+    expect(updates.defaultLayout[0].columns[0].children[0].tileKey).toBe('newKey');
+    expect(updates.wideLayout[0].columns[0].children[0].tileKey).toBe('newKey');
+    expect(updates.wideLayout[0].columns[0].children[1].tileKey).toBe('otherKey');
+  });
+
+  it('updates a tileRef nested inside a row placement', () => {
+    const pageLayout = {
+      layout: [row([column([{ nodeType: 'row', row: row([column([tileRef('oldKey')])]) }])])]
+    };
+
+    const updates = renameTileKeyInLayoutData(pageLayout, 'oldKey', 'newKey');
+
+    expect(updates.layout[0].columns[0].children[0].row.columns[0].children[0].tileKey).toBe('newKey');
+  });
+
+  it('leaves an empty placement and a non-matching tileRef untouched', () => {
+    const pageLayout = {
+      layout: [row([column([{ nodeType: 'empty' }, tileRef('unrelatedKey')])])]
+    };
+
+    const updates = renameTileKeyInLayoutData(pageLayout, 'oldKey', 'newKey');
+
+    expect(updates.layout[0].columns[0].children[0]).toEqual({ nodeType: 'empty' });
+    expect(updates.layout[0].columns[0].children[1].tileKey).toBe('unrelatedKey');
   });
 });

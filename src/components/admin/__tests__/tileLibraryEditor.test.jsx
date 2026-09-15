@@ -199,4 +199,112 @@ describe('TileLibraryEditor', () => {
     expect(screen.getByText(/Image tile/)).toBeInTheDocument();
     expect(screen.getByText(/Description — this page's project/)).toBeInTheDocument();
   });
+
+  it('adds a new tile under an explicit custom key instead of the suggested one', () => {
+    const onChange = jest.fn();
+    render(<TileLibraryEditor tiles={{}} onChange={onChange} projects={projects} />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Add project tile' }));
+    fireEvent.change(screen.getByLabelText('Project'), { target: { value: 'projectB' } });
+    fireEvent.change(screen.getByLabelText(/^Key/), { target: { value: 'myCustomKey' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Add tile' }));
+
+    expect(onChange).toHaveBeenCalledWith({
+      myCustomKey: { kind: 'project', projectKey: 'projectB', backgroundPosition: '' }
+    });
+  });
+
+  it('refuses to add a tile under a key that already exists', () => {
+    window.alert = jest.fn();
+    const onChange = jest.fn();
+    const tiles = { existingKey: { kind: 'project', projectKey: 'projectA' } };
+    render(<TileLibraryEditor tiles={tiles} onChange={onChange} projects={projects} />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Add project tile' }));
+    fireEvent.change(screen.getByLabelText('Project'), { target: { value: 'projectB' } });
+    fireEvent.change(screen.getByLabelText(/^Key/), { target: { value: 'existingKey' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Add tile' }));
+
+    expect(window.alert).toHaveBeenCalledWith(expect.stringContaining('existingKey'));
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
+  it('renames an existing tile, calling onRenameTile with the old key, new key, and updated tile map', () => {
+    const onChange = jest.fn();
+    const onRenameTile = jest.fn();
+    const tiles = { tileA: { kind: 'project', projectKey: 'projectA', backgroundPosition: '' } };
+    render(<TileLibraryEditor tiles={tiles} onChange={onChange} onRenameTile={onRenameTile} projects={projects} />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Edit' }));
+    fireEvent.change(screen.getByLabelText(/^Key/), { target: { value: 'tileB' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+
+    expect(onRenameTile).toHaveBeenCalledWith('tileA', 'tileB', {
+      tileB: { kind: 'project', projectKey: 'projectA', backgroundPosition: '' }
+    });
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
+  it('falls back to a plain onChange rename when onRenameTile is not provided', () => {
+    const onChange = jest.fn();
+    const tiles = { tileA: { kind: 'project', projectKey: 'projectA', backgroundPosition: '' } };
+    render(<TileLibraryEditor tiles={tiles} onChange={onChange} projects={projects} />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Edit' }));
+    fireEvent.change(screen.getByLabelText(/^Key/), { target: { value: 'tileB' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+
+    expect(onChange).toHaveBeenCalledWith({
+      tileB: { kind: 'project', projectKey: 'projectA', backgroundPosition: '' }
+    });
+  });
+
+  it('refuses to rename a tile to a key that already exists', () => {
+    window.alert = jest.fn();
+    const onChange = jest.fn();
+    const onRenameTile = jest.fn();
+    const tiles = {
+      tileA: { kind: 'project', projectKey: 'projectA' },
+      tileB: { kind: 'project', projectKey: 'projectB' }
+    };
+    render(<TileLibraryEditor tiles={tiles} onChange={onChange} onRenameTile={onRenameTile} projects={projects} />);
+
+    fireEvent.click(screen.getAllByRole('button', { name: 'Edit' })[0]);
+    fireEvent.change(screen.getByLabelText(/^Key/), { target: { value: 'tileB' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+
+    expect(window.alert).toHaveBeenCalledWith(expect.stringContaining('tileB'));
+    expect(onChange).not.toHaveBeenCalled();
+    expect(onRenameTile).not.toHaveBeenCalled();
+  });
+
+  it('refuses to save a tile with a blank key', () => {
+    window.alert = jest.fn();
+    const onChange = jest.fn();
+    const tiles = { tileA: { kind: 'project', projectKey: 'projectA' } };
+    render(<TileLibraryEditor tiles={tiles} onChange={onChange} projects={projects} />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Edit' }));
+    fireEvent.change(screen.getByLabelText(/^Key/), { target: { value: '   ' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+
+    expect(window.alert).toHaveBeenCalled();
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
+  it('saving an edit with the key unchanged keeps the same key, not a rename', () => {
+    const onChange = jest.fn();
+    const onRenameTile = jest.fn();
+    const tiles = { tileA: { kind: 'project', projectKey: 'projectA', backgroundPosition: '' } };
+    render(<TileLibraryEditor tiles={tiles} onChange={onChange} onRenameTile={onRenameTile} projects={projects} />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Edit' }));
+    fireEvent.change(screen.getByLabelText(/Background position/), { target: { value: '10% 10%' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+
+    expect(onChange).toHaveBeenCalledWith({
+      tileA: { kind: 'project', projectKey: 'projectA', backgroundPosition: '10% 10%' }
+    });
+    expect(onRenameTile).not.toHaveBeenCalled();
+  });
 });

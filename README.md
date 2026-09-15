@@ -102,7 +102,7 @@ Because every page's content already lives in a plain `static/*.js` data file (s
 Sections, each in `src/components/admin/`:
 
 - **Projects** (`projectsEditor.jsx`) — add/edit/delete/reorder/hide projects and each portfolio section's shared introduction text.
-- **Layouts** (`layoutsEditor.jsx`) — manage a page's tile library and edit its row/column tree(s) with a live preview; also where a brand-new portfolio page gets created (a project with no page yet can be started from a blank layout, generating its data file, its fixed wrapper page file, and a test scaffold).
+- **Layouts** (`layoutsEditor.jsx`) — manage a page's tile library (add/edit/delete/rename — renaming a tile updates every placement referencing it across the page's layout tree(s)) and edit its row/column tree(s) with a live preview; also where a brand-new portfolio page gets created (a project with no page yet can be started from a blank layout, generating its data file, its fixed wrapper page file, and a test scaffold).
 - **About** (`aboutEditor.jsx`) — edit the About page's three text sections.
 - **Reviews** (`reviewsEditor.jsx`) — add/edit/delete/reorder the review list.
 - **Review Changes** (`outputSection.jsx`/`outputPanel.jsx`) — every changed file's full text, ready to copy into GitHub.

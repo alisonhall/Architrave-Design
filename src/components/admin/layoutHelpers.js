@@ -107,6 +107,41 @@ export const stripLayoutData = (data) => {
   return stripped;
 };
 
+const renamePlacementTileKey = (placement, oldKey, newKey) => {
+  if (placement.nodeType === 'row') return { ...placement, row: renameRowTileKey(placement.row, oldKey, newKey) };
+  if (placement.nodeType === 'tileRef' && placement.tileKey === oldKey) return { ...placement, tileKey: newKey };
+  return placement;
+};
+
+const renameColumnTileKey = (column, oldKey, newKey) => ({
+  ...column,
+  children: column.children.map((placement) => renamePlacementTileKey(placement, oldKey, newKey))
+});
+
+const renameRowTileKey = (row, oldKey, newKey) => ({
+  ...row,
+  columns: row.columns.map((column) => renameColumnTileKey(column, oldKey, newKey))
+});
+
+/**
+ * @description Updates every `tileRef` placement across a page's layout tree(s) that
+ * points at `oldKey` to point at `newKey` instead — used when a tile is renamed in the
+ * tile library, so its existing placements keep working under the new key rather than
+ * silently going stale. Returns only the tree fields that actually changed (`layout` or
+ * `defaultLayout`/`wideLayout`), ready to spread into an updatePageLayout call.
+ */
+export const renameTileKeyInLayoutData = (pageLayout, oldKey, newKey) => {
+  const updates = {};
+  if (pageLayout.layout) updates.layout = pageLayout.layout.map((row) => renameRowTileKey(row, oldKey, newKey));
+  if (pageLayout.defaultLayout) {
+    updates.defaultLayout = pageLayout.defaultLayout.map((row) => renameRowTileKey(row, oldKey, newKey));
+  }
+  if (pageLayout.wideLayout) {
+    updates.wideLayout = pageLayout.wideLayout.map((row) => renameRowTileKey(row, oldKey, newKey));
+  }
+  return updates;
+};
+
 /**
  * @description Starting layout draft for a brand-new detail page: a single, empty tree
  * (just a description tile in its library, no rows yet — the tree editor's own "Add

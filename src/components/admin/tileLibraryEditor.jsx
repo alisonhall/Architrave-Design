@@ -160,37 +160,76 @@ const tileSummary = (tile, projects) => {
  * @param {Function} param.onChange
  * @param {Object} param.projects
  * @param {Array} param.kinds - which tile kinds this page supports adding
+ * @param {Function} [param.onRenameTile] - called (oldKey, newKey, nextTiles) instead of
+ * `onChange` when an existing tile's key is changed, so the caller can apply the tile
+ * map update and its placements' key update together in one atomic step; if omitted,
+ * the tile is renamed in the map alone via `onChange` and its placements are left
+ * pointing at the old key
  */
-const TileLibraryEditor = ({ tiles, onChange, projects, kinds }) => {
+const TileLibraryEditor = ({ tiles, onChange, projects, kinds, onRenameTile }) => {
   const [editingKey, setEditingKey] = useState(null);
   const [addingKind, setAddingKind] = useState(null);
   const [draftValues, setDraftValues] = useState(null);
+  const [draftKey, setDraftKey] = useState('');
 
   const startAdd = (kind) => {
     setEditingKey(null);
     setAddingKind(kind);
     setDraftValues(makeBlankTile(kind));
+    setDraftKey('');
   };
 
   const startEdit = (key) => {
     setAddingKind(null);
     setEditingKey(key);
     setDraftValues({ ...tiles[key] });
+    setDraftKey(key);
   };
 
   const cancel = () => {
     setEditingKey(null);
     setAddingKind(null);
     setDraftValues(null);
+    setDraftKey('');
   };
 
+  const keyCollides = (key, ignoringKey) => key !== ignoringKey && Object.prototype.hasOwnProperty.call(tiles, key);
+
   const saveEdit = () => {
-    onChange({ ...tiles, [editingKey]: draftValues });
+    const nextKey = draftKey.trim();
+    if (!nextKey) {
+      // eslint-disable-next-line no-alert
+      window.alert('A tile needs a key.');
+      return;
+    }
+    if (keyCollides(nextKey, editingKey)) {
+      // eslint-disable-next-line no-alert
+      window.alert(`"${nextKey}" is already used by another tile.`);
+      return;
+    }
+
+    if (nextKey === editingKey) {
+      onChange({ ...tiles, [editingKey]: draftValues });
+    } else {
+      const nextTiles = { ...tiles, [nextKey]: draftValues };
+      delete nextTiles[editingKey];
+      // Renaming touches both the tile map and every placement referencing the old key
+      // — onRenameTile applies both in one update rather than two separate onChange
+      // calls, which (since each is computed from the same pre-update snapshot) would
+      // otherwise have the second call silently clobber the first.
+      if (onRenameTile) onRenameTile(editingKey, nextKey, nextTiles);
+      else onChange(nextTiles);
+    }
     cancel();
   };
 
   const saveAdd = () => {
-    const key = suggestTileKey(addingKind, draftValues.projectKey, tiles);
+    const key = draftKey.trim() || suggestTileKey(addingKind, draftValues.projectKey, tiles);
+    if (keyCollides(key, null)) {
+      // eslint-disable-next-line no-alert
+      window.alert(`"${key}" is already used by another tile.`);
+      return;
+    }
     onChange({ ...tiles, [key]: draftValues });
     cancel();
   };
@@ -222,6 +261,10 @@ const TileLibraryEditor = ({ tiles, onChange, projects, kinds }) => {
       {editingKey && (
         <div className="adminProjectForm">
           <h4>Editing tile: {editingKey}</h4>
+          <label>
+            Key <span className="adminProjectForm-hint">(referenced by this tile's placements — renaming updates them)</span>
+            <input type="text" value={draftKey} onChange={(e) => setDraftKey(e.target.value)} />
+          </label>
           <TileFields kind={draftValues.kind} values={draftValues} onChange={setDraftValues} projects={projects} />
           <div className="adminProjectForm-actions">
             <button type="button" onClick={saveEdit}>Save</button>
@@ -233,6 +276,10 @@ const TileLibraryEditor = ({ tiles, onChange, projects, kinds }) => {
       {addingKind && (
         <div className="adminProjectForm">
           <h4>New {addingKind} tile</h4>
+          <label>
+            Key <span className="adminProjectForm-hint">(optional — auto-generated from your selections if left blank)</span>
+            <input type="text" value={draftKey} onChange={(e) => setDraftKey(e.target.value)} />
+          </label>
           <TileFields kind={addingKind} values={draftValues} onChange={setDraftValues} projects={projects} />
           <div className="adminProjectForm-actions">
             <button type="button" onClick={saveAdd}>Add tile</button>
@@ -256,11 +303,13 @@ TileLibraryEditor.propTypes = {
   tiles: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   projects: PropTypes.object.isRequired,
-  kinds: PropTypes.arrayOf(PropTypes.string)
+  kinds: PropTypes.arrayOf(PropTypes.string),
+  onRenameTile: PropTypes.func
 };
 
 TileLibraryEditor.defaultProps = {
-  kinds: ['project', 'filler', 'text']
+  kinds: ['project', 'filler', 'text'],
+  onRenameTile: null
 };
 
 export default TileLibraryEditor;

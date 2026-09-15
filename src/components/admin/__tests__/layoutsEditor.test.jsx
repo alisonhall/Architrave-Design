@@ -233,3 +233,48 @@ describe('LayoutsEditor — creating a new page', () => {
     expect(screen.getByText('Editing: static/layouts/test-manor.js')).toBeInTheDocument();
   });
 });
+
+describe('LayoutsEditor — renaming a tile', () => {
+  beforeEach(() => {
+    window.sessionStorage.clear();
+  });
+
+  it('renaming a tile updates its placement select and keeps the preview intact', () => {
+    renderEditor();
+
+    fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'creditRiverManor' } });
+
+    const row = screen.getByText(/^1 —/).closest('li');
+    fireEvent.click(within(row).getByRole('button', { name: 'Edit' }));
+    fireEvent.change(screen.getByLabelText(/^Key/), { target: { value: 'frontFacade' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+
+    // The tile list now shows it under the new key, not the old one.
+    expect(screen.getByText(/^frontFacade —/)).toBeInTheDocument();
+    expect(screen.queryByText(/^1 —/)).not.toBeInTheDocument();
+
+    // Its placement in the tree editor now points at the new key.
+    const placementSelects = document.querySelectorAll('.adminLayoutTree-placement select');
+    const matchingSelect = Array.from(placementSelects).find((select) => select.value === 'frontFacade');
+    expect(matchingSelect).toBeDefined();
+
+    // The preview still renders that tile's image — the rename didn't orphan its placement.
+    expect(screen.getAllByRole('img').length).toBeGreaterThan(0);
+  });
+
+  it('renaming a tile to a colliding key leaves the layout unchanged', () => {
+    window.alert = jest.fn();
+    renderEditor();
+
+    fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'creditRiverManor' } });
+
+    const row = screen.getByText(/^1 —/).closest('li');
+    fireEvent.click(within(row).getByRole('button', { name: 'Edit' }));
+    fireEvent.change(screen.getByLabelText(/^Key/), { target: { value: '2' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+
+    expect(window.alert).toHaveBeenCalled();
+    expect(screen.getByText(/^1 —/)).toBeInTheDocument();
+    expect(screen.getByText(/^2 —/)).toBeInTheDocument();
+  });
+});

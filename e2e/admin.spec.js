@@ -330,3 +330,30 @@ test.describe('reviews editor', () => {
     await expect(page.locator('.adminProjectsEditor-row', { hasText: 'Marisa Renamed via E2E' })).toHaveCount(0);
   });
 });
+
+test.describe('layouts editor — renaming a tile', () => {
+  const openLayouts = async (page, pageKey) => {
+    await unlock(page);
+    await page.getByRole('button', { name: 'Layouts' }).click();
+    await expect(page.locator('.adminLayoutsEditor')).toBeVisible();
+    if (pageKey) await page.getByLabel('Page').selectOption(pageKey);
+  };
+
+  test('renaming a tile updates its placement and still surfaces the file in Review Changes', async ({ page }) => {
+    await openLayouts(page, 'creditRiverManor');
+
+    const tileRow = page.locator('.adminTileLibrary li', { hasText: '1 —' });
+    await tileRow.getByRole('button', { name: 'Edit' }).click();
+    await page.getByLabel(/^Key/).fill('frontFacade');
+    await page.getByRole('button', { name: 'Save' }).click();
+
+    await expect(page.locator('.adminTileLibrary li', { hasText: 'frontFacade —' })).toBeVisible();
+    await expect(page.locator('.adminTileLibrary li', { hasText: '1 —' })).toHaveCount(0);
+    // The preview still renders the renamed tile's image — its placement followed the rename.
+    await expect(page.locator('.adminLayoutPreview img').first()).toBeVisible();
+
+    await page.getByRole('button', { name: 'Review Changes' }).click();
+    await expect(page.locator('.adminOutputPanel-fileHeader code')).toHaveText('static/layouts/credit-river-manor.js');
+    await expect(page.locator('.adminOutputPanel-file pre')).toContainText('frontFacade');
+  });
+});
