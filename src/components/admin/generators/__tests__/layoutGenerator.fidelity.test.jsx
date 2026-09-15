@@ -5,10 +5,8 @@ import { render } from '@testing-library/react';
 
 import { seedDraft, LAYOUT_PAGE_CONFIGS } from '../../seedData';
 import { generateLayoutPage } from '../layoutGenerator';
-import RealIndexPage from '../../../../pages/index';
 import RealNewHomes from '../../../../pages/portfolio/new-homes';
 import RealRenovationsAdditions from '../../../../pages/portfolio/renovations-additions';
-import RealCreditRiverManor from '../../../../pages/portfolio/new-homes/credit-river-manor';
 import RealHoggsHollowFrenchCountry from '../../../../pages/portfolio/new-homes/hoggs-hollow-french-country';
 import RealHoggsHollowFrench from '../../../../pages/portfolio/new-homes/hoggs-hollow-french';
 import RealHoggsHollowTraditional from '../../../../pages/portfolio/new-homes/hoggs-hollow-traditional';
@@ -39,19 +37,13 @@ const newHomesDetailCase = (name, layoutKey, RealComponent, slug) =>
 const renovationsDetailCase = (name, layoutKey, RealComponent, slug) =>
   detailCase('renovations-additions', name, layoutKey, RealComponent, slug);
 
-// For each supported page, writes the generated text next to the real one so Jest's
-// normal jsx transform picks it up, then requires and renders it — proving the
-// generator's output isn't just "valid JSX" but renders byte-for-byte the same DOM as
-// the hand-written page it was transcribed from.
+// For each supported page still on the original JSX-generation mechanism (i.e. not yet
+// migrated to the data-driven static/layouts/<slug>.js form — see
+// layoutDataGenerator.fidelity.test.jsx for those), writes the generated text next to
+// the real one so Jest's normal jsx transform picks it up, then requires and renders
+// it — proving the generator's output isn't just "valid JSX" but renders byte-for-byte
+// the same DOM as the hand-written page it was transcribed from.
 const CASES = [
-  {
-    name: 'index.jsx',
-    layoutKey: 'index',
-    generatedPath: path.join(__dirname, '../../../../pages/__generatedIndexForTest.jsx'),
-    requirePath: '../../../../pages/__generatedIndexForTest',
-    RealComponent: RealIndexPage,
-    pathname: '/'
-  },
   {
     name: 'new-homes.jsx',
     layoutKey: 'newHomes',
@@ -68,7 +60,6 @@ const CASES = [
     RealComponent: RealRenovationsAdditions,
     pathname: '/portfolio/renovations-additions/'
   },
-  newHomesDetailCase('CreditRiverManor', 'creditRiverManor', RealCreditRiverManor, 'credit-river-manor'),
   newHomesDetailCase(
     'HoggsHollowFrenchCountry',
     'hoggsHollowFrenchCountry',

@@ -46,7 +46,7 @@ describe('AdminApp', () => {
 
     fireEvent.click(screen.getByRole('button', { name: 'Layouts' }));
 
-    expect(screen.getByText('Editing: src/pages/index.jsx')).toBeInTheDocument();
+    expect(screen.getByText('Editing: static/layouts/index.js')).toBeInTheDocument();
   });
 
   it('shares draft state between the Projects and Layouts sections', () => {

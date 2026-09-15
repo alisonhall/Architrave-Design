@@ -18,7 +18,7 @@ describe('LayoutsEditor', () => {
   it('defaults to the first supported page', () => {
     renderEditor();
 
-    expect(screen.getByText('Editing: src/pages/index.jsx')).toBeInTheDocument();
+    expect(screen.getByText('Editing: static/layouts/index.js')).toBeInTheDocument();
   });
 
   it('shows a page selector when more than one page is supported', () => {
@@ -96,7 +96,7 @@ describe('LayoutsEditor', () => {
 
     fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'creditRiverManor' } });
 
-    expect(screen.getByText('Editing: src/pages/portfolio/new-homes/credit-river-manor.jsx')).toBeInTheDocument();
+    expect(screen.getByText('Editing: static/layouts/credit-river-manor.js')).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Layout' })).toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Default layout (narrow screens)' })).not.toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Wide layout (wide screens)' })).not.toBeInTheDocument();
@@ -120,6 +120,21 @@ describe('LayoutsEditor', () => {
     expect(screen.getByText('Credit River Manor')).toBeInTheDocument();
   });
 
+  it('renders two sections (not one) for a dual-layout detail page, still with detail-only tile kinds', () => {
+    // Regression test: a "detail" page (bound to one project) can still have a
+    // defaultLayout/wideLayout split, just like a listing page — the section count
+    // must come from the data shape, not from pageConfig.type alone.
+    renderEditor();
+
+    fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'kingswayGeorgianDetail' } });
+
+    expect(screen.getByRole('heading', { name: 'Default layout (narrow screens)' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Wide layout (wide screens)' })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Layout' })).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Add image tile' })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Add project tile' })).not.toBeInTheDocument();
+  });
+
   it('still renders correctly for a returning user whose cached draft predates this section', () => {
     // Regression test: a sessionStorage draft saved before layouts.index/newHomes/
     // renovationsAdditions existed (or under any other outdated shape) must not leave
@@ -131,7 +146,7 @@ describe('LayoutsEditor', () => {
 
     renderEditor();
 
-    expect(screen.getByText('Editing: src/pages/index.jsx')).toBeInTheDocument();
+    expect(screen.getByText('Editing: static/layouts/index.js')).toBeInTheDocument();
     expect(screen.getAllByText("Hogg's Hollow French").length).toBeGreaterThan(0);
   });
 });

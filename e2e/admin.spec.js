@@ -126,7 +126,7 @@ test.describe('layouts editor', () => {
   test('shows the target file and a live preview matching the real page', async ({ page }) => {
     await openLayouts(page);
 
-    await expect(page.getByText('Editing: src/pages/index.jsx')).toBeVisible();
+    await expect(page.getByText('Editing: static/layouts/index.js')).toBeVisible();
     await expect(page.locator('.adminLayoutPreview').first().getByText("Hogg's Hollow French")).toBeVisible();
   });
 
@@ -173,7 +173,7 @@ test.describe('layouts editor', () => {
   }) => {
     await openLayouts(page, 'creditRiverManor');
 
-    await expect(page.getByText('Editing: src/pages/portfolio/new-homes/credit-river-manor.jsx')).toBeVisible();
+    await expect(page.getByText('Editing: static/layouts/credit-river-manor.js')).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Layout' })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Default layout (narrow screens)' })).not.toBeVisible();
     await expect(page.getByRole('button', { name: 'Add image tile' })).toBeVisible();
@@ -189,7 +189,19 @@ test.describe('layouts editor', () => {
     await page.getByRole('button', { name: 'Review Changes' }).click();
 
     await expect(page.locator('.adminOutputPanel-fileHeader code')).toHaveText(
-      'src/pages/portfolio/new-homes/credit-river-manor.jsx'
+      'static/layouts/credit-river-manor.js'
     );
+  });
+
+  test('a dual-layout detail page shows two sections (not one), still with detail-only tile kinds', async ({
+    page
+  }) => {
+    await openLayouts(page, 'kingswayGeorgianDetail');
+
+    await expect(page.getByRole('heading', { name: 'Default layout (narrow screens)' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Wide layout (wide screens)' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Layout', exact: true })).toHaveCount(0);
+    await expect(page.getByRole('button', { name: 'Add image tile' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Add project tile' })).toHaveCount(0);
   });
 });

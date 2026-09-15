@@ -1,8 +1,9 @@
 import constants from '../../../static/app-constants';
+import indexLayoutData from '../../../static/layouts/index';
+import creditRiverManorLayoutData from '../../../static/layouts/credit-river-manor';
+import { hydrateLayoutData } from './layoutHelpers';
 import { newHomesLayout, newHomesPageConfig } from './seedLayouts/newHomes';
-import { indexPageLayout, indexPageConfig } from './seedLayouts/indexPage';
 import { renovationsAdditionsLayout, renovationsAdditionsPageConfig } from './seedLayouts/renovationsAdditions';
-import { creditRiverManorLayout, creditRiverManorPageConfig } from './seedLayouts/creditRiverManor';
 import { hoggsHollowFrenchCountryLayout, hoggsHollowFrenchCountryPageConfig } from './seedLayouts/hoggsHollowFrenchCountry';
 import { hoggsHollowFrenchDetailLayout, hoggsHollowFrenchDetailPageConfig } from './seedLayouts/hoggsHollowFrenchDetail';
 import { hoggsHollowTraditionalDetailLayout, hoggsHollowTraditionalDetailPageConfig } from './seedLayouts/hoggsHollowTraditionalDetail';
@@ -51,10 +52,13 @@ export const seedDraft = {
   aboutContent: null,
   reviews: null,
   layouts: {
-    index: clone(indexPageLayout),
+    // index and creditRiverManor are migrated to the data-driven form: their layout
+    // comes straight from static/layouts/*.js, the same file the real page renders
+    // from, hydrated with fresh ids for the tree editor. No transcription, no drift.
+    index: clone(hydrateLayoutData(indexLayoutData)),
     newHomes: clone(newHomesLayout),
     renovationsAdditions: clone(renovationsAdditionsLayout),
-    creditRiverManor: clone(creditRiverManorLayout),
+    creditRiverManor: clone(hydrateLayoutData(creditRiverManorLayoutData)),
     hoggsHollowFrenchCountry: clone(hoggsHollowFrenchCountryLayout),
     hoggsHollowFrenchDetail: clone(hoggsHollowFrenchDetailLayout),
     hoggsHollowTraditionalDetail: clone(hoggsHollowTraditionalDetailLayout),
@@ -72,22 +76,39 @@ export const seedDraft = {
   }
 };
 
-// Static, non-content configuration (import paths, class names) each supported page's
-// layout generator needs — not part of the editable draft.
+// Static, non-content configuration each supported page's layout generator needs —
+// not part of the editable draft.
 //
-// upcoming.jsx is deliberately not here: unlike the other listing pages, it isn't a
-// hand-tuned Row/Column/Item tree at all — it's already fully generated from
+// Pages with `dataFile: true` are migrated to the data-driven form: their layout lives
+// in static/layouts/<slug>.js (imported directly above), and editing them generates
+// that same plain-data file via generateLayoutData — no JSX, no separate seed, no
+// import-path/component-name bookkeeping needed. Pages without it are still on the
+// original hand-transcribed-seed mechanism (see seedLayouts/*.js) pending migration;
+// those need the fuller JSX-generation config (componentName, import paths, etc.)
+// consumed by generateLayoutPage.
+//
+// upcoming.jsx is deliberately not here at all: unlike the other listing pages, it
+// isn't a hand-tuned Row/Column/Item tree — it's already fully generated from
 // upcomingProjectsOrder (a plain map over that array), so it's already covered by the
 // Projects section's ordering controls and doesn't need a layout editor of its own.
-//
-// creditRiverManor is the first of the ~16 project detail pages to get this treatment
-// (type: 'detail' — a single tree bound to one project, rather than a listing page's
-// paired default/wide trees over many). The rest follow the same pattern.
 export const LAYOUT_PAGE_CONFIGS = {
-  index: indexPageConfig,
+  index: {
+    key: 'index',
+    label: 'Home (index)',
+    dataFile: true,
+    dataFilePath: 'static/layouts/index.js',
+    type: 'listing'
+  },
   newHomes: newHomesPageConfig,
   renovationsAdditions: renovationsAdditionsPageConfig,
-  creditRiverManor: creditRiverManorPageConfig,
+  creditRiverManor: {
+    key: 'creditRiverManor',
+    label: 'Credit River Manor (New Homes detail page)',
+    dataFile: true,
+    dataFilePath: 'static/layouts/credit-river-manor.js',
+    type: 'detail',
+    projectKey: 'creditRiverManor'
+  },
   hoggsHollowFrenchCountry: hoggsHollowFrenchCountryPageConfig,
   hoggsHollowFrenchDetail: hoggsHollowFrenchDetailPageConfig,
   hoggsHollowTraditionalDetail: hoggsHollowTraditionalDetailPageConfig,

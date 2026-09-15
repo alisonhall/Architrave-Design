@@ -13,8 +13,11 @@ const DETAIL_TILE_KINDS = ['image', 'description'];
 /**
  * @description The Layouts section of the admin tool: pick a portfolio page, manage
  * its reusable tiles, and edit its layout tree(s) with a live preview alongside each.
- * A listing page (index.jsx, new-homes.jsx, etc.) has separate narrow/wide-screen
- * trees sharing one tile library; a detail page has a single tree bound to one project.
+ * Two independent things vary per page: whether it's bound to one project (a "detail"
+ * page — tile kinds image/description, a bound-project description tile) or shares
+ * projects broadly (a "listing" page — tile kinds project/filler/text); and whether it
+ * has one tree (`layout`) or two (`defaultLayout`/`wideLayout`) — a detail page can be
+ * either shape, so the tree-count is read from the data itself, not from the page type.
  */
 const LayoutsEditor = () => {
   const [activePage, setActivePage] = useState(PAGE_KEYS[0]);
@@ -31,6 +34,9 @@ const LayoutsEditor = () => {
 
   if (!pageLayout) return null;
 
+  const isDual = Boolean(pageLayout.defaultLayout);
+  const targetPath = pageConfig.dataFilePath || pageConfig.filePath;
+
   return (
     <div className="adminLayoutsEditor">
       {PAGE_KEYS.length > 1 && (
@@ -44,7 +50,7 @@ const LayoutsEditor = () => {
         </label>
       )}
 
-      <p className="adminLayoutsEditor-target">Editing: {pageConfig.filePath}</p>
+      <p className="adminLayoutsEditor-target">Editing: {targetPath}</p>
 
       <TileLibraryEditor
         tiles={pageLayout.tiles}
@@ -53,24 +59,7 @@ const LayoutsEditor = () => {
         kinds={isDetailPage ? DETAIL_TILE_KINDS : LISTING_TILE_KINDS}
       />
 
-      {isDetailPage ? (
-        <section className="adminLayoutsEditor-variant">
-          <h3>Layout</h3>
-          <div className="adminLayoutsEditor-columns">
-            <LayoutTreeEditor
-              rows={pageLayout.layout}
-              onChange={(rows) => updatePageLayout({ layout: rows })}
-              tiles={pageLayout.tiles}
-            />
-            <LayoutPreview
-              rows={pageLayout.layout}
-              tiles={pageLayout.tiles}
-              projects={projects}
-              boundProject={boundProject}
-            />
-          </div>
-        </section>
-      ) : (
+      {isDual ? (
         <>
           <section className="adminLayoutsEditor-variant">
             <h3>Default layout (narrow screens)</h3>
@@ -85,6 +74,7 @@ const LayoutsEditor = () => {
                 tiles={pageLayout.tiles}
                 projects={projects}
                 introText={introText}
+                boundProject={boundProject}
               />
             </div>
           </section>
@@ -102,10 +92,28 @@ const LayoutsEditor = () => {
                 tiles={pageLayout.tiles}
                 projects={projects}
                 introText={introText}
+                boundProject={boundProject}
               />
             </div>
           </section>
         </>
+      ) : (
+        <section className="adminLayoutsEditor-variant">
+          <h3>Layout</h3>
+          <div className="adminLayoutsEditor-columns">
+            <LayoutTreeEditor
+              rows={pageLayout.layout}
+              onChange={(rows) => updatePageLayout({ layout: rows })}
+              tiles={pageLayout.tiles}
+            />
+            <LayoutPreview
+              rows={pageLayout.layout}
+              tiles={pageLayout.tiles}
+              projects={projects}
+              boundProject={boundProject}
+            />
+          </div>
+        </section>
       )}
     </div>
   );

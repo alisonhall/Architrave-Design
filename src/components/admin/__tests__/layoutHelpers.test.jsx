@@ -8,7 +8,9 @@ import {
   makeTilePlacement,
   makeBlankTile,
   suggestTileKey,
-  computeTileOrder
+  computeTileOrder,
+  hydrateLayoutData,
+  stripLayoutData
 } from '../layoutHelpers';
 
 describe('array helpers', () => {
@@ -166,5 +168,68 @@ describe('computeTileOrder', () => {
     ];
 
     expect(computeTileOrder(rows, tiles)).toEqual(['a']);
+  });
+});
+
+describe('hydrateLayoutData / stripLayoutData', () => {
+  const rawData = {
+    mainClasses: 'portfolio',
+    sectionClassName: 'contentWrapper layoutAll layoutProject',
+    projectKey: 'someProject',
+    tiles: { a: { kind: 'image', num: 1, imageUrl: 'https://example.com/a.jpg' } },
+    layout: [
+      {
+        height: 300,
+        columns: [
+          {
+            width: '50%',
+            children: [
+              { nodeType: 'tileRef', tileKey: 'a' },
+              { nodeType: 'row', row: { columns: [{ children: [{ nodeType: 'empty' }] }] } }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+
+  it('adds an id to every row, column, and placement, including nested rows', () => {
+    const hydrated = hydrateLayoutData(rawData);
+    const row = hydrated.layout[0];
+    const column = row.columns[0];
+    const [tileRefPlacement, nestedRowPlacement] = column.children;
+
+    expect(row.id).toEqual(expect.any(String));
+    expect(column.id).toEqual(expect.any(String));
+    expect(tileRefPlacement.id).toEqual(expect.any(String));
+    expect(nestedRowPlacement.id).toEqual(expect.any(String));
+    expect(nestedRowPlacement.row.id).toEqual(expect.any(String));
+    expect(nestedRowPlacement.row.columns[0].id).toEqual(expect.any(String));
+    expect(nestedRowPlacement.row.columns[0].children[0].id).toEqual(expect.any(String));
+  });
+
+  it('leaves non-tree fields untouched', () => {
+    const hydrated = hydrateLayoutData(rawData);
+    expect(hydrated.mainClasses).toBe('portfolio');
+    expect(hydrated.projectKey).toBe('someProject');
+    expect(hydrated.tiles).toEqual(rawData.tiles);
+  });
+
+  it('hydrates whichever tree fields are present (single vs dual)', () => {
+    const dual = { tiles: {}, defaultLayout: [], wideLayout: [] };
+    const hydrated = hydrateLayoutData(dual);
+    expect(hydrated.defaultLayout).toEqual([]);
+    expect(hydrated.wideLayout).toEqual([]);
+    expect(hydrated.layout).toBeUndefined();
+  });
+
+  it('stripLayoutData removes every id added by hydrateLayoutData, round-tripping exactly', () => {
+    const hydrated = hydrateLayoutData(rawData);
+    const stripped = stripLayoutData(hydrated);
+    expect(stripped).toEqual(rawData);
+  });
+
+  it('stripLayoutData leaves data with no ids unchanged', () => {
+    expect(stripLayoutData(rawData)).toEqual(rawData);
   });
 });

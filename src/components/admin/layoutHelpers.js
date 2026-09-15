@@ -1,3 +1,7 @@
+// computeTileOrder is genuinely shared with production rendering (src/components/
+// layoutTreeRenderer.jsx) — re-exported here so existing admin imports keep working.
+export { computeTileOrder } from '../layoutTreeRenderer';
+
 let idCounter = 0;
 /**
  * @description A unique-enough id for a layout tree node, used only as a React key and
@@ -27,10 +31,6 @@ export const makeTilePlacement = (tileKey) => ({ id: makeId('placement'), nodeTy
 // configure about it).
 export const makeEmptyPlacement = () => ({ id: makeId('placement'), nodeType: 'empty' });
 
-// Tile kinds that never get a fade-in `num` — everything else (project/filler/image)
-// does. See computeTileOrder below.
-const UNNUMBERED_TILE_KINDS = ['text', 'description'];
-
 export const makeBlankTile = (kind) => {
   if (kind === 'project') return { kind: 'project', projectKey: '', backgroundPosition: '' };
   if (kind === 'filler') return { kind: 'filler', projectKey: '', imageUrl: '' };
@@ -53,37 +53,55 @@ export const suggestTileKey = (kind, projectKey, existingTiles) => {
   return `${base}${suffix}`;
 };
 
+// `static/layouts/*.js` never stores `id` fields (they're an editing-only concern —
+// React keys and node addresses for the tree editor). These two functions are the only
+// place ids get added (on load) and removed (before generating output), so the
+// committed data stays clean regardless of what the admin does with it in a session.
+const hydratePlacement = (placement) => {
+  if (placement.nodeType === 'row') return { id: makeId('placement'), nodeType: 'row', row: hydrateRow(placement.row) };
+  return { id: makeId('placement'), ...placement };
+};
+
+const hydrateColumn = (column) => ({ id: makeId('column'), ...column, children: column.children.map(hydratePlacement) });
+
+const hydrateRow = (row) => ({ id: makeId('row'), ...row, columns: row.columns.map(hydrateColumn) });
+
+export const hydrateLayoutRows = (rows) => rows.map(hydrateRow);
+
 /**
- * @description Walks a layout's rows in document order and returns the tile keys in
- * the order they're first placed — this is the numbering the real site's Item
- * components use (num=1, 2, 3, ...) for a staggered fade-in animation on the first few
- * tiles. Only "image" tiles (project/filler) are numbered; text tiles never are.
- *
- * @param {Array} rows
- * @param {Object} tiles
+ * @description Adds fresh `id`s to every row/column/placement in a page's layout data
+ * (as loaded from static/layouts/<slug>.js) so the tree editor has stable React keys
+ * and addresses to edit. Handles both a single-tree page (`layout`) and a dual-tree
+ * page (`defaultLayout`/`wideLayout`); everything else on the object passes through.
  */
-export const computeTileOrder = (rows, tiles) => {
-  const order = [];
-  const seen = new Set();
+export const hydrateLayoutData = (data) => {
+  const hydrated = { ...data };
+  if (data.layout) hydrated.layout = hydrateLayoutRows(data.layout);
+  if (data.defaultLayout) hydrated.defaultLayout = hydrateLayoutRows(data.defaultLayout);
+  if (data.wideLayout) hydrated.wideLayout = hydrateLayoutRows(data.wideLayout);
+  return hydrated;
+};
 
-  const visitChildren = (children) => {
-    children.forEach((child) => {
-      if (child.nodeType === 'row') {
-        visitColumns(child.row.columns);
-      } else if (child.nodeType === 'tileRef' && !seen.has(child.tileKey)) {
-        const tile = tiles[child.tileKey];
-        if (tile && !UNNUMBERED_TILE_KINDS.includes(tile.kind)) {
-          seen.add(child.tileKey);
-          order.push(child.tileKey);
-        } else if (tile) {
-          seen.add(child.tileKey);
-        }
-      }
-    });
-  };
+const stripPlacement = ({ id, ...rest }) => {
+  if (rest.nodeType === 'row') return { nodeType: 'row', row: stripRow(rest.row) };
+  return rest;
+};
 
-  const visitColumns = (columns) => columns.forEach((column) => visitChildren(column.children));
+const stripColumn = ({ id, children, ...rest }) => ({ ...rest, children: children.map(stripPlacement) });
 
-  rows.forEach((row) => visitColumns(row.columns));
-  return order;
+const stripRow = ({ id, columns, ...rest }) => ({ ...rest, columns: columns.map(stripColumn) });
+
+export const stripLayoutRows = (rows) => rows.map(stripRow);
+
+/**
+ * @description The inverse of hydrateLayoutData — removes every `id` before the draft
+ * is serialized back to static/layouts/<slug>.js text, so what's committed never
+ * carries editor-only bookkeeping.
+ */
+export const stripLayoutData = (data) => {
+  const stripped = { ...data };
+  if (data.layout) stripped.layout = stripLayoutRows(data.layout);
+  if (data.defaultLayout) stripped.defaultLayout = stripLayoutRows(data.defaultLayout);
+  if (data.wideLayout) stripped.wideLayout = stripLayoutRows(data.wideLayout);
+  return stripped;
 };
