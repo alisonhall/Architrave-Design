@@ -30,6 +30,18 @@ describe('ProjectsEditor', () => {
     });
   });
 
+  it('shows a thumbnail for each project row, identifying it by image', () => {
+    renderEditor();
+
+    const firstShownKey = seedDraft.newProjectsOrder[0];
+    const firstShownName = seedDraft.projects[firstShownKey].projectName;
+    const row = within(newHomesSection()).getByText(firstShownName).closest('li');
+
+    const thumbnail = row.querySelector('img.adminThumbnail');
+    expect(thumbnail).toBeInTheDocument();
+    expect(thumbnail).toHaveAttribute('src', expect.stringContaining('c_fill'));
+  });
+
   it('moves a shown project to "not shown" and back', () => {
     renderEditor();
     const firstShownKey = seedDraft.newProjectsOrder[0];

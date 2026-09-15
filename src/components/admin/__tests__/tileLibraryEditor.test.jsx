@@ -4,8 +4,8 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import TileLibraryEditor from '../tileLibraryEditor';
 
 const projects = {
-  projectA: { key: 'projectA', projectName: 'Project A' },
-  projectB: { key: 'projectB', projectName: 'Project B' }
+  projectA: { key: 'projectA', projectName: 'Project A', mainImageUrl: 'https://example.com/project-a.jpg' },
+  projectB: { key: 'projectB', projectName: 'Project B', mainImageUrl: 'https://example.com/project-b.jpg' }
 };
 
 describe('TileLibraryEditor', () => {
@@ -229,6 +229,48 @@ describe('TileLibraryEditor', () => {
 
     expect(screen.getByText(/Image tile/)).toBeInTheDocument();
     expect(screen.getByText(/Description — this page's project/)).toBeInTheDocument();
+  });
+
+  it('shows a thumbnail for a project tile, using its project\'s main image', () => {
+    const tiles = { tileA: { kind: 'project', projectKey: 'projectA' } };
+    render(<TileLibraryEditor tiles={tiles} onChange={jest.fn()} projects={projects} />);
+
+    const row = screen.getByText(/tileA/).closest('li');
+    expect(row.querySelector('img.adminThumbnail')).toHaveAttribute('src', expect.stringContaining('project-a'));
+  });
+
+  it('shows a thumbnail for a filler or image tile, using its own image URL', () => {
+    const tiles = {
+      fillerTile: { kind: 'filler', imageUrl: 'https://example.com/filler.jpg' },
+      imageTile: { kind: 'image', imageUrl: 'https://example.com/plain.jpg' }
+    };
+    render(<TileLibraryEditor tiles={tiles} onChange={jest.fn()} projects={projects} kinds={['filler', 'image']} />);
+
+    expect(screen.getByText(/fillerTile/).closest('li').querySelector('img.adminThumbnail'))
+      .toHaveAttribute('src', expect.stringContaining('filler.jpg'));
+    expect(screen.getByText(/imageTile/).closest('li').querySelector('img.adminThumbnail'))
+      .toHaveAttribute('src', expect.stringContaining('plain.jpg'));
+  });
+
+  it('shows no thumbnail for tile kinds with no image (text, description, embed, placeholder)', () => {
+    const tiles = {
+      textTile: { kind: 'text', text: 'Some text', useIntroText: false },
+      descriptionTile: { kind: 'description' },
+      embedTile: { kind: 'embed', html: '<iframe></iframe>' },
+      placeholderTile: { kind: 'placeholder' }
+    };
+    render(
+      <TileLibraryEditor
+        tiles={tiles}
+        onChange={jest.fn()}
+        projects={projects}
+        kinds={['text', 'description', 'embed', 'placeholder']}
+      />
+    );
+
+    ['textTile', 'descriptionTile', 'embedTile', 'placeholderTile'].forEach((key) => {
+      expect(screen.getByText(new RegExp(key)).closest('li').querySelector('img.adminThumbnail')).not.toBeInTheDocument();
+    });
   });
 
   it('adds a new tile under an explicit custom key instead of the suggested one', () => {

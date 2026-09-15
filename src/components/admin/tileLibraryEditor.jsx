@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { makeBlankTile, suggestTileKey } from './layoutHelpers';
+import AdminThumbnail from './adminThumbnail';
 
 const TileFields = ({ kind, values, onChange, projects }) => {
   if (kind === 'project') {
@@ -155,6 +156,14 @@ const tileSummary = (tile, projects) => {
   return tile.useIntroText ? 'Text — shared introduction' : `Text — "${(tile.text || '').slice(0, 40)}"`;
 };
 
+// A quick visual identifier for the tile list — only the kinds that actually carry an
+// image URL have one; everything else (text/description/embed/placeholder) has none.
+const tileThumbnailUrl = (tile, projects) => {
+  if (tile.kind === 'project') return projects[tile.projectKey]?.mainImageUrl;
+  if (tile.kind === 'filler' || tile.kind === 'image') return tile.imageUrl;
+  return null;
+};
+
 /**
  * @description Manages the reusable tile definitions for one page's layout — each tile
  * can be placed one or more times across its layout tree(s); editing it here updates
@@ -255,7 +264,10 @@ const TileLibraryEditor = ({ tiles, onChange, projects, kinds, onRenameTile }) =
       <ul>
         {Object.keys(tiles).map((key) => (
           <li key={key} className="adminProjectsEditor-row">
-            <span className="adminProjectsEditor-name">{key} — {tileSummary(tiles[key], projects)}</span>
+            <span className="adminProjectsEditor-nameGroup">
+              <AdminThumbnail imageUrl={tileThumbnailUrl(tiles[key], projects)} />
+              <span className="adminProjectsEditor-name">{key} — {tileSummary(tiles[key], projects)}</span>
+            </span>
             <span className="adminProjectsEditor-rowActions">
               <button type="button" onClick={() => startEdit(key)}>Edit</button>
               <button type="button" onClick={() => deleteTile(key)}>Delete</button>

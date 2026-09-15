@@ -113,6 +113,15 @@ test.describe('projects editor', () => {
     await page.getByRole('button', { name: 'Review Changes' }).click();
     await expect(page.locator('.adminOutputPanel-fileHeader code')).toHaveText('static/app-constants.js');
   });
+
+  test('shows a thumbnail on each project row', async ({ page }) => {
+    await unlock(page);
+
+    const newHomesSection = page.locator('section', { has: page.getByRole('heading', { name: 'New Homes' }) });
+    const firstRow = newHomesSection.locator('.adminProjectsEditor-row').first();
+
+    await expect(firstRow.locator('img.adminThumbnail')).toBeVisible();
+  });
 });
 
 test.describe('layouts editor', () => {
@@ -128,6 +137,13 @@ test.describe('layouts editor', () => {
 
     await expect(page.getByText('Editing: static/layouts/index.js')).toBeVisible();
     await expect(page.locator('.adminLayoutPreview').first().getByText("Hogg's Hollow French")).toBeVisible();
+  });
+
+  test('shows a thumbnail on each tile that has an image', async ({ page }) => {
+    await openLayouts(page);
+
+    const tileRow = page.locator('.adminTileLibrary li', { hasText: 'hoggsHollowFrench' }).first();
+    await expect(tileRow.locator('img.adminThumbnail')).toBeVisible();
   });
 
   test('switches between supported pages via the selector', async ({ page }) => {

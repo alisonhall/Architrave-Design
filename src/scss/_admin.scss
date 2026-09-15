@@ -171,6 +171,14 @@
         margin-bottom: 4px;
     }
 
+    &-nameGroup {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        overflow: hidden;
+        min-width: 0;
+    }
+
     &-name {
         overflow: hidden;
         text-overflow: ellipsis;
@@ -391,4 +399,12 @@
     border: 1px solid #ddd;
     padding: 10px;
     background: $pageColour;
+}
+
+.adminThumbnail {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    object-fit: cover;
+    background: #eee;
 }

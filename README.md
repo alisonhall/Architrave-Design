@@ -74,7 +74,7 @@ Each portfolio page's layout is plain data (a page's `static/layouts/<slug>.js`)
 
 - `rowHOC.jsx` — a horizontal band (`height` or `imageHeight` in px).
 - `columnHOC.jsx` — a column inside a row (`width` as a percentage).
-- `item.jsx` — a tile inside a column: a project image+link, a plain image, a filler image, a text blurb, or a raw embed (an iframe's HTML pasted verbatim), depending on which props it's given.
+- `item.jsx` — a tile inside a column: a project image+link, a plain image, a filler image, a text blurb, a raw embed (an iframe's HTML pasted verbatim), or a plain blue placeholder, depending on which props it's given.
 
 A listing page (`index`/`new-homes`/`renovations-additions`) has two trees, `defaultLayout` and `wideLayout` (narrow vs. wide screens); a detail page has either that same two-tree shape or a single `layout` tree — read from the data itself, not fixed by page type. `layoutTreeRenderer.jsx`'s `renderLayoutTree` is the single rendering implementation shared by the real pages (via `listingPageLayout.jsx`/`detailPageLayout.jsx`) and the Admin tool's live preview, so the two can never drift apart.
 

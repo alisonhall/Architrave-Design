@@ -4,6 +4,7 @@ import { useDraftSection } from './draftContext';
 import { PROJECT_TYPES, makeUniqueProjectKey } from './projectHelpers';
 import ProjectForm from './projectForm';
 import ProjectPreview from './projectPreview';
+import AdminThumbnail from './adminThumbnail';
 
 const arrayWithout = (array, value) => array.filter((item) => item !== value);
 const arrayMoved = (array, index, delta) => {
@@ -101,7 +102,10 @@ const ProjectsEditor = () => {
 
     return (
       <li key={key} className="adminProjectsEditor-row">
-        <span className="adminProjectsEditor-name">{project.projectName}</span>
+        <span className="adminProjectsEditor-nameGroup">
+          <AdminThumbnail imageUrl={project.mainImageUrl} />
+          <span className="adminProjectsEditor-name">{project.projectName}</span>
+        </span>
         <span className="adminProjectsEditor-rowActions">
           {showUpDown && (
             <>
