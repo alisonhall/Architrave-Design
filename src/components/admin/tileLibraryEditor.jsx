@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { makeBlankTile, suggestTileKey } from './layoutHelpers';
 import AdminThumbnail from './adminThumbnail';
+import ActionsMenu from './actionsMenu';
 
 // Exported so tileEditPopover.jsx (the click-to-edit-in-preview UI) can reuse the exact
 // same kind-specific fields as this library's own add/edit forms — one set of tile
@@ -167,6 +168,39 @@ export const tileThumbnailUrl = (tile, projects) => {
   return null;
 };
 
+// Matches against the same text the list already shows (key + summary), so what you
+// see is what you can search by — used both by this library's own list and by the
+// click-to-edit popover's "assign a tile" list (tileEditPopover.jsx).
+export const filterTileKeys = (tiles, projects, query) => {
+  const normalized = query.trim().toLowerCase();
+  if (!normalized) return Object.keys(tiles);
+  return Object.keys(tiles).filter(
+    (key) => `${key} ${tileSummary(tiles[key], projects)}`.toLowerCase().includes(normalized)
+  );
+};
+
+/**
+ * @description A search box for a list of tile keys, shared by the Tile Library's own
+ * list and the click-to-edit popover's "assign a tile" list — one filtering UI, two
+ * places that show a tile list.
+ */
+export const TileFilterInput = ({ value, onChange }) => (
+  <label className="adminTileLibrary-filter">
+    Filter tiles
+    <input
+      type="text"
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      placeholder="Search by key or summary…"
+    />
+  </label>
+);
+
+TileFilterInput.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired
+};
+
 /**
  * @description Manages the reusable tile definitions for one page's layout — each tile
  * can be placed one or more times across its layout tree(s); editing it here updates
@@ -189,6 +223,8 @@ const TileLibraryEditor = ({ tiles, onChange, projects, kinds, onRenameTile }) =
   const [addingKind, setAddingKind] = useState(null);
   const [draftValues, setDraftValues] = useState(null);
   const [draftKey, setDraftKey] = useState('');
+  const [filter, setFilter] = useState('');
+  const visibleKeys = filterTileKeys(tiles, projects, filter);
 
   const startAdd = (kind) => {
     setEditingKey(null);
@@ -261,23 +297,46 @@ const TileLibraryEditor = ({ tiles, onChange, projects, kinds, onRenameTile }) =
     if (editingKey === key) cancel();
   };
 
+  // Not assigned to any placement yet — many pages have several near-identical tiles
+  // (e.g. a handful of plain images), so starting from a copy beats rebuilding one from
+  // scratch. Uses the Tile Library's own list, not the layout tree, so this never
+  // touches placements at all.
+  const duplicateTile = (key) => {
+    let newKey = `${key}Copy`;
+    let suffix = 2;
+    while (Object.prototype.hasOwnProperty.call(tiles, newKey)) {
+      newKey = `${key}Copy${suffix}`;
+      suffix += 1;
+    }
+    onChange({ ...tiles, [newKey]: { ...tiles[key] } });
+  };
+
   return (
     <div className="adminTileLibrary">
       <h3>Tiles</h3>
+      <TileFilterInput value={filter} onChange={setFilter} />
       <ul>
-        {Object.keys(tiles).map((key) => (
+        {visibleKeys.map((key) => (
           <li key={key} className="adminProjectsEditor-row">
             <span className="adminProjectsEditor-nameGroup">
               <AdminThumbnail imageUrl={tileThumbnailUrl(tiles[key], projects)} />
               <span className="adminProjectsEditor-name">{key} — {tileSummary(tiles[key], projects)}</span>
             </span>
             <span className="adminProjectsEditor-rowActions">
-              <button type="button" onClick={() => startEdit(key)}>Edit</button>
-              <button type="button" onClick={() => deleteTile(key)}>Delete</button>
+              <ActionsMenu
+                actions={[
+                  { label: 'Edit', onClick: () => startEdit(key) },
+                  { label: 'Duplicate', onClick: () => duplicateTile(key) },
+                  { label: 'Delete', onClick: () => deleteTile(key) }
+                ]}
+              />
             </span>
           </li>
         ))}
       </ul>
+      {filter && visibleKeys.length === 0 && (
+        <p className="adminProjectForm-hint">No tiles match &quot;{filter}&quot;.</p>
+      )}
 
       {editingKey && (
         <div className="adminProjectForm">

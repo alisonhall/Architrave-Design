@@ -146,6 +146,29 @@ test.describe('layouts editor', () => {
     await expect(tileRow.locator('img.adminThumbnail')).toBeVisible();
   });
 
+  test('duplicating a tile adds a copy to the Tile Library', async ({ page }) => {
+    await openLayouts(page);
+
+    const tileLibrary = page.locator('.adminTileLibrary');
+    const tileRow = tileLibrary.locator('li', { hasText: 'hoggsHollowFrench' }).first();
+    await tileRow.getByRole('button', { name: 'Actions ▾' }).click();
+    await tileRow.getByRole('menuitem', { name: 'Duplicate' }).click();
+
+    await expect(tileLibrary.locator('li', { hasText: 'hoggsHollowFrenchCopy' })).toBeVisible();
+  });
+
+  test('filtering the Tile Library narrows the list to matching tiles', async ({ page }) => {
+    await openLayouts(page);
+
+    const tileLibrary = page.locator('.adminTileLibrary');
+    await expect(tileLibrary.locator('li', { hasText: 'kingswayGeorgian' })).toBeVisible();
+
+    await page.getByLabel('Filter tiles').fill('hoggsHollowFrench');
+
+    await expect(tileLibrary.locator('li', { hasText: 'hoggsHollowFrench' })).toBeVisible();
+    await expect(tileLibrary.locator('li', { hasText: 'kingswayGeorgian' })).toHaveCount(0);
+  });
+
   test('switches between supported pages via the selector', async ({ page }) => {
     await openLayouts(page);
 
@@ -159,7 +182,8 @@ test.describe('layouts editor', () => {
     await openLayouts(page, 'newHomes');
 
     const tileRow = page.locator('.adminTileLibrary li', { hasText: 'classicCentreHall' });
-    await tileRow.getByRole('button', { name: 'Edit' }).click();
+    await tileRow.getByRole('button', { name: 'Actions ▾' }).click();
+    await tileRow.getByRole('menuitem', { name: 'Edit' }).click();
     await page.getByLabel(/Background position/).fill('10% 10%');
     await page.getByRole('button', { name: 'Save' }).click();
 
@@ -182,6 +206,59 @@ test.describe('layouts editor', () => {
 
     await page.getByRole('button', { name: 'Review Changes' }).click();
     await expect(page.locator('.adminOutputPanel-fileHeader code')).toHaveText('static/layouts/new-homes.js');
+  });
+
+  test('a row\'s actions are tucked behind one menu instead of separate buttons', async ({ page }) => {
+    await openLayouts(page, 'newHomes');
+
+    const rowHeader = page.locator('.adminLayoutTree > .adminLayoutTree-row > .adminLayoutTree-rowHeader').first();
+    await expect(rowHeader.getByRole('button', { name: 'Move up' })).toHaveCount(0);
+
+    await rowHeader.getByRole('button', { name: 'Actions ▾' }).click();
+    await expect(rowHeader.getByRole('menuitem', { name: 'Move up' })).toBeVisible();
+    await expect(rowHeader.getByRole('menuitem', { name: 'Move up' })).toBeDisabled();
+    await expect(rowHeader.getByRole('menuitem', { name: 'Remove row' })).toBeVisible();
+  });
+
+  test('collapsing a row hides its fields and columns behind a summary, and expanding restores them', async ({ page }) => {
+    await openLayouts(page, 'newHomes');
+
+    const firstRow = page.locator('.adminLayoutTree > .adminLayoutTree-row').first();
+    const rowHeader = firstRow.locator(':scope > .adminLayoutTree-rowHeader');
+    await expect(rowHeader.getByLabel('Height (px)', { exact: true })).toBeVisible();
+
+    await rowHeader.locator('.adminLayoutTree-collapseToggle').click();
+    await expect(rowHeader.getByLabel('Height (px)', { exact: true })).toHaveCount(0);
+    await expect(rowHeader.getByText(/^Row — \d+ columns?$/)).toBeVisible();
+
+    await rowHeader.locator('.adminLayoutTree-collapseToggle').click();
+    await expect(rowHeader.getByLabel('Height (px)', { exact: true })).toBeVisible();
+  });
+
+  test('dragging a row by its handle onto another row reorders them', async ({ page }) => {
+    await openLayouts(page, 'newHomes');
+
+    const rows = page.locator('.adminLayoutTree > .adminLayoutTree-row');
+    const firstRowSummaryBefore = await rows.first().locator(':scope > .adminLayoutTree-rowHeader input').first().inputValue();
+
+    const firstHandle = rows.first().locator(':scope > .adminLayoutTree-rowHeader .adminLayoutTree-dragHandle');
+    await firstHandle.dragTo(rows.nth(1));
+
+    const secondRowHeightAfter = await rows.nth(1).locator(':scope > .adminLayoutTree-rowHeader input').first().inputValue();
+    expect(secondRowHeightAfter).toBe(firstRowSummaryBefore);
+  });
+
+  test('duplicating a row inserts a copy right after it', async ({ page }) => {
+    await openLayouts(page, 'newHomes');
+
+    const rows = page.locator('.adminLayoutTree > .adminLayoutTree-row');
+    const rowCountBefore = await rows.count();
+
+    const firstRowHeader = rows.first().locator(':scope > .adminLayoutTree-rowHeader');
+    await firstRowHeader.getByRole('button', { name: 'Actions ▾' }).click();
+    await firstRowHeader.getByRole('menuitem', { name: 'Duplicate row' }).click();
+
+    await expect(rows).toHaveCount(rowCountBefore + 1);
   });
 
   test('a detail page shows a single layout tree bound to its own project, with only image/description tile kinds', async ({
@@ -359,7 +436,8 @@ test.describe('layouts editor — renaming a tile', () => {
     await openLayouts(page, 'creditRiverManor');
 
     const tileRow = page.locator('.adminTileLibrary li', { hasText: '1 —' });
-    await tileRow.getByRole('button', { name: 'Edit' }).click();
+    await tileRow.getByRole('button', { name: 'Actions ▾' }).click();
+    await tileRow.getByRole('menuitem', { name: 'Edit' }).click();
     await page.getByLabel(/^Key/).fill('frontFacade');
     await page.getByRole('button', { name: 'Save' }).click();
 
@@ -442,8 +520,22 @@ test.describe('layouts editor — click-to-edit-in-preview', () => {
     await expect(dialog).toHaveCount(0);
 
     const tileRow = page.locator('.adminTileLibrary li', { hasText: '1 —' });
-    await tileRow.getByRole('button', { name: 'Edit' }).click();
+    await tileRow.getByRole('button', { name: 'Actions ▾' }).click();
+    await tileRow.getByRole('menuitem', { name: 'Edit' }).click();
     await expect(page.getByLabel(/Background position/)).toHaveValue('12% 34%');
+  });
+
+  test('filtering the "assign a tile" list in the popover narrows it to matching tiles', async ({ page }) => {
+    await openLayouts(page, 'kingswayGeorgianDetail');
+
+    await page.locator('.adminLayoutPreview .textBlurbFiller:visible').first().click();
+    const dialog = page.getByRole('dialog');
+    await expect(dialog.getByText(/^frontFacade —/)).toBeVisible();
+
+    await dialog.getByLabel('Filter tiles').fill('sittingRoom');
+
+    await expect(dialog.getByText(/^sittingRoom —/)).toBeVisible();
+    await expect(dialog.getByText(/^frontFacade —/)).toHaveCount(0);
   });
 
   test('assigning an existing tile to an empty slot from the preview updates the layout', async ({ page }) => {

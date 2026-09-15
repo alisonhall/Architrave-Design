@@ -14,11 +14,25 @@ export const makeId = (prefix) => {
 
 export const replaceAt = (array, index, value) => array.map((item, i) => (i === index ? value : item));
 export const removeAt = (array, index) => array.filter((_, i) => i !== index);
+export const insertAt = (array, index, value) => [...array.slice(0, index), value, ...array.slice(index)];
 export const moveAt = (array, index, delta) => {
   const target = index + delta;
   if (target < 0 || target >= array.length) return array;
   const next = [...array];
   [next[index], next[target]] = [next[target], next[index]];
+  return next;
+};
+
+// Used for drag-and-drop reordering (layoutTreeEditor.jsx) — unlike moveAt (which
+// swaps two adjacent items), this relocates one item to any position, shifting the
+// items between its old and new spot rather than swapping.
+export const moveToIndex = (array, fromIndex, toIndex) => {
+  if (fromIndex === toIndex || fromIndex < 0 || fromIndex >= array.length || toIndex < 0 || toIndex >= array.length) {
+    return array;
+  }
+  const next = [...array];
+  const [item] = next.splice(fromIndex, 1);
+  next.splice(toIndex, 0, item);
   return next;
 };
 
@@ -30,6 +44,29 @@ export const makeTilePlacement = (tileKey) => ({ id: makeId('placement'), nodeTy
 // directly rather than through the shared tile library (there's nothing to reuse or
 // configure about it).
 export const makeEmptyPlacement = () => ({ id: makeId('placement'), nodeType: 'empty' });
+
+// Deep-clones a row/column/placement with fresh ids at every level — used for
+// "Duplicate row"/"Duplicate column" (layoutTreeEditor.jsx). A shallow clone would
+// leave the copy sharing ids with the original, breaking both React's keying and the
+// click-to-edit-in-preview DOM-id lookup (layoutClickOverlay.jsx), which relies on
+// every column having a unique id.
+export const cloneColumnWithNewIds = (column) => ({
+  ...column,
+  id: makeId('column'),
+  children: column.children.map(clonePlacementWithNewIds)
+});
+
+export const cloneRowWithNewIds = (row) => ({
+  ...row,
+  id: makeId('row'),
+  columns: row.columns.map(cloneColumnWithNewIds)
+});
+
+function clonePlacementWithNewIds(placement) {
+  const id = makeId('placement');
+  if (placement.nodeType === 'row') return { ...placement, id, row: cloneRowWithNewIds(placement.row) };
+  return { ...placement, id };
+}
 
 export const makeBlankTile = (kind) => {
   if (kind === 'project') return { kind: 'project', projectKey: '', backgroundPosition: '' };

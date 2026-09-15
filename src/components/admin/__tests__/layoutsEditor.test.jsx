@@ -64,7 +64,8 @@ describe('LayoutsEditor', () => {
     renderEditor();
 
     const tileRow = screen.getByText(/hoggsHollowFrench —/).closest('li');
-    fireEvent.click(within(tileRow).getByRole('button', { name: 'Edit' }));
+    fireEvent.click(within(tileRow).getByRole('button', { name: 'Actions ▾' }));
+    fireEvent.click(within(tileRow).getByRole('menuitem', { name: 'Edit' }));
     fireEvent.change(screen.getByLabelText(/Background position/), { target: { value: '5% 5%' } });
     fireEvent.click(screen.getByRole('button', { name: 'Save' }));
 
@@ -81,11 +82,11 @@ describe('LayoutsEditor', () => {
     const wideSection = variants[1].closest('section');
 
     const addRowButtons = within(defaultSection).getAllByRole('button', { name: 'Add row' });
-    const wideRowCountBefore = within(wideSection).getAllByRole('button', { name: 'Remove row' }).length;
+    const wideRowCountBefore = wideSection.querySelectorAll('.adminLayoutTree-row').length;
 
     fireEvent.click(addRowButtons[addRowButtons.length - 1]);
 
-    const wideRowCountAfter = within(wideSection).getAllByRole('button', { name: 'Remove row' }).length;
+    const wideRowCountAfter = wideSection.querySelectorAll('.adminLayoutTree-row').length;
     expect(wideRowCountAfter).toBe(wideRowCountBefore);
   });
 
@@ -94,15 +95,15 @@ describe('LayoutsEditor', () => {
 
     fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'newHomes' } });
     const defaultSection = screen.getAllByText(/layout \(/)[0].closest('section');
-    const rowCountBeforeAdd = within(defaultSection).getAllByRole('button', { name: 'Remove row' }).length;
+    const rowCountBeforeAdd = defaultSection.querySelectorAll('.adminLayoutTree-row').length;
     fireEvent.click(within(defaultSection).getByRole('button', { name: 'Add row' }));
-    expect(within(defaultSection).getAllByRole('button', { name: 'Remove row' }).length).toBe(rowCountBeforeAdd + 1);
+    expect(defaultSection.querySelectorAll('.adminLayoutTree-row').length).toBe(rowCountBeforeAdd + 1);
 
     fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'index' } });
     fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'newHomes' } });
 
     const defaultSectionAgain = screen.getAllByText(/layout \(/)[0].closest('section');
-    expect(within(defaultSectionAgain).getAllByRole('button', { name: 'Remove row' }).length).toBe(rowCountBeforeAdd + 1);
+    expect(defaultSectionAgain.querySelectorAll('.adminLayoutTree-row').length).toBe(rowCountBeforeAdd + 1);
   });
 
   it('renders a single Layout section (no default/wide split) for a detail page', () => {
@@ -277,7 +278,8 @@ describe('LayoutsEditor — renaming a tile', () => {
     fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'creditRiverManor' } });
 
     const row = screen.getByText(/^1 —/).closest('li');
-    fireEvent.click(within(row).getByRole('button', { name: 'Edit' }));
+    fireEvent.click(within(row).getByRole('button', { name: 'Actions ▾' }));
+    fireEvent.click(within(row).getByRole('menuitem', { name: 'Edit' }));
     fireEvent.change(screen.getByLabelText(/^Key/), { target: { value: 'frontFacade' } });
     fireEvent.click(screen.getByRole('button', { name: 'Save' }));
 
@@ -301,7 +303,8 @@ describe('LayoutsEditor — renaming a tile', () => {
     fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'creditRiverManor' } });
 
     const row = screen.getByText(/^1 —/).closest('li');
-    fireEvent.click(within(row).getByRole('button', { name: 'Edit' }));
+    fireEvent.click(within(row).getByRole('button', { name: 'Actions ▾' }));
+    fireEvent.click(within(row).getByRole('menuitem', { name: 'Edit' }));
     fireEvent.change(screen.getByLabelText(/^Key/), { target: { value: '2' } });
     fireEvent.click(screen.getByRole('button', { name: 'Save' }));
 
@@ -336,7 +339,8 @@ describe('LayoutsEditor — click-to-edit-in-preview', () => {
 
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
     const row = screen.getByText(/^1 —/).closest('li');
-    fireEvent.click(within(row).getByRole('button', { name: 'Edit' }));
+    fireEvent.click(within(row).getByRole('button', { name: 'Actions ▾' }));
+    fireEvent.click(within(row).getByRole('menuitem', { name: 'Edit' }));
     expect(screen.getByDisplayValue('5% 5%')).toBeInTheDocument();
   });
 

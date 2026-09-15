@@ -176,6 +176,30 @@ describe('TileEditPopover', () => {
       expect(onClose).toHaveBeenCalled();
     });
 
+    it('filters the existing-tiles list', () => {
+      const multipleTiles = {
+        hoggsHollowFrench: { kind: 'image', imageUrl: 'https://example.com/a.jpg' },
+        kingswayGeorgian: { kind: 'image', imageUrl: 'https://example.com/b.jpg' }
+      };
+      render(
+        <TileEditPopover
+          selection={makeSelection({ isEmpty: true })}
+          tiles={multipleTiles}
+          onChangeTiles={jest.fn()}
+          onAssignRows={jest.fn()}
+          onCreateTileAndAssign={jest.fn()}
+          projects={projects}
+          kinds={['image']}
+          onClose={jest.fn()}
+        />
+      );
+
+      fireEvent.change(screen.getByLabelText('Filter tiles'), { target: { value: 'kingsway' } });
+
+      expect(screen.queryByText(/hoggsHollowFrench/)).not.toBeInTheDocument();
+      expect(screen.getByText(/kingswayGeorgian/)).toBeInTheDocument();
+    });
+
     it('creates a new tile and assigns it in one atomic call', () => {
       const onCreateTileAndAssign = jest.fn();
       const onClose = jest.fn();

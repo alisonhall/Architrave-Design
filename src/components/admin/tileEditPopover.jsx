@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { makeBlankTile, suggestTileKey } from './layoutHelpers';
-import { TileFields, TILE_KIND_LABELS, tileSummary, tileThumbnailUrl } from './tileLibraryEditor';
+import { TileFields, TILE_KIND_LABELS, tileSummary, tileThumbnailUrl, filterTileKeys, TileFilterInput } from './tileLibraryEditor';
 import AdminThumbnail from './adminThumbnail';
 
 // Reserves roughly enough room for the popover's own content (it can still scroll
@@ -25,6 +25,7 @@ const AssignTile = ({ tiles, projects, kinds, onAssignExisting, onCreateAndAssig
   const [creatingKind, setCreatingKind] = useState(null);
   const [draftValues, setDraftValues] = useState(null);
   const [draftKey, setDraftKey] = useState('');
+  const [filter, setFilter] = useState('');
 
   const startCreate = (kind) => {
     setCreatingKind(kind);
@@ -59,22 +60,29 @@ const AssignTile = ({ tiles, projects, kinds, onAssignExisting, onCreateAndAssig
     );
   }
 
-  const tileKeys = Object.keys(tiles);
+  const allTileKeys = Object.keys(tiles);
+  const visibleTileKeys = filterTileKeys(tiles, projects, filter);
 
   return (
     <div className="adminTileEditPopover-assign">
       <h4>Assign a tile</h4>
-      {tileKeys.length > 0 && (
-        <ul className="adminTileEditPopover-existing">
-          {tileKeys.map((key) => (
-            <li key={key}>
-              <button type="button" onClick={() => onAssignExisting(key)}>
-                <AdminThumbnail imageUrl={tileThumbnailUrl(tiles[key], projects)} />
-                <span>{key} — {tileSummary(tiles[key], projects)}</span>
-              </button>
-            </li>
-          ))}
-        </ul>
+      {allTileKeys.length > 0 && (
+        <>
+          <TileFilterInput value={filter} onChange={setFilter} />
+          <ul className="adminTileEditPopover-existing">
+            {visibleTileKeys.map((key) => (
+              <li key={key}>
+                <button type="button" onClick={() => onAssignExisting(key)}>
+                  <AdminThumbnail imageUrl={tileThumbnailUrl(tiles[key], projects)} />
+                  <span>{key} — {tileSummary(tiles[key], projects)}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+          {filter && visibleTileKeys.length === 0 && (
+            <p className="adminProjectForm-hint">No tiles match &quot;{filter}&quot;.</p>
+          )}
+        </>
       )}
       <p className="adminProjectForm-hint">Or add a new tile:</p>
       <div className="adminTileLibrary-addButtons">

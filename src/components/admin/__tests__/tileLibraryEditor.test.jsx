@@ -8,6 +8,10 @@ const projects = {
   projectB: { key: 'projectB', projectName: 'Project B', mainImageUrl: 'https://example.com/project-b.jpg' }
 };
 
+// Each row's Edit/Delete are consolidated into one ActionsMenu (actionsMenu.jsx) —
+// open the row's own menu, then choose the item.
+const openRowMenu = (rowIndex = 0) => fireEvent.click(screen.getAllByRole('button', { name: 'Actions ▾' })[rowIndex]);
+
 describe('TileLibraryEditor', () => {
   beforeEach(() => {
     window.confirm = jest.fn(() => true);
@@ -53,7 +57,8 @@ describe('TileLibraryEditor', () => {
     const tiles = { tileA: { kind: 'project', projectKey: 'projectA', backgroundPosition: '' } };
     render(<TileLibraryEditor tiles={tiles} onChange={onChange} projects={projects} />);
 
-    fireEvent.click(screen.getByRole('button', { name: 'Edit' }));
+    openRowMenu();
+    fireEvent.click(screen.getByRole('menuitem', { name: 'Edit' }));
     fireEvent.change(screen.getByLabelText(/Background position/), { target: { value: '10% 10%' } });
     fireEvent.click(screen.getByRole('button', { name: 'Save' }));
 
@@ -67,7 +72,8 @@ describe('TileLibraryEditor', () => {
     const tiles = { tileA: { kind: 'project', projectKey: 'projectA' } };
     render(<TileLibraryEditor tiles={tiles} onChange={onChange} projects={projects} />);
 
-    fireEvent.click(screen.getByRole('button', { name: 'Delete' }));
+    openRowMenu();
+    fireEvent.click(screen.getByRole('menuitem', { name: 'Delete' }));
 
     expect(window.confirm).toHaveBeenCalled();
     expect(onChange).toHaveBeenCalledWith({});
@@ -79,7 +85,8 @@ describe('TileLibraryEditor', () => {
     const tiles = { tileA: { kind: 'project', projectKey: 'projectA' } };
     render(<TileLibraryEditor tiles={tiles} onChange={onChange} projects={projects} />);
 
-    fireEvent.click(screen.getByRole('button', { name: 'Delete' }));
+    openRowMenu();
+    fireEvent.click(screen.getByRole('menuitem', { name: 'Delete' }));
 
     expect(onChange).not.toHaveBeenCalled();
   });
@@ -308,7 +315,8 @@ describe('TileLibraryEditor', () => {
     const tiles = { tileA: { kind: 'project', projectKey: 'projectA', backgroundPosition: '' } };
     render(<TileLibraryEditor tiles={tiles} onChange={onChange} onRenameTile={onRenameTile} projects={projects} />);
 
-    fireEvent.click(screen.getByRole('button', { name: 'Edit' }));
+    openRowMenu();
+    fireEvent.click(screen.getByRole('menuitem', { name: 'Edit' }));
     fireEvent.change(screen.getByLabelText(/^Key/), { target: { value: 'tileB' } });
     fireEvent.click(screen.getByRole('button', { name: 'Save' }));
 
@@ -323,7 +331,8 @@ describe('TileLibraryEditor', () => {
     const tiles = { tileA: { kind: 'project', projectKey: 'projectA', backgroundPosition: '' } };
     render(<TileLibraryEditor tiles={tiles} onChange={onChange} projects={projects} />);
 
-    fireEvent.click(screen.getByRole('button', { name: 'Edit' }));
+    openRowMenu();
+    fireEvent.click(screen.getByRole('menuitem', { name: 'Edit' }));
     fireEvent.change(screen.getByLabelText(/^Key/), { target: { value: 'tileB' } });
     fireEvent.click(screen.getByRole('button', { name: 'Save' }));
 
@@ -342,7 +351,8 @@ describe('TileLibraryEditor', () => {
     };
     render(<TileLibraryEditor tiles={tiles} onChange={onChange} onRenameTile={onRenameTile} projects={projects} />);
 
-    fireEvent.click(screen.getAllByRole('button', { name: 'Edit' })[0]);
+    openRowMenu(0);
+    fireEvent.click(screen.getByRole('menuitem', { name: 'Edit' }));
     fireEvent.change(screen.getByLabelText(/^Key/), { target: { value: 'tileB' } });
     fireEvent.click(screen.getByRole('button', { name: 'Save' }));
 
@@ -357,7 +367,8 @@ describe('TileLibraryEditor', () => {
     const tiles = { tileA: { kind: 'project', projectKey: 'projectA' } };
     render(<TileLibraryEditor tiles={tiles} onChange={onChange} projects={projects} />);
 
-    fireEvent.click(screen.getByRole('button', { name: 'Edit' }));
+    openRowMenu();
+    fireEvent.click(screen.getByRole('menuitem', { name: 'Edit' }));
     fireEvent.change(screen.getByLabelText(/^Key/), { target: { value: '   ' } });
     fireEvent.click(screen.getByRole('button', { name: 'Save' }));
 
@@ -371,7 +382,8 @@ describe('TileLibraryEditor', () => {
     const tiles = { tileA: { kind: 'project', projectKey: 'projectA', backgroundPosition: '' } };
     render(<TileLibraryEditor tiles={tiles} onChange={onChange} onRenameTile={onRenameTile} projects={projects} />);
 
-    fireEvent.click(screen.getByRole('button', { name: 'Edit' }));
+    openRowMenu();
+    fireEvent.click(screen.getByRole('menuitem', { name: 'Edit' }));
     fireEvent.change(screen.getByLabelText(/Background position/), { target: { value: '10% 10%' } });
     fireEvent.click(screen.getByRole('button', { name: 'Save' }));
 
@@ -379,5 +391,88 @@ describe('TileLibraryEditor', () => {
       tileA: { kind: 'project', projectKey: 'projectA', backgroundPosition: '10% 10%' }
     });
     expect(onRenameTile).not.toHaveBeenCalled();
+  });
+
+  describe('duplicating', () => {
+    it('duplicates a tile under a "Copy" key, keeping its values, without touching the original', () => {
+      const onChange = jest.fn();
+      const tiles = { tileA: { kind: 'project', projectKey: 'projectA', backgroundPosition: '5% 5%' } };
+      render(<TileLibraryEditor tiles={tiles} onChange={onChange} projects={projects} />);
+
+      openRowMenu();
+      fireEvent.click(screen.getByRole('menuitem', { name: 'Duplicate' }));
+
+      expect(onChange).toHaveBeenCalledWith({
+        tileA: tiles.tileA,
+        tileACopy: { kind: 'project', projectKey: 'projectA', backgroundPosition: '5% 5%' }
+      });
+    });
+
+    it('dedupes the copy\'s key when "Copy" is already taken', () => {
+      const onChange = jest.fn();
+      const tiles = {
+        tileA: { kind: 'project', projectKey: 'projectA' },
+        tileACopy: { kind: 'project', projectKey: 'projectB' }
+      };
+      render(<TileLibraryEditor tiles={tiles} onChange={onChange} projects={projects} />);
+
+      openRowMenu(0);
+      fireEvent.click(screen.getByRole('menuitem', { name: 'Duplicate' }));
+
+      const [nextTiles] = onChange.mock.calls[0];
+      expect(nextTiles.tileACopy2).toEqual(tiles.tileA);
+    });
+  });
+
+  describe('filtering', () => {
+    const tiles = {
+      hoggsHollowFrench: { kind: 'project', projectKey: 'projectA' },
+      kingswayGeorgian: { kind: 'project', projectKey: 'projectB' },
+      textTile: { kind: 'text', text: 'Welcome', useIntroText: false }
+    };
+
+    it('shows every tile when the filter is empty', () => {
+      render(<TileLibraryEditor tiles={tiles} onChange={jest.fn()} projects={projects} />);
+
+      expect(screen.getByText(/hoggsHollowFrench/)).toBeInTheDocument();
+      expect(screen.getByText(/kingswayGeorgian/)).toBeInTheDocument();
+      expect(screen.getByText(/textTile/)).toBeInTheDocument();
+    });
+
+    it('filters the list by key', () => {
+      render(<TileLibraryEditor tiles={tiles} onChange={jest.fn()} projects={projects} />);
+
+      fireEvent.change(screen.getByLabelText('Filter tiles'), { target: { value: 'kingsway' } });
+
+      expect(screen.queryByText(/hoggsHollowFrench/)).not.toBeInTheDocument();
+      expect(screen.getByText(/kingswayGeorgian/)).toBeInTheDocument();
+      expect(screen.queryByText(/textTile/)).not.toBeInTheDocument();
+    });
+
+    it('filters the list by summary text (e.g. a project name), not just the key', () => {
+      render(<TileLibraryEditor tiles={tiles} onChange={jest.fn()} projects={projects} />);
+
+      fireEvent.change(screen.getByLabelText('Filter tiles'), { target: { value: 'project a' } });
+
+      expect(screen.getByText(/hoggsHollowFrench/)).toBeInTheDocument();
+      expect(screen.queryByText(/kingswayGeorgian/)).not.toBeInTheDocument();
+    });
+
+    it('is case-insensitive', () => {
+      render(<TileLibraryEditor tiles={tiles} onChange={jest.fn()} projects={projects} />);
+
+      fireEvent.change(screen.getByLabelText('Filter tiles'), { target: { value: 'KINGSWAY' } });
+
+      expect(screen.getByText(/kingswayGeorgian/)).toBeInTheDocument();
+    });
+
+    it('shows a "no tiles match" message when nothing matches', () => {
+      render(<TileLibraryEditor tiles={tiles} onChange={jest.fn()} projects={projects} />);
+
+      fireEvent.change(screen.getByLabelText('Filter tiles'), { target: { value: 'nonexistent' } });
+
+      expect(screen.queryByText(/hoggsHollowFrench/)).not.toBeInTheDocument();
+      expect(screen.getByText('No tiles match "nonexistent".')).toBeInTheDocument();
+    });
   });
 });
