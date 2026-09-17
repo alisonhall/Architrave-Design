@@ -229,6 +229,47 @@ describe('TileEditPopover', () => {
       expect(onClose).toHaveBeenCalled();
     });
 
+    it('keeps the popover fully within the viewport when its anchor is near the bottom-right corner', () => {
+      // A small window with an anchor right at its edge, and a popover whose own
+      // rendered size (mocked below) would overflow both the right and bottom edges if
+      // positioned naively off the anchor alone (top: anchor.bottom, left: anchor.left).
+      window.innerWidth = 400;
+      window.innerHeight = 300;
+      const anchor = document.createElement('div');
+      jest.spyOn(anchor, 'getBoundingClientRect').mockReturnValue(
+        { top: 280, bottom: 290, left: 380, right: 390, width: 10, height: 10 }
+      );
+      jest.spyOn(Element.prototype, 'getBoundingClientRect').mockImplementation(function mockImpl() {
+        if (this.classList.contains('adminTileEditPopover')) {
+          return { top: 296, bottom: 696, left: 380, right: 680, width: 300, height: 400 };
+        }
+        return { top: 0, bottom: 0, left: 0, right: 0, width: 0, height: 0 };
+      });
+
+      const { container } = render(
+        <TileEditPopover
+          selection={makeSelection({ tileKey: 'tileA', anchor })}
+          tiles={{ tileA: { kind: 'image', imageUrl: 'https://example.com/a.jpg', backgroundPosition: '', overlayText: '' } }}
+          onChangeTiles={jest.fn()}
+          onAssignRows={jest.fn()}
+          onCreateTileAndAssign={jest.fn()}
+          projects={projects}
+          kinds={['image']}
+          onClose={jest.fn()}
+        />
+      );
+
+      const popover = container.querySelector('.adminTileEditPopover');
+      expect(popover.style.position).toBe('fixed');
+      // 300px wide / 400px tall popover in a 400x300 window: only one on-screen position
+      // satisfies both axes' 8px-margin clamp, so this also proves clamping actually ran
+      // rather than just not crashing.
+      expect(popover.style.top).toBe('8px');
+      expect(popover.style.left).toBe('92px');
+
+      jest.restoreAllMocks();
+    });
+
     it('refuses to create a tile whose key already exists', () => {
       window.alert = jest.fn();
       const onCreateTileAndAssign = jest.fn();

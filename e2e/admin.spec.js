@@ -525,6 +525,41 @@ test.describe('layouts editor — click-to-edit-in-preview', () => {
     await expect(page.getByLabel(/Background position/)).toHaveValue('12% 34%');
   });
 
+  test('clicking a project tile (a real link on the live site) opens its popover instead of navigating away', async ({
+    page
+  }) => {
+    await openLayouts(page, 'newHomes');
+
+    await page.locator('.adminLayoutPreview a', { hasText: "Hogg's Hollow French" }).first().click();
+
+    await expect(page.getByRole('dialog')).toBeVisible();
+    await expect(page.getByRole('dialog').getByText(/^Editing tile:/)).toBeVisible();
+    // The whole point: still on /admin/, not navigated to the project's own detail page.
+    expect(page.url()).toContain('/admin/');
+  });
+
+  test('the popover renders above a project tile\'s title text and stays fully within the viewport', async ({ page }) => {
+    await openLayouts(page, 'newHomes');
+
+    await page.locator('.adminLayoutPreview a', { hasText: "Hogg's Hollow French" }).first().click();
+    const dialog = page.getByRole('dialog');
+    await expect(dialog).toBeVisible();
+
+    const viewport = page.viewportSize();
+    const box = await dialog.boundingBox();
+    expect(box.x).toBeGreaterThanOrEqual(0);
+    expect(box.y).toBeGreaterThanOrEqual(0);
+    expect(box.x + box.width).toBeLessThanOrEqual(viewport.width);
+    expect(box.y + box.height).toBeLessThanOrEqual(viewport.height);
+
+    // item.scss's .textOverlay (a project tile's title) sits at z-index: 200 in
+    // production, so the popover only reliably renders in front of it — rather than
+    // whichever one happens to win a given pixel — if its own z-index actually exceeds
+    // that (checked against the real computed style, not just the source stylesheet).
+    const popoverZIndex = await dialog.evaluate((el) => parseInt(window.getComputedStyle(el).zIndex, 10));
+    expect(popoverZIndex).toBeGreaterThan(200);
+  });
+
   test('filtering the "assign a tile" list in the popover narrows it to matching tiles', async ({ page }) => {
     await openLayouts(page, 'kingswayGeorgianDetail');
 
@@ -564,5 +599,81 @@ test.describe('layouts editor — click-to-edit-in-preview', () => {
 
     await expect(dialog).toHaveCount(0);
     await expect(page.locator('.adminTileLibrary li', { hasText: 'imageTile —' })).toBeVisible();
+  });
+});
+
+test.describe('layouts editor — drag-to-resize in preview', () => {
+  const openLayouts = async (page, pageKey) => {
+    await unlock(page);
+    await page.getByRole('button', { name: 'Layouts' }).click();
+    await expect(page.locator('.adminLayoutsEditor')).toBeVisible();
+    if (pageKey) await page.getByLabel('Page').selectOption(pageKey);
+  };
+
+  const dragBy = async (page, handle, dx, dy) => {
+    // page.mouse.move/down/up work in raw viewport coordinates and don't auto-scroll the
+    // way locator.click() does, so a handle below the fold (this preview column is tall)
+    // needs to be brought into view first.
+    await handle.scrollIntoViewIfNeeded();
+    const box = await handle.boundingBox();
+    const startX = box.x + box.width / 2;
+    const startY = box.y + box.height / 2;
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    await page.mouse.move(startX + dx, startY + dy, { steps: 10 });
+    await page.mouse.up();
+  };
+
+  test('dragging a row\'s bottom edge in the preview resizes it, matching the tree editor\'s height field', async ({
+    page
+  }) => {
+    await openLayouts(page, 'creditRiverManor');
+
+    const heightInput = page.locator('.adminLayoutTree > .adminLayoutTree-row').first()
+      .locator(':scope > .adminLayoutTree-rowHeader').getByLabel('Height (px)', { exact: true });
+    const heightBefore = await heightInput.inputValue();
+
+    const handle = page.locator('.adminEditableLayoutPreview .adminLayoutResize-row').first();
+    await dragBy(page, handle, 0, 60);
+
+    await expect(heightInput).not.toHaveValue(heightBefore);
+  });
+
+  test('dragging a column\'s right edge in the preview resizes it, matching the tree editor\'s width field', async ({
+    page
+  }) => {
+    await openLayouts(page, 'creditRiverManor');
+
+    const widthInput = page.locator('.adminLayoutTree-column').first().getByLabel(/^Width/);
+    const widthBefore = await widthInput.inputValue();
+
+    const handle = page.locator('.adminEditableLayoutPreview .adminLayoutResize-column').first();
+    await dragBy(page, handle, -40, 0);
+
+    await expect(widthInput).not.toHaveValue(widthBefore);
+  });
+
+  test('clicking (not dragging) a resize line opens an inline input, and typing an exact height updates the tree editor', async ({
+    page
+  }) => {
+    await openLayouts(page, 'creditRiverManor');
+
+    const handle = page.locator('.adminEditableLayoutPreview .adminLayoutResize-row').first();
+    await handle.click();
+
+    const inlineInput = page.locator('.adminLayoutResize-edit').getByLabel('Height (px)');
+    await expect(inlineInput).toBeVisible();
+
+    await inlineInput.fill('555');
+    await inlineInput.press('Enter');
+    await expect(inlineInput).toHaveCount(0);
+
+    const heightInput = page.locator('.adminLayoutTree > .adminLayoutTree-row').first()
+      .locator(':scope > .adminLayoutTree-rowHeader').getByLabel('Height (px)', { exact: true });
+    await expect(heightInput).toHaveValue('555');
+
+    await page.getByRole('button', { name: 'Review Changes' }).click();
+    await expect(page.locator('.adminOutputPanel-fileHeader code')).toHaveText('static/layouts/credit-river-manor.js');
+    await expect(page.locator('.adminOutputPanel-file pre')).toContainText('height: 555');
   });
 });

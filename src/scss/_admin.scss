@@ -478,7 +478,10 @@
 }
 
 .adminTileEditPopover {
-    z-index: 20;
+    // Above item.scss's .textOverlay (a project tile's title text), which sets z-index:
+    // 200 and, lacking its own stacking context, competes directly against this
+    // fixed-positioned popover rather than staying trapped behind it.
+    z-index: 300;
     width: 300px;
     max-height: 80vh;
     overflow-y: auto;
@@ -595,5 +598,92 @@
                 cursor: default;
             }
         }
+    }
+}
+
+.adminLayoutResizeOverlay {
+    position: absolute;
+    inset: 0;
+    // Only the handles themselves should intercept the pointer — the rest of this
+    // layer sits over the live preview and must let clicks through to it (and to the
+    // click-to-edit-in-preview handler on the same container).
+    pointer-events: none;
+}
+
+.adminLayoutResize-row,
+.adminLayoutResize-column {
+    position: absolute;
+    z-index: 5;
+    pointer-events: auto;
+
+    &::after {
+        content: '';
+        display: block;
+        background: transparent;
+    }
+
+    &:hover::after,
+    &:active::after {
+        background: rgba(0, 100, 255, 0.5);
+    }
+}
+
+.adminLayoutResize-row {
+    height: 8px;
+    margin-top: -4px;
+    cursor: row-resize;
+
+    &::after {
+        height: 2px;
+        margin-top: 3px;
+    }
+}
+
+.adminLayoutResize-column {
+    width: 8px;
+    margin-left: -4px;
+    cursor: col-resize;
+
+    &::after {
+        width: 2px;
+        height: 100%;
+        margin-left: 3px;
+    }
+}
+
+.adminLayoutResize-label {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    padding: 2px 6px;
+    background: #000;
+    color: #fff;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.adminLayoutResize-edit {
+    position: absolute;
+    z-index: 21;
+    padding: 6px;
+    background: $pageColour;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    pointer-events: auto;
+
+    label {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    input {
+        width: 80px;
+        padding: 4px;
+        font-family: inherit;
+        font-size: $bodyFontSize;
     }
 }

@@ -1,24 +1,58 @@
-import React, { useState } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { makeBlankTile, suggestTileKey } from './layoutHelpers';
 import { TileFields, TILE_KIND_LABELS, tileSummary, tileThumbnailUrl, filterTileKeys, TileFilterInput } from './tileLibraryEditor';
 import AdminThumbnail from './adminThumbnail';
 
-// Reserves roughly enough room for the popover's own content (it can still scroll
-// internally past that, via max-height/overflow-y in _admin.scss) so it doesn't get
-// anchored so close to the viewport's bottom/right edge that its own buttons end up
-// unreachable off-screen.
-const anchorStyle = (anchor) => {
-  if (!anchor || typeof anchor.getBoundingClientRect !== 'function') return {};
+// A first-paint guess, anchored just below/left of the clicked tile — not yet clamped to
+// the viewport, since the popover's own size isn't known until it's actually rendered
+// (its content varies a lot: an "edit" form vs. an "assign a tile" list vs. a
+// project-kind tile's much longer field set). useClampedPosition below corrects this
+// against the popover's own real measured size, the same real-DOM-measurement approach
+// layoutClickOverlay.jsx/layoutResizeOverlay.jsx already use rather than guessing a fixed
+// reserved size that a tall enough popover could still overflow.
+const initialStyle = (anchor) => {
+  if (!anchor || typeof anchor.getBoundingClientRect !== 'function') return { position: 'fixed', top: 8, left: 8 };
   const rect = anchor.getBoundingClientRect();
-  const maxTop = Math.max(8, window.innerHeight - 420);
-  const maxLeft = Math.max(8, window.innerWidth - 320);
-  return {
-    position: 'fixed',
-    top: Math.max(8, Math.min(rect.bottom + 6, maxTop)),
-    left: Math.max(8, Math.min(rect.left, maxLeft))
-  };
+  return { position: 'fixed', top: rect.bottom + 6, left: rect.left };
+};
+
+// Re-measures the popover's own rendered box after every render (its height changes
+// between edit/assign modes, and whenever TileFields' visible fields change) and nudges
+// it back on-screen if it overflows — not just on mount, so switching modes on a tile
+// near the edge of the window doesn't leave it hanging off after all.
+const useClampedPosition = (anchor) => {
+  const ref = useRef(null);
+  const [style, setStyle] = useState(() => initialStyle(anchor));
+
+  useLayoutEffect(() => {
+    setStyle(initialStyle(anchor));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [anchor]);
+
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const maxTop = Math.max(8, window.innerHeight - rect.height - 8);
+    const maxLeft = Math.max(8, window.innerWidth - rect.width - 8);
+    const clampedTop = Math.min(Math.max(8, rect.top), maxTop);
+    const clampedLeft = Math.min(Math.max(8, rect.left), maxLeft);
+    // Comparing against the *applied* style (not the just-measured `rect`) is what makes
+    // this converge: a real browser reflects an applied `top`/`left` back through
+    // getBoundingClientRect on the next measurement, but nothing guarantees that in every
+    // environment (jsdom's getBoundingClientRect is always zeroed, since it never lays
+    // anything out) — comparing against `rect` there would set the same "corrected" style
+    // every single render forever, since the measurement never budges either way.
+    setStyle((current) => (
+      current.top === clampedTop && current.left === clampedLeft
+        ? current
+        : { ...current, top: clampedTop, left: clampedLeft }
+    ));
+  });
+
+  return { ref, style };
 };
 
 const AssignTile = ({ tiles, projects, kinds, onAssignExisting, onCreateAndAssign, onCancel }) => {
@@ -202,6 +236,7 @@ const TileEditPopover = ({
   onClose
 }) => {
   const [reassigning, setReassigning] = useState(false);
+  const { ref, style } = useClampedPosition(selection ? selection.anchor : null);
 
   if (!selection) return null;
 
@@ -209,8 +244,9 @@ const TileEditPopover = ({
 
   return (
     <div
+      ref={ref}
       className="adminTileEditPopover"
-      style={anchorStyle(selection.anchor)}
+      style={style}
       role="dialog"
       aria-label={showAssignMode ? 'Assign a tile' : 'Edit tile'}
     >

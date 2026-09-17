@@ -142,6 +142,35 @@ describe('EditableLayoutPreview', () => {
     );
   });
 
+  it('clicking a project tile (a real link) opens the popover instead of navigating', () => {
+    const tileRows = [row({}, [column('col1', [{ nodeType: 'tileRef', tileKey: 'someProject' }])])];
+
+    render(
+      <EditableLayoutPreview
+        rows={tileRows}
+        tiles={{ someProject: { kind: 'project', projectKey: 'someProject' } }}
+        projects={projects}
+        kinds={['project']}
+        onChangeRows={jest.fn()}
+        onChangeTiles={jest.fn()}
+        onCreateTileAndAssign={jest.fn()}
+      />
+    );
+
+    const link = screen.getByRole('link');
+    expect(link).toHaveAttribute('href', '/portfolio/new-homes/some-project');
+
+    // fireEvent.click resolves to the underlying dispatchEvent()'s own return value, which
+    // the DOM spec defines as false exactly when preventDefault() was called — the most
+    // direct way to prove real navigation was actually blocked, not just that a popover
+    // happened to also open.
+    const dispatchResult = fireEvent.click(link);
+
+    expect(dispatchResult).toBe(false);
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+    expect(screen.getByText('Editing tile: someProject')).toBeInTheDocument();
+  });
+
   it('clicking outside any column does not open a popover', () => {
     const tiles = { a: { kind: 'image', imageUrl: 'https://example.com/a.jpg' } };
     const rows = [row({}, [column('col1', [tileRef('a')])])];
