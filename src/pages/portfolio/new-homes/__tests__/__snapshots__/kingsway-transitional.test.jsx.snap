@@ -1,0 +1,962 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`kingsway-transitional page matches the snapshot 1`] = `
+<div>
+  <div
+    class="page"
+  >
+    <aside>
+      <a
+        class="logo-link"
+        href="/"
+      >
+        <img
+          alt="Architrave Design, Architect logo"
+          id="logo"
+          src="test-file-stub"
+        />
+      </a>
+      <nav>
+        <header
+          class="side"
+        >
+          <p>
+            Architrave Design
+          </p>
+          <p>
+            |
+          </p>
+          <p>
+            Architect
+          </p>
+        </header>
+        <ul
+          class="mainNav"
+        >
+          <li>
+            <a
+              class="portfolioNav"
+              href="/portfolio/new-homes"
+            >
+              Portfolio
+            </a>
+          </li>
+          <ul
+            class="subNav subNavVisible"
+          >
+            <li>
+              <a
+                class="selected"
+                href="/portfolio/new-homes"
+              >
+                New Homes
+              </a>
+            </li>
+            <li>
+              <a
+                class=""
+                href="/portfolio/renovations-additions"
+              >
+                Renovations
+              </a>
+            </li>
+            <li>
+              <a
+                href="/portfolio/upcoming"
+              >
+                Upcoming
+              </a>
+            </li>
+          </ul>
+          <li>
+            <a
+              href="/about"
+            >
+              About
+            </a>
+          </li>
+          <li>
+            <a
+              href="/reviews"
+            >
+              Reviews
+            </a>
+          </li>
+          <li>
+            <a
+              href="/contact"
+            >
+              Contact
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div
+        class="houzz-badges"
+      >
+        <a
+          class="houzz-badge houzz-logo"
+          href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+          title="Architrave Design on Houzz"
+        >
+          <img
+            alt="Houzz logo"
+            src="test-file-stub"
+          />
+        </a>
+        <a
+          class="houzz-badge best-of-houzz"
+          href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+          title="Best of Houzz 2021"
+        >
+          <img
+            alt="Best of Houzz 2021 badge"
+            src="test-file-stub"
+          />
+        </a>
+        <a
+          class="houzz-badge best-of-houzz"
+          href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+          title="Best of Houzz 2026"
+        >
+          <img
+            alt="Best of Houzz 2026 badge"
+            src="test-file-stub"
+          />
+        </a>
+      </div>
+    </aside>
+    <div
+      class="content portfolio"
+    >
+      <header
+        class="top"
+      >
+        <p>
+          Architrave Design
+        </p>
+        <p>
+          |
+        </p>
+        <p>
+          Architect
+        </p>
+      </header>
+      <main>
+        <section
+          class="contentWrapper layoutAll layoutProject defaultLayout"
+        >
+          <div
+            class="row css-1juzpks"
+          >
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image1"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv1 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_680,c_scale,f_auto,q_auto/v1690224718/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/wllgq8z17m_qlavce.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image2"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv2 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_680,c_scale,f_auto,q_auto/v1690224720/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/t3me2mc9ik_so4o4x.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row css-3czr7x"
+          >
+            <div
+              class="column css-aw7wqq"
+            >
+              <section
+                class="textBlurb  item"
+              >
+                <div
+                  class="headingSection"
+                >
+                  <h2
+                    class="title"
+                  >
+                    Kingsway Transitional
+                  </h2>
+                </div>
+                <p
+                  class="text"
+                >
+                  A traditional street face respects the neighbourhood, but the interior of this family home is all glass, stone and clean modern lines. A winding central stair opens up the interior, flooding the home with light.
+                </p>
+              </section>
+            </div>
+          </div>
+          <div
+            class="row css-1xigkwb"
+          >
+            <div
+              class="column css-1l4pbsb"
+            >
+              <div
+                class="image-tile clearfix  item image image3"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv3 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_800,c_scale,f_auto,q_auto/v1595347233/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/2-Modern-Rear_juviao.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-1l4pbsb"
+            >
+              <div
+                class="row css-15p7jjd"
+              >
+                <div
+                  class="column css-aw7wqq"
+                >
+                  <div
+                    class="image-tile clearfix  item image image4"
+                  >
+                    <div
+                      class="shadowOverlay clearfix"
+                    >
+                      <img
+                        alt=""
+                        class="imageDiv imageDiv4 cld-responsive css-1w9t0u2"
+                        src="https://res.cloudinary.com/alisonkhall/image/upload/h_700,c_scale,f_auto,q_auto/v1690224738/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/inzkd3co1u_k78khw.jpg"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="row css-3czr7x"
+              >
+                <div
+                  class="column css-aw7wqq"
+                >
+                  <section
+                    class="textBlurbFiller  item"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row css-1juzpks"
+          >
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image5"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv5 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_680,c_scale,f_auto,q_auto/v1690224731/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/9ynkmnemea_xi4jy3.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image6"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv6 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_680,c_scale,f_auto,q_auto/v1690224712/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/wyiw0roxqk_pdosis.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row css-1juzpks"
+          >
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image7"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv7 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_680,c_scale,f_auto,q_auto/v1690224715/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/wpmfr17qls_cwaye2.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image8"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv8 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_680,c_scale,f_auto,q_auto/v1690224733/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/8a5rn0jhm9_yayhnq.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row css-1juzpks"
+          >
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image9"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv9 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_680,c_scale,f_auto,q_auto/v1690224735/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/9yil46v4lj_s8tjbi.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image10"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv10 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_680,c_scale,f_auto,q_auto/v1690224715/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/vkdzuxidqt_qcdfzk.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row css-1juzpks"
+          >
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image11"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv11 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_680,c_scale,f_auto,q_auto/v1690224730/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/nb2m6t67mu_intdkd.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image12"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv12 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_680,c_scale,f_auto,q_auto/v1690224736/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/tfeivoj6j0_ztt97m.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row css-1juzpks"
+          >
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image13"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv13 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_680,c_scale,f_auto,q_auto/v1690224733/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/5ezfxtm9pp_cdqizs.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image14"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv14 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_680,c_scale,f_auto,q_auto/v1690224726/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/5wxqms5oi8_ohgn7k.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row css-1juzpks"
+          >
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image15"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv15 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_680,c_scale,f_auto,q_auto/v1690224713/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/2wl8dux9ys_pirdbm.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image16"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv16 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_680,c_scale,f_auto,q_auto/v1690224735/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/qih7wzw9i8_egspcu.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <a
+            class="prevProject"
+            href="/portfolio/new-homes/credit-river-manor"
+          >
+            <img
+              alt=""
+              src="test-file-stub"
+            />
+            <span>
+              Previous Project
+            </span>
+          </a>
+          <a
+            class="nextProject"
+            href="/portfolio/new-homes/princess-margaret-classic"
+          >
+            <span>
+              Next Project
+            </span>
+            <img
+              alt=""
+              src="test-file-stub"
+            />
+          </a>
+        </section>
+        <section
+          class="contentWrapper layoutAll layoutProject wideLayout"
+        >
+          <div
+            class="row css-e3f7zz"
+          >
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image1"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv1 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_880,c_scale,f_auto,q_auto/v1690224718/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/wllgq8z17m_qlavce.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image2"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv2 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_880,c_scale,f_auto,q_auto/v1690224720/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/t3me2mc9ik_so4o4x.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row css-3czr7x"
+          >
+            <div
+              class="column css-aw7wqq"
+            >
+              <section
+                class="textBlurb  item"
+              >
+                <div
+                  class="headingSection"
+                >
+                  <h2
+                    class="title"
+                  >
+                    Kingsway Transitional
+                  </h2>
+                </div>
+                <p
+                  class="text"
+                >
+                  A traditional street face respects the neighbourhood, but the interior of this family home is all glass, stone and clean modern lines. A winding central stair opens up the interior, flooding the home with light.
+                </p>
+              </section>
+            </div>
+          </div>
+          <div
+            class="row css-1obek1y"
+          >
+            <div
+              class="column css-1l4pbsb"
+            >
+              <div
+                class="image-tile clearfix  item image image3"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv3 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_1000,c_scale,f_auto,q_auto/v1595347233/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/2-Modern-Rear_juviao.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-1l4pbsb"
+            >
+              <div
+                class="row css-1xigkwb"
+              >
+                <div
+                  class="column css-aw7wqq"
+                >
+                  <div
+                    class="image-tile clearfix  item image image4"
+                  >
+                    <div
+                      class="shadowOverlay clearfix"
+                    >
+                      <img
+                        alt=""
+                        class="imageDiv imageDiv4 cld-responsive css-1w9t0u2"
+                        src="https://res.cloudinary.com/alisonkhall/image/upload/h_800,c_scale,f_auto,q_auto/v1690224738/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/inzkd3co1u_k78khw.jpg"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="row css-3czr7x"
+              >
+                <div
+                  class="column css-aw7wqq"
+                >
+                  <section
+                    class="textBlurbFiller  item"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row css-e3f7zz"
+          >
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image5"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv5 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_880,c_scale,f_auto,q_auto/v1690224731/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/9ynkmnemea_xi4jy3.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image6"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv6 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_880,c_scale,f_auto,q_auto/v1690224712/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/wyiw0roxqk_pdosis.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row css-e3f7zz"
+          >
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image7"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv7 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_880,c_scale,f_auto,q_auto/v1690224715/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/wpmfr17qls_cwaye2.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image8"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv8 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_880,c_scale,f_auto,q_auto/v1690224733/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/8a5rn0jhm9_yayhnq.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row css-e3f7zz"
+          >
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image9"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv9 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_880,c_scale,f_auto,q_auto/v1690224735/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/9yil46v4lj_s8tjbi.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image10"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv10 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_880,c_scale,f_auto,q_auto/v1690224715/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/vkdzuxidqt_qcdfzk.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row css-e3f7zz"
+          >
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image11"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv11 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_880,c_scale,f_auto,q_auto/v1690224730/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/nb2m6t67mu_intdkd.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image12"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv12 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_880,c_scale,f_auto,q_auto/v1690224736/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/tfeivoj6j0_ztt97m.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row css-e3f7zz"
+          >
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image13"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv13 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_880,c_scale,f_auto,q_auto/v1690224733/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/5ezfxtm9pp_cdqizs.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image14"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv14 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_880,c_scale,f_auto,q_auto/v1690224726/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/5wxqms5oi8_ohgn7k.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row css-e3f7zz"
+          >
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image15"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv15 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_880,c_scale,f_auto,q_auto/v1690224713/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/2wl8dux9ys_pirdbm.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image16"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv16 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_880,c_scale,f_auto,q_auto/v1690224735/ArchitraveDesign/1-New-Homes/4-Kingsway-Transitional/qih7wzw9i8_egspcu.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <a
+            class="prevProject"
+            href="/portfolio/new-homes/credit-river-manor"
+          >
+            <img
+              alt=""
+              src="test-file-stub"
+            />
+            <span>
+              Previous Project
+            </span>
+          </a>
+          <a
+            class="nextProject"
+            href="/portfolio/new-homes/princess-margaret-classic"
+          >
+            <span>
+              Next Project
+            </span>
+            <img
+              alt=""
+              src="test-file-stub"
+            />
+          </a>
+        </section>
+      </main>
+      <footer>
+        <div
+          class="houzz-badges"
+        >
+          <a
+            class="houzz-badge houzz-logo-footer"
+            href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+            title="Architrave Design on Houzz"
+          >
+            <img
+              alt="Houzz logo"
+              src="test-file-stub"
+            />
+          </a>
+          <a
+            class="houzz-badge best-of-houzz-footer"
+            href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+            title="Best of Houzz 2021"
+          >
+            <img
+              alt="Best of Houzz 2021 badge"
+              src="test-file-stub"
+            />
+          </a>
+          <a
+            class="houzz-badge best-of-houzz-footer"
+            href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+            title="Best of Houzz 2026"
+          >
+            <img
+              alt="Best of Houzz 2026 badge"
+              src="test-file-stub"
+            />
+          </a>
+        </div>
+        <a
+          class="sitemap"
+          href="/sitemap"
+        >
+          Site Map
+        </a>
+        <p
+          class="copyright"
+        >
+          © 
+          2026
+        </p>
+        <p
+          class="websiteBy"
+        >
+          Website by 
+          <a
+            href="https://alisonkhall.com/"
+          >
+            Alison Hall
+          </a>
+        </p>
+      </footer>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,563 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`traditional-kingsway-park page matches the snapshot 1`] = `
+<div>
+  <div
+    class="page"
+  >
+    <aside>
+      <a
+        class="logo-link"
+        href="/"
+      >
+        <img
+          alt="Architrave Design, Architect logo"
+          id="logo"
+          src="test-file-stub"
+        />
+      </a>
+      <nav>
+        <header
+          class="side"
+        >
+          <p>
+            Architrave Design
+          </p>
+          <p>
+            |
+          </p>
+          <p>
+            Architect
+          </p>
+        </header>
+        <ul
+          class="mainNav"
+        >
+          <li>
+            <a
+              class="portfolioNav"
+              href="/portfolio/new-homes"
+            >
+              Portfolio
+            </a>
+          </li>
+          <ul
+            class="subNav subNavVisible"
+          >
+            <li>
+              <a
+                class="selected"
+                href="/portfolio/new-homes"
+              >
+                New Homes
+              </a>
+            </li>
+            <li>
+              <a
+                class=""
+                href="/portfolio/renovations-additions"
+              >
+                Renovations
+              </a>
+            </li>
+            <li>
+              <a
+                href="/portfolio/upcoming"
+              >
+                Upcoming
+              </a>
+            </li>
+          </ul>
+          <li>
+            <a
+              href="/about"
+            >
+              About
+            </a>
+          </li>
+          <li>
+            <a
+              href="/reviews"
+            >
+              Reviews
+            </a>
+          </li>
+          <li>
+            <a
+              href="/contact"
+            >
+              Contact
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div
+        class="houzz-badges"
+      >
+        <a
+          class="houzz-badge houzz-logo"
+          href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+          title="Architrave Design on Houzz"
+        >
+          <img
+            alt="Houzz logo"
+            src="test-file-stub"
+          />
+        </a>
+        <a
+          class="houzz-badge best-of-houzz"
+          href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+          title="Best of Houzz 2021"
+        >
+          <img
+            alt="Best of Houzz 2021 badge"
+            src="test-file-stub"
+          />
+        </a>
+        <a
+          class="houzz-badge best-of-houzz"
+          href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+          title="Best of Houzz 2026"
+        >
+          <img
+            alt="Best of Houzz 2026 badge"
+            src="test-file-stub"
+          />
+        </a>
+      </div>
+    </aside>
+    <div
+      class="content portfolio"
+    >
+      <header
+        class="top"
+      >
+        <p>
+          Architrave Design
+        </p>
+        <p>
+          |
+        </p>
+        <p>
+          Architect
+        </p>
+      </header>
+      <main>
+        <section
+          class="contentWrapper layoutAll layoutProject defaultLayout"
+        >
+          <div
+            class="row css-w7tfss"
+          >
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image1"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv1 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_1260,c_scale,f_auto,q_auto/v1595347271/ArchitraveDesign/1-New-Homes/6-Kingsway-Park-Traditional/1-Traditional-Stone-Front_mk1zvn.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row css-3czr7x"
+          >
+            <div
+              class="column css-aw7wqq"
+            >
+              <section
+                class="textBlurb  item"
+              >
+                <div
+                  class="headingSection"
+                >
+                  <h2
+                    class="title"
+                  >
+                    Traditional Kingsway Park
+                  </h2>
+                </div>
+                <p
+                  class="text"
+                >
+                  Set in the heart of Kingsway Park, this home uses traditional proportions and materials to evoke the character of its established neighbourhood. Inside, a light and contemporary palette of materials makes for relaxed and casual family living.
+                </p>
+              </section>
+            </div>
+          </div>
+          <div
+            class="row css-alwodn"
+          >
+            <div
+              class="column css-1ba732t"
+            >
+              <div
+                class="image-tile clearfix  item image image2"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv2 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_850,c_scale,f_auto,q_auto/v1595347268/ArchitraveDesign/1-New-Homes/6-Kingsway-Park-Traditional/2-Front-Foyer_uc6wxy.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-1jnol8s"
+            >
+              <div
+                class="image-tile clearfix  item image image3"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv3 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_850,c_scale,f_auto,q_auto/v1595347269/ArchitraveDesign/1-New-Homes/6-Kingsway-Park-Traditional/3-Dining-Room_hegcnz.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row css-1xxem6l"
+          >
+            <div
+              class="column css-aw7wqq"
+            >
+              <div
+                class="image-tile clearfix  item image image4"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv4 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_1050,c_scale,f_auto,q_auto/v1595347269/ArchitraveDesign/1-New-Homes/6-Kingsway-Park-Traditional/4-Family-Room-Builtins_duyso3.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row css-vvkpu5"
+          >
+            <div
+              class="column css-fmjlta"
+            >
+              <div
+                class="row css-3czr7x"
+              >
+                <div
+                  class="column css-aw7wqq"
+                >
+                  <section
+                    class="textBlurbFiller  item"
+                  />
+                </div>
+              </div>
+              <div
+                class="row css-1jvr5hr"
+              >
+                <div
+                  class="column css-aw7wqq"
+                >
+                  <div
+                    class="image-tile clearfix  item image image5"
+                  >
+                    <div
+                      class="shadowOverlay clearfix"
+                    >
+                      <img
+                        alt=""
+                        class="imageDiv imageDiv5 cld-responsive css-1w9t0u2"
+                        src="https://res.cloudinary.com/alisonkhall/image/upload/h_400,c_scale,f_auto,q_auto/v1595347270/ArchitraveDesign/1-New-Homes/6-Kingsway-Park-Traditional/5-Family-_Room-_-Kitchen_nqonjc.jpg"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-1kv64zx"
+            >
+              <div
+                class="image-tile clearfix  item image image6"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv6 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_400,c_scale,f_auto,q_auto/v1595347270/ArchitraveDesign/1-New-Homes/6-Kingsway-Park-Traditional/7-Master-Ensuite_g5n9vl.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <a
+            class="prevProject"
+            href="/portfolio/new-homes/princess-margaret-classic"
+          >
+            <img
+              alt=""
+              src="test-file-stub"
+            />
+            <span>
+              Previous Project
+            </span>
+          </a>
+          <a
+            class="nextProject"
+            href="/portfolio/new-homes/oakville-executive-home"
+          >
+            <span>
+              Next Project
+            </span>
+            <img
+              alt=""
+              src="test-file-stub"
+            />
+          </a>
+        </section>
+        <section
+          class="contentWrapper layoutAll layoutProject wideLayout"
+        >
+          <div
+            class="row css-1xigkwb"
+          >
+            <div
+              class="column css-l7776b"
+            >
+              <div
+                class="image-tile clearfix  item image image1"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv1 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_800,c_scale,f_auto,q_auto/v1595347271/ArchitraveDesign/1-New-Homes/6-Kingsway-Park-Traditional/1-Traditional-Stone-Front_mk1zvn.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-1yn8kn"
+            >
+              <div
+                class="image-tile clearfix  item image image2"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv2 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_800,c_scale,f_auto,q_auto/v1595347268/ArchitraveDesign/1-New-Homes/6-Kingsway-Park-Traditional/2-Front-Foyer_uc6wxy.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-199vsq1"
+            >
+              <div
+                class="image-tile clearfix  item image image3"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv3 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_800,c_scale,f_auto,q_auto/v1595347269/ArchitraveDesign/1-New-Homes/6-Kingsway-Park-Traditional/3-Dining-Room_hegcnz.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row css-3czr7x"
+          >
+            <div
+              class="column css-aw7wqq"
+            >
+              <section
+                class="textBlurb  item"
+              >
+                <div
+                  class="headingSection"
+                >
+                  <h2
+                    class="title"
+                  >
+                    Traditional Kingsway Park
+                  </h2>
+                </div>
+                <p
+                  class="text"
+                >
+                  Set in the heart of Kingsway Park, this home uses traditional proportions and materials to evoke the character of its established neighbourhood. Inside, a light and contemporary palette of materials makes for relaxed and casual family living.
+                </p>
+              </section>
+            </div>
+          </div>
+          <div
+            class="row css-erfvca"
+          >
+            <div
+              class="column css-xrwi6r"
+            >
+              <div
+                class="image-tile clearfix  item image image4"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv4 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_650,c_scale,f_auto,q_auto/v1595347269/ArchitraveDesign/1-New-Homes/6-Kingsway-Park-Traditional/4-Family-Room-Builtins_duyso3.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-1myez65"
+            >
+              <div
+                class="image-tile clearfix  item image image6"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv6 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_650,c_scale,f_auto,q_auto/v1595347268/ArchitraveDesign/1-New-Homes/6-Kingsway-Park-Traditional/6-Kitchen-Island_htgx13.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="column css-xrwi6r"
+            >
+              <div
+                class="image-tile clearfix  item image image5"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv5 cld-responsive css-1w9t0u2"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_650,c_scale,f_auto,q_auto/v1595347270/ArchitraveDesign/1-New-Homes/6-Kingsway-Park-Traditional/5-Family-_Room-_-Kitchen_nqonjc.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <a
+            class="prevProject"
+            href="/portfolio/new-homes/princess-margaret-classic"
+          >
+            <img
+              alt=""
+              src="test-file-stub"
+            />
+            <span>
+              Previous Project
+            </span>
+          </a>
+          <a
+            class="nextProject"
+            href="/portfolio/new-homes/oakville-executive-home"
+          >
+            <span>
+              Next Project
+            </span>
+            <img
+              alt=""
+              src="test-file-stub"
+            />
+          </a>
+        </section>
+      </main>
+      <footer>
+        <div
+          class="houzz-badges"
+        >
+          <a
+            class="houzz-badge houzz-logo-footer"
+            href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+            title="Architrave Design on Houzz"
+          >
+            <img
+              alt="Houzz logo"
+              src="test-file-stub"
+            />
+          </a>
+          <a
+            class="houzz-badge best-of-houzz-footer"
+            href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+            title="Best of Houzz 2021"
+          >
+            <img
+              alt="Best of Houzz 2021 badge"
+              src="test-file-stub"
+            />
+          </a>
+          <a
+            class="houzz-badge best-of-houzz-footer"
+            href="http://www.houzz.com/pro/architrave/architrave-design-architect"
+            title="Best of Houzz 2026"
+          >
+            <img
+              alt="Best of Houzz 2026 badge"
+              src="test-file-stub"
+            />
+          </a>
+        </div>
+        <a
+          class="sitemap"
+          href="/sitemap"
+        >
+          Site Map
+        </a>
+        <p
+          class="copyright"
+        >
+          © 
+          2026
+        </p>
+        <p
+          class="websiteBy"
+        >
+          Website by 
+          <a
+            href="https://alisonkhall.com/"
+          >
+            Alison Hall
+          </a>
+        </p>
+      </footer>
+    </div>
+  </div>
+</div>
+`;
