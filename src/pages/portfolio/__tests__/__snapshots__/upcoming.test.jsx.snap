@@ -161,7 +161,7 @@ exports[`upcoming page matches the snapshot 1`] = `
                   <img
                     alt=""
                     class="imageDiv imageDiv0 cld-responsive css-1y49jtp"
-                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_1400,c_scale,f_auto,q_auto/v1742767803/ArchitraveDesign/3-Upcoming/Kingsgarden-Georgian_ai6fja.jpg"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_1400,c_scale,f_auto,q_auto/v1789735584/ArchitraveDesign/3-Upcoming/Brule_Gardens_Tudor_Revival_webvia.jpg"
                   />
                 </div>
               </div>
@@ -179,7 +179,7 @@ exports[`upcoming page matches the snapshot 1`] = `
                 <p
                   class="textOverlay"
                 >
-                  Kingsgarden Georgian
+                  Brule Gardens Tudor Revival
                 </p>
               </section>
             </div>
@@ -218,6 +218,44 @@ exports[`upcoming page matches the snapshot 1`] = `
                   class="textOverlay"
                 >
                   King George's Backsplit
+                </p>
+              </section>
+            </div>
+          </div>
+          <div
+            class="row css-13ksqwx"
+          >
+            <div
+              class="column css-j9dtvt"
+            >
+              <div
+                class="image-tile clearfix  item image image2"
+              >
+                <div
+                  class="shadowOverlay clearfix"
+                >
+                  <img
+                    alt=""
+                    class="imageDiv imageDiv2 cld-responsive css-1y49jtp"
+                    src="https://res.cloudinary.com/alisonkhall/image/upload/h_1400,c_scale,f_auto,q_auto/v1742767803/ArchitraveDesign/3-Upcoming/Kingsgarden-Georgian_ai6fja.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row css-ly4s8"
+          >
+            <div
+              class="column css-j9dtvt"
+            >
+              <section
+                class="textBlurb"
+              >
+                <p
+                  class="textOverlay"
+                >
+                  Kingsgarden Georgian
                 </p>
               </section>
             </div>

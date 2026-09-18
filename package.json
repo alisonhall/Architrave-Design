@@ -61,6 +61,7 @@
         "serve": "gatsby serve",
         "test": "jest",
         "test:watch": "jest --watch",
+        "test:update-snapshots": "jest --updateSnapshot",
         "test:e2e": "playwright test"
     },
     "repository": {
