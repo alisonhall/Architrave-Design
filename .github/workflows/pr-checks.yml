@@ -8,19 +8,24 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
-permissions:
-  contents: write
-
 jobs:
-  validate:
-    name: Update snapshots and run tests
+  update-snapshots:
+    name: Update snapshots
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      pull-requests: write
+    outputs:
+      sha: ${{ steps.resolve-sha.outputs.sha }}
     steps:
       - name: Determine if PR is from a fork
         id: source
+        env:
+          HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+          BASE_REPO: ${{ github.repository }}
         run: |
-          if [ "${{ github.event.pull_request.head.repo.full_name }}" = "${{ github.repository }}" ]; then
+          if [ "$HEAD_REPO" = "$BASE_REPO" ]; then
             echo "is_fork=false" >> "$GITHUB_OUTPUT"
           else
             echo "is_fork=true" >> "$GITHUB_OUTPUT"
@@ -36,16 +41,13 @@ jobs:
 
       - name: Use branch head for same-repo PRs
         if: steps.source.outputs.is_fork == 'false'
-        run: git checkout -B "${{ github.head_ref }}" "${{ github.event.pull_request.head.sha }}"
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: git checkout -B "$HEAD_REF" "$HEAD_SHA"
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
+      - name: Setup project
+        uses: ./.github/actions/setup-project
 
       - name: Update test snapshots
         run: npm run test:update-snapshots
@@ -53,36 +55,119 @@ jobs:
       - name: Check for snapshot changes
         id: snapshots
         run: |
-          if [ -n "$(git status --porcelain)" ]; then
+          changed_files=$( { git diff --name-only; git ls-files --others --exclude-standard; } )
+          if [ -n "$changed_files" ]; then
             echo "changed=true" >> "$GITHUB_OUTPUT"
+            delimiter="EOF_${RANDOM}${RANDOM}${RANDOM}"
+            {
+              echo "files<<$delimiter"
+              echo "$changed_files"
+              echo "$delimiter"
+            } >> "$GITHUB_OUTPUT"
           else
             echo "changed=false" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Commit updated snapshots
+        id: commit
         if: steps.snapshots.outputs.changed == 'true' && steps.source.outputs.is_fork == 'false'
+        env:
+          HEAD_REF: ${{ github.head_ref }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
           git commit -m "chore: update test snapshots [skip ci]"
-          git push origin HEAD:"${{ github.head_ref }}"
+          git push origin HEAD:"$HEAD_REF"
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Comment on PR about updated snapshots
+        if: steps.snapshots.outputs.changed == 'true' && steps.source.outputs.is_fork == 'false'
+        uses: actions/github-script@v7
+        env:
+          SNAPSHOT_FILES: ${{ steps.snapshots.outputs.files }}
+          COMMIT_SHA: ${{ steps.commit.outputs.sha }}
+        with:
+          script: |
+            const files = (process.env.SNAPSHOT_FILES || '')
+              .split('\n')
+              .filter(Boolean);
+            const [firstFile, ...restFiles] = files;
+            const fileList = files.map(f => `- \`${f}\``).join('\n');
+
+            await github.rest.pulls.createReviewComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              commit_id: process.env.COMMIT_SHA,
+              path: firstFile,
+              subject_type: 'file',
+              body: `🔄 Test snapshots were out of date and have been automatically updated in commit ${process.env.COMMIT_SHA}. **Please review these changes before merging.**\n\n` +
+                `Note: this comment is anchored to \`${firstFile}\`, but that may not be the only snapshot file that changed` +
+                (restFiles.length > 0 ? ` — ${restFiles.length} other file${restFiles.length === 1 ? ' was' : 's were'} also updated in this commit.` : '.') +
+                `\n\nAll updated snapshot files in this commit:\n\n${fileList}`,
+            });
 
       - name: Discard snapshot changes on forked PR
         if: steps.snapshots.outputs.changed == 'true' && steps.source.outputs.is_fork == 'true'
         run: |
-          echo "::warning::Snapshots changed but cannot be auto-committed to a fork PR. Run 'npm run test:update-snapshots' locally and push the changes."
+          echo "::warning::Snapshots are out of date but cannot be auto-committed to a fork PR. Run 'npm run test:update-snapshots' locally and push the changes. The unit-tests and e2e-tests jobs will fail until this is done."
           git checkout -- .
           git clean -fd
 
+      - name: Resolve sha for downstream jobs
+        id: resolve-sha
+        run: |
+          if [ -n "${{ steps.commit.outputs.sha }}" ]; then
+            echo "sha=${{ steps.commit.outputs.sha }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "sha=${{ github.event.pull_request.head.sha }}" >> "$GITHUB_OUTPUT"
+          fi
+
+  unit-tests:
+    name: Unit tests
+    needs: update-snapshots
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.update-snapshots.outputs.sha }}
+
+      - name: Setup project
+        uses: ./.github/actions/setup-project
+
       - name: Run unit tests
-        run: npm run test
+        run: npm run test:coverage
+
+  e2e-tests:
+    name: E2E tests
+    needs: update-snapshots
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.update-snapshots.outputs.sha }}
+
+      - name: Setup project
+        uses: ./.github/actions/setup-project
+
+      - name: Get Playwright version
+        id: playwright-version
+        run: echo "version=$(node -p "require('@playwright/test/package.json').version")" >> "$GITHUB_OUTPUT"
 
       - name: Cache Playwright browsers
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.version }}
 
       - name: Run e2e tests
         run: npm run test:e2e
