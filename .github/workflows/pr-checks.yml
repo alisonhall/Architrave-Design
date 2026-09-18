@@ -1,0 +1,88 @@
+name: PR Checks
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    name: Update snapshots and run tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Determine if PR is from a fork
+        id: source
+        run: |
+          if [ "${{ github.event.pull_request.head.repo.full_name }}" = "${{ github.repository }}" ]; then
+            echo "is_fork=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "is_fork=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          # Fetch the real branch ref (not the merge ref) so we can push back to it.
+          # Only possible for same-repo PRs; fork PRs fall back to the default checkout.
+          fetch-depth: 0
+
+      - name: Use branch head for same-repo PRs
+        if: steps.source.outputs.is_fork == 'false'
+        run: git checkout -B "${{ github.head_ref }}" "${{ github.event.pull_request.head.sha }}"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Update test snapshots
+        run: npm run test:update-snapshots
+
+      - name: Check for snapshot changes
+        id: snapshots
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit updated snapshots
+        if: steps.snapshots.outputs.changed == 'true' && steps.source.outputs.is_fork == 'false'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore: update test snapshots [skip ci]"
+          git push origin HEAD:"${{ github.head_ref }}"
+
+      - name: Discard snapshot changes on forked PR
+        if: steps.snapshots.outputs.changed == 'true' && steps.source.outputs.is_fork == 'true'
+        run: |
+          echo "::warning::Snapshots changed but cannot be auto-committed to a fork PR. Run 'npm run test:update-snapshots' locally and push the changes."
+          git checkout -- .
+          git clean -fd
+
+      - name: Run unit tests
+        run: npm run test
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
+
+      - name: Run e2e tests
+        run: npm run test:e2e
