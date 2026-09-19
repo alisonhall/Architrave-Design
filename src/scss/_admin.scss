@@ -1,0 +1,689 @@
+@import 'variables';
+
+.adminPasswordGate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #f4f4f4;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 280px;
+        padding: $spacing;
+        background: $pageColour;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+
+        h1 {
+            margin: 0 0 10px;
+            font-size: $titleFontSize;
+        }
+
+        input {
+            padding: 8px;
+            font-size: $bodyFontSize;
+            border: 1px solid $grayLinkColour;
+        }
+
+        button {
+            padding: 10px;
+            font-size: $bodyFontSize;
+            background: $darkTextColour;
+            color: $lightTextColour;
+            border: none;
+            cursor: pointer;
+
+            &:disabled {
+                opacity: 0.5;
+                cursor: default;
+            }
+        }
+    }
+
+    &-error {
+        color: #b00020;
+        margin: 0;
+    }
+}
+
+.adminApp {
+    display: flex;
+    min-height: 100vh;
+    background: #f4f4f4;
+
+    &-nav {
+        display: flex;
+        flex-direction: column;
+        width: 180px;
+        flex-shrink: 0;
+        background: $darkTextColour;
+
+        button {
+            padding: 15px;
+            text-align: left;
+            background: none;
+            border: none;
+            color: $lightGrayLinkColour;
+            cursor: pointer;
+            font-size: $bodyFontSize;
+
+            &.active {
+                background: rgba(255, 255, 255, 0.1);
+                color: $lightTextColour;
+            }
+        }
+    }
+
+    &-content {
+        flex-grow: 1;
+        padding: $spacing;
+        overflow-y: auto;
+    }
+
+    &-placeholder {
+        color: $grayLinkColour;
+    }
+}
+
+.adminOutputPanel {
+    &-instructions {
+        max-width: 700px;
+    }
+
+    &-file {
+        margin-bottom: $spacingX2;
+        background: $pageColour;
+        border: 1px solid #ddd;
+
+        &Header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 15px;
+            background: #eee;
+
+            button {
+                padding: 5px 12px;
+                cursor: pointer;
+            }
+        }
+
+        pre {
+            margin: 0;
+            padding: 15px;
+            overflow-x: auto;
+            font-size: 0.85rem;
+        }
+    }
+
+    &-note {
+        margin: 0;
+        padding: 8px 15px;
+        background: #fff8e1;
+        font-size: 0.9rem;
+    }
+}
+
+.adminProjectsEditor {
+    max-width: 900px;
+
+    &-intro {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-bottom: $spacingX2;
+
+        textarea {
+            padding: 8px;
+            font-family: inherit;
+            font-size: $bodyFontSize;
+        }
+    }
+
+    &-type {
+        margin-bottom: $spacingX2;
+        padding-bottom: $spacing;
+        border-bottom: 1px solid #ddd;
+
+        h3 {
+            margin-bottom: 6px;
+            font-size: 1rem;
+            color: $grayLinkColour;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0 0 15px;
+            padding: 0;
+        }
+    }
+
+    &-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 8px 10px;
+        background: $pageColour;
+        border: 1px solid #eee;
+        margin-bottom: 4px;
+    }
+
+    &-nameGroup {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        overflow: hidden;
+        min-width: 0;
+    }
+
+    &-name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &-rowActions {
+        display: flex;
+        gap: 6px;
+        flex-shrink: 0;
+
+        button {
+            padding: 4px 10px;
+            cursor: pointer;
+        }
+    }
+
+    &-editing,
+    &-preview {
+        margin-top: $spacingX2;
+        padding-top: $spacing;
+        border-top: 2px solid $darkTextColour;
+    }
+}
+
+.adminProjectForm {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-width: 500px;
+    margin-top: 10px;
+
+    label {
+        margin-top: 10px;
+        font-weight: 600;
+    }
+
+    input,
+    textarea {
+        padding: 8px;
+        font-family: inherit;
+        font-size: $bodyFontSize;
+    }
+
+    &-hint {
+        font-weight: 400;
+        color: $grayLinkColour;
+    }
+
+    &-row {
+        display: flex;
+        gap: 8px;
+
+        input {
+            flex-grow: 1;
+        }
+    }
+
+    &-actions {
+        display: flex;
+        gap: 8px;
+        margin-top: $spacing;
+
+        button {
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+    }
+}
+
+.adminProjectPreview {
+    max-width: 500px;
+    overflow: hidden;
+}
+
+.adminTileLibrary {
+    margin-bottom: $spacingX2;
+    padding-bottom: $spacing;
+    border-bottom: 1px solid #ddd;
+
+    ul {
+        list-style: none;
+        margin: 0 0 10px;
+        padding: 0;
+    }
+
+    &-filter {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        max-width: 260px;
+        margin-bottom: 8px;
+        font-size: 0.85rem;
+        font-weight: 600;
+
+        input {
+            padding: 6px;
+            font-family: inherit;
+            font-size: $bodyFontSize;
+        }
+    }
+
+    &-addButtons {
+        display: flex;
+        gap: 8px;
+    }
+}
+
+.adminLayoutsEditor {
+    &-target {
+        font-family: monospace;
+        color: $grayLinkColour;
+    }
+
+    &-variant {
+        margin-top: $spacingX2;
+
+        h3 {
+            margin-bottom: 10px;
+        }
+    }
+
+    &-columns {
+        display: flex;
+        gap: $spacingX2;
+        align-items: flex-start;
+
+        @media screen and (max-width: 900px) {
+            flex-direction: column;
+        }
+    }
+}
+
+.adminLayoutTree {
+    flex: 1;
+    min-width: 0;
+
+    &-collapseToggle {
+        flex-shrink: 0;
+        width: 22px;
+        height: 22px;
+        padding: 0;
+        background: none;
+        border: 1px solid #ccc;
+        cursor: pointer;
+        line-height: 1;
+    }
+
+    &-dragHandle {
+        flex-shrink: 0;
+        width: 22px;
+        height: 22px;
+        padding: 0;
+        background: none;
+        border: 1px solid #ccc;
+        cursor: grab;
+        line-height: 1;
+
+        &:active {
+            cursor: grabbing;
+        }
+    }
+
+    &-row {
+        margin-bottom: 10px;
+        padding: 10px;
+        background: $pageColour;
+        border: 2px solid #ccc;
+
+        &--dragOver {
+            border-color: #0064ff;
+            border-style: dashed;
+        }
+    }
+
+    &-rowHeader {
+        display: flex;
+        align-items: flex-end;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+
+        label {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.85rem;
+        }
+
+        input {
+            width: 90px;
+            padding: 4px;
+        }
+    }
+
+    &-columns {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    &-column {
+        flex: 1;
+        min-width: 160px;
+        padding: 8px;
+        background: #f4f4f4;
+        border: 1px dashed #bbb;
+
+        &--dragOver {
+            border-color: #0064ff;
+        }
+    }
+
+    &-columnHeader {
+        display: flex;
+        align-items: flex-end;
+        gap: 8px;
+        margin-bottom: 8px;
+
+        label {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.85rem;
+        }
+
+        input {
+            width: 80px;
+            padding: 4px;
+        }
+    }
+
+    &-placement {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 6px;
+    }
+
+    &-nestedRow {
+        margin-bottom: 6px;
+    }
+
+    &-controls {
+        display: flex;
+        gap: 4px;
+
+        button {
+            padding: 3px 8px;
+            cursor: pointer;
+        }
+    }
+
+    &-addButtons {
+        display: flex;
+        gap: 6px;
+        margin-top: 6px;
+
+        button {
+            padding: 4px 8px;
+            cursor: pointer;
+        }
+    }
+}
+
+.adminLayoutPreview {
+    overflow: hidden;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background: $pageColour;
+}
+
+.adminThumbnail {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    object-fit: cover;
+    background: #eee;
+}
+
+.adminEditableLayoutPreview {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    max-width: 600px;
+
+    // Click-to-edit-in-preview: the actual rendered tiles are the click targets (see
+    // layoutClickOverlay.jsx's resolvePlacementClick, which maps a click straight back
+    // to the clicked column's data) — this just gives them a pointer cursor and a hover
+    // outline, no separate overlay markup involved.
+    .column > * {
+        cursor: pointer;
+
+        &:hover {
+            outline: 2px solid rgba(0, 100, 255, 0.6);
+            outline-offset: -2px;
+        }
+    }
+}
+
+.adminTileEditPopover {
+    // Above item.scss's .textOverlay (a project tile's title text), which sets z-index:
+    // 200 and, lacking its own stacking context, competes directly against this
+    // fixed-positioned popover rather than staying trapped behind it.
+    z-index: 300;
+    width: 300px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 12px;
+    background: $pageColour;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+
+    h4 {
+        margin: 0 0 8px;
+    }
+
+    label {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        margin-top: 8px;
+        font-weight: 600;
+    }
+
+    input,
+    textarea,
+    select {
+        padding: 6px;
+        font-family: inherit;
+        font-size: $bodyFontSize;
+    }
+
+    &-form .adminProjectForm-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+
+        button {
+            padding: 6px 10px;
+            cursor: pointer;
+        }
+    }
+
+    &-existing {
+        list-style: none;
+        margin: 0 0 10px;
+        padding: 0;
+        max-height: 220px;
+        overflow-y: auto;
+
+        li {
+            margin-bottom: 4px;
+        }
+
+        button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            padding: 4px;
+            text-align: left;
+            background: none;
+            border: 1px solid #eee;
+            cursor: pointer;
+
+            &:hover {
+                background: #f4f4f4;
+            }
+
+            span {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+    }
+}
+
+.adminActionsMenu {
+    position: relative;
+    display: inline-block;
+
+    > button {
+        padding: 4px 10px;
+        cursor: pointer;
+    }
+
+    &-list {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        z-index: 10;
+        margin: 2px 0 0;
+        padding: 4px;
+        list-style: none;
+        min-width: 120px;
+        background: $pageColour;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 6px 8px;
+            text-align: left;
+            background: none;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+
+            &:hover:not(:disabled) {
+                background: #f4f4f4;
+            }
+
+            &:disabled {
+                opacity: 0.4;
+                cursor: default;
+            }
+        }
+    }
+}
+
+.adminLayoutResizeOverlay {
+    position: absolute;
+    inset: 0;
+    // Only the handles themselves should intercept the pointer — the rest of this
+    // layer sits over the live preview and must let clicks through to it (and to the
+    // click-to-edit-in-preview handler on the same container).
+    pointer-events: none;
+}
+
+.adminLayoutResize-row,
+.adminLayoutResize-column {
+    position: absolute;
+    z-index: 5;
+    pointer-events: auto;
+
+    &::after {
+        content: '';
+        display: block;
+        background: transparent;
+    }
+
+    &:hover::after,
+    &:active::after {
+        background: rgba(0, 100, 255, 0.5);
+    }
+}
+
+.adminLayoutResize-row {
+    height: 8px;
+    margin-top: -4px;
+    cursor: row-resize;
+
+    &::after {
+        height: 2px;
+        margin-top: 3px;
+    }
+}
+
+.adminLayoutResize-column {
+    width: 8px;
+    margin-left: -4px;
+    cursor: col-resize;
+
+    &::after {
+        width: 2px;
+        height: 100%;
+        margin-left: 3px;
+    }
+}
+
+.adminLayoutResize-label {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    padding: 2px 6px;
+    background: #000;
+    color: #fff;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.adminLayoutResize-edit {
+    position: absolute;
+    z-index: 21;
+    padding: 6px;
+    background: $pageColour;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    pointer-events: auto;
+
+    label {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    input {
+        width: 80px;
+        padding: 4px;
+        font-family: inherit;
+        font-size: $bodyFontSize;
+    }
+}

@@ -1,188 +1,116 @@
 # Architrave Design
 
-## Coding Snippets
+The portfolio site for Architrave Design, Architect — a residential architecture firm in the Toronto area. Built with [Gatsby](https://www.gatsbyjs.com/) (React + static site generation), with project imagery served from Cloudinary.
 
-### Each project page
+## Requirements
 
-```js
-import React from "react"
+- Node `>=18` and npm `>=9` (see `.nvmrc` / `package.json#engines`). If you use [nvm](https://github.com/nvm-sh/nvm), run `nvm use` in the repo root.
 
-import Layout from "../../../components/layout"
-import Seo from "../../../components/seo"
-import ImageLayout1Col1Row from '../../../components/imageLayout1Col1Row';
-import ImageTile from '../../../components/imageTile';
-import TextBlurb from '../../../components/textBlurb';
-import TextBlurbFiller from '../../../components/textBlurbFiller';
-import PrevNextProjectLink from '../../../components/prevNextProjectLink';
+## Getting started
 
-const PageName = (props) => (
-  <Layout urlPath={props.location.pathname} mainClasses="portfolio pageName">
-    <Seo />
-    <section class="contentWrapper layoutAll layoutRenovationsPageName">
-
-      {/* COMPONENTS GO HERE */}
-
-      <PrevNextProjectLink direction="previous" linkUrl="/portfolio/renovations-additions/cornwall-heritage-addition" />
-      <PrevNextProjectLink direction="next" linkUrl="/portfolio/renovations-additions/lorne-park-interior" />
-    </section>
-  </Layout>
-)
-
-export default PageName;
+```sh
+npm install
+npm run develop
 ```
 
-### Components for project pages
+The site runs at `http://localhost:8000` (Gatsby's GraphQL explorer is at `http://localhost:8000/___graphql`).
 
-```js
-import image1 from '../../../images/New-Homes/KingswayTraditional-1.jpg';
-import image1 from '../../../images/Renovations-Additions/Lytton-Park-2.jpg';
+## Scripts
 
-<ImageTile dataItem={{
-  num: '1',
-  image: image1,
-  width: 'calc(100% - (1.5% * 2))',
-  height: 'calc(500px * 1.26)'
-}} />
+| Script | What it does |
+| --- | --- |
+| `npm run develop` (alias `npm start`) | Runs the site locally with hot reload. |
+| `npm run build` | Builds the static site into `public/`. |
+| `npm run serve` | Serves a production build locally (used by the e2e tests, on port 9000). |
+| `npm test` | Runs the Jest unit/snapshot test suite. |
+| `npm run test:watch` | Runs Jest in watch mode. |
+| `npm run test:e2e` | Runs the Playwright end-to-end suite against a production build (builds and serves the site automatically). |
+| `npm run format` | Formats `src/**/*.{js,jsx}` with Prettier. |
 
-<TextBlurb dataItem={{
-  title: 'Kingsway Traditional',
-  text: 'Set in the heart of The Kingsway, this new family home evokes the character and flavour of the neighbourhood. Local stone and brick outside conceal a double-height foyer, panelled formal rooms and a casual great-room.'
-}} />
+## Project structure
 
-<TextBlurbFiller dataItem={{
-  width: 'calc(47% - (1.5% * 2))',
-  height: '40px',
-  float: 'left'
-}} />
+```text
+src/
+  components/     Shared React components: layout/nav/header/footer, seo, the Row/
+                   Column/Item tile system, the shared page-layout renderers
+                   (listingPageLayout.jsx, detailPageLayout.jsx, aboutPageLayout.jsx,
+                   reviewsPageLayout.jsx, layoutTreeRenderer.jsx), and admin/ tooling
+  pages/          One file per route (Gatsby's filesystem-based routing) — see below
+  scss/           Global styles and page-specific partials
+  images/         Local images (most project photography instead lives on Cloudinary)
+static/
+  app-constants.js  The site's project data: every project, which ones appear (and in
+                     what order) on each portfolio listing page, plus Cloudinary/Houzz
+                     config
+  about.js          The About page's content (intro/bio/approach text)
+  reviews.js        The Reviews page's content (the review list)
+  layouts/          One file per portfolio page, holding its Row/Column/tile tree(s) —
+                     see "The layout system" below
+  helpers.js        Shared helpers for building a project's tile from app-constants data
+e2e/              Playwright end-to-end specs, run against a real production build
 ```
 
-### Components for overview pages
+### Pages
 
-```js
-<ImageLinkTile dataItem={{
-  num: '1',
-  linkUrl: '/portfolio/new-homes/hoggs-hollow-traditional',
-  text: "Hogg's Hollow Traditional",
-  image: image1,
-  backgroundPosition: '100% 0%',
-  width: 'calc(48% - (1.5% * 2))',
-  height: 'calc(500px * 1.405)'
-}} />
+- `src/pages/index.jsx`, `about.jsx`, `reviews.jsx`, `contact.jsx`, `sitemap.jsx`, `404.jsx` — top-level pages.
+- `src/pages/portfolio/{new-homes,renovations-additions}.jsx` — portfolio listing pages.
+- `src/pages/portfolio/upcoming.jsx` — the upcoming-projects listing; generated directly from `upcomingProjectsOrder` rather than a hand-tuned layout, so it has no entry under `static/layouts/`.
+- `src/pages/portfolio/{new-homes,renovations-additions}/*.jsx` — one detail page per project.
 
-<ImageFillerTile dataItem={{
-  num: '3',
-  image: image3,
-  width: 'calc(21% - (1.5% * 2))',
-  height: 'calc(500px * 0.598266)'
-}} />
+Every page above except `upcoming.jsx` is a fixed, one-line wrapper — e.g.:
 
-<TextBlurb dataItem={{
-  text: 'Designing stylish new homes and renovations in Etobicoke and the Greater Toronto Area.'
-}}/>
+```jsx
+import layoutData from '../../../../static/layouts/lorne-park-interior';
+import DetailPageLayout from '../../../components/detailPageLayout';
+
+const LorneParkInterior = (props) => <DetailPageLayout {...layoutData} location={props.location} />;
 ```
 
-### Useful, but not currently used
+Its actual layout lives entirely in the matching `static/layouts/<slug>.js` file, so once a page's wrapper exists, that wrapper file itself never needs to change again — every future edit happens in its data file instead (by hand, or via the Admin tool — see below).
 
-```js
-{data.map(item => dataItemSwitcher(item))}
-```
+### The layout system
 
-## Default Gatsby Quick-Start Guide
+Each portfolio page's layout is plain data (a page's `static/layouts/<slug>.js`) describing a tree of rows, columns, and tiles, resolved at render time by `src/components/layoutTreeRenderer.jsx` using three lower-level components:
 
-<!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
-<p align="center">
-  <a href="https://www.gatsbyjs.org">
-    <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby's default starter
-</h1>
+- `rowHOC.jsx` — a horizontal band (`height` or `imageHeight` in px).
+- `columnHOC.jsx` — a column inside a row (`width` as a percentage).
+- `item.jsx` — a tile inside a column: a project image+link, a plain image, a filler image, a text blurb, a raw embed (an iframe's HTML pasted verbatim), or a plain blue placeholder, depending on which props it's given.
 
-Kick off your project with this default boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
+A listing page (`index`/`new-homes`/`renovations-additions`) has two trees, `defaultLayout` and `wideLayout` (narrow vs. wide screens); a detail page has either that same two-tree shape or a single `layout` tree — read from the data itself, not fixed by page type. `layoutTreeRenderer.jsx`'s `renderLayoutTree` is the single rendering implementation shared by the real pages (via `listingPageLayout.jsx`/`detailPageLayout.jsx`) and the Admin tool's live preview, so the two can never drift apart.
 
-_Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.org/docs/gatsby-starters/)._
+### Content data
 
-## 🚀 Quick start
+- `static/app-constants.js` holds every project (`projects`), which project keys appear on each portfolio listing page and in what order (`newProjectsOrder`, `renovationProjectsOrder`, `upcomingProjectsOrder`), and which ones are defined but not currently shown (`unusedNewProjects`, etc.).
+- `static/layouts/<slug>.js` holds one portfolio page's layout (see above).
+- `static/about.js` / `static/reviews.js` hold the About and Reviews pages' text content.
 
-1.  **Create a Gatsby site.**
+All of the above are plain data files with no JSX in them — editing one and redeploying is the entire update, whether done by hand or through the Admin tool.
 
-    Use the Gatsby CLI to create a new site, specifying the default starter.
+## Testing
 
-    ```sh
-    # create a new Gatsby site using the default starter
-    npx gatsby new my-default-starter https://github.com/gatsbyjs/gatsby-starter-default
-    ```
+- **Unit/component tests** (Jest + React Testing Library): `npm test`. Full-page renders use `toMatchSnapshot()` (snapshots live alongside each test in `__snapshots__/`; update with `npm test -- -u` after an intentional markup change, and review the diff before committing); everything else (generators, editors, interactive components) asserts on specific behavior/output.
+- **End-to-end tests** (Playwright, `e2e/`): `npm run test:e2e`. This builds the site and serves it on `http://localhost:9000`, then drives it in a real browser.
+  - `e2e/site.spec.js` — the public site: navigation, portfolio listing/detail pages, sitemap, 404.
+  - `e2e/admin.spec.js` — the Admin tool: the passphrase gate, and each editor's end-to-end flows (see below).
 
-1.  **Start developing.**
+## Admin tool
 
-    Navigate into your new site’s directory and start it up.
+`/admin` is a password-gated content editor built directly into the site (`src/components/admin/`). It lets every piece of editable content — projects, portfolio page layouts, and the About/Reviews page text — be drafted visually in the browser, live-previewed with the site's own rendering components, and turned into ready-to-paste file text for GitHub's web UI. Nothing it does writes to the filesystem; its draft state lives only in `sessionStorage` for that browser session, and it's not linked from the public site navigation. The password check is a client-side deterrent only (the site has no backend), not real access control — see the comment in `passwordGate.jsx` for how to change the default passphrase before deploying.
 
-    ```sh
-    cd my-default-starter/
-    gatsby develop
-    ```
+Because every page's content already lives in a plain `static/*.js` data file (see above), the Admin tool and the real site always read the exact same source — there's nothing to hand-transcribe into or out of the tool, and an edit made directly on GitHub shows up in the Admin tool on its next load, with no separate sync step.
 
-1.  **Open the source code and start editing!**
+Sections, each in `src/components/admin/`:
 
-    Your site is now running at `http://localhost:8000`!
+- **Projects** (`projectsEditor.jsx`) — add/edit/delete/reorder/hide projects and each portfolio section's shared introduction text.
+- **Layouts** (`layoutsEditor.jsx`) — manage a page's tile library (add/edit/delete/rename — renaming a tile updates every placement referencing it across the page's layout tree(s)) and edit its row/column tree(s) with a live preview; also where a brand-new portfolio page gets created (a project with no page yet can be started from a blank layout, generating its data file, its fixed wrapper page file, and a test scaffold).
+- **About** (`aboutEditor.jsx`) — edit the About page's three text sections.
+- **Reviews** (`reviewsEditor.jsx`) — add/edit/delete/reorder the review list.
+- **Review Changes** (`outputSection.jsx`/`outputPanel.jsx`) — every changed file's full text, ready to copy into GitHub.
 
-    _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql)._
+## Deployment
 
-    Open the `my-default-starter` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
+`npm run build` produces a static site in `public/`; there's no deploy configuration checked into this repo, so hosting/CI is managed outside of it.
 
-## 🧐 What's inside?
+## License
 
-A quick look at the top-level files and directories you'll see in a Gatsby project.
-
-    .
-    ├── node_modules
-    ├── src
-    ├── .gitignore
-    ├── .prettierrc
-    ├── gatsby-browser.js
-    ├── gatsby-config.js
-    ├── gatsby-node.js
-    ├── gatsby-ssr.js
-    ├── LICENSE
-    ├── package-lock.json
-    ├── package.json
-    └── README.md
-
-1.  **`/node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages) are automatically installed.
-
-2.  **`/src`**: This directory will contain all of the code related to what you will see on the front-end of your site (what you see in the browser) such as your site header or a page template. `src` is a convention for “source code”.
-
-3.  **`.gitignore`**: This file tells git which files it should not track / not maintain a version history for.
-
-4.  **`.prettierrc`**: This is a configuration file for [Prettier](https://prettier.io/). Prettier is a tool to help keep the formatting of your code consistent.
-
-5.  **`gatsby-browser.js`**: This file is where Gatsby expects to find any usage of the [Gatsby browser APIs](https://www.gatsbyjs.org/docs/browser-apis/) (if any). These allow customization/extension of default Gatsby settings affecting the browser.
-
-6.  **`gatsby-config.js`**: This is the main configuration file for a Gatsby site. This is where you can specify information about your site (metadata) like the site title and description, which Gatsby plugins you’d like to include, etc. (Check out the [config docs](https://www.gatsbyjs.org/docs/gatsby-config/) for more detail).
-
-7.  **`gatsby-node.js`**: This file is where Gatsby expects to find any usage of the [Gatsby Node APIs](https://www.gatsbyjs.org/docs/node-apis/) (if any). These allow customization/extension of default Gatsby settings affecting pieces of the site build process.
-
-8.  **`gatsby-ssr.js`**: This file is where Gatsby expects to find any usage of the [Gatsby server-side rendering APIs](https://www.gatsbyjs.org/docs/ssr-apis/) (if any). These allow customization of default Gatsby settings affecting server-side rendering.
-
-9.  **`LICENSE`**: Gatsby is licensed under the MIT license.
-
-10. **`package-lock.json`** (See `package.json` below, first). This is an automatically generated file based on the exact versions of your npm dependencies that were installed for your project. **(You won’t change this file directly).**
-
-11. **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
-
-12. **`README.md`**: A text file containing useful reference information about your project.
-
-## 🎓 Learning Gatsby
-
-Looking for more guidance? Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.org/). Here are some places to start:
-
-- **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.org/tutorial/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
-
-- **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.org/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
-
-## 💫 Deploy
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-default)
-
-<!-- AUTO-GENERATED-CONTENT:END -->
+MIT — see [LICENSE](LICENSE).

@@ -221,6 +221,7 @@ exports[`classic-centre-hall page matches the snapshot 1`] = `
               >
                 <iframe
                   allow="xr-spatial-tracking; gyroscope; accelerometer"
+                  allowfullscreen=""
                   frameborder="0"
                   height="640"
                   scrolling="no"
@@ -499,6 +500,7 @@ exports[`classic-centre-hall page matches the snapshot 1`] = `
               >
                 <iframe
                   allow="xr-spatial-tracking; gyroscope; accelerometer"
+                  allowfullscreen=""
                   frameborder="0"
                   height="640"
                   scrolling="no"
