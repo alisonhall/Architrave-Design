@@ -143,4 +143,39 @@ describe('resolvePlacementClick', () => {
     expect(next[0].height).toBe(400);
     expect(next[0].columns[0].children[0].row.columns[0].children[0].tileKey).toBe('swapped');
   });
+
+  describe('moving and removing the clicked placement', () => {
+    const rows = () => [row({}, [{ id: 'col1', children: [tileRef('a'), tileRef('b'), tileRef('c')] }, { id: 'col2', children: [tileRef('d')] }])];
+
+    it('reports whether it can move up/down', () => {
+      const { root, columnEl } = buildColumnDom('col1', 3);
+      expect(resolvePlacementClick({ target: columnEl.children[0] }, root, rows())).toMatchObject({ canMoveUp: false, canMoveDown: true });
+      expect(resolvePlacementClick({ target: columnEl.children[2] }, root, rows())).toMatchObject({ canMoveUp: true, canMoveDown: false });
+    });
+
+    it('getMovedRows moves only the clicked placement within its column', () => {
+      const { root, columnEl } = buildColumnDom('col1', 3);
+      const current = rows();
+      const result = resolvePlacementClick({ target: columnEl.children[1] }, root, current);
+
+      const movedUp = result.getMovedRows(-1);
+      expect(movedUp[0].columns[0].children.map((child) => child.tileKey)).toEqual(['b', 'a', 'c']);
+      expect(movedUp[0].columns[1]).toBe(current[0].columns[1]);
+      expect(result.getMovedRows(1)[0].columns[0].children.map((child) => child.tileKey)).toEqual(['a', 'c', 'b']);
+    });
+
+    it('getRemovedRows takes the clicked placement out of its column', () => {
+      const { root, columnEl } = buildColumnDom('col1', 3);
+      const result = resolvePlacementClick({ target: columnEl.children[1] }, root, rows());
+
+      expect(result.getRemovedRows()[0].columns[0].children.map((child) => child.tileKey)).toEqual(['a', 'c']);
+    });
+  });
+
+  it('returns null when the clicked column isn\'t in the tree data (a stale render)', () => {
+    const { root, columnEl } = buildColumnDom('unknownColumn', 1);
+    const rows = [row({}, [{ id: 'col1', children: [tileRef('a')] }])];
+
+    expect(resolvePlacementClick({ target: columnEl.children[0] }, root, rows)).toBeNull();
+  });
 });

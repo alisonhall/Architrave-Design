@@ -10,8 +10,11 @@ import PropTypes from 'prop-types';
  * @param {Object} param
  * @param {Array} param.actions - [{ label, onClick, disabled? }]
  * @param {string} [param.label] - the menu button's own label
+ * @param {string} [param.align] - which edge of the button the open list lines up with:
+ * 'right' (the default, extending leftward) or 'left' (extending rightward — for a menu
+ * sitting near the left edge of the screen, where extending leftward would clip)
  */
-const ActionsMenu = ({ actions, label }) => {
+const ActionsMenu = ({ actions, label, align }) => {
   const [open, setOpen] = useState(false);
   const containerRef = useRef(null);
 
@@ -30,7 +33,7 @@ const ActionsMenu = ({ actions, label }) => {
         {label}
       </button>
       {open && (
-        <ul className="adminActionsMenu-list" role="menu">
+        <ul className={`adminActionsMenu-list${align === 'left' ? ' adminActionsMenu-list--alignLeft' : ''}`} role="menu">
           {actions.map((action) => (
             <li key={action.label} role="none">
               <button
@@ -55,9 +58,10 @@ ActionsMenu.propTypes = {
     onClick: PropTypes.func.isRequired,
     disabled: PropTypes.bool
   })).isRequired,
-  label: PropTypes.string
+  label: PropTypes.string,
+  align: PropTypes.oneOf(['left', 'right'])
 };
 
-ActionsMenu.defaultProps = { label: 'Actions ▾' };
+ActionsMenu.defaultProps = { label: 'Actions ▾', align: 'right' };
 
 export default ActionsMenu;

@@ -295,4 +295,62 @@ describe('TileEditPopover', () => {
       expect(onCreateTileAndAssign).not.toHaveBeenCalled();
     });
   });
+
+  describe('moving/removing the clicked spot', () => {
+    const tiles = { tileA: { kind: 'image', imageUrl: 'https://example.com/a.jpg', backgroundPosition: '', overlayText: '' } };
+    const renderWith = (selectionOverrides, handlers = {}) => render(
+      <TileEditPopover
+        selection={makeSelection({
+          tileKey: 'tileA',
+          canMoveUp: true,
+          canMoveDown: false,
+          getMovedRows: jest.fn((delta) => [{ moved: delta }]),
+          getRemovedRows: jest.fn(() => [{ removed: true }]),
+          ...selectionOverrides
+        })}
+        tiles={tiles}
+        onChangeTiles={jest.fn()}
+        onAssignRows={handlers.onAssignRows ?? jest.fn()}
+        onCreateTileAndAssign={jest.fn()}
+        projects={projects}
+        kinds={['image']}
+        onClose={handlers.onClose ?? jest.fn()}
+      />
+    );
+
+    it('moves the spot up (or down, when allowed), applying the rows and closing', () => {
+      const onAssignRows = jest.fn();
+      const onClose = jest.fn();
+      renderWith({}, { onAssignRows, onClose });
+
+      expect(screen.getByRole('button', { name: 'Move down' })).toBeDisabled();
+      fireEvent.click(screen.getByRole('button', { name: 'Move up' }));
+
+      expect(onAssignRows).toHaveBeenCalledWith([{ moved: -1 }]);
+      expect(onClose).toHaveBeenCalled();
+    });
+
+    it('moves the spot down', () => {
+      const onAssignRows = jest.fn();
+      renderWith({ canMoveUp: false, canMoveDown: true }, { onAssignRows });
+
+      expect(screen.getByRole('button', { name: 'Move up' })).toBeDisabled();
+      fireEvent.click(screen.getByRole('button', { name: 'Move down' }));
+      expect(onAssignRows).toHaveBeenCalledWith([{ moved: 1 }]);
+    });
+
+    it('removes the spot from the layout, from an empty slot too', () => {
+      const onAssignRows = jest.fn();
+      renderWith({ tileKey: null, isEmpty: true }, { onAssignRows });
+
+      expect(screen.getByText('Assign a tile')).toBeInTheDocument();
+      fireEvent.click(screen.getByRole('button', { name: 'Remove from layout' }));
+      expect(onAssignRows).toHaveBeenCalledWith([{ removed: true }]);
+    });
+
+    it('offers no spot actions when the selection can\'t provide them', () => {
+      renderWith({ getMovedRows: undefined, getRemovedRows: undefined });
+      expect(screen.queryByRole('button', { name: 'Remove from layout' })).not.toBeInTheDocument();
+    });
+  });
 });

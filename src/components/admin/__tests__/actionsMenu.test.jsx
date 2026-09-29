@@ -58,4 +58,10 @@ describe('ActionsMenu', () => {
     render(<ActionsMenu label="⋯" actions={[{ label: 'Edit', onClick: jest.fn() }]} />);
     expect(screen.getByRole('button', { name: '⋯' })).toBeInTheDocument();
   });
+
+  it('lines its list up with the button\'s left edge when asked to', () => {
+    const { container } = render(<ActionsMenu actions={[{ label: 'One', onClick: jest.fn() }]} align="left" />);
+    fireEvent.click(screen.getByRole('button', { name: 'Actions ▾' }));
+    expect(container.querySelector('.adminActionsMenu-list--alignLeft')).toBeInTheDocument();
+  });
 });

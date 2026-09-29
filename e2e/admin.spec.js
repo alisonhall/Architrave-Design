@@ -198,65 +198,78 @@ test.describe('layouts editor', () => {
     const variants = page.locator('.adminLayoutsEditor-variant');
     const defaultVariant = variants.first();
     const wideVariant = variants.nth(1);
+    const defaultRows = defaultVariant.locator('.adminLayoutPreview > .row');
+    const wideRows = wideVariant.locator('.adminLayoutPreview > .row');
 
-    const wideRowCountBefore = await wideVariant.locator('.adminLayoutTree > .adminLayoutTree-row').count();
+    const defaultRowCountBefore = await defaultRows.count();
+    const wideRowCountBefore = await wideRows.count();
     await defaultVariant.getByRole('button', { name: 'Add row' }).click();
-    const wideRowCountAfter = await wideVariant.locator('.adminLayoutTree > .adminLayoutTree-row').count();
-    expect(wideRowCountAfter).toBe(wideRowCountBefore);
+    await expect(defaultRows).toHaveCount(defaultRowCountBefore + 1);
+    await expect(wideRows).toHaveCount(wideRowCountBefore);
 
     await page.getByRole('button', { name: 'Review Changes' }).click();
     await expect(page.locator('.adminOutputPanel-fileHeader code')).toHaveText('static/layouts/new-homes.js');
   });
 
-  test('a row\'s actions are tucked behind one menu instead of separate buttons', async ({ page }) => {
+  test('each row in the preview has a toolbar whose actions are tucked behind one menu', async ({ page }) => {
     await openLayouts(page, 'newHomes');
 
-    const rowHeader = page.locator('.adminLayoutTree > .adminLayoutTree-row > .adminLayoutTree-rowHeader').first();
-    await expect(rowHeader.getByRole('button', { name: 'Move up' })).toHaveCount(0);
+    const toolbar = page.locator('.adminLayoutsEditor-variant').first().locator('.adminLayoutStructure-toolbar--row').first();
+    await expect(toolbar.getByRole('button', { name: 'Move up' })).toHaveCount(0);
 
-    await rowHeader.getByRole('button', { name: 'Actions ▾' }).click();
-    await expect(rowHeader.getByRole('menuitem', { name: 'Move up' })).toBeVisible();
-    await expect(rowHeader.getByRole('menuitem', { name: 'Move up' })).toBeDisabled();
-    await expect(rowHeader.getByRole('menuitem', { name: 'Remove row' })).toBeVisible();
+    await toolbar.getByRole('button', { name: 'Row ▾' }).click();
+    await expect(toolbar.getByRole('menuitem', { name: 'Move up' })).toBeVisible();
+    await expect(toolbar.getByRole('menuitem', { name: 'Move up' })).toBeDisabled();
+    await expect(toolbar.getByRole('menuitem', { name: 'Remove row' })).toBeVisible();
   });
 
-  test('collapsing a row hides its fields and columns behind a summary, and expanding restores them', async ({ page }) => {
-    await openLayouts(page, 'newHomes');
+  test('a nested row has its own toolbar, and moving it reorders it within its column', async ({ page }) => {
+    await openLayouts(page, 'lyttonParkManorDetail');
 
-    const firstRow = page.locator('.adminLayoutTree > .adminLayoutTree-row').first();
-    const rowHeader = firstRow.locator(':scope > .adminLayoutTree-rowHeader');
-    await expect(rowHeader.getByLabel('Height (px)', { exact: true })).toBeVisible();
+    const defaultVariant = page.locator('.adminLayoutsEditor-variant').first();
+    const nestedToolbars = defaultVariant.locator('.adminLayoutStructure-toolbar--nested');
+    await expect(nestedToolbars).toHaveCount(2);
 
-    await rowHeader.locator('.adminLayoutTree-collapseToggle').click();
-    await expect(rowHeader.getByLabel('Height (px)', { exact: true })).toHaveCount(0);
-    await expect(rowHeader.getByText(/^Row — \d+ columns?$/)).toBeVisible();
+    // Row 3's first column holds two nested rows (350px then 310px tall).
+    const nestedRows = defaultVariant.locator('.adminLayoutPreview > .row').nth(2).locator('.column .row');
+    const firstNestedIdBefore = await nestedRows.first().getAttribute('data-row-id');
 
-    await rowHeader.locator('.adminLayoutTree-collapseToggle').click();
-    await expect(rowHeader.getByLabel('Height (px)', { exact: true })).toBeVisible();
+    const firstNestedToolbar = defaultVariant.locator(`[data-row-toolbar="${firstNestedIdBefore}"]`);
+    await firstNestedToolbar.getByRole('button', { name: 'Nested row ▾' }).click();
+    await firstNestedToolbar.getByRole('menuitem', { name: 'Move down' }).click();
+
+    await expect(nestedRows.nth(1)).toHaveAttribute('data-row-id', firstNestedIdBefore);
   });
 
-  test('dragging a row by its handle onto another row reorders them', async ({ page }) => {
+  test('dragging a row by its toolbar handle onto another row reorders them', async ({ page }) => {
     await openLayouts(page, 'newHomes');
 
-    const rows = page.locator('.adminLayoutTree > .adminLayoutTree-row');
-    const firstRowSummaryBefore = await rows.first().locator(':scope > .adminLayoutTree-rowHeader input').first().inputValue();
+    const defaultVariant = page.locator('.adminLayoutsEditor-variant').first();
+    const rows = defaultVariant.locator('.adminLayoutPreview > .row');
+    const firstRowId = await rows.first().getAttribute('data-row-id');
 
-    const firstHandle = rows.first().locator(':scope > .adminLayoutTree-rowHeader .adminLayoutTree-dragHandle');
-    await firstHandle.dragTo(rows.nth(1));
+    const handle = defaultVariant.locator(`[data-row-toolbar="${firstRowId}"]`).getByRole('button', { name: 'Drag to reorder' });
+    await handle.scrollIntoViewIfNeeded();
+    await handle.hover();
+    await page.mouse.down();
+    const secondBox = await rows.nth(1).boundingBox();
+    await page.mouse.move(secondBox.x + secondBox.width / 2, secondBox.y + secondBox.height / 2, { steps: 10 });
+    await expect(defaultVariant.locator('.adminLayoutStructure-dropZone--over')).toHaveCount(1);
+    await page.mouse.up();
 
-    const secondRowHeightAfter = await rows.nth(1).locator(':scope > .adminLayoutTree-rowHeader input').first().inputValue();
-    expect(secondRowHeightAfter).toBe(firstRowSummaryBefore);
+    await expect(rows.nth(1)).toHaveAttribute('data-row-id', firstRowId);
   });
 
   test('duplicating a row inserts a copy right after it', async ({ page }) => {
     await openLayouts(page, 'newHomes');
 
-    const rows = page.locator('.adminLayoutTree > .adminLayoutTree-row');
+    const defaultVariant = page.locator('.adminLayoutsEditor-variant').first();
+    const rows = defaultVariant.locator('.adminLayoutPreview > .row');
     const rowCountBefore = await rows.count();
 
-    const firstRowHeader = rows.first().locator(':scope > .adminLayoutTree-rowHeader');
-    await firstRowHeader.getByRole('button', { name: 'Actions ▾' }).click();
-    await firstRowHeader.getByRole('menuitem', { name: 'Duplicate row' }).click();
+    const toolbar = defaultVariant.locator('.adminLayoutStructure-toolbar--row').first();
+    await toolbar.getByRole('button', { name: 'Row ▾' }).click();
+    await toolbar.getByRole('menuitem', { name: 'Duplicate row' }).click();
 
     await expect(rows).toHaveCount(rowCountBefore + 1);
   });
@@ -278,7 +291,7 @@ test.describe('layouts editor', () => {
   test('editing a detail page and reviewing changes surfaces its file', async ({ page }) => {
     await openLayouts(page, 'creditRiverManor');
 
-    await page.locator('.adminLayoutTree').getByRole('button', { name: 'Add row' }).click();
+    await page.locator('.adminLayoutsEditor-variant').getByRole('button', { name: 'Add row' }).click();
     await page.getByRole('button', { name: 'Review Changes' }).click();
 
     await expect(page.locator('.adminOutputPanel-fileHeader code')).toHaveText(
@@ -332,9 +345,19 @@ test.describe('layouts editor', () => {
 
     await expect(page.getByText('Editing: static/layouts/e2e-new-page-manor.js')).toBeVisible();
     await expect(page.getByRole('button', { name: 'Delete this new page' })).toBeVisible();
-    await expect(page.locator('.adminLayoutTree').getByRole('button', { name: 'Add row' })).toBeVisible();
+    await expect(page.getByText('This layout has no rows yet.')).toBeVisible();
 
-    await page.locator('.adminLayoutTree').getByRole('button', { name: 'Add row' }).click();
+    // Build the page's first row up from nothing, entirely in the preview.
+    await page.locator('.adminLayoutsEditor-variant').getByRole('button', { name: 'Add row' }).click();
+    const rowToolbar = page.locator('.adminLayoutStructure-toolbar--row');
+    await rowToolbar.getByRole('button', { name: 'Row ▾' }).click();
+    await rowToolbar.getByRole('menuitem', { name: 'Add column' }).click();
+    const columnToolbar = page.locator('.adminLayoutStructure-toolbar--column');
+    await columnToolbar.getByRole('button', { name: 'Column ▾' }).click();
+    await columnToolbar.getByRole('menuitem', { name: 'Add tile' }).click();
+    await page.getByText('Empty slot — click to choose a tile').click();
+    await page.getByRole('dialog').getByText(/^description —/).click();
+    await expect(page.locator('.adminLayoutPreview').getByText('E2E New Page Manor')).toBeVisible();
     await page.getByRole('button', { name: 'Review Changes' }).click();
 
     // Adding the project itself also changes static/app-constants.js, so it's expected
@@ -488,10 +511,14 @@ test.describe('layouts editor — image and placeholder tiles', () => {
 
     await expect(tileLibrary.locator('li', { hasText: 'placeholderTile — Placeholder' })).toBeVisible();
 
-    // Place it in the tree, and confirm the preview renders a plain blue filler for it.
-    await page.locator('.adminLayoutTree-column').first().getByRole('button', { name: 'Add tile' }).click();
-    const newPlacementSelect = page.locator('.adminLayoutTree-placement select').last();
-    await newPlacementSelect.selectOption('placeholderTile');
+    // Place it via a column's toolbar, and confirm the preview renders a plain blue filler for it.
+    const columnToolbar = page.locator('.adminLayoutStructure-toolbar--column').first();
+    await columnToolbar.getByRole('button', { name: 'Column ▾' }).click();
+    await columnToolbar.getByRole('menuitem', { name: 'Add tile' }).click();
+    const emptySlot = page.getByText('Empty slot — click to choose a tile');
+    await emptySlot.scrollIntoViewIfNeeded();
+    await emptySlot.click();
+    await page.getByRole('dialog').getByText(/^placeholderTile —/).click();
 
     await expect(page.locator('.adminLayoutPreview .textBlurbFiller')).toBeVisible();
   });
@@ -624,56 +651,132 @@ test.describe('layouts editor — drag-to-resize in preview', () => {
     await page.mouse.up();
   };
 
-  test('dragging a row\'s bottom edge in the preview resizes it, matching the tree editor\'s height field', async ({
-    page
-  }) => {
+  // Reads a row's/column's current size back through its toolbar's "Edit size…"/"Edit
+  // width…" form (the same inline form a click on a resize line opens), then closes it.
+  const readSize = async (page, toolbar, menuLabel, itemLabel, fieldLabel) => {
+    await toolbar.getByRole('button', { name: menuLabel }).click();
+    await toolbar.getByRole('menuitem', { name: itemLabel }).click();
+    const input = page.locator('.adminLayoutResize-edit').getByLabel(fieldLabel, { exact: true });
+    const value = await input.inputValue();
+    await input.press('Escape');
+    await expect(input).toHaveCount(0);
+    return value;
+  };
+
+  const firstRowId = (page) => page.locator('.adminLayoutPreview > .row').first().getAttribute('data-row-id');
+
+  // The row resize handle lying along a given row's bottom edge.
+  const handleAlongBottomOf = async (page, rowLocator) => {
+    const rowBox = await rowLocator.boundingBox();
+    const handles = page.locator('.adminLayoutResize-row');
+    const count = await handles.count();
+    for (let i = 0; i < count; i += 1) {
+      const box = await handles.nth(i).boundingBox();
+      if (box && Math.abs(box.y + box.height / 2 - (rowBox.y + rowBox.height)) < 3 && Math.abs(box.x - rowBox.x) < 3) {
+        return handles.nth(i);
+      }
+    }
+    throw new Error('No resize handle found along that row\'s bottom edge');
+  };
+
+  test('dragging a row\'s bottom edge in the preview resizes it', async ({ page }) => {
     await openLayouts(page, 'creditRiverManor');
 
-    const heightInput = page.locator('.adminLayoutTree > .adminLayoutTree-row').first()
-      .locator(':scope > .adminLayoutTree-rowHeader').getByLabel('Height (px)', { exact: true });
-    const heightBefore = await heightInput.inputValue();
+    const rowId = await firstRowId(page);
+    const toolbar = page.locator(`[data-row-toolbar="${rowId}"]`);
+    const heightBefore = await readSize(page, toolbar, 'Row ▾', 'Edit size…', 'Height (px)');
 
-    const handle = page.locator('.adminEditableLayoutPreview .adminLayoutResize-row').first();
+    const handle = await handleAlongBottomOf(page, page.locator(`[data-row-id="${rowId}"]`));
     await dragBy(page, handle, 0, 60);
 
-    await expect(heightInput).not.toHaveValue(heightBefore);
+    const heightAfter = await readSize(page, toolbar, 'Row ▾', 'Edit size…', 'Height (px)');
+    expect(heightAfter).not.toBe(heightBefore);
   });
 
-  test('dragging a column\'s right edge in the preview resizes it, matching the tree editor\'s width field', async ({
+  test('dragging a column\'s right edge in the preview resizes it', async ({ page }) => {
+    await openLayouts(page, 'lyttonParkManorDetail');
+
+    // The default layout's third row has two columns (46% / 54%); its first column's
+    // right edge is a real, draggable boundary.
+    const defaultVariant = page.locator('.adminLayoutsEditor-variant').first();
+    const columnId = await defaultVariant.locator('.adminLayoutPreview > .row').nth(2)
+      .locator(':scope > .column').first().getAttribute('data-column-id');
+    const toolbar = defaultVariant.locator(`[data-column-toolbar="${columnId}"]`);
+    expect(await readSize(page, toolbar, 'Column ▾', 'Edit width…', 'Width')).toBe('46%');
+
+    const handles = defaultVariant.locator('.adminLayoutResize-column');
+    const count = await handles.count();
+    let target = null;
+    for (let i = 0; i < count; i += 1) {
+      const box = await handles.nth(i).boundingBox();
+      const columnBox = await defaultVariant.locator(`[data-column-id="${columnId}"]`).boundingBox();
+      if (box && Math.abs(box.x + box.width / 2 - (columnBox.x + columnBox.width)) < 3 && Math.abs(box.y - columnBox.y) < 3) {
+        target = handles.nth(i);
+        break;
+      }
+    }
+    expect(target).not.toBeNull();
+    await dragBy(page, target, -40, 0);
+
+    expect(await readSize(page, toolbar, 'Column ▾', 'Edit width…', 'Width')).not.toBe('46%');
+  });
+
+  test('a nested row gets its own resize handle, which changes only that nested row', async ({ page }) => {
+    await openLayouts(page, 'lyttonParkManorDetail');
+
+    const defaultVariant = page.locator('.adminLayoutsEditor-variant').first();
+    const parentRow = defaultVariant.locator('.adminLayoutPreview > .row').nth(2);
+    const nestedRow = parentRow.locator('.column .row').first();
+
+    const target = await handleAlongBottomOf(page, nestedRow);
+    await dragBy(page, target, 0, -50);
+
+    await page.getByRole('button', { name: 'Review Changes' }).click();
+    const output = page.locator('.adminOutputPanel-file pre');
+    await expect(output).toContainText('height: 300');
+    // The parent row and the other nested row keep their own heights.
+    await expect(output).toContainText('height: 660');
+    await expect(output).toContainText('height: 310');
+  });
+
+  test('clicking (not dragging) a resize line opens an inline form, and typing an exact height and image height commits both', async ({
     page
   }) => {
     await openLayouts(page, 'creditRiverManor');
 
-    const widthInput = page.locator('.adminLayoutTree-column').first().getByLabel(/^Width/);
-    const widthBefore = await widthInput.inputValue();
-
-    const handle = page.locator('.adminEditableLayoutPreview .adminLayoutResize-column').first();
-    await dragBy(page, handle, -40, 0);
-
-    await expect(widthInput).not.toHaveValue(widthBefore);
-  });
-
-  test('clicking (not dragging) a resize line opens an inline input, and typing an exact height updates the tree editor', async ({
-    page
-  }) => {
-    await openLayouts(page, 'creditRiverManor');
-
-    const handle = page.locator('.adminEditableLayoutPreview .adminLayoutResize-row').first();
+    const handle = page.locator('.adminEditableLayoutPreview .adminLayoutResize-row').last();
+    await handle.scrollIntoViewIfNeeded();
     await handle.click();
 
-    const inlineInput = page.locator('.adminLayoutResize-edit').getByLabel('Height (px)');
-    await expect(inlineInput).toBeVisible();
+    const form = page.locator('.adminLayoutResize-edit');
+    const heightInput = form.getByLabel('Height (px)', { exact: true });
+    await expect(heightInput).toBeVisible();
 
-    await inlineInput.fill('555');
-    await inlineInput.press('Enter');
-    await expect(inlineInput).toHaveCount(0);
-
-    const heightInput = page.locator('.adminLayoutTree > .adminLayoutTree-row').first()
-      .locator(':scope > .adminLayoutTree-rowHeader').getByLabel('Height (px)', { exact: true });
-    await expect(heightInput).toHaveValue('555');
+    await heightInput.fill('555');
+    await form.getByLabel('Image height (px)', { exact: true }).fill('444');
+    await form.getByLabel('Image height (px)', { exact: true }).press('Enter');
+    await expect(heightInput).toHaveCount(0);
 
     await page.getByRole('button', { name: 'Review Changes' }).click();
     await expect(page.locator('.adminOutputPanel-fileHeader code')).toHaveText('static/layouts/credit-river-manor.js');
     await expect(page.locator('.adminOutputPanel-file pre')).toContainText('height: 555');
+    await expect(page.locator('.adminOutputPanel-file pre')).toContainText('imageHeight: 444');
+  });
+});
+
+test.describe('layouts editor — moving and removing a tile\'s spot from its popover', () => {
+  test('"Remove from layout" takes the clicked tile out of the preview, leaving the tile in the library', async ({ page }) => {
+    await unlock(page);
+    await page.getByRole('button', { name: 'Layouts' }).click();
+    await page.getByLabel('Page').selectOption('creditRiverManor');
+
+    const images = page.locator('.adminLayoutPreview img');
+    const countBefore = await images.count();
+    await images.first().click();
+    await page.getByRole('dialog').getByRole('button', { name: 'Remove from layout' }).click();
+
+    await expect(page.getByRole('dialog')).toHaveCount(0);
+    await expect(images).toHaveCount(countBefore - 1);
+    await expect(page.locator('.adminTileLibrary li', { hasText: '1 —' })).toBeVisible();
   });
 });

@@ -107,7 +107,7 @@ const renderTile = (tileKey, context) => {
 const renderPlacement = (placement, index, context) => {
   const key = placement.id ?? index;
   if (placement.nodeType === 'tileRef') {
-    const tile = renderTile(placement.tileKey, context);
+    const tile = renderTile(placement.tileKey, context) ?? (context.renderUnresolved ? context.renderUnresolved(placement) : null);
     return tile ? React.cloneElement(tile, { key }) : null;
   }
   if (placement.nodeType === 'empty') return <Item key={key} />;
@@ -148,13 +148,17 @@ const renderRow = (row, key, context) => (
  * @param {Object} param.projects
  * @param {string} param.introText - used by a listing page's shared-intro text tile
  * @param {Object} param.boundProject - used by a detail page's description tile
+ * @param {Function} [param.renderUnresolved] - admin preview only: called with a
+ * tileRef placement that resolves to nothing (no tile chosen yet, or its tile was
+ * deleted) to render a visible stand-in instead. Real committed data never has one, so
+ * production pages never pass this; without it, such a placement renders nothing.
  */
-export const renderLayoutTree = ({ rows, tiles, projects, introText, boundProject }) => {
+export const renderLayoutTree = ({ rows, tiles, projects, introText, boundProject, renderUnresolved }) => {
   const numbers = {};
   computeTileOrder(rows, tiles).forEach((tileKey, index) => {
     numbers[tileKey] = tiles[tileKey].num ?? index + 1;
   });
-  const context = { tiles, projects, introText, numbers, boundProject };
+  const context = { tiles, projects, introText, numbers, boundProject, renderUnresolved };
 
   return rows.map((row, index) => renderRow(row, row.id ?? index, context));
 };

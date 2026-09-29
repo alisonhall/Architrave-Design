@@ -82,12 +82,49 @@ describe('LayoutsEditor', () => {
     const wideSection = variants[1].closest('section');
 
     const addRowButtons = within(defaultSection).getAllByRole('button', { name: 'Add row' });
-    const wideRowCountBefore = wideSection.querySelectorAll('.adminLayoutTree-row').length;
+    const wideRowCountBefore = wideSection.querySelectorAll('.adminLayoutPreview > .row').length;
 
     fireEvent.click(addRowButtons[addRowButtons.length - 1]);
 
-    const wideRowCountAfter = wideSection.querySelectorAll('.adminLayoutTree-row').length;
+    const wideRowCountAfter = wideSection.querySelectorAll('.adminLayoutPreview > .row').length;
     expect(wideRowCountAfter).toBe(wideRowCountBefore);
+  });
+
+  it('"Add row" under the wide layout adds to the wide layout only', () => {
+    renderEditor();
+
+    const [defaultSection, wideSection] = screen.getAllByText(/layout \(/).map((heading) => heading.closest('section'));
+    const defaultCountBefore = defaultSection.querySelectorAll('.adminLayoutPreview > .row').length;
+    const wideCountBefore = wideSection.querySelectorAll('.adminLayoutPreview > .row').length;
+
+    fireEvent.click(within(wideSection).getByRole('button', { name: 'Add row' }));
+
+    expect(wideSection.querySelectorAll('.adminLayoutPreview > .row')).toHaveLength(wideCountBefore + 1);
+    expect(defaultSection.querySelectorAll('.adminLayoutPreview > .row')).toHaveLength(defaultCountBefore);
+  });
+
+  it('"Add row" on a single-layout detail page adds to its layout', () => {
+    renderEditor();
+    fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'creditRiverManor' } });
+
+    const section = screen.getByRole('heading', { name: 'Layout' }).closest('section');
+    const countBefore = section.querySelectorAll('.adminLayoutPreview > .row').length;
+    fireEvent.click(within(section).getByRole('button', { name: 'Add row' }));
+
+    expect(section.querySelectorAll('.adminLayoutPreview > .row')).toHaveLength(countBefore + 1);
+  });
+
+  it('editing a tile from a preview popover on each variant updates the shared tile library', () => {
+    renderEditor();
+    fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'kingswayGeorgianDetail' } });
+
+    const sections = screen.getAllByText(/layout \(/).map((heading) => heading.closest('section'));
+    sections.forEach((section, index) => {
+      fireEvent.click(section.querySelector('.adminLayoutPreview img'));
+      fireEvent.change(screen.getByLabelText(/Background position/), { target: { value: `${index}% ${index}%` } });
+      fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+      expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    });
   });
 
   it('keeps a per-page edit isolated from the other pages', () => {
@@ -95,15 +132,15 @@ describe('LayoutsEditor', () => {
 
     fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'newHomes' } });
     const defaultSection = screen.getAllByText(/layout \(/)[0].closest('section');
-    const rowCountBeforeAdd = defaultSection.querySelectorAll('.adminLayoutTree-row').length;
+    const rowCountBeforeAdd = defaultSection.querySelectorAll('.adminLayoutPreview > .row').length;
     fireEvent.click(within(defaultSection).getByRole('button', { name: 'Add row' }));
-    expect(defaultSection.querySelectorAll('.adminLayoutTree-row').length).toBe(rowCountBeforeAdd + 1);
+    expect(defaultSection.querySelectorAll('.adminLayoutPreview > .row').length).toBe(rowCountBeforeAdd + 1);
 
     fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'index' } });
     fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'newHomes' } });
 
     const defaultSectionAgain = screen.getAllByText(/layout \(/)[0].closest('section');
-    expect(defaultSectionAgain.querySelectorAll('.adminLayoutTree-row').length).toBe(rowCountBeforeAdd + 1);
+    expect(defaultSectionAgain.querySelectorAll('.adminLayoutPreview > .row').length).toBe(rowCountBeforeAdd + 1);
   });
 
   it('renders a single Layout section (no default/wide split) for a detail page', () => {
@@ -272,7 +309,7 @@ describe('LayoutsEditor — renaming a tile', () => {
     window.sessionStorage.clear();
   });
 
-  it('renaming a tile updates its placement select and keeps the preview intact', () => {
+  it('renaming a tile updates its placements and keeps the preview intact', () => {
     renderEditor();
 
     fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'creditRiverManor' } });
@@ -287,10 +324,11 @@ describe('LayoutsEditor — renaming a tile', () => {
     expect(screen.getByText(/^frontFacade —/)).toBeInTheDocument();
     expect(screen.queryByText(/^1 —/)).not.toBeInTheDocument();
 
-    // Its placement in the tree editor now points at the new key.
-    const placementSelects = document.querySelectorAll('.adminLayoutTree-placement select');
-    const matchingSelect = Array.from(placementSelects).find((select) => select.value === 'frontFacade');
-    expect(matchingSelect).toBeDefined();
+    // Its placement in the preview now points at the new key: clicking it opens the
+    // tile under its new name.
+    fireEvent.click(document.querySelector('.adminLayoutPreview img'));
+    expect(screen.getByText('Editing tile: frontFacade')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Cancel' }));
 
     // The preview still renders that tile's image — the rename didn't orphan its placement.
     expect(screen.getAllByRole('img').length).toBeGreaterThan(0);

@@ -131,4 +131,14 @@ describe('LayoutPreview', () => {
     expect(screen.queryByRole('img')).not.toBeInTheDocument();
     expect(screen.queryByRole('link')).not.toBeInTheDocument();
   });
+
+  it('shows an empty-slot stand-in for a placement with no tile yet, or whose tile was deleted', () => {
+    const rows = [row('r1', [column('c1', [tileRef('p1', ''), tileRef('p2', 'deletedTile')])])];
+    const { container } = render(<LayoutPreview rows={rows} tiles={{}} projects={projects} />);
+
+    // Each must still be a real child of its column — click-to-edit maps clicks by DOM child index.
+    const columnEl = container.querySelector('[data-column-id="c1"]');
+    expect(columnEl.children).toHaveLength(2);
+    expect(screen.getAllByText('Empty slot — click to choose a tile')).toHaveLength(2);
+  });
 });

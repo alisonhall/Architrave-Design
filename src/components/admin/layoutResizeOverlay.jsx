@@ -1,87 +1,82 @@
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+
+import { flattenLayout, updateRowById, updateRowColumns } from './layoutHelpers';
+import { useLayoutMeasurement } from './layoutDomMeasurement';
 
 // Movement below this (px) counts as a click, not a drag — lets the same handle serve
 // both "drag to resize" and "click for an exact number" without a separate button.
 const DRAG_THRESHOLD = 4;
 
-// Row/column resize is scoped to top-level rows and their direct columns — the same
-// boundary drag-and-drop and duplication already draw (see layoutTreeEditor.jsx): a
-// nested row (inside a column) has no resize handle of its own here either.
-export const setRowHeight = (rows, rowId, height) => rows.map((row) => (row.id === rowId ? { ...row, height } : row));
+// Two edges closer than this (px) are treated as the same line — see
+// visibleHandleBoxes below.
+const COINCIDENT_EDGE = 6;
 
-export const setColumnWidth = (rows, rowId, columnId, width) => rows.map((row) => {
-  if (row.id !== rowId) return row;
-  return { ...row, columns: row.columns.map((column) => (column.id === columnId ? { ...column, width } : column)) };
-});
+// All three work on a row/column at any depth, nested rows included (updateRowById /
+// updateRowColumns walk the whole tree).
+export const setRowHeight = (rows, rowId, height) => updateRowById(rows, rowId, (row) => ({ ...row, height }));
 
-// Reads the *real* rendered positions of each top-level row/column, the same way
-// layoutClickOverlay.jsx resolves clicks — a synthetic grid built from data alone has
-// no way to know a row's actual height (most have none set, sized by their image
-// content) or match it pixel-for-pixel; measuring the live DOM sidesteps that entirely.
-const measureRects = (containerEl, rows) => {
-  if (!containerEl) return { rowRects: [], columnRects: [] };
-  const containerRect = containerEl.getBoundingClientRect();
-  const rowRects = [];
-  const columnRects = [];
+export const setRowSize = (rows, rowId, { height, imageHeight }) => updateRowById(
+  rows,
+  rowId,
+  (row) => ({ ...row, height, imageHeight })
+);
 
-  rows.forEach((row) => {
-    const rowEl = containerEl.querySelector(`[data-row-id="${row.id}"]`);
-    if (!rowEl) return;
-    const rowRect = rowEl.getBoundingClientRect();
-    rowRects.push({
-      rowId: row.id,
-      top: rowRect.bottom - containerRect.top,
-      left: rowRect.left - containerRect.left,
-      width: rowRect.width,
-      height: rowRect.height
-    });
+export const setColumnWidth = (rows, rowId, columnId, width) => updateRowColumns(
+  rows,
+  rowId,
+  (columns) => columns.map((column) => (column.id === columnId ? { ...column, width } : column))
+);
 
-    row.columns.forEach((column) => {
-      const columnEl = containerEl.querySelector(`[data-column-id="${column.id}"]`);
-      if (!columnEl) return;
-      const columnRect = columnEl.getBoundingClientRect();
-      columnRects.push({
-        rowId: row.id,
-        columnId: column.id,
-        top: columnRect.top - containerRect.top,
-        left: columnRect.right - containerRect.left,
-        height: columnRect.height,
-        width: columnRect.width,
-        rowWidth: rowRect.width
-      });
-    });
+/**
+ * @description Picks which measured rows/columns get a resize handle. Every row gets
+ * one at its bottom edge and every column at its right edge — nested rows included —
+ * except where a nested row's edge lands on its parent's own edge (a nested row filling
+ * the rest of its column, or a nested row's last column ending where its parent column
+ * does): two handles stacked on the same line would leave only whichever renders last
+ * reachable, so the outer one keeps it. A nested row hidden that way can still be sized
+ * exactly from its structure toolbar's "Edit size…" (layoutStructureOverlay.jsx).
+ *
+ * Measured boxes whose ids aren't in `rows` any more (one stale frame right after
+ * switching to a different tree entirely, before the effect re-measures) are dropped
+ * rather than crashing on them.
+ *
+ * @param {Array} rows
+ * @param {Object} measurement - useLayoutMeasurement's { rowBoxes, columnBoxes }
+ * @returns {{ rows: Array, columns: Array }} the boxes to render handles for, innermost first
+ */
+export const visibleHandleBoxes = (rows, { rowBoxes, columnBoxes }) => {
+  const { rows: rowEntries, columns: columnEntries } = flattenLayout(rows);
+  const liveRowIds = new Set(rowEntries.map((entry) => entry.row.id));
+  const liveColumnIds = new Set(columnEntries.map((entry) => entry.column.id));
+  const rowBoxById = Object.fromEntries(rowBoxes.map((box) => [box.rowId, box]));
+  const columnBoxById = Object.fromEntries(columnBoxes.map((box) => [box.columnId, box]));
+  const bottom = (box) => box.top + box.height;
+  const right = (box) => box.left + box.width;
+
+  const visibleRows = rowBoxes.filter((box) => {
+    if (!liveRowIds.has(box.rowId)) return false;
+    const parent = box.parentRowId ? rowBoxById[box.parentRowId] : null;
+    return !parent || Math.abs(bottom(box) - bottom(parent)) >= COINCIDENT_EDGE;
   });
 
-  return { rowRects, columnRects };
-};
+  const visibleColumns = columnBoxes.filter((box) => {
+    if (!liveColumnIds.has(box.columnId)) return false;
+    const row = rowBoxById[box.rowId];
+    const parentColumn = row && row.parentColumnId ? columnBoxById[row.parentColumnId] : null;
+    return !parentColumn || Math.abs(right(box) - right(parentColumn)) >= COINCIDENT_EDGE;
+  });
 
-// Takes the container *element* itself, not a ref object — a mutable ref's `.current`
-// isn't safe to read here: React attaches a parent host div's ref only after processing
-// that div's children's own commit-phase work, so on first mount this component's own
-// layout effect would run before containerRef.current is populated, silently measuring
-// nothing until the next window resize. The caller (editableLayoutPreview.jsx) tracks the
-// container in state via a callback ref instead, so this effect re-runs, correctly, the
-// moment the real element becomes available.
-const useMeasuredRects = (containerEl, rows) => {
-  const [rects, setRects] = useState({ rowRects: [], columnRects: [] });
-
-  useLayoutEffect(() => {
-    const remeasure = () => setRects(measureRects(containerEl, rows));
-    remeasure();
-    window.addEventListener('resize', remeasure);
-    return () => window.removeEventListener('resize', remeasure);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [containerEl, rows]);
-
-  return rects;
+  // Outer handles render last, so wherever two do still overlap, the outer one is on top.
+  const innermostFirst = (a, b) => b.depth - a.depth;
+  return { rows: [...visibleRows].sort(innermostFirst), columns: [...visibleColumns].sort(innermostFirst) };
 };
 
 // Shared drag logic for both handle orientations: tracks pointer movement along one
 // axis, moves the handle's own line to follow the cursor (imperative — no re-render per
 // pointermove) for live feedback without resizing anything until release, then either
 // commits the final value (a real drag) or opens the number-input fallback (a click).
-const useDragHandle = ({ axis, initialValue, onCommit, onClickToEdit }) => {
+const useDragHandle = ({ axis, onCommit, onClickToEdit }) => {
   const lineRef = useRef(null);
   const [liveValue, setLiveValue] = useState(null);
 
@@ -153,16 +148,12 @@ RowResizeHandle.propTypes = {
 };
 
 const ColumnResizeHandle = ({ rect, initialWidth, onCommit, onClickToEdit }) => {
+  const toPercent = (delta) => Math.max(5, Math.min(100, ((initialWidth + delta) / rect.rowWidth) * 100));
   const { lineRef, liveValue, onPointerDown } = useDragHandle({
     axis: 'x',
-    onCommit: (delta) => {
-      const percent = Math.max(5, Math.min(100, ((initialWidth + delta) / rect.rowWidth) * 100));
-      onCommit(`${percent.toFixed(1)}%`);
-    },
+    onCommit: (delta) => onCommit(`${toPercent(delta).toFixed(1)}%`),
     onClickToEdit
   });
-
-  const liveWidth = liveValue !== null ? Math.max(5, Math.min(100, ((initialWidth + liveValue) / rect.rowWidth) * 100)) : null;
 
   return (
     <div
@@ -174,7 +165,7 @@ const ColumnResizeHandle = ({ rect, initialWidth, onCommit, onClickToEdit }) => 
       aria-orientation="vertical"
       aria-label="Drag to resize this column's width, or click to type an exact value"
     >
-      {liveWidth !== null && <span className="adminLayoutResize-label">{liveWidth.toFixed(0)}%</span>}
+      {liveValue !== null && <span className="adminLayoutResize-label">{toPercent(liveValue).toFixed(0)}%</span>}
     </div>
   );
 };
@@ -191,67 +182,100 @@ ColumnResizeHandle.propTypes = {
   onClickToEdit: PropTypes.func.isRequired
 };
 
-const EditPopup = ({ rect, label, value, onCommit, onCancel }) => {
-  const [draft, setDraft] = useState(value);
+/**
+ * @description The small inline form a click on a resize line (or a structure
+ * toolbar's "Edit size…") opens, for typing exact values a drag can't hit precisely.
+ * Enter in any field commits every field at once, as does moving focus out of the form
+ * entirely (not just between its own fields); Escape cancels.
+ */
+const EditPopup = ({ rect, fields, onCommit, onCancel }) => {
+  const [draft, setDraft] = useState(() => Object.fromEntries(fields.map((field) => [field.name, field.value])));
 
   const commit = () => onCommit(draft);
 
   return (
-    <div className="adminLayoutResize-edit" style={{ top: rect.top, left: rect.left }}>
-      <label>
-        {label}
-        <input
-          type="text"
-          autoFocus
-          value={draft}
-          onChange={(e) => setDraft(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') commit();
-            if (e.key === 'Escape') onCancel();
-          }}
-          onBlur={commit}
-        />
-      </label>
+    <div
+      className="adminLayoutResize-edit"
+      style={{ top: rect.top, left: rect.left }}
+      onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) commit(); }}
+    >
+      {fields.map((field, index) => (
+        <label key={field.name}>
+          {field.label}
+          <input
+            type="text"
+            inputMode={field.numeric ? 'numeric' : undefined}
+            // eslint-disable-next-line jsx-a11y/no-autofocus
+            autoFocus={index === 0}
+            value={draft[field.name]}
+            onChange={(e) => setDraft({ ...draft, [field.name]: e.target.value })}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') commit();
+              if (e.key === 'Escape') onCancel();
+            }}
+          />
+        </label>
+      ))}
     </div>
   );
 };
 
 EditPopup.propTypes = {
   rect: PropTypes.shape({ top: PropTypes.number, left: PropTypes.number }).isRequired,
-  label: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  fields: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+    numeric: PropTypes.bool
+  })).isRequired,
   onCommit: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired
 };
 
+const pxOrUndefined = (value) => {
+  if (value.trim() === '') return undefined;
+  const number = Number(value);
+  return Number.isNaN(number) ? undefined : number;
+};
+
+// Where the inline form opens for a given measured box: just below a row's bottom
+// edge, or at a column's right edge.
+export const editAnchorFor = (type, box) => (
+  type === 'row'
+    ? { top: box.top + box.height, left: box.left }
+    : { top: box.top, left: box.left + box.width }
+);
+
 /**
- * @description Drag lines overlaid on the live preview for resizing a top-level row's
- * height or one of its direct columns' width — an alternative to the number/text inputs
- * in layoutTreeEditor.jsx (which stay in place; this doesn't replace them, just offers a
- * faster, more direct way to do the same edit). Clicking a line instead of dragging it
- * opens a small inline input for typing an exact value, since a drag alone can't be
+ * @description Drag lines overlaid on the live preview for resizing any row's height
+ * (top-level or nested) or any column's width — the preview's only way to change either
+ * now that the side-panel tree editor is gone, alongside the "Edit size…" item in each
+ * row/column's structure toolbar (layoutStructureOverlay.jsx), which opens this same
+ * inline form. Clicking a line instead of dragging it opens that form too, for typing an
+ * exact value (a row's form also holds its "Image height"), since a drag alone can't be
  * precise.
+ *
+ * The open form can be controlled from outside (`editing`/`onEditingChange`) so the
+ * structure toolbar can open it too; without those props it manages itself.
  *
  * @param {Object} param
  * @param {Element} param.containerEl - the element renderLayoutTree's output is inside
  * @param {Array} param.rows
  * @param {Function} param.onChangeRows
+ * @param {Object} [param.editing] - { type: 'row'|'column', rowId, columnId?, rect } or null
+ * @param {Function} [param.onEditingChange]
  */
-const LayoutResizeOverlay = ({ containerEl = null, rows, onChangeRows }) => {
-  const { rowRects, columnRects } = useMeasuredRects(containerEl, rows);
-  const [editing, setEditing] = useState(null);
+const LayoutResizeOverlay = ({ containerEl = null, rows, onChangeRows, editing: controlledEditing, onEditingChange }) => {
+  const measurement = useLayoutMeasurement(containerEl, rows);
+  const [ownEditing, setOwnEditing] = useState(null);
+  const isControlled = onEditingChange !== undefined;
+  const editing = isControlled ? controlledEditing : ownEditing;
+  const setEditing = isControlled ? onEditingChange : setOwnEditing;
 
-  const rowById = Object.fromEntries(rows.map((row) => [row.id, row]));
+  const { rows: rowBoxes, columns: columnBoxes } = visibleHandleBoxes(rows, measurement);
+  const { rows: rowEntries } = flattenLayout(rows);
+  const rowById = Object.fromEntries(rowEntries.map((entry) => [entry.row.id, entry.row]));
 
-  // Measuring happens in an effect that fires *after* render, so for one frame after
-  // `rows` changes to a different tree entirely (switching pages, e.g.) the previous
-  // page's rects can still be around, pointing at row/column ids this page doesn't
-  // have — filtering them out here avoids crashing on that one stale frame rather than
-  // trying to keep the effect perfectly synchronous with every possible prop change.
-  const validRowRects = rowRects.filter((rect) => rowById[rect.rowId]);
-  const validColumnRects = columnRects.filter(
-    (rect) => rowById[rect.rowId]?.columns.some((column) => column.id === rect.columnId)
-  );
   const editingRow = editing ? rowById[editing.rowId] : null;
   const editingColumn = editing?.type === 'column' && editingRow
     ? editingRow.columns.find((column) => column.id === editing.columnId)
@@ -259,32 +283,42 @@ const LayoutResizeOverlay = ({ containerEl = null, rows, onChangeRows }) => {
 
   return (
     <div className="adminLayoutResizeOverlay">
-      {validRowRects.map((rect) => (
+      {rowBoxes.map((box) => (
         <RowResizeHandle
-          key={rect.rowId}
-          rect={rect}
-          initialHeight={rowById[rect.rowId].height ?? rect.height}
-          onCommit={(height) => onChangeRows(setRowHeight(rows, rect.rowId, height))}
-          onClickToEdit={() => setEditing({ type: 'row', rowId: rect.rowId, rect })}
+          key={box.rowId}
+          rect={{ ...editAnchorFor('row', box), width: box.width }}
+          initialHeight={rowById[box.rowId].height ?? box.height}
+          onCommit={(height) => onChangeRows(setRowHeight(rows, box.rowId, height))}
+          onClickToEdit={() => setEditing({ type: 'row', rowId: box.rowId, rect: editAnchorFor('row', box) })}
         />
       ))}
-      {validColumnRects.map((rect) => (
+      {columnBoxes.map((box) => (
         <ColumnResizeHandle
-          key={rect.columnId}
-          rect={rect}
-          initialWidth={rect.width}
-          onCommit={(width) => onChangeRows(setColumnWidth(rows, rect.rowId, rect.columnId, width))}
-          onClickToEdit={() => setEditing({ type: 'column', rowId: rect.rowId, columnId: rect.columnId, rect })}
+          key={box.columnId}
+          rect={{ ...editAnchorFor('column', box), height: box.height, rowWidth: box.rowWidth }}
+          initialWidth={box.width}
+          onCommit={(width) => onChangeRows(setColumnWidth(rows, box.rowId, box.columnId, width))}
+          onClickToEdit={() => setEditing({
+            type: 'column',
+            rowId: box.rowId,
+            columnId: box.columnId,
+            rect: editAnchorFor('column', box)
+          })}
         />
       ))}
       {editing && editing.type === 'row' && editingRow && (
         <EditPopup
+          key={`row-${editing.rowId}`}
           rect={editing.rect}
-          label="Height (px)"
-          value={String(editingRow.height ?? '')}
-          onCommit={(value) => {
-            const height = value.trim() === '' ? undefined : Number(value);
-            onChangeRows(setRowHeight(rows, editing.rowId, Number.isNaN(height) ? undefined : height));
+          fields={[
+            { name: 'height', label: 'Height (px)', value: String(editingRow.height ?? ''), numeric: true },
+            { name: 'imageHeight', label: 'Image height (px)', value: String(editingRow.imageHeight ?? ''), numeric: true }
+          ]}
+          onCommit={(values) => {
+            onChangeRows(setRowSize(rows, editing.rowId, {
+              height: pxOrUndefined(values.height),
+              imageHeight: pxOrUndefined(values.imageHeight)
+            }));
             setEditing(null);
           }}
           onCancel={() => setEditing(null)}
@@ -292,11 +326,11 @@ const LayoutResizeOverlay = ({ containerEl = null, rows, onChangeRows }) => {
       )}
       {editing && editing.type === 'column' && editingColumn && (
         <EditPopup
+          key={`column-${editing.columnId}`}
           rect={editing.rect}
-          label="Width"
-          value={editingColumn.width || ''}
-          onCommit={(value) => {
-            onChangeRows(setColumnWidth(rows, editing.rowId, editing.columnId, value.trim() || undefined));
+          fields={[{ name: 'width', label: 'Width', value: editingColumn.width || '' }]}
+          onCommit={(values) => {
+            onChangeRows(setColumnWidth(rows, editing.rowId, editing.columnId, values.width.trim() || undefined));
             setEditing(null);
           }}
           onCancel={() => setEditing(null)}
@@ -309,7 +343,14 @@ const LayoutResizeOverlay = ({ containerEl = null, rows, onChangeRows }) => {
 LayoutResizeOverlay.propTypes = {
   containerEl: PropTypes.instanceOf(typeof Element !== 'undefined' ? Element : Object),
   rows: PropTypes.array.isRequired,
-  onChangeRows: PropTypes.func.isRequired
+  onChangeRows: PropTypes.func.isRequired,
+  editing: PropTypes.shape({
+    type: PropTypes.oneOf(['row', 'column']).isRequired,
+    rowId: PropTypes.string.isRequired,
+    columnId: PropTypes.string,
+    rect: PropTypes.shape({ top: PropTypes.number, left: PropTypes.number }).isRequired
+  }),
+  onEditingChange: PropTypes.func
 };
 
 export default LayoutResizeOverlay;

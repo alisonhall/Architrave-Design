@@ -4,7 +4,6 @@ import { useDraftSection } from './draftContext';
 import { LAYOUT_PAGE_CONFIGS } from './seedData';
 import { makeBlankDetailLayout, renameTileKeyInLayoutData } from './layoutHelpers';
 import TileLibraryEditor from './tileLibraryEditor';
-import LayoutTreeEditor from './layoutTreeEditor';
 import EditableLayoutPreview from './editableLayoutPreview';
 
 const LISTING_TILE_KINDS = ['project', 'filler', 'image', 'text'];
@@ -14,7 +13,8 @@ const FOLDER_LABELS = { 'new-homes': 'New Homes', 'renovations-additions': 'Reno
 
 /**
  * @description The Layouts section of the admin tool: pick a portfolio page, manage
- * its reusable tiles, and edit its layout tree(s) with a live preview alongside each.
+ * its reusable tiles, and edit its layout tree(s) directly on a live preview of each
+ * (see editableLayoutPreview.jsx).
  * Two independent things vary per page: whether it's bound to one project (a "detail"
  * page — tile kinds image/description/embed/placeholder, a bound-project description
  * tile) or shares projects broadly (a "listing" page — tile kinds
@@ -142,71 +142,50 @@ const LayoutsEditor = () => {
             <>
               <section className="adminLayoutsEditor-variant">
                 <h3>Default layout (narrow screens)</h3>
-                <div className="adminLayoutsEditor-columns">
-                  <LayoutTreeEditor
-                    rows={pageLayout.defaultLayout}
-                    onChange={(rows) => updatePageLayout({ defaultLayout: rows })}
-                    tiles={pageLayout.tiles}
-                  />
-                  <EditableLayoutPreview
-                    rows={pageLayout.defaultLayout}
-                    tiles={pageLayout.tiles}
-                    projects={projects}
-                    introText={introText}
-                    boundProject={boundProject}
-                    kinds={isDetailPage ? DETAIL_TILE_KINDS : LISTING_TILE_KINDS}
-                    onChangeRows={(rows) => updatePageLayout({ defaultLayout: rows })}
-                    onChangeTiles={(tiles) => updatePageLayout({ tiles })}
-                    onCreateTileAndAssign={createTileAndAssign('defaultLayout')}
-                    onRenameTile={renameTileKey}
-                  />
-                </div>
+                <EditableLayoutPreview
+                  rows={pageLayout.defaultLayout}
+                  tiles={pageLayout.tiles}
+                  projects={projects}
+                  introText={introText}
+                  boundProject={boundProject}
+                  kinds={isDetailPage ? DETAIL_TILE_KINDS : LISTING_TILE_KINDS}
+                  onChangeRows={(rows) => updatePageLayout({ defaultLayout: rows })}
+                  onChangeTiles={(tiles) => updatePageLayout({ tiles })}
+                  onCreateTileAndAssign={createTileAndAssign('defaultLayout')}
+                  onRenameTile={renameTileKey}
+                />
               </section>
 
               <section className="adminLayoutsEditor-variant">
                 <h3>Wide layout (wide screens)</h3>
-                <div className="adminLayoutsEditor-columns">
-                  <LayoutTreeEditor
-                    rows={pageLayout.wideLayout}
-                    onChange={(rows) => updatePageLayout({ wideLayout: rows })}
-                    tiles={pageLayout.tiles}
-                  />
-                  <EditableLayoutPreview
-                    rows={pageLayout.wideLayout}
-                    tiles={pageLayout.tiles}
-                    projects={projects}
-                    introText={introText}
-                    boundProject={boundProject}
-                    kinds={isDetailPage ? DETAIL_TILE_KINDS : LISTING_TILE_KINDS}
-                    onChangeRows={(rows) => updatePageLayout({ wideLayout: rows })}
-                    onChangeTiles={(tiles) => updatePageLayout({ tiles })}
-                    onCreateTileAndAssign={createTileAndAssign('wideLayout')}
-                    onRenameTile={renameTileKey}
-                  />
-                </div>
+                <EditableLayoutPreview
+                  rows={pageLayout.wideLayout}
+                  tiles={pageLayout.tiles}
+                  projects={projects}
+                  introText={introText}
+                  boundProject={boundProject}
+                  kinds={isDetailPage ? DETAIL_TILE_KINDS : LISTING_TILE_KINDS}
+                  onChangeRows={(rows) => updatePageLayout({ wideLayout: rows })}
+                  onChangeTiles={(tiles) => updatePageLayout({ tiles })}
+                  onCreateTileAndAssign={createTileAndAssign('wideLayout')}
+                  onRenameTile={renameTileKey}
+                />
               </section>
             </>
           ) : (
             <section className="adminLayoutsEditor-variant">
               <h3>Layout</h3>
-              <div className="adminLayoutsEditor-columns">
-                <LayoutTreeEditor
-                  rows={pageLayout.layout}
-                  onChange={(rows) => updatePageLayout({ layout: rows })}
-                  tiles={pageLayout.tiles}
-                />
-                <EditableLayoutPreview
-                  rows={pageLayout.layout}
-                  tiles={pageLayout.tiles}
-                  projects={projects}
-                  boundProject={boundProject}
-                  kinds={isDetailPage ? DETAIL_TILE_KINDS : LISTING_TILE_KINDS}
-                  onChangeRows={(rows) => updatePageLayout({ layout: rows })}
-                  onChangeTiles={(tiles) => updatePageLayout({ tiles })}
-                  onCreateTileAndAssign={createTileAndAssign('layout')}
-                  onRenameTile={renameTileKey}
-                />
-              </div>
+              <EditableLayoutPreview
+                rows={pageLayout.layout}
+                tiles={pageLayout.tiles}
+                projects={projects}
+                boundProject={boundProject}
+                kinds={isDetailPage ? DETAIL_TILE_KINDS : LISTING_TILE_KINDS}
+                onChangeRows={(rows) => updatePageLayout({ layout: rows })}
+                onChangeTiles={(tiles) => updatePageLayout({ tiles })}
+                onCreateTileAndAssign={createTileAndAssign('layout')}
+                onRenameTile={renameTileKey}
+              />
             </section>
           )}
         </>

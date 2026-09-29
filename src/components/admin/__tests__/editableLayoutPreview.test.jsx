@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, within } from '@testing-library/react';
 
 import EditableLayoutPreview from '../editableLayoutPreview';
 
@@ -189,5 +189,84 @@ describe('EditableLayoutPreview', () => {
 
     fireEvent.click(container);
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  });
+
+  describe('structure editing, directly on the preview', () => {
+    const tiles = { a: { kind: 'image', imageUrl: 'https://example.com/a.jpg' } };
+    const renderPreview = (rows, onChangeRows = jest.fn(), tileMap = tiles) => render(
+      <EditableLayoutPreview
+        rows={rows}
+        tiles={tileMap}
+        projects={projects}
+        kinds={['image']}
+        onChangeRows={onChangeRows}
+        onChangeTiles={jest.fn()}
+        onCreateTileAndAssign={jest.fn()}
+      />
+    );
+
+    it('"Add row" appends a blank row', () => {
+      const onChangeRows = jest.fn();
+      const rows = [row({ id: 'row1' }, [column('col1', [tileRef('a')])])];
+      renderPreview(rows, onChangeRows);
+
+      fireEvent.click(screen.getByRole('button', { name: 'Add row' }));
+
+      const next = onChangeRows.mock.calls[0][0];
+      expect(next).toHaveLength(2);
+      expect(next[0]).toBe(rows[0]);
+      expect(next[1].columns).toEqual([]);
+    });
+
+    it('says so when a layout has no rows yet', () => {
+      renderPreview([]);
+      expect(screen.getByText('This layout has no rows yet.')).toBeInTheDocument();
+    });
+
+    it('shows a structure toolbar on each row and column', () => {
+      const { container } = renderPreview([row({ id: 'row1' }, [column('col1', [tileRef('a')])])]);
+
+      expect(within(container.querySelector('[data-row-toolbar="row1"]')).getByRole('button', { name: 'Row ▾' })).toBeInTheDocument();
+      expect(within(container.querySelector('[data-column-toolbar="col1"]')).getByRole('button', { name: 'Column ▾' })).toBeInTheDocument();
+    });
+
+    it('a row toolbar\'s "Edit size…" opens the size form, which commits to the row', () => {
+      const onChangeRows = jest.fn();
+      const { container } = renderPreview([row({ id: 'row1', height: 300 }, [column('col1', [tileRef('a')])])], onChangeRows);
+
+      const toolbar = container.querySelector('[data-row-toolbar="row1"]');
+      fireEvent.click(within(toolbar).getByRole('button', { name: 'Row ▾' }));
+      fireEvent.click(within(toolbar).getByRole('menuitem', { name: 'Edit size…' }));
+
+      const heightInput = screen.getByLabelText('Height (px)');
+      expect(heightInput).toHaveValue('300');
+      fireEvent.change(heightInput, { target: { value: '420' } });
+      fireEvent.keyDown(heightInput, { key: 'Enter' });
+
+      expect(onChangeRows.mock.calls[0][0][0].height).toBe(420);
+      expect(screen.queryByLabelText('Height (px)')).not.toBeInTheDocument();
+    });
+
+    it('clicking a spot whose tile was deleted offers to assign one, rather than editing a tile that isn\'t there', () => {
+      const onChangeRows = jest.fn();
+      renderPreview([row({ id: 'row1' }, [column('col1', [tileRef('gone')])])], onChangeRows);
+
+      fireEvent.click(screen.getByText('Empty slot — click to choose a tile'));
+
+      expect(screen.getByText('Assign a tile')).toBeInTheDocument();
+      fireEvent.click(screen.getByText(/^a —/));
+      expect(onChangeRows.mock.calls[0][0][0].columns[0].children[0].tileKey).toBe('a');
+    });
+
+    it('removing a spot from its popover takes it out of the layout', () => {
+      const onChangeRows = jest.fn();
+      renderPreview([row({ id: 'row1' }, [column('col1', [tileRef('a'), { nodeType: 'empty' }])])], onChangeRows);
+
+      fireEvent.click(screen.getByRole('img'));
+      fireEvent.click(screen.getByRole('button', { name: 'Remove from layout' }));
+
+      expect(onChangeRows.mock.calls[0][0][0].columns[0].children).toEqual([{ nodeType: 'empty' }]);
+      expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    });
   });
 });

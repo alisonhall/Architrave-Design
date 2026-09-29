@@ -16,7 +16,16 @@ import {
   makeBlankDetailLayout,
   renameTileKeyInLayoutData,
   cloneRowWithNewIds,
-  cloneColumnWithNewIds
+  cloneColumnWithNewIds,
+  clonePlacementWithNewIds,
+  updateRowById,
+  updateColumnById,
+  flattenLayout,
+  findRowById,
+  findColumnById,
+  updateRowContainer,
+  updateRowColumns,
+  updateColumnChildren
 } from '../layoutHelpers';
 
 describe('array helpers', () => {
@@ -393,5 +402,151 @@ describe('renameTileKeyInLayoutData', () => {
 
     expect(updates.layout[0].columns[0].children[0]).toEqual({ nodeType: 'empty' });
     expect(updates.layout[0].columns[0].children[1].tileKey).toBe('unrelatedKey');
+  });
+});
+
+describe('tree walking', () => {
+  // row1
+  //   col1: [tile a, nested row2 [col2: [tile b]], tile c]
+  //   col3: []
+  // row3
+  //   col4: [tile d]
+  const tree = () => [
+    {
+      id: 'row1',
+      columns: [
+        {
+          id: 'col1',
+          children: [
+            { id: 'p1', nodeType: 'tileRef', tileKey: 'a' },
+            { id: 'p2', nodeType: 'row', row: { id: 'row2', columns: [{ id: 'col2', children: [{ id: 'p3', nodeType: 'tileRef', tileKey: 'b' }] }] } },
+            { id: 'p4', nodeType: 'tileRef', tileKey: 'c' }
+          ]
+        },
+        { id: 'col3', children: [] }
+      ]
+    },
+    { id: 'row3', columns: [{ id: 'col4', children: [{ id: 'p5', nodeType: 'tileRef', tileKey: 'd' }] }] }
+  ];
+
+  describe('flattenLayout', () => {
+    it('lists every row and column in document order, tagged with its position', () => {
+      const { rows, columns } = flattenLayout(tree());
+
+      expect(rows.map((entry) => entry.row.id)).toEqual(['row1', 'row2', 'row3']);
+      expect(rows[0]).toMatchObject({ depth: 0, topLevel: true, index: 0, siblingCount: 2, parentColumnId: null, parentRowId: null });
+      expect(rows[1]).toMatchObject({ depth: 1, topLevel: false, index: 1, siblingCount: 3, parentColumnId: 'col1', parentRowId: 'row1' });
+      expect(rows[2]).toMatchObject({ depth: 0, topLevel: true, index: 1 });
+
+      expect(columns.map((entry) => entry.column.id)).toEqual(['col1', 'col2', 'col3', 'col4']);
+      expect(columns[1]).toMatchObject({ rowId: 'row2', depth: 1, index: 0, siblingCount: 1 });
+      expect(columns[2]).toMatchObject({ rowId: 'row1', depth: 0, index: 1, siblingCount: 2 });
+    });
+
+    it('returns empty lists for an empty tree', () => {
+      expect(flattenLayout([])).toEqual({ rows: [], columns: [] });
+    });
+  });
+
+  describe('findRowById / findColumnById', () => {
+    it('finds top-level and nested nodes', () => {
+      expect(findRowById(tree(), 'row2').columns[0].id).toBe('col2');
+      expect(findRowById(tree(), 'row3').id).toBe('row3');
+      expect(findColumnById(tree(), 'col2').children[0].tileKey).toBe('b');
+      expect(findColumnById(tree(), 'col4').id).toBe('col4');
+    });
+
+    it('returns null for an unknown id', () => {
+      expect(findRowById(tree(), 'nope')).toBeNull();
+      expect(findColumnById(tree(), 'nope')).toBeNull();
+    });
+  });
+
+  describe('updateRowById', () => {
+    it('updates a nested row, leaving unrelated branches as the same references', () => {
+      const rows = tree();
+      const next = updateRowById(rows, 'row2', (row) => ({ ...row, height: 99 }));
+
+      expect(findRowById(next, 'row2').height).toBe(99);
+      expect(next[1]).toBe(rows[1]);
+      expect(next[0].columns[1]).toBe(rows[0].columns[1]);
+      expect(next[0].columns[0].children[0]).toBe(rows[0].columns[0].children[0]);
+    });
+
+    it('updates a top-level row', () => {
+      const next = updateRowById(tree(), 'row3', (row) => ({ ...row, height: 10 }));
+      expect(next[1].height).toBe(10);
+    });
+
+    it('returns the very same array when no row matches', () => {
+      const rows = tree();
+      expect(updateRowById(rows, 'nope', (row) => ({ ...row, height: 1 }))).toBe(rows);
+    });
+  });
+
+  describe('updateColumnById', () => {
+    it('updates a nested column, leaving unrelated branches as the same references', () => {
+      const rows = tree();
+      const next = updateColumnById(rows, 'col2', (column) => ({ ...column, width: '50%' }));
+
+      expect(findColumnById(next, 'col2').width).toBe('50%');
+      expect(next[1]).toBe(rows[1]);
+    });
+
+    it('returns the very same array when no column matches', () => {
+      const rows = tree();
+      expect(updateColumnById(rows, 'nope', (column) => ({ ...column, width: '1%' }))).toBe(rows);
+    });
+  });
+
+  describe('updateRowColumns / updateColumnChildren', () => {
+    it('updateRowColumns applies an op to a nested row\'s columns', () => {
+      const next = updateRowColumns(tree(), 'row2', (columns) => [...columns, { id: 'new', children: [] }]);
+      expect(findRowById(next, 'row2').columns.map((column) => column.id)).toEqual(['col2', 'new']);
+    });
+
+    it('updateColumnChildren applies an op to a column\'s children', () => {
+      const next = updateColumnChildren(tree(), 'col3', (children) => [...children, { id: 'x', nodeType: 'empty' }]);
+      expect(findColumnById(next, 'col3').children).toEqual([{ id: 'x', nodeType: 'empty' }]);
+    });
+  });
+
+  describe('updateRowContainer', () => {
+    it('applies the op to the top-level rows array for a top-level row', () => {
+      const next = updateRowContainer(tree(), 'row3', (list, index) => removeAt(list, index));
+      expect(next.map((row) => row.id)).toEqual(['row1']);
+    });
+
+    it('applies the op to the parent column\'s children for a nested row', () => {
+      const next = updateRowContainer(tree(), 'row2', (list, index) => moveAt(list, index, 1));
+      expect(findColumnById(next, 'col1').children.map((child) => child.id)).toEqual(['p1', 'p4', 'p2']);
+    });
+
+    it('supplies a clone function matching the level — a whole row at the top, a placement when nested', () => {
+      const duplicate = (list, index, clone) => insertAt(list, index + 1, clone(list[index]));
+
+      const topLevel = updateRowContainer(tree(), 'row1', duplicate);
+      expect(topLevel).toHaveLength(3);
+      expect(topLevel[1].id).not.toBe('row1');
+      expect(topLevel[1].columns[0].children[1].row.columns[0].children[0].tileKey).toBe('b');
+
+      const nested = updateRowContainer(tree(), 'row2', duplicate);
+      const children = findColumnById(nested, 'col1').children;
+      expect(children).toHaveLength(4);
+      expect(children[2].nodeType).toBe('row');
+      expect(children[2].id).not.toBe('p2');
+      expect(children[2].row.id).not.toBe('row2');
+    });
+
+    it('returns rows unchanged for an unknown row id', () => {
+      const rows = tree();
+      expect(updateRowContainer(rows, 'nope', (list) => [])).toBe(rows);
+    });
+  });
+
+  it('clonePlacementWithNewIds gives a tile placement a fresh id and keeps its tile', () => {
+    const clone = clonePlacementWithNewIds({ id: 'p1', nodeType: 'tileRef', tileKey: 'a' });
+    expect(clone.id).not.toBe('p1');
+    expect(clone.tileKey).toBe('a');
   });
 });

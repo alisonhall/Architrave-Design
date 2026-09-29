@@ -133,3 +133,20 @@ describe('computeTileOrder', () => {
     expect(computeTileOrder(rows, tiles)).toEqual(['a']);
   });
 });
+
+describe('renderLayoutTree — unresolved placements', () => {
+  const rows = [row({}, [column({}, [tileRef('missing'), tileRef('')])])];
+
+  it('renders nothing for a tile that doesn\'t resolve, by default (the live site)', () => {
+    const { container } = render(<div>{renderLayoutTree({ rows, tiles: {}, projects })}</div>);
+    expect(container.querySelector('.column')).toBeEmptyDOMElement();
+  });
+
+  it('renders renderUnresolved\'s stand-in for each one when given', () => {
+    const renderUnresolved = jest.fn((placement) => <span>unresolved {placement.tileKey || '(none)'}</span>);
+    render(<div>{renderLayoutTree({ rows, tiles: {}, projects, renderUnresolved })}</div>);
+
+    expect(screen.getByText('unresolved missing')).toBeInTheDocument();
+    expect(screen.getByText('unresolved (none)')).toBeInTheDocument();
+  });
+});

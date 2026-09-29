@@ -200,6 +200,34 @@ EditTile.propTypes = {
 
 EditTile.defaultProps = { onRenameTile: null };
 
+// Acts on this one spot in the layout rather than on the tile's shared definition:
+// moving it among its column's other children, or taking it out of the layout
+// altogether (the tile itself stays in the library, as do its other placements).
+const PlacementActions = ({ selection, onApplyRows }) => (
+  <div className="adminTileEditPopover-placement">
+    <p className="adminProjectForm-hint">This spot in the layout:</p>
+    <div className="adminProjectForm-actions">
+      <button type="button" disabled={!selection.canMoveUp} onClick={() => onApplyRows(selection.getMovedRows(-1))}>
+        Move up
+      </button>
+      <button type="button" disabled={!selection.canMoveDown} onClick={() => onApplyRows(selection.getMovedRows(1))}>
+        Move down
+      </button>
+      <button type="button" onClick={() => onApplyRows(selection.getRemovedRows())}>Remove from layout</button>
+    </div>
+  </div>
+);
+
+PlacementActions.propTypes = {
+  selection: PropTypes.shape({
+    canMoveUp: PropTypes.bool,
+    canMoveDown: PropTypes.bool,
+    getMovedRows: PropTypes.func.isRequired,
+    getRemovedRows: PropTypes.func.isRequired
+  }).isRequired,
+  onApplyRows: PropTypes.func.isRequired
+};
+
 /**
  * @description The click-to-edit-in-preview popover: opened by clicking a tile (or an
  * empty slot) in the live preview via layoutClickOverlay.jsx. Editing a tile here edits
@@ -211,10 +239,14 @@ EditTile.defaultProps = { onRenameTile: null };
  * `selection.getNextRows(tileKey)` (from layoutClickOverlay.jsx) is a pure function, so
  * assigning an existing tile only needs `onAssignRows`, but creating a brand-new tile
  * and assigning it in the same step needs both `tiles` and `rows` updated together —
- * `onCreateTileAndAssign` lets the caller apply both in one atomic update.
+ * `onCreateTileAndAssign` lets the caller apply both in one atomic update. Moving or
+ * removing the clicked spot itself (`selection.getMovedRows`/`getRemovedRows`, when
+ * provided) also goes through `onAssignRows`, then closes the popover — its anchor is
+ * the spot that just moved or disappeared.
  *
  * @param {Object} param
- * @param {Object} [param.selection] - { tileKey, isEmpty, anchor, getNextRows }, or null to render nothing
+ * @param {Object} [param.selection] - { tileKey, isEmpty, anchor, getNextRows, canMoveUp?,
+ * canMoveDown?, getMovedRows?, getRemovedRows? } (see resolvePlacementClick), or null to render nothing
  * @param {Object} param.tiles
  * @param {Function} param.onChangeTiles - a tile's own fields changed, no placement affected
  * @param {Function} [param.onRenameTile]
@@ -272,7 +304,7 @@ const TileEditPopover = ({
           onRenameTile={onRenameTile ? (oldKey, newKey, nextTiles) => { onRenameTile(oldKey, newKey, nextTiles); onClose(); } : null}
           onDelete={() => {
             // eslint-disable-next-line no-alert
-            if (!window.confirm('Delete this tile? Any layout placements using it will need to be removed too.')) return;
+            if (!window.confirm("Delete this tile? Anywhere it's placed in the layout will become an empty slot.")) return;
             const nextTiles = { ...tiles };
             delete nextTiles[selection.tileKey];
             onChangeTiles(nextTiles);
@@ -280,6 +312,12 @@ const TileEditPopover = ({
           }}
           onReassign={() => setReassigning(true)}
           onCancel={onClose}
+        />
+      )}
+      {selection.getMovedRows && selection.getRemovedRows && (
+        <PlacementActions
+          selection={selection}
+          onApplyRows={(nextRows) => { onAssignRows(nextRows); setReassigning(false); onClose(); }}
         />
       )}
     </div>
@@ -291,7 +329,11 @@ TileEditPopover.propTypes = {
     tileKey: PropTypes.string,
     isEmpty: PropTypes.bool,
     anchor: PropTypes.object,
-    getNextRows: PropTypes.func
+    getNextRows: PropTypes.func,
+    canMoveUp: PropTypes.bool,
+    canMoveDown: PropTypes.bool,
+    getMovedRows: PropTypes.func,
+    getRemovedRows: PropTypes.func
   }),
   tiles: PropTypes.object.isRequired,
   onChangeTiles: PropTypes.func.isRequired,

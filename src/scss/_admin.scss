@@ -300,145 +300,23 @@
             margin-bottom: 10px;
         }
     }
-
-    &-columns {
-        display: flex;
-        gap: $spacingX2;
-        align-items: flex-start;
-
-        @media screen and (max-width: 900px) {
-            flex-direction: column;
-        }
-    }
 }
 
-.adminLayoutTree {
-    flex: 1;
-    min-width: 0;
+.adminDragHandle {
+    flex-shrink: 0;
+    // Drag-to-reorder is pointer-event driven (layoutStructureOverlay.jsx) — without
+    // this, a touch drag on the handle would scroll the page instead.
+    touch-action: none;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    background: $pageColour;
+    border: 1px solid #ccc;
+    cursor: grab;
+    line-height: 1;
 
-    &-collapseToggle {
-        flex-shrink: 0;
-        width: 22px;
-        height: 22px;
-        padding: 0;
-        background: none;
-        border: 1px solid #ccc;
-        cursor: pointer;
-        line-height: 1;
-    }
-
-    &-dragHandle {
-        flex-shrink: 0;
-        width: 22px;
-        height: 22px;
-        padding: 0;
-        background: none;
-        border: 1px solid #ccc;
-        cursor: grab;
-        line-height: 1;
-
-        &:active {
-            cursor: grabbing;
-        }
-    }
-
-    &-row {
-        margin-bottom: 10px;
-        padding: 10px;
-        background: $pageColour;
-        border: 2px solid #ccc;
-
-        &--dragOver {
-            border-color: #0064ff;
-            border-style: dashed;
-        }
-    }
-
-    &-rowHeader {
-        display: flex;
-        align-items: flex-end;
-        gap: 10px;
-        flex-wrap: wrap;
-        margin-bottom: 10px;
-
-        label {
-            display: flex;
-            flex-direction: column;
-            font-size: 0.85rem;
-        }
-
-        input {
-            width: 90px;
-            padding: 4px;
-        }
-    }
-
-    &-columns {
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
-    }
-
-    &-column {
-        flex: 1;
-        min-width: 160px;
-        padding: 8px;
-        background: #f4f4f4;
-        border: 1px dashed #bbb;
-
-        &--dragOver {
-            border-color: #0064ff;
-        }
-    }
-
-    &-columnHeader {
-        display: flex;
-        align-items: flex-end;
-        gap: 8px;
-        margin-bottom: 8px;
-
-        label {
-            display: flex;
-            flex-direction: column;
-            font-size: 0.85rem;
-        }
-
-        input {
-            width: 80px;
-            padding: 4px;
-        }
-    }
-
-    &-placement {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        margin-bottom: 6px;
-    }
-
-    &-nestedRow {
-        margin-bottom: 6px;
-    }
-
-    &-controls {
-        display: flex;
-        gap: 4px;
-
-        button {
-            padding: 3px 8px;
-            cursor: pointer;
-        }
-    }
-
-    &-addButtons {
-        display: flex;
-        gap: 6px;
-        margin-top: 6px;
-
-        button {
-            padding: 4px 8px;
-            cursor: pointer;
-        }
+    &:active {
+        cursor: grabbing;
     }
 }
 
@@ -447,6 +325,36 @@
     border: 1px solid #ddd;
     padding: 10px;
     background: $pageColour;
+
+    // A placement with no tile yet (or whose tile was deleted) — see UnassignedSlot in
+    // layoutPreview.jsx. Admin-only: the real site never renders one.
+    &-unassigned {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 80px;
+        padding: 10px;
+        color: $grayLinkColour;
+        font-size: 0.85rem;
+        text-align: center;
+        background: repeating-linear-gradient(45deg, #f7f7f7, #f7f7f7 8px, #eee 8px, #eee 16px);
+        border: 1px dashed #bbb;
+    }
+
+    // A row with no columns yet, or a column with no children yet, renders with no
+    // size at all — give it some here (admin preview only) so it's visible, and its
+    // structure toolbar has somewhere to sit, until something's added to it.
+    .row:empty,
+    .column:empty {
+        min-height: 60px;
+        outline: 1px dashed #bbb;
+        outline-offset: -1px;
+    }
+
+    .column:empty {
+        min-width: 60px;
+        flex: 1;
+    }
 }
 
 .adminThumbnail {
@@ -459,9 +367,20 @@
 
 .adminEditableLayoutPreview {
     position: relative;
-    flex: 1;
-    min-width: 0;
-    max-width: 600px;
+    max-width: 1100px;
+
+    &-empty {
+        margin: 10px 0 0;
+    }
+
+    &-footer {
+        margin-top: 10px;
+
+        button {
+            padding: 6px 12px;
+            cursor: pointer;
+        }
+    }
 
     // Click-to-edit-in-preview: the actual rendered tiles are the click targets (see
     // layoutClickOverlay.jsx's resolvePlacementClick, which maps a click straight back
@@ -579,6 +498,11 @@
         border: 1px solid #ccc;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 
+        &--alignLeft {
+            right: auto;
+            left: 0;
+        }
+
         button {
             display: block;
             width: 100%;
@@ -613,7 +537,9 @@
 .adminLayoutResize-row,
 .adminLayoutResize-column {
     position: absolute;
-    z-index: 5;
+    // Every preview overlay control needs to clear item.scss's .textOverlay (z-index:
+    // 200 — see .adminTileEditPopover), or a project tile's title text wins the pointer.
+    z-index: 210;
     pointer-events: auto;
 
     &::after {
@@ -664,8 +590,10 @@
 }
 
 .adminLayoutResize-edit {
+    display: flex;
+    gap: 8px;
     position: absolute;
-    z-index: 21;
+    z-index: 260;
     padding: 6px;
     background: $pageColour;
     border: 1px solid #ccc;
@@ -685,5 +613,77 @@
         padding: 4px;
         font-family: inherit;
         font-size: $bodyFontSize;
+    }
+}
+
+.adminLayoutStructureOverlay {
+    position: absolute;
+    inset: 0;
+    // As with .adminLayoutResizeOverlay: only the toolbars (and, mid-drag, the drop
+    // zones) take the pointer — everything else passes through to the preview.
+    pointer-events: none;
+}
+
+.adminLayoutStructure-toolbar {
+    position: absolute;
+    z-index: 220;
+    display: flex;
+    gap: 2px;
+    margin: 2px;
+    opacity: 0.75;
+    pointer-events: auto;
+    font-size: 0.75rem;
+    // A column toolbar is anchored at the column's right edge and shifted left by its
+    // own width — at the preview's right edge, shrink-to-fit would otherwise wrap it.
+    white-space: nowrap;
+
+    &:hover,
+    &:focus-within {
+        opacity: 1;
+    }
+
+    // An open menu must sit above every other toolbar, not just its own (each toolbar
+    // is its own stacking context, so the list's z-index alone can't do it).
+    &:focus-within,
+    &:has(.adminActionsMenu-list) {
+        z-index: 240;
+    }
+
+    .adminDragHandle {
+        width: 20px;
+        height: 20px;
+        font-size: 0.75rem;
+    }
+
+    .adminActionsMenu > button {
+        padding: 2px 6px;
+        font-size: 0.75rem;
+        background: $pageColour;
+        border: 1px solid #999;
+    }
+
+    &--nested .adminActionsMenu > button {
+        border-style: dashed;
+    }
+
+    &--column {
+        transform: translateX(-100%);
+        margin-left: -2px;
+    }
+}
+
+.adminLayoutStructure-dropZone {
+    position: absolute;
+    z-index: 230;
+    outline: 2px dashed rgba(0, 100, 255, 0.4);
+    outline-offset: -2px;
+
+    &--source {
+        background: rgba(0, 0, 0, 0.08);
+    }
+
+    &--over {
+        background: rgba(0, 100, 255, 0.15);
+        outline-color: #0064ff;
     }
 }

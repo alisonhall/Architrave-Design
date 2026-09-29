@@ -1,51 +1,4 @@
-import { replaceAt } from './layoutHelpers';
-
-// Recursively replaces the column whose `id` matches `columnId`, wherever it lives in
-// the tree (including inside a nested row placement), with `updater(column)`'s result.
-// Everything else is returned untouched (new references only along the path that
-// actually changed, same as the rest of this codebase's update helpers).
-const updateColumnById = (rows, columnId, updater) => rows.map((row) => ({
-  ...row,
-  columns: row.columns.map((column) => updateColumnRecursive(column, columnId, updater))
-}));
-
-const updateColumnRecursive = (column, columnId, updater) => {
-  if (column.id === columnId) return updater(column);
-  return {
-    ...column,
-    children: column.children.map((placement) => {
-      if (placement.nodeType !== 'row') return placement;
-      return {
-        ...placement,
-        row: {
-          ...placement.row,
-          columns: placement.row.columns.map((nested) => updateColumnRecursive(nested, columnId, updater))
-        }
-      };
-    })
-  };
-};
-
-const findColumnById = (rows, columnId) => {
-  for (let i = 0; i < rows.length; i += 1) {
-    const found = findColumnInColumns(rows[i].columns, columnId);
-    if (found) return found;
-  }
-  return null;
-};
-
-const findColumnInColumns = (columns, columnId) => {
-  for (let i = 0; i < columns.length; i += 1) {
-    const column = columns[i];
-    if (column.id === columnId) return column;
-    const nestedMatch = column.children
-      .filter((child) => child.nodeType === 'row')
-      .map((child) => findColumnInColumns(child.row.columns, columnId))
-      .find(Boolean);
-    if (nestedMatch) return nestedMatch;
-  }
-  return null;
-};
+import { replaceAt, removeAt, moveAt, findColumnById, updateColumnChildren } from './layoutHelpers';
 
 /**
  * @description Resolves a click inside a live layout preview to the exact placement
@@ -67,8 +20,11 @@ const findColumnInColumns = (columns, columnId) => {
  * @param {MouseEvent} event
  * @param {HTMLElement} rootEl - the preview's own container (stops the search there)
  * @param {Array} rows
- * @returns {Object|null} { tileKey, isEmpty, anchor, getNextRows } or null if the click
- * didn't land on a resolvable placement
+ * @returns {Object|null} { tileKey, isEmpty, anchor, getNextRows, canMoveUp, canMoveDown,
+ * getMovedRows, getRemovedRows } or null if the click didn't land on a resolvable
+ * placement — `getNextRows(tileKey)` assigns a tile to this slot, `getMovedRows(delta)`
+ * moves it up/down among its column's children, `getRemovedRows()` takes it out of the
+ * layout entirely (all pure: each returns the next `rows` without applying it)
  */
 export const resolvePlacementClick = (event, rootEl, rows) => {
   const columnEl = event.target.closest('[data-column-id]');
@@ -87,15 +43,16 @@ export const resolvePlacementClick = (event, rootEl, rows) => {
   if (!placement) return null;
 
   const isEmpty = placement.nodeType === 'empty' || (placement.nodeType === 'tileRef' && !placement.tileKey);
-  const getNextRows = (tileKey) => updateColumnById(rows, columnId, (col) => ({
-    ...col,
-    children: replaceAt(col.children, childIndex, { id: placement.id, nodeType: 'tileRef', tileKey })
-  }));
+  const updateChildren = (op) => updateColumnChildren(rows, columnId, op);
 
   return {
     tileKey: placement.nodeType === 'tileRef' ? placement.tileKey : null,
     isEmpty,
     anchor: directChild,
-    getNextRows
+    canMoveUp: childIndex > 0,
+    canMoveDown: childIndex < column.children.length - 1,
+    getNextRows: (tileKey) => updateChildren((children) => replaceAt(children, childIndex, { id: placement.id, nodeType: 'tileRef', tileKey })),
+    getMovedRows: (delta) => updateChildren((children) => moveAt(children, childIndex, delta)),
+    getRemovedRows: () => updateChildren((children) => removeAt(children, childIndex))
   };
 };
