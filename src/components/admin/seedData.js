@@ -88,7 +88,12 @@ export const seedDraft = {
   // already-committed one for the rest of the session. Empty until "create a page" is
   // used; each entry also carries `folder`/`slug`/`isNew` so outputSection.jsx knows to
   // additionally generate the fixed wrapper page file and its test scaffold.
-  newLayoutPages: {}
+  newLayoutPages: {},
+  // Already-committed layout pages whose project was deleted in this session, keyed by
+  // page key: { label, files } — the files the admin has to delete in GitHub (this tool
+  // can only write files, never delete them), listed by outputSection.jsx. Such a page
+  // no longer appears in the Layouts editor.
+  deletedPages: {}
 };
 
 // Static, non-content configuration each supported page's layout generator needs —
@@ -224,4 +229,14 @@ export const LAYOUT_PAGE_CONFIGS = {
     'classic-centre-hall',
     'classicCentreHall'
   )
+};
+
+/**
+ * @description Every layout page the admin can currently edit: the committed ones plus
+ * any created this session, minus any whose project was deleted this session.
+ */
+export const pageConfigsFor = (newLayoutPages = {}, deletedPages = {}) => {
+  const configs = { ...LAYOUT_PAGE_CONFIGS, ...newLayoutPages };
+  Object.keys(deletedPages).forEach((key) => delete configs[key]);
+  return configs;
 };

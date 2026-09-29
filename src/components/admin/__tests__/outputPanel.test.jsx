@@ -55,4 +55,13 @@ describe('OutputPanel', () => {
     expect(writeText).toHaveBeenCalledWith('const constants = {};');
     await waitFor(() => expect(screen.getByText('Copied!')).toBeInTheDocument());
   });
+
+  it('shows a file to delete with its path and note, but no content or Copy button', () => {
+    render(<OutputPanel files={[{ path: 'static/layouts/gone.js', deleted: true, note: 'Its project was deleted.' }]} />);
+
+    expect(screen.getByText('Delete this file')).toBeInTheDocument();
+    expect(screen.getByText('static/layouts/gone.js')).toBeInTheDocument();
+    expect(screen.getByText('Its project was deleted.')).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Copy' })).not.toBeInTheDocument();
+  });
 });

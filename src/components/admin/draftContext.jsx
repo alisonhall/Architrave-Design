@@ -33,6 +33,10 @@ const draftReducer = (state, action) => {
   switch (action.type) {
     case 'SET_SECTION':
       return { ...state, [action.section]: action.value };
+    // Several sections changed as one edit (e.g. deleting a project, which also touches
+    // its listing order and every layout that used it).
+    case 'SET_SECTIONS':
+      return { ...state, ...action.values };
     case 'RESET':
       return seedDraft;
     default:
@@ -100,4 +104,13 @@ export const useDraftSection = (section) => {
   const dispatch = useDraftDispatch();
   const setSection = (value) => dispatch({ type: 'SET_SECTION', section, value });
   return [state[section], setSection];
+};
+
+/**
+ * @description Sets several draft sections at once, as a single edit — for a change
+ * that spans sections and should never be seen (or undone) half-applied.
+ */
+export const useDraftUpdate = () => {
+  const dispatch = useDraftDispatch();
+  return (values) => dispatch({ type: 'SET_SECTIONS', values });
 };

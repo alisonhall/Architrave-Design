@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useDraftState } from './draftContext';
-import { seedDraft, LAYOUT_PAGE_CONFIGS } from './seedData';
+import { seedDraft, pageConfigsFor } from './seedData';
 import { generateAppConstants } from './generators/appConstantsGenerator';
 import { generateLayoutData } from './generators/layoutGenerator';
 import { generateNewPageFile } from './generators/newPageGenerator';
@@ -58,7 +58,7 @@ const OutputSection = () => {
     });
   }
 
-  const pageConfigs = { ...LAYOUT_PAGE_CONFIGS, ...draft.newLayoutPages };
+  const pageConfigs = pageConfigsFor(draft.newLayoutPages, draft.deletedPages);
 
   Object.keys(pageConfigs).forEach((pageKey) => {
     const pageConfig = pageConfigs[pageKey];
@@ -84,6 +84,16 @@ const OutputSection = () => {
         note: 'Run `npm test -- -u` locally after adding this file to generate its actual snapshot, then commit the resulting .snap file alongside it.'
       });
     }
+  });
+
+  Object.values(draft.deletedPages || {}).forEach(({ label, files: pageFiles }) => {
+    pageFiles.forEach((path) => {
+      files.push({
+        path,
+        deleted: true,
+        note: `Part of ${label}, whose project was deleted — the site won't build while this page's files remain.`
+      });
+    });
   });
 
   return <OutputPanel files={files} />;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import { useDraftSection } from './draftContext';
-import { PROJECT_TYPES, makeUniqueProjectKey } from './projectHelpers';
+import { useDraftSection, useDraftState, useDraftUpdate } from './draftContext';
+import { PROJECT_TYPES, makeUniqueProjectKey, planProjectDeletion, deleteProjectConfirmMessage } from './projectHelpers';
 import ProjectForm from './projectForm';
 import ProjectPreview from './projectPreview';
 import AdminThumbnail from './adminThumbnail';
@@ -21,6 +21,8 @@ const arrayMoved = (array, index, delta) => {
  * introduction text used on those listing pages.
  */
 const ProjectsEditor = () => {
+  const draft = useDraftState();
+  const updateDraft = useDraftUpdate();
   const [projects, setProjects] = useDraftSection('projects');
   const [defaultIntroductionText, setDefaultIntroductionText] = useDraftSection('defaultIntroductionText');
 
@@ -70,15 +72,14 @@ const ProjectsEditor = () => {
     sections[typeValue].setOrder([...sections[typeValue].order, key]);
   };
 
-  const deleteProject = (typeValue, key) => {
+  // One edit across every section the project touches (see planProjectDeletion), so
+  // nothing is left pointing at it — and so a single undo brings it all back.
+  const deleteProject = (key) => {
+    const plan = planProjectDeletion(draft, key);
     // eslint-disable-next-line no-alert
-    if (!window.confirm(`Delete "${projects[key].projectName}"? This can't be undone within this session.`)) return;
+    if (!window.confirm(deleteProjectConfirmMessage(projects[key].projectName, plan))) return;
 
-    const nextProjects = { ...projects };
-    delete nextProjects[key];
-    setProjects(nextProjects);
-    sections[typeValue].setOrder(arrayWithout(sections[typeValue].order, key));
-    sections[typeValue].setUnused(arrayWithout(sections[typeValue].unused, key));
+    updateDraft(plan.updates);
     if (editingKey === key) closeForms();
   };
 
@@ -135,7 +136,7 @@ const ProjectsEditor = () => {
           >
             Edit
           </button>
-          <button type="button" onClick={() => deleteProject(typeValue, key)}>Delete</button>
+          <button type="button" onClick={() => deleteProject(key)}>Delete</button>
         </span>
       </li>
     );

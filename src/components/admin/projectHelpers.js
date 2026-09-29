@@ -1,3 +1,6 @@
+import { pageConfigsFor } from './seedData';
+import { countTilePlacements, removeTileKeyFromLayoutData } from './layoutHelpers';
+
 /**
  * @description The three project types the site groups portfolio projects into, and
  * which draft sections (see seedData.js) hold their "shown" order and "unused" list.
@@ -64,4 +67,105 @@ export const makeUniqueProjectKey = (projectName, existingProjects) => {
   let suffix = 2;
   while (existingProjects[`${base}${suffix}`]) suffix += 1;
   return `${base}${suffix}`;
+};
+
+// Tile kinds that point at a project by `projectKey`.
+const PROJECT_TILE_KINDS = ['project', 'filler'];
+
+// The committed files behind a detail page: its layout data, its fixed wrapper page,
+// and that page's test and snapshot.
+const detailPageFiles = (config, folder) => {
+  const slug = config.dataFilePath.replace(/^static\/layouts\//, '').replace(/\.js$/, '');
+  return [
+    config.dataFilePath,
+    `src/pages/portfolio/${folder}/${slug}.jsx`,
+    `src/pages/portfolio/${folder}/__tests__/${slug}.test.jsx`,
+    `src/pages/portfolio/${folder}/__tests__/__snapshots__/${slug}.test.jsx.snap`
+  ];
+};
+
+/**
+ * @description Everything deleting a project has to change so nothing is left pointing
+ * at it — the live site renders a tile whose project is gone as nothing at all, and a
+ * detail page whose project is gone fails the build:
+ *
+ * - it's removed from `projects` and from its type's shown/hidden lists;
+ * - every project/filler tile pointing at it, on every page, is removed along with each
+ *   spot it's placed in;
+ * - its own detail page is dropped: one created this session simply disappears; an
+ *   already-committed one is recorded in `deletedPages`, so Review Changes lists its
+ *   files for deletion in GitHub.
+ *
+ * @param {Object} draft - the whole admin draft
+ * @param {string} projectKey
+ * @returns {{ updates: Object, affectedPages: Array, removedPages: Array }} `updates` is
+ * ready for useDraftUpdate; the other two describe the change for the confirmation
+ */
+export const planProjectDeletion = (draft, projectKey) => {
+  const project = draft.projects[projectKey];
+  const typeConfig = getProjectTypeConfig(project.type);
+  const pageConfigs = pageConfigsFor(draft.newLayoutPages, draft.deletedPages);
+
+  const projects = { ...draft.projects };
+  delete projects[projectKey];
+  const layouts = { ...draft.layouts };
+  const newLayoutPages = { ...draft.newLayoutPages };
+  const deletedPages = { ...draft.deletedPages };
+  const affectedPages = [];
+  const removedPages = [];
+
+  Object.entries(pageConfigs).forEach(([pageKey, config]) => {
+    const layout = draft.layouts[pageKey];
+    if (!layout) return;
+
+    if (config.projectKey === projectKey) {
+      delete layouts[pageKey];
+      if (config.isNew) delete newLayoutPages[pageKey];
+      else deletedPages[pageKey] = { label: config.label, files: detailPageFiles(config, project.type) };
+      removedPages.push({ key: pageKey, label: config.label, isNew: Boolean(config.isNew) });
+      return;
+    }
+
+    const tileKeys = Object.keys(layout.tiles).filter((key) => (
+      PROJECT_TILE_KINDS.includes(layout.tiles[key].kind) && layout.tiles[key].projectKey === projectKey
+    ));
+    if (tileKeys.length === 0) return;
+
+    let next = { ...layout, tiles: { ...layout.tiles } };
+    let placements = 0;
+    tileKeys.forEach((tileKey) => {
+      placements += countTilePlacements(next, tileKey);
+      delete next.tiles[tileKey];
+      next = { ...next, ...removeTileKeyFromLayoutData(next, tileKey) };
+    });
+    layouts[pageKey] = next;
+    affectedPages.push({ key: pageKey, label: config.label, tiles: tileKeys.length, placements });
+  });
+
+  const updates = { projects, layouts, newLayoutPages, deletedPages };
+  if (typeConfig) {
+    updates[typeConfig.orderKey] = draft[typeConfig.orderKey].filter((key) => key !== projectKey);
+    updates[typeConfig.unusedKey] = draft[typeConfig.unusedKey].filter((key) => key !== projectKey);
+  }
+  return { updates, affectedPages, removedPages };
+};
+
+/**
+ * @description The confirmation shown before deleting a project, spelling out what
+ * else goes with it (see planProjectDeletion).
+ */
+export const deleteProjectConfirmMessage = (projectName, { affectedPages, removedPages }) => {
+  const lines = [`Delete "${projectName}"?`];
+  if (affectedPages.length > 0 || removedPages.length > 0) {
+    lines.push('', 'This will also:');
+    affectedPages.forEach(({ label, placements }) => {
+      lines.push(`• remove its tile from ${label}${placements === 1 ? ' (1 spot)' : ` (${placements} spots)`}`);
+    });
+    removedPages.forEach(({ label, isNew }) => {
+      lines.push(isNew
+        ? `• discard its new page, ${label}`
+        : `• remove its page, ${label} — Review Changes will list that page's files to delete in GitHub`);
+    });
+  }
+  return lines.join('\n');
 };

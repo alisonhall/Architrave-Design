@@ -3,6 +3,7 @@ import { render, screen, fireEvent, within } from '@testing-library/react';
 
 import { DraftProvider } from '../draftContext';
 import LayoutsEditor from '../layoutsEditor';
+import ProjectsEditor from '../projectsEditor';
 import AdminApp from '../adminApp';
 
 const renderEditor = () => render(
@@ -476,5 +477,28 @@ describe('LayoutsEditor — deleting a tile', () => {
     expect(window.confirm).toHaveBeenCalledWith(expect.stringMatching(/^Delete the tile "hoggsHollowFrench"\? It's placed in \d+ spots? /));
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
     expect(titleCount()).toBe(0);
+  });
+});
+
+describe('LayoutsEditor — when the page being edited disappears', () => {
+  beforeEach(() => {
+    window.sessionStorage.clear();
+    window.confirm = jest.fn(() => true);
+  });
+
+  it('falls back to the first page once the selected page\'s project is deleted', () => {
+    render(
+      <DraftProvider>
+        <ProjectsEditor />
+        <LayoutsEditor />
+      </DraftProvider>
+    );
+    fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'hoggsHollowFrenchDetail' } });
+    expect(screen.getByText('Editing: static/layouts/hoggs-hollow-french.js')).toBeInTheDocument();
+
+    const section = screen.getByRole('heading', { name: 'New Homes' }).closest('section');
+    fireEvent.click(within(within(section).getAllByText("Hogg's Hollow French")[0].closest('li')).getByRole('button', { name: 'Delete' }));
+
+    expect(screen.getByText('Editing: static/layouts/index.js')).toBeInTheDocument();
   });
 });

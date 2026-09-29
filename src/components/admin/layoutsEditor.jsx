@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { useDraftSection } from './draftContext';
-import { LAYOUT_PAGE_CONFIGS } from './seedData';
+import { LAYOUT_PAGE_CONFIGS, pageConfigsFor } from './seedData';
 import {
   makeBlankDetailLayout,
   renameTileKeyInLayoutData,
@@ -40,9 +40,15 @@ const LayoutsEditor = () => {
   const [introText] = useDraftSection('defaultIntroductionText');
   const [newLayoutPages, setNewLayoutPages] = useDraftSection('newLayoutPages');
 
-  const pageConfigs = { ...LAYOUT_PAGE_CONFIGS, ...newLayoutPages };
+  const [deletedPages] = useDraftSection('deletedPages');
+
+  const pageConfigs = pageConfigsFor(newLayoutPages, deletedPages);
   const pageKeys = Object.keys(pageConfigs);
-  const [activePage, setActivePage] = useState(pageKeys[0]);
+  const [selectedPage, setActivePage] = useState(pageKeys[0]);
+  // The selected page can stop existing underneath this editor — its project deleted,
+  // or a page-creating edit undone — so fall back to the first page rather than
+  // rendering nothing.
+  const activePage = pageConfigs[selectedPage] ? selectedPage : pageKeys[0];
 
   const usedProjectKeys = new Set(Object.values(pageConfigs).map((config) => config.projectKey).filter(Boolean));
   const availableProjects = Object.keys(projects).filter(
