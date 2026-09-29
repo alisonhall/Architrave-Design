@@ -423,3 +423,58 @@ describe('LayoutsEditor — click-to-edit-in-preview', () => {
     expect(screen.getByText(/^imageTile —/)).toBeInTheDocument();
   });
 });
+
+describe('LayoutsEditor — deleting a tile', () => {
+  beforeEach(() => {
+    window.sessionStorage.clear();
+  });
+
+  const openTileMenu = (keyPattern) => {
+    const row = screen.getByText(keyPattern).closest('li');
+    fireEvent.click(within(row).getByRole('button', { name: 'Actions ▾' }));
+    fireEvent.click(within(row).getByRole('menuitem', { name: 'Delete' }));
+  };
+
+  it('from the Tile Library, removes the tile and every spot it was placed in, after saying how many', () => {
+    window.confirm = jest.fn(() => true);
+    renderEditor();
+    fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'creditRiverManor' } });
+    const imagesBefore = document.querySelectorAll('.adminLayoutPreview img').length;
+
+    openTileMenu(/^1 —/);
+
+    expect(window.confirm).toHaveBeenCalledWith('Delete the tile "1"? It\'s placed in 1 spot in this page\'s layout, which will be removed too.');
+    expect(screen.queryByText(/^1 —/)).not.toBeInTheDocument();
+    expect(document.querySelectorAll('.adminLayoutPreview img')).toHaveLength(imagesBefore - 1);
+    // Removed outright, not left behind as a placement pointing at nothing.
+    expect(screen.queryByText('Empty slot — click to choose a tile')).not.toBeInTheDocument();
+  });
+
+  it('keeps everything when the confirmation is cancelled', () => {
+    window.confirm = jest.fn(() => false);
+    renderEditor();
+    fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'creditRiverManor' } });
+    const imagesBefore = document.querySelectorAll('.adminLayoutPreview img').length;
+
+    openTileMenu(/^1 —/);
+
+    expect(screen.getByText(/^1 —/)).toBeInTheDocument();
+    expect(document.querySelectorAll('.adminLayoutPreview img')).toHaveLength(imagesBefore);
+  });
+
+  it('from the preview popover, removes it from both layout variants of a dual page', () => {
+    window.confirm = jest.fn(() => true);
+    renderEditor();
+    fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'newHomes' } });
+    const sections = screen.getAllByText(/layout \(/).map((heading) => heading.closest('section'));
+    const titleCount = () => screen.queryAllByText("Hogg's Hollow French").length;
+    expect(titleCount()).toBeGreaterThan(1);
+
+    fireEvent.click(within(sections[0]).getAllByText("Hogg's Hollow French")[0]);
+    fireEvent.click(screen.getByRole('button', { name: 'Delete this tile' }));
+
+    expect(window.confirm).toHaveBeenCalledWith(expect.stringMatching(/^Delete the tile "hoggsHollowFrench"\? It's placed in \d+ spots? /));
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    expect(titleCount()).toBe(0);
+  });
+});

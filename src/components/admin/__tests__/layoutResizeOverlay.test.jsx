@@ -546,3 +546,22 @@ describe('canResizeColumn', () => {
     expect(canResizeColumn([{ id: 'a', width: '40%' }], {}, 0)).toBe(true);
   });
 });
+
+describe('LayoutResizeOverlay — after a column is removed', () => {
+  it('doesn\'t crash on the render that still has the old measurement (positions past the end of the row)', () => {
+    // Two sized columns, each 200px wide in a 400px row.
+    mockRects({
+      columnRects: {
+        col1: { top: 0, left: 0, right: 200, bottom: 100, width: 200, height: 100 },
+        col2: { top: 0, left: 200, right: 400, bottom: 100, width: 200, height: 100 }
+      }
+    });
+    const twoColumns = [{ id: 'row1', columns: [{ id: 'col1', width: '46%', children: [] }, { id: 'col2', width: '54%', children: [] }] }];
+    const { rerender } = render(<Harness rows={twoColumns} onChangeRows={jest.fn()} />);
+    expect(screen.getAllByRole('separator', { name: /resize this column's width/ }).length).toBeGreaterThan(0);
+
+    // col1 removed: col2 is now at position 0, but the last measurement still says 1.
+    const oneColumn = [{ id: 'row1', columns: [{ id: 'col2', width: '54%', children: [] }] }];
+    expect(() => rerender(<Harness rows={oneColumn} onChangeRows={jest.fn()} />)).not.toThrow();
+  });
+});

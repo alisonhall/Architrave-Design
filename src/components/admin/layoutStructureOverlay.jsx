@@ -182,8 +182,18 @@ const LayoutStructureOverlay = ({ containerEl = null, rows, onChangeRows, onEdit
   const { rows: rowEntries, columns: columnEntries } = flattenLayout(rows);
   const liveRowIds = new Set(rowEntries.map((entry) => entry.row.id));
   const liveColumnIds = new Set(columnEntries.map((entry) => entry.column.id));
-  const liveRowBoxes = rowBoxes.filter((box) => liveRowIds.has(box.rowId));
-  const liveColumnBoxes = columnBoxes.filter((box) => liveColumnIds.has(box.columnId));
+  // Positions (`index`, `siblingCount`, `topLevel`, parents) come from the tree as it
+  // is now, not from the measurement: right after a move or remove, this render still
+  // has the previous measurement (the effect re-measures after it), whose positions no
+  // longer match. Only the pixel geometry is taken from the measured boxes.
+  const rowEntryById = Object.fromEntries(rowEntries.map(({ row, ...meta }) => [row.id, meta]));
+  const columnEntryById = Object.fromEntries(columnEntries.map(({ column, ...meta }) => [column.id, meta]));
+  const liveRowBoxes = rowBoxes
+    .filter((box) => liveRowIds.has(box.rowId))
+    .map((box) => ({ ...box, ...rowEntryById[box.rowId] }));
+  const liveColumnBoxes = columnBoxes
+    .filter((box) => liveColumnIds.has(box.columnId))
+    .map((box) => ({ ...box, ...columnEntryById[box.columnId] }));
 
   // The boxes a given drag group can be dropped onto: every top-level row, or every
   // column in the same row.

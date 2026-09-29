@@ -25,7 +25,10 @@ import {
   findColumnById,
   updateRowContainer,
   updateRowColumns,
-  updateColumnChildren
+  updateColumnChildren,
+  removeTileKeyFromLayoutData,
+  countTilePlacements,
+  deleteTileConfirmMessage
 } from '../layoutHelpers';
 
 describe('array helpers', () => {
@@ -548,5 +551,48 @@ describe('tree walking', () => {
     const clone = clonePlacementWithNewIds({ id: 'p1', nodeType: 'tileRef', tileKey: 'a' });
     expect(clone.id).not.toBe('p1');
     expect(clone.tileKey).toBe('a');
+  });
+});
+
+describe('removing a deleted tile\'s placements', () => {
+  const tileRef = (tileKey) => ({ nodeType: 'tileRef', tileKey });
+  const page = {
+    tiles: {},
+    defaultLayout: [
+      {
+        columns: [
+          { children: [tileRef('gone'), tileRef('kept'), { nodeType: 'row', row: { columns: [{ children: [tileRef('gone'), { nodeType: 'empty' }] }] } }] }
+        ]
+      }
+    ],
+    wideLayout: [{ columns: [{ children: [tileRef('gone')] }] }]
+  };
+
+  it('removeTileKeyFromLayoutData takes every placement of the tile out of every tree, nested ones included', () => {
+    const updates = removeTileKeyFromLayoutData(page, 'gone');
+
+    expect(Object.keys(updates)).toEqual(['defaultLayout', 'wideLayout']);
+    expect(updates.defaultLayout[0].columns[0].children).toEqual([
+      tileRef('kept'),
+      { nodeType: 'row', row: { columns: [{ children: [{ nodeType: 'empty' }] }] } }
+    ]);
+    expect(updates.wideLayout[0].columns[0].children).toEqual([]);
+  });
+
+  it('removeTileKeyFromLayoutData handles a single-tree page', () => {
+    expect(removeTileKeyFromLayoutData({ layout: [{ columns: [{ children: [tileRef('gone')] }] }] }, 'gone'))
+      .toEqual({ layout: [{ columns: [{ children: [] }] }] });
+  });
+
+  it('countTilePlacements counts across every tree, nested ones included', () => {
+    expect(countTilePlacements(page, 'gone')).toBe(3);
+    expect(countTilePlacements(page, 'kept')).toBe(1);
+    expect(countTilePlacements(page, 'nowhere')).toBe(0);
+  });
+
+  it('deleteTileConfirmMessage spells out what goes with the tile', () => {
+    expect(deleteTileConfirmMessage('a', 0)).toBe('Delete the tile "a"? It isn\'t placed anywhere in this page\'s layout.');
+    expect(deleteTileConfirmMessage('a', 1)).toBe('Delete the tile "a"? It\'s placed in 1 spot in this page\'s layout, which will be removed too.');
+    expect(deleteTileConfirmMessage('a', 3)).toContain('placed in 3 spots');
   });
 });

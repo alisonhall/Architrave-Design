@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import LayoutPreview from './layoutPreview';
@@ -38,6 +38,7 @@ import { makeBlankRow } from './layoutHelpers';
  * @param {Function} param.onChangeTiles - called with the updated `tiles` map
  * @param {Function} param.onCreateTileAndAssign - called with (key, values, rows) to add a tile and assign it in one atomic update
  * @param {Function} [param.onRenameTile]
+ * @param {Function} [param.onDeleteTile] - see TileEditPopover
  */
 const EditableLayoutPreview = ({
   rows,
@@ -49,7 +50,8 @@ const EditableLayoutPreview = ({
   onChangeRows,
   onChangeTiles,
   onCreateTileAndAssign,
-  onRenameTile
+  onRenameTile,
+  onDeleteTile
 }) => {
   const containerRef = useRef(null);
   const [containerEl, setContainerEl] = useState(null);
@@ -57,6 +59,21 @@ const EditableLayoutPreview = ({
   // The resize overlay's inline size form, lifted here so a structure toolbar's "Edit
   // size…"/"Edit width…" can open it too, not just a click on a resize line.
   const [editingSize, setEditingSize] = useState(null);
+
+  // The tile popover's actions (assign / move / remove this spot) are worked out from
+  // the tree as it was when the tile was clicked, and it's anchored to that tile's
+  // element. Once this tree changes any other way — a resize, a toolbar action, "Add
+  // row" — both may be stale: applying them would silently undo that change, or hit
+  // the wrong spot. So it closes instead. (Editing a tile's own fields doesn't change
+  // the tree, so that — and anything done to a different layout variant — leaves it open.)
+  const isFirstRows = useRef(true);
+  useEffect(() => {
+    if (isFirstRows.current) {
+      isFirstRows.current = false;
+      return;
+    }
+    setSelection(null);
+  }, [rows]);
 
   // A plain ref's `.current` isn't safe for LayoutResizeOverlay's first-mount
   // measurement (see its own comment) — this callback ref also stores the node in state,
@@ -108,6 +125,7 @@ const EditableLayoutPreview = ({
         tiles={tiles}
         onChangeTiles={onChangeTiles}
         onRenameTile={onRenameTile}
+        onDeleteTile={onDeleteTile}
         onAssignRows={onChangeRows}
         onCreateTileAndAssign={onCreateTileAndAssign}
         projects={projects}
@@ -131,13 +149,15 @@ EditableLayoutPreview.propTypes = {
   onChangeRows: PropTypes.func.isRequired,
   onChangeTiles: PropTypes.func.isRequired,
   onCreateTileAndAssign: PropTypes.func.isRequired,
-  onRenameTile: PropTypes.func
+  onRenameTile: PropTypes.func,
+  onDeleteTile: PropTypes.func
 };
 
 EditableLayoutPreview.defaultProps = {
   introText: '',
   boundProject: null,
-  onRenameTile: null
+  onRenameTile: null,
+  onDeleteTile: null
 };
 
 export default EditableLayoutPreview;

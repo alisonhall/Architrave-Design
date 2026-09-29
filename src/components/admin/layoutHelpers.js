@@ -325,6 +325,57 @@ export const renameTileKeyInLayoutData = (pageLayout, oldKey, newKey) => {
   return updates;
 };
 
+const removeTileFromRow = (row, tileKey) => ({
+  ...row,
+  columns: row.columns.map((column) => ({
+    ...column,
+    children: column.children
+      .filter((placement) => !(placement.nodeType === 'tileRef' && placement.tileKey === tileKey))
+      .map((placement) => (placement.nodeType === 'row' ? { ...placement, row: removeTileFromRow(placement.row, tileKey) } : placement))
+  }))
+});
+
+const LAYOUT_TREE_FIELDS = ['layout', 'defaultLayout', 'wideLayout'];
+
+/**
+ * @description Removes every placement of `tileKey` from a page's layout tree(s) — used
+ * when a tile is deleted from the library, so no placement is left pointing at a tile
+ * that no longer exists (which the live site renders as nothing at all, collapsing its
+ * column). Returns only the tree fields the page has, ready to spread into an
+ * updatePageLayout call alongside the new `tiles`.
+ */
+export const removeTileKeyFromLayoutData = (pageLayout, tileKey) => {
+  const updates = {};
+  LAYOUT_TREE_FIELDS.forEach((field) => {
+    if (pageLayout[field]) updates[field] = pageLayout[field].map((row) => removeTileFromRow(row, tileKey));
+  });
+  return updates;
+};
+
+/**
+ * @description How many placements of `tileKey` a page's layout tree(s) hold — for
+ * telling the admin what deleting that tile will also take out of the layout.
+ */
+export const countTilePlacements = (pageLayout, tileKey) => {
+  let count = 0;
+  const visitRow = (row) => row.columns.forEach((column) => column.children.forEach((placement) => {
+    if (placement.nodeType === 'row') visitRow(placement.row);
+    else if (placement.nodeType === 'tileRef' && placement.tileKey === tileKey) count += 1;
+  }));
+  LAYOUT_TREE_FIELDS.forEach((field) => (pageLayout[field] || []).forEach(visitRow));
+  return count;
+};
+
+/**
+ * @description The confirmation shown before deleting a tile, spelling out what else goes
+ * with it.
+ */
+export const deleteTileConfirmMessage = (tileKey, placementCount) => {
+  if (placementCount === 0) return `Delete the tile "${tileKey}"? It isn't placed anywhere in this page's layout.`;
+  const spots = placementCount === 1 ? '1 spot' : `${placementCount} spots`;
+  return `Delete the tile "${tileKey}"? It's placed in ${spots} in this page's layout, which will be removed too.`;
+};
+
 /**
  * @description Starting layout draft for a brand-new detail page: a single, empty tree
  * (just a description tile in its library, no rows yet — the preview's own "Add row"

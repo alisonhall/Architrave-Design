@@ -895,3 +895,62 @@ test.describe('layouts editor — moving and removing a tile\'s spot from its po
     await expect(page.locator('.adminTileLibrary li', { hasText: '1 —' })).toBeVisible();
   });
 });
+
+test.describe('layouts editor — edits that change the layout under other controls', () => {
+  const openLayouts = async (page, pageKey) => {
+    await unlock(page);
+    await page.getByRole('button', { name: 'Layouts' }).click();
+    await page.getByLabel('Page').selectOption(pageKey);
+  };
+
+  test('removing the first of two sized columns leaves the editor working', async ({ page }) => {
+    await openLayouts(page, 'lyttonParkManorDetail');
+    const errors = [];
+    page.on('pageerror', (error) => errors.push(error.message));
+
+    // Row 3's "46%" / "54%" pair.
+    const variant = page.locator('.adminLayoutsEditor-variant').first();
+    const row = variant.locator('.adminLayoutPreview > .row').nth(2);
+    const firstColumnId = await row.locator(':scope > .column').first().getAttribute('data-column-id');
+    const toolbar = variant.locator(`[data-column-toolbar="${firstColumnId}"]`);
+    page.once('dialog', (dialog) => dialog.accept());
+    await toolbar.getByRole('button', { name: 'Column ▾' }).click();
+    await toolbar.getByRole('menuitem', { name: 'Remove column' }).click();
+
+    await expect(row.locator(':scope > .column')).toHaveCount(1);
+    // Still alive: the remaining column's toolbar works.
+    await expect(variant.locator('.adminLayoutStructure-toolbar--column').first()).toBeVisible();
+    expect(errors).toEqual([]);
+  });
+
+  test('the tile popover closes when the layout is changed elsewhere, so it can\'t undo that change', async ({ page }) => {
+    await openLayouts(page, 'creditRiverManor');
+
+    await page.locator('.adminLayoutPreview img').first().click();
+    await expect(page.getByRole('dialog')).toBeVisible();
+
+    const rows = page.locator('.adminLayoutPreview > .row');
+    const rowCount = await rows.count();
+    await page.getByRole('button', { name: 'Add row' }).click();
+
+    await expect(page.getByRole('dialog')).toHaveCount(0);
+    await expect(rows).toHaveCount(rowCount + 1);
+  });
+
+  test('deleting a tile removes it from the layout too, so the saved file never points at a missing tile', async ({ page }) => {
+    await openLayouts(page, 'creditRiverManor');
+    const images = page.locator('.adminLayoutPreview img');
+    const imageCount = await images.count();
+
+    await images.first().click();
+    page.once('dialog', (dialog) => {
+      expect(dialog.message()).toBe('Delete the tile "1"? It\'s placed in 1 spot in this page\'s layout, which will be removed too.');
+      dialog.accept();
+    });
+    await page.getByRole('dialog').getByRole('button', { name: 'Delete this tile' }).click();
+
+    await expect(images).toHaveCount(imageCount - 1);
+    await page.getByRole('button', { name: 'Review Changes' }).click();
+    await expect(page.locator('.adminOutputPanel-file pre')).not.toContainText("tileKey: '1'");
+  });
+});

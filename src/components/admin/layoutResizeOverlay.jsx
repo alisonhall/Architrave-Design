@@ -408,9 +408,14 @@ const LayoutResizeOverlay = ({ containerEl = null, rows, onChangeRows, editing: 
         />
       ))}
       {columnBoxes.map((box) => {
+        // The column's position in the row *now*, not as of the last measurement: right
+        // after a column is removed or moved, this render still has the previous
+        // measurement (the effect re-measures after it), whose positions may point past
+        // the end of the row or at a different column.
         const row = rowById[box.rowId];
-        if (!canResizeColumn(row.columns, columnBoxById, box.index)) return null;
-        const resize = (delta) => computeColumnResize({ columns: row.columns, boxes: columnBoxById, index: box.index, delta });
+        const index = row.columns.findIndex((column) => column.id === box.columnId);
+        if (index === -1 || !canResizeColumn(row.columns, columnBoxById, index)) return null;
+        const resize = (delta) => computeColumnResize({ columns: row.columns, boxes: columnBoxById, index, delta });
 
         return (
           <ColumnResizeHandle

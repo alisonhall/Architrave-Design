@@ -269,4 +269,54 @@ describe('EditableLayoutPreview', () => {
       expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
     });
   });
+
+  describe('the tile popover when the layout changes underneath it', () => {
+    const tiles = { a: { kind: 'image', imageUrl: 'https://example.com/a.jpg', backgroundPosition: '', overlayText: '' } };
+    const props = (rows, overrides = {}) => ({
+      rows,
+      tiles,
+      projects,
+      kinds: ['image'],
+      onChangeRows: jest.fn(),
+      onChangeTiles: jest.fn(),
+      onCreateTileAndAssign: jest.fn(),
+      ...overrides
+    });
+
+    it('closes when this layout tree changes some other way, so its stale actions can\'t undo that change', () => {
+      const rows = [row({ id: 'row1' }, [column('col1', [tileRef('a')])])];
+      const { rerender } = render(<EditableLayoutPreview {...props(rows)} />);
+      fireEvent.click(screen.getByRole('img'));
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+
+      // e.g. a resize applied while the popover was open.
+      rerender(<EditableLayoutPreview {...props([{ ...rows[0], height: 500 }])} />);
+      expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    });
+
+    it('stays open when only the tiles change (the same tree)', () => {
+      const rows = [row({ id: 'row1' }, [column('col1', [tileRef('a')])])];
+      const { rerender } = render(<EditableLayoutPreview {...props(rows)} />);
+      fireEvent.click(screen.getByRole('img'));
+
+      rerender(<EditableLayoutPreview {...props(rows, { tiles: { ...tiles, b: { kind: 'placeholder' } } })} />);
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+    });
+
+    it('hands "Delete this tile" to onDeleteTile, closing only if it went ahead', () => {
+      const rows = [row({ id: 'row1' }, [column('col1', [tileRef('a')])])];
+      const onDeleteTile = jest.fn(() => false);
+      const { rerender } = render(<EditableLayoutPreview {...props(rows, { onDeleteTile })} />);
+      fireEvent.click(screen.getByRole('img'));
+
+      fireEvent.click(screen.getByRole('button', { name: 'Delete this tile' }));
+      expect(onDeleteTile).toHaveBeenCalledWith('a');
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+
+      onDeleteTile.mockReturnValue(true);
+      rerender(<EditableLayoutPreview {...props(rows, { onDeleteTile })} />);
+      fireEvent.click(screen.getByRole('button', { name: 'Delete this tile' }));
+      expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    });
+  });
 });

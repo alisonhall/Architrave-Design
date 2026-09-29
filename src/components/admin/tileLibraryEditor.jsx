@@ -217,8 +217,12 @@ TileFilterInput.propTypes = {
  * map update and its placements' key update together in one atomic step; if omitted,
  * the tile is renamed in the map alone via `onChange` and its placements are left
  * pointing at the old key
+ * @param {Function} [param.onDeleteTile] - called (key) instead of the built-in
+ * confirm-and-`onChange` when a tile is deleted, so the caller can confirm and remove
+ * the tile together with its placements in one step; it returns whether the tile was
+ * actually deleted (false if the admin cancelled)
  */
-const TileLibraryEditor = ({ tiles, onChange, projects, kinds, onRenameTile }) => {
+const TileLibraryEditor = ({ tiles, onChange, projects, kinds, onRenameTile, onDeleteTile }) => {
   const [editingKey, setEditingKey] = useState(null);
   const [addingKind, setAddingKind] = useState(null);
   const [draftValues, setDraftValues] = useState(null);
@@ -289,6 +293,10 @@ const TileLibraryEditor = ({ tiles, onChange, projects, kinds, onRenameTile }) =
   };
 
   const deleteTile = (key) => {
+    if (onDeleteTile) {
+      if (onDeleteTile(key) && editingKey === key) cancel();
+      return;
+    }
     // eslint-disable-next-line no-alert
     if (!window.confirm('Delete this tile? Any layout placements using it will need to be removed too.')) return;
     const next = { ...tiles };
@@ -384,12 +392,14 @@ TileLibraryEditor.propTypes = {
   onChange: PropTypes.func.isRequired,
   projects: PropTypes.object.isRequired,
   kinds: PropTypes.arrayOf(PropTypes.string),
-  onRenameTile: PropTypes.func
+  onRenameTile: PropTypes.func,
+  onDeleteTile: PropTypes.func
 };
 
 TileLibraryEditor.defaultProps = {
   kinds: ['project', 'filler', 'text'],
-  onRenameTile: null
+  onRenameTile: null,
+  onDeleteTile: null
 };
 
 export default TileLibraryEditor;

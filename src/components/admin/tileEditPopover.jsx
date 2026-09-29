@@ -250,6 +250,9 @@ PlacementActions.propTypes = {
  * @param {Object} param.tiles
  * @param {Function} param.onChangeTiles - a tile's own fields changed, no placement affected
  * @param {Function} [param.onRenameTile]
+ * @param {Function} [param.onDeleteTile] - called (key) to confirm and delete a tile
+ * along with every placement of it (see TileLibraryEditor's prop of the same name);
+ * returns whether it was deleted
  * @param {Function} param.onAssignRows - called with the new `rows` after picking an existing tile for this slot
  * @param {Function} param.onCreateTileAndAssign - called with (key, values, rows) after creating a tile and assigning it here
  * @param {Object} param.projects
@@ -261,6 +264,7 @@ const TileEditPopover = ({
   tiles,
   onChangeTiles,
   onRenameTile,
+  onDeleteTile,
   onAssignRows,
   onCreateTileAndAssign,
   projects,
@@ -303,8 +307,12 @@ const TileEditPopover = ({
           onSave={(nextTiles) => { onChangeTiles(nextTiles); onClose(); }}
           onRenameTile={onRenameTile ? (oldKey, newKey, nextTiles) => { onRenameTile(oldKey, newKey, nextTiles); onClose(); } : null}
           onDelete={() => {
+            if (onDeleteTile) {
+              if (onDeleteTile(selection.tileKey)) onClose();
+              return;
+            }
             // eslint-disable-next-line no-alert
-            if (!window.confirm("Delete this tile? Anywhere it's placed in the layout will become an empty slot.")) return;
+            if (!window.confirm('Delete this tile? Any layout placements using it will need to be removed too.')) return;
             const nextTiles = { ...tiles };
             delete nextTiles[selection.tileKey];
             onChangeTiles(nextTiles);
@@ -338,6 +346,7 @@ TileEditPopover.propTypes = {
   tiles: PropTypes.object.isRequired,
   onChangeTiles: PropTypes.func.isRequired,
   onRenameTile: PropTypes.func,
+  onDeleteTile: PropTypes.func,
   onAssignRows: PropTypes.func.isRequired,
   onCreateTileAndAssign: PropTypes.func.isRequired,
   projects: PropTypes.object.isRequired,
@@ -347,7 +356,8 @@ TileEditPopover.propTypes = {
 
 TileEditPopover.defaultProps = {
   selection: null,
-  onRenameTile: null
+  onRenameTile: null,
+  onDeleteTile: null
 };
 
 export default TileEditPopover;

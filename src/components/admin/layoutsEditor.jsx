@@ -2,7 +2,13 @@ import React, { useState } from 'react';
 
 import { useDraftSection } from './draftContext';
 import { LAYOUT_PAGE_CONFIGS } from './seedData';
-import { makeBlankDetailLayout, renameTileKeyInLayoutData } from './layoutHelpers';
+import {
+  makeBlankDetailLayout,
+  renameTileKeyInLayoutData,
+  removeTileKeyFromLayoutData,
+  countTilePlacements,
+  deleteTileConfirmMessage
+} from './layoutHelpers';
 import TileLibraryEditor from './tileLibraryEditor';
 import EditableLayoutPreview from './editableLayoutPreview';
 
@@ -86,6 +92,19 @@ const LayoutsEditor = () => {
     ...renameTileKeyInLayoutData(pageLayout, oldKey, newKey)
   });
 
+  // Deleting a tile also removes every placement of it across all of this page's
+  // layout trees, in the same update — otherwise the saved layout would keep pointing
+  // at a tile that no longer exists, which the live site renders as nothing at all.
+  // Returns whether it went ahead (the admin can cancel the confirmation).
+  const deleteTileKey = (key) => {
+    // eslint-disable-next-line no-alert
+    if (!window.confirm(deleteTileConfirmMessage(key, countTilePlacements(pageLayout, key)))) return false;
+    const nextTiles = { ...pageLayout.tiles };
+    delete nextTiles[key];
+    updatePageLayout({ tiles: nextTiles, ...removeTileKeyFromLayoutData(pageLayout, key) });
+    return true;
+  };
+
   // Creating a brand-new tile from the click-to-edit-in-preview popover and assigning
   // it to the clicked slot touches both `tiles` and one tree's `rows` — done here as one
   // atomic updatePageLayout call per field, not two separate ones (see
@@ -134,6 +153,7 @@ const LayoutsEditor = () => {
             tiles={pageLayout.tiles}
             onChange={(tiles) => updatePageLayout({ tiles })}
             onRenameTile={renameTileKey}
+            onDeleteTile={deleteTileKey}
             projects={projects}
             kinds={isDetailPage ? DETAIL_TILE_KINDS : LISTING_TILE_KINDS}
           />
@@ -153,6 +173,7 @@ const LayoutsEditor = () => {
                   onChangeTiles={(tiles) => updatePageLayout({ tiles })}
                   onCreateTileAndAssign={createTileAndAssign('defaultLayout')}
                   onRenameTile={renameTileKey}
+                  onDeleteTile={deleteTileKey}
                 />
               </section>
 
@@ -169,6 +190,7 @@ const LayoutsEditor = () => {
                   onChangeTiles={(tiles) => updatePageLayout({ tiles })}
                   onCreateTileAndAssign={createTileAndAssign('wideLayout')}
                   onRenameTile={renameTileKey}
+                  onDeleteTile={deleteTileKey}
                 />
               </section>
             </>
@@ -185,6 +207,7 @@ const LayoutsEditor = () => {
                 onChangeTiles={(tiles) => updatePageLayout({ tiles })}
                 onCreateTileAndAssign={createTileAndAssign('layout')}
                 onRenameTile={renameTileKey}
+                onDeleteTile={deleteTileKey}
               />
             </section>
           )}
