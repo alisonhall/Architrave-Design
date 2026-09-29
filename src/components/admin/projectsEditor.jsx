@@ -194,6 +194,7 @@ const ProjectsEditor = () => {
         <section className="adminProjectsEditor-editing">
           <h2>Editing: {projects[editingKey].projectName}</h2>
           <ProjectForm
+            key={editingKey}
             initialProject={projects[editingKey]}
             onChange={(values) => setPreviewProject({ ...projects[editingKey], ...values })}
             onSubmit={(values) => saveProject(editingKey, values)}

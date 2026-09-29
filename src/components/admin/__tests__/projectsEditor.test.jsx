@@ -133,6 +133,26 @@ describe('ProjectsEditor', () => {
     expect(screen.queryByText('Should not stick')).not.toBeInTheDocument();
   });
 
+  it('switching Edit to a different project without saving discards the first project\'s unsaved edits', () => {
+    renderEditor();
+    const [firstKey, secondKey] = seedDraft.newProjectsOrder;
+    const firstName = seedDraft.projects[firstKey].projectName;
+    const secondName = seedDraft.projects[secondKey].projectName;
+    const section = within(newHomesSection());
+
+    fireEvent.click(within(section.getByText(firstName).closest('li')).getByRole('button', { name: 'Edit' }));
+    fireEvent.change(screen.getByLabelText('Project name'), { target: { value: 'Unsaved draft text' } });
+
+    fireEvent.click(within(section.getByText(secondName).closest('li')).getByRole('button', { name: 'Edit' }));
+
+    // The form must reset to the second project's own data — not keep showing the first
+    // project's unsaved edit, and not keep showing the first project's original name
+    // either (this is now a fresh form for a different project entirely).
+    expect(screen.getByLabelText('Project name')).toHaveValue(secondName);
+    expect(screen.getByRole('heading', { name: `Editing: ${secondName}` })).toBeInTheDocument();
+    expect(screen.queryByText('Unsaved draft text')).not.toBeInTheDocument();
+  });
+
   it('adds a new project as "not shown" by default', () => {
     renderEditor();
     const section = within(newHomesSection());

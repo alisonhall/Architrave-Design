@@ -100,6 +100,32 @@ test.describe('projects editor', () => {
     await expect(page.locator('.adminProjectsEditor-row', { hasText: 'Renamed via E2E' })).toBeVisible();
   });
 
+  test('switching Edit to a different project without saving discards the first project\'s unsaved edits', async ({
+    page
+  }) => {
+    await unlock(page);
+
+    const newHomesSection = page.locator('section', { has: page.getByRole('heading', { name: 'New Homes' }) });
+    const rows = newHomesSection.locator('.adminProjectsEditor-row');
+    const firstName = await rows.nth(0).locator('.adminProjectsEditor-name').innerText();
+    const secondName = await rows.nth(1).locator('.adminProjectsEditor-name').innerText();
+
+    await rows.nth(0).getByRole('button', { name: 'Edit' }).click();
+    await page.locator('#project-name').fill('Unsaved draft text');
+
+    const secondRow = newHomesSection.locator('.adminProjectsEditor-row').filter({
+      has: page.locator('.adminProjectsEditor-name', { hasText: secondName })
+    });
+    await secondRow.getByRole('button', { name: 'Edit' }).click();
+
+    await expect(page.getByRole('heading', { name: `Editing: ${secondName}` })).toBeVisible();
+    await expect(page.locator('#project-name')).toHaveValue(secondName);
+    await expect(page.getByText('Unsaved draft text')).toHaveCount(0);
+
+    // The first project itself must be untouched too, not just the form's display.
+    await expect(newHomesSection.locator('.adminProjectsEditor-name', { hasText: firstName }).first()).toBeVisible();
+  });
+
   test('reordering, hiding, and showing a project updates the output panel', async ({ page }) => {
     await unlock(page);
 
