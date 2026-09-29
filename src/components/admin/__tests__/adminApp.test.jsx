@@ -1,7 +1,8 @@
 import React from 'react';
-import { render, screen, fireEvent, within } from '@testing-library/react';
+import { render, screen, fireEvent, within, act } from '@testing-library/react';
 
 import AdminApp from '../adminApp';
+import { seedDraft, SEED_VERSION } from '../seedData';
 
 describe('AdminApp', () => {
   beforeEach(() => {
@@ -100,5 +101,139 @@ describe('AdminApp — deleting a project', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Review Changes' }));
     expect(screen.getAllByText('Delete this file')).toHaveLength(4);
     expect(screen.getByText('src/pages/portfolio/new-homes/hoggs-hollow-french.jsx')).toBeInTheDocument();
+  });
+});
+
+describe('AdminApp — undo, redo and discarding changes', () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
+    window.sessionStorage.clear();
+    window.confirm = jest.fn(() => true);
+  });
+
+  afterEach(() => {
+    jest.useRealTimers();
+    jest.restoreAllMocks();
+  });
+
+  // Separate clicks are separate undo steps in a real browser because a turn of the
+  // event loop passes between them; here, that has to be let happen explicitly.
+  const nextTurn = () => act(() => { jest.runOnlyPendingTimers(); });
+
+  const newHomes = () => within(screen.getByRole('heading', { name: 'New Homes' }).closest('section'));
+  const hideFirstShown = () => {
+    const shownList = newHomes().getAllByRole('list')[0];
+    const firstRow = within(shownList).getAllByRole('listitem')[0];
+    const name = firstRow.querySelector('.adminProjectsEditor-name').textContent;
+    fireEvent.click(within(firstRow).getByRole('button', { name: 'Hide' }));
+    return name;
+  };
+  const shownNames = () => within(newHomes().getAllByRole('list')[0])
+    .getAllByRole('listitem').map((row) => row.querySelector('.adminProjectsEditor-name').textContent);
+
+  it('starts with nothing to undo, redo or discard', () => {
+    render(<AdminApp />);
+    ['Undo', 'Redo', 'Discard all changes'].forEach((name) => expect(screen.getByRole('button', { name })).toBeDisabled());
+  });
+
+  it('undoes and redoes an edit from the buttons — one step even though it changed two lists', () => {
+    render(<AdminApp />);
+    const before = shownNames();
+    const hidden = hideFirstShown();
+    expect(shownNames()).not.toContain(hidden);
+    nextTurn();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Undo' }));
+    expect(shownNames()).toEqual(before);
+    expect(screen.getByRole('button', { name: 'Undo' })).toBeDisabled();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Redo' }));
+    expect(shownNames()).not.toContain(hidden);
+  });
+
+  it('Ctrl/Cmd+Z undoes and Ctrl/Cmd+Shift+Z or Ctrl+Y redoes — but not while typing in a field', () => {
+    render(<AdminApp />);
+    const hidden = hideFirstShown();
+    nextTurn();
+
+    fireEvent.keyDown(screen.getByRole('textbox', { name: /introduction/i }), { key: 'z', ctrlKey: true });
+    expect(shownNames()).not.toContain(hidden);
+
+    fireEvent.keyDown(document.body, { key: 'z', metaKey: true });
+    expect(shownNames()).toContain(hidden);
+    fireEvent.keyDown(document.body, { key: 'Z', ctrlKey: true, shiftKey: true });
+    expect(shownNames()).not.toContain(hidden);
+    fireEvent.keyDown(document.body, { key: 'z', ctrlKey: true });
+    fireEvent.keyDown(document.body, { key: 'y', ctrlKey: true });
+    expect(shownNames()).not.toContain(hidden);
+
+    // Other shortcuts are left alone.
+    fireEvent.keyDown(document.body, { key: 'z' });
+    fireEvent.keyDown(document.body, { key: 'z', ctrlKey: true, altKey: true });
+    fireEvent.keyDown(document.body, { key: 's', ctrlKey: true });
+    expect(shownNames()).not.toContain(hidden);
+  });
+
+  it('"Discard all changes" asks first, goes back to the site as it is, and can itself be undone', () => {
+    render(<AdminApp />);
+    const before = shownNames();
+    const hidden = hideFirstShown();
+    nextTurn();
+
+    window.confirm = jest.fn(() => false);
+    fireEvent.click(screen.getByRole('button', { name: 'Discard all changes' }));
+    expect(shownNames()).not.toContain(hidden);
+
+    window.confirm = jest.fn(() => true);
+    fireEvent.click(screen.getByRole('button', { name: 'Discard all changes' }));
+    expect(shownNames()).toEqual(before);
+    expect(screen.getByRole('button', { name: 'Discard all changes' })).toBeDisabled();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Undo' }));
+    expect(shownNames()).not.toContain(hidden);
+  });
+
+  it('asks before leaving the page only while there are changes', () => {
+    render(<AdminApp />);
+    const leave = () => {
+      const event = new Event('beforeunload', { cancelable: true });
+      window.dispatchEvent(event);
+      return event.defaultPrevented;
+    };
+
+    expect(leave()).toBe(false);
+    hideFirstShown();
+    expect(leave()).toBe(true);
+  });
+});
+
+describe('AdminApp — notices about the draft', () => {
+  const STORAGE_KEY = 'architrave-admin-draft';
+
+  beforeEach(() => window.sessionStorage.clear());
+  afterEach(() => jest.restoreAllMocks());
+
+  it('warns when changes can\'t be saved in the tab', () => {
+    jest.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new Error('QuotaExceededError'); });
+    render(<AdminApp />);
+    expect(screen.getByRole('alert')).toHaveTextContent('couldn\'t be saved in this browser tab');
+  });
+
+  it('says so (dismissibly) when a stored draft couldn\'t be restored', () => {
+    window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ __seedVersion: SEED_VERSION - 1 }));
+    render(<AdminApp />);
+
+    expect(screen.getByText(/previous draft couldn.t be restored/)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Dismiss' }));
+    expect(screen.queryByText(/previous draft couldn.t be restored/)).not.toBeInTheDocument();
+  });
+
+  it('warns (dismissibly) when the draft predates the site\'s current content', () => {
+    window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ ...seedDraft, __seedVersion: SEED_VERSION, __seedFingerprint: 'older' }));
+    render(<AdminApp />);
+
+    expect(screen.getByText(/content has been updated since this draft was started/)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Dismiss' }));
+    expect(screen.queryByText(/content has been updated/)).not.toBeInTheDocument();
   });
 });

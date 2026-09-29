@@ -59,6 +59,13 @@
         width: 180px;
         flex-shrink: 0;
         background: $darkTextColour;
+        // Kept in view on a long page (the Layouts editor runs thousands of px), so the
+        // section list — and Undo/Redo at its foot — is always within reach.
+        position: sticky;
+        top: 0;
+        align-self: flex-start;
+        height: 100vh;
+        overflow-y: auto;
 
         button {
             padding: 15px;
@@ -82,8 +89,55 @@
         overflow-y: auto;
     }
 
-    &-placeholder {
-        color: $grayLinkColour;
+    // Undo / Redo / Discard all changes, at the foot of the section list.
+    &-history {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-top: auto;
+        padding: 15px;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+
+        button {
+            padding: 8px 10px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            text-align: center;
+
+            &:disabled {
+                opacity: 0.35;
+                cursor: default;
+            }
+        }
+    }
+}
+
+// Messages about the draft itself (couldn't be saved, restored from an outdated
+// session, ...), shown above whichever section is open.
+.adminNotice {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    max-width: 900px;
+    margin-bottom: $spacing;
+    padding: 12px 15px;
+    background: #eaf2fb;
+    border-left: 4px solid #3a78c3;
+
+    &--warning {
+        background: #fff6e0;
+        border-left-color: #d69a00;
+    }
+
+    &--error {
+        background: #fdecea;
+        border-left-color: #c0392b;
+    }
+
+    button {
+        flex-shrink: 0;
+        margin-left: auto;
+        padding: 4px 10px;
+        cursor: pointer;
     }
 }
 
