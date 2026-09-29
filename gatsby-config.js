@@ -1,4 +1,9 @@
 module.exports = {
+  // Set (and paired with `--prefix-paths` on the develop/build scripts) only
+  // when served under a subpath, e.g. by app-hub at /apps/architrave-design.
+  // Standalone `gatsby develop`/`gatsby build` runs are unaffected, since
+  // GATSBY_PATH_PREFIX is unset and pathPrefix is simply omitted then.
+  ...(process.env.GATSBY_PATH_PREFIX ? { pathPrefix: process.env.GATSBY_PATH_PREFIX } : {}),
   siteMetadata: {
     title: `Architrave Design, Architect | Residential Designs`,
     description: `Architrave Design, Architect is a Residential Architect designing Homes and Additions in Etobicoke, Toronto, Mississauga, and Oakville.`,

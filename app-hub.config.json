@@ -1,0 +1,10 @@
+{
+  "name": "Architrave Design",
+  "slug": "architrave-design",
+  "description": "Architrave Design portfolio site",
+  "icon": "A",
+  "start": "GATSBY_PATH_PREFIX=/apps/architrave-design npm run build -- --prefix-paths && GATSBY_PATH_PREFIX=/apps/architrave-design npm run serve -- --prefix-paths -p $PORT",
+  "port": 4008,
+  "healthPath": "/apps/architrave-design/",
+  "preserveMountPath": true
+}
