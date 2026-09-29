@@ -166,4 +166,34 @@ describe('OutputSection', () => {
     expect(screen.getByText('src/pages/portfolio/new-homes/test-manor.jsx')).toBeInTheDocument();
     expect(screen.getByText('src/pages/portfolio/new-homes/__tests__/test-manor.test.jsx')).toBeInTheDocument();
   });
+
+  it('checks each changed layout for problems before it\'s applied', () => {
+    const EmptyRowAdder = () => {
+      const [layouts, setLayouts] = useDraftSection('layouts');
+      return (
+        <button
+          type="button"
+          onClick={() => setLayouts({
+            ...layouts,
+            creditRiverManor: { ...layouts.creditRiverManor, layout: [...layouts.creditRiverManor.layout, { id: 'r', columns: [] }] }
+          })}
+        >
+          add empty row
+        </button>
+      );
+    };
+    render(<DraftProvider><EmptyRowAdder /><OutputSection /></DraftProvider>);
+
+    fireEvent.click(screen.getByText('add empty row'));
+
+    expect(screen.getByRole('alert')).toHaveTextContent('1 problem to fix');
+    expect(screen.getByText('has no columns, so it shows nothing.', { exact: false })).toBeInTheDocument();
+  });
+
+  it('tells the admin to go through a pull request, which updates snapshot tests automatically', () => {
+    render(<DraftProvider><IntroTextMutator /><OutputSection /></DraftProvider>);
+    fireEvent.click(screen.getByText('mutate intro'));
+
+    expect(screen.getByText(/open a pull request: its checks update \(or create\) the affected snapshot tests automatically/)).toBeInTheDocument();
+  });
 });

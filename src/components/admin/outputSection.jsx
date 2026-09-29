@@ -9,6 +9,7 @@ import { generateTestScaffold } from './generators/testScaffoldGenerator';
 import { generateAboutData } from './generators/aboutGenerator';
 import { generateReviewsData } from './generators/reviewsGenerator';
 import OutputPanel from './outputPanel';
+import { findLayoutProblems } from './draftProblems';
 
 const APP_CONSTANTS_FIELDS = [
   'projects',
@@ -20,6 +21,10 @@ const APP_CONSTANTS_FIELDS = [
   'unusedUpcomingProjects',
   'defaultIntroductionText'
 ];
+
+// Page snapshot tests are kept current by the "Update snapshots" job in
+// .github/workflows/pr-checks.yml, which runs on pull requests only.
+const SNAPSHOT_NOTE = 'Commit these changes to a branch and open a pull request: its checks update (or create) the affected snapshot tests automatically in a follow-up commit — look over that commit before merging. Committed straight to master instead, those tests fail until someone runs `npm test -- -u` locally.';
 
 const appConstantsChanged = (draft) =>
   APP_CONSTANTS_FIELDS.some((field) => JSON.stringify(draft[field]) !== JSON.stringify(seedDraft[field]));
@@ -38,7 +43,7 @@ const OutputSection = () => {
       path: 'static/app-constants.js',
       content: generateAppConstants(draft),
       note:
-        "Any page whose snapshot renders project tiles (e.g. the home, new-homes, or reviews page tests) may need its snapshot updated afterward with `npm test -- -u` — review the diff before committing it. If a layout below still references a project you deleted, fix that layout first — the generated page would fail to render."
+        `Pages that show project tiles (e.g. the home, new-homes, or reviews pages) will have their snapshot tests updated too. ${SNAPSHOT_NOTE}`
     });
   }
 
@@ -46,7 +51,7 @@ const OutputSection = () => {
     files.push({
       path: 'static/about.js',
       content: generateAboutData(draft.aboutContent),
-      note: "This is plain data — the real about page's own file never needs to change. Its snapshot test will need updating afterward with `npm test -- -u` — review the diff before committing it."
+      note: `This is plain data — the real about page's own file never needs to change. ${SNAPSHOT_NOTE}`
     });
   }
 
@@ -54,7 +59,7 @@ const OutputSection = () => {
     files.push({
       path: 'static/reviews.js',
       content: generateReviewsData(draft.reviews),
-      note: "This is plain data — the real reviews page's own file never needs to change. Its snapshot test will need updating afterward with `npm test -- -u` — review the diff before committing it."
+      note: `This is plain data — the real reviews page's own file never needs to change. ${SNAPSHOT_NOTE}`
     });
   }
 
@@ -69,7 +74,8 @@ const OutputSection = () => {
     files.push({
       path: pageConfig.dataFilePath,
       content: generateLayoutData(pageLayout),
-      note: "This is plain data — the real page's own file never needs to change. Its snapshot test (if any) will need updating afterward with `npm test -- -u` — review the diff before committing it."
+      problems: findLayoutProblems(pageLayout, draft.projects),
+      note: `This is plain data — the real page's own file never needs to change. ${SNAPSHOT_NOTE}`
     });
 
     if (pageConfig.isNew) {
@@ -81,7 +87,7 @@ const OutputSection = () => {
       files.push({
         path: `src/pages/portfolio/${pageConfig.folder}/__tests__/${pageConfig.slug}.test.jsx`,
         content: generateTestScaffold(pageConfig),
-        note: 'Run `npm test -- -u` locally after adding this file to generate its actual snapshot, then commit the resulting .snap file alongside it.'
+        note: `The page's snapshot file doesn't exist yet — the pull request checks create it. ${SNAPSHOT_NOTE}`
       });
     }
   });

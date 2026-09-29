@@ -809,3 +809,28 @@
         background: #c0392b;
     }
 }
+
+.adminOutputPanel-problemSummary {
+    max-width: 900px;
+    margin-bottom: $spacing;
+    padding: 12px 15px;
+    background: #fdecea;
+    border-left: 4px solid #c0392b;
+}
+
+.adminOutputPanel-problems {
+    margin: 0;
+    padding: 10px 15px 10px 35px;
+    background: #fdecea;
+
+    li {
+        margin: 2px 0;
+    }
+}
+
+.adminOutputPanel-copyError {
+    margin: 0;
+    padding: 8px 15px;
+    color: #8a1c10;
+    background: #fdecea;
+}
