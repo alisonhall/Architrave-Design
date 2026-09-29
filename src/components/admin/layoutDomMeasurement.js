@@ -23,19 +23,28 @@ const EMPTY = { rowBoxes: [], columnBoxes: [] };
  * @param {Element} containerEl
  * @param {Array} rows
  * @returns {{ rowBoxes: Array, columnBoxes: Array }} boxes with `top`/`left`/`width`/
- * `height` in px relative to `containerEl`; column boxes also carry `rowWidth` (their
- * parent row's rendered width, for converting a dragged px width to a percentage)
+ * `height` (border box) and `contentWidth`/`contentHeight` (inside the borders), in px
+ * relative to `containerEl`; column boxes also carry their parent row's
+ * `rowContentWidth` (what a column's percentage width is actually a percentage of)
  */
 export const measureLayout = (containerEl, rows) => {
   if (!containerEl) return EMPTY;
   const containerRect = containerEl.getBoundingClientRect();
+  // `width`/`height` are the full border box (where the edge — and so its resize line —
+  // actually is); `contentWidth`/`contentHeight` exclude borders. The two differ by a
+  // lot here: every row and column carries 25px white borders as its gutters (see
+  // row.scss/column.scss), while a row's `height` and a column's `width` in the data
+  // only size the inside. (clientWidth/Height read 0 for something with no layout box
+  // of its own, so fall back to the border box then.)
   const boxOf = (el) => {
     const rect = el.getBoundingClientRect();
     return {
       top: rect.top - containerRect.top,
       left: rect.left - containerRect.left,
       width: rect.width,
-      height: rect.height
+      height: rect.height,
+      contentWidth: el.clientWidth || rect.width,
+      contentHeight: el.clientHeight || rect.height
     };
   };
 
@@ -57,7 +66,12 @@ export const measureLayout = (containerEl, rows) => {
     if (!el) return;
     const parentRowBox = rowBoxById[meta.rowId];
     const box = boxOf(el);
-    columnBoxes.push({ columnId: column.id, ...meta, ...box, rowWidth: parentRowBox ? parentRowBox.width : box.width });
+    columnBoxes.push({
+      columnId: column.id,
+      ...meta,
+      ...box,
+      rowContentWidth: parentRowBox ? parentRowBox.contentWidth : box.contentWidth
+    });
   });
 
   return { rowBoxes, columnBoxes };

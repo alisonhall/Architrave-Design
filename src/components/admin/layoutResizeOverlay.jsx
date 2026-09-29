@@ -28,6 +28,15 @@ export const setColumnWidth = (rows, rowId, columnId, width) => updateRowColumns
   (columns) => columns.map((column) => (column.id === columnId ? { ...column, width } : column))
 );
 
+// Sets several columns' widths in one row at once — { [columnId]: width }.
+export const setColumnWidths = (rows, rowId, widths) => updateRowColumns(
+  rows,
+  rowId,
+  (columns) => columns.map((column) => (Object.prototype.hasOwnProperty.call(widths, column.id)
+    ? { ...column, width: widths[column.id] }
+    : column))
+);
+
 /**
  * @description Picks which measured rows/columns get a resize handle. Every row gets
  * one at its bottom edge and every column at its right edge — nested rows included —
@@ -70,6 +79,101 @@ export const visibleHandleBoxes = (rows, { rowBoxes, columnBoxes }) => {
   // Outer handles render last, so wherever two do still overlap, the outer one is on top.
   const innermostFirst = (a, b) => b.depth - a.depth;
   return { rows: [...visibleRows].sort(innermostFirst), columns: [...visibleColumns].sort(innermostFirst) };
+};
+
+// No column is dragged narrower than this (px, inside its borders).
+const MIN_COLUMN_WIDTH = 20;
+
+// A column's `width` as the px width it asks for (its flex basis): a percentage of its
+// row's inside width, a px value, or — unset — whatever it currently renders at.
+const specifiedWidth = (width, rowContentWidth, renderedWidth) => {
+  if (typeof width === 'string' && width.trim().endsWith('%')) return (parseFloat(width) / 100) * rowContentWidth;
+  if (typeof width === 'string' && width.trim().endsWith('px')) return parseFloat(width);
+  return renderedWidth;
+};
+
+const toPercent = (px, rowContentWidth) => `${Math.max(0, (px / rowContentWidth) * 100).toFixed(1)}%`;
+
+const hasWidth = (column) => typeof column.width === 'string' && column.width.trim() !== '';
+
+// How much of the width a column asks for it actually renders at — below 1 when its
+// row's columns ask for more than fits and flexbox shrinks them (see below).
+const renderedFraction = (column, box) => {
+  const asked = specifiedWidth(column.width, box.rowContentWidth, box.contentWidth);
+  return asked > 0 ? box.contentWidth / asked : 1;
+};
+
+/**
+ * @description Works out the `width`s that put column `index`'s right edge exactly
+ * `delta` px from where it is now. Three things make that more than "new px width /
+ * row width":
+ *
+ * - A column's `width` sizes only its inside; its 25px white side borders come on top.
+ * - A row is a flexbox that shrinks its columns to fit when their widths plus borders
+ *   add up to more than the row (most two-column rows do: "46%" + "54%" + borders), so a
+ *   column renders at some fraction of the width it asks for. That fraction is the same
+ *   for every column with a width set (flexbox shrinks each in proportion to its size),
+ *   and is measured here as rendered ÷ asked-for.
+ * - A column with no width set is sized from its content instead, which reshuffles as
+ *   soon as any sibling's width changes. So if any column in the row has none, every
+ *   column in it is first given the width it renders at right now (the row looks
+ *   exactly the same, but is now fully specified, with nothing shrunk).
+ *
+ * Then the dragged column grows by delta ÷ its fraction, and the column to its right
+ * (if any) shrinks by the same — which moves only the edge being dragged, keeps the
+ * row's total (and so the fraction) unchanged, and leaves every other column in place.
+ *
+ * @param {Object} param
+ * @param {Array} param.columns - every column in the row, in order
+ * @param {Object} param.boxes - measured boxes (from measureLayout) by column id
+ * @param {number} param.index - the column whose right edge was dragged
+ * @param {number} param.delta - how far (px) it was dragged
+ * @returns {Object} the new widths to set, { [columnId]: '12.3%' }
+ */
+export const computeColumnResize = ({ columns, boxes, index, delta }) => {
+  const box = boxes[columns[index].id];
+  const rowContentWidth = box.rowContentWidth;
+  const materialize = columns.some((column) => !hasWidth(column));
+
+  // Each column's asked-for width (px) and rendered fraction, after materializing.
+  const sizes = columns.map((column) => {
+    const columnBox = boxes[column.id];
+    if (!columnBox) return null;
+    if (materialize) return { asked: columnBox.contentWidth, fraction: 1, rendered: columnBox.contentWidth };
+    return {
+      asked: specifiedWidth(column.width, rowContentWidth, columnBox.contentWidth),
+      fraction: renderedFraction(column, columnBox),
+      rendered: columnBox.contentWidth
+    };
+  });
+
+  const own = sizes[index];
+  const next = sizes[index + 1] ?? null;
+  let clamped = Math.max(delta, MIN_COLUMN_WIDTH - own.rendered);
+  if (next) clamped = Math.min(clamped, next.rendered - MIN_COLUMN_WIDTH);
+
+  const widths = {};
+  if (materialize) {
+    columns.forEach((column, i) => {
+      if (sizes[i]) widths[column.id] = toPercent(sizes[i].asked, rowContentWidth);
+    });
+  }
+  widths[columns[index].id] = toPercent(own.asked + clamped / own.fraction, rowContentWidth);
+  if (next) widths[columns[index + 1].id] = toPercent(next.asked - clamped / next.fraction, rowContentWidth);
+  return widths;
+};
+
+/**
+ * @description Whether dragging this column's right edge can actually move it. Not so
+ * for a row's last column while flexbox is shrinking the row to fit (see
+ * computeColumnResize): its right edge is pinned to the row's own, and asking for less
+ * width just gives the shrinking back to its siblings.
+ */
+export const canResizeColumn = (columns, boxes, index) => {
+  if (index < columns.length - 1) return true;
+  if (columns.some((column) => !hasWidth(column))) return true;
+  const box = boxes[columns[index].id];
+  return !box || renderedFraction(columns[index], box) > 0.99;
 };
 
 // Shared drag logic for both handle orientations: tracks pointer movement along one
@@ -156,11 +260,10 @@ RowResizeHandle.propTypes = {
   onClickToEdit: PropTypes.func.isRequired
 };
 
-const ColumnResizeHandle = ({ rect, initialWidth, onCommit, onClickToEdit }) => {
-  const toPercent = (delta) => Math.max(5, Math.min(100, ((initialWidth + delta) / rect.rowWidth) * 100));
+const ColumnResizeHandle = ({ rect, preview, onCommit, onClickToEdit }) => {
   const { lineRef, liveValue, onPointerDown } = useDragHandle({
     axis: 'x',
-    onCommit: (delta) => onCommit(`${toPercent(delta).toFixed(1)}%`),
+    onCommit,
     onClickToEdit
   });
 
@@ -174,7 +277,7 @@ const ColumnResizeHandle = ({ rect, initialWidth, onCommit, onClickToEdit }) => 
       aria-orientation="vertical"
       aria-label="Drag to resize this column's width, or click to type an exact value"
     >
-      {liveValue !== null && <span className="adminLayoutResize-label">{toPercent(liveValue).toFixed(0)}%</span>}
+      {liveValue !== null && <span className="adminLayoutResize-label">{preview(liveValue)}</span>}
     </div>
   );
 };
@@ -183,10 +286,9 @@ ColumnResizeHandle.propTypes = {
   rect: PropTypes.shape({
     top: PropTypes.number,
     left: PropTypes.number,
-    height: PropTypes.number,
-    rowWidth: PropTypes.number
+    height: PropTypes.number
   }).isRequired,
-  initialWidth: PropTypes.number.isRequired,
+  preview: PropTypes.func.isRequired,
   onCommit: PropTypes.func.isRequired,
   onClickToEdit: PropTypes.func.isRequired
 };
@@ -284,6 +386,7 @@ const LayoutResizeOverlay = ({ containerEl = null, rows, onChangeRows, editing: 
   const { rows: rowBoxes, columns: columnBoxes } = visibleHandleBoxes(rows, measurement);
   const { rows: rowEntries } = flattenLayout(rows);
   const rowById = Object.fromEntries(rowEntries.map((entry) => [entry.row.id, entry.row]));
+  const columnBoxById = Object.fromEntries(measurement.columnBoxes.map((box) => [box.columnId, box]));
 
   const editingRow = editing ? rowById[editing.rowId] : null;
   const editingColumn = editing?.type === 'column' && editingRow
@@ -296,25 +399,34 @@ const LayoutResizeOverlay = ({ containerEl = null, rows, onChangeRows, editing: 
         <RowResizeHandle
           key={box.rowId}
           rect={{ ...editAnchorFor('row', box), width: box.width }}
-          initialHeight={rowById[box.rowId].height ?? box.height}
+          // The measured inside height, not the data's `height` or the border box: a row
+          // with no height set yet still has a real rendered one to start from, and its
+          // 25px white borders aren't part of what `height` sizes.
+          initialHeight={box.contentHeight}
           onCommit={(height) => onChangeRows(setRowHeight(rows, box.rowId, height))}
           onClickToEdit={() => setEditing({ type: 'row', rowId: box.rowId, rect: editAnchorFor('row', box) })}
         />
       ))}
-      {columnBoxes.map((box) => (
-        <ColumnResizeHandle
-          key={box.columnId}
-          rect={{ ...editAnchorFor('column', box), height: box.height, rowWidth: box.rowWidth }}
-          initialWidth={box.width}
-          onCommit={(width) => onChangeRows(setColumnWidth(rows, box.rowId, box.columnId, width))}
-          onClickToEdit={() => setEditing({
-            type: 'column',
-            rowId: box.rowId,
-            columnId: box.columnId,
-            rect: editAnchorFor('column', box)
-          })}
-        />
-      ))}
+      {columnBoxes.map((box) => {
+        const row = rowById[box.rowId];
+        if (!canResizeColumn(row.columns, columnBoxById, box.index)) return null;
+        const resize = (delta) => computeColumnResize({ columns: row.columns, boxes: columnBoxById, index: box.index, delta });
+
+        return (
+          <ColumnResizeHandle
+            key={box.columnId}
+            rect={{ ...editAnchorFor('column', box), height: box.height }}
+            preview={(delta) => resize(delta)[box.columnId]}
+            onCommit={(delta) => onChangeRows(setColumnWidths(rows, box.rowId, resize(delta)))}
+            onClickToEdit={() => setEditing({
+              type: 'column',
+              rowId: box.rowId,
+              columnId: box.columnId,
+              rect: editAnchorFor('column', box)
+            })}
+          />
+        );
+      })}
       {editing && editing.type === 'row' && editingRow && (
         <EditPopup
           key={`row-${editing.rowId}`}

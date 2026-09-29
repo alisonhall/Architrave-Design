@@ -746,6 +746,96 @@ test.describe('layouts editor — drag-to-resize in preview', () => {
     expect(await readSize(page, toolbar, 'Column ▾', 'Edit width…', 'Width')).not.toBe('46%');
   });
 
+  // Drags a resize line and checks the edge ends up where the pointer let go — not
+  // merely that "something changed" (a line that resized by the wrong amount passes that).
+  const expectEdgeFollowsDrag = async (page, target, handleFor, axis, distance) => {
+    // Bring the edge being dragged (a row's bottom, or a column's top where its handle
+    // is grabbed) to mid-screen — a tall row's bottom can otherwise sit below the fold.
+    const before = await target.boundingBox();
+    await page.evaluate((y) => window.scrollBy(0, y - 350), axis === 'y' ? before.y + before.height : before.y);
+    const box = await target.boundingBox();
+    const handle = await handleFor(box);
+    const handleBox = await handle.boundingBox();
+    const start = axis === 'y'
+      ? { x: handleBox.x + 30, y: handleBox.y + handleBox.height / 2 }
+      : { x: handleBox.x + handleBox.width / 2, y: handleBox.y + 30 };
+    // Compared in page (not viewport) coordinates: shrinking a row can shorten the page
+    // enough that the browser scrolls, which moves everything in the viewport.
+    const scrollY = () => page.evaluate(() => window.scrollY);
+    const releasedAt = (axis === 'y' ? start.y + (await scrollY()) : start.x) + distance;
+
+    await page.mouse.move(start.x, start.y);
+    await page.mouse.down();
+    await page.mouse.move(start.x + (axis === 'x' ? distance : 0), start.y + (axis === 'y' ? distance : 0), { steps: 10 });
+    await page.mouse.up();
+
+    await expect.poll(async () => {
+      const after = await target.boundingBox();
+      const edge = axis === 'y' ? after.y + after.height + (await scrollY()) : after.x + after.width;
+      return Math.abs(edge - releasedAt);
+    }).toBeLessThanOrEqual(2);
+  };
+
+  const rowHandleAt = (page) => async (box) => {
+    const handles = page.locator('.adminLayoutResize-row');
+    for (let i = 0; i < await handles.count(); i += 1) {
+      const h = await handles.nth(i).boundingBox();
+      if (h && Math.abs(h.y + h.height / 2 - (box.y + box.height)) < 3 && Math.abs(h.x - box.x) < 3) return handles.nth(i);
+    }
+    throw new Error('No row resize handle along that edge');
+  };
+
+  const columnHandleAt = (page) => async (box) => {
+    const handles = page.locator('.adminLayoutResize-column');
+    for (let i = 0; i < await handles.count(); i += 1) {
+      const h = await handles.nth(i).boundingBox();
+      if (h && Math.abs(h.x + h.width / 2 - (box.x + box.width)) < 3 && Math.abs(h.y - box.y) < 3) return handles.nth(i);
+    }
+    throw new Error('No column resize handle along that edge');
+  };
+
+  test('a row\'s bottom edge ends up exactly where it was dragged to — sized or not, top-level or nested', async ({ page }) => {
+    await openLayouts(page, 'lyttonParkManorDetail');
+    const variant = page.locator('.adminLayoutsEditor-variant').first();
+    const topRows = variant.locator('.adminLayoutPreview > .row');
+
+    // Row 2 is the description row, with no height set (sized by its text).
+    await expectEdgeFollowsDrag(page, topRows.nth(1), rowHandleAt(page), 'y', 60);
+    // Row 1 has a height (600).
+    await expectEdgeFollowsDrag(page, topRows.nth(0), rowHandleAt(page), 'y', -80);
+    // A nested row (350) inside row 3.
+    await expectEdgeFollowsDrag(page, topRows.nth(2).locator('.column .row').first(), rowHandleAt(page), 'y', 40);
+  });
+
+  test('a column\'s right edge ends up exactly where it was dragged to, with its neighbour taking up the difference', async ({ page }) => {
+    await openLayouts(page, 'lyttonParkManorDetail');
+    const variant = page.locator('.adminLayoutsEditor-variant').first();
+
+    // Row 3's "46%" / "54%" pair: together with their borders they overflow the row,
+    // so flexbox shrinks both — the case that used to land 20–30px off.
+    const pair = variant.locator('.adminLayoutPreview > .row').nth(2).locator(':scope > .column');
+    const rowBox = await variant.locator('.adminLayoutPreview > .row').nth(2).boundingBox();
+    await expectEdgeFollowsDrag(page, pair.first(), columnHandleAt(page), 'x', -60);
+    // The neighbour still ends at the row's right edge.
+    const second = await pair.nth(1).boundingBox();
+    expect(Math.abs(second.x + second.width - (rowBox.x + rowBox.width))).toBeLessThanOrEqual(1);
+  });
+
+  test('a column in a row whose columns have no widths ends up exactly where it was dragged to', async ({ page }) => {
+    await openLayouts(page, 'creditRiverManor');
+
+    // Row 5: three columns with no width set — the case that used to land 100px+ off.
+    const trio = page.locator('.adminLayoutPreview > .row').nth(4).locator(':scope > .column');
+    await expectEdgeFollowsDrag(page, trio.first(), columnHandleAt(page), 'x', -40);
+
+    await page.getByRole('button', { name: 'Review Changes' }).click();
+    // All three were given explicit widths, not just the dragged one.
+    const output = page.locator('.adminOutputPanel-file pre');
+    for (const tile of ['diningRoom', 'kitchenBreakfastBay', 'familyRoomWithCustomMantel']) {
+      await expect(output).toContainText(new RegExp(`width: '[\\d.]+%',\\s*children: \\[\\s*\\{\\s*nodeType: 'tileRef',\\s*tileKey: '${tile}'`));
+    }
+  });
+
   test('a nested row gets its own resize handle, which changes only that nested row', async ({ page }) => {
     await openLayouts(page, 'lyttonParkManorDetail');
 

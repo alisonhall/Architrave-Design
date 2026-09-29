@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 
-import LayoutResizeOverlay, { setRowHeight, setRowSize, setColumnWidth, visibleHandleBoxes, editAnchorFor } from '../layoutResizeOverlay';
+import LayoutResizeOverlay, {
+  setRowHeight,
+  setRowSize,
+  setColumnWidth,
+  setColumnWidths,
+  visibleHandleBoxes,
+  editAnchorFor,
+  computeColumnResize,
+  canResizeColumn
+} from '../layoutResizeOverlay';
 
 const tileRef = (tileKey) => ({ nodeType: 'tileRef', tileKey });
 
@@ -80,7 +89,9 @@ describe('LayoutResizeOverlay', () => {
     expect(screen.getByRole('separator', { name: /resize this column's width/ })).toBeInTheDocument();
   });
 
-  it('dragging the row handle down commits a taller height on release', () => {
+  it('dragging the row handle down commits a taller height on release, starting from its rendered height', () => {
+    // The row renders 100px tall (mockRects), whatever its data says — that's where the
+    // line is, so that's what a drag starts from.
     mockRects();
     const onChangeRows = jest.fn();
     const rows = singleColumnRows();
@@ -91,7 +102,25 @@ describe('LayoutResizeOverlay', () => {
     fireEvent.pointerMove(document, { clientY: 150 });
     fireEvent.pointerUp(document, { clientY: 150 });
 
-    expect(onChangeRows).toHaveBeenCalledWith(setRowHeight(rows, 'row1', 350));
+    expect(onChangeRows).toHaveBeenCalledWith(setRowHeight(rows, 'row1', 150));
+  });
+
+  it('measures a row\'s height inside its borders, so the committed height puts the edge where it was released', () => {
+    // 350px border box = 300px inside + 25px white border top and bottom (row.scss).
+    mockRects({ rowRect: { top: 0, left: 0, right: 400, bottom: 350, width: 400, height: 350 } });
+    jest.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockImplementation(function mockHeight() {
+      return this.dataset.rowId ? 300 : 0;
+    });
+    const onChangeRows = jest.fn();
+    const rows = [{ id: 'row1', columns: [{ id: 'col1', children: [] }] }];
+    render(<Harness rows={rows} onChangeRows={onChangeRows} />);
+
+    const handle = screen.getByRole('separator', { name: /resize this row's height/ });
+    fireEvent.pointerDown(handle, { clientY: 350 });
+    fireEvent.pointerMove(document, { clientY: 410 });
+    fireEvent.pointerUp(document, { clientY: 410 });
+
+    expect(onChangeRows).toHaveBeenCalledWith(setRowHeight(rows, 'row1', 360));
   });
 
   it('shows a live height label while dragging', () => {
@@ -102,7 +131,7 @@ describe('LayoutResizeOverlay', () => {
     fireEvent.pointerDown(handle, { clientY: 100 });
     fireEvent.pointerMove(document, { clientY: 160 });
 
-    expect(screen.getByText('360px')).toBeInTheDocument();
+    expect(screen.getByText('160px')).toBeInTheDocument();
 
     fireEvent.pointerUp(document, { clientY: 160 });
   });
@@ -375,7 +404,9 @@ describe('LayoutResizeOverlay — nested rows', () => {
     fireEvent.pointerMove(document, { clientX: 300 });
     fireEvent.pointerUp(document, { clientX: 300 });
 
-    expect(onChangeRows).toHaveBeenCalledWith(setColumnWidth(rows, 'row2', 'col2', '75.0%'));
+    // Both nested columns had no width, so both get one: col2 grows by the 100px dragged
+    // and col3, to its right, gives up the same.
+    expect(onChangeRows).toHaveBeenCalledWith(setColumnWidths(rows, 'row2', { col2: '75.0%', col3: '25.0%' }));
   });
 });
 
@@ -454,5 +485,64 @@ describe('LayoutResizeOverlay — the row size form', () => {
     fireEvent.keyDown(screen.getByLabelText('Width'), { key: 'Escape' });
     expect(onEditingChange).toHaveBeenCalledWith(null);
     expect(onChangeRows).not.toHaveBeenCalled();
+  });
+});
+
+describe('computeColumnResize', () => {
+  // A 1000px-wide row (inside its borders).
+  const box = (contentWidth) => ({ contentWidth, rowContentWidth: 1000 });
+
+  it('with room to spare, grows the column by exactly the drag and shrinks its right-hand neighbour to match', () => {
+    const columns = [{ id: 'a', width: '40%' }, { id: 'b', width: '40%' }, { id: 'c', width: '10%' }];
+    const boxes = { a: box(400), b: box(400), c: box(100) };
+
+    expect(computeColumnResize({ columns, boxes, index: 0, delta: 50 })).toEqual({ a: '45.0%', b: '35.0%' });
+  });
+
+  it('corrects for flexbox shrinking an over-full row, so the edge still lands where it was dragged', () => {
+    // "50%" + "50%" plus borders overflow the row, so both render at 95% of what they ask for.
+    const columns = [{ id: 'a', width: '50%' }, { id: 'b', width: '50%' }];
+    const boxes = { a: box(475), b: box(475) };
+
+    // Moving the rendered edge 95px means asking for 100px more (95 / 0.95).
+    expect(computeColumnResize({ columns, boxes, index: 0, delta: 95 })).toEqual({ a: '60.0%', b: '40.0%' });
+  });
+
+  it('first gives every column in the row the width it renders at when any has none', () => {
+    const columns = [{ id: 'a' }, { id: 'b', width: '30%' }, { id: 'c' }];
+    const boxes = { a: box(300), b: box(300), c: box(300) };
+
+    expect(computeColumnResize({ columns, boxes, index: 1, delta: -100 })).toEqual({ a: '30.0%', b: '20.0%', c: '40.0%' });
+  });
+
+  it('reads px widths too, and resizes a last column on its own', () => {
+    const columns = [{ id: 'a', width: '500px' }];
+    expect(computeColumnResize({ columns, boxes: { a: box(500) }, index: 0, delta: -100 })).toEqual({ a: '40.0%' });
+  });
+
+  it('never drags a column, or its neighbour, below a minimum width', () => {
+    const columns = [{ id: 'a', width: '50%' }, { id: 'b', width: '50%' }];
+    const boxes = { a: box(500), b: box(500) };
+
+    expect(computeColumnResize({ columns, boxes, index: 0, delta: -1000 })).toEqual({ a: '2.0%', b: '98.0%' });
+    expect(computeColumnResize({ columns, boxes, index: 0, delta: 1000 })).toEqual({ a: '98.0%', b: '2.0%' });
+  });
+});
+
+describe('canResizeColumn', () => {
+  const box = (contentWidth) => ({ contentWidth, rowContentWidth: 1000 });
+
+  it('allows any column but the last', () => {
+    expect(canResizeColumn([{ id: 'a', width: '50%' }, { id: 'b', width: '50%' }], { a: box(475), b: box(475) }, 0)).toBe(true);
+  });
+
+  it('refuses a last column whose edge is pinned by flexbox shrinking the row', () => {
+    expect(canResizeColumn([{ id: 'a', width: '50%' }, { id: 'b', width: '50%' }], { a: box(475), b: box(475) }, 1)).toBe(false);
+  });
+
+  it('allows a last column that renders at the width it asks for, or in a row with unsized columns', () => {
+    expect(canResizeColumn([{ id: 'a', width: '40%' }, { id: 'b', width: '40%' }], { a: box(400), b: box(400) }, 1)).toBe(true);
+    expect(canResizeColumn([{ id: 'a' }, { id: 'b', width: '50%' }], { a: box(475), b: box(475) }, 1)).toBe(true);
+    expect(canResizeColumn([{ id: 'a', width: '40%' }], {}, 0)).toBe(true);
   });
 });

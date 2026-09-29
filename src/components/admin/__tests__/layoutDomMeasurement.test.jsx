@@ -58,9 +58,9 @@ describe('measureLayout', () => {
       expect.objectContaining({ rowId: 'row2', depth: 1, topLevel: false, parentColumnId: 'col1', parentRowId: 'row1', height: 120 })
     ]);
     expect(columnBoxes).toEqual([
-      expect.objectContaining({ columnId: 'col1', rowId: 'row1', index: 0, siblingCount: 2, width: 200, rowWidth: 400 }),
-      expect.objectContaining({ columnId: 'col2', rowId: 'row2', depth: 1, width: 200, rowWidth: 200 }),
-      expect.objectContaining({ columnId: 'col3', rowId: 'row1', index: 1, left: 200, rowWidth: 400 })
+      expect.objectContaining({ columnId: 'col1', rowId: 'row1', index: 0, siblingCount: 2, width: 200, rowContentWidth: 400 }),
+      expect.objectContaining({ columnId: 'col2', rowId: 'row2', depth: 1, width: 200, rowContentWidth: 200 }),
+      expect.objectContaining({ columnId: 'col3', rowId: 'row1', index: 1, left: 200, rowContentWidth: 400 })
     ]);
   });
 
@@ -73,7 +73,7 @@ describe('measureLayout', () => {
     expect(columnBoxes.map((box) => box.columnId)).toEqual(['col1', 'col2', 'col3']);
   });
 
-  it('falls back to the column\'s own width for rowWidth when its row wasn\'t measured', () => {
+  it('falls back to the column\'s own width for rowContentWidth when its row wasn\'t measured', () => {
     const container = document.createElement('div');
     container.innerHTML = '<div data-column-id="col3"></div>';
     jest.spyOn(Element.prototype, 'getBoundingClientRect').mockImplementation(function mockImpl() {
@@ -81,7 +81,25 @@ describe('measureLayout', () => {
     });
 
     const { columnBoxes } = measureLayout(container, rows);
-    expect(columnBoxes).toEqual([expect.objectContaining({ columnId: 'col3', rowWidth: 200 })]);
+    expect(columnBoxes).toEqual([expect.objectContaining({ columnId: 'col3', rowContentWidth: 200 })]);
+  });
+});
+
+describe('measureLayout — content size', () => {
+  it('reports the inside (clientWidth/clientHeight — no borders) alongside the border box', () => {
+    const container = buildDom();
+    jest.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockImplementation(function mockWidth() {
+      return this.dataset.rowId === 'row1' ? 350 : 0;
+    });
+    jest.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockImplementation(function mockHeight() {
+      return this.dataset.rowId === 'row1' ? 250 : 0;
+    });
+
+    const { rowBoxes, columnBoxes } = measureLayout(container, rows);
+
+    expect(rowBoxes[0]).toMatchObject({ width: 400, height: 300, contentWidth: 350, contentHeight: 250 });
+    // A column reports its row's inside width; with no clientWidth of its own, it falls back to its border box.
+    expect(columnBoxes[0]).toMatchObject({ contentWidth: 200, rowContentWidth: 350 });
   });
 });
 
