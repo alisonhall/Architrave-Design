@@ -29,6 +29,13 @@ const DRAG_THRESHOLD = 4;
 const ROW_TOOLBAR_WIDTH = 100;
 const COLUMN_TOOLBAR_WIDTH = 116;
 
+// Removing a row or column also removes everything inside it, and the admin tool has
+// no undo — so, like deleting a page (layoutsEditor.jsx), it asks first.
+const confirmRemove = (what) => (
+  // eslint-disable-next-line no-alert
+  window.confirm(`Remove this ${what} and everything in it? This can't be undone.`)
+);
+
 const overlaps = (a, b) => a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
 
 /**
@@ -200,7 +207,10 @@ const LayoutStructureOverlay = ({ containerEl = null, rows, onChangeRows, onEdit
             { label: 'Duplicate row', onClick: () => inContainer((list, i, clone) => insertAt(list, i + 1, clone(list[i]))) },
             { label: 'Add column', onClick: () => onChangeRows(updateRowColumns(rows, rowId, (columns) => [...columns, makeBlankColumn()])) },
             { label: 'Edit size…', onClick: () => onEditSize({ type: 'row', rowId, rect: editAnchorFor('row', box) }) },
-            { label: 'Remove row', onClick: () => inContainer((list, i) => removeAt(list, i)) }
+            {
+              label: 'Remove row',
+              onClick: () => { if (confirmRemove(topLevel ? 'row' : 'nested row')) inContainer((list, i) => removeAt(list, i)); }
+            }
           ]}
         />
       </div>
@@ -231,7 +241,10 @@ const LayoutStructureOverlay = ({ containerEl = null, rows, onChangeRows, onEdit
             { label: 'Add nested row', onClick: () => addChild(makeRowPlacement) },
             { label: 'Add empty placeholder', onClick: () => addChild(makeEmptyPlacement) },
             { label: 'Edit width…', onClick: () => onEditSize({ type: 'column', rowId, columnId, rect: editAnchorFor('column', box) }) },
-            { label: 'Remove column', onClick: () => onColumns((columns) => removeAt(columns, index)) }
+            {
+              label: 'Remove column',
+              onClick: () => { if (confirmRemove('column')) onColumns((columns) => removeAt(columns, index)); }
+            }
           ]}
         />
       </div>

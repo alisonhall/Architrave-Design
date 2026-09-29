@@ -260,6 +260,31 @@ test.describe('layouts editor', () => {
     await expect(rows.nth(1)).toHaveAttribute('data-row-id', firstRowId);
   });
 
+  test('removing a row asks for confirmation first, and only removes it once accepted', async ({ page }) => {
+    await openLayouts(page, 'newHomes');
+
+    const defaultVariant = page.locator('.adminLayoutsEditor-variant').first();
+    const rows = defaultVariant.locator('.adminLayoutPreview > .row');
+    const rowCountBefore = await rows.count();
+    const toolbar = defaultVariant.locator('.adminLayoutStructure-toolbar--row').first();
+
+    const removeRow = async () => {
+      await toolbar.getByRole('button', { name: 'Row ▾' }).click();
+      await toolbar.getByRole('menuitem', { name: 'Remove row' }).click();
+    };
+
+    page.once('dialog', (dialog) => {
+      expect(dialog.message()).toContain('Remove this row and everything in it?');
+      dialog.dismiss();
+    });
+    await removeRow();
+    await expect(rows).toHaveCount(rowCountBefore);
+
+    page.once('dialog', (dialog) => dialog.accept());
+    await removeRow();
+    await expect(rows).toHaveCount(rowCountBefore - 1);
+  });
+
   test('duplicating a row inserts a copy right after it', async ({ page }) => {
     await openLayouts(page, 'newHomes');
 

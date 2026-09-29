@@ -198,15 +198,29 @@ describe('LayoutStructureOverlay', () => {
       expect(onEditSize).toHaveBeenCalledWith({ type: 'row', rowId: 'row2', rect: { top: 300, left: 0 } });
     });
 
-    it('removes a row, top-level or nested', () => {
+    it('removes a row, top-level or nested, after confirming', () => {
+      window.confirm = jest.fn(() => true);
       const onChangeRows = jest.fn();
       const { container } = render(<Harness rows={makeRows()} onChangeRows={onChangeRows} />);
 
       choose(rowToolbar(container, 'row4'), 'Row ▾', 'Remove row');
+      expect(window.confirm).toHaveBeenLastCalledWith(expect.stringContaining('Remove this row and everything in it?'));
       expect(onChangeRows.mock.calls[0][0].map((row) => row.id)).toEqual(['row1']);
 
       choose(rowToolbar(container, 'row2'), 'Nested row ▾', 'Remove row');
+      expect(window.confirm).toHaveBeenLastCalledWith(expect.stringContaining('Remove this nested row'));
       expect(findRowById(onChangeRows.mock.calls[1][0], 'row2')).toBeNull();
+    });
+
+    it('leaves the row in place when the confirmation is declined', () => {
+      window.confirm = jest.fn(() => false);
+      const onChangeRows = jest.fn();
+      const { container } = render(<Harness rows={makeRows()} onChangeRows={onChangeRows} />);
+
+      choose(rowToolbar(container, 'row4'), 'Row ▾', 'Remove row');
+
+      expect(window.confirm).toHaveBeenCalled();
+      expect(onChangeRows).not.toHaveBeenCalled();
     });
   });
 
@@ -262,13 +276,25 @@ describe('LayoutStructureOverlay', () => {
       expect(onEditSize).toHaveBeenCalledWith({ type: 'column', rowId: 'row1', columnId: 'col1', rect: { top: 0, left: 200 } });
     });
 
-    it('removes a column', () => {
+    it('removes a column after confirming', () => {
+      window.confirm = jest.fn(() => true);
       const onChangeRows = jest.fn();
       const { container } = render(<Harness rows={makeRows()} onChangeRows={onChangeRows} />);
 
       choose(columnToolbar(container, 'col1'), 'Column ▾', 'Remove column');
 
+      expect(window.confirm).toHaveBeenCalledWith(expect.stringContaining('Remove this column and everything in it?'));
       expect(onChangeRows.mock.calls[0][0][0].columns.map((column) => column.id)).toEqual(['col2']);
+    });
+
+    it('leaves the column in place when the confirmation is declined', () => {
+      window.confirm = jest.fn(() => false);
+      const onChangeRows = jest.fn();
+      const { container } = render(<Harness rows={makeRows()} onChangeRows={onChangeRows} />);
+
+      choose(columnToolbar(container, 'col1'), 'Column ▾', 'Remove column');
+
+      expect(onChangeRows).not.toHaveBeenCalled();
     });
   });
 
