@@ -167,4 +167,15 @@ describe('ProjectsEditor', () => {
     expect(section.getByText('Test Estate')).toBeInTheDocument();
     expect(section.getByText('Test Estate').closest('li').querySelector('button').textContent).toBe('Show');
   });
+
+  it('moves a shown project up', () => {
+    renderEditor();
+    const shown = () => within(within(newHomesSection()).getAllByRole('list')[0]).getAllByRole('listitem')
+      .map((item) => item.querySelector('.adminProjectsEditor-name').textContent);
+    const [first, second] = shown();
+
+    fireEvent.click(within(within(within(newHomesSection()).getAllByRole('list')[0]).getAllByRole('listitem')[1]).getByRole('button', { name: 'Up' }));
+
+    expect(shown().slice(0, 2)).toEqual([second, first]);
+  });
 });

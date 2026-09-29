@@ -24,7 +24,18 @@ const fingerprint = (text) => {
   return hash.toString(36);
 };
 
-const SEED_JSON = JSON.stringify(seedDraft);
+/**
+ * @description The draft's actual content as text, for comparing — leaving out every
+ * `id`: those are editor-only (React keys and node addresses, never written to any file;
+ * see hydrateLayoutData/hydrateReviews), and freshly random on every page load. Compared
+ * with them, a draft restored after a refresh would never match the site's own content,
+ * even untouched.
+ */
+export const contentJSON = (value) => JSON.stringify(value, (key, entry) => (key === 'id' ? undefined : entry));
+
+export const sameContent = (a, b) => a === b || contentJSON(a) === contentJSON(b);
+
+const SEED_JSON = contentJSON(seedDraft);
 const SEED_FINGERPRINT = fingerprint(SEED_JSON);
 
 /**
@@ -151,7 +162,7 @@ export const historyReducer = (state, action) => {
 export const draftHasChanges = (draft) => {
   const keys = Object.keys(seedDraft);
   if (keys.every((key) => draft[key] === seedDraft[key])) return false;
-  return JSON.stringify(draft) !== SEED_JSON;
+  return contentJSON(draft) !== SEED_JSON;
 };
 
 /**

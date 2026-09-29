@@ -6,13 +6,20 @@ import {
   useDraftSection,
   useDraftMeta,
   useDraftUpdate,
+  useDraftDispatch,
   historyReducer,
   loadInitialDraft,
   draftHasChanges,
+  contentJSON,
+  sameContent,
   HISTORY_LIMIT,
   TYPING_MERGE_WINDOW
 } from '../draftContext';
 import { seedDraft, SEED_VERSION } from '../seedData';
+import { hydrateLayoutData } from '../layoutHelpers';
+import { hydrateReviews } from '../reviewsHelpers';
+import indexLayout from '../../../../static/layouts/index';
+import reviewsData from '../../../../static/reviews';
 
 const STORAGE_KEY = 'architrave-admin-draft';
 
@@ -299,5 +306,50 @@ describe('DraftProvider — history and status', () => {
   it('useDraftMeta refuses to work outside a DraftProvider', () => {
     jest.spyOn(console, 'error').mockImplementation(() => {});
     expect(() => render(<MetaProbe />)).toThrow(/within a DraftProvider/);
+  });
+
+describe('draft hooks outside a DraftProvider', () => {
+  it('refuse to work', () => {
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+    const Probe = () => { useDraftSection('reviews'); return null; };
+    expect(() => render(<Probe />)).toThrow(/useDraftState must be used within a DraftProvider/);
+    jest.restoreAllMocks();
+  });
+});
+});
+
+describe('useDraftDispatch outside a DraftProvider', () => {
+  it('refuses to work', () => {
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+    const Probe = () => { useDraftDispatch(); return null; };
+    expect(() => render(<Probe />)).toThrow(/useDraftDispatch must be used within a DraftProvider/);
+    jest.restoreAllMocks();
+  });
+});
+
+describe('comparing content, not editor-only ids', () => {
+  // What a page reload does: the same committed data hydrated again, with new random ids.
+  const reloaded = () => ({
+    ...JSON.parse(JSON.stringify(seedDraft)),
+    layouts: { ...seedDraft.layouts, index: hydrateLayoutData(indexLayout) },
+    reviews: hydrateReviews(reviewsData)
+  });
+
+  it('sees the same data with different ids as the same content', () => {
+    const again = reloaded();
+    expect(JSON.stringify(again.layouts.index)).not.toBe(JSON.stringify(seedDraft.layouts.index));
+    expect(sameContent(again.layouts.index, seedDraft.layouts.index)).toBe(true);
+    expect(sameContent(again.reviews, seedDraft.reviews)).toBe(true);
+    expect(contentJSON(again)).toBe(contentJSON(seedDraft));
+  });
+
+  it('so an untouched draft restored after a reload has no changes', () => {
+    expect(draftHasChanges(reloaded())).toBe(false);
+  });
+
+  it('while a real change still counts', () => {
+    const edited = reloaded();
+    edited.reviews = edited.reviews.slice(1);
+    expect(draftHasChanges(edited)).toBe(true);
   });
 });

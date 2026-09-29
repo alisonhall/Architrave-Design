@@ -89,9 +89,8 @@ const EditableLayoutPreview = ({
     setContainerEl(node);
   };
 
+  // Only ever fires from the container itself, so containerRef.current is set by then.
   const handleClick = (event) => {
-    if (!containerRef.current) return;
-
     // A project tile renders as a real Gatsby <Link> (see buildProjectTile/imageLinkTile.jsx)
     // — clicking one here must open its edit popover, not navigate away from the admin
     // tool. Using the capture phase (not the usual bubble-phase onClick) means this runs

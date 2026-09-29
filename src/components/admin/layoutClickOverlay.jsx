@@ -34,8 +34,9 @@ export const resolvePlacementClick = (event, rootEl, rows) => {
   while (directChild && directChild.parentElement !== columnEl) directChild = directChild.parentElement;
   if (!directChild) return null;
 
+  // directChild's parent is columnEl (that's where the walk above stopped), so it's
+  // always one of columnEl's children.
   const childIndex = Array.from(columnEl.children).indexOf(directChild);
-  if (childIndex === -1) return null;
 
   const columnId = columnEl.dataset.columnId;
   const column = findColumnById(rows, columnId);

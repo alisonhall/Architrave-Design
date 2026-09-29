@@ -521,6 +521,12 @@ describe('computeColumnResize', () => {
     expect(computeColumnResize({ columns, boxes: { a: box(500) }, index: 0, delta: -100 })).toEqual({ a: '40.0%' });
   });
 
+  it('treats a width it can\'t read as a size (e.g. "auto") as the width the column renders at', () => {
+    const columns = [{ id: 'a', width: 'auto' }, { id: 'b', width: '50%' }];
+    expect(computeColumnResize({ columns, boxes: { a: box(400), b: box(500) }, index: 0, delta: 100 }))
+      .toEqual({ a: '50.0%', b: '40.0%' });
+  });
+
   it('never drags a column, or its neighbour, below a minimum width', () => {
     const columns = [{ id: 'a', width: '50%' }, { id: 'b', width: '50%' }];
     const boxes = { a: box(500), b: box(500) };

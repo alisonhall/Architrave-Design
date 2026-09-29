@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useDraftState } from './draftContext';
+import { useDraftState, sameContent } from './draftContext';
 import { seedDraft, pageConfigsFor } from './seedData';
 import { generateAppConstants } from './generators/appConstantsGenerator';
 import { generateLayoutData } from './generators/layoutGenerator';
@@ -27,7 +27,7 @@ const APP_CONSTANTS_FIELDS = [
 const SNAPSHOT_NOTE = 'Commit these changes to a branch and open a pull request: its checks update (or create) the affected snapshot tests automatically in a follow-up commit — look over that commit before merging. Committed straight to master instead, those tests fail until someone runs `npm test -- -u` locally.';
 
 const appConstantsChanged = (draft) =>
-  APP_CONSTANTS_FIELDS.some((field) => JSON.stringify(draft[field]) !== JSON.stringify(seedDraft[field]));
+  APP_CONSTANTS_FIELDS.some((field) => !sameContent(draft[field], seedDraft[field]));
 
 /**
  * @description Reads the current draft and turns it into the list of files the output
@@ -47,7 +47,7 @@ const OutputSection = () => {
     });
   }
 
-  if (JSON.stringify(draft.aboutContent) !== JSON.stringify(seedDraft.aboutContent)) {
+  if (!sameContent(draft.aboutContent, seedDraft.aboutContent)) {
     files.push({
       path: 'static/about.js',
       content: generateAboutData(draft.aboutContent),
@@ -55,7 +55,7 @@ const OutputSection = () => {
     });
   }
 
-  if (JSON.stringify(draft.reviews) !== JSON.stringify(seedDraft.reviews)) {
+  if (!sameContent(draft.reviews, seedDraft.reviews)) {
     files.push({
       path: 'static/reviews.js',
       content: generateReviewsData(draft.reviews),
@@ -69,7 +69,7 @@ const OutputSection = () => {
     const pageConfig = pageConfigs[pageKey];
     const pageLayout = draft.layouts[pageKey];
     if (!pageLayout) return;
-    if (JSON.stringify(pageLayout) === JSON.stringify(seedDraft.layouts[pageKey])) return;
+    if (sameContent(pageLayout, seedDraft.layouts[pageKey])) return;
 
     files.push({
       path: pageConfig.dataFilePath,

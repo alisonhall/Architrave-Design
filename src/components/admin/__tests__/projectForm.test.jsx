@@ -68,4 +68,22 @@ describe('ProjectForm', () => {
 
     expect(onCancel).toHaveBeenCalled();
   });
+
+  it('submits every optional field it offers', () => {
+    const onSubmit = jest.fn();
+    render(<ProjectForm onSubmit={onSubmit} onCancel={jest.fn()} />);
+
+    fireEvent.change(screen.getByLabelText('Project name'), { target: { value: 'Full Project' } });
+    fireEvent.change(screen.getByLabelText('Main image URL'), { target: { value: 'https://example.com/main.jpg' } });
+    fireEvent.change(screen.getByLabelText('Description'), { target: { value: 'A long description.' } });
+    fireEvent.change(screen.getByLabelText(/Completion/), { target: { value: 'Spring 2027' } });
+    fireEvent.change(screen.getByLabelText(/Before image URL/), { target: { value: 'https://example.com/before.jpg' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+
+    expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({
+      projectDescription: 'A long description.',
+      completion: 'Spring 2027',
+      beforeImageUrl: 'https://example.com/before.jpg'
+    }));
+  });
 });

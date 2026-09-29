@@ -441,4 +441,65 @@ describe('TileEditPopover', () => {
       expect(onClose).not.toHaveBeenCalled();
     });
   });
+
+  describe('edit form validation and navigation', () => {
+    const tiles = {
+      a: { kind: 'image', imageUrl: 'https://example.com/a.jpg', backgroundPosition: '', overlayText: '' },
+      b: { kind: 'image', imageUrl: 'https://example.com/b.jpg', backgroundPosition: '', overlayText: '' }
+    };
+    const renderEdit = (overrides = {}) => render(
+      <TileEditPopover
+        selection={makeSelection({ tileKey: 'a' })}
+        tiles={tiles}
+        onChangeTiles={overrides.onChangeTiles ?? jest.fn()}
+        onAssignRows={jest.fn()}
+        onCreateTileAndAssign={jest.fn()}
+        projects={projects}
+        kinds={['image']}
+        onClose={overrides.onClose ?? jest.fn()}
+      />
+    );
+
+    beforeEach(() => { window.alert = jest.fn(); });
+
+    it('refuses an empty key', () => {
+      const onChangeTiles = jest.fn();
+      renderEdit({ onChangeTiles });
+      fireEvent.change(screen.getByLabelText(/^Key/), { target: { value: '  ' } });
+      fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+      expect(window.alert).toHaveBeenCalledWith('A tile needs a key.');
+      expect(onChangeTiles).not.toHaveBeenCalled();
+    });
+
+    it('refuses a key another tile already has', () => {
+      const onChangeTiles = jest.fn();
+      renderEdit({ onChangeTiles });
+      fireEvent.change(screen.getByLabelText(/^Key/), { target: { value: 'b' } });
+      fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+      expect(window.alert).toHaveBeenCalledWith('"b" is already used by another tile.');
+      expect(onChangeTiles).not.toHaveBeenCalled();
+    });
+
+    it('renames through onChangeTiles alone when no rename handler is given', () => {
+      const onChangeTiles = jest.fn();
+      renderEdit({ onChangeTiles });
+      fireEvent.change(screen.getByLabelText(/^Key/), { target: { value: 'c' } });
+      fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+      expect(onChangeTiles).toHaveBeenCalledWith({ b: tiles.b, c: tiles.a });
+    });
+
+    it('"Back" leaves the new-tile form for the assign list, and Cancel there closes', () => {
+      const onClose = jest.fn();
+      renderEdit({ onClose });
+      fireEvent.click(screen.getByRole('button', { name: 'Use a different tile here' }));
+      fireEvent.click(screen.getByRole('button', { name: 'Add image tile' }));
+      expect(screen.getByText('New image tile')).toBeInTheDocument();
+
+      fireEvent.click(screen.getByRole('button', { name: 'Back' }));
+      expect(screen.getByText('Assign a tile')).toBeInTheDocument();
+
+      fireEvent.click(screen.getByRole('button', { name: 'Cancel' }));
+      expect(onClose).toHaveBeenCalled();
+    });
+  });
 });

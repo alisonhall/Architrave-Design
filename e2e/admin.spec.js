@@ -1055,3 +1055,101 @@ test.describe('layouts editor — edits that change the layout under other contr
     await expect(page.locator('.adminOutputPanel-file pre')).toContainText('height: 320');
   });
 });
+
+test.describe('admin — undo, discard, and warnings', () => {
+  const openLayouts = async (page, pageKey) => {
+    await unlock(page);
+    await page.getByRole('button', { name: 'Layouts' }).click();
+    await page.getByLabel('Page').selectOption(pageKey);
+  };
+
+  test('undo and redo work from the buttons and the keyboard', async ({ page }) => {
+    await openLayouts(page, 'creditRiverManor');
+    const rows = page.locator('.adminLayoutPreview > .row');
+    const count = await rows.count();
+
+    await page.getByRole('button', { name: 'Add row' }).click();
+    await expect(rows).toHaveCount(count + 1);
+
+    await page.getByRole('button', { name: 'Undo' }).click();
+    await expect(rows).toHaveCount(count);
+    await page.getByRole('button', { name: 'Redo' }).click();
+    await expect(rows).toHaveCount(count + 1);
+
+    // Focus is on the Redo button — not a text field — so the shortcut applies.
+    await page.keyboard.press('ControlOrMeta+z');
+    await expect(rows).toHaveCount(count);
+    await page.keyboard.press('ControlOrMeta+Shift+z');
+    await expect(rows).toHaveCount(count + 1);
+  });
+
+  test('"Discard all changes" goes back to the site as it is, and can be undone', async ({ page }) => {
+    await openLayouts(page, 'creditRiverManor');
+    const rows = page.locator('.adminLayoutPreview > .row');
+    const count = await rows.count();
+    await page.getByRole('button', { name: 'Add row' }).click();
+
+    page.once('dialog', (dialog) => dialog.accept());
+    await page.getByRole('button', { name: 'Discard all changes' }).click();
+    await expect(rows).toHaveCount(count);
+    await expect(page.getByRole('button', { name: 'Discard all changes' })).toBeDisabled();
+
+    await page.getByRole('button', { name: 'Undo' }).click();
+    await expect(rows).toHaveCount(count + 1);
+  });
+
+  test('Review Changes flags a layout problem before it\'s applied', async ({ page }) => {
+    await openLayouts(page, 'creditRiverManor');
+    await page.getByRole('button', { name: 'Add row' }).click();
+
+    await page.getByRole('button', { name: 'Review Changes' }).click();
+    await expect(page.locator('.adminOutputPanel-problemSummary')).toContainText('1 problem to fix before applying');
+    await expect(page.locator('.adminOutputPanel-problems')).toContainText('has no columns, so it shows nothing.');
+  });
+
+  test('deleting a project removes its tiles and lists its page\'s files to delete', async ({ page }) => {
+    await unlock(page);
+    const section = page.locator('section', { has: page.getByRole('heading', { name: 'New Homes' }) });
+    const row = section.locator('li', { hasText: "Hogg's Hollow French" }).first();
+    page.once('dialog', (dialog) => {
+      expect(dialog.message()).toContain('remove its page, Hoggs Hollow French (New Homes detail page)');
+      dialog.accept();
+    });
+    await row.getByRole('button', { name: 'Delete' }).click();
+
+    await page.getByRole('button', { name: 'Layouts' }).click();
+    await expect(page.locator('.adminLayoutPreview').getByText("Hogg's Hollow French")).toHaveCount(0);
+
+    await page.getByRole('button', { name: 'Review Changes' }).click();
+    await expect(page.locator('.adminOutputPanel-file--deleted')).toHaveCount(4);
+    await expect(page.locator('.adminOutputPanel-file--deleted code').first()).toHaveText('static/layouts/hoggs-hollow-french.js');
+  });
+
+  test('asks before the page is closed while there are changes', async ({ page }) => {
+    await openLayouts(page, 'creditRiverManor');
+    await page.getByRole('button', { name: 'Add row' }).click();
+
+    const dialog = page.waitForEvent('dialog');
+    await page.close({ runBeforeUnload: true });
+    expect((await dialog).type()).toBe('beforeunload');
+  });
+
+  test('a reload doesn\'t make an untouched draft look changed, and keeps a real edit as the only change', async ({ page }) => {
+    await unlock(page);
+    await page.reload();
+
+    await expect(page.getByText('content has been updated since this draft was started')).toHaveCount(0);
+    await expect(page.getByRole('button', { name: 'Discard all changes' })).toBeDisabled();
+    await page.getByRole('button', { name: 'Review Changes' }).click();
+    await expect(page.getByText(/No changes yet/)).toBeVisible();
+
+    await page.getByRole('button', { name: 'Layouts' }).click();
+    await page.getByLabel('Page').selectOption('creditRiverManor');
+    await page.getByRole('button', { name: 'Add row' }).click();
+    page.on('dialog', (dialog) => dialog.accept());
+    await page.reload();
+
+    await page.getByRole('button', { name: 'Review Changes' }).click();
+    await expect(page.locator('.adminOutputPanel-fileHeader code')).toHaveText(['static/layouts/credit-river-manor.js']);
+  });
+});

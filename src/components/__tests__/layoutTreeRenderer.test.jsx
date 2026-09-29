@@ -150,3 +150,11 @@ describe('renderLayoutTree — unresolved placements', () => {
     expect(screen.getByText('unresolved (none)')).toBeInTheDocument();
   });
 });
+
+describe('renderLayoutTree — a project tile whose project is missing', () => {
+  it('renders nothing for it', () => {
+    const rows = [row({}, [column({}, [tileRef('lost')])])];
+    const { container } = render(<div>{renderLayoutTree({ rows, tiles: { lost: { kind: 'project', projectKey: 'nope' } }, projects })}</div>);
+    expect(container.querySelector('.column')).toBeEmptyDOMElement();
+  });
+});

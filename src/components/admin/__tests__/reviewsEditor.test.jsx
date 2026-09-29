@@ -103,4 +103,24 @@ describe('ReviewsEditor', () => {
     expect(screen.getAllByRole('listitem').length).toBe(rowsBefore);
     expect(screen.getByRole('button', { name: 'Add review' })).toBeInTheDocument();
   });
+
+  it('moves a review up', () => {
+    renderEditor();
+    const secondBefore = within(screen.getAllByRole('listitem')[1]).getByText(/—/).textContent;
+
+    fireEvent.click(within(screen.getAllByRole('listitem')[1]).getByRole('button', { name: 'Up' }));
+
+    expect(within(screen.getAllByRole('listitem')[0]).getByText(/—/).textContent).toBe(secondBefore);
+  });
+
+  it('edits a review\'s project date and text', () => {
+    renderEditor();
+    fireEvent.click(within(screen.getAllByRole('listitem')[0]).getByRole('button', { name: 'Edit' }));
+
+    fireEvent.change(screen.getByLabelText(/Project date/), { target: { value: 'May 2031' } });
+    fireEvent.change(screen.getByLabelText(/^Text/), { target: { value: 'Edited review text.' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+
+    expect(within(screen.getAllByRole('listitem')[0]).getByText(/May 2031/)).toBeInTheDocument();
+  });
 });

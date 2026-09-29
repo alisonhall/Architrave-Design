@@ -60,4 +60,16 @@ describe('AboutEditor', () => {
     fireEvent.click(removeButtons[removeButtons.length - 1]);
     expect(bioSection.querySelectorAll('textarea').length).toBe(paragraphCountBefore);
   });
+
+  it('edits the Bio and Approach sections too', () => {
+    const { container } = renderEditor();
+    const preview = container.querySelector('.adminAboutPreview');
+
+    ['Bio', 'Approach'].forEach((label) => {
+      // The form's own heading (h3), not the preview's rendering of the same text.
+      const section = screen.getAllByRole('heading', { name: label, level: 3 })[0].closest('section');
+      fireEvent.change(section.querySelector('input'), { target: { value: `New ${label} heading` } });
+      expect(within(preview).getByText(`New ${label} heading`)).toBeInTheDocument();
+    });
+  });
 });

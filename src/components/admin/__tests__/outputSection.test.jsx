@@ -3,6 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 
 import { DraftProvider, useDraftSection } from '../draftContext';
 import OutputSection from '../outputSection';
+import { seedDraft, SEED_VERSION } from '../seedData';
 
 // A tiny helper to mutate the draft from outside the Projects editor, so this test can
 // focus purely on OutputSection's own behaviour (show/hide, generated content).
@@ -195,5 +196,42 @@ describe('OutputSection', () => {
     fireEvent.click(screen.getByText('mutate intro'));
 
     expect(screen.getByText(/open a pull request: its checks update \(or create\) the affected snapshot tests automatically/)).toBeInTheDocument();
+  });
+
+  it('lists static/about.js and static/reviews.js once those change', () => {
+    const ContentMutator = () => {
+      const [about, setAbout] = useDraftSection('aboutContent');
+      const [reviews, setReviews] = useDraftSection('reviews');
+      return (
+        <>
+          <button type="button" onClick={() => setAbout({ ...about, intro: { ...about.intro, heading: 'Changed' } })}>about</button>
+          <button type="button" onClick={() => setReviews(reviews.slice(1))}>reviews</button>
+        </>
+      );
+    };
+    render(<DraftProvider><ContentMutator /><OutputSection /></DraftProvider>);
+
+    fireEvent.click(screen.getByText('about'));
+    fireEvent.click(screen.getByText('reviews'));
+
+    expect(screen.getByText('static/about.js')).toBeInTheDocument();
+    expect(screen.getByText('static/reviews.js')).toBeInTheDocument();
+  });
+
+  it('lists nothing for a draft restored after a reload — same content, new editor-only ids', () => {
+    const reloadedDraft = JSON.parse(JSON.stringify(seedDraft));
+    const renumber = (value) => {
+      if (Array.isArray(value)) value.forEach(renumber);
+      else if (value && typeof value === 'object') {
+        if ('id' in value) value.id = `${value.id}-reloaded`;
+        Object.values(value).forEach(renumber);
+      }
+    };
+    renumber(reloadedDraft);
+    window.sessionStorage.setItem('architrave-admin-draft', JSON.stringify({ ...reloadedDraft, __seedVersion: SEED_VERSION }));
+
+    render(<DraftProvider><OutputSection /></DraftProvider>);
+
+    expect(screen.getByText(/No changes yet/)).toBeInTheDocument();
   });
 });

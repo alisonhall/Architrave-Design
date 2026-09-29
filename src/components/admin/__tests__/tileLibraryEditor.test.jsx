@@ -475,4 +475,16 @@ describe('TileLibraryEditor', () => {
       expect(screen.getByText('No tiles match "nonexistent".')).toBeInTheDocument();
     });
   });
+
+  it('a text tile can use its own text instead of the shared introduction', () => {
+    const onChange = jest.fn();
+    render(<TileLibraryEditor tiles={{}} onChange={onChange} projects={projects} />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Add text tile' }));
+    fireEvent.click(screen.getByRole('checkbox', { name: /shared portfolio introduction/ }));
+    fireEvent.change(screen.getByLabelText(/^Text/), { target: { value: 'Custom words.' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Add tile' }));
+
+    expect(onChange).toHaveBeenCalledWith({ textTile: { kind: 'text', text: 'Custom words.', useIntroText: false } });
+  });
 });
