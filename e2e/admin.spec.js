@@ -931,7 +931,9 @@ test.describe('layouts editor — edits that change the layout under other contr
 
     const rows = page.locator('.adminLayoutPreview > .row');
     const rowCount = await rows.count();
-    await page.getByRole('button', { name: 'Add row' }).click();
+    // The popover is fixed on screen and can end up covering "Add row" — press it
+    // directly rather than by clicking at its position.
+    await page.getByRole('button', { name: 'Add row' }).dispatchEvent('click');
 
     await expect(page.getByRole('dialog')).toHaveCount(0);
     await expect(rows).toHaveCount(rowCount + 1);
