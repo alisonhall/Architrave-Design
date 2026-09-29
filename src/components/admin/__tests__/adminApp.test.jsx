@@ -229,11 +229,43 @@ describe('AdminApp — notices about the draft', () => {
   });
 
   it('warns (dismissibly) when the draft predates the site\'s current content', () => {
-    window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ ...seedDraft, __seedVersion: SEED_VERSION, __seedFingerprint: 'older' }));
+    window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ ...seedDraft, reviews: [], __seedVersion: SEED_VERSION, __seedFingerprint: 'older' }));
     render(<AdminApp />);
 
     expect(screen.getByText(/content has been updated since this draft was started/)).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: 'Dismiss' }));
     expect(screen.queryByText(/content has been updated/)).not.toBeInTheDocument();
+  });
+});
+
+describe('AdminApp — the project edit form when its project disappears', () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
+    window.sessionStorage.clear();
+    window.confirm = jest.fn(() => true);
+  });
+
+  afterEach(() => {
+    jest.useRealTimers();
+    jest.restoreAllMocks();
+  });
+
+  it('closes instead of crashing when Redo deletes the project being edited', () => {
+    render(<AdminApp />);
+    const nextTurn = () => act(() => { jest.runOnlyPendingTimers(); });
+    const row = () => within(screen.getByRole('heading', { name: 'New Homes' }).closest('section'))
+      .getAllByText("Hogg's Hollow French")[0].closest('li');
+
+    fireEvent.click(within(row()).getByRole('button', { name: 'Delete' }));
+    nextTurn();
+    fireEvent.click(screen.getByRole('button', { name: 'Undo' }));
+    nextTurn();
+    fireEvent.click(within(row()).getByRole('button', { name: 'Edit' }));
+    expect(screen.getByRole('heading', { name: "Editing: Hogg's Hollow French" })).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Redo' }));
+
+    expect(screen.queryByRole('heading', { name: /^Editing:/ })).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Undo' })).toBeEnabled();
   });
 });

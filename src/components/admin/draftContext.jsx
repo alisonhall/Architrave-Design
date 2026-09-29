@@ -48,9 +48,11 @@ const SEED_FINGERPRINT = fingerprint(SEED_JSON);
  * - `staleContent`: it was restored, but the site's committed content has changed since
  *   it was started (a deploy happened in between). The draft still holds the old
  *   versions of everything, so applying Review Changes as-is would undo that update.
+ * - `baseFingerprint`: the fingerprint of the content the draft was started from, to
+ *   keep saving alongside it (see DraftProvider).
  */
 export const loadInitialDraft = () => {
-  const fresh = { draft: seedDraft, discarded: false, staleContent: false };
+  const fresh = { draft: seedDraft, discarded: false, staleContent: false, baseFingerprint: SEED_FINGERPRINT };
   if (typeof window === 'undefined') return fresh;
 
   let stored;
@@ -66,10 +68,12 @@ export const loadInitialDraft = () => {
     if (parsed.__seedVersion !== SEED_VERSION) return { ...fresh, discarded: true };
 
     const { __seedVersion, __seedFingerprint, ...draft } = parsed;
+    const baseFingerprint = __seedFingerprint === undefined ? SEED_FINGERPRINT : __seedFingerprint;
     return {
       draft: { ...seedDraft, ...draft },
       discarded: false,
-      staleContent: __seedFingerprint !== undefined && __seedFingerprint !== SEED_FINGERPRINT
+      staleContent: baseFingerprint !== SEED_FINGERPRINT,
+      baseFingerprint
     };
   } catch (error) {
     return { ...fresh, discarded: true };
@@ -183,15 +187,26 @@ export const DraftProvider = ({ children }) => {
     lastEdit: null
   }));
   const [saveFailed, setSaveFailed] = useState(false);
-  const [notices, setNotices] = useState({ discarded: initial.discarded, staleContent: initial.staleContent });
+  const [notices, setNotices] = useState({ discarded: initial.discarded, staleContent: true });
+  // The content the draft was started from. Saved with the draft — not the current
+  // content's fingerprint — so a draft that predates a deploy stays recognizable as such
+  // on every later refresh, not just the first. Once the draft no longer differs from
+  // the site at all (e.g. after "Discard all changes"), it's simply based on the current
+  // content.
+  const [baseFingerprint, setBaseFingerprint] = useState(initial.baseFingerprint);
 
   const state = history.present;
+  const hasChanges = useMemo(() => draftHasChanges(state), [state]);
+
+  useEffect(() => {
+    if (!hasChanges) setBaseFingerprint(SEED_FINGERPRINT);
+  }, [hasChanges]);
 
   useEffect(() => {
     try {
       window.sessionStorage.setItem(
         STORAGE_KEY,
-        JSON.stringify({ ...state, __seedVersion: SEED_VERSION, __seedFingerprint: SEED_FINGERPRINT })
+        JSON.stringify({ ...state, __seedVersion: SEED_VERSION, __seedFingerprint: baseFingerprint })
       );
       setSaveFailed(false);
     } catch (error) {
@@ -199,13 +214,11 @@ export const DraftProvider = ({ children }) => {
       // refresh — which the admin needs to know, not discover afterwards.
       setSaveFailed(true);
     }
-  }, [state]);
+  }, [state, baseFingerprint]);
 
   // Stamps every edit with its batch and time, which historyReducer uses to decide what
   // counts as one undo step.
   const dispatch = useMemo(() => (action) => rawDispatch({ ...action, batch: currentBatch(), time: Date.now() }), []);
-
-  const hasChanges = useMemo(() => draftHasChanges(state), [state]);
 
   const meta = useMemo(() => ({
     canUndo: history.past.length > 0,
@@ -216,9 +229,9 @@ export const DraftProvider = ({ children }) => {
     hasChanges,
     saveFailed,
     discardedStoredDraft: notices.discarded,
-    staleContent: notices.staleContent,
+    staleContent: notices.staleContent && baseFingerprint !== SEED_FINGERPRINT,
     dismissNotice: (name) => setNotices((current) => ({ ...current, [name]: false }))
-  }), [history.past.length, history.future.length, dispatch, hasChanges, saveFailed, notices]);
+  }), [history.past.length, history.future.length, dispatch, hasChanges, saveFailed, notices, baseFingerprint]);
 
   return (
     <DraftStateContext.Provider value={state}>

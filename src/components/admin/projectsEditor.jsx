@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useDraftSection, useDraftState, useDraftUpdate } from './draftContext';
 import { PROJECT_TYPES, makeUniqueProjectKey, planProjectDeletion, deleteProjectConfirmMessage } from './projectHelpers';
@@ -57,6 +57,14 @@ const ProjectsEditor = () => {
     setAddingType(null);
     setPreviewProject(null);
   };
+
+  // The project being edited can stop existing underneath the form — deleted and then
+  // redone, or taken away by Undo or "Discard all changes" — so close the form then
+  // rather than editing (or crashing on) a project that's gone.
+  const editingProject = editingKey ? projects[editingKey] : null;
+  useEffect(() => {
+    if (editingKey && !editingProject) closeForms();
+  }, [editingKey, editingProject]);
 
   const moveWithinOrder = (typeValue, index, delta) => {
     sections[typeValue].setOrder(arrayMoved(sections[typeValue].order, index, delta));
@@ -191,13 +199,13 @@ const ProjectsEditor = () => {
         </section>
       ))}
 
-      {editingKey && (
+      {editingProject && (
         <section className="adminProjectsEditor-editing">
-          <h2>Editing: {projects[editingKey].projectName}</h2>
+          <h2>Editing: {editingProject.projectName}</h2>
           <ProjectForm
             key={editingKey}
-            initialProject={projects[editingKey]}
-            onChange={(values) => setPreviewProject({ ...projects[editingKey], ...values })}
+            initialProject={editingProject}
+            onChange={(values) => setPreviewProject({ ...editingProject, ...values })}
             onSubmit={(values) => saveProject(editingKey, values)}
             onCancel={closeForms}
           />

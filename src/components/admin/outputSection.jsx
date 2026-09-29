@@ -92,8 +92,11 @@ const OutputSection = () => {
     }
   });
 
+  // A deleted page's files, except any a page created since is writing afresh (same
+  // project re-added, same file name) — those are being replaced, not deleted.
+  const writtenPaths = new Set(files.map((file) => file.path));
   Object.values(draft.deletedPages || {}).forEach(({ label, files: pageFiles }) => {
-    pageFiles.forEach((path) => {
+    pageFiles.filter((path) => !writtenPaths.has(path)).forEach((path) => {
       files.push({
         path,
         deleted: true,

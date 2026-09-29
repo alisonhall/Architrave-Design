@@ -225,7 +225,7 @@ describe('loadInitialDraft', () => {
 
   it('starts fresh when storage can\'t be read at all', () => {
     jest.spyOn(Storage.prototype, 'getItem').mockImplementation(() => { throw new Error('blocked'); });
-    expect(loadInitialDraft()).toEqual({ draft: seedDraft, discarded: false, staleContent: false });
+    expect(loadInitialDraft()).toMatchObject({ draft: seedDraft, discarded: false, staleContent: false });
   });
 });
 
@@ -351,5 +351,45 @@ describe('comparing content, not editor-only ids', () => {
     const edited = reloaded();
     edited.reviews = edited.reviews.slice(1);
     expect(draftHasChanges(edited)).toBe(true);
+  });
+});
+
+describe('DraftProvider — a draft started before the site\'s content changed', () => {
+  const StaleProbe = () => {
+    const { staleContent, reset } = useDraftMeta();
+    return (
+      <div>
+        <p>{`stale:${staleContent}`}</p>
+        <button type="button" onClick={reset}>reset</button>
+      </div>
+    );
+  };
+
+  beforeEach(() => window.sessionStorage.clear());
+
+  it('stays flagged on every later load, not just the first, until it no longer differs from the site', () => {
+    const stored = { ...JSON.parse(JSON.stringify(seedDraft)), reviews: [], __seedVersion: SEED_VERSION, __seedFingerprint: 'older' };
+    window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
+
+    const first = render(<DraftProvider><StaleProbe /></DraftProvider>);
+    expect(screen.getByText('stale:true')).toBeInTheDocument();
+    expect(JSON.parse(window.sessionStorage.getItem(STORAGE_KEY)).__seedFingerprint).toBe('older');
+    first.unmount();
+
+    // A second refresh.
+    const second = render(<DraftProvider><StaleProbe /></DraftProvider>);
+    expect(screen.getByText('stale:true')).toBeInTheDocument();
+
+    // Discarding the old draft makes it plain current content — nothing left to warn about.
+    fireEvent.click(screen.getByText('reset'));
+    expect(screen.getByText('stale:false')).toBeInTheDocument();
+    expect(JSON.parse(window.sessionStorage.getItem(STORAGE_KEY)).__seedFingerprint).not.toBe('older');
+    second.unmount();
+  });
+
+  it('isn\'t flagged when the old draft has no changes of its own (it can\'t undo anything)', () => {
+    window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ ...seedDraft, __seedVersion: SEED_VERSION, __seedFingerprint: 'older' }));
+    render(<DraftProvider><StaleProbe /></DraftProvider>);
+    expect(screen.getByText('stale:false')).toBeInTheDocument();
   });
 });

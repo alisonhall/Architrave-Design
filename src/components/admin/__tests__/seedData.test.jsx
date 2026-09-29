@@ -1,5 +1,5 @@
 import constants from '../../../../static/app-constants';
-import { seedDraft, LAYOUT_PAGE_CONFIGS } from '../seedData';
+import { seedDraft, LAYOUT_PAGE_CONFIGS, pageConfigsFor } from '../seedData';
 
 describe('seedDraft', () => {
   it('clones projects and ordering data from app-constants', () => {
@@ -58,5 +58,21 @@ describe('seedDraft', () => {
     Object.keys(LAYOUT_PAGE_CONFIGS).forEach((key) => {
       expect(seedDraft.layouts[key]).toBeDefined();
     });
+  });
+});
+
+describe('pageConfigsFor', () => {
+  it('adds pages created this session and leaves out pages whose project was deleted', () => {
+    const newPage = { key: 'someNewDetail', label: 'New', isNew: true };
+    const configs = pageConfigsFor({ someNewDetail: newPage }, { creditRiverManor: { label: 'x', files: [] } });
+
+    expect(configs.someNewDetail).toBe(newPage);
+    expect(configs.creditRiverManor).toBeUndefined();
+    expect(configs.index).toBe(LAYOUT_PAGE_CONFIGS.index);
+  });
+
+  it('keeps a page created again under a deleted page\'s key (its project was added back)', () => {
+    const recreated = { key: 'creditRiverManor', label: 'Credit River Manor again', isNew: true };
+    expect(pageConfigsFor({ creditRiverManor: recreated }, { creditRiverManor: { label: 'x', files: [] } }).creditRiverManor).toBe(recreated);
   });
 });

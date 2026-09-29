@@ -233,10 +233,15 @@ export const LAYOUT_PAGE_CONFIGS = {
 
 /**
  * @description Every layout page the admin can currently edit: the committed ones plus
- * any created this session, minus any whose project was deleted this session.
+ * any created this session, minus any whose project was deleted this session — unless a
+ * page has since been created again under the same key (a project deleted, then added
+ * back under the same name, gets the same key, and so does its new page): the new page
+ * is very much there.
  */
 export const pageConfigsFor = (newLayoutPages = {}, deletedPages = {}) => {
   const configs = { ...LAYOUT_PAGE_CONFIGS, ...newLayoutPages };
-  Object.keys(deletedPages).forEach((key) => delete configs[key]);
+  Object.keys(deletedPages).forEach((key) => {
+    if (!newLayoutPages[key]) delete configs[key];
+  });
   return configs;
 };

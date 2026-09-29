@@ -234,4 +234,49 @@ describe('OutputSection', () => {
 
     expect(screen.getByText(/No changes yet/)).toBeInTheDocument();
   });
+
+  it('writes a re-created page\'s files rather than listing them for deletion, deleting only what\'s left of the old page', () => {
+    const files = [
+      'static/layouts/credit-river-manor.js',
+      'src/pages/portfolio/new-homes/credit-river-manor.jsx',
+      'src/pages/portfolio/new-homes/__tests__/credit-river-manor.test.jsx',
+      'src/pages/portfolio/new-homes/__tests__/__snapshots__/credit-river-manor.test.jsx.snap'
+    ];
+    const Recreate = () => {
+      const [layouts, setLayouts] = useDraftSection('layouts');
+      const [, setNewPages] = useDraftSection('newLayoutPages');
+      const [, setDeleted] = useDraftSection('deletedPages');
+      return (
+        <button
+          type="button"
+          onClick={() => {
+            setDeleted({ creditRiverManor: { label: 'Credit River Manor (New Homes detail page)', files } });
+            setNewPages({
+              creditRiverManor: {
+                key: 'creditRiverManor',
+                label: 'Credit River Manor (New Homes detail page)',
+                dataFile: true,
+                dataFilePath: 'static/layouts/credit-river-manor.js',
+                type: 'detail',
+                projectKey: 'creditRiverManor',
+                folder: 'new-homes',
+                slug: 'credit-river-manor',
+                isNew: true
+              }
+            });
+            setLayouts({ ...layouts, creditRiverManor: { ...layouts.creditRiverManor, layout: layouts.creditRiverManor.layout.slice(1) } });
+          }}
+        >
+          recreate
+        </button>
+      );
+    };
+    const { container } = render(<DraftProvider><Recreate /><OutputSection /></DraftProvider>);
+    fireEvent.click(screen.getByText('recreate'));
+
+    const written = Array.from(container.querySelectorAll('.adminOutputPanel-file:not(.adminOutputPanel-file--deleted) .adminOutputPanel-fileHeader code')).map((el) => el.textContent);
+    const deleted = Array.from(container.querySelectorAll('.adminOutputPanel-file--deleted code')).map((el) => el.textContent);
+    expect(written).toEqual(files.slice(0, 3));
+    expect(deleted).toEqual([files[3]]);
+  });
 });
