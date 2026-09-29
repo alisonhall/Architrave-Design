@@ -18,4 +18,13 @@ module.exports = {
     url: 'http://localhost',
   },
   moduleFileExtensions: ['js', 'jsx', 'json'],
+  collectCoverageFrom: ['src/pages/**/*.jsx', 'src/components/**/*.jsx'],
+  coverageThreshold: {
+    global: {
+      statements: 98,
+      branches: 85,
+      functions: 98,
+      lines: 98,
+    },
+  },
 };

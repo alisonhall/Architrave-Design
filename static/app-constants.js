@@ -201,6 +201,13 @@ const projects = {
         type: projectTypes.upcoming,
         projectName: "King George's Backsplit",
         mainImageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1776209609/ArchitraveDesign/3-Upcoming/St_Georges_Backsplit_Renovation_frqrkd.jpg'
+    },
+    bruleGardensTudorRevival: {
+        key: 'bruleGardensTudorRevival',
+        fileName: 'brule-gardens-tudor-revival',
+        type: 'upcoming',
+        projectName: 'Brule Gardens Tudor Revival',
+        mainImageUrl: 'https://res.cloudinary.com/alisonkhall/image/upload/v1789735584/ArchitraveDesign/3-Upcoming/Brule_Gardens_Tudor_Revival_webvia.jpg'
     }
 }
 
@@ -226,8 +233,9 @@ const constants = {
         projects.etobicokeArtsAndCrafts.key
     ],
     upcomingProjectsOrder: [
-        projects.kingsgardenGeorgian.key,
-        projects.kingGeorgesBacksplit.key
+        projects.bruleGardensTudorRevival.key,
+        projects.kingGeorgesBacksplit.key,
+        projects.kingsgardenGeorgian.key
     ],
     unusedNewProjects: [
         projects.hoggsHollowTraditional.key,

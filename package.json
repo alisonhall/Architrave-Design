@@ -60,8 +60,10 @@
         "start": "npm run develop",
         "serve": "gatsby serve",
         "test": "jest",
+        "test:coverage": "jest --coverage",
         "test:watch": "jest --watch",
-        "test:e2e": "playwright test"
+        "test:update-snapshots": "jest --updateSnapshot",
+        "test:e2e": "playwright install --with-deps chromium && playwright test"
     },
     "repository": {
         "type": "git",
