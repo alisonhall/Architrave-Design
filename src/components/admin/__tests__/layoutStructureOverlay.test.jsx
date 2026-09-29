@@ -84,7 +84,7 @@ describe('placeToolbars', () => {
 
     const topOf = (predicate) => placed.find(predicate).top;
     expect(topOf((t) => t.box.rowId === 'outer')).toBe(0);
-    // The column's toolbar (150px wide column, 116px toolbar) overlaps the row's at the
+    // The column's toolbar (150px wide column, 136px toolbar) overlaps the row's at the
     // top-left, so it steps down once; the nested row's then clears both.
     expect(topOf((t) => t.box.columnId === 'c')).toBe(TOOLBAR_HEIGHT + 2);
     expect(topOf((t) => t.box.rowId === 'inner')).toBe(2 * (TOOLBAR_HEIGHT + 2));
@@ -343,6 +343,21 @@ describe('LayoutStructureOverlay', () => {
       drag(handle, [5, 5], [50, 50]);
       drag(handle, [5, 5], [50, 900]);
 
+      expect(onChangeRows).not.toHaveBeenCalled();
+    });
+
+    it('a cancelled drag clears its drop zones and reorders nothing, even on a later tap', () => {
+      const onChangeRows = jest.fn();
+      const { container } = render(<Harness rows={makeRows()} onChangeRows={onChangeRows} />);
+      const handle = within(rowToolbar(container, 'row1')).getByRole('button', { name: 'Drag to reorder' });
+
+      drag(handle, [5, 5], [50, 350], { release: false });
+      expect(screen.getAllByTestId('layout-drop-zone')).toHaveLength(2);
+
+      fireEvent.pointerCancel(document);
+      expect(screen.queryAllByTestId('layout-drop-zone')).toHaveLength(0);
+
+      fireEvent.pointerUp(document, { clientX: 50, clientY: 350 });
       expect(onChangeRows).not.toHaveBeenCalled();
     });
 

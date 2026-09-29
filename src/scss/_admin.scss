@@ -541,6 +541,9 @@
     // 200 — see .adminTileEditPopover), or a project tile's title text wins the pointer.
     z-index: 210;
     pointer-events: auto;
+    // Dragging is pointer-event driven (layoutResizeOverlay.jsx) — without this, a
+    // touch drag on a line is taken over as a page scroll and never resizes anything.
+    touch-action: none;
 
     &::after {
         content: '';
@@ -576,6 +579,7 @@
         margin-left: 3px;
     }
 }
+
 
 .adminLayoutResize-label {
     position: absolute;
@@ -685,5 +689,56 @@
     &--over {
         background: rgba(0, 100, 255, 0.15);
         outline-color: #0064ff;
+    }
+}
+
+// Touch screens (tablets): no hover to reveal a line, and a fingertip needs far more
+// than an 8px strip to hit — so show every line faintly and widen the grab area around
+// it (the visible line stays centred in it). Toolbar controls get bigger too. Kept
+// last in this file so it overrides the base rules above at equal specificity.
+@media (pointer: coarse) {
+    .adminLayoutResize-row,
+    .adminLayoutResize-column {
+        &::after {
+            background: rgba(0, 100, 255, 0.25);
+        }
+    }
+
+    .adminLayoutResize-row {
+        height: 24px;
+        margin-top: -12px;
+
+        &::after {
+            margin-top: 11px;
+        }
+    }
+
+    .adminLayoutResize-column {
+        width: 24px;
+        margin-left: -12px;
+
+        &::after {
+            margin-left: 11px;
+        }
+    }
+
+    .adminLayoutStructure-toolbar {
+        opacity: 1;
+
+        .adminDragHandle {
+            width: 32px;
+            height: 32px;
+            font-size: 1rem;
+        }
+
+        .adminActionsMenu > button {
+            min-height: 32px;
+            padding: 4px 10px;
+            font-size: 0.85rem;
+        }
+    }
+
+    .adminActionsMenu-list button {
+        padding: 10px 12px;
     }
 }

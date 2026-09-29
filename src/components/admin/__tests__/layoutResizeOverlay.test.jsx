@@ -107,6 +107,26 @@ describe('LayoutResizeOverlay', () => {
     fireEvent.pointerUp(document, { clientY: 160 });
   });
 
+  it('a cancelled drag (the browser taking a touch over as a scroll) commits nothing, and a later tap doesn\'t either', () => {
+    mockRects();
+    const onChangeRows = jest.fn();
+    render(<Harness rows={singleColumnRows()} onChangeRows={onChangeRows} />);
+
+    const handle = screen.getByRole('separator', { name: /resize this row's height/ });
+    fireEvent.pointerDown(handle, { clientY: 100 });
+    fireEvent.pointerMove(document, { clientY: 150 });
+    fireEvent.pointerCancel(document);
+
+    expect(screen.queryByText(/px$/)).not.toBeInTheDocument();
+    expect(handle.style.transform).toBe('');
+
+    // Before the fix, the drag's listeners outlived the cancel, so this unrelated tap
+    // elsewhere "finished" it and committed a bogus height.
+    fireEvent.pointerUp(document, { clientY: 0 });
+    expect(onChangeRows).not.toHaveBeenCalled();
+    expect(screen.queryByLabelText('Height (px)')).not.toBeInTheDocument();
+  });
+
   it('a plain click (no meaningful movement) on the row handle opens the height input instead of resizing', () => {
     mockRects();
     const onChangeRows = jest.fn();

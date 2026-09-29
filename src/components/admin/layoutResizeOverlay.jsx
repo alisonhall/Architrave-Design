@@ -95,11 +95,16 @@ const useDragHandle = ({ axis, onCommit, onClickToEdit }) => {
       }
     };
 
-    const handleUp = (upEvent) => {
+    const cleanUp = () => {
       document.removeEventListener('pointermove', handleMove);
       document.removeEventListener('pointerup', handleUp);
+      document.removeEventListener('pointercancel', cleanUp);
       if (lineRef.current) lineRef.current.style.transform = '';
       setLiveValue(null);
+    };
+
+    function handleUp(upEvent) {
+      cleanUp();
 
       if (moved) {
         const pos = axis === 'y' ? upEvent.clientY : upEvent.clientX;
@@ -107,10 +112,14 @@ const useDragHandle = ({ axis, onCommit, onClickToEdit }) => {
       } else {
         onClickToEdit();
       }
-    };
+    }
 
     document.addEventListener('pointermove', handleMove);
     document.addEventListener('pointerup', handleUp);
+    // The browser took the gesture over (a touch it decided was a scroll, e.g.): drop
+    // it without committing anything. Without this, the listeners would stay attached
+    // and the next unrelated tap anywhere would "finish" the drag at that position.
+    document.addEventListener('pointercancel', cleanUp);
   };
 
   return { lineRef, liveValue, onPointerDown };

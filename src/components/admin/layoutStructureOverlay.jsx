@@ -22,12 +22,15 @@ import ActionsMenu from './actionsMenu';
 
 // Estimated toolbar footprints (px), used only to keep toolbars from landing on top of
 // each other (see placeToolbars) — each toolbar still sizes itself to its own content.
-export const TOOLBAR_HEIGHT = 26;
+// Sized for touch screens' larger controls (see the pointer: coarse rules in
+// _admin.scss), so toolbars don't overlap there either; on a mouse it just leaves a
+// little extra space between stacked toolbars.
+export const TOOLBAR_HEIGHT = 36;
 const TOOLBAR_GAP = 2;
 // Movement below this (px) counts as a click on a drag handle, not a drag.
 const DRAG_THRESHOLD = 4;
-const ROW_TOOLBAR_WIDTH = 100;
-const COLUMN_TOOLBAR_WIDTH = 116;
+const ROW_TOOLBAR_WIDTH = 120;
+const COLUMN_TOOLBAR_WIDTH = 136;
 
 // Removing a row or column also removes everything inside it, and the admin tool has
 // no undo — so, like deleting a page (layoutsEditor.jsx), it asks first.
@@ -119,17 +122,25 @@ export const usePointerReorder = (containerEl, onReorder) => {
       setDrag(current);
     };
 
-    const handleUp = (upEvent) => {
+    const cleanUp = () => {
       document.removeEventListener('pointermove', handleMove);
       document.removeEventListener('pointerup', handleUp);
+      document.removeEventListener('pointercancel', cleanUp);
       setDrag(null);
+    };
+
+    // A pointercancel (the browser taking a touch gesture over) just drops the drag —
+    // see the same handling in layoutResizeOverlay.jsx.
+    function handleUp(upEvent) {
+      cleanUp();
       if (!current) return;
       const toIndex = overIndexAt(upEvent.clientX, upEvent.clientY);
       if (toIndex !== null && toIndex !== fromIndex) onReorder(group, fromIndex, toIndex);
-    };
+    }
 
     document.addEventListener('pointermove', handleMove);
     document.addEventListener('pointerup', handleUp);
+    document.addEventListener('pointercancel', cleanUp);
   };
 
   return { drag, startDrag };
