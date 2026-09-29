@@ -9,7 +9,8 @@ import LayoutResizeOverlay, {
   visibleHandleBoxes,
   editAnchorFor,
   computeColumnResize,
-  canResizeColumn
+  canResizeColumn,
+  parsePxInput
 } from '../layoutResizeOverlay';
 
 const tileRef = (tileKey) => ({ nodeType: 'tileRef', tileKey });
@@ -99,7 +100,7 @@ describe('LayoutResizeOverlay', () => {
 
     const handle = screen.getByRole('separator', { name: /resize this row's height/ });
     fireEvent.pointerDown(handle, { clientY: 100 });
-    fireEvent.pointerMove(document, { clientY: 150 });
+    fireEvent.pointerMove(document, { buttons: 1, clientY: 150 });
     fireEvent.pointerUp(document, { clientY: 150 });
 
     expect(onChangeRows).toHaveBeenCalledWith(setRowHeight(rows, 'row1', 150));
@@ -117,7 +118,7 @@ describe('LayoutResizeOverlay', () => {
 
     const handle = screen.getByRole('separator', { name: /resize this row's height/ });
     fireEvent.pointerDown(handle, { clientY: 350 });
-    fireEvent.pointerMove(document, { clientY: 410 });
+    fireEvent.pointerMove(document, { buttons: 1, clientY: 410 });
     fireEvent.pointerUp(document, { clientY: 410 });
 
     expect(onChangeRows).toHaveBeenCalledWith(setRowHeight(rows, 'row1', 360));
@@ -129,7 +130,7 @@ describe('LayoutResizeOverlay', () => {
 
     const handle = screen.getByRole('separator', { name: /resize this row's height/ });
     fireEvent.pointerDown(handle, { clientY: 100 });
-    fireEvent.pointerMove(document, { clientY: 160 });
+    fireEvent.pointerMove(document, { buttons: 1, clientY: 160 });
 
     expect(screen.getByText('160px')).toBeInTheDocument();
 
@@ -143,7 +144,7 @@ describe('LayoutResizeOverlay', () => {
 
     const handle = screen.getByRole('separator', { name: /resize this row's height/ });
     fireEvent.pointerDown(handle, { clientY: 100 });
-    fireEvent.pointerMove(document, { clientY: 150 });
+    fireEvent.pointerMove(document, { buttons: 1, clientY: 150 });
     fireEvent.pointerCancel(document);
 
     expect(screen.queryByText(/px$/)).not.toBeInTheDocument();
@@ -227,7 +228,7 @@ describe('LayoutResizeOverlay', () => {
 
     const handle = screen.getByRole('separator', { name: /resize this column's width/ });
     fireEvent.pointerDown(handle, { clientX: 200 });
-    fireEvent.pointerMove(document, { clientX: 240 });
+    fireEvent.pointerMove(document, { buttons: 1, clientX: 240 });
     fireEvent.pointerUp(document, { clientX: 240 });
 
     expect(onChangeRows).toHaveBeenCalledWith(setColumnWidth(rows, 'row1', 'col1', '60.0%'));
@@ -384,7 +385,7 @@ describe('LayoutResizeOverlay — nested rows', () => {
 
     // Innermost first: handles[0] is row2's.
     fireEvent.pointerDown(handles[0], { clientY: 150 });
-    fireEvent.pointerMove(document, { clientY: 200 });
+    fireEvent.pointerMove(document, { buttons: 1, clientY: 200 });
     fireEvent.pointerUp(document, { clientY: 200 });
 
     expect(onChangeRows).toHaveBeenCalledWith(setRowHeight(rows, 'row2', 200));
@@ -401,7 +402,7 @@ describe('LayoutResizeOverlay — nested rows', () => {
     expect(handles).toHaveLength(2);
 
     fireEvent.pointerDown(handles[0], { clientX: 200 });
-    fireEvent.pointerMove(document, { clientX: 300 });
+    fireEvent.pointerMove(document, { buttons: 1, clientX: 300 });
     fireEvent.pointerUp(document, { clientX: 300 });
 
     // Both nested columns had no width, so both get one: col2 grows by the 100px dragged
@@ -434,7 +435,7 @@ describe('LayoutResizeOverlay — the row size form', () => {
     expect(onChangeRows).toHaveBeenCalledWith(setRowSize(rows, 'row1', { height: 300, imageHeight: 180 }));
   });
 
-  it('treats a non-numeric value as unset', () => {
+  it('keeps the row\'s current height for a value it can\'t read, rather than clearing it', () => {
     mockRects();
     const onChangeRows = jest.fn();
     const rows = singleColumnRows();
@@ -444,7 +445,7 @@ describe('LayoutResizeOverlay — the row size form', () => {
     fireEvent.change(screen.getByLabelText('Height (px)'), { target: { value: 'tall' } });
     fireEvent.keyDown(screen.getByLabelText('Height (px)'), { key: 'Enter' });
 
-    expect(onChangeRows).toHaveBeenCalledWith(setRowSize(rows, 'row1', { height: undefined, imageHeight: 250 }));
+    expect(onChangeRows).toHaveBeenCalledWith(setRowSize(rows, 'row1', { height: 300, imageHeight: 250 }));
   });
 
   it('moving focus between its own fields doesn\'t commit, but leaving the form does', () => {
@@ -601,5 +602,79 @@ describe('LayoutResizeOverlay — the size form when the layout changes under it
       <LayoutResizeOverlay containerEl={containerEl} rows={[...rows]} onChangeRows={jest.fn()} editing={editing} onEditingChange={onEditingChange} />
     );
     expect(onEditingChange).toHaveBeenCalledWith(null);
+  });
+});
+
+describe('parsePxInput', () => {
+  it('reads plain numbers and px values', () => {
+    expect(parsePxInput('320', 100)).toBe(320);
+    expect(parsePxInput(' 320px ', 100)).toBe(320);
+    expect(parsePxInput('320 PX', 100)).toBe(320);
+    expect(parsePxInput('12.5', 100)).toBe(12.5);
+  });
+
+  it('treats an empty field as a deliberate clear', () => {
+    expect(parsePxInput('   ', 100)).toBeUndefined();
+  });
+
+  it('keeps the previous value for anything it can\'t read, rather than clearing it', () => {
+    expect(parsePxInput('tall', 100)).toBe(100);
+    expect(parsePxInput('3O0', 100)).toBe(100);
+    expect(parsePxInput('-20', 100)).toBe(100);
+    expect(parsePxInput('50%', undefined)).toBeUndefined();
+  });
+});
+
+describe('LayoutResizeOverlay — typed values', () => {
+  const rows = () => [{ id: 'row1', height: 300, imageHeight: 250, columns: [{ id: 'col1', children: [] }] }];
+  const openForm = () => {
+    fireEvent.pointerDown(screen.getByRole('separator', { name: /resize this row's height/ }), { clientY: 100 });
+    fireEvent.pointerUp(document, { clientY: 100 });
+  };
+
+  it('accepts "320px" as 320, and keeps the old height for something unreadable', () => {
+    mockRects();
+    const onChangeRows = jest.fn();
+    const current = rows();
+    render(<Harness rows={current} onChangeRows={onChangeRows} />);
+    openForm();
+
+    fireEvent.change(screen.getByLabelText('Height (px)'), { target: { value: '320px' } });
+    fireEvent.change(screen.getByLabelText('Image height (px)'), { target: { value: 'big' } });
+    fireEvent.keyDown(screen.getByLabelText('Height (px)'), { key: 'Enter' });
+
+    expect(onChangeRows).toHaveBeenCalledWith(setRowSize(current, 'row1', { height: 320, imageHeight: 250 }));
+  });
+});
+
+describe('LayoutResizeOverlay — which presses drag', () => {
+  it('ignores a right-click on a line', () => {
+    mockRects();
+    const onChangeRows = jest.fn();
+    render(<Harness rows={[{ id: 'row1', height: 300, columns: [{ id: 'col1', children: [] }] }]} onChangeRows={onChangeRows} />);
+
+    fireEvent.pointerDown(screen.getByRole('separator', { name: /resize this row's height/ }), { button: 2, clientY: 100 });
+    fireEvent.pointerMove(document, { buttons: 1, clientY: 150 });
+    fireEvent.pointerUp(document, { clientY: 150 });
+
+    expect(onChangeRows).not.toHaveBeenCalled();
+    expect(screen.queryByLabelText('Height (px)')).not.toBeInTheDocument();
+  });
+
+  it('drops a drag whose release was never seen (a move with no button held), without committing', () => {
+    mockRects();
+    const onChangeRows = jest.fn();
+    render(<Harness rows={[{ id: 'row1', height: 300, columns: [{ id: 'col1', children: [] }] }]} onChangeRows={onChangeRows} />);
+    const handle = screen.getByRole('separator', { name: /resize this row's height/ });
+
+    fireEvent.pointerDown(handle, { clientY: 100 });
+    fireEvent.pointerMove(document, { buttons: 1, clientY: 150 });
+    fireEvent.pointerMove(document, { buttons: 0, clientY: 160 });
+    expect(screen.queryByText(/px$/)).not.toBeInTheDocument();
+    expect(handle.style.transform).toBe('');
+
+    // The later click that used to "finish" it now does nothing.
+    fireEvent.pointerUp(document, { clientY: 300 });
+    expect(onChangeRows).not.toHaveBeenCalled();
   });
 });

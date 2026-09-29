@@ -176,6 +176,16 @@ export const canResizeColumn = (columns, boxes, index) => {
   return !box || renderedFraction(columns[index], box) > 0.99;
 };
 
+// Only the main button starts a drag (touch and pen presses report as it too). A
+// right-click in particular must not: it opens the browser's context menu, which
+// swallows the matching release, so the drag would never end — and a later ordinary
+// click would finish it somewhere unintended.
+export const isMainButtonPress = (event) => event.button === 0;
+
+// A move arriving with no button held means the release was never seen (swallowed by
+// that context menu, say): the drag is over, not still in progress.
+export const isReleasedMove = (event) => event.buttons === 0;
+
 // Shared drag logic for both handle orientations: tracks pointer movement along one
 // axis, moves the handle's own line to follow the cursor (imperative — no re-render per
 // pointermove) for live feedback without resizing anything until release, then either
@@ -185,11 +195,16 @@ const useDragHandle = ({ axis, onCommit, onClickToEdit }) => {
   const [liveValue, setLiveValue] = useState(null);
 
   const onPointerDown = (event) => {
+    if (!isMainButtonPress(event)) return;
     event.preventDefault();
     const startPos = axis === 'y' ? event.clientY : event.clientX;
     let moved = false;
 
     const handleMove = (moveEvent) => {
+      if (isReleasedMove(moveEvent)) {
+        cleanUp();
+        return;
+      }
       const pos = axis === 'y' ? moveEvent.clientY : moveEvent.clientX;
       const delta = pos - startPos;
       if (Math.abs(delta) > DRAG_THRESHOLD) moved = true;
@@ -343,10 +358,17 @@ EditPopup.propTypes = {
   onCancel: PropTypes.func.isRequired
 };
 
-const pxOrUndefined = (value) => {
-  if (value.trim() === '') return undefined;
-  const number = Number(value);
-  return Number.isNaN(number) ? undefined : number;
+/**
+ * @description Reads a typed px value: "320", "320px" and "320 px" all mean 320, and an
+ * empty field means unset. Anything else ("tall", "3O0") keeps `previous` rather than
+ * silently clearing the value — a row losing its height is a big visible change to make
+ * from a typo.
+ */
+export const parsePxInput = (value, previous) => {
+  const trimmed = value.trim();
+  if (trimmed === '') return undefined;
+  const match = trimmed.match(/^(\d+(?:\.\d+)?)\s*(?:px)?$/i);
+  return match ? Number(match[1]) : previous;
 };
 
 // Where the inline form opens for a given measured box: just below a row's bottom
@@ -456,8 +478,8 @@ const LayoutResizeOverlay = ({ containerEl = null, rows, onChangeRows, editing: 
           ]}
           onCommit={(values) => {
             onChangeRows(setRowSize(rows, editing.rowId, {
-              height: pxOrUndefined(values.height),
-              imageHeight: pxOrUndefined(values.imageHeight)
+              height: parsePxInput(values.height, editingRow.height),
+              imageHeight: parsePxInput(values.imageHeight, editingRow.imageHeight)
             }));
             setEditing(null);
           }}

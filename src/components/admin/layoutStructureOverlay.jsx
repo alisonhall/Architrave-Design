@@ -17,7 +17,7 @@ import {
   updateColumnChildren
 } from './layoutHelpers';
 import { useLayoutMeasurement } from './layoutDomMeasurement';
-import { editAnchorFor } from './layoutResizeOverlay';
+import { editAnchorFor, isMainButtonPress, isReleasedMove } from './layoutResizeOverlay';
 import ActionsMenu from './actionsMenu';
 
 // Estimated toolbar footprints (px), used only to keep toolbars from landing on top of
@@ -104,6 +104,7 @@ export const usePointerReorder = (containerEl, onReorder) => {
   // Only ever called from a handle, and handles only render once there's a measured
   // container — so `containerEl` is always set by now.
   const startDrag = (event, group, fromIndex, siblingBoxes) => {
+    if (!isMainButtonPress(event)) return;
     event.preventDefault();
     const startX = event.clientX;
     const startY = event.clientY;
@@ -116,6 +117,10 @@ export const usePointerReorder = (containerEl, onReorder) => {
     };
 
     const handleMove = (moveEvent) => {
+      if (isReleasedMove(moveEvent)) {
+        cleanUp();
+        return;
+      }
       const moved = Math.abs(moveEvent.clientX - startX) > DRAG_THRESHOLD || Math.abs(moveEvent.clientY - startY) > DRAG_THRESHOLD;
       if (!current && !moved) return;
       current = { group, fromIndex, overIndex: overIndexAt(moveEvent.clientX, moveEvent.clientY) };

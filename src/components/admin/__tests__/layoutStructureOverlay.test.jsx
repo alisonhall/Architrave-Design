@@ -303,7 +303,7 @@ describe('LayoutStructureOverlay', () => {
     // within the BOXES layout above.
     const drag = (handle, from, to, { release = true } = {}) => {
       fireEvent.pointerDown(handle, { clientX: from[0], clientY: from[1] });
-      fireEvent.pointerMove(document, { clientX: to[0], clientY: to[1] });
+      fireEvent.pointerMove(document, { buttons: 1, clientX: to[0], clientY: to[1] });
       if (release) fireEvent.pointerUp(document, { clientX: to[0], clientY: to[1] });
     };
 
@@ -361,13 +361,41 @@ describe('LayoutStructureOverlay', () => {
       expect(onChangeRows).not.toHaveBeenCalled();
     });
 
+    it('ignores a right-click on a drag handle', () => {
+      const onChangeRows = jest.fn();
+      const { container } = render(<Harness rows={makeRows()} onChangeRows={onChangeRows} />);
+      const handle = within(rowToolbar(container, 'row1')).getByRole('button', { name: 'Drag to reorder' });
+
+      fireEvent.pointerDown(handle, { button: 2, clientX: 5, clientY: 5 });
+      fireEvent.pointerMove(document, { buttons: 1, clientX: 50, clientY: 350 });
+      expect(screen.queryAllByTestId('layout-drop-zone')).toHaveLength(0);
+      fireEvent.pointerUp(document, { clientX: 50, clientY: 350 });
+
+      expect(onChangeRows).not.toHaveBeenCalled();
+    });
+
+    it('drops a drag whose release was never seen, so a later click can\'t reorder', () => {
+      const onChangeRows = jest.fn();
+      const { container } = render(<Harness rows={makeRows()} onChangeRows={onChangeRows} />);
+      const handle = within(rowToolbar(container, 'row1')).getByRole('button', { name: 'Drag to reorder' });
+
+      drag(handle, [5, 5], [50, 350], { release: false });
+      expect(screen.getAllByTestId('layout-drop-zone')).toHaveLength(2);
+
+      fireEvent.pointerMove(document, { buttons: 0, clientX: 60, clientY: 360 });
+      expect(screen.queryAllByTestId('layout-drop-zone')).toHaveLength(0);
+
+      fireEvent.pointerUp(document, { clientX: 50, clientY: 350 });
+      expect(onChangeRows).not.toHaveBeenCalled();
+    });
+
     it('a press-and-release without real movement is not a drag', () => {
       const onChangeRows = jest.fn();
       const { container } = render(<Harness rows={makeRows()} onChangeRows={onChangeRows} />);
       const handle = within(rowToolbar(container, 'row1')).getByRole('button', { name: 'Drag to reorder' });
 
       fireEvent.pointerDown(handle, { clientX: 5, clientY: 5 });
-      fireEvent.pointerMove(document, { clientX: 6, clientY: 6 });
+      fireEvent.pointerMove(document, { buttons: 1, clientX: 6, clientY: 6 });
       expect(screen.queryAllByTestId('layout-drop-zone')).toHaveLength(0);
       // Released straight over another row: still not a drag, since it never moved.
       fireEvent.pointerUp(document, { clientX: 50, clientY: 350 });

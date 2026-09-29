@@ -1034,4 +1034,24 @@ test.describe('layouts editor — edits that change the layout under other contr
     await page.mouse.wheel(0, 400);
     await expect(dialog).toBeVisible();
   });
+
+  test('typing a height with a unit ("320px") sets it, and a typo keeps the old height instead of clearing it', async ({ page }) => {
+    await openLayouts(page, 'creditRiverManor');
+    const rowId = await page.locator('.adminLayoutPreview > .row').first().getAttribute('data-row-id');
+    const toolbar = page.locator(`[data-row-toolbar="${rowId}"]`);
+    const form = page.locator('.adminLayoutResize-edit');
+    const setHeight = async (value) => {
+      await toolbar.getByRole('button', { name: 'Row ▾' }).click();
+      await toolbar.getByRole('menuitem', { name: 'Edit size…' }).click();
+      await form.getByLabel('Height (px)', { exact: true }).fill(value);
+      await form.getByLabel('Height (px)', { exact: true }).press('Enter');
+      await expect(form).toHaveCount(0);
+    };
+
+    await setHeight('320px');
+    await setHeight('tall');
+
+    await page.getByRole('button', { name: 'Review Changes' }).click();
+    await expect(page.locator('.adminOutputPanel-file pre')).toContainText('height: 320');
+  });
 });
