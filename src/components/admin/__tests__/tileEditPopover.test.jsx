@@ -353,4 +353,92 @@ describe('TileEditPopover', () => {
       expect(screen.queryByRole('button', { name: 'Remove from layout' })).not.toBeInTheDocument();
     });
   });
+
+  describe('closing when the page scrolls', () => {
+    const tiles = { tileA: { kind: 'image', imageUrl: 'https://example.com/a.jpg', backgroundPosition: '', overlayText: '' } };
+    const setScrollY = (y) => Object.defineProperty(window, 'scrollY', { value: y, configurable: true, writable: true });
+    const renderOpen = (onClose) => render(
+      <TileEditPopover
+        selection={makeSelection({ tileKey: 'tileA' })}
+        tiles={tiles}
+        onChangeTiles={jest.fn()}
+        onAssignRows={jest.fn()}
+        onCreateTileAndAssign={jest.fn()}
+        projects={projects}
+        kinds={['image']}
+        onClose={onClose}
+      />
+    );
+
+    beforeEach(() => setScrollY(0));
+    afterEach(() => setScrollY(0));
+
+    it('closes once the page scrolls past a few pixels', () => {
+      const onClose = jest.fn();
+      renderOpen(onClose);
+
+      setScrollY(5);
+      fireEvent.scroll(document);
+      expect(onClose).not.toHaveBeenCalled();
+
+      setScrollY(40);
+      fireEvent.scroll(document);
+      expect(onClose).toHaveBeenCalled();
+    });
+
+    it('stays open when the scrolling happens inside the popover itself', () => {
+      const onClose = jest.fn();
+      renderOpen(onClose);
+      setScrollY(40);
+
+      fireEvent.scroll(screen.getByRole('dialog'));
+      expect(onClose).not.toHaveBeenCalled();
+    });
+
+    it('stays open while one of its fields has focus (a tablet keyboard can scroll the page)', () => {
+      const onClose = jest.fn();
+      renderOpen(onClose);
+      screen.getByLabelText('Image URL').focus();
+
+      setScrollY(200);
+      fireEvent.scroll(document);
+      expect(onClose).not.toHaveBeenCalled();
+    });
+
+    it('also closes when a scrolling container around the preview scrolls', () => {
+      const onClose = jest.fn();
+      renderOpen(onClose);
+      const panel = document.createElement('div');
+      document.body.appendChild(panel);
+
+      panel.scrollTop = 0;
+      fireEvent.scroll(panel);
+      panel.scrollTop = 50;
+      fireEvent.scroll(panel);
+
+      expect(onClose).toHaveBeenCalled();
+      panel.remove();
+    });
+
+    it('stops listening once closed', () => {
+      const onClose = jest.fn();
+      const { rerender } = renderOpen(onClose);
+      rerender(
+        <TileEditPopover
+          selection={null}
+          tiles={tiles}
+          onChangeTiles={jest.fn()}
+          onAssignRows={jest.fn()}
+          onCreateTileAndAssign={jest.fn()}
+          projects={projects}
+          kinds={['image']}
+          onClose={onClose}
+        />
+      );
+
+      setScrollY(100);
+      fireEvent.scroll(document);
+      expect(onClose).not.toHaveBeenCalled();
+    });
+  });
 });

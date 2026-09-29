@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { makeBlankTile, suggestTileKey } from './layoutHelpers';
@@ -53,6 +53,59 @@ const useClampedPosition = (anchor) => {
   });
 
   return { ref, style };
+};
+
+// Scrolling less than this (px) doesn't count — incidental nudges from layout, say.
+const SCROLL_CLOSE_THRESHOLD = 8;
+
+const scrollPosition = (target) => (
+  target === document || target === window
+    ? { x: window.scrollX, y: window.scrollY }
+    : { x: target.scrollLeft, y: target.scrollTop }
+);
+
+/**
+ * @description Closes the popover once the page (or anything containing the preview)
+ * scrolls. It's fixed on screen, anchored where the tile *was*, so after a scroll it no
+ * longer points at its tile and can end up covering controls that have scrolled under
+ * it, like "Add row". Two exceptions: scrolling inside the popover itself (its field
+ * list, the "Assign a tile" list), and any scroll while focus is in one of its fields —
+ * on a tablet, bringing up the on-screen keyboard can scroll the page, and closing then
+ * would throw away what was being typed.
+ */
+const useCloseOnScroll = (ref, open, onClose) => {
+  // Read through a ref so a new `onClose` each render (the caller passes an inline
+  // function) doesn't re-subscribe — which would also reset the starting position.
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const initialPage = { x: window.scrollX, y: window.scrollY };
+    const starts = new Map();
+
+    const handleScroll = (event) => {
+      const popover = ref.current;
+      const { target } = event;
+      if (popover && target instanceof Node && popover.contains(target)) return;
+      if (popover && popover.contains(document.activeElement)) return;
+
+      if (!starts.has(target)) {
+        // The first scroll event seen from this target: it has already moved by the
+        // time it fires, so measure from the position the page was at on opening
+        // (for the page itself) or from here (for anything else).
+        starts.set(target, target === document || target === window ? initialPage : scrollPosition(target));
+      }
+      const start = starts.get(target);
+      const now = scrollPosition(target);
+      if (Math.abs(now.x - start.x) > SCROLL_CLOSE_THRESHOLD || Math.abs(now.y - start.y) > SCROLL_CLOSE_THRESHOLD) onCloseRef.current();
+    };
+
+    // Capture phase: scroll events don't bubble, so this is the only way to hear a
+    // scrolling ancestor as well as the page itself.
+    document.addEventListener('scroll', handleScroll, true);
+    return () => document.removeEventListener('scroll', handleScroll, true);
+  }, [ref, open]);
 };
 
 const AssignTile = ({ tiles, projects, kinds, onAssignExisting, onCreateAndAssign, onCancel }) => {
@@ -273,6 +326,7 @@ const TileEditPopover = ({
 }) => {
   const [reassigning, setReassigning] = useState(false);
   const { ref, style } = useClampedPosition(selection ? selection.anchor : null);
+  useCloseOnScroll(ref, Boolean(selection), onClose);
 
   if (!selection) return null;
 

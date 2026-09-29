@@ -1019,4 +1019,19 @@ test.describe('layouts editor — edits that change the layout under other contr
     await page.getByRole('button', { name: 'Review Changes' }).click();
     await expect(page.locator('.adminOutputPanel-file pre')).toContainText('height: 440');
   });
+
+  test('the tile popover closes when the page scrolls, but not while its fields are being typed in', async ({ page }) => {
+    await openLayouts(page, 'creditRiverManor');
+    const dialog = page.getByRole('dialog');
+
+    await page.locator('.adminLayoutPreview img').first().click();
+    await expect(dialog).toBeVisible();
+    await page.mouse.wheel(0, 400);
+    await expect(dialog).toHaveCount(0);
+
+    await page.locator('.adminLayoutPreview img').first().click();
+    await dialog.getByLabel('Image URL').click();
+    await page.mouse.wheel(0, 400);
+    await expect(dialog).toBeVisible();
+  });
 });
