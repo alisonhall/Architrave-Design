@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { flattenLayout, updateRowById, updateRowColumns } from './layoutHelpers';
@@ -382,6 +382,20 @@ const LayoutResizeOverlay = ({ containerEl = null, rows, onChangeRows, editing: 
   const isControlled = onEditingChange !== undefined;
   const editing = isControlled ? controlledEditing : ownEditing;
   const setEditing = isControlled ? onEditingChange : setOwnEditing;
+
+  // The open form holds the values it opened with, and saves them when it loses focus.
+  // If the tree changes some other way meanwhile — the same line dragged, a toolbar
+  // action — saving those would silently undo it, so the form closes instead. (Its own
+  // save changes the tree too, but closes it anyway.)
+  const isFirstRows = useRef(true);
+  useEffect(() => {
+    if (isFirstRows.current) {
+      isFirstRows.current = false;
+      return;
+    }
+    setEditing(null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rows]);
 
   const { rows: rowBoxes, columns: columnBoxes } = visibleHandleBoxes(rows, measurement);
   const { rows: rowEntries } = flattenLayout(rows);

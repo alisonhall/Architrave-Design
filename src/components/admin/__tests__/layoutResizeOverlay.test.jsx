@@ -565,3 +565,41 @@ describe('LayoutResizeOverlay — after a column is removed', () => {
     expect(() => rerender(<Harness rows={oneColumn} onChangeRows={jest.fn()} />)).not.toThrow();
   });
 });
+
+describe('LayoutResizeOverlay — the size form when the layout changes under it', () => {
+  it('closes, so the values it opened with can\'t later be saved over the change', () => {
+    mockRects();
+    const onChangeRows = jest.fn();
+    const rows = [{ id: 'row1', height: 300, columns: [{ id: 'col1', children: [] }] }];
+    const { rerender } = render(<Harness rows={rows} onChangeRows={onChangeRows} />);
+
+    fireEvent.pointerDown(screen.getByRole('separator', { name: /resize this row's height/ }), { clientY: 100 });
+    fireEvent.pointerUp(document, { clientY: 100 });
+    const input = screen.getByLabelText('Height (px)');
+    expect(input).toHaveValue('300');
+
+    // e.g. the same line dragged to 400 while the form was open.
+    rerender(<Harness rows={[{ ...rows[0], height: 400 }]} onChangeRows={onChangeRows} />);
+
+    expect(screen.queryByLabelText('Height (px)')).not.toBeInTheDocument();
+    fireEvent.blur(input, { relatedTarget: document.body });
+    expect(onChangeRows).not.toHaveBeenCalled();
+  });
+
+  it('closes a controlled form too, via onEditingChange', () => {
+    mockRects();
+    const onEditingChange = jest.fn();
+    const rows = [{ id: 'row1', columns: [{ id: 'col1', children: [] }] }];
+    const containerEl = document.createElement('div');
+    const editing = { type: 'row', rowId: 'row1', rect: { top: 0, left: 0 } };
+    const { rerender } = render(
+      <LayoutResizeOverlay containerEl={containerEl} rows={rows} onChangeRows={jest.fn()} editing={editing} onEditingChange={onEditingChange} />
+    );
+    expect(onEditingChange).not.toHaveBeenCalled();
+
+    rerender(
+      <LayoutResizeOverlay containerEl={containerEl} rows={[...rows]} onChangeRows={jest.fn()} editing={editing} onEditingChange={onEditingChange} />
+    );
+    expect(onEditingChange).toHaveBeenCalledWith(null);
+  });
+});

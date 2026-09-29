@@ -80,8 +80,8 @@ export const measureLayout = (containerEl, rows) => {
 /**
  * @description Keeps measureLayout's result current: re-measures whenever the tree
  * changes, the window resizes, or (where ResizeObserver exists — every real browser,
- * not jsdom) the preview itself changes size, e.g. once a late-loading image settles a
- * row's height.
+ * not jsdom) the preview or any row/column in it changes size, e.g. once a late-loading
+ * image settles a row's height.
  *
  * Takes the container *element* itself, not a ref object — a mutable ref's `.current`
  * isn't safe to read here: React attaches a parent host div's ref only after processing
@@ -101,10 +101,16 @@ export const useLayoutMeasurement = (containerEl, rows) => {
     remeasure();
     window.addEventListener('resize', remeasure);
 
+    // Every row and column, not just the preview as a whole: plenty of changes resize
+    // one without changing the preview's outer size — a tile's content edited so a
+    // column with no width set renders wider, say — and no other trigger here would
+    // notice. (Observing each one also catches the preview's own size changing, since
+    // anything that does resizes some row.)
     let observer = null;
     if (containerEl && typeof ResizeObserver !== 'undefined') {
       observer = new ResizeObserver(remeasure);
       observer.observe(containerEl);
+      containerEl.querySelectorAll('[data-row-id], [data-column-id]').forEach((el) => observer.observe(el));
     }
 
     return () => {

@@ -953,4 +953,42 @@ test.describe('layouts editor — edits that change the layout under other contr
     await page.getByRole('button', { name: 'Review Changes' }).click();
     await expect(page.locator('.adminOutputPanel-file pre')).not.toContainText("tileKey: '1'");
   });
+
+  test('clicking a second tile while the first one\'s form is open edits the second tile, not a copy of the first', async ({ page }) => {
+    await openLayouts(page, 'creditRiverManor');
+    const images = page.locator('.adminLayoutPreview img');
+    const dialog = page.getByRole('dialog');
+
+    await images.nth(0).click();
+    await expect(dialog.getByText('Editing tile: 1')).toBeVisible();
+    const firstUrl = await dialog.getByLabel('Image URL').inputValue();
+
+    await images.nth(1).click();
+    await expect(dialog.getByText(/^Editing tile: (?!1$)/)).toBeVisible();
+    await expect(dialog.getByLabel('Image URL')).not.toHaveValue(firstUrl);
+  });
+
+  test('an open exact-size form closes when its row is dragged, instead of later saving its old value', async ({ page }) => {
+    await openLayouts(page, 'creditRiverManor');
+    const row = page.locator('.adminLayoutPreview > .row').first();
+    const rowBox = await row.boundingBox();
+    await page.evaluate((y) => window.scrollBy(0, y - 350), rowBox.y + rowBox.height);
+    const box = await row.boundingBox();
+    const edgeY = box.y + box.height;
+
+    // Click the line (opens the form at 380), then drag the same line down 60px.
+    await page.mouse.click(box.x + box.width / 2, edgeY);
+    const form = page.locator('.adminLayoutResize-edit');
+    await expect(form.getByLabel('Height (px)', { exact: true })).toHaveValue('380');
+    await page.mouse.move(box.x + box.width / 2, edgeY);
+    await page.mouse.down();
+    await page.mouse.move(box.x + box.width / 2, edgeY + 60, { steps: 10 });
+    await page.mouse.up();
+
+    await expect(form).toHaveCount(0);
+    // A click elsewhere can't bring the old 380 back.
+    await page.getByRole('heading', { name: 'Layout' }).click();
+    await page.getByRole('button', { name: 'Review Changes' }).click();
+    await expect(page.locator('.adminOutputPanel-file pre')).toContainText('height: 440');
+  });
 });

@@ -319,4 +319,54 @@ describe('EditableLayoutPreview', () => {
       expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
     });
   });
+
+  describe('each click opens a fresh popover', () => {
+    const tiles = {
+      a: { kind: 'image', imageUrl: 'https://example.com/a.jpg', backgroundPosition: '', overlayText: 'Tile A' },
+      b: { kind: 'image', imageUrl: 'https://example.com/b.jpg', backgroundPosition: '', overlayText: 'Tile B' }
+    };
+    const rows = [row({ id: 'row1' }, [column('col1', [tileRef('a'), tileRef('b')])])];
+    const props = (overrides = {}) => ({
+      rows,
+      tiles,
+      projects,
+      kinds: ['image'],
+      onChangeRows: jest.fn(),
+      onChangeTiles: jest.fn(),
+      onCreateTileAndAssign: jest.fn(),
+      ...overrides
+    });
+
+    it('clicking a second tile while one is open shows (and saves) the second tile\'s own values', () => {
+      const onChangeTiles = jest.fn();
+      render(<EditableLayoutPreview {...props({ onChangeTiles })} />);
+      const [imageA, imageB] = screen.getAllByRole('img');
+
+      fireEvent.click(imageA);
+      expect(screen.getByLabelText('Image URL')).toHaveValue('https://example.com/a.jpg');
+
+      fireEvent.click(imageB);
+      expect(screen.getByText('Editing tile: b')).toBeInTheDocument();
+      expect(screen.getByLabelText('Image URL')).toHaveValue('https://example.com/b.jpg');
+
+      fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+      expect(onChangeTiles).toHaveBeenCalledWith(tiles);
+    });
+
+    it('"Use a different tile here" doesn\'t carry over to the next tile clicked after the popover was closed by a layout change', () => {
+      const { rerender } = render(<EditableLayoutPreview {...props()} />);
+      fireEvent.click(screen.getAllByRole('img')[0]);
+      fireEvent.click(screen.getByRole('button', { name: 'Use a different tile here' }));
+      expect(screen.getByText('Assign a tile')).toBeInTheDocument();
+
+      // Some other edit to this tree closes it...
+      rerender(<EditableLayoutPreview {...props({ rows: [{ ...rows[0], height: 400 }] })} />);
+      expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+
+      // ...and the next click opens the tile's edit form, not the assign list.
+      fireEvent.click(screen.getAllByRole('img')[1]);
+      expect(screen.getByText('Editing tile: b')).toBeInTheDocument();
+      expect(screen.queryByText('Assign a tile')).not.toBeInTheDocument();
+    });
+  });
 });

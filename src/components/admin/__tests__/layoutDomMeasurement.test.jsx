@@ -136,6 +136,9 @@ describe('useLayoutMeasurement', () => {
     const container = buildDom();
     const { unmount } = render(<Harness container={container} />);
     expect(observe).toHaveBeenCalledWith(container);
+    // Each row and column too — a tile edit can resize one without resizing the preview.
+    ['row1', 'row2'].forEach((id) => expect(observe).toHaveBeenCalledWith(container.querySelector(`[data-row-id="${id}"]`)));
+    ['col1', 'col2', 'col3'].forEach((id) => expect(observe).toHaveBeenCalledWith(container.querySelector(`[data-column-id="${id}"]`)));
 
     container.querySelector('[data-row-id="row2"]').remove();
     act(() => observerCallback());

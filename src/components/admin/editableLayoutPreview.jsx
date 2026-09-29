@@ -56,6 +56,11 @@ const EditableLayoutPreview = ({
   const containerRef = useRef(null);
   const [containerEl, setContainerEl] = useState(null);
   const [selection, setSelection] = useState(null);
+  // Bumped on every click that opens the popover, and used as its `key`: each click
+  // gets a fresh popover, so nothing carries over from the last one — not the edit
+  // form's draft values (which would otherwise be saved over the newly clicked tile),
+  // nor "Use a different tile here" mode.
+  const selectionCount = useRef(0);
   // The resize overlay's inline size form, lifted here so a structure toolbar's "Edit
   // size…"/"Edit width…" can open it too, not just a click on a resize line.
   const [editingSize, setEditingSize] = useState(null);
@@ -103,7 +108,8 @@ const EditableLayoutPreview = ({
     // A placement pointing at a tile that no longer exists (deleted from the library)
     // is really an empty slot waiting for a tile — there's nothing left to edit.
     const isMissingTile = clicked.tileKey && !Object.prototype.hasOwnProperty.call(tiles, clicked.tileKey);
-    setSelection(isMissingTile ? { ...clicked, isEmpty: true } : clicked);
+    selectionCount.current += 1;
+    setSelection({ ...clicked, isEmpty: clicked.isEmpty || Boolean(isMissingTile), id: selectionCount.current });
   };
 
   return (
@@ -121,6 +127,7 @@ const EditableLayoutPreview = ({
       />
       <LayoutStructureOverlay containerEl={containerEl} rows={rows} onChangeRows={onChangeRows} onEditSize={setEditingSize} />
       <TileEditPopover
+        key={selection ? selection.id : 'closed'}
         selection={selection}
         tiles={tiles}
         onChangeTiles={onChangeTiles}
