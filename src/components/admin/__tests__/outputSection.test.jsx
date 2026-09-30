@@ -1,0 +1,282 @@
+import React from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
+
+import { DraftProvider, useDraftSection } from '../draftContext';
+import OutputSection from '../outputSection';
+import { seedDraft, SEED_VERSION } from '../seedData';
+
+// A tiny helper to mutate the draft from outside the Projects editor, so this test can
+// focus purely on OutputSection's own behaviour (show/hide, generated content).
+const IntroTextMutator = () => {
+  const [, setIntro] = useDraftSection('defaultIntroductionText');
+  return (
+    <button type="button" onClick={() => setIntro('A brand new introduction.')}>
+      mutate intro
+    </button>
+  );
+};
+
+const LayoutsMutator = () => {
+  const [, setLayouts] = useDraftSection('layouts');
+  return (
+    <button type="button" onClick={() => setLayouts({ unrelated: true })}>
+      mutate layouts
+    </button>
+  );
+};
+
+const NewHomesLayoutMutator = () => {
+  const [layouts, setLayouts] = useDraftSection('layouts');
+  return (
+    <button
+      type="button"
+      onClick={() => setLayouts({
+        ...layouts,
+        newHomes: { ...layouts.newHomes, defaultLayout: [] }
+      })}
+    >
+      mutate new-homes layout
+    </button>
+  );
+};
+
+const NewPageAdder = () => {
+  const [layouts, setLayouts] = useDraftSection('layouts');
+  const [newLayoutPages, setNewLayoutPages] = useDraftSection('newLayoutPages');
+  const addPage = () => {
+    setNewLayoutPages({
+      ...newLayoutPages,
+      testManorDetail: {
+        key: 'testManorDetail',
+        label: 'Test Manor (New Homes detail page)',
+        dataFile: true,
+        dataFilePath: 'static/layouts/test-manor.js',
+        type: 'detail',
+        projectKey: 'testManor',
+        folder: 'new-homes',
+        slug: 'test-manor',
+        isNew: true
+      }
+    });
+    setLayouts({
+      ...layouts,
+      testManorDetail: {
+        mainClasses: 'portfolio',
+        sectionClassName: 'contentWrapper layoutAll layoutProject',
+        projectKey: 'testManor',
+        tiles: { description: { kind: 'description' } },
+        layout: []
+      }
+    });
+  };
+  return <button type="button" onClick={addPage}>add new page</button>;
+};
+
+describe('OutputSection', () => {
+  beforeEach(() => {
+    window.sessionStorage.clear();
+  });
+
+  it('shows no files when the draft matches the live site', () => {
+    render(
+      <DraftProvider>
+        <OutputSection />
+      </DraftProvider>
+    );
+
+    expect(screen.getByText(/no changes yet/i)).toBeInTheDocument();
+  });
+
+  it('lists static/app-constants.js once the projects data has changed', () => {
+    render(
+      <DraftProvider>
+        <IntroTextMutator />
+        <OutputSection />
+      </DraftProvider>
+    );
+
+    fireEvent.click(screen.getByText('mutate intro'));
+
+    expect(screen.getByText('static/app-constants.js')).toBeInTheDocument();
+    expect(screen.getByText(/A brand new introduction\./)).toBeInTheDocument();
+  });
+
+  it('does not flag app-constants.js as changed for unrelated draft sections', () => {
+    render(
+      <DraftProvider>
+        <LayoutsMutator />
+        <OutputSection />
+      </DraftProvider>
+    );
+
+    fireEvent.click(screen.getByText('mutate layouts'));
+
+    expect(screen.getByText(/no changes yet/i)).toBeInTheDocument();
+  });
+
+  it('includes a note about regenerating dependent page snapshots', () => {
+    render(
+      <DraftProvider>
+        <IntroTextMutator />
+        <OutputSection />
+      </DraftProvider>
+    );
+
+    fireEvent.click(screen.getByText('mutate intro'));
+
+    expect(screen.getByText(/npm test -- -u/)).toBeInTheDocument();
+  });
+
+  it('lists the new-homes.jsx page once its layout has actually changed', () => {
+    render(
+      <DraftProvider>
+        <NewHomesLayoutMutator />
+        <OutputSection />
+      </DraftProvider>
+    );
+
+    fireEvent.click(screen.getByText('mutate new-homes layout'));
+
+    expect(screen.getByText('static/layouts/new-homes.js')).toBeInTheDocument();
+  });
+
+  it('does not list new-homes.jsx when only unrelated draft data changes', () => {
+    render(
+      <DraftProvider>
+        <IntroTextMutator />
+        <OutputSection />
+      </DraftProvider>
+    );
+
+    fireEvent.click(screen.getByText('mutate intro'));
+
+    expect(screen.queryByText('static/layouts/new-homes.js')).not.toBeInTheDocument();
+  });
+
+  it('lists the data file, wrapper page, and test scaffold for a brand-new page', () => {
+    render(
+      <DraftProvider>
+        <NewPageAdder />
+        <OutputSection />
+      </DraftProvider>
+    );
+
+    fireEvent.click(screen.getByText('add new page'));
+
+    expect(screen.getByText('static/layouts/test-manor.js')).toBeInTheDocument();
+    expect(screen.getByText('src/pages/portfolio/new-homes/test-manor.jsx')).toBeInTheDocument();
+    expect(screen.getByText('src/pages/portfolio/new-homes/__tests__/test-manor.test.jsx')).toBeInTheDocument();
+  });
+
+  it('checks each changed layout for problems before it\'s applied', () => {
+    const EmptyRowAdder = () => {
+      const [layouts, setLayouts] = useDraftSection('layouts');
+      return (
+        <button
+          type="button"
+          onClick={() => setLayouts({
+            ...layouts,
+            creditRiverManor: { ...layouts.creditRiverManor, layout: [...layouts.creditRiverManor.layout, { id: 'r', columns: [] }] }
+          })}
+        >
+          add empty row
+        </button>
+      );
+    };
+    render(<DraftProvider><EmptyRowAdder /><OutputSection /></DraftProvider>);
+
+    fireEvent.click(screen.getByText('add empty row'));
+
+    expect(screen.getByRole('alert')).toHaveTextContent('1 problem to fix');
+    expect(screen.getByText('has no columns, so it shows nothing.', { exact: false })).toBeInTheDocument();
+  });
+
+  it('tells the admin to go through a pull request, which updates snapshot tests automatically', () => {
+    render(<DraftProvider><IntroTextMutator /><OutputSection /></DraftProvider>);
+    fireEvent.click(screen.getByText('mutate intro'));
+
+    expect(screen.getByText(/open a pull request: its checks update \(or create\) the affected snapshot tests automatically/)).toBeInTheDocument();
+  });
+
+  it('lists static/about.js and static/reviews.js once those change', () => {
+    const ContentMutator = () => {
+      const [about, setAbout] = useDraftSection('aboutContent');
+      const [reviews, setReviews] = useDraftSection('reviews');
+      return (
+        <>
+          <button type="button" onClick={() => setAbout({ ...about, intro: { ...about.intro, heading: 'Changed' } })}>about</button>
+          <button type="button" onClick={() => setReviews(reviews.slice(1))}>reviews</button>
+        </>
+      );
+    };
+    render(<DraftProvider><ContentMutator /><OutputSection /></DraftProvider>);
+
+    fireEvent.click(screen.getByText('about'));
+    fireEvent.click(screen.getByText('reviews'));
+
+    expect(screen.getByText('static/about.js')).toBeInTheDocument();
+    expect(screen.getByText('static/reviews.js')).toBeInTheDocument();
+  });
+
+  it('lists nothing for a draft restored after a reload — same content, new editor-only ids', () => {
+    const reloadedDraft = JSON.parse(JSON.stringify(seedDraft));
+    const renumber = (value) => {
+      if (Array.isArray(value)) value.forEach(renumber);
+      else if (value && typeof value === 'object') {
+        if ('id' in value) value.id = `${value.id}-reloaded`;
+        Object.values(value).forEach(renumber);
+      }
+    };
+    renumber(reloadedDraft);
+    window.sessionStorage.setItem('architrave-admin-draft', JSON.stringify({ ...reloadedDraft, __seedVersion: SEED_VERSION }));
+
+    render(<DraftProvider><OutputSection /></DraftProvider>);
+
+    expect(screen.getByText(/No changes yet/)).toBeInTheDocument();
+  });
+
+  it('writes a re-created page\'s files rather than listing them for deletion, deleting only what\'s left of the old page', () => {
+    const files = [
+      'static/layouts/credit-river-manor.js',
+      'src/pages/portfolio/new-homes/credit-river-manor.jsx',
+      'src/pages/portfolio/new-homes/__tests__/credit-river-manor.test.jsx',
+      'src/pages/portfolio/new-homes/__tests__/__snapshots__/credit-river-manor.test.jsx.snap'
+    ];
+    const Recreate = () => {
+      const [layouts, setLayouts] = useDraftSection('layouts');
+      const [, setNewPages] = useDraftSection('newLayoutPages');
+      const [, setDeleted] = useDraftSection('deletedPages');
+      return (
+        <button
+          type="button"
+          onClick={() => {
+            setDeleted({ creditRiverManor: { label: 'Credit River Manor (New Homes detail page)', files } });
+            setNewPages({
+              creditRiverManor: {
+                key: 'creditRiverManor',
+                label: 'Credit River Manor (New Homes detail page)',
+                dataFile: true,
+                dataFilePath: 'static/layouts/credit-river-manor.js',
+                type: 'detail',
+                projectKey: 'creditRiverManor',
+                folder: 'new-homes',
+                slug: 'credit-river-manor',
+                isNew: true
+              }
+            });
+            setLayouts({ ...layouts, creditRiverManor: { ...layouts.creditRiverManor, layout: layouts.creditRiverManor.layout.slice(1) } });
+          }}
+        >
+          recreate
+        </button>
+      );
+    };
+    const { container } = render(<DraftProvider><Recreate /><OutputSection /></DraftProvider>);
+    fireEvent.click(screen.getByText('recreate'));
+
+    const written = Array.from(container.querySelectorAll('.adminOutputPanel-file:not(.adminOutputPanel-file--deleted) .adminOutputPanel-fileHeader code')).map((el) => el.textContent);
+    const deleted = Array.from(container.querySelectorAll('.adminOutputPanel-file--deleted code')).map((el) => el.textContent);
+    expect(written).toEqual(files.slice(0, 3));
+    expect(deleted).toEqual([files[3]]);
+  });
+});

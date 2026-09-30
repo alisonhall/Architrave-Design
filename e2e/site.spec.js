@@ -73,6 +73,38 @@ test.describe('portfolio', () => {
     await expect(page.getByText('Previous Project').first()).toBeVisible();
     await expect(page.getByText('Next Project').first()).toBeVisible();
   });
+
+  test('a detail page with an embed tile renders its pasted iframe markup', async ({ page }) => {
+    const response = await page.goto('/portfolio/new-homes/classic-centre-hall/');
+    expect(response.ok()).toBeTruthy();
+
+    // The page is a dual-layout (defaultLayout/wideLayout) detail page, so the same
+    // embed tile is present twice in the DOM — CSS shows only one at a time.
+    const embedFrame = page.locator('iframe[src*="kuula.co"]').first();
+    await expect(embedFrame).toBeVisible();
+    await expect(embedFrame).toHaveAttribute('allowfullscreen', '');
+  });
+});
+
+test.describe('about page', () => {
+  test('renders its intro, bio, and approach content', async ({ page }) => {
+    const response = await page.goto('/about/');
+    expect(response.ok()).toBeTruthy();
+
+    await expect(page.getByRole('heading', { name: 'Architrave Design, Architect' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Bill Hall' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Approach' })).toBeVisible();
+  });
+});
+
+test.describe('reviews page', () => {
+  test('renders review content and a link to Houzz reviews', async ({ page }) => {
+    const response = await page.goto('/reviews/');
+    expect(response.ok()).toBeTruthy();
+
+    await expect(page.getByRole('heading', { name: 'Marisa C' })).toBeVisible();
+    await expect(page.getByRole('link', { name: /houzz reviews/i })).toBeVisible();
+  });
 });
 
 test.describe('sitemap page', () => {

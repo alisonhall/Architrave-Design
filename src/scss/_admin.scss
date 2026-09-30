@@ -1,0 +1,1029 @@
+@import 'variables';
+
+.adminPasswordGate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #f4f4f4;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 280px;
+        padding: $spacing;
+        background: $pageColour;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+
+        h1 {
+            margin: 0 0 10px;
+            font-size: $titleFontSize;
+        }
+
+        input {
+            padding: 8px;
+            font-size: $bodyFontSize;
+            border: 1px solid $grayLinkColour;
+        }
+
+        button {
+            padding: 10px;
+            font-size: $bodyFontSize;
+            background: $darkTextColour;
+            color: $lightTextColour;
+            border: none;
+            cursor: pointer;
+
+            &:disabled {
+                opacity: 0.5;
+                cursor: default;
+            }
+        }
+    }
+
+    &-error {
+        color: #b00020;
+        margin: 0;
+    }
+}
+
+.adminApp {
+    display: flex;
+    min-height: 100vh;
+    background: #f4f4f4;
+
+    &-nav {
+        display: flex;
+        flex-direction: column;
+        width: 180px;
+        flex-shrink: 0;
+        background: $darkTextColour;
+        // Kept in view on a long page (the Layouts editor runs thousands of px), so the
+        // section list — and Undo/Redo at its foot — is always within reach.
+        position: sticky;
+        top: 0;
+        align-self: flex-start;
+        height: 100vh;
+        overflow-y: auto;
+
+        button {
+            padding: 15px;
+            text-align: left;
+            background: none;
+            border: none;
+            color: $lightGrayLinkColour;
+            cursor: pointer;
+            font-size: $bodyFontSize;
+
+            &.active {
+                background: rgba(255, 255, 255, 0.1);
+                color: $lightTextColour;
+            }
+        }
+    }
+
+    &-content {
+        flex-grow: 1;
+        padding: $spacing;
+        overflow-y: auto;
+    }
+
+    // Undo / Redo / Discard all changes, at the foot of the section list.
+    &-history {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-top: auto;
+        padding: 15px;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+
+        button {
+            padding: 8px 10px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            text-align: center;
+
+            &:disabled {
+                opacity: 0.35;
+                cursor: default;
+            }
+        }
+    }
+}
+
+// Messages about the draft itself (couldn't be saved, restored from an outdated
+// session, ...), shown above whichever section is open.
+.adminNotice {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    max-width: 900px;
+    margin-bottom: $spacing;
+    padding: 12px 15px;
+    background: #eaf2fb;
+    border-left: 4px solid #3a78c3;
+
+    &--warning {
+        background: #fff6e0;
+        border-left-color: #d69a00;
+    }
+
+    &--error {
+        background: #fdecea;
+        border-left-color: #c0392b;
+    }
+
+    button {
+        flex-shrink: 0;
+        margin-left: auto;
+        padding: 4px 10px;
+        cursor: pointer;
+    }
+}
+
+.adminOutputPanel {
+    &-instructions {
+        max-width: 700px;
+    }
+
+    &-file {
+        margin-bottom: $spacingX2;
+        background: $pageColour;
+        border: 1px solid #ddd;
+
+        &Header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 15px;
+            background: #eee;
+
+            button {
+                padding: 5px 12px;
+                cursor: pointer;
+            }
+        }
+
+        pre {
+            margin: 0;
+            padding: 15px;
+            overflow-x: auto;
+            font-size: 0.85rem;
+        }
+    }
+
+    &-note {
+        margin: 0;
+        padding: 8px 15px;
+        background: #fff8e1;
+        font-size: 0.9rem;
+    }
+}
+
+.adminProjectsEditor {
+    max-width: 900px;
+
+    &-intro {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-bottom: $spacingX2;
+
+        textarea {
+            padding: 8px;
+            font-family: inherit;
+            font-size: $bodyFontSize;
+        }
+    }
+
+    &-type {
+        margin-bottom: $spacingX2;
+        padding-bottom: $spacing;
+        border-bottom: 1px solid #ddd;
+
+        h3 {
+            margin-bottom: 6px;
+            font-size: 1rem;
+            color: $grayLinkColour;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0 0 15px;
+            padding: 0;
+        }
+    }
+
+    &-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 8px 10px;
+        background: $pageColour;
+        border: 1px solid #eee;
+        margin-bottom: 4px;
+    }
+
+    &-nameGroup {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        overflow: hidden;
+        min-width: 0;
+    }
+
+    &-name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &-rowActions {
+        display: flex;
+        gap: 6px;
+        flex-shrink: 0;
+
+        button {
+            padding: 4px 10px;
+            cursor: pointer;
+        }
+    }
+
+    &-editing,
+    &-preview {
+        margin-top: $spacingX2;
+        padding-top: $spacing;
+        border-top: 2px solid $darkTextColour;
+    }
+}
+
+// Shared "label stacked above its own input/textarea/select" pattern, extended by every
+// admin form below that wraps a field as <label>Text<input/></label>. A bare label like
+// that renders inline by default, so the label's text and its control sit side by side
+// on one line — meaning where the control starts depends on how long that one field's
+// label text happens to be, which is what made a form with several such fields (each a
+// different label length) look raggedly misaligned rather than lined up in a column.
+%adminFieldLabel {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 10px;
+    font-weight: 600;
+
+    input,
+    textarea,
+    select {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 8px;
+        font-family: inherit;
+        font-size: $bodyFontSize;
+    }
+}
+
+.adminProjectForm {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-width: 500px;
+    margin-top: 10px;
+
+    // Excludes a checkbox's own label (TileFields' "Use the shared portfolio
+    // introduction text") — stacking it above a full-width, height-13px-tall
+    // checkbox is worse than the ragged-alignment problem this is meant to fix.
+    // A checkbox belongs inline next to its own text, which is what a bare
+    // <label> already does by default.
+    label:not(:has(input[type='checkbox'])) {
+        @extend %adminFieldLabel;
+    }
+
+    // Only covers this form's own <label htmlFor="…"> + separate sibling <input>
+    // fields — %adminFieldLabel's own nested rule above already styles a wrapped
+    // control consistently wherever that pattern's used instead (Tile Library /
+    // Reviews forms reuse this same .adminProjectForm class for exactly that).
+    input,
+    textarea {
+        padding: 8px;
+        font-family: inherit;
+        font-size: $bodyFontSize;
+    }
+
+    &-hint {
+        font-weight: 400;
+        color: $grayLinkColour;
+    }
+
+    &-row {
+        display: flex;
+        gap: 8px;
+
+        input {
+            flex-grow: 1;
+        }
+    }
+
+    &-actions {
+        display: flex;
+        gap: 8px;
+        margin-top: $spacing;
+
+        button {
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+    }
+}
+
+.adminProjectPreview {
+    max-width: 500px;
+    overflow: hidden;
+}
+
+.adminAboutEditor {
+    &-columns {
+        display: flex;
+        gap: $spacingX2;
+        align-items: flex-start;
+    }
+
+    // Without an explicit flex-basis, a flex item shrinks to its content's own
+    // preferred size rather than claiming a real share of the row — every field
+    // inside collapsed to a sliver next to the wider preview column.
+    &-fields {
+        flex: 1;
+        min-width: 0;
+    }
+
+    &-section {
+        max-width: 500px;
+        margin-bottom: $spacingX2;
+
+        label {
+            @extend %adminFieldLabel;
+        }
+    }
+
+    &-paragraph {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+
+        label {
+            flex-grow: 1;
+        }
+    }
+}
+
+.adminAboutPreview {
+    // Renders the real about-page content full-bleed, with nothing else capping its
+    // width — as an unconstrained flex sibling of .adminAboutEditor-fields it claimed
+    // almost all of .adminAboutEditor-columns' row, squeezing the fields down to a
+    // sliver despite their own flex: 1 (matching .adminProjectPreview's existing cap).
+    flex-shrink: 0;
+    max-width: 500px;
+    overflow: hidden;
+}
+
+.adminTileLibrary {
+    margin-bottom: $spacingX2;
+    padding-bottom: $spacing;
+    border-bottom: 1px solid #ddd;
+
+    ul {
+        list-style: none;
+        margin: 0 0 10px;
+        padding: 0;
+    }
+
+    &-filter {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        max-width: 260px;
+        margin-bottom: 8px;
+        font-size: 0.85rem;
+        font-weight: 600;
+
+        input {
+            padding: 6px;
+            font-family: inherit;
+            font-size: $bodyFontSize;
+        }
+    }
+
+    &-addButtons {
+        display: flex;
+        gap: 8px;
+    }
+}
+
+.adminLayoutsEditor {
+    &-target {
+        font-family: monospace;
+        color: $grayLinkColour;
+    }
+
+    &-variant {
+        margin-top: $spacingX2;
+
+        h3 {
+            margin-bottom: 10px;
+        }
+    }
+
+    // The page picker / "create a page for" selectors — plain sibling <label>s would
+    // otherwise render inline by default and could sit side by side on a wide screen.
+    // Scoped to these two specific classes, not a bare `label` descendant selector —
+    // TileLibraryEditor and EditableLayoutPreview's popover both render *inside*
+    // .adminLayoutsEditor too, so a bare `label` here would (and, before this fix,
+    // did) also match every field label buried inside them, silently overriding
+    // their own more specific rules since Sass's @extend merges same-placeholder
+    // selectors into one shared rule.
+    &-pagePicker,
+    &-newPage {
+        @extend %adminFieldLabel;
+        max-width: 320px;
+    }
+}
+
+.adminDragHandle {
+    flex-shrink: 0;
+    // Drag-to-reorder is pointer-event driven (layoutStructureOverlay.jsx) — without
+    // this, a touch drag on the handle would scroll the page instead.
+    touch-action: none;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    background: $pageColour;
+    border: 1px solid #ccc;
+    cursor: grab;
+    line-height: 1;
+
+    &:active {
+        cursor: grabbing;
+    }
+}
+
+.adminLayoutPreview {
+    overflow: hidden;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background: $pageColour;
+
+    // A placement with no tile yet (or whose tile was deleted) — see UnassignedSlot in
+    // layoutPreview.jsx. Admin-only: the real site never renders one.
+    &-unassigned {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 80px;
+        padding: 10px;
+        color: $grayLinkColour;
+        font-size: 0.85rem;
+        text-align: center;
+        background: repeating-linear-gradient(45deg, #f7f7f7, #f7f7f7 8px, #eee 8px, #eee 16px);
+        border: 1px dashed #bbb;
+    }
+
+    // A row with no columns yet, or a column with no children yet, renders with no
+    // size at all — give it some here (admin preview only) so it's visible, and its
+    // structure toolbar has somewhere to sit, until something's added to it.
+    .row:empty,
+    .column:empty {
+        min-height: 60px;
+        outline: 1px dashed #bbb;
+        outline-offset: -1px;
+    }
+
+    .column:empty {
+        min-width: 60px;
+        flex: 1;
+    }
+}
+
+.adminThumbnail {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    object-fit: cover;
+    background: #eee;
+}
+
+.adminEditableLayoutPreview {
+    position: relative;
+    max-width: 1100px;
+
+    &-empty {
+        margin: 10px 0 0;
+    }
+
+    &-footer {
+        margin-top: 10px;
+
+        button {
+            padding: 6px 12px;
+            cursor: pointer;
+        }
+    }
+
+    // Click-to-edit-in-preview: the actual rendered tiles are the click targets (see
+    // layoutClickOverlay.jsx's resolvePlacementClick, which maps a click straight back
+    // to the clicked column's data) — this just gives them a pointer cursor and a hover
+    // outline, no separate overlay markup involved.
+    .column > * {
+        cursor: pointer;
+
+        &:hover {
+            outline: 2px solid rgba(0, 100, 255, 0.6);
+            outline-offset: -2px;
+        }
+    }
+}
+
+.adminTileEditPopover {
+    // Above item.scss's .textOverlay (a project tile's title text), which sets z-index:
+    // 200 and, lacking its own stacking context, competes directly against this
+    // fixed-positioned popover rather than staying trapped behind it.
+    z-index: 300;
+    width: 300px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 12px;
+    background: $pageColour;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+
+    h4 {
+        margin: 0 0 8px;
+    }
+
+    label {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        margin-top: 8px;
+        font-weight: 600;
+    }
+
+    input,
+    textarea,
+    select {
+        padding: 6px;
+        font-family: inherit;
+        font-size: $bodyFontSize;
+    }
+
+    &-form .adminProjectForm-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+
+        button {
+            padding: 6px 10px;
+            cursor: pointer;
+        }
+    }
+
+    &-existing {
+        list-style: none;
+        margin: 0 0 10px;
+        padding: 0;
+        max-height: 220px;
+        overflow-y: auto;
+
+        li {
+            margin-bottom: 4px;
+        }
+
+        button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            padding: 4px;
+            text-align: left;
+            background: none;
+            border: 1px solid #eee;
+            cursor: pointer;
+
+            &:hover {
+                background: #f4f4f4;
+            }
+
+            span {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+    }
+}
+
+.adminActionsMenu {
+    position: relative;
+    display: inline-block;
+
+    > button {
+        padding: 4px 10px;
+        cursor: pointer;
+    }
+
+    &-list {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        z-index: 10;
+        margin: 2px 0 0;
+        padding: 4px;
+        list-style: none;
+        min-width: 120px;
+        background: $pageColour;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+        &--alignLeft {
+            right: auto;
+            left: 0;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 6px 8px;
+            text-align: left;
+            background: none;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+
+            &:hover:not(:disabled) {
+                background: #f4f4f4;
+            }
+
+            &:disabled {
+                opacity: 0.4;
+                cursor: default;
+            }
+        }
+    }
+}
+
+.adminLayoutResizeOverlay {
+    position: absolute;
+    inset: 0;
+    // Only the handles themselves should intercept the pointer — the rest of this
+    // layer sits over the live preview and must let clicks through to it (and to the
+    // click-to-edit-in-preview handler on the same container).
+    pointer-events: none;
+}
+
+.adminLayoutResize-row,
+.adminLayoutResize-column {
+    position: absolute;
+    // Every preview overlay control needs to clear item.scss's .textOverlay (z-index:
+    // 200 — see .adminTileEditPopover), or a project tile's title text wins the pointer.
+    z-index: 210;
+    pointer-events: auto;
+    // Dragging is pointer-event driven (layoutResizeOverlay.jsx) — without this, a
+    // touch drag on a line is taken over as a page scroll and never resizes anything.
+    touch-action: none;
+
+    &::after {
+        content: '';
+        display: block;
+        background: transparent;
+    }
+
+    &:hover::after,
+    &:active::after {
+        background: rgba(0, 100, 255, 0.5);
+    }
+}
+
+.adminLayoutResize-row {
+    height: 8px;
+    margin-top: -4px;
+    cursor: row-resize;
+
+    &::after {
+        height: 2px;
+        margin-top: 3px;
+    }
+}
+
+.adminLayoutResize-column {
+    width: 8px;
+    margin-left: -4px;
+    cursor: col-resize;
+
+    &::after {
+        width: 2px;
+        height: 100%;
+        margin-left: 3px;
+    }
+}
+
+
+.adminLayoutResize-label {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    padding: 2px 6px;
+    background: #000;
+    color: #fff;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.adminLayoutResize-edit {
+    display: flex;
+    gap: 8px;
+    position: absolute;
+    z-index: 260;
+    padding: 6px;
+    background: $pageColour;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    pointer-events: auto;
+
+    label {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    input {
+        width: 80px;
+        padding: 4px;
+        font-family: inherit;
+        font-size: $bodyFontSize;
+    }
+}
+
+.adminLayoutStructureOverlay {
+    position: absolute;
+    inset: 0;
+    // As with .adminLayoutResizeOverlay: only the toolbars (and, mid-drag, the drop
+    // zones) take the pointer — everything else passes through to the preview.
+    pointer-events: none;
+}
+
+.adminLayoutStructure-toolbar {
+    position: absolute;
+    z-index: 220;
+    display: flex;
+    gap: 2px;
+    margin: 2px;
+    opacity: 0.75;
+    pointer-events: auto;
+    font-size: 0.75rem;
+    // A column toolbar is anchored at the column's right edge and shifted left by its
+    // own width — at the preview's right edge, shrink-to-fit would otherwise wrap it.
+    white-space: nowrap;
+
+    &:hover,
+    &:focus-within {
+        opacity: 1;
+    }
+
+    // An open menu must sit above every other toolbar, not just its own (each toolbar
+    // is its own stacking context, so the list's z-index alone can't do it).
+    &:focus-within,
+    &:has(.adminActionsMenu-list) {
+        z-index: 240;
+    }
+
+    .adminDragHandle {
+        width: 20px;
+        height: 20px;
+        font-size: 0.75rem;
+    }
+
+    .adminActionsMenu > button {
+        padding: 2px 6px;
+        font-size: 0.75rem;
+        background: $pageColour;
+        border: 1px solid #999;
+    }
+
+    &--nested .adminActionsMenu > button {
+        border-style: dashed;
+    }
+
+    &--column {
+        transform: translateX(-100%);
+        margin-left: -2px;
+    }
+}
+
+.adminLayoutStructure-dropZone {
+    position: absolute;
+    z-index: 230;
+    outline: 2px dashed rgba(0, 100, 255, 0.4);
+    outline-offset: -2px;
+
+    &--source {
+        background: rgba(0, 0, 0, 0.08);
+    }
+
+    &--over {
+        background: rgba(0, 100, 255, 0.15);
+        outline-color: #0064ff;
+    }
+}
+
+// Touch screens (tablets): no hover to reveal a line, and a fingertip needs far more
+// than an 8px strip to hit — so show every line faintly and widen the grab area around
+// it (the visible line stays centred in it). Toolbar controls get bigger too. Kept
+// last in this file so it overrides the base rules above at equal specificity.
+@media (pointer: coarse) {
+    .adminLayoutResize-row,
+    .adminLayoutResize-column {
+        &::after {
+            background: rgba(0, 100, 255, 0.25);
+        }
+    }
+
+    .adminLayoutResize-row {
+        height: 24px;
+        margin-top: -12px;
+
+        &::after {
+            margin-top: 11px;
+        }
+    }
+
+    .adminLayoutResize-column {
+        width: 24px;
+        margin-left: -12px;
+
+        &::after {
+            margin-left: 11px;
+        }
+    }
+
+    .adminLayoutStructure-toolbar {
+        opacity: 1;
+
+        .adminDragHandle {
+            width: 32px;
+            height: 32px;
+            font-size: 1rem;
+        }
+
+        .adminActionsMenu > button {
+            min-height: 32px;
+            padding: 4px 10px;
+            font-size: 0.85rem;
+        }
+    }
+
+    .adminActionsMenu-list button {
+        padding: 10px 12px;
+    }
+}
+
+.adminOutputPanel-file--deleted {
+    border-left: 4px solid #c0392b;
+
+    .adminOutputPanel-deleteLabel {
+        margin-right: 8px;
+        padding: 2px 6px;
+        color: #fff;
+        font-size: 0.75rem;
+        font-weight: 600;
+        background: #c0392b;
+    }
+}
+
+.adminOutputPanel-problemSummary {
+    max-width: 900px;
+    margin-bottom: $spacing;
+    padding: 12px 15px;
+    background: #fdecea;
+    border-left: 4px solid #c0392b;
+}
+
+.adminOutputPanel-problems {
+    margin: 0;
+    padding: 10px 15px 10px 35px;
+    background: #fdecea;
+
+    li {
+        margin: 2px 0;
+    }
+}
+
+.adminOutputPanel-copyError {
+    margin: 0;
+    padding: 8px 15px;
+    color: #8a1c10;
+    background: #fdecea;
+}
+
+.adminRevealOrder {
+    margin-top: $spacing;
+    padding: 10px 15px;
+    background: $pageColour;
+    border: 1px solid #ddd;
+
+    summary {
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    &-controls {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 15px;
+        margin: 10px 0;
+
+        button {
+            padding: 6px 12px;
+            cursor: pointer;
+        }
+    }
+
+    &-slots {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 10px;
+    }
+
+    &-slot {
+        padding: 8px;
+        background: #f7f7f7;
+        border: 2px dashed transparent;
+
+        &--over {
+            border-color: #0064ff;
+            background: rgba(0, 100, 255, 0.08);
+        }
+
+        h4 {
+            margin: 0 0 6px;
+            font-size: 0.9rem;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        li {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 4px;
+        }
+
+        select {
+            flex-shrink: 0;
+        }
+    }
+
+    &-tileName {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 0.85rem;
+    }
+
+    &-tile--dragging {
+        opacity: 0.4;
+    }
+}
+
+.adminRevealStepBadges {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+// Each tile's reveal step, at its bottom-left corner — clear of the row/column toolbars
+// (top corners) and above a project tile's title text (z-index 200, item.scss).
+.adminRevealStepBadge {
+    position: absolute;
+    z-index: 215;
+    width: 24px;
+    height: 24px;
+    margin: -30px 0 0 6px;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 24px;
+    text-align: center;
+    background: #0064ff;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}

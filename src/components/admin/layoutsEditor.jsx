@@ -1,0 +1,249 @@
+import React, { useState } from 'react';
+
+import { useDraftSection } from './draftContext';
+import { LAYOUT_PAGE_CONFIGS, pageConfigsFor } from './seedData';
+import {
+  makeBlankDetailLayout,
+  renameTileKeyInLayoutData,
+  removeTileKeyFromLayoutData,
+  countTilePlacements,
+  deleteTileConfirmMessage
+} from './layoutHelpers';
+import TileLibraryEditor from './tileLibraryEditor';
+import EditableLayoutPreview from './editableLayoutPreview';
+import RevealOrderEditor from './revealOrderEditor';
+
+const LISTING_TILE_KINDS = ['project', 'filler', 'image', 'text'];
+const DETAIL_TILE_KINDS = ['image', 'description', 'embed', 'placeholder'];
+const DETAIL_PROJECT_TYPES = ['new-homes', 'renovations-additions'];
+const FOLDER_LABELS = { 'new-homes': 'New Homes', 'renovations-additions': 'Renovations & Additions' };
+
+/**
+ * @description The Layouts section of the admin tool: pick a portfolio page, manage
+ * its reusable tiles, and edit its layout tree(s) directly on a live preview of each
+ * (see editableLayoutPreview.jsx).
+ * Two independent things vary per page: whether it's bound to one project (a "detail"
+ * page — tile kinds image/description/embed/placeholder, a bound-project description
+ * tile) or shares projects broadly (a "listing" page — tile kinds
+ * project/filler/image/text); and whether it has one tree (`layout`) or two
+ * (`defaultLayout`/`wideLayout`) — a detail page can be either shape, so the tree-count
+ * is read from the data itself, not from the page type.
+ *
+ * A page can also be created here from scratch: picking a New Homes/Renovations
+ * project that doesn't have one yet starts it from a blank layout (see
+ * makeBlankDetailLayout) and registers it in draft.newLayoutPages, so it behaves
+ * exactly like an already-committed page for the rest of the session — outputSection.jsx
+ * additionally generates its fixed wrapper page file and a test scaffold for it.
+ */
+const LayoutsEditor = () => {
+  const [layouts, setLayouts] = useDraftSection('layouts');
+  const [projects] = useDraftSection('projects');
+  const [introText] = useDraftSection('defaultIntroductionText');
+  const [newLayoutPages, setNewLayoutPages] = useDraftSection('newLayoutPages');
+
+  const [deletedPages] = useDraftSection('deletedPages');
+
+  const pageConfigs = pageConfigsFor(newLayoutPages, deletedPages);
+  const pageKeys = Object.keys(pageConfigs);
+  const [selectedPage, setActivePage] = useState(pageKeys[0]);
+  const [showRevealSteps, setShowRevealSteps] = useState(true);
+  // Bumped by "Replay reveal": re-mounting the previews re-runs their fade-in, exactly as
+  // a page load does.
+  const [replayCount, setReplayCount] = useState(0);
+  // The selected page can stop existing underneath this editor — its project deleted,
+  // or a page-creating edit undone — so fall back to the first page rather than
+  // rendering nothing.
+  const activePage = pageConfigs[selectedPage] ? selectedPage : pageKeys[0];
+
+  const usedProjectKeys = new Set(Object.values(pageConfigs).map((config) => config.projectKey).filter(Boolean));
+  const availableProjects = Object.keys(projects).filter(
+    (key) => DETAIL_PROJECT_TYPES.includes(projects[key].type) && !usedProjectKeys.has(key)
+  );
+
+  const createPage = (projectKey) => {
+    const project = projects[projectKey];
+    const key = `${projectKey}Detail`;
+    const config = {
+      key,
+      label: `${project.projectName} (${FOLDER_LABELS[project.type]} detail page)`,
+      dataFile: true,
+      dataFilePath: `static/layouts/${project.fileName}.js`,
+      type: 'detail',
+      projectKey,
+      folder: project.type,
+      slug: project.fileName,
+      isNew: true
+    };
+    setNewLayoutPages({ ...newLayoutPages, [key]: config });
+    setLayouts({ ...layouts, [key]: makeBlankDetailLayout(projectKey) });
+    setActivePage(key);
+  };
+
+  const deletePage = (key) => {
+    // eslint-disable-next-line no-alert
+    if (!window.confirm('Delete this new page? Its draft layout will be lost.')) return;
+    const nextPages = { ...newLayoutPages };
+    delete nextPages[key];
+    setNewLayoutPages(nextPages);
+    const nextLayouts = { ...layouts };
+    delete nextLayouts[key];
+    setLayouts(nextLayouts);
+    setActivePage(Object.keys(LAYOUT_PAGE_CONFIGS)[0]);
+  };
+
+  const pageLayout = layouts[activePage];
+  const pageConfig = pageConfigs[activePage];
+  const isDetailPage = pageConfig?.type === 'detail';
+  const boundProject = isDetailPage ? projects[pageConfig.projectKey] : null;
+
+  const updatePageLayout = (updates) => setLayouts({ ...layouts, [activePage]: { ...pageLayout, ...updates } });
+
+  const renameTileKey = (oldKey, newKey, nextTiles) => updatePageLayout({
+    tiles: nextTiles,
+    ...renameTileKeyInLayoutData(pageLayout, oldKey, newKey)
+  });
+
+  // Deleting a tile also removes every placement of it across all of this page's
+  // layout trees, in the same update — otherwise the saved layout would keep pointing
+  // at a tile that no longer exists, which the live site renders as nothing at all.
+  // Returns whether it went ahead (the admin can cancel the confirmation).
+  const deleteTileKey = (key) => {
+    // eslint-disable-next-line no-alert
+    if (!window.confirm(deleteTileConfirmMessage(key, countTilePlacements(pageLayout, key)))) return false;
+    const nextTiles = { ...pageLayout.tiles };
+    delete nextTiles[key];
+    updatePageLayout({ tiles: nextTiles, ...removeTileKeyFromLayoutData(pageLayout, key) });
+    return true;
+  };
+
+  // Creating a brand-new tile from the click-to-edit-in-preview popover and assigning
+  // it to the clicked slot touches both `tiles` and one tree's `rows` — done here as one
+  // atomic updatePageLayout call per field, not two separate ones (see
+  // layoutClickOverlay.jsx's own note on why that would silently clobber one of them).
+  const createTileAndAssign = (field) => (key, values, rows) => updatePageLayout({
+    tiles: { ...pageLayout.tiles, [key]: values },
+    [field]: rows
+  });
+
+  const isDual = pageLayout ? Boolean(pageLayout.defaultLayout) : false;
+  const targetPath = pageConfig?.dataFilePath;
+
+  return (
+    <div className="adminLayoutsEditor">
+      {pageKeys.length > 1 && (
+        <label className="adminLayoutsEditor-pagePicker">
+          Page
+          <select value={activePage} onChange={(e) => setActivePage(e.target.value)}>
+            {pageKeys.map((key) => (
+              <option key={key} value={key}>{pageConfigs[key].label}</option>
+            ))}
+          </select>
+        </label>
+      )}
+
+      {availableProjects.length > 0 && (
+        <label className="adminLayoutsEditor-newPage">
+          Create a page for
+          <select value="" onChange={(e) => { if (e.target.value) createPage(e.target.value); }}>
+            <option value="">Select a project…</option>
+            {availableProjects.map((key) => (
+              <option key={key} value={key}>{projects[key].projectName}</option>
+            ))}
+          </select>
+        </label>
+      )}
+
+      {pageConfig && pageLayout && (
+        <>
+          <p className="adminLayoutsEditor-target">Editing: {targetPath}</p>
+          {pageConfig.isNew && (
+            <button type="button" onClick={() => deletePage(activePage)}>Delete this new page</button>
+          )}
+
+          <TileLibraryEditor
+            // A fresh library per page: an Edit form left open must not carry over to
+            // another page, where a tile with the same key is a different tile.
+            key={activePage}
+            tiles={pageLayout.tiles}
+            onChange={(tiles) => updatePageLayout({ tiles })}
+            onRenameTile={renameTileKey}
+            onDeleteTile={deleteTileKey}
+            projects={projects}
+            kinds={isDetailPage ? DETAIL_TILE_KINDS : LISTING_TILE_KINDS}
+          />
+
+          <RevealOrderEditor
+            tiles={pageLayout.tiles}
+            projects={projects}
+            onChangeTiles={(tiles) => updatePageLayout({ tiles })}
+            onReplay={() => setReplayCount((count) => count + 1)}
+            showSteps={showRevealSteps}
+            onShowStepsChange={setShowRevealSteps}
+          />
+
+          {isDual ? (
+            <>
+              <section className="adminLayoutsEditor-variant">
+                <h3>Default layout (narrow screens)</h3>
+                <EditableLayoutPreview
+                  key={`default-${replayCount}`}
+                  rows={pageLayout.defaultLayout}
+                  tiles={pageLayout.tiles}
+                  projects={projects}
+                  introText={introText}
+                  boundProject={boundProject}
+                  kinds={isDetailPage ? DETAIL_TILE_KINDS : LISTING_TILE_KINDS}
+                  onChangeRows={(rows) => updatePageLayout({ defaultLayout: rows })}
+                  onChangeTiles={(tiles) => updatePageLayout({ tiles })}
+                  onCreateTileAndAssign={createTileAndAssign('defaultLayout')}
+                  onRenameTile={renameTileKey}
+                  onDeleteTile={deleteTileKey}
+                  showRevealSteps={showRevealSteps}
+                />
+              </section>
+
+              <section className="adminLayoutsEditor-variant">
+                <h3>Wide layout (wide screens)</h3>
+                <EditableLayoutPreview
+                  key={`wide-${replayCount}`}
+                  rows={pageLayout.wideLayout}
+                  tiles={pageLayout.tiles}
+                  projects={projects}
+                  introText={introText}
+                  boundProject={boundProject}
+                  kinds={isDetailPage ? DETAIL_TILE_KINDS : LISTING_TILE_KINDS}
+                  onChangeRows={(rows) => updatePageLayout({ wideLayout: rows })}
+                  onChangeTiles={(tiles) => updatePageLayout({ tiles })}
+                  onCreateTileAndAssign={createTileAndAssign('wideLayout')}
+                  onRenameTile={renameTileKey}
+                  onDeleteTile={deleteTileKey}
+                  showRevealSteps={showRevealSteps}
+                />
+              </section>
+            </>
+          ) : (
+            <section className="adminLayoutsEditor-variant">
+              <h3>Layout</h3>
+              <EditableLayoutPreview
+                key={`layout-${replayCount}`}
+                rows={pageLayout.layout}
+                tiles={pageLayout.tiles}
+                projects={projects}
+                boundProject={boundProject}
+                kinds={isDetailPage ? DETAIL_TILE_KINDS : LISTING_TILE_KINDS}
+                onChangeRows={(rows) => updatePageLayout({ layout: rows })}
+                onChangeTiles={(tiles) => updatePageLayout({ tiles })}
+                onCreateTileAndAssign={createTileAndAssign('layout')}
+                onRenameTile={renameTileKey}
+                onDeleteTile={deleteTileKey}
+                showRevealSteps={showRevealSteps}
+              />
+            </section>
+          )}
+        </>
+      )}
+    </div>
+  );
+};
+
+export default LayoutsEditor;
