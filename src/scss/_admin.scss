@@ -258,6 +258,30 @@
     }
 }
 
+// Shared "label stacked above its own input/textarea/select" pattern, extended by every
+// admin form below that wraps a field as <label>Text<input/></label>. A bare label like
+// that renders inline by default, so the label's text and its control sit side by side
+// on one line — meaning where the control starts depends on how long that one field's
+// label text happens to be, which is what made a form with several such fields (each a
+// different label length) look raggedly misaligned rather than lined up in a column.
+%adminFieldLabel {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 10px;
+    font-weight: 600;
+
+    input,
+    textarea,
+    select {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 8px;
+        font-family: inherit;
+        font-size: $bodyFontSize;
+    }
+}
+
 .adminProjectForm {
     display: flex;
     flex-direction: column;
@@ -265,11 +289,19 @@
     max-width: 500px;
     margin-top: 10px;
 
-    label {
-        margin-top: 10px;
-        font-weight: 600;
+    // Excludes a checkbox's own label (TileFields' "Use the shared portfolio
+    // introduction text") — stacking it above a full-width, height-13px-tall
+    // checkbox is worse than the ragged-alignment problem this is meant to fix.
+    // A checkbox belongs inline next to its own text, which is what a bare
+    // <label> already does by default.
+    label:not(:has(input[type='checkbox'])) {
+        @extend %adminFieldLabel;
     }
 
+    // Only covers this form's own <label htmlFor="…"> + separate sibling <input>
+    // fields — %adminFieldLabel's own nested rule above already styles a wrapped
+    // control consistently wherever that pattern's used instead (Tile Library /
+    // Reviews forms reuse this same .adminProjectForm class for exactly that).
     input,
     textarea {
         padding: 8px;
@@ -304,6 +336,51 @@
 }
 
 .adminProjectPreview {
+    max-width: 500px;
+    overflow: hidden;
+}
+
+.adminAboutEditor {
+    &-columns {
+        display: flex;
+        gap: $spacingX2;
+        align-items: flex-start;
+    }
+
+    // Without an explicit flex-basis, a flex item shrinks to its content's own
+    // preferred size rather than claiming a real share of the row — every field
+    // inside collapsed to a sliver next to the wider preview column.
+    &-fields {
+        flex: 1;
+        min-width: 0;
+    }
+
+    &-section {
+        max-width: 500px;
+        margin-bottom: $spacingX2;
+
+        label {
+            @extend %adminFieldLabel;
+        }
+    }
+
+    &-paragraph {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+
+        label {
+            flex-grow: 1;
+        }
+    }
+}
+
+.adminAboutPreview {
+    // Renders the real about-page content full-bleed, with nothing else capping its
+    // width — as an unconstrained flex sibling of .adminAboutEditor-fields it claimed
+    // almost all of .adminAboutEditor-columns' row, squeezing the fields down to a
+    // sliver despite their own flex: 1 (matching .adminProjectPreview's existing cap).
+    flex-shrink: 0;
     max-width: 500px;
     overflow: hidden;
 }
@@ -353,6 +430,20 @@
         h3 {
             margin-bottom: 10px;
         }
+    }
+
+    // The page picker / "create a page for" selectors — plain sibling <label>s would
+    // otherwise render inline by default and could sit side by side on a wide screen.
+    // Scoped to these two specific classes, not a bare `label` descendant selector —
+    // TileLibraryEditor and EditableLayoutPreview's popover both render *inside*
+    // .adminLayoutsEditor too, so a bare `label` here would (and, before this fix,
+    // did) also match every field label buried inside them, silently overriding
+    // their own more specific rules since Sass's @extend merges same-placeholder
+    // selectors into one shared rule.
+    &-pagePicker,
+    &-newPage {
+        @extend %adminFieldLabel;
+        max-width: 320px;
     }
 }
 

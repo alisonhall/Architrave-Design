@@ -54,7 +54,7 @@ const AboutEditor = () => {
   return (
     <div className="adminAboutEditor">
       <div className="adminAboutEditor-columns">
-        <div>
+        <div className="adminAboutEditor-fields">
           <SectionFields label="Introduction" section={about.intro} onChange={(intro) => setAbout({ ...about, intro })} />
           <SectionFields label="Bio" section={about.bio} onChange={(bio) => setAbout({ ...about, bio })} />
           <SectionFields label="Approach" section={about.approach} onChange={(approach) => setAbout({ ...about, approach })} />

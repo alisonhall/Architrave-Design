@@ -131,7 +131,7 @@ const LayoutsEditor = () => {
   return (
     <div className="adminLayoutsEditor">
       {pageKeys.length > 1 && (
-        <label>
+        <label className="adminLayoutsEditor-pagePicker">
           Page
           <select value={activePage} onChange={(e) => setActivePage(e.target.value)}>
             {pageKeys.map((key) => (
