@@ -405,6 +405,28 @@ describe('TileEditPopover', () => {
       expect(onClose).not.toHaveBeenCalled();
     });
 
+    it('doesn\'t count a scroll it ignored (while typing) towards closing afterwards', () => {
+      const onClose = jest.fn();
+      renderOpen(onClose);
+      const field = screen.getByLabelText('Image URL');
+      field.focus();
+
+      // The tablet keyboard pushes the page while typing...
+      setScrollY(300);
+      fireEvent.scroll(document);
+      field.blur();
+
+      // ...and after leaving the field, a tiny scroll isn't "300px since opening".
+      setScrollY(301);
+      fireEvent.scroll(document);
+      expect(onClose).not.toHaveBeenCalled();
+
+      // A real scroll from there still closes it.
+      setScrollY(340);
+      fireEvent.scroll(document);
+      expect(onClose).toHaveBeenCalled();
+    });
+
     it('also closes when a scrolling container around the preview scrolls', () => {
       const onClose = jest.fn();
       renderOpen(onClose);

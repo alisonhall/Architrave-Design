@@ -88,7 +88,13 @@ const useCloseOnScroll = (ref, open, onClose) => {
       const popover = ref.current;
       const { target } = event;
       if (popover && target instanceof Node && popover.contains(target)) return;
-      if (popover && popover.contains(document.activeElement)) return;
+      if (popover && popover.contains(document.activeElement)) {
+        // Ignored — and measured from here on, so it can't count towards closing later
+        // (a tablet keyboard pushing the page 300px while typing, then the slightest
+        // scroll after leaving the field, would otherwise close it and lose the edit).
+        starts.set(target, scrollPosition(target));
+        return;
+      }
 
       if (!starts.has(target)) {
         // The first scroll event seen from this target: it has already moved by the

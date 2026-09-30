@@ -125,7 +125,7 @@ describe('DraftProvider', () => {
 });
 
 describe('historyReducer', () => {
-  const start = () => ({ past: [], present: { a: 1, b: 1 }, future: [], lastEdit: null });
+  const start = () => ({ past: [], pastBases: [], present: { a: 1, b: 1 }, base: 'current', future: [], futureBases: [], lastEdit: null });
   const set = (section, value, batch, time) => ({ type: 'SET_SECTION', section, value, batch, time });
 
   it('records each separate edit as its own undo step, and undo/redo walk through them', () => {
@@ -391,5 +391,74 @@ describe('DraftProvider — a draft started before the site\'s content changed',
     window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ ...seedDraft, __seedVersion: SEED_VERSION, __seedFingerprint: 'older' }));
     render(<DraftProvider><StaleProbe /></DraftProvider>);
     expect(screen.getByText('stale:false')).toBeInTheDocument();
+  });
+});
+
+describe('historyReducer — which content each step was started from', () => {
+  const set = (section, value, batch, time) => ({ type: 'SET_SECTION', section, value, batch, time });
+  // An edited draft started before a deploy: `base` is an older fingerprint.
+  const staleStart = () => ({
+    past: [],
+    pastBases: [],
+    present: { ...seedDraft, reviews: [] },
+    base: 'older',
+    future: [],
+    futureBases: [],
+    lastEdit: null
+  });
+
+  it('undoing "Discard all changes" brings back the draft\'s older base along with it, and redo drops it again', () => {
+    let state = historyReducer(staleStart(), { type: 'RESET', batch: 1, time: 0 });
+    expect(state.base).not.toBe('older');
+
+    state = historyReducer(state, { type: 'UNDO' });
+    expect(state.present.reviews).toEqual([]);
+    expect(state.base).toBe('older');
+
+    state = historyReducer(state, { type: 'REDO' });
+    expect(state.base).not.toBe('older');
+  });
+
+  it('ordinary edits keep the base', () => {
+    const state = historyReducer(staleStart(), set('defaultIntroductionText', 'x', 1, 0));
+    expect(state.base).toBe('older');
+  });
+
+  it('an edit made while the draft matches the site again is based on the current content', () => {
+    const matching = { ...staleStart(), present: seedDraft };
+    const state = historyReducer(matching, set('defaultIntroductionText', 'x', 1, 0));
+    expect(state.base).not.toBe('older');
+    // ...and undo still restores the step's own base.
+    expect(historyReducer(state, { type: 'UNDO' }).base).toBe('older');
+  });
+});
+
+describe('DraftProvider — undoing a discard of an out-of-date draft', () => {
+  const Probe = () => {
+    const { staleContent, reset, undo } = useDraftMeta();
+    return (
+      <div>
+        <p>{`stale:${staleContent}`}</p>
+        <button type="button" onClick={reset}>reset</button>
+        <button type="button" onClick={undo}>undo</button>
+      </div>
+    );
+  };
+
+  beforeEach(() => window.sessionStorage.clear());
+
+  it('shows the warning again, and saves the older fingerprint again', () => {
+    window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify({
+      ...JSON.parse(JSON.stringify(seedDraft)), reviews: [], __seedVersion: SEED_VERSION, __seedFingerprint: 'older'
+    }));
+    render(<DraftProvider><Probe /></DraftProvider>);
+    expect(screen.getByText('stale:true')).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText('reset'));
+    expect(screen.getByText('stale:false')).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText('undo'));
+    expect(screen.getByText('stale:true')).toBeInTheDocument();
+    expect(JSON.parse(window.sessionStorage.getItem(STORAGE_KEY)).__seedFingerprint).toBe('older');
   });
 });

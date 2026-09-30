@@ -116,7 +116,15 @@ const mergesWithLast = (lastEdit, action) => {
 /**
  * @description The draft plus its undo/redo history. Every edit (SET_SECTION,
  * SET_SECTIONS, RESET) records the draft as it was in `past`, unless it merges into the
- * previous step (see mergesWithLast), and clears `future`. Only `present` is persisted.
+ * previous step (see mergesWithLast), and clears `future`.
+ *
+ * Alongside each draft in the history is its `base`: the fingerprint of the site
+ * content that draft was started from (see loadInitialDraft's `staleContent`). It moves
+ * through undo/redo with its draft — so undoing "Discard all changes" on a draft that
+ * predates a deploy brings back not just that draft but the fact that it's out of date.
+ * RESET bases the draft on the current content; so does any edit made while the draft
+ * doesn't differ from the site at all (there's nothing left from the older content).
+ * Only `present` and `base` are persisted.
  */
 export const historyReducer = (state, action) => {
   switch (action.type) {
@@ -127,13 +135,19 @@ export const historyReducer = (state, action) => {
       if (next === state.present) return state;
       const sections = action.type === 'RESET' ? [] : changedSections(action);
       const lastEdit = { batch: action.batch, time: action.time, sections };
+      const base = action.type === 'RESET' || (state.base !== SEED_FINGERPRINT && !draftHasChanges(state.present))
+        ? SEED_FINGERPRINT
+        : state.base;
       if (mergesWithLast(state.lastEdit, action)) {
-        return { ...state, present: next, future: [], lastEdit };
+        return { ...state, present: next, base, future: [], futureBases: [], lastEdit };
       }
       return {
         past: [...state.past, state.present].slice(-HISTORY_LIMIT),
+        pastBases: [...state.pastBases, state.base].slice(-HISTORY_LIMIT),
         present: next,
+        base,
         future: [],
+        futureBases: [],
         lastEdit
       };
     }
@@ -141,8 +155,11 @@ export const historyReducer = (state, action) => {
       if (state.past.length === 0) return state;
       return {
         past: state.past.slice(0, -1),
+        pastBases: state.pastBases.slice(0, -1),
         present: state.past[state.past.length - 1],
+        base: state.pastBases[state.pastBases.length - 1],
         future: [state.present, ...state.future],
+        futureBases: [state.base, ...state.futureBases],
         lastEdit: null
       };
     }
@@ -150,8 +167,11 @@ export const historyReducer = (state, action) => {
       if (state.future.length === 0) return state;
       return {
         past: [...state.past, state.present],
+        pastBases: [...state.pastBases, state.base],
         present: state.future[0],
+        base: state.futureBases[0],
         future: state.future.slice(1),
+        futureBases: state.futureBases.slice(1),
         lastEdit: null
       };
     }
@@ -163,11 +183,11 @@ export const historyReducer = (state, action) => {
 // Whether the draft differs from the site's committed content at all. Sections still
 // holding seedDraft's own objects are unchanged by definition; anything else (e.g. a
 // draft restored from sessionStorage, which is all fresh objects) is compared in full.
-export const draftHasChanges = (draft) => {
+export function draftHasChanges(draft) {
   const keys = Object.keys(seedDraft);
   if (keys.every((key) => draft[key] === seedDraft[key])) return false;
   return contentJSON(draft) !== SEED_JSON;
-};
+}
 
 /**
  * @description Provides the in-memory, session-only admin draft state (a working copy of
@@ -182,25 +202,22 @@ export const DraftProvider = ({ children }) => {
   const [initial] = useState(loadInitialDraft);
   const [history, rawDispatch] = useReducer(historyReducer, undefined, () => ({
     past: [],
+    pastBases: [],
     present: initial.draft,
+    base: initial.baseFingerprint,
     future: [],
+    futureBases: [],
     lastEdit: null
   }));
   const [saveFailed, setSaveFailed] = useState(false);
   const [notices, setNotices] = useState({ discarded: initial.discarded, staleContent: true });
-  // The content the draft was started from. Saved with the draft — not the current
-  // content's fingerprint — so a draft that predates a deploy stays recognizable as such
-  // on every later refresh, not just the first. Once the draft no longer differs from
-  // the site at all (e.g. after "Discard all changes"), it's simply based on the current
-  // content.
-  const [baseFingerprint, setBaseFingerprint] = useState(initial.baseFingerprint);
 
   const state = history.present;
+  // The content the draft was started from (see historyReducer). Saved with the draft —
+  // not the current content's fingerprint — so a draft that predates a deploy stays
+  // recognizable as such on every later refresh, not just the first.
+  const baseFingerprint = history.base;
   const hasChanges = useMemo(() => draftHasChanges(state), [state]);
-
-  useEffect(() => {
-    if (!hasChanges) setBaseFingerprint(SEED_FINGERPRINT);
-  }, [hasChanges]);
 
   useEffect(() => {
     try {
@@ -229,7 +246,8 @@ export const DraftProvider = ({ children }) => {
     hasChanges,
     saveFailed,
     discardedStoredDraft: notices.discarded,
-    staleContent: notices.staleContent && baseFingerprint !== SEED_FINGERPRINT,
+    // An old draft with no changes of its own can't undo anything, so isn't flagged.
+    staleContent: notices.staleContent && hasChanges && baseFingerprint !== SEED_FINGERPRINT,
     dismissNotice: (name) => setNotices((current) => ({ ...current, [name]: false }))
   }), [history.past.length, history.future.length, dispatch, hasChanges, saveFailed, notices, baseFingerprint]);
 
