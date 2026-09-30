@@ -5,6 +5,7 @@ import LayoutPreview from './layoutPreview';
 import TileEditPopover from './tileEditPopover';
 import LayoutResizeOverlay from './layoutResizeOverlay';
 import LayoutStructureOverlay from './layoutStructureOverlay';
+import RevealStepBadges from './revealStepBadges';
 import { resolvePlacementClick } from './layoutClickOverlay';
 import { makeBlankRow } from './layoutHelpers';
 
@@ -39,6 +40,7 @@ import { makeBlankRow } from './layoutHelpers';
  * @param {Function} param.onCreateTileAndAssign - called with (key, values, rows) to add a tile and assign it in one atomic update
  * @param {Function} [param.onRenameTile]
  * @param {Function} [param.onDeleteTile] - see TileEditPopover
+ * @param {boolean} [param.showRevealSteps] - number each tile with the step it fades in at
  */
 const EditableLayoutPreview = ({
   rows,
@@ -51,7 +53,8 @@ const EditableLayoutPreview = ({
   onChangeTiles,
   onCreateTileAndAssign,
   onRenameTile,
-  onDeleteTile
+  onDeleteTile,
+  showRevealSteps
 }) => {
   const containerRef = useRef(null);
   const [containerEl, setContainerEl] = useState(null);
@@ -125,6 +128,7 @@ const EditableLayoutPreview = ({
         onEditingChange={setEditingSize}
       />
       <LayoutStructureOverlay containerEl={containerEl} rows={rows} onChangeRows={onChangeRows} onEditSize={setEditingSize} />
+      {showRevealSteps && <RevealStepBadges containerEl={containerEl} rows={rows} tiles={tiles} />}
       <TileEditPopover
         key={selection ? selection.id : 'closed'}
         selection={selection}
@@ -156,14 +160,16 @@ EditableLayoutPreview.propTypes = {
   onChangeTiles: PropTypes.func.isRequired,
   onCreateTileAndAssign: PropTypes.func.isRequired,
   onRenameTile: PropTypes.func,
-  onDeleteTile: PropTypes.func
+  onDeleteTile: PropTypes.func,
+  showRevealSteps: PropTypes.bool
 };
 
 EditableLayoutPreview.defaultProps = {
   introText: '',
   boundProject: null,
   onRenameTile: null,
-  onDeleteTile: null
+  onDeleteTile: null,
+  showRevealSteps: false
 };
 
 export default EditableLayoutPreview;

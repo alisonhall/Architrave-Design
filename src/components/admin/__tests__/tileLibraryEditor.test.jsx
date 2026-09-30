@@ -34,7 +34,7 @@ describe('TileLibraryEditor', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Add tile' }));
 
     expect(onChange).toHaveBeenCalledWith({
-      projectB: { kind: 'project', projectKey: 'projectB', backgroundPosition: '' }
+      projectB: { kind: 'project', projectKey: 'projectB', backgroundPosition: '', num: 6 }
     });
   });
 
@@ -48,7 +48,7 @@ describe('TileLibraryEditor', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Add tile' }));
 
     expect(onChange).toHaveBeenCalledWith({
-      projectAFiller: { kind: 'filler', projectKey: 'projectA', imageUrl: 'https://example.com/f.jpg' }
+      projectAFiller: { kind: 'filler', projectKey: 'projectA', imageUrl: 'https://example.com/f.jpg', num: 6 }
     });
   });
 
@@ -131,7 +131,7 @@ describe('TileLibraryEditor', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Add tile' }));
 
     expect(onChange).toHaveBeenCalledWith({
-      imageTile: { kind: 'image', imageUrl: 'https://example.com/room.jpg', backgroundPosition: '', overlayText: '' }
+      imageTile: { kind: 'image', imageUrl: 'https://example.com/room.jpg', backgroundPosition: '', overlayText: '', num: 6 }
     });
   });
 
@@ -145,7 +145,7 @@ describe('TileLibraryEditor', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Add tile' }));
 
     expect(onChange).toHaveBeenCalledWith({
-      imageTile: { kind: 'image', imageUrl: 'https://example.com/room.jpg', backgroundPosition: '100% 0%', overlayText: '' }
+      imageTile: { kind: 'image', imageUrl: 'https://example.com/room.jpg', backgroundPosition: '100% 0%', overlayText: '', num: 6 }
     });
   });
 
@@ -159,7 +159,7 @@ describe('TileLibraryEditor', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Add tile' }));
 
     expect(onChange).toHaveBeenCalledWith({
-      imageTile: { kind: 'image', imageUrl: 'https://example.com/before.jpg', backgroundPosition: '', overlayText: 'Before' }
+      imageTile: { kind: 'image', imageUrl: 'https://example.com/before.jpg', backgroundPosition: '', overlayText: 'Before', num: 6 }
     });
   });
 
@@ -185,7 +185,7 @@ describe('TileLibraryEditor', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Add tile' }));
 
     expect(onChange).toHaveBeenCalledWith({
-      embedTile: { kind: 'embed', html: '<iframe width="100%" height="500" src="https://kuula.co/share/abc"></iframe>' }
+      embedTile: { kind: 'embed', html: '<iframe width="100%" height="500" src="https://kuula.co/share/abc"></iframe>', num: 6 }
     });
   });
 
@@ -223,7 +223,7 @@ describe('TileLibraryEditor', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Add tile' }));
 
     expect(onChange).toHaveBeenCalledWith({
-      imageTile: { kind: 'image', imageUrl: 'https://example.com/static.jpg', backgroundPosition: '', overlayText: '' }
+      imageTile: { kind: 'image', imageUrl: 'https://example.com/static.jpg', backgroundPosition: '', overlayText: '', num: 6 }
     });
   });
 
@@ -290,7 +290,7 @@ describe('TileLibraryEditor', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Add tile' }));
 
     expect(onChange).toHaveBeenCalledWith({
-      myCustomKey: { kind: 'project', projectKey: 'projectB', backgroundPosition: '' }
+      myCustomKey: { kind: 'project', projectKey: 'projectB', backgroundPosition: '', num: 6 }
     });
   });
 

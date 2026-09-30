@@ -592,3 +592,52 @@ describe('LayoutsEditor — the same tile open in the Tile Library and the previ
     expect(document.querySelector('.adminTileLibrary .adminProjectForm')).not.toBeInTheDocument();
   });
 });
+
+describe('LayoutsEditor — reveal order', () => {
+  beforeEach(() => window.sessionStorage.clear());
+
+  const openCreditRiver = () => {
+    renderEditor();
+    fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'creditRiverManor' } });
+  };
+
+  it('shows the page\'s reveal order, and moving a tile updates it (and the saved tile)', () => {
+    openCreditRiver();
+    fireEvent.change(screen.getByLabelText('Reveal step for 1'), { target: { value: 'rest' } });
+
+    expect(within(screen.getByRole('region', { name: 'With the rest — 3.5s' })).getByText('1')).toBeInTheDocument();
+    expect(screen.getByLabelText('Reveal step for 1')).toHaveValue('rest');
+  });
+
+  it('shows step badges on the preview, which can be hidden', () => {
+    openCreditRiver();
+    expect(document.querySelector('.adminRevealStepBadges')).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('checkbox', { name: 'Show steps on the previews' }));
+    expect(document.querySelector('.adminRevealStepBadges')).not.toBeInTheDocument();
+  });
+
+  it('"Replay reveal" re-renders the preview from scratch, re-running its fade-in', () => {
+    openCreditRiver();
+    const previewBefore = document.querySelector('.adminLayoutPreview');
+
+    fireEvent.click(screen.getByRole('button', { name: 'Replay reveal' }));
+
+    expect(document.querySelector('.adminLayoutPreview')).not.toBe(previewBefore);
+    expect(document.querySelector('.adminLayoutPreview img')).toBeInTheDocument();
+  });
+
+  it('a tile created from the preview fades in with the rest', () => {
+    openCreditRiver();
+    const column = document.querySelector('.adminLayoutStructure-toolbar--column');
+    fireEvent.click(within(column).getByRole('button', { name: 'Column ▾' }));
+    fireEvent.click(within(column).getByRole('menuitem', { name: 'Add tile' }));
+    fireEvent.click(screen.getByText('Empty slot — click to choose a tile'));
+    const popover = screen.getByRole('dialog');
+    fireEvent.click(within(popover).getByRole('button', { name: 'Add image tile' }));
+    fireEvent.change(within(popover).getByLabelText('Image URL'), { target: { value: 'https://example.com/new.jpg' } });
+    fireEvent.click(within(popover).getByRole('button', { name: 'Add & assign' }));
+
+    expect(screen.getByLabelText('Reveal step for imageTile')).toHaveValue('rest');
+  });
+});

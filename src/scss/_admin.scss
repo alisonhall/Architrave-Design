@@ -834,3 +834,105 @@
     color: #8a1c10;
     background: #fdecea;
 }
+
+.adminRevealOrder {
+    margin-top: $spacing;
+    padding: 10px 15px;
+    background: $pageColour;
+    border: 1px solid #ddd;
+
+    summary {
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    &-controls {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 15px;
+        margin: 10px 0;
+
+        button {
+            padding: 6px 12px;
+            cursor: pointer;
+        }
+    }
+
+    &-slots {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 10px;
+    }
+
+    &-slot {
+        padding: 8px;
+        background: #f7f7f7;
+        border: 2px dashed transparent;
+
+        &--over {
+            border-color: #0064ff;
+            background: rgba(0, 100, 255, 0.08);
+        }
+
+        h4 {
+            margin: 0 0 6px;
+            font-size: 0.9rem;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        li {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 4px;
+        }
+
+        select {
+            flex-shrink: 0;
+        }
+    }
+
+    &-tileName {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 0.85rem;
+    }
+
+    &-tile--dragging {
+        opacity: 0.4;
+    }
+}
+
+.adminRevealStepBadges {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+// Each tile's reveal step, at its bottom-left corner — clear of the row/column toolbars
+// (top corners) and above a project tile's title text (z-index 200, item.scss).
+.adminRevealStepBadge {
+    position: absolute;
+    z-index: 215;
+    width: 24px;
+    height: 24px;
+    margin: -30px 0 0 6px;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 24px;
+    text-align: center;
+    background: #0064ff;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}

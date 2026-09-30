@@ -371,7 +371,7 @@ test.describe('layouts editor', () => {
     await page.getByLabel(/Embed HTML/).fill('<iframe title="Tour" width="100%" height="500" src="https://kuula.co/share/abc"></iframe>');
     await page.locator('.adminTileLibrary').getByRole('button', { name: 'Add tile' }).click();
 
-    await expect(page.getByText(/Embed — pasted iframe markup/)).toBeVisible();
+    await expect(page.locator('.adminTileLibrary').getByText(/Embed — pasted iframe markup/)).toBeVisible();
 
     await page.getByRole('button', { name: 'Review Changes' }).click();
     await expect(page.locator('.adminOutputPanel-fileHeader code')).toHaveText(
@@ -1186,5 +1186,57 @@ test.describe('layouts editor — one tile open in both the Tile Library and the
     await libraryForm.getByRole('button', { name: 'Save' }).click();
     await page.getByRole('button', { name: 'Review Changes' }).click();
     await expect(page.locator('.adminOutputPanel-file pre')).toContainText("backgroundPosition: '50% 50%'");
+  });
+});
+
+test.describe('layouts editor — reveal order', () => {
+  const openReveal = async (page) => {
+    await unlock(page);
+    await page.getByRole('button', { name: 'Layouts' }).click();
+    await page.getByLabel('Page').selectOption('creditRiverManor');
+    await page.getByText('Reveal order', { exact: true }).click();
+  };
+
+  test('moving a tile to a step updates its badge on the preview and its saved num', async ({ page }) => {
+    await openReveal(page);
+    const badges = page.locator('.adminRevealStepBadge');
+    await expect(badges.first()).toBeVisible();
+
+    await page.getByLabel('Reveal step for 1', { exact: true }).selectOption('rest');
+    await expect(page.getByRole('region', { name: 'With the rest — 3.5s' }).getByText('1', { exact: true })).toBeVisible();
+
+    await page.getByRole('button', { name: 'Review Changes' }).click();
+    await expect(page.locator('.adminOutputPanel-file pre')).toContainText('num: 15');
+  });
+
+  test('dragging a tile onto a step moves it there', async ({ page }) => {
+    await openReveal(page);
+    const handle = page.getByRole('button', { name: 'Drag 1 to a step' });
+    const target = page.getByRole('region', { name: 'Step 5 — 3s' });
+    await handle.scrollIntoViewIfNeeded();
+    await handle.hover();
+    await page.mouse.down();
+    const box = await target.boundingBox();
+    // Near the slot's top: its row can stretch it taller than what's on screen.
+    await page.mouse.move(box.x + box.width / 2, box.y + 20, { steps: 10 });
+    await expect(target).toHaveClass(/adminRevealOrder-slot--over/);
+    await page.mouse.up();
+
+    await expect(page.getByLabel('Reveal step for 1', { exact: true })).toHaveValue('5');
+  });
+
+  test('"Replay reveal" restarts the preview\'s fade-in animation', async ({ page }) => {
+    await openReveal(page);
+    const firstImageItem = page.locator('.adminLayoutPreview .item.image').first();
+    // Let the initial fade-in finish.
+    await page.waitForTimeout(1500);
+    const finished = await firstImageItem.evaluate((el) => el.getAnimations().length);
+
+    await page.getByRole('button', { name: 'Replay reveal' }).click();
+    const running = await page.locator('.adminLayoutPreview .item.image').first()
+      .evaluate((el) => el.getAnimations().filter((animation) => animation.playState === 'running').length);
+
+    expect(finished).toBe(0);
+    expect(running).toBeGreaterThan(0);
   });
 });

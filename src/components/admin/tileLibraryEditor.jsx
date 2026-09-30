@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { makeBlankTile, suggestTileKey } from './layoutHelpers';
+import { withRevealNum } from './revealOrder';
 import AdminThumbnail from './adminThumbnail';
 import ActionsMenu from './actionsMenu';
 
@@ -349,7 +350,8 @@ const TileLibraryEditor = ({ tiles, onChange, projects, kinds, onRenameTile, onD
       window.alert(`"${key}" is already used by another tile.`);
       return;
     }
-    onChange({ ...tiles, [key]: draftValues });
+    // New tiles fade in with the rest until given a step (see revealOrder.js).
+    onChange({ ...tiles, [key]: withRevealNum(draftValues, tiles) });
     cancel();
   };
 

@@ -11,6 +11,7 @@ import {
 } from './layoutHelpers';
 import TileLibraryEditor from './tileLibraryEditor';
 import EditableLayoutPreview from './editableLayoutPreview';
+import RevealOrderEditor from './revealOrderEditor';
 
 const LISTING_TILE_KINDS = ['project', 'filler', 'image', 'text'];
 const DETAIL_TILE_KINDS = ['image', 'description', 'embed', 'placeholder'];
@@ -45,6 +46,10 @@ const LayoutsEditor = () => {
   const pageConfigs = pageConfigsFor(newLayoutPages, deletedPages);
   const pageKeys = Object.keys(pageConfigs);
   const [selectedPage, setActivePage] = useState(pageKeys[0]);
+  const [showRevealSteps, setShowRevealSteps] = useState(true);
+  // Bumped by "Replay reveal": re-mounting the previews re-runs their fade-in, exactly as
+  // a page load does.
+  const [replayCount, setReplayCount] = useState(0);
   // The selected page can stop existing underneath this editor — its project deleted,
   // or a page-creating edit undone — so fall back to the first page rather than
   // rendering nothing.
@@ -164,11 +169,21 @@ const LayoutsEditor = () => {
             kinds={isDetailPage ? DETAIL_TILE_KINDS : LISTING_TILE_KINDS}
           />
 
+          <RevealOrderEditor
+            tiles={pageLayout.tiles}
+            projects={projects}
+            onChangeTiles={(tiles) => updatePageLayout({ tiles })}
+            onReplay={() => setReplayCount((count) => count + 1)}
+            showSteps={showRevealSteps}
+            onShowStepsChange={setShowRevealSteps}
+          />
+
           {isDual ? (
             <>
               <section className="adminLayoutsEditor-variant">
                 <h3>Default layout (narrow screens)</h3>
                 <EditableLayoutPreview
+                  key={`default-${replayCount}`}
                   rows={pageLayout.defaultLayout}
                   tiles={pageLayout.tiles}
                   projects={projects}
@@ -180,12 +195,14 @@ const LayoutsEditor = () => {
                   onCreateTileAndAssign={createTileAndAssign('defaultLayout')}
                   onRenameTile={renameTileKey}
                   onDeleteTile={deleteTileKey}
+                  showRevealSteps={showRevealSteps}
                 />
               </section>
 
               <section className="adminLayoutsEditor-variant">
                 <h3>Wide layout (wide screens)</h3>
                 <EditableLayoutPreview
+                  key={`wide-${replayCount}`}
                   rows={pageLayout.wideLayout}
                   tiles={pageLayout.tiles}
                   projects={projects}
@@ -197,6 +214,7 @@ const LayoutsEditor = () => {
                   onCreateTileAndAssign={createTileAndAssign('wideLayout')}
                   onRenameTile={renameTileKey}
                   onDeleteTile={deleteTileKey}
+                  showRevealSteps={showRevealSteps}
                 />
               </section>
             </>
@@ -204,6 +222,7 @@ const LayoutsEditor = () => {
             <section className="adminLayoutsEditor-variant">
               <h3>Layout</h3>
               <EditableLayoutPreview
+                key={`layout-${replayCount}`}
                 rows={pageLayout.layout}
                 tiles={pageLayout.tiles}
                 projects={projects}
@@ -214,6 +233,7 @@ const LayoutsEditor = () => {
                 onCreateTileAndAssign={createTileAndAssign('layout')}
                 onRenameTile={renameTileKey}
                 onDeleteTile={deleteTileKey}
+                showRevealSteps={showRevealSteps}
               />
             </section>
           )}

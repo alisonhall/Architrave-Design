@@ -13,6 +13,7 @@ import {
   confirmSaveOverChanges
 } from './tileLibraryEditor';
 import AdminThumbnail from './adminThumbnail';
+import { withRevealNum } from './revealOrder';
 
 // A first-paint guess, anchored just below/left of the clicked tile — not yet clamped to
 // the viewport, since the popover's own size isn't known until it's actually rendered
@@ -142,7 +143,8 @@ const AssignTile = ({ tiles, projects, kinds, onAssignExisting, onCreateAndAssig
       window.alert(`"${key}" is already used by another tile.`);
       return;
     }
-    onCreateAndAssign(key, draftValues);
+    // New tiles fade in with the rest until given a step (see revealOrder.js).
+    onCreateAndAssign(key, withRevealNum(draftValues, tiles));
   };
 
   if (creatingKind) {
