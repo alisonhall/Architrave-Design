@@ -502,3 +502,93 @@ describe('LayoutsEditor — when the page being edited disappears', () => {
     expect(screen.getByText('Editing: static/layouts/index.js')).toBeInTheDocument();
   });
 });
+
+describe('LayoutsEditor — the same tile open in the Tile Library and the preview popover', () => {
+  beforeEach(() => {
+    window.sessionStorage.clear();
+    window.confirm = jest.fn(() => true);
+  });
+
+  const openLibraryEdit = (keyPattern) => {
+    const row = screen.getByText(keyPattern).closest('li');
+    fireEvent.click(within(row).getByRole('button', { name: 'Actions ▾' }));
+    fireEvent.click(within(row).getByRole('menuitem', { name: 'Edit' }));
+    return document.querySelector('.adminTileLibrary .adminProjectForm');
+  };
+  const openPopover = () => {
+    fireEvent.click(document.querySelector('.adminLayoutPreview img'));
+    return screen.getByRole('dialog');
+  };
+  const position = (form) => within(form).getByLabelText(/Background position/);
+
+  const setUp = () => {
+    renderEditor();
+    fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'creditRiverManor' } });
+  };
+
+  it('an untouched form picks up what the other one saved', () => {
+    setUp();
+    const library = openLibraryEdit(/^1 —/);
+    const before = position(library).value;
+    const popover = openPopover();
+
+    fireEvent.change(position(popover), { target: { value: '12% 34%' } });
+    fireEvent.click(within(popover).getByRole('button', { name: 'Save' }));
+
+    expect(before).not.toBe('12% 34%');
+    expect(position(library)).toHaveValue('12% 34%');
+  });
+
+  it('works the other way round too: the popover picks up a Tile Library save', () => {
+    setUp();
+    const popover = openPopover();
+    const library = openLibraryEdit(/^1 —/);
+
+    fireEvent.change(position(library), { target: { value: '1% 2%' } });
+    fireEvent.click(within(library).getByRole('button', { name: 'Save' }));
+
+    expect(position(popover)).toHaveValue('1% 2%');
+  });
+
+  it('a form with its own edits keeps them, and asks before its Save replaces the other\'s', () => {
+    setUp();
+    const library = openLibraryEdit(/^1 —/);
+    fireEvent.change(position(library), { target: { value: '99% 99%' } });
+
+    const popover = openPopover();
+    fireEvent.change(position(popover), { target: { value: '12% 34%' } });
+    fireEvent.click(within(popover).getByRole('button', { name: 'Save' }));
+    expect(position(library)).toHaveValue('99% 99%');
+
+    // Declined: nothing is replaced, and the form stays open.
+    window.confirm = jest.fn(() => false);
+    fireEvent.click(within(library).getByRole('button', { name: 'Save' }));
+    expect(window.confirm).toHaveBeenCalledWith(expect.stringContaining('was changed somewhere else after this form was opened'));
+    expect(position(library)).toHaveValue('99% 99%');
+    expect(position(openPopover())).toHaveValue('12% 34%');
+    fireEvent.click(within(screen.getByRole('dialog')).getByRole('button', { name: 'Cancel' }));
+
+    // Confirmed: this form's values win.
+    window.confirm = jest.fn(() => true);
+    fireEvent.click(within(library).getByRole('button', { name: 'Save' }));
+    expect(position(openPopover())).toHaveValue('99% 99%');
+  });
+
+  it('saving without any change elsewhere doesn\'t ask', () => {
+    setUp();
+    const library = openLibraryEdit(/^1 —/);
+    fireEvent.change(position(library), { target: { value: '5% 5%' } });
+    fireEvent.click(within(library).getByRole('button', { name: 'Save' }));
+    expect(window.confirm).not.toHaveBeenCalled();
+  });
+
+  it('closes the Tile Library\'s form when the tile is deleted from the popover', () => {
+    setUp();
+    openLibraryEdit(/^1 —/);
+    const popover = openPopover();
+
+    fireEvent.click(within(popover).getByRole('button', { name: 'Delete this tile' }));
+
+    expect(document.querySelector('.adminTileLibrary .adminProjectForm')).not.toBeInTheDocument();
+  });
+});

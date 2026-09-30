@@ -1153,3 +1153,38 @@ test.describe('admin — undo, discard, and warnings', () => {
     await expect(page.locator('.adminOutputPanel-fileHeader code')).toHaveText(['static/layouts/credit-river-manor.js']);
   });
 });
+
+test.describe('layouts editor — one tile open in both the Tile Library and the popover', () => {
+  test('an untouched Tile Library form shows what the popover saved, and a form with its own edits asks before overwriting', async ({ page }) => {
+    await unlock(page);
+    await page.getByRole('button', { name: 'Layouts' }).click();
+    await page.getByLabel('Page').selectOption('creditRiverManor');
+
+    const tileRow = page.locator('.adminTileLibrary li', { hasText: '1 —' });
+    await tileRow.getByRole('button', { name: 'Actions ▾' }).click();
+    await tileRow.getByRole('menuitem', { name: 'Edit' }).click();
+    const libraryForm = page.locator('.adminTileLibrary .adminProjectForm');
+    const libraryPosition = libraryForm.getByLabel(/Background position/);
+
+    await page.locator('.adminLayoutPreview img').first().click();
+    const popover = page.getByRole('dialog');
+    await popover.getByLabel(/Background position/).fill('12% 34%');
+    await popover.getByRole('button', { name: 'Save' }).click();
+    await expect(libraryPosition).toHaveValue('12% 34%');
+
+    // Now the library form has its own edit; the popover saves something else first.
+    await libraryPosition.fill('99% 99%');
+    await page.locator('.adminLayoutPreview img').first().click();
+    await popover.getByLabel(/Background position/).fill('50% 50%');
+    await popover.getByRole('button', { name: 'Save' }).click();
+    await expect(libraryPosition).toHaveValue('99% 99%');
+
+    page.once('dialog', (dialog) => {
+      expect(dialog.message()).toContain('was changed somewhere else after this form was opened');
+      dialog.dismiss();
+    });
+    await libraryForm.getByRole('button', { name: 'Save' }).click();
+    await page.getByRole('button', { name: 'Review Changes' }).click();
+    await expect(page.locator('.adminOutputPanel-file pre')).toContainText("backgroundPosition: '50% 50%'");
+  });
+});

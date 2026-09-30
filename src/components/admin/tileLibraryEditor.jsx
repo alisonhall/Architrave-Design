@@ -1,9 +1,54 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { makeBlankTile, suggestTileKey } from './layoutHelpers';
 import AdminThumbnail from './adminThumbnail';
 import ActionsMenu from './actionsMenu';
+
+const sameTileValues = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+
+/**
+ * @description Keeps an open tile edit form honest about the tile changing under it.
+ * The same tile can be edited from two places at once — this library's Edit form and
+ * the preview's popover (tileEditPopover.jsx) — and Undo/Redo can change it too, while
+ * each form edits its own copy until Save. So, whenever the saved tile changes:
+ *
+ * - it's gone (deleted, or renamed elsewhere): the form closes (`onGone`);
+ * - the form has no edits of its own yet: it quietly picks up the saved values
+ *   (`onRefresh`), so it never shows (or saves back) stale ones;
+ * - the form has edits of its own: it keeps them — confirmSaveOverChanges then asks
+ *   before Save replaces what was saved elsewhere.
+ *
+ * @param {Object} param
+ * @param {Object} param.tile - the tile as currently saved (undefined if it's gone)
+ * @param {Object} param.openedWith - the saved tile the form's values started from
+ * @param {Object} param.values - the form's current values
+ * @param {Function} param.onRefresh - called with the newly saved tile
+ * @param {Function} param.onGone
+ */
+export const useTileDraftSync = ({ tile, openedWith, values, onRefresh, onGone }) => {
+  useEffect(() => {
+    if (!openedWith) return;
+    if (!tile) {
+      onGone();
+      return;
+    }
+    if (sameTileValues(tile, openedWith)) return;
+    if (sameTileValues(values, openedWith)) onRefresh(tile);
+    // Only a change to the saved tile matters here, not every keystroke in the form.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tile]);
+};
+
+/**
+ * @description Whether Save may go ahead: straight away if the tile hasn't changed since
+ * the form opened, otherwise only if the admin confirms replacing those changes.
+ */
+export const confirmSaveOverChanges = (tile, openedWith, tileKey) => (
+  sameTileValues(tile, openedWith)
+  // eslint-disable-next-line no-alert
+  || window.confirm(`The tile "${tileKey}" was changed somewhere else after this form was opened. Save anyway, replacing those changes with this form's values?`)
+);
 
 // Exported so tileEditPopover.jsx (the click-to-edit-in-preview UI) can reuse the exact
 // same kind-specific fields as this library's own add/edit forms — one set of tile
@@ -227,6 +272,8 @@ const TileLibraryEditor = ({ tiles, onChange, projects, kinds, onRenameTile, onD
   const [addingKind, setAddingKind] = useState(null);
   const [draftValues, setDraftValues] = useState(null);
   const [draftKey, setDraftKey] = useState('');
+  // The saved tile the Edit form's values started from (see useTileDraftSync).
+  const [openedWith, setOpenedWith] = useState(null);
   const [filter, setFilter] = useState('');
   const visibleKeys = filterTileKeys(tiles, projects, filter);
 
@@ -241,6 +288,7 @@ const TileLibraryEditor = ({ tiles, onChange, projects, kinds, onRenameTile, onD
     setAddingKind(null);
     setEditingKey(key);
     setDraftValues({ ...tiles[key] });
+    setOpenedWith(tiles[key]);
     setDraftKey(key);
   };
 
@@ -248,8 +296,20 @@ const TileLibraryEditor = ({ tiles, onChange, projects, kinds, onRenameTile, onD
     setEditingKey(null);
     setAddingKind(null);
     setDraftValues(null);
+    setOpenedWith(null);
     setDraftKey('');
   };
+
+  useTileDraftSync({
+    tile: editingKey ? tiles[editingKey] : undefined,
+    openedWith,
+    values: draftValues,
+    onRefresh: (tile) => {
+      setDraftValues({ ...tile });
+      setOpenedWith(tile);
+    },
+    onGone: cancel
+  });
 
   const keyCollides = (key, ignoringKey) => key !== ignoringKey && Object.prototype.hasOwnProperty.call(tiles, key);
 
@@ -265,6 +325,7 @@ const TileLibraryEditor = ({ tiles, onChange, projects, kinds, onRenameTile, onD
       window.alert(`"${nextKey}" is already used by another tile.`);
       return;
     }
+    if (!confirmSaveOverChanges(tiles[editingKey], openedWith, editingKey)) return;
 
     if (nextKey === editingKey) {
       onChange({ ...tiles, [editingKey]: draftValues });

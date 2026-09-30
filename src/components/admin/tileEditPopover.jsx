@@ -2,7 +2,16 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { makeBlankTile, suggestTileKey } from './layoutHelpers';
-import { TileFields, TILE_KIND_LABELS, tileSummary, tileThumbnailUrl, filterTileKeys, TileFilterInput } from './tileLibraryEditor';
+import {
+  TileFields,
+  TILE_KIND_LABELS,
+  tileSummary,
+  tileThumbnailUrl,
+  filterTileKeys,
+  TileFilterInput,
+  useTileDraftSync,
+  confirmSaveOverChanges
+} from './tileLibraryEditor';
 import AdminThumbnail from './adminThumbnail';
 
 // A first-paint guess, anchored just below/left of the clicked tile — not yet clamped to
@@ -202,6 +211,19 @@ AssignTile.propTypes = {
 const EditTile = ({ tileKey, tiles, projects, onSave, onRenameTile, onDelete, onReassign, onCancel }) => {
   const [draftValues, setDraftValues] = useState({ ...tiles[tileKey] });
   const [draftKey, setDraftKey] = useState(tileKey);
+  // The saved tile the form's values started from (see useTileDraftSync).
+  const [openedWith, setOpenedWith] = useState(tiles[tileKey]);
+
+  useTileDraftSync({
+    tile: tiles[tileKey],
+    openedWith,
+    values: draftValues,
+    onRefresh: (tile) => {
+      setDraftValues({ ...tile });
+      setOpenedWith(tile);
+    },
+    onGone: onCancel
+  });
 
   const save = () => {
     const nextKey = draftKey.trim();
@@ -215,6 +237,7 @@ const EditTile = ({ tileKey, tiles, projects, onSave, onRenameTile, onDelete, on
       window.alert(`"${nextKey}" is already used by another tile.`);
       return;
     }
+    if (!confirmSaveOverChanges(tiles[tileKey], openedWith, tileKey)) return;
 
     if (nextKey === tileKey) {
       onSave({ ...tiles, [tileKey]: draftValues });
