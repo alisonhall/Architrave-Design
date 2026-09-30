@@ -641,3 +641,21 @@ describe('LayoutsEditor — reveal order', () => {
     expect(screen.getByLabelText('Reveal step for imageTile')).toHaveValue('rest');
   });
 });
+
+describe('LayoutsEditor — switching pages with a tile open in the Tile Library', () => {
+  beforeEach(() => window.sessionStorage.clear());
+
+  it('closes the open Edit form, rather than carrying it onto another page\'s tile of the same name', () => {
+    renderEditor();
+    fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'index' } });
+    const row = screen.getByText(/^creditRiverManor —/).closest('li');
+    fireEvent.click(within(row).getByRole('button', { name: 'Actions ▾' }));
+    fireEvent.click(within(row).getByRole('menuitem', { name: 'Edit' }));
+    expect(screen.getByText('Editing tile: creditRiverManor')).toBeInTheDocument();
+
+    // New Homes also has a tile called creditRiverManor.
+    fireEvent.change(screen.getByLabelText('Page'), { target: { value: 'newHomes' } });
+
+    expect(screen.queryByText('Editing tile: creditRiverManor')).not.toBeInTheDocument();
+  });
+});

@@ -161,6 +161,9 @@ const LayoutsEditor = () => {
           )}
 
           <TileLibraryEditor
+            // A fresh library per page: an Edit form left open must not carry over to
+            // another page, where a tile with the same key is a different tile.
+            key={activePage}
             tiles={pageLayout.tiles}
             onChange={(tiles) => updatePageLayout({ tiles })}
             onRenameTile={renameTileKey}
