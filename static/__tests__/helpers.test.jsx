@@ -23,7 +23,7 @@ describe('buildProjectTile', () => {
   it('renders the project image and its name as the overlay copy', () => {
     render(buildProjectTile(project));
 
-    expect(screen.getByRole('img')).toHaveAttribute('src', 'https://example.com/photo.jpg');
+    expect(screen.getByRole('presentation')).toHaveAttribute('src', 'https://example.com/photo.jpg');
     expect(screen.getByText('Some Project')).toBeInTheDocument();
   });
 

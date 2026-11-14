@@ -35,7 +35,7 @@ describe('LayoutPreview', () => {
     render(<LayoutPreview rows={rows} tiles={tiles} projects={projects} introText="Intro" />);
 
     expect(screen.queryByRole('link')).not.toBeInTheDocument();
-    expect(screen.getByRole('img')).toHaveAttribute('src', 'https://example.com/filler.jpg');
+    expect(screen.getByRole('presentation')).toHaveAttribute('src', 'https://example.com/filler.jpg');
   });
 
   it('renders a text tile using the shared introduction text when useIntroText is set', () => {
@@ -77,7 +77,7 @@ describe('LayoutPreview', () => {
 
     render(<LayoutPreview rows={rows} tiles={{}} projects={projects} introText="Intro" />);
 
-    expect(screen.queryByRole('img')).not.toBeInTheDocument();
+    expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
     expect(screen.queryByRole('link')).not.toBeInTheDocument();
   });
 
@@ -88,7 +88,7 @@ describe('LayoutPreview', () => {
     render(<LayoutPreview rows={rows} tiles={tiles} projects={projects} />);
 
     expect(screen.queryByRole('link')).not.toBeInTheDocument();
-    const img = screen.getByRole('img');
+    const img = screen.getByRole('presentation');
     expect(img).toHaveAttribute('src', 'https://example.com/plain.jpg');
     expect(img).not.toHaveClass('filler');
   });
@@ -128,7 +128,7 @@ describe('LayoutPreview', () => {
     const { container } = render(<LayoutPreview rows={rows} tiles={{}} projects={projects} />);
 
     expect(container.querySelector('.column')).toBeInTheDocument();
-    expect(screen.queryByRole('img')).not.toBeInTheDocument();
+    expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
     expect(screen.queryByRole('link')).not.toBeInTheDocument();
   });
 

@@ -37,7 +37,7 @@ describe('EditableLayoutPreview', () => {
       />
     );
 
-    expect(screen.getByRole('img')).toBeInTheDocument();
+    expect(screen.getByRole('presentation')).toBeInTheDocument();
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
     expect(container.querySelector('[data-column-id="col1"]')).toBeInTheDocument();
   });
@@ -58,7 +58,7 @@ describe('EditableLayoutPreview', () => {
       />
     );
 
-    fireEvent.click(screen.getByRole('img'));
+    fireEvent.click(screen.getByRole('presentation'));
 
     expect(screen.getByRole('dialog')).toBeInTheDocument();
     expect(screen.getByText('Editing tile: a')).toBeInTheDocument();
@@ -81,7 +81,7 @@ describe('EditableLayoutPreview', () => {
       />
     );
 
-    fireEvent.click(screen.getByRole('img'));
+    fireEvent.click(screen.getByRole('presentation'));
     fireEvent.change(screen.getByLabelText('Image URL'), { target: { value: 'https://example.com/new.jpg' } });
     fireEvent.click(screen.getByRole('button', { name: 'Save' }));
 
@@ -262,7 +262,7 @@ describe('EditableLayoutPreview', () => {
       const onChangeRows = jest.fn();
       renderPreview([row({ id: 'row1' }, [column('col1', [tileRef('a'), { nodeType: 'empty' }])])], onChangeRows);
 
-      fireEvent.click(screen.getByRole('img'));
+      fireEvent.click(screen.getByRole('presentation'));
       fireEvent.click(screen.getByRole('button', { name: 'Remove from layout' }));
 
       expect(onChangeRows.mock.calls[0][0][0].columns[0].children).toEqual([{ nodeType: 'empty' }]);
@@ -286,7 +286,7 @@ describe('EditableLayoutPreview', () => {
     it('closes when this layout tree changes some other way, so its stale actions can\'t undo that change', () => {
       const rows = [row({ id: 'row1' }, [column('col1', [tileRef('a')])])];
       const { rerender } = render(<EditableLayoutPreview {...props(rows)} />);
-      fireEvent.click(screen.getByRole('img'));
+      fireEvent.click(screen.getByRole('presentation'));
       expect(screen.getByRole('dialog')).toBeInTheDocument();
 
       // e.g. a resize applied while the popover was open.
@@ -297,7 +297,7 @@ describe('EditableLayoutPreview', () => {
     it('stays open when only the tiles change (the same tree)', () => {
       const rows = [row({ id: 'row1' }, [column('col1', [tileRef('a')])])];
       const { rerender } = render(<EditableLayoutPreview {...props(rows)} />);
-      fireEvent.click(screen.getByRole('img'));
+      fireEvent.click(screen.getByRole('presentation'));
 
       rerender(<EditableLayoutPreview {...props(rows, { tiles: { ...tiles, b: { kind: 'placeholder' } } })} />);
       expect(screen.getByRole('dialog')).toBeInTheDocument();
@@ -307,7 +307,7 @@ describe('EditableLayoutPreview', () => {
       const rows = [row({ id: 'row1' }, [column('col1', [tileRef('a')])])];
       const onDeleteTile = jest.fn(() => false);
       const { rerender } = render(<EditableLayoutPreview {...props(rows, { onDeleteTile })} />);
-      fireEvent.click(screen.getByRole('img'));
+      fireEvent.click(screen.getByRole('presentation'));
 
       fireEvent.click(screen.getByRole('button', { name: 'Delete this tile' }));
       expect(onDeleteTile).toHaveBeenCalledWith('a');
@@ -340,7 +340,7 @@ describe('EditableLayoutPreview', () => {
     it('clicking a second tile while one is open shows (and saves) the second tile\'s own values', () => {
       const onChangeTiles = jest.fn();
       render(<EditableLayoutPreview {...props({ onChangeTiles })} />);
-      const [imageA, imageB] = screen.getAllByRole('img');
+      const [imageA, imageB] = screen.getAllByRole('presentation');
 
       fireEvent.click(imageA);
       expect(screen.getByLabelText('Image URL')).toHaveValue('https://example.com/a.jpg');
@@ -355,7 +355,7 @@ describe('EditableLayoutPreview', () => {
 
     it('"Use a different tile here" doesn\'t carry over to the next tile clicked after the popover was closed by a layout change', () => {
       const { rerender } = render(<EditableLayoutPreview {...props()} />);
-      fireEvent.click(screen.getAllByRole('img')[0]);
+      fireEvent.click(screen.getAllByRole('presentation')[0]);
       fireEvent.click(screen.getByRole('button', { name: 'Use a different tile here' }));
       expect(screen.getByText('Assign a tile')).toBeInTheDocument();
 
@@ -364,7 +364,7 @@ describe('EditableLayoutPreview', () => {
       expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
 
       // ...and the next click opens the tile's edit form, not the assign list.
-      fireEvent.click(screen.getAllByRole('img')[1]);
+      fireEvent.click(screen.getAllByRole('presentation')[1]);
       expect(screen.getByText('Editing tile: b')).toBeInTheDocument();
       expect(screen.queryByText('Assign a tile')).not.toBeInTheDocument();
     });
