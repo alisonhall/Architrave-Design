@@ -17,7 +17,7 @@ describe('ProjectPreview', () => {
     );
 
     expect(screen.getByText('Preview Project')).toBeInTheDocument();
-    expect(screen.getByRole('img')).toHaveAttribute('src', 'https://example.com/preview.jpg');
+    expect(screen.getByRole('presentation')).toHaveAttribute('src', 'https://example.com/preview.jpg');
   });
 
   it('links to the project\'s portfolio page', () => {

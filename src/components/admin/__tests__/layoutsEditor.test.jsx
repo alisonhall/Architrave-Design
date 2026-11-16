@@ -332,7 +332,7 @@ describe('LayoutsEditor — renaming a tile', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Cancel' }));
 
     // The preview still renders that tile's image — the rename didn't orphan its placement.
-    expect(screen.getAllByRole('img').length).toBeGreaterThan(0);
+    expect(screen.getAllByRole('presentation').length).toBeGreaterThan(0);
   });
 
   it('renaming a tile to a colliding key leaves the layout unchanged', () => {
@@ -392,7 +392,7 @@ describe('LayoutsEditor — click-to-edit-in-preview', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Save' }));
 
     expect(screen.getByText(/^frontFacadeViaPopover —/)).toBeInTheDocument();
-    expect(screen.getAllByRole('img').length).toBeGreaterThan(0);
+    expect(screen.getAllByRole('presentation').length).toBeGreaterThan(0);
   });
 
   it('assigning an existing tile to an empty slot works from the preview', () => {

@@ -40,7 +40,7 @@ describe('renderLayoutTree', () => {
     // actually propagated down to it — this is the regression this test guards (Row/
     // Column pass sizing via React.cloneElement on their *direct* JSX children; a
     // wrapper component in between silently breaks that).
-    expect(screen.getByRole('img')).toHaveAttribute('src', expect.stringContaining('h_800'));
+    expect(screen.getByRole('presentation')).toHaveAttribute('src', expect.stringContaining('h_800'));
   });
 
   it('renders a text tile using the shared introduction text', () => {
@@ -83,7 +83,7 @@ describe('renderLayoutTree', () => {
     const { container } = render(<>{renderLayoutTree({ rows, tiles, projects })}</>);
 
     expect(container.querySelector('.textBlurbFiller')).toBeInTheDocument();
-    expect(screen.queryByRole('img')).not.toBeInTheDocument();
+    expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
   });
 
   it('renders a nested row inside a column', () => {
@@ -114,7 +114,7 @@ describe('renderLayoutTree', () => {
 
     render(<>{renderLayoutTree({ rows, tiles: {}, projects })}</>);
 
-    expect(screen.queryByRole('img')).not.toBeInTheDocument();
+    expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
   });
 });
 
